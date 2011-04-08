@@ -1,0 +1,55 @@
+ruby-efl
+    by Jérémy Zurcher
+    http://cgit.asynk.ch
+
+== DESCRIPTION:
+
+ruby-efl is a FFI[https://github.com/ffi/ffi/wiki] binding to Enlightenment Foundation Libraries (EFL[http://www.enlightenment.org/p.php?p=docs&l=en])
+
+== FEATURES/PROBLEMS:
+
+* Project just started
+
+== SYNOPSIS:
+
+    require './lib/efl'
+    include EFL
+    EET.init
+    EET.open('/tmp/_eet.cfg', EET::FILE_MODE_WRITE) do |f|
+        f.write 'config2', 'test--key'
+    end
+    EET.open('/tmp/_eet.cfg', EET::FILE_MODE_READ) do |f|
+        puts f.read('config2')
+    end
+    EET.shutdown
+
+For less minimalistic and more sane examples you may look at:
+
+* the spec/ folder
+
+== REQUIREMENTS:
+
+* You need a sane enlightenment foundation libraries installation,
+  for this you might like to use easy_e17.sh[http://omicron.homeip.net/projects/#easy_e17.sh].
+
+== DOWNLOAD/INSTALL:
+
+From rubyforge:
+
+  [sudo] gem install ruby-efl
+
+or from the git repository on github:
+
+  git clone git://github.com/jeremyz/ruby-efl.git
+  cd ruby-efl
+  rake gem:install
+
+== CREDITS:
+
+Special thanks to:
+
+* need help ...
+
+== LICENSE:
+
+See MIT-LICENSE file.
