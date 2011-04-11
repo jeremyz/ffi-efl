@@ -12,6 +12,8 @@ module EFL
         functions = [
             [ :ecore_init, [ ], :int ],
             [ :ecore_shutdown, [], :int ],
+            [ :ecore_main_loop_begin, [], :void],
+            [ :ecore_main_loop_quit, [], :void],
         ].each do |func|
             begin
                 attach_function *func
@@ -23,6 +25,8 @@ module EFL
         class << self
             alias init ecore_init
             alias shutdown ecore_shutdown
+            alias main_loop_begin ecore_main_loop_begin
+            alias main_loop_quit ecore_main_loop_quit
         end
         #
     end

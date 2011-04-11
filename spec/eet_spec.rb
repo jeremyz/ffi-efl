@@ -28,52 +28,69 @@ describe EFL::EET do
     end
     #
     it "should open and close" do
-        EET.init.should eql 1
+        EET.init
         f = EET.open FP, EET::FILE_MODE_WRITE
         f.write 'fake', 'value'
         f.close
-        EET.shutdown.should eql 0
+        EET.shutdown
     end
     it "should be able to get file access mode" do
-        EET.init.should eql 1
+        EET.init
         [ EET::FILE_MODE_READ, EET::FILE_MODE_WRITE, EET::FILE_MODE_READ_WRITE ].each do |m|
             EET.open FP, m do |f|
                 f.mode_get.should eql m
             end
         end
-        EET.shutdown.should eql 0
+        EET.shutdown
     end
     #
     it "should write" do
-        EET.init.should eql 1
+        EET.init
         f = EET.open FP, EET::FILE_MODE_WRITE
         f.write 'config', 'test key'
         f.close
-        EET.shutdown.should eql 0
+        EET.shutdown
     end
     #
     it "should read" do
-        EET.init.should eql 1
+        EET.init
         f = EET.open FP, EET::FILE_MODE_READ
         f.read('config').should eql 'test key'
         f.close
-        EET.shutdown.should eql 0
+        EET.shutdown
+    end
+    #
+    it "should read/write" do
+        EET.init
+        f = EET.open FP, EET::FILE_MODE_READ_WRITE
+        f.write 'configg', 'test key'
+        f.read('configg').should eql 'test key'
+        f.close
+        EET.shutdown
     end
     #
     it "should write in block" do
-        EET.init.should eql 1
+        EET.init
         EET.open FP, EET::FILE_MODE_WRITE do |f|
             f.write 'config2', 'test--key'
         end
-        EET.shutdown.should eql 0
+        EET.shutdown
     end
     #
     it "should read in block" do
-        EET.init.should eql 1
+        EET.init
         EET.open FP, EET::FILE_MODE_READ do |f|
             f.read('config2').should eql 'test--key'
         end
-        EET.shutdown.should eql 0
+        EET.shutdown
     end
     #
+    it "should read/write in block" do
+        EET.init
+        EET.open FP, EET::FILE_MODE_READ_WRITE do |f|
+            f.write 'config22', 'test--key'
+            f.read('config22').should eql 'test--key'
+        end
+        EET.shutdown
+    end
 end
