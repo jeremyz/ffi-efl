@@ -19,4 +19,9 @@ describe EFL::ECORE do
         ECORE.shutdown.should eql 0
     end
     #
+    it "should run a single iteration of the mainloop" do
+        ECORE.init.should eql 1
+        ECORE.main_loop_iterate
+        ECORE.shutdown.should eql 0
+    end
 end
