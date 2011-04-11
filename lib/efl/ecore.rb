@@ -6,11 +6,6 @@ require 'ffi'
 module EFL
     module ECORE
         #
-        MAJOR = 0
-        MINOR = 0
-        REVISION = 1
-        VERSION = [MAJOR,MINOR,REVISION].join '.'
-        #
         extend FFI::Library
         #
         ffi_lib 'ecore'
@@ -25,12 +20,9 @@ module EFL
             end
         end
         #
-        def self.init
-            ecore_init
-        end
-        #
-        def self.shutdown
-            ecore_shutdown
+        class << self
+            alias init ecore_init
+            alias shutdown ecore_shutdown
         end
         #
     end

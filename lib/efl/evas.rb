@@ -6,11 +6,6 @@ require 'ffi'
 module EFL
     module EVAS
         #
-        MAJOR = 0
-        MINOR = 0
-        REVISION = 1
-        VERSION = [MAJOR,MINOR,REVISION].join '.'
-        #
         extend FFI::Library
         #
         ffi_lib 'evas'
@@ -25,12 +20,9 @@ module EFL
             end
         end
         #
-        def self.init
-            evas_init
-        end
-        #
-        def self.shutdown
-            evas_shutdown
+        class << self
+            alias init evas_init
+            alias shutdown evas_shutdown
         end
         #
     end

@@ -6,11 +6,6 @@ require 'ffi'
 module EFL
     module EET
         #
-        MAJOR = 0
-        MINOR = 0
-        REVISION = 1
-        VERSION = [MAJOR,MINOR,REVISION].join '.'
-        #
         class Error < Exception
             ERROR_NONE=0
             ERROR_BAD_OBJECT=1
@@ -76,32 +71,27 @@ module EFL
             end
         end
         #
-        def self.init
-            eet_init
-        end
-        #
-        def self.shutdown
-            eet_shutdown
-        end
-        #
-        def self.clearcache
-            eet_clearcache
-        end
-        #
         FILE_MODE_INVALID = -1
         FILE_MODE_READ = 0
         FILE_MODE_WRITE = 1
         FILE_MODE_READ_WRITE  = 2
         #
-        def self.open path, mode=FILE_MODE_READ, &blk
-            if blk
-                f = eet_open path, mode
-                raise Exception.new "Unable to open file #{path}" if f.nil?
-                yield EETFile.new f
-                eet_close f
-            else
-                f = eet_open path, mode
-                return EETFile.new f unless f.nil?
+        class << self
+            #
+            alias init eet_init
+            alias shutdown eet_shutdown
+            alias clearcache eet_clearcache
+            #
+            def open path, mode=FILE_MODE_READ, &blk
+                if blk
+                    f = eet_open path, mode
+                    raise Exception.new "Unable to open file #{path}" if f.nil?
+                    yield EETFile.new f
+                    eet_close f
+                else
+                    f = eet_open path, mode
+                    return EETFile.new f unless f.nil?
+                end
             end
         end
         #

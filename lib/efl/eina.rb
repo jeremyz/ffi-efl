@@ -6,11 +6,6 @@ require 'ffi'
 module EFL
     module EINA
         #
-        MAJOR = 0
-        MINOR = 0
-        REVISION = 1
-        VERSION = [MAJOR,MINOR,REVISION].join '.'
-        #
         extend FFI::Library
         #
         ffi_lib 'eina'
@@ -25,12 +20,9 @@ module EFL
             end
         end
         #
-        def self.init
-            eina_init
-        end
-        #
-        def self.shutdown
-            eina_shutdown
+        class << self
+            alias init eina_init
+            alias shutdown eina_shutdown
         end
         #
     end

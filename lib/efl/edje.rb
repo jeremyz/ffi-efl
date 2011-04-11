@@ -6,11 +6,6 @@ require 'ffi'
 module EFL
     module EDJE
         #
-        MAJOR = 0
-        MINOR = 0
-        REVISION = 1
-        VERSION = [MAJOR,MINOR,REVISION].join '.'
-        #
         extend FFI::Library
         #
         ffi_lib 'edje'
@@ -25,12 +20,9 @@ module EFL
             end
         end
         #
-        def self.init
-            edje_init
-        end
-        #
-        def self.shutdown
-            edje_shutdown
+        class << self
+            alias init edje_init
+            alias shutdown edje_shutdown
         end
         #
     end
