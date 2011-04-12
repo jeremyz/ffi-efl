@@ -1,11 +1,11 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ecore'
+require 'e17/ecore'
 #
-describe EFL::ECORE do
+describe E17::ECORE do
     #
-    include EFL
+    include E17
     #
     it "should init" do
         ECORE.init.should eql 1

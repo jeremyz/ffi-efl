@@ -3,7 +3,7 @@
 #
 require 'ffi'
 #
-module EFL
+module E17
     module EVAS
         #
         extend FFI::Library

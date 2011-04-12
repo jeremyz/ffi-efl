@@ -1,11 +1,11 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/eet'
+require 'e17/eet'
 #
-describe EFL::EET do
+describe E17::EET do
     #
-    include EFL
+    include E17
     #
     FP = '/tmp/_eet.cfg'
     #

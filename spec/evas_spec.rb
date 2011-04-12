@@ -1,11 +1,11 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/evas'
+require 'e17/evas'
 #
-describe EFL::EVAS do
+describe E17::EVAS do
     #
-    include EFL
+    include E17
     #
     it "should init" do
         EVAS.init.should eql 1

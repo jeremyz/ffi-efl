@@ -3,12 +3,13 @@
 load './tasks/setup.rb'
 #
 # Project general information
-PROJ.name = 'ruby-efl'
+PROJ.name = 'ffi-e17'
 PROJ.authors = 'Jérémy Zurcher'
 PROJ.email = 'jeremy@asynk.ch'
-PROJ.url = 'http://cgit.asynk.ch'
+#PROJ.url = 'http://cgit.asynk.ch/cgi-bin/cgit/ffi-e17'
+PROJ.url = 'https://github.com/jeremyz/ffi-e17'
 PROJ.version = '0.0.0'
-PROJ.rubyforge.name = 'ruby-efl'
+PROJ.rubyforge.name = 'ffi-e17'
 PROJ.readme_file = 'README.rdoc'
 #
 # Annoucement

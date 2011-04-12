@@ -1,12 +1,12 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ecore'
-require 'efl/ecore/event'
+require 'e17/ecore'
+require 'e17/ecore/event'
 #
-describe EFL::ECORE do
+describe E17::ECORE do
     #
-    include EFL
+    include E17
     #
     before(:all) do
         USER_SIGNAL_CB = Proc.new do |data, type, event|

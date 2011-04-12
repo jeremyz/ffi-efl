@@ -3,15 +3,15 @@
 #
 require 'ffi'
 #
-module EFL
-    module EDJE
+module E17
+    module EINA
         #
         extend FFI::Library
         #
-        ffi_lib 'edje'
+        ffi_lib 'eina'
         [
-            [ :edje_init, [], :int],
-            [ :edje_shutdown, [], :int],
+            [ :eina_init, [], :int],
+            [ :eina_shutdown, [], :int],
         ].each do |func|
             begin
                 attach_function *func
@@ -21,8 +21,8 @@ module EFL
         end
         #
         class << self
-            alias init edje_init
-            alias shutdown edje_shutdown
+            alias init eina_init
+            alias shutdown eina_shutdown
         end
         #
     end

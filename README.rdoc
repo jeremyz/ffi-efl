@@ -1,10 +1,11 @@
-ruby-efl
+ffi-e17
     by Jérémy Zurcher
     http://cgit.asynk.ch
 
 == DESCRIPTION:
 
-ruby-efl is a FFI[https://github.com/ffi/ffi/wiki] binding to Enlightenment Foundation Libraries (EFL[http://www.enlightenment.org/p.php?p=docs&l=en])
+ffi-e17 is a FFI[https://github.com/ffi/ffi/wiki] binding to Enlightenment Foundation Libraries (eina,eet,evas,ecore,edje)
+and Elementary, part of the Enlightenment project. (E17 API[http://www.enlightenment.org/p.php?p=docs&l=en])
 
 == FEATURES/PROBLEMS:
 
@@ -12,8 +13,8 @@ ruby-efl is a FFI[https://github.com/ffi/ffi/wiki] binding to Enlightenment Foun
 
 == SYNOPSIS:
 
-    require './lib/efl'
-    include EFL
+    require './lib/e17'
+    include E17
     EET.init
     EET.open('/tmp/_eet.cfg', EET::FILE_MODE_WRITE) do |f|
         f.write 'config2', 'test--key'
@@ -36,12 +37,12 @@ For less minimalistic and more sane examples you may look at:
 
 From rubyforge:
 
-  [sudo] gem install ruby-efl
+  [sudo] gem install ffi-e17
 
 or from the git repository on github:
 
-  git clone git://github.com/jeremyz/ruby-efl.git
-  cd ruby-efl
+  git clone git://github.com/jeremyz/ffi-e17.git
+  cd ffi-e17
   rake gem:install
 
 == CREDITS:

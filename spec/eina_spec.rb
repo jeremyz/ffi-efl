@@ -1,11 +1,11 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/eina'
+require 'e17/eina'
 #
-describe EFL::EINA do
+describe E17::EINA do
     #
-    include EFL
+    include E17
     #
     it "should init" do
         EINA.init.should eql 1
