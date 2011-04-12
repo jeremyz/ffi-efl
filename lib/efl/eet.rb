@@ -9,15 +9,15 @@ module EFL
         extend FFI::Library
         #
         ffi_lib 'eet'
-        functions = [
-            [ :eet_init, [ ], :int ],
-            [ :eet_shutdown, [], :int ],
-            [ :eet_clearcache, [], :void ],
-            [ :eet_open, [:string, :int], :pointer ],
-            [ :eet_mode_get, [:pointer], :int ],
-            [ :eet_close, [:pointer], :int ],
-            [ :eet_write, [:pointer, :string, :pointer, :int, :int], :int ],
-            [ :eet_read, [:pointer, :string, :pointer], :pointer ],
+        [
+            [ :eet_init, [], :int],
+            [ :eet_shutdown, [], :int],
+            [ :eet_clearcache, [], :void],
+            [ :eet_open, [:string, :int], :pointer],
+            [ :eet_mode_get, [:pointer], :int],
+            [ :eet_close, [:pointer], :int],
+            [ :eet_write, [:pointer, :string, :pointer, :int, :int], :int],
+            [ :eet_read, [:pointer, :string, :pointer], :pointer],
         ].each do |func|
             begin
                 attach_function *func

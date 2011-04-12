@@ -9,9 +9,9 @@ module EFL
         extend FFI::Library
         #
         ffi_lib 'edje'
-        functions = [
-            [ :edje_init, [ ], :int ],
-            [ :edje_shutdown, [], :int ],
+        [
+            [ :edje_init, [], :int],
+            [ :edje_shutdown, [], :int],
         ].each do |func|
             begin
                 attach_function *func

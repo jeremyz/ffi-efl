@@ -9,9 +9,9 @@ module EFL
         extend FFI::Library
         #
         ffi_lib 'eina'
-        functions = [
-            [ :eina_init, [ ], :int ],
-            [ :eina_shutdown, [], :int ],
+        [
+            [ :eina_init, [], :int],
+            [ :eina_shutdown, [], :int],
         ].each do |func|
             begin
                 attach_function *func
