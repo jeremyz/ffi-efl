@@ -1,6 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
+require 'efl/ecore'
 require 'efl/ecore/event'
 #
 describe EFL::ECORE do
@@ -20,6 +21,8 @@ describe EFL::ECORE do
             data.read_string.should eql "none"
             event.read_int.should eql 666
         end
+        NONE = "none"
+        NONE_PTR = FFI::MemoryPointer.from_string NONE
     end
     #
     it 'should be able to add event hanlder and process event' do
@@ -33,10 +36,10 @@ describe EFL::ECORE do
         evt_handler = ECORE.event_handler_add ECORE::EVENT_SIGNAL_USER, USER_SIGNAL_CB, "666"
         evt_handler.null?.should be_false
         # add, del, add event
-        ecore_evt = ECORE.event_add ECORE::EVENT_SIGNAL_USER, evt, EVENT_FREE_CB, FFI::MemoryPointer.from_string("none")
+        ecore_evt = ECORE.event_add ECORE::EVENT_SIGNAL_USER, evt, EVENT_FREE_CB, NONE_PTR
         ecore_evt.null?.should be_false
         ECORE.event_del ecore_evt
-        ecore_evt = ECORE.event_add ECORE::EVENT_SIGNAL_USER, evt, EVENT_FREE_CB, FFI::MemoryPointer.from_string("none")
+        ecore_evt = ECORE.event_add ECORE::EVENT_SIGNAL_USER, evt, EVENT_FREE_CB, NONE_PTR
         ecore_evt.null?.should be_false
         ECORE.main_loop_begin   # process event
         ECORE.shutdown
@@ -51,7 +54,7 @@ describe EFL::ECORE do
         ECORE.event_handler_data_get(evt_handler).read_string.should eql "wrong"
         ECORE.event_handler_data_set evt_handler, FFI::MemoryPointer.from_string("666")
         ECORE.event_handler_data_get(evt_handler).read_string.should eql "666"
-        ecore_evt = ECORE.event_add ECORE::EVENT_SIGNAL_USER, evt, EVENT_FREE_CB, FFI::MemoryPointer.from_string("none")
+        ecore_evt = ECORE.event_add ECORE::EVENT_SIGNAL_USER, evt, EVENT_FREE_CB, NONE_PTR
         ecore_evt.null?.should be_false
         ECORE.main_loop_begin   # process event
         ECORE.shutdown
