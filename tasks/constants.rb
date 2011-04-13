@@ -20,8 +20,8 @@ end
 
 BUILD_DIR = "build"
 
-USE_RAKE_COMPILER = ( (RUBY_PLATFORM =~ /java/) ? false : true ) or test ?d, 'ext'
-if USE_RAKE_COMPILER# and test ?d, 'ext'
+USE_RAKE_COMPILER = ( ( (RUBY_PLATFORM =~ /java/) ? false : true ) and test ?d, 'ext' )
+if USE_RAKE_COMPILER
     gem 'rake-compiler', '>=0.6.0'
     require 'rake/extensiontask'
     ENV['RUBY_CC_VERSION'] = '1.8.7:1.9.2'
