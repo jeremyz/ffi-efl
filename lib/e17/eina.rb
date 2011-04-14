@@ -1,29 +1,24 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'ffi'
+require 'e17/ffi_helper'
 #
 module E17
     module EINA
         #
+        extend FFIHelper
         extend FFI::Library
         #
         ffi_lib 'eina'
-        [
+        #
+        fcts = [
             [ :eina_init, [], :int],
             [ :eina_shutdown, [], :int],
-        ].each do |func|
-            begin
-                attach_function *func
-            rescue Object => e
-                puts "Could not attach #{func} #{e.message}"
-            end
-        end
+        ]
         #
-        class << self
-            alias init eina_init
-            alias shutdown eina_shutdown
-        end
+        attach_fcts fcts
+        #
+        create_aliases 'eina_'.length, fcts
         #
     end
 end
