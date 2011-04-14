@@ -15,7 +15,7 @@ module E17
         #
         callback :evas_async_events_put_cb, [:pointer, :int, :pointer], :void
         #
-        @fcts = [
+        fcts = [
             # http://docs.enlightenment.org/auto/evas/group__Evas__Group.html
             [ :evas_init, [], :int],
             [ :evas_shutdown, [], :int],
@@ -25,9 +25,9 @@ module E17
             [ :evas_async_events_put, [:pointer, :int, :pointer, :evas_async_events_put_cb], :bool],
         ]
         #
-        attach_fcts
+        attach_fcts fcts
         #
-        create_aliases 'evas_'.length
+        create_aliases 'evas_'.length, fcts
         #
     end
 end
