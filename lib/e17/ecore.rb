@@ -11,6 +11,8 @@ module E17
         #
         ffi_lib 'ecore'
         #
+        typedef :pointer, :ecore_pipe
+        #
         callback :ecore_pipe_cb, [:pointer, :pointer, :int], :void
         callback :ecore_select_function, [:int, :pointer, :pointer, :pointer, :pointer], :int
         callback :ecore_fd_prep_cb, [:pointer, :pointer], :void
@@ -19,11 +21,11 @@ module E17
             # http://docs.enlightenment.org/auto/ecore/group__Ecore__Group.html
             [ :ecore_init, [], :int],
             [ :ecore_shutdown, [], :int],
-            [ :ecore_pipe_add, [:ecore_pipe_cb, :pointer], :pointer],
-            [ :ecore_pipe_del, [:pointer], :pointer],
-            [ :ecore_pipe_read_close, [:pointer], :void],
-            [ :ecore_pipe_write_close, [:pointer], :void],
-            [ :ecore_pipe_write, [:pointer, :pointer, :int], :bool],
+            [ :ecore_pipe_add, [:ecore_pipe_cb, :pointer], :ecore_pipe],
+            [ :ecore_pipe_del, [:ecore_pipe], :pointer],
+            [ :ecore_pipe_read_close, [:ecore_pipe], :void],
+            [ :ecore_pipe_write_close, [:ecore_pipe], :void],
+            [ :ecore_pipe_write, [:ecore_pipe, :pointer, :int], :bool],
             # http://docs.enlightenment.org/auto/ecore/group__Ecore__Main__Loop__Group.html
             [ :ecore_main_loop_iterate, [], :void],
             [ :ecore_main_loop_begin, [], :void],

@@ -20,6 +20,10 @@ module E17
         EVENT_SIGNAL_REALTIME = 5 # Realtime signal event
         EVENT_COUNT = 6
         #
+        typedef :pointer, :ecore_event
+        typedef :pointer, :ecore_event_filter
+        typedef :pointer, :ecore_event_handler
+        #
         callback :ecore_end_cb, [:pointer, :pointer], :void
         callback :ecore_data_cb, [:pointer], :pointer
         callback :ecore_filter_cb, [:pointer, :pointer, :int, :pointer], :bool
@@ -27,15 +31,15 @@ module E17
         #
         fcts = [
             # http://docs.enlightenment.org/auto/ecore/group__Ecore__Event__Group.html
-            [ :ecore_event_handler_add, [:int, :ecore_event_handler_cb, :pointer], :pointer],
-            [ :ecore_event_handler_del, [:pointer], :pointer],
-            [ :ecore_event_add, [:int, :pointer, :ecore_end_cb, :pointer], :pointer],
-            [ :ecore_event_del, [:pointer], :pointer],
-            [ :ecore_event_handler_data_get, [:pointer], :pointer],
-            [ :ecore_event_handler_data_set, [:pointer,:pointer], :pointer],
+            [ :ecore_event_handler_add, [:int, :ecore_event_handler_cb, :pointer], :ecore_event_handler],
+            [ :ecore_event_handler_del, [:ecore_event_handler], :pointer],
+            [ :ecore_event_add, [:int, :pointer, :ecore_end_cb, :pointer], :ecore_event],
+            [ :ecore_event_del, [:ecore_event], :pointer],
+            [ :ecore_event_handler_data_get, [:ecore_event_handler], :pointer],
+            [ :ecore_event_handler_data_set, [:ecore_event_handler, :pointer], :pointer],
             [ :ecore_event_type_new, [], :int],
-            [ :ecore_event_filter_add, [:ecore_data_cb, :ecore_filter_cb, :ecore_end_cb, :pointer], :pointer],
-            [ :ecore_event_filter_del, [:pointer], :pointer],
+            [ :ecore_event_filter_add, [:ecore_data_cb, :ecore_filter_cb, :ecore_end_cb, :pointer], :ecore_event_filter],
+            [ :ecore_event_filter_del, [:ecore_event_filter], :pointer],
             [ :ecore_event_current_type_get, [], :int],
             [ :ecore_event_current_event_get, [], :pointer],
         ]
