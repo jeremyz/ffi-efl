@@ -4,8 +4,8 @@
 require 'ffi'
 #
 module FFIHelper
-    def attach_fcts
-        @fcts.each do |func|
+    def attach_fcts fcts
+        fcts.each do |func|
             begin
                 attach_function *func
             rescue Object => e
@@ -13,14 +13,12 @@ module FFIHelper
             end
         end
     end
-    def create_aliases l
-        @fcts.each do |f,a,r|
-            module_eval <<-code
-            class << self
-                alias #{f.to_s[l..-1]} #{f}
-            end
-            code
+    def create_aliases l, fcts
+        module_eval <<-code
+        class << self
+            #{fcts.map{ |f,a,r| "alias #{f.to_s[l..-1]} #{f}" }.join "\n" }
         end
+        code
     end
 end
 #
