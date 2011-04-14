@@ -1,20 +1,23 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'ffi'
+require 'e17/ffi_helper'
 #
 module E17
     module ECORE
         #
+        extend FFIHelper
         extend FFI::Library
+        #
+        ffi_lib 'ecore'
         #
         callback :ecore_pipe_cb, [:pointer, :pointer, :int], :void
         callback :ecore_select_function, [:int, :pointer, :pointer, :pointer, :pointer], :int
+        callback :ecore_fd_prep_cb, [:pointer, :pointer], :void
         #
-        ffi_lib 'ecore'
-        [
+        fcts = [
             # http://docs.enlightenment.org/auto/ecore/group__Ecore__Group.html
-            [ :ecore_init, [ ], :int],
+            [ :ecore_init, [], :int],
             [ :ecore_shutdown, [], :int],
             [ :ecore_pipe_add, [:ecore_pipe_cb, :pointer], :pointer],
             [ :ecore_pipe_del, [:pointer], :pointer],
@@ -25,33 +28,26 @@ module E17
             [ :ecore_main_loop_iterate, [], :void],
             [ :ecore_main_loop_begin, [], :void],
             [ :ecore_main_loop_quit, [], :void],
-            [ :ecore_main_loop_select_func_set, [], :void],  # TODO spec
-            [ :ecore_main_loop_select_func_get, [], :void],  # TODO spec
-#            EAPI void   ecore_main_fd_handler_prepare_callback_set (Ecore_Fd_Handler *fd_handler, Ecore_Fd_Prep_Cb func, const void *data) # TODO
-        ].each do |func|
-            begin
-                attach_function *func
-            rescue Object => e
-                puts "Could not attach #{func} #{e.message}"
+            [ :ecore_main_loop_select_func_set, [:ecore_select_function], :void],                           # TODO spec
+            [ :ecore_main_loop_select_func_get, [], :ecore_select_function],                                # TODO spec
+            [ :ecore_main_fd_handler_prepare_callback_set, [:pointer, :ecore_fd_prep_cb, :pointer], :void], # TODO spec
+        ]
+        #
+        attach_fcts fcts
+        #
+        create_aliases 'ecore_'.length, fcts
+        #
+        class EcorePipe
+            def initialize cb, data
+                @ptr = ECORE.ecore_pipe_add cb, data
+            end
+            def del; ECORE.ecore_pipe_del @ptr; end
+            def read_close; ECORE.ecore_pipe_read_close @ptr; end
+            def write_close; ECORE.ecore_pipe_write_close @ptr; end
+            def write data
+                ECORE.ecore_pipe_write @ptr, FFI::MemoryPointer.from_string(data.to_s), data.to_s.length+1
             end
         end
-        #
-        class << self
-            alias init ecore_init
-            alias shutdown ecore_shutdown
-            alias pipe_add ecore_pipe_add
-            alias pipe_del ecore_pipe_del
-            alias pipe_read_close ecore_pipe_read_close
-            alias pipe_write_close ecore_pipe_write_close
-            alias pipe_write ecore_pipe_write
-            #
-            alias main_loop_iterate ecore_main_loop_iterate
-            alias main_loop_begin ecore_main_loop_begin
-            alias main_loop_quit ecore_main_loop_quit
-            alias main_loop_select_func_set ecore_main_loop_select_func_set
-            alias main_loop_select_func_get ecore_main_loop_select_func_get
-        end
-        #
     end
 end
 #

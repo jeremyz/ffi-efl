@@ -26,21 +26,19 @@ describe E17::ECORE do
     end
     #
     it 'should write and read data from pipe' do
-        ECORE.init
+        data = FFI::MemoryPointer.from_string("none")
         cb = Proc.new do |data,buffer,bytes|
             data.read_string.should eql 'none'
             buffer.read_string.should eql 'hello world'
             bytes.should eql 12
         end
-        data = FFI::MemoryPointer.from_string("none")
-        pipe = ECORE.pipe_add cb, data
-        buffer = FFI::MemoryPointer.new(:string,128)
-        buffer.write_string 'hello world'
-        ECORE.pipe_write pipe, buffer, 12
+        ECORE.init
+        pipe = ECORE::EcorePipe.new cb, data
+        pipe.write("hello world").should be_true
         ECORE.main_loop_iterate
-        ECORE.pipe_read_close pipe
-        ECORE.pipe_write_close pipe
-        ECORE.pipe_del pipe
+        pipe.read_close
+        pipe.write_close
+        pipe.del.address.should eql data.address
         ECORE.shutdown
     end
 end
