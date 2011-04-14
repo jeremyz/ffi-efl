@@ -1,29 +1,26 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'ffi'
+require 'e17/ffi_helper'
 #
 module E17
     module EDJE
         #
+        extend FFIHelper
         extend FFI::Library
         #
         ffi_lib 'edje'
-        [
+        #
+        fcts = [
+            # TODO
+            # http://docs.enlightenment.org/auto/edje/Edje_8h.html
             [ :edje_init, [], :int],
             [ :edje_shutdown, [], :int],
-        ].each do |func|
-            begin
-                attach_function *func
-            rescue Object => e
-                puts "Could not attach #{func} #{e.message}"
-            end
-        end
+        ]
         #
-        class << self
-            alias init edje_init
-            alias shutdown edje_shutdown
-        end
+        attach_fcts fcts
+        #
+        create_aliases 'edje_'.length, fcts
         #
     end
 end
