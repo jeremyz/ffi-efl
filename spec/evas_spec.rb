@@ -19,9 +19,21 @@ describe E17::EVAS do
         EVAS.shutdown.should eql 0
     end
     #
+    it "evas alloc error enum is ok" do
+        EVAS.enum_value(:none).should eql 0
+        EVAS.enum_value(:fatal).should eql 1
+        EVAS.enum_value(:recovered).should eql 2
+        EVAS.enum_type(:evas_alloc_error)[0].should eql :none
+        EVAS.enum_type(:evas_alloc_error)[1].should eql :fatal
+        EVAS.enum_type(:evas_alloc_error)[2].should eql :recovered
+        EVAS.enum_type(:evas_alloc_error)[:none].should eql 0
+        EVAS.enum_type(:evas_alloc_error)[:fatal].should eql 1
+        EVAS.enum_type(:evas_alloc_error)[:recovered].should eql 2
+    end
+    #
     it "should have no memory allocation error occured" do
         EVAS.init
-        EVAS.alloc_error.should eql EVAS::ALLOC_ERROR_NONE
+        EVAS.alloc_error.should eql :none
         EVAS.shutdown
     end
     #
