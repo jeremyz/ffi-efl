@@ -11,18 +11,20 @@ module E17
         #
         ffi_lib 'ecore'
         #
+        typedef :pointer, :data
         typedef :pointer, :ecore_pipe
+        typedef :pointer, :ecore_fd_handler
         #
-        callback :ecore_pipe_cb, [:pointer, :pointer, :int], :void
+        callback :ecore_pipe_cb, [:data, :pointer, :int], :void
         callback :ecore_select_function, [:int, :pointer, :pointer, :pointer, :pointer], :int
-        callback :ecore_fd_prep_cb, [:pointer, :pointer], :void
+        callback :ecore_fd_prep_cb, [:data, :pointer], :void
         #
         fcts = [
             # http://docs.enlightenment.org/auto/ecore/group__Ecore__Group.html
             [ :ecore_init, [], :int],
             [ :ecore_shutdown, [], :int],
-            [ :ecore_pipe_add, [:ecore_pipe_cb, :pointer], :ecore_pipe],
-            [ :ecore_pipe_del, [:ecore_pipe], :pointer],
+            [ :ecore_pipe_add, [:ecore_pipe_cb, :data], :ecore_pipe],
+            [ :ecore_pipe_del, [:ecore_pipe], :data],
             [ :ecore_pipe_read_close, [:ecore_pipe], :void],
             [ :ecore_pipe_write_close, [:ecore_pipe], :void],
             [ :ecore_pipe_write, [:ecore_pipe, :pointer, :int], :bool],
@@ -32,7 +34,7 @@ module E17
             [ :ecore_main_loop_quit, [], :void],
             [ :ecore_main_loop_select_func_set, [:ecore_select_function], :void],                           # TODO spec
             [ :ecore_main_loop_select_func_get, [], :ecore_select_function],                                # TODO spec
-            [ :ecore_main_fd_handler_prepare_callback_set, [:pointer, :ecore_fd_prep_cb, :pointer], :void], # TODO spec
+            [ :ecore_main_fd_handler_prepare_callback_set, [:ecore_fd_handler, :ecore_fd_prep_cb, :data], :void], # TODO spec
         ]
         #
         attach_fcts fcts
