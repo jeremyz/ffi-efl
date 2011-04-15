@@ -40,13 +40,13 @@ describe E17::EVAS do
     it "should process async events" do
         cb = Proc.new do |target,type,evt|
             target.read_string.should eql "target"
-            type.should eql 0
+            type.should eql :show
             evt.read_string.should eql "work"
         end
         EVAS.init
         target = FFI::MemoryPointer.from_string("target")
         work = FFI::MemoryPointer.from_string("work")
-        EVAS.async_events_put target, 0, work, cb
+        EVAS.async_events_put target, :show, work, cb
         EVAS.async_events_process.should eql 1
         EVAS.async_events_process.should eql 0
         EVAS.shutdown
