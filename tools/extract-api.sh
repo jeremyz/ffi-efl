@@ -26,6 +26,7 @@ for header in \
     #
     cat $header | sed -n -f sed-functions > $FILE
     cat $header | sed -r -n -f sed-enums > $FILE-enum
+    cat $header | sed -r -n -f sed-structs > $FILE-structs
     #
     if [ -f $FILE.prev ]; then
         diff -u0 $FILE.prev $FILE > $FILE-diff
