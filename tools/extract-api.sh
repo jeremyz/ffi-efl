@@ -1,9 +1,11 @@
 #! /bin/bash
 #
-# TODO : use pkg-config
-#
+CURRENT=$(dirname $0)/api
+PREV=$(dirname $0)/api-prev
 INCLUDE=$(pkg-config --libs ecore |gawk '{ print substr($1,3) }' | sed s/lib/include/)
 #
+[ ! -d $PREV ] && mkdir $PREV
+[ ! -d $CURRENT ] && mkdir $CURRENT
 rm *-diff 2>/dev/null
 #
 for header in \
@@ -22,16 +24,18 @@ for header in \
     DIR=$(dirname $header)
     FILE=$(basename $header)
     #
-    [ -f $FILE ] && mv $FILE $FILE.prev
+    mv $CURRENT/$FILE-* $PREV/ 2>/dev/null
     #
-    cat $header | sed -n -f sed-functions > $FILE
-    cat $header | sed -r -n -f sed-enums > $FILE-enum
-    cat $header | sed -r -n -f sed-structs > $FILE-structs
+    cat $header | sed -r -n -f sed-functions > $CURRENT/$FILE-funcs
+    cat $header | sed -r -n -f sed-enums > $CURRENT/$FILE-enums
+    cat $header | sed -r -n -f sed-structs > $CURRENT/$FILE-structs
     #
-    if [ -f $FILE.prev ]; then
-        diff -u0 $FILE.prev $FILE > $FILE-diff
-        N=$(cat $FILE-diff | wc -l)
-        [ $N -eq 0 ] && rm $FILE-diff
-    fi
+    for F in $FILE-funcs $FILE-enums $FILE-structs ; do
+        if [ -f $PREV/$F ]; then
+            diff -u0 $PREV/$F $CURRENT/$F > $F-diff
+            N=$(cat $F-diff | wc -l)
+            [ $N -eq 0 ] && rm $F-diff
+        fi
+    done
     #
 done
