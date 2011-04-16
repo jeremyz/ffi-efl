@@ -1,27 +1,31 @@
 #! /bin/bash
-
+#
+# TODO : use pkg-config
+#
+INCLUDE=$(pkg-config --libs ecore |gawk '{ print substr($1,3) }' | sed s/lib/include/)
+#
+rm *-diff 2>/dev/null
+#
 for header in \
-    '/opt/e17/include/eet-1/Eet.h' \
-    '/opt/e17/include/edje-1/Edje.h' \
-    '/opt/e17/include/evas-1/Evas.h' \
-    '/opt/e17/include/evas-1/Evas_GL.h' \
-    '/opt/e17/include/ecore-1/Ecore.h' \
-    '/opt/e17/include/ecore-1/Ecore_Con.h' \
-    '/opt/e17/include/ecore-1/Ecore_Evas.h' \
-    '/opt/e17/include/ecore-1/Ecore_Fb.h' \
-    '/opt/e17/include/ecore-1/Ecore_File.h' \
-    '/opt/e17/include/elementary-0/Elementary.h' \
+    "${INCLUDE}/eet-1/Eet.h" \
+    "${INCLUDE}/edje-1/Edje.h" \
+    "${INCLUDE}/evas-1/Evas.h" \
+    "${INCLUDE}/evas-1/Evas_GL.h" \
+    "${INCLUDE}/ecore-1/Ecore.h" \
+    "${INCLUDE}/ecore-1/Ecore_Con.h" \
+    "${INCLUDE}/ecore-1/Ecore_Evas.h" \
+    "${INCLUDE}/ecore-1/Ecore_Fb.h" \
+    "${INCLUDE}/ecore-1/Ecore_File.h" \
+    "${INCLUDE}/elementary-0/Elementary.h" \
     ; do
     #
     DIR=$(dirname $header)
     FILE=$(basename $header)
     #
-    [ -f $FILE-diff ] && rm $FILE-diff
     [ -f $FILE ] && mv $FILE $FILE.prev
-    # loop1 : fix EAPI with return type on separate line
-    # loop2 : fix EAPI with multilines arguments
-    cat $header | sed -ne ':loop1;/EAPI.*[^;]$/N;s/\n//;s/ \{2,\}/ /g;t loop1;' -e ':loop2;/,$/N;s/,\n/ /;s/ \{2,\}/ /g;t loop2;' -e 's/^ *EAPI/EAPI/p' > $FILE
-    # sed  -r 's/EAPI ([a-zA-Z][a-zA-Z_ ]*[a-zA-Z]( \*+ ?| ))([a-z[a-z_0-9]*[a-z]) ?\(([a-zA-Z0-9_ \*,\.]+)\) */#\1#\3#\4#/' > $FILE
+    #
+    cat $header | sed -n -f sed-functions > $FILE
+    cat $header | sed -r -n -f sed-enums > $FILE-enum
     #
     if [ -f $FILE.prev ]; then
         diff -u0 $FILE.prev $FILE > $FILE-diff
