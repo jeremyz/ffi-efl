@@ -1,0 +1,14 @@
+s/^\s*typedef\s+(struct\s+)?((\w+\**\s+)*)(\w+)\s*;.*$/typedef \1 \2 \4;/
+t finish
+s/^\s*typedef\s+(struct.*[^;].*)/typedef \1/
+T
+h
+:loop
+n
+/^\s*\}/ ! b loop
+s/^\s*\}\s*(\w+)\s*;.*$/\1;/
+H;x
+s/\n/ /g
+:finish
+s/ {2,}/ /g
+p

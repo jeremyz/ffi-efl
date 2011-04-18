@@ -15,6 +15,7 @@ for header in \
     "${INCLUDE}/evas-1/Evas_GL.h" \
     "${INCLUDE}/ecore-1/Ecore.h" \
     "${INCLUDE}/ecore-1/Ecore_Con.h" \
+    "${INCLUDE}/ecore-1/Ecore_Input.h" \
     "${INCLUDE}/ecore-1/Ecore_Evas.h" \
     "${INCLUDE}/ecore-1/Ecore_Fb.h" \
     "${INCLUDE}/ecore-1/Ecore_File.h" \
@@ -26,11 +27,9 @@ for header in \
     #
     mv $CURRENT/$FILE-* $PREV/ 2>/dev/null
     #
-    for what in functions enums structs callbacks; do
-        cat $header | sed -r -n -f sed-$what > $CURRENT/$FILE-$what
-    done
-    #
-    for F in $FILE-funcs $FILE-enums $FILE-structs ; do
+    for what in functions enums types callbacks; do
+        F=$FILE-$what
+        cat $header | sed -r -n -f sed-$what > $CURRENT/$F
         if [ -f $PREV/$F ]; then
             diff -u0 $PREV/$F $CURRENT/$F > $F-diff
             N=$(cat $F-diff | wc -l)
