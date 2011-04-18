@@ -1,14 +1,14 @@
-s/.*(enum\s+[a-zA-Z0-9_]+).*$/typedef \1 { /
+s/.*(enum\s+\w+).*$/typedef \1 { /
 T;h
 :attrs;n
 s/^\s*([A-Z0-9_]+).*$/\1, /
 T next;H;b attrs
 :next
 /^\s*\}/ ! b attrs
-s/^\s*}\s*([a-zA-Z0-9_]+).*$/ } \1;/
+s/^\s*}\s*(\w+).*$/ } \1;/
 t finish
 :close
-s/^\s*typedef\s+enum\s+[a-zA-Z0-9_]+\s+([a-zA-Z0-9_]+)\s+;/ } \1/
+s/^\s*typedef\s+enum\s+\w+\s+(\w+)\s+;/ } \1/
 t finish;n;T close
 :finish
 H;x
