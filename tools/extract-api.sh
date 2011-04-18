@@ -26,9 +26,9 @@ for header in \
     #
     mv $CURRENT/$FILE-* $PREV/ 2>/dev/null
     #
-    cat $header | sed -r -n -f sed-functions > $CURRENT/$FILE-funcs
-    cat $header | sed -r -n -f sed-enums > $CURRENT/$FILE-enums
-    cat $header | sed -r -n -f sed-structs > $CURRENT/$FILE-structs
+    for what in functions enums structs callbacks; do
+        cat $header | sed -r -n -f sed-$what > $CURRENT/$FILE-$what
+    done
     #
     for F in $FILE-funcs $FILE-enums $FILE-structs ; do
         if [ -f $PREV/$F ]; then
