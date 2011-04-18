@@ -1,1 +1,11 @@
-/^\s*typedef\s+([a-zA-Z0-9_\* ]+?)\s+\*?(\(\*)?(\w+)\)?\s*\(.*\);\s*$/p
+s/^\s*typedef\s+(.*)(\(\*?\w+\))?\s*(\(.*\));/typedef \1 \2 \3;/
+t finish
+s/^\s*typedef\s+(.*)(\(\*?\w+\))?\s*(\(.*,)/typedef \1 \2 \3/
+T;h
+:loop;n
+/,$/ { H; b loop }
+/;$/ { H;x}
+:finish
+s/\n//g
+s/ {2,}/ /g
+p
