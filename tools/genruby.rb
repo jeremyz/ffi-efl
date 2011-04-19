@@ -94,7 +94,7 @@ def set_type t, v, cb=false
         exit 1
     end
     r = TYPES[v]
-    v =r[1..-1] if not r.nil?
+    v = r[1..-1] if not r.nil?
     TYPES[t]=':'+v
     if cb
         TYPES[t+' *']=':'+v
@@ -103,6 +103,7 @@ def set_type t, v, cb=false
         TYPES[t+' **']=':'+v+'_pp'
         TYPES[t+' ***']=':'+v+'_ppp'
     end
+    v
 end
 #
 def get_type t
@@ -116,7 +117,7 @@ def get_type t
     r
 end
 #
-def get_type_from_arg arg
+def get_type_from_arg arg, l
     if arg=~ /^\s*void\s*$/
         return ''
     end
@@ -125,11 +126,16 @@ def get_type_from_arg arg
     end
     k = arg.gsub(/const/,'').gsub(/\s{2,}/,' ').strip
 #    if not k=~/^((?:\w+\s)+\**)\s?(\w+)$/
-    if not k=~/(.*?)(\w+)$/
-        puts "wrong arg >#{k}< #{arg}"
+    if k=~/(.*?)(\w+)$/
+        return get_type $1
+    end
+    # try with unchanged argument string
+    t = get_type k
+    if t.nil?
+        puts "wrong arg >#{k}< #{arg} (#{l})"
         exit 1
     end
-    get_type $1
+    t
 end
 #
 def wrap_text txt, col, indent
@@ -147,11 +153,11 @@ def gen_enums path, indent
         typedef = $1
         values = $2
         typename = $3
-        set_type typename, typename
+        v = set_type typename, typename
 #        args = values.split(',').collect { |cst| ':'+cst.strip.downcase }.join ', '
         args = values.split(',').collect { |cst| ':'+cst.strip.downcase.sub(typename.downcase+'_','') }.join(', ').gsub(/=/,',')
         r << indent+"# #{typedef} {...} #{typename};\n"
-        r << wrap_text( indent+"enum :#{typename.downcase}, [ #{args} ]", 150, indent+' '*4 )+"\n"
+        r << wrap_text( indent+"enum :#{v}, [ #{args} ]", 150, indent+' '*4 )+"\n"
     end
     r
 end
@@ -160,18 +166,18 @@ def gen_typedefs path, indent
     r = ''
     open(path+'-types','r').readlines.each do |l|
         l.strip!
-        if l=~/typedef struct _\w+ (\w+);/
-            t = $1
-            set_type t, t
+        if l=~/typedef (struct|enum|union) _\w+ (\w+);/
+            t = $2
+            v = set_type t, t
             r << indent+"# #{l}\n"
             r << indent+"typedef :pointer, :#{t.downcase}\n"
             r << indent+"typedef :pointer, :#{t.downcase}_p\n"
-        elsif l =~/typedef ((?:\w+\**\s)+)(\w+);/
+        elsif l =~/typedef\s+((?:\w+\**\s)+)(\w+);/
             t = $2
             v = $1
-            set_type t, v
+            v = set_type t, v
             r << indent+"# #{l}\n"
-            r << indent+"typedef :#{v.downcase}, :#{t.downcase}\n"
+            r << indent+"typedef :#{v}, :#{t.downcase}\n"
 #            r << indent+"typedef :#{v.downcase}, :#{t.downcase}_p\n"
         else
             r << indent+"# #{l}\n#{indent}# FIXME\n"
@@ -191,10 +197,10 @@ def gen_callbacks path, indent
         end
         ret = $1
         name = $2
-        args = $3.split(',').collect { |arg| get_type_from_arg arg }.join ', '
+        args = $3.split(',').collect { |arg| get_type_from_arg arg, l }.join ', '
         k = name.sub(/\(/,'').sub(/\)/,'').sub(/\*/,'')
         t = name.downcase.sub(/\(/,'').sub(/\)/,'').sub(/\*/,'')
-        set_type k, t, true
+        t = set_type k, t, true
         r << indent+"# #{l}\n"
         r << wrap_text(indent+"callback :#{t}, [ #{args} ], #{get_type ret}", 150, indent+' '*4 )+"\n"
     end
@@ -212,7 +218,7 @@ def gen_functions path, indent
         end
         ret = $1
         func = $2.downcase
-        args = $3.split(',').collect { |arg| get_type_from_arg arg }.join ', '
+        args = $3.split(',').collect { |arg| get_type_from_arg arg, l }.join ', '
         r << indent+"# #{l}\n"
         r << wrap_text(indent+"[ :#{func}, [ #{args} ], #{get_type ret} ],", 150, indent+' '*4)+"\n"
     end
