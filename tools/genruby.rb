@@ -159,7 +159,7 @@ def gen_enums path, indent
         values = $2
         typename = $3
         v = set_type typename, typename
-        args = values.split(',').collect { |cst| ':'+cst.strip.downcase }.join(', ').gsub(/=/,',')
+        args = values.split(',').collect { |cst| ':'+cst.strip.downcase }.join(', ').gsub(/=/,',').gsub(/ ,/,',')
         r << indent+"# #{typedef} {...} #{typename};\n"
         r << wrap_text( indent+"enum :#{v}, [ #{args} ]", 150, indent+' '*4 )+"\n"
     end
