@@ -118,7 +118,7 @@ end
 #
 def get_type_from_arg arg
     if arg=~ /^\s*void\s*$/
-        return get_type 'void'
+        return ''
     end
     if arg =~ /\.\.\./
         return '... FIXME'
