@@ -25,11 +25,14 @@ module E17
         typedef :pointer, :void_p
         typedef :pointer, :uchar_p
         typedef :pointer, :string_array
+        typedef :pointer, :string_array_p
         #
         typedef :pointer, :eina_list_p
         #
     end
     #
 end
+#
+require 'e17/eina/eina_types-ffi'
 #
 # EOF
