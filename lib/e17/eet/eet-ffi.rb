@@ -90,9 +90,9 @@ module E17
         # typedef void (*Eet_Descriptor_Str_Direct_Free_Callback) (const char *str);
         callback :eet_descriptor_str_direct_free_callback, [ :string ], :void
         # typedef const char *(*Eet_Descriptor_Type_Get_Callback) (const void *data, Eina_Bool *unknow);
-        callback :eet_descriptor_type_get_callback, [ :void_p, :uchar_p ], :string
+        callback :eet_descriptor_type_get_callback, [ :void_p, :eina_bool_p ], :string
         # typedef Eina_Bool (*Eet_Descriptor_Type_Set_Callback) (const char *type, void *data, Eina_Bool unknow);
-        callback :eet_descriptor_type_set_callback, [ :string, :void_p, :uchar ], :uchar
+        callback :eet_descriptor_type_set_callback, [ :string, :void_p, :eina_bool ], :eina_bool
         # typedef void *(*Eet_Descriptor_Array_Alloc_Callback) (size_t size);
         callback :eet_descriptor_array_alloc_callback, [ :ulong ], :void_p
         # typedef void (*Eet_Descriptor_Array_Free_Callback) (void *mem);
@@ -104,7 +104,7 @@ module E17
         # typedef void (*Eet_Node_Walk_Struct_Add_Callback) (void *parent, const char *name, void *child, void *user_data);
         callback :eet_node_walk_struct_add_callback, [ :void_p, :string, :void_p, :void_p ], :void
         # typedef void *(*Eet_Node_Walk_Array_Callback) (Eina_Bool variable, const char *name, int count, void *user_data);
-        callback :eet_node_walk_array_callback, [ :uchar, :string, :int, :void_p ], :void_p
+        callback :eet_node_walk_array_callback, [ :eina_bool, :string, :int, :void_p ], :void_p
         # typedef void (*Eet_Node_Walk_Insert_Callback) (void *array, int index, void *child, void *user_data);
         callback :eet_node_walk_insert_callback, [ :void_p, :int, :void_p, :void_p ], :void
         # typedef void *(*Eet_Node_Walk_List_Callback) (const char *name, void *user_data);
@@ -116,9 +116,9 @@ module E17
         # typedef void *(*Eet_Node_Walk_Simple_Callback) (int type, Eet_Node_Data *data, void *user_data);
         callback :eet_node_walk_simple_callback, [ :int, :eet_node_data_p, :void_p ], :void_p
         # typedef Eina_Bool Eet_Read_Cb (const void *eet_data, size_t size, void *user_data);
-        callback :eet_read_cb, [ :void_p, :ulong, :void_p ], :uchar
+        callback :eet_read_cb, [ :void_p, :ulong, :void_p ], :eina_bool
         # typedef Eina_Bool Eet_Write_Cb (const void *data, size_t size, void *user_data);
-        callback :eet_write_cb, [ :void_p, :ulong, :void_p ], :uchar
+        callback :eet_write_cb, [ :void_p, :ulong, :void_p ], :eina_bool
         #
         # FUNCTIONS
         fcts = [
@@ -153,7 +153,7 @@ module E17
         # EAPI int eet_delete(Eet_File *ef, const char *name);
         [ :eet_delete, [ :eet_file_p, :string ], :int ],
         # EAPI Eina_Bool eet_alias(Eet_File *ef, const char *name, const char *destination, int compress);
-        [ :eet_alias, [ :eet_file_p, :string, :string, :int ], :uchar ],
+        [ :eet_alias, [ :eet_file_p, :string, :string, :int ], :eina_bool ],
         # EAPI char ** eet_list(Eet_File *ef, const char *glob, int *count_ret);
         [ :eet_list, [ :eet_file_p, :string, :int_p ], :string_array ],
         # EAPI int eet_num_entries(Eet_File *ef);
@@ -220,7 +220,7 @@ module E17
         # EAPI Eina_Bool eet_eina_stream_data_descriptor_class_set(Eet_Data_Descriptor_Class *eddc, unsigned int		 eddc_size, const char *name, int size);
         # FIXME
         # EAPI Eina_Bool eet_eina_file_data_descriptor_class_set(Eet_Data_Descriptor_Class *eddc, unsigned int eddc_size, const char *name, int size);
-        [ :eet_eina_file_data_descriptor_class_set, [ :eet_data_descriptor_class_p, :uint, :string, :int ], :uchar ],
+        [ :eet_eina_file_data_descriptor_class_set, [ :eet_data_descriptor_class_p, :uint, :string, :int ], :eina_bool ],
         # EAPI void eet_data_descriptor_free(Eet_Data_Descriptor *edd);
         [ :eet_data_descriptor_free, [ :eet_data_descriptor_p ], :void ],
         # EAPI void eet_data_descriptor_element_add(Eet_Data_Descriptor *edd, const char *name, int type, int group_type, int offset, /* int count_offset, */
@@ -320,11 +320,11 @@ module E17
         # EAPI int eet_connection_received(Eet_Connection *conn, const void *data, size_t size);
         [ :eet_connection_received, [ :eet_connection_p, :void_p, :ulong ], :int ],
         # EAPI Eina_Bool eet_connection_send(Eet_Connection *conn, Eet_Data_Descriptor *edd, const void *data_in, const char *cipher_key);
-        [ :eet_connection_send, [ :eet_connection_p, :eet_data_descriptor_p, :void_p, :string ], :uchar ],
+        [ :eet_connection_send, [ :eet_connection_p, :eet_data_descriptor_p, :void_p, :string ], :eina_bool ],
         # EAPI Eina_Bool eet_connection_node_send(Eet_Connection *conn, Eet_Node *node, const char *cipher_key);
-        [ :eet_connection_node_send, [ :eet_connection_p, :eet_node_p, :string ], :uchar ],
+        [ :eet_connection_node_send, [ :eet_connection_p, :eet_node_p, :string ], :eina_bool ],
         # EAPI void * eet_connection_close(Eet_Connection *conn, Eina_Bool *on_going);
-        [ :eet_connection_close, [ :eet_connection_p, :uchar_p ], :void_p ],
+        [ :eet_connection_close, [ :eet_connection_p, :eina_bool_p ], :void_p ],
         ]
         #
         attach_fcts fcts

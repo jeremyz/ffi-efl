@@ -111,7 +111,7 @@ module E17
         # typedef void *(*Ecore_Data_Cb) (void *data);
         callback :ecore_data_cb, [ :void_p ], :void_p
         # typedef Eina_Bool (*Ecore_Filter_Cb) (void *data, void *loop_data, int type, void *event);
-        callback :ecore_filter_cb, [ :void_p, :void_p, :int, :void_p ], :uchar
+        callback :ecore_filter_cb, [ :void_p, :void_p, :int, :void_p ], :eina_bool
         # typedef int (*Ecore_Select_Function) (int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
         callback :ecore_select_function, [ :int, :pointer, :pointer, :pointer, :pointer ], :int
         # typedef void (*Ecore_End_Cb) (void *user_data, void *func_data);
@@ -121,21 +121,21 @@ module E17
         # typedef void (*Ecore_Exe_Cb) (void *data, const Ecore_Exe *exe);
         callback :ecore_exe_cb, [ :void_p, :ecore_exe_p ], :void
         # typedef Eina_Bool (*Ecore_Event_Handler_Cb) (void *data, int type, void *event);
-        callback :ecore_event_handler_cb, [ :void_p, :int, :void_p ], :uchar
+        callback :ecore_event_handler_cb, [ :void_p, :int, :void_p ], :eina_bool
         # typedef void (*Ecore_Thread_Cb) (void *data, Ecore_Thread *thread);
         callback :ecore_thread_cb, [ :void_p, :ecore_thread_p ], :void
         # typedef void (*Ecore_Thread_Notify_Cb) (void *data, Ecore_Thread *thread, void *msg_data);
         callback :ecore_thread_notify_cb, [ :void_p, :ecore_thread_p, :void_p ], :void
         # typedef Eina_Bool (*Ecore_Task_Cb) (void *data);
-        callback :ecore_task_cb, [ :void_p ], :uchar
+        callback :ecore_task_cb, [ :void_p ], :eina_bool
         # typedef void (*Ecore_Cb) (void *data);
         callback :ecore_cb, [ :void_p ], :void
         # typedef Eina_Bool (*Ecore_Fd_Cb) (void *data, Ecore_Fd_Handler *fd_handler);
-        callback :ecore_fd_cb, [ :void_p, :ecore_fd_handler_p ], :uchar
+        callback :ecore_fd_cb, [ :void_p, :ecore_fd_handler_p ], :eina_bool
         # typedef void (*Ecore_Fd_Prep_Cb) (void *data, Ecore_Fd_Handler *fd_handler);
         callback :ecore_fd_prep_cb, [ :void_p, :ecore_fd_handler_p ], :void
         # typedef Eina_Bool (*Ecore_Win32_Handle_Cb) (void *data, Ecore_Win32_Handler *wh);
-        callback :ecore_win32_handle_cb, [ :void_p, :ecore_win32_handler_p ], :uchar
+        callback :ecore_win32_handle_cb, [ :void_p, :ecore_win32_handler_p ], :eina_bool
         #
         # FUNCTIONS
         fcts = [
@@ -188,7 +188,7 @@ module E17
         # EAPI void ecore_exe_callback_pre_free_set(Ecore_Exe *exe, Ecore_Exe_Cb func);
         [ :ecore_exe_callback_pre_free_set, [ :ecore_exe_p, :ecore_exe_cb ], :void ],
         # EAPI Eina_Bool ecore_exe_send(Ecore_Exe *exe, const void *data, int size);
-        [ :ecore_exe_send, [ :ecore_exe_p, :void_p, :int ], :uchar ],
+        [ :ecore_exe_send, [ :ecore_exe_p, :void_p, :int ], :eina_bool ],
         # EAPI void ecore_exe_close_stdin(Ecore_Exe *exe);
         [ :ecore_exe_close_stdin, [ :ecore_exe_p ], :void ],
         # EAPI void ecore_exe_auto_limits_set(Ecore_Exe *exe, int start_bytes, int end_bytes, int start_lines, int end_lines);
@@ -248,7 +248,7 @@ module E17
         # EAPI Ecore_Select_Function ecore_main_loop_select_func_get(void);
         [ :ecore_main_loop_select_func_get, [  ], :ecore_select_function ],
         # EAPI Eina_Bool ecore_main_loop_glib_integrate(void);
-        [ :ecore_main_loop_glib_integrate, [  ], :uchar ],
+        [ :ecore_main_loop_glib_integrate, [  ], :eina_bool ],
         # EAPI void ecore_main_loop_glib_always_integrate_disable(void);
         [ :ecore_main_loop_glib_always_integrate_disable, [  ], :void ],
         # EAPI void ecore_main_loop_begin(void);
@@ -264,7 +264,7 @@ module E17
         # EAPI int ecore_main_fd_handler_fd_get(Ecore_Fd_Handler *fd_handler);
         [ :ecore_main_fd_handler_fd_get, [ :ecore_fd_handler_p ], :int ],
         # EAPI Eina_Bool ecore_main_fd_handler_active_get(Ecore_Fd_Handler *fd_handler, Ecore_Fd_Handler_Flags flags);
-        [ :ecore_main_fd_handler_active_get, [ :ecore_fd_handler_p, :ecore_fd_handler_flags ], :uchar ],
+        [ :ecore_main_fd_handler_active_get, [ :ecore_fd_handler_p, :ecore_fd_handler_flags ], :eina_bool ],
         # EAPI void ecore_main_fd_handler_active_set(Ecore_Fd_Handler *fd_handler, Ecore_Fd_Handler_Flags flags);
         [ :ecore_main_fd_handler_active_set, [ :ecore_fd_handler_p, :ecore_fd_handler_flags ], :void ],
         # EAPI Ecore_Win32_Handler *ecore_main_win32_handler_add(void *h, Ecore_Win32_Handle_Cb func, const void *data);
@@ -276,7 +276,7 @@ module E17
         # EAPI void *ecore_pipe_del(Ecore_Pipe *p);
         [ :ecore_pipe_del, [ :ecore_pipe_p ], :void_p ],
         # EAPI Eina_Bool ecore_pipe_write(Ecore_Pipe *p, const void *buffer, unsigned int nbytes);
-        [ :ecore_pipe_write, [ :ecore_pipe_p, :void_p, :uint ], :uchar ],
+        [ :ecore_pipe_write, [ :ecore_pipe_p, :void_p, :uint ], :eina_bool ],
         # EAPI void ecore_pipe_write_close(Ecore_Pipe *p);
         [ :ecore_pipe_write_close, [ :ecore_pipe_p ], :void ],
         # EAPI void ecore_pipe_read_close(Ecore_Pipe *p);
@@ -284,16 +284,16 @@ module E17
         # EAPI Ecore_Thread *ecore_thread_run(Ecore_Thread_Cb func_blocking, Ecore_Thread_Cb func_end, Ecore_Thread_Cb func_cancel, const void *data);
         [ :ecore_thread_run, [ :ecore_thread_cb, :ecore_thread_cb, :ecore_thread_cb, :void_p ], :ecore_thread_p ],
         # EAPI Ecore_Thread *ecore_thread_feedback_run(Ecore_Thread_Cb func_heavy, Ecore_Thread_Notify_Cb func_notify, Ecore_Thread_Cb func_end, Ecore_Thread_Cb func_cancel, const void *data, Eina_Bool try_no_queue);
-        [ :ecore_thread_feedback_run, [ :ecore_thread_cb, :ecore_thread_notify_cb, :ecore_thread_cb, :ecore_thread_cb, :void_p, :uchar ],
+        [ :ecore_thread_feedback_run, [ :ecore_thread_cb, :ecore_thread_notify_cb, :ecore_thread_cb, :ecore_thread_cb, :void_p, :eina_bool ],
             :ecore_thread_p ],
         # EAPI Eina_Bool ecore_thread_cancel(Ecore_Thread *thread);
-        [ :ecore_thread_cancel, [ :ecore_thread_p ], :uchar ],
+        [ :ecore_thread_cancel, [ :ecore_thread_p ], :eina_bool ],
         # EAPI Eina_Bool ecore_thread_check(Ecore_Thread *thread);
-        [ :ecore_thread_check, [ :ecore_thread_p ], :uchar ],
+        [ :ecore_thread_check, [ :ecore_thread_p ], :eina_bool ],
         # EAPI Eina_Bool ecore_thread_feedback(Ecore_Thread *thread, const void *msg_data);
-        [ :ecore_thread_feedback, [ :ecore_thread_p, :void_p ], :uchar ],
+        [ :ecore_thread_feedback, [ :ecore_thread_p, :void_p ], :eina_bool ],
         # EAPI Eina_Bool ecore_thread_reschedule(Ecore_Thread *thread);
-        [ :ecore_thread_reschedule, [ :ecore_thread_p ], :uchar ],
+        [ :ecore_thread_reschedule, [ :ecore_thread_p ], :eina_bool ],
         # EAPI int ecore_thread_active_get(void);
         [ :ecore_thread_active_get, [  ], :int ],
         # EAPI int ecore_thread_pending_get(void);
@@ -311,21 +311,21 @@ module E17
         # EAPI int ecore_thread_available_get(void);
         [ :ecore_thread_available_get, [  ], :int ],
         # EAPI Eina_Bool ecore_thread_local_data_add(Ecore_Thread *thread, const char *key, void *value, Eina_Free_Cb cb, Eina_Bool direct);
-        [ :ecore_thread_local_data_add, [ :ecore_thread_p, :string, :void_p, :eina_free_cb, :uchar ], :uchar ],
+        [ :ecore_thread_local_data_add, [ :ecore_thread_p, :string, :void_p, :eina_free_cb, :eina_bool ], :eina_bool ],
         # EAPI void *ecore_thread_local_data_set(Ecore_Thread *thread, const char *key, void *value, Eina_Free_Cb cb);
         [ :ecore_thread_local_data_set, [ :ecore_thread_p, :string, :void_p, :eina_free_cb ], :void_p ],
         # EAPI void *ecore_thread_local_data_find(Ecore_Thread *thread, const char *key);
         [ :ecore_thread_local_data_find, [ :ecore_thread_p, :string ], :void_p ],
         # EAPI Eina_Bool ecore_thread_local_data_del(Ecore_Thread *thread, const char *key);
-        [ :ecore_thread_local_data_del, [ :ecore_thread_p, :string ], :uchar ],
+        [ :ecore_thread_local_data_del, [ :ecore_thread_p, :string ], :eina_bool ],
         # EAPI Eina_Bool ecore_thread_global_data_add(const char *key, void *value, Eina_Free_Cb cb, Eina_Bool direct);
-        [ :ecore_thread_global_data_add, [ :string, :void_p, :eina_free_cb, :uchar ], :uchar ],
+        [ :ecore_thread_global_data_add, [ :string, :void_p, :eina_free_cb, :eina_bool ], :eina_bool ],
         # EAPI void *ecore_thread_global_data_set(const char *key, void *value, Eina_Free_Cb cb);
         [ :ecore_thread_global_data_set, [ :string, :void_p, :eina_free_cb ], :void_p ],
         # EAPI void *ecore_thread_global_data_find(const char *key);
         [ :ecore_thread_global_data_find, [ :string ], :void_p ],
         # EAPI Eina_Bool ecore_thread_global_data_del(const char *key);
-        [ :ecore_thread_global_data_del, [ :string ], :uchar ],
+        [ :ecore_thread_global_data_del, [ :string ], :eina_bool ],
         # EAPI void *ecore_thread_global_data_wait(const char *key, double seconds);
         [ :ecore_thread_global_data_wait, [ :string, :double ], :void_p ],
         # EAPI double ecore_time_get(void);
@@ -373,7 +373,7 @@ module E17
         # EAPI double ecore_poller_poll_interval_get(Ecore_Poller_Type type);
         [ :ecore_poller_poll_interval_get, [ :ecore_poller_type ], :double ],
         # EAPI Eina_Bool ecore_poller_poller_interval_set(Ecore_Poller *poller, int interval);
-        [ :ecore_poller_poller_interval_set, [ :ecore_poller_p, :int ], :uchar ],
+        [ :ecore_poller_poller_interval_set, [ :ecore_poller_p, :int ], :eina_bool ],
         # EAPI int ecore_poller_poller_interval_get(Ecore_Poller *poller);
         [ :ecore_poller_poller_interval_get, [ :ecore_poller_p ], :int ],
         # EAPI Ecore_Poller *ecore_poller_add(Ecore_Poller_Type type, int interval, Ecore_Task_Cb func, const void *data);
