@@ -6,21 +6,24 @@ require 'rspec/core/rake_task'
 namespace :spec do
 
     desc 'Run all specs with basic output'
-    RSpec::Core::RakeTask.new(:run) do |t|
+    RSpec::Core::RakeTask.new(:run) do |t,args|
         t.ruby_opts = PROJ.ruby_opts
         t.rspec_opts = PROJ.spec.opts
+        t.pattern = ENV['pattern'] if ENV['pattern']
     end
 
     desc 'Run all specs with text output'
     RSpec::Core::RakeTask.new(:doc) do |t|
         t.ruby_opts = PROJ.ruby_opts
         t.rspec_opts = PROJ.spec.opts + ['-fs' ]
+        t.pattern = ENV['pattern'] if ENV['pattern']
     end
 
     desc 'Run all specs with html output'
     RSpec::Core::RakeTask.new(:html) do |t|
         t.ruby_opts = PROJ.ruby_opts
         t.rspec_opts = PROJ.spec.opts + ['-fh' ]
+        t.pattern = ENV['pattern'] if ENV['pattern']
     end
 
     if HAVE_RCOV
