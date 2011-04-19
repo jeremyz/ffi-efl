@@ -26,13 +26,18 @@ HEADER =<<-EOF
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'e17/ffi_helper'
+require 'e17/ffi'
 #
 module E17
+    #
     module MNAME
+        def self.method_missing m, *args, &block
+            return E17::API.send 'MBASE_'+m.to_s, *args, &block
+        end
+    end
+    #
+    module API
         #
-        extend FFI::Library
-        extend FFIHelper
 EOF
 FOOTER =<<-EOF
     end
@@ -75,8 +80,6 @@ TYPES = {
     'struct timeval *' => ':pointer',
     'struct sockaddr *' => ':pointer',
     # E17 BASE TYPES
-#    'Eina_Bool' => ':bool',
-#    'Eina_Bool *' => ':bool_p',
     'Eina_List' => ':eina_list',
     'Eina_List *' => ':eina_list_p',
     'Eina_Hash' => ':eina_hash',
@@ -125,7 +128,6 @@ def get_type_from_arg arg, l
         return '... FIXME'
     end
     k = arg.gsub(/const/,'').gsub(/\s{2,}/,' ').strip
-#    if not k=~/^((?:\w+\s)+\**)\s?(\w+)$/
     if k=~/(.*?)(\w+)$/
         return get_type $1
     end
@@ -154,8 +156,7 @@ def gen_enums path, indent
         values = $2
         typename = $3
         v = set_type typename, typename
-#        args = values.split(',').collect { |cst| ':'+cst.strip.downcase }.join ', '
-        args = values.split(',').collect { |cst| ':'+cst.strip.downcase.sub(typename.downcase+'_','') }.join(', ').gsub(/=/,',')
+        args = values.split(',').collect { |cst| ':'+cst.strip.downcase }.join(', ').gsub(/=/,',')
         r << indent+"# #{typedef} {...} #{typename};\n"
         r << wrap_text( indent+"enum :#{v}, [ #{args} ]", 150, indent+' '*4 )+"\n"
     end
@@ -178,7 +179,6 @@ def gen_typedefs path, indent
             v = set_type t, v
             r << indent+"# #{l}\n"
             r << indent+"typedef :#{v}, :#{t.downcase}\n"
-#            r << indent+"typedef :#{v.downcase}, :#{t.downcase}_p\n"
         else
             r << indent+"# #{l}\n#{indent}# FIXME\n"
             next
@@ -227,31 +227,24 @@ def gen_functions path, indent
 end
 #
 libraries.each do |header,lib|
-    module_name = header[0..-3].sub(/_/,'')
+    module_name = header[0..-3].sub(/_/,'').capitalize
     base = File.join path, 'api', header
     dir = File.join lib_path, header[0..-3].split('_').first.downcase
     Dir.mkdir dir unless Dir.exists? dir
-    output = File.join dir, "#{header[0..-3].downcase}-defs.rb"
+    output = File.join dir, "#{header[0..-3].downcase}-ffi.rb"
     puts "generate #{output}"
     open(output,'w:utf-8') do |f|
-        f << HEADER.sub(/MNAME/,module_name)
+        f << HEADER.sub(/MNAME/,module_name).sub(/MBASE/,header[0..-3].downcase)
+        f << "#{INDENT}#\n#{INDENT}ffi_lib '#{lib}'\n"
         f << "#{INDENT}#\n#{INDENT}# ENUMS\n"
         f << gen_enums(base, INDENT)
         f << "#{INDENT}#\n#{INDENT}# TYPEDEFS\n"
         f << gen_typedefs(base, INDENT)
         f << "#{INDENT}#\n#{INDENT}# CALLBACKS\n"
         f << gen_callbacks(base, INDENT)
-        f << FOOTER
-    end
-    output = File.join dir, "#{header[0..-3].downcase}-funcs.rb"
-    puts "generate #{output}"
-    open(output,'w:utf-8') do |f|
-        f << HEADER.sub(/MNAME/,module_name)
-        f << "#{INDENT}#\n#{INDENT}ffi_lib '#{lib}'\n"
         f << "#{INDENT}#\n#{INDENT}# FUNCTIONS\n"
         f <<  gen_functions(base, INDENT)
         f << "#{INDENT}#\n#{INDENT}attach_fcts fcts\n"
-        f << "#{INDENT}#\n#{INDENT}create_aliases '#{module_name.downcase}_'.length, fcts\n#{INDENT}#\n"
         f << FOOTER
     end
 end
