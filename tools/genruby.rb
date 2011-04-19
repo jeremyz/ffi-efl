@@ -140,7 +140,7 @@ def gen_enums path, indent
     r = ''
     open(path+'-enums','r').readlines.each do |l|
         l.strip!
-        if not l=~/(typedef enum(?: \w+)?) {([A-Z0-9_ ,]+)} (\w+);/
+        if not l=~/(typedef enum(?: \w+)?) {([A-Z0-9_ (\s*=\s*-?[\d+]),]+)} (\w+);/
             r << indent+"# #{l}\n#{indent}# FIXME\n"
             next
         end
@@ -149,7 +149,7 @@ def gen_enums path, indent
         typename = $3
         set_type typename, typename
 #        args = values.split(',').collect { |cst| ':'+cst.strip.downcase }.join ', '
-        args = values.split(',').collect { |cst| ':'+cst.strip.downcase.sub(typename.downcase+'_','') }.join ', '
+        args = values.split(',').collect { |cst| ':'+cst.strip.downcase.sub(typename.downcase+'_','') }.join(', ').gsub(/=/,',')
         r << indent+"# #{typedef} {...} #{typename};\n"
         r << wrap_text( indent+"enum :#{typename.downcase}, [ #{args} ]", 150, indent+' '*4 )+"\n"
     end
