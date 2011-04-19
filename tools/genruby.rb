@@ -191,7 +191,7 @@ def gen_callbacks path, indent
     r = ''
     open(path+'-callbacks','r').readlines.each do |l|
         l.strip!
-        if not l=~/^\s*typedef\s+([a-zA-Z0-9_\* ]+?)\s+\**((?:\(\*)?\w+\)?)\s*\((.*)\);\s*$/
+        if not l=~/^\s*typedef\s+([a-zA-Z0-9_\* ]+?\s+\**)((?:\(\*)?\w+\)?)\s*\((.*)\);\s*$/
             r << indent+"# #{l}\n#{indent}# FIXME\n"
             next
         end
