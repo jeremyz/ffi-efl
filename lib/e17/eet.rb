@@ -1,8 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'e17/eet/eet-defs'
-require 'e17/eet/eet-funcs'
+require 'e17/eet/eet-ffi'
 #
 module E17
     module Eet
@@ -11,12 +10,12 @@ module E17
             #
             def open path, mode=FILE_MODE_READ, &blk
                 if blk
-                    f = eet_open path, mode
+                    f = E17::API.eet_open path, mode
                     raise Exception.new "Unable to open file #{path}" if f.nil?
                     yield EetFile.new f
-                    eet_close f
+                    E17::API.eet_close f
                 else
-                    f = eet_open path, mode
+                    f = E17::API.eet_open path, mode
                     return EetFile.new f unless f.nil?
                 end
             end
@@ -30,21 +29,21 @@ module E17
             private :initialize
             #
             def close
-                Eet.eet_close @ptr
+                E17::API.eet_close @ptr
                 @ptr=nil
             end
             #
             def mode_get
-                Eet.eet_mode_get @ptr
+                E17::API.eet_mode_get @ptr
             end
             #
             def write key, data, compress=false
-                Eet.eet_write @ptr, key, FFI::MemoryPointer.from_string(data), data.bytesize, ( compress ? 1 : 0 )
+                E17::API.eet_write @ptr, key, FFI::MemoryPointer.from_string(data), data.bytesize, ( compress ? 1 : 0 )
             end
             #
             def read key
                 ptr = FFI::MemoryPointer.new(:int)
-                data = Eet.eet_read @ptr, key, ptr
+                data = E17::API.eet_read @ptr, key, ptr
                 s = ptr.read_int
                 ptr.free
                 return nil if s==0
