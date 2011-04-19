@@ -80,6 +80,8 @@ TYPES = {
     'struct timeval *' => ':pointer',
     'struct sockaddr *' => ':pointer',
     # E17 BASE TYPES
+    'Eina_Bool' => ':eina_bool',
+    'Eina_Bool *' => ':eina_bool_p',
     'Eina_List' => ':eina_list',
     'Eina_List *' => ':eina_list_p',
     'Eina_Hash' => ':eina_hash',
@@ -91,6 +93,7 @@ TYPES = {
 }
 #
 def set_type t, v, cb=false
+    return 'bool' if t =~/Eina_Bool/
     v = v.downcase.gsub(/(const|enum|union)/,'').strip
     if not TYPES[t].nil?
         puts "type already exists >#{t}< #{v}"
@@ -179,6 +182,7 @@ def gen_typedefs path, indent
             v = set_type t, v
             r << indent+"# #{l}\n"
             r << indent+"typedef :#{v}, :#{t.downcase}\n"
+            r << indent+"typedef :pointer, :#{t.downcase}_p\n" if t=~/Eina_Bool/
         else
             r << indent+"# #{l}\n#{indent}# FIXME\n"
             next
