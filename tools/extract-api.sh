@@ -37,7 +37,7 @@ for header in \
         if [ -f $PREV/$F ]; then
             diff -u0 $PREV/$F $CURRENT/$F > $P/$F-diff
             N=$(cat $P/$F-diff | wc -l)
-            [ $N -eq 0 ] && rm $P/$F-diff
+            [ $N -eq 0 ] && rm $P/$F-diff || echo "see $P/$F-diff"
         fi
     done
     #
