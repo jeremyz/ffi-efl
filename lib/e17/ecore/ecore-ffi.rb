@@ -109,7 +109,7 @@ module E17
         #
         # CALLBACKS
         # typedef void *(*Ecore_Data_Cb) (void *data);
-        callback :ecore_data_cb, [ :void_p ], :void
+        callback :ecore_data_cb, [ :void_p ], :void_p
         # typedef Eina_Bool (*Ecore_Filter_Cb) (void *data, void *loop_data, int type, void *event);
         callback :ecore_filter_cb, [ :void_p, :void_p, :int, :void_p ], :uchar
         # typedef int (*Ecore_Select_Function) (int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
