@@ -7,7 +7,7 @@ module Efl
     #
     module EcoreInput
         def self.method_missing m, *args, &block
-            return Efl::API.send 'ecore_input_'+m.to_s, *args, &block
+            return Efl::API.send 'ecore_'+m.to_s, *args, &block
         end
     end
     #

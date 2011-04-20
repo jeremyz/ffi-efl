@@ -243,7 +243,7 @@ libraries.collect do |header,module_name,module_base,lib|
     Dir.mkdir dir unless Dir.exists? dir
     output = File.join dir, "#{header[0..-3].downcase}-ffi.rb"
     puts "parse #{base}-*"
-    r = [lib, output, module_name, header[0..-3].downcase ]
+    r = [lib, output, module_name, module_base ]
     r << gen_enums(base, INDENT)
     r << gen_typedefs(base, INDENT)
     r << gen_callbacks(base, INDENT)
