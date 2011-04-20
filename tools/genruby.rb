@@ -165,6 +165,9 @@ def gen_enums path, indent
         args = values.split(',').collect { |cst| ':'+cst.strip.downcase }.join(', ').gsub(/=/,',').gsub(/ ,/,',')
         r << indent+"# #{typedef} {...} #{typename};"
         r << wrap_text( indent+"enum :#{v}, [ #{args} ]", 150, indent+' '*4 )
+        r << [ typename+' *', indent+"typedef :pointer, :#{v}_p" ]
+        r << [ typename+' **', indent+"typedef :pointer, :#{v}_pp" ]
+        r << [ typename+' ***', indent+"typedef :pointer, :#{v}_ppp" ]
     end
     r
 end
@@ -252,21 +255,9 @@ end.each do |lib, output, module_name, module_base, enums, typedefs, callbacks, 
         f << HEADER.sub(/MNAME/,module_name).sub(/MBASE/,module_base)
         f << "#{INDENT}#\n#{INDENT}ffi_lib '#{lib}'"
         f << "\n#{INDENT}#\n#{INDENT}# ENUMS"
-        f << "\n"+enums.join("\n") unless enums.empty?
+        f << "\n"+enums.collect { |t| ( t.is_a?(Array) ? ( TYPES_USAGE[t[0]] ? t[1] : nil ) : t ) }.compact.join("\n") unless enums.empty?
         f << "\n#{INDENT}#\n#{INDENT}# TYPEDEFS"
-        unless typedefs.empty?
-            f << "\n"+typedefs.collect { |t|
-                if t.is_a? Array
-                    if TYPES_USAGE[t[0]]
-                        t[1]
-                    else
-                        nil
-                    end
-                else
-                    t
-                end
-            }.compact.join("\n")
-        end
+        f << "\n"+typedefs.collect { |t| ( t.is_a?(Array) ? ( TYPES_USAGE[t[0]] ? t[1] : nil ) : t ) }.compact.join("\n") unless typedefs.empty?
         f << "\n#{INDENT}#\n#{INDENT}# CALLBACKS"
         f << "\n"+callbacks.join("\n") unless callbacks.empty?
         f << "\n#{INDENT}#\n#{INDENT}# FUNCTIONS"
