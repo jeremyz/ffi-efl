@@ -4,20 +4,21 @@
 path = File.dirname __FILE__
 lib_path = File.join path, '..', 'lib', 'efl'
 #
+# header, module name, lfct prefix, lib
 libraries = [
-    [ 'eina_types.h', 'eina'],
-    [ 'Eet.h', 'eet'],
-    [ 'Evas.h', 'evas'],
-    [ 'Evas_GL.h', 'evas'],
-    [ 'Edje.h', 'edje'],
-    [ 'Ecore.h', 'ecore'],
-    [ 'Ecore_Con.h', 'ecore'],
-    [ 'Ecore_Input.h', 'ecore'],
-    [ 'Ecore_Getopt.h', 'ecore'],
-    [ 'Ecore_Evas.h', 'ecore'],
-    [ 'Ecore_Fb.h', 'ecore'],
-    [ 'Ecore_File.h', 'ecore'],
-    [ 'Elementary.h', 'libelementary-ver-pre-svn-09.so.0' ],
+    [ 'eina_types.h', 'Eina', 'eina', 'eina'],
+    [ 'Eet.h', 'Eet', 'eet', 'eet'],
+    [ 'Evas.h', 'Evas', 'evas', 'evas'],
+#    [ 'Evas_GL.h', 'EvasGl', 'evas_gl', 'evas'],
+#    [ 'Edje.h', 'Edje', 'edje', 'edje'],
+    [ 'Ecore.h', 'Ecore', 'ecore', 'ecore'],
+#    [ 'Ecore_Con.h', 'EcoreCon', 'ecore_con', 'ecore'],
+    [ 'Ecore_Input.h', 'EcoreInput', 'ecore', 'ecore'],
+    [ 'Ecore_Getopt.h', 'EcoreGetopt', 'ecore_getopt', 'ecore'],
+    [ 'Ecore_Evas.h', 'Ecore_evas', 'ecore', 'ecore'],
+#    [ 'Ecore_Fb.h', 'Ecore_fb', 'ecore', 'ecore'],
+#    [ 'Ecore_File.h', 'Ecore_file', 'ecore', 'ecore'],
+    [ 'Elementary.h', 'Elm', 'elm', 'libelementary-ver-pre-svn-09.so.0' ],
 ]
 #
 INDENT=' '*8
@@ -236,8 +237,7 @@ def gen_functions path, indent
     r
 end
 #
-libraries.collect do |header,lib|
-    module_name = header[0..-3].sub(/_/,'').capitalize
+libraries.collect do |header,module_name,module_base,lib|
     base = File.join path, 'api', header
     dir = File.join lib_path, header[0..-3].split('_').first.downcase
     Dir.mkdir dir unless Dir.exists? dir

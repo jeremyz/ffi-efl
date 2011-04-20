@@ -70,7 +70,7 @@ module Efl
             #
         end
         #
-        class Efl::APIObject
+        class EvasObject
             def type_get
                 Efl::API.evas_object_type_get @evas
             end
