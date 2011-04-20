@@ -1,11 +1,11 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'e17/eet'
+require 'efl/eet'
 #
-describe E17::Eet do
+describe Efl::Eet do
     #
-    include E17
+    include Efl
     #
     FP = '/tmp/_eet.cfg'
     #
@@ -28,15 +28,15 @@ describe E17::Eet do
     end
     #
     it "should have good enums" do
-        E17::API.enum_type(:eet_file_mode)[:eet_file_mode_invalid].should eql -1
-        E17::API.enum_type(:eet_file_mode)[:eet_file_mode_read].should eql 0
-        E17::API.enum_type(:eet_file_mode)[:eet_file_mode_write].should eql 1
-        E17::API.enum_type(:eet_file_mode)[:eet_file_mode_read_write].should eql 2
+        Efl::API.enum_type(:eet_file_mode)[:eet_file_mode_invalid].should eql -1
+        Efl::API.enum_type(:eet_file_mode)[:eet_file_mode_read].should eql 0
+        Efl::API.enum_type(:eet_file_mode)[:eet_file_mode_write].should eql 1
+        Efl::API.enum_type(:eet_file_mode)[:eet_file_mode_read_write].should eql 2
     end
     #
     it "should open and close" do
         Eet.init
-        f = Eet.open FP, E17::API.enum_type(:eet_file_mode)[:eet_file_mode_write]
+        f = Eet.open FP, Efl::API.enum_type(:eet_file_mode)[:eet_file_mode_write]
         f.write 'fake', 'value'
         f.close
         Eet.shutdown
@@ -44,9 +44,9 @@ describe E17::Eet do
     #
     it "should be able to get file access mode" do
         Eet.init
-        E17::API.enum_type(:eet_file_mode).symbols.each do |m|
+        Efl::API.enum_type(:eet_file_mode).symbols.each do |m|
             next if m==:eet_file_mode_invalid
-            Eet.open FP, E17::API.enum_type(:eet_file_mode)[m] do |f|
+            Eet.open FP, Efl::API.enum_type(:eet_file_mode)[m] do |f|
                 f.mode_get.should eql m
             end
         end

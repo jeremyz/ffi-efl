@@ -1,13 +1,13 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'e17/ffi'
+require 'efl/ffi'
 #
-module E17
+module Efl
     #
     module Edje
         def self.method_missing m, *args, &block
-            return E17::API.send 'edje_'+m.to_s, *args, &block
+            return Efl::API.send 'edje_'+m.to_s, *args, &block
         end
     end
     #

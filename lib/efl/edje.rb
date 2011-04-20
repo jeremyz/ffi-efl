@@ -1,9 +1,9 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'e17/edje/edje-ffi'
+require 'efl/edje/edje-ffi'
 #
-module E17
+module Efl
     module Edje
         #
     end

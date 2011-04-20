@@ -1,11 +1,11 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'e17/edje'
+require 'efl/edje'
 #
-describe E17::Edje do
+describe Efl::Edje do
     #
-    include E17
+    include Efl
     #
     it "should init" do
         Edje.init.should eql 1

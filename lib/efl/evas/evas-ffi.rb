@@ -1,13 +1,13 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'e17/ffi'
+require 'efl/ffi'
 #
-module E17
+module Efl
     #
     module Evas
         def self.method_missing m, *args, &block
-            return E17::API.send 'evas_'+m.to_s, *args, &block
+            return Efl::API.send 'evas_'+m.to_s, *args, &block
         end
     end
     #

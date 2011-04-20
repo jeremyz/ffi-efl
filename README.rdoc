@@ -1,11 +1,11 @@
-ffi-e17
+ffi-efl
     by Jérémy Zurcher
     http://cgit.asynk.ch
 
 == DESCRIPTION:
 
-ffi-e17 is a FFI[https://github.com/ffi/ffi/wiki] binding to Enlightenment Foundation Libraries (eina,eet,evas,ecore,edje)
-and Elementary, part of the Enlightenment project. (E17 API[http://www.enlightenment.org/p.php?p=docs&l=en])
+ffi-efl is a FFI[https://github.com/ffi/ffi/wiki] binding to Enlightenment Foundation Libraries (eina,eet,evas,ecore,edje...)
+base components of the Enlightenment project. (EFL API[http://www.enlightenment.org/p.php?p=docs&l=en])
 
 == FEATURES/PROBLEMS:
 
@@ -13,16 +13,16 @@ and Elementary, part of the Enlightenment project. (E17 API[http://www.enlighten
 
 == SYNOPSIS:
 
-    require './lib/e17'
-    include E17
-    EET.init
-    EET.open('/tmp/_eet.cfg', EET::FILE_MODE_WRITE) do |f|
+    require './lib/efl'
+    include Efl
+    Eet.init
+    Eet.open('/tmp/_eet.cfg', :eet_file_mode_write) do |f|
         f.write 'config2', 'test--key'
     end
-    EET.open('/tmp/_eet.cfg', EET::FILE_MODE_READ) do |f|
+    Eet.open('/tmp/_eet.cfg', :eet_file_mode_read) do |f|
         puts f.read('config2')
     end
-    EET.shutdown
+    Eet.shutdown
 
 For less minimalistic and more sane examples you may look at:
 
@@ -37,12 +37,12 @@ For less minimalistic and more sane examples you may look at:
 
 From rubyforge:
 
-  [sudo] gem install ffi-e17
+  [sudo] gem install ffi-efl
 
 or from the git repository on github:
 
-  git clone git://github.com/jeremyz/ffi-e17.git
-  cd ffi-e17
+  git clone git://github.com/jeremyz/ffi-efl.git
+  cd ffi-efl
   rake gem:install
 
 == CREDITS:

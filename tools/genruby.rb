@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 #
 path = File.dirname __FILE__
-lib_path = File.join path, '..', 'lib', 'e17'
+lib_path = File.join path, '..', 'lib', 'efl'
 #
 libraries = [
     [ 'eina_types.h', 'eina'],
@@ -26,13 +26,13 @@ HEADER =<<-EOF
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'e17/ffi'
+require 'efl/ffi'
 #
-module E17
+module Efl
     #
     module MNAME
         def self.method_missing m, *args, &block
-            return E17::API.send 'MBASE_'+m.to_s, *args, &block
+            return Efl::API.send 'MBASE_'+m.to_s, *args, &block
         end
     end
     #
@@ -79,7 +79,7 @@ TYPES = {
     'struct tm *' => ':pointer',
     'struct timeval *' => ':pointer',
     'struct sockaddr *' => ':pointer',
-    # E17 BASE TYPES
+    # Efl BASE TYPES
     'Eina_Bool' => ':eina_bool',
     'Eina_Bool *' => ':eina_bool_p',
     'Eina_List' => ':eina_list',

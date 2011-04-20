@@ -1,11 +1,11 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'e17/evas'
+require 'efl/evas'
 #
-describe E17::Evas do
+describe Efl::Evas do
     #
-    include E17
+    include Efl
     #
     it "should init" do
         Evas.init.should eql 1
@@ -20,15 +20,15 @@ describe E17::Evas do
     end
     #
     it "evas alloc error enum is ok" do
-        E17::API.enum_value(:evas_alloc_error_none).should eql 0
-        E17::API.enum_value(:evas_alloc_error_fatal).should eql 1
-        E17::API.enum_value(:evas_alloc_error_recovered).should eql 2
-        E17::API.enum_type(:evas_alloc_error)[0].should eql :evas_alloc_error_none
-        E17::API.enum_type(:evas_alloc_error)[1].should eql :evas_alloc_error_fatal
-        E17::API.enum_type(:evas_alloc_error)[2].should eql :evas_alloc_error_recovered
-        E17::API.enum_type(:evas_alloc_error)[:evas_alloc_error_none].should eql 0
-        E17::API.enum_type(:evas_alloc_error)[:evas_alloc_error_fatal].should eql 1
-        E17::API.enum_type(:evas_alloc_error)[:evas_alloc_error_recovered].should eql 2
+        Efl::API.enum_value(:evas_alloc_error_none).should eql 0
+        Efl::API.enum_value(:evas_alloc_error_fatal).should eql 1
+        Efl::API.enum_value(:evas_alloc_error_recovered).should eql 2
+        Efl::API.enum_type(:evas_alloc_error)[0].should eql :evas_alloc_error_none
+        Efl::API.enum_type(:evas_alloc_error)[1].should eql :evas_alloc_error_fatal
+        Efl::API.enum_type(:evas_alloc_error)[2].should eql :evas_alloc_error_recovered
+        Efl::API.enum_type(:evas_alloc_error)[:evas_alloc_error_none].should eql 0
+        Efl::API.enum_type(:evas_alloc_error)[:evas_alloc_error_fatal].should eql 1
+        Efl::API.enum_type(:evas_alloc_error)[:evas_alloc_error_recovered].should eql 2
     end
     #
     it "should have no memory allocation error occured" do

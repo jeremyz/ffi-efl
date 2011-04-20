@@ -3,7 +3,7 @@
 #
 require 'ffi'
 #
-module E17
+module Efl
     #
     module API
         #
@@ -39,6 +39,6 @@ module E17
     #
 end
 #
-require 'e17/eina/eina_types-ffi'
+require 'efl/eina/eina_types-ffi'
 #
 # EOF
