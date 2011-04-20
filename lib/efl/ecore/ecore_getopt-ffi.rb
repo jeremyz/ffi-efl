@@ -5,7 +5,7 @@ require 'efl/ffi'
 #
 module Efl
     #
-    module Ecoregetopt
+    module EcoreGetopt
         def self.method_missing m, *args, &block
             return Efl::API.send 'ecore_getopt_'+m.to_s, *args, &block
         end
