@@ -32,6 +32,8 @@ module E17
         typedef :pointer, :eina_list_p
         typedef :pointer, :eina_iterator_p
         typedef :pointer, :eina_accessor_p
+        typedef :pointer, :evas_p
+        typedef :pointer, :evas_object_p
         #
     end
     #
