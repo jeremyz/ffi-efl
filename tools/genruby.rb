@@ -92,6 +92,8 @@ TYPES = {
     'Eina_Accessor *' => ':eina_accessor_p',
 }
 #
+TYPES_USAGE = {}
+#
 def set_type t, v, cb=false
     return 'bool' if t =~/Eina_Bool/
     v = v.downcase.gsub(/(const|enum|union)/,'').strip
@@ -120,6 +122,7 @@ def get_type t
         puts "unknown type >#{k}< #{t}"
         exit 1
     end
+    TYPES_USAGE[k]||=true
     r
 end
 #
@@ -128,7 +131,7 @@ def get_type_from_arg arg, l
         return ''
     end
     if arg =~ /\.\.\./
-        return '... FIXME'
+        return ':varargs'
     end
     k = arg.gsub(/const/,'').gsub(/\s{2,}/,' ').strip
     if k=~/(.*?)(\w+)$/
@@ -148,11 +151,11 @@ def wrap_text txt, col, indent
 end
 #
 def gen_enums path, indent
-    r = ''
+    r = []
     open(path+'-enums','r').readlines.each do |l|
         l.strip!
         if not l=~/(typedef enum(?: \w+)?) {([A-Z0-9_ (\s*=\s*-?[\d+]),]+)} (\w+);/
-            r << indent+"# #{l}\n#{indent}# FIXME\n"
+            r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
         typedef = $1
@@ -160,43 +163,43 @@ def gen_enums path, indent
         typename = $3
         v = set_type typename, typename
         args = values.split(',').collect { |cst| ':'+cst.strip.downcase }.join(', ').gsub(/=/,',').gsub(/ ,/,',')
-        r << indent+"# #{typedef} {...} #{typename};\n"
-        r << wrap_text( indent+"enum :#{v}, [ #{args} ]", 150, indent+' '*4 )+"\n"
+        r << indent+"# #{typedef} {...} #{typename};"
+        r << wrap_text( indent+"enum :#{v}, [ #{args} ]", 150, indent+' '*4 )
     end
     r
 end
 #
 def gen_typedefs path, indent
-    r = ''
+    r = []
     open(path+'-types','r').readlines.each do |l|
         l.strip!
         if l=~/typedef (struct|enum|union) _\w+ (\w+);/
             t = $2
-            v = set_type t, t
-            r << indent+"# #{l}\n"
-            r << indent+"typedef :pointer, :#{t.downcase}\n"
-            r << indent+"typedef :pointer, :#{t.downcase}_p\n"
+            v = 'pointer'
+            set_type t, t
         elsif l =~/typedef\s+((?:\w+\**\s)+)(\w+);/
             t = $2
             v = $1
             v = set_type t, v
-            r << indent+"# #{l}\n"
-            r << indent+"typedef :#{v}, :#{t.downcase}\n"
-            r << indent+"typedef :pointer, :#{t.downcase}_p\n" if t=~/Eina_Bool/
         else
-            r << indent+"# #{l}\n#{indent}# FIXME\n"
+            r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
+        r << indent+"# #{l}"
+        r << indent+"typedef :#{v}, :#{t.downcase}"
+        r << [ t+' *', indent+"typedef :pointer, :#{t.downcase}_p" ]
+        r << [ t+' **', indent+"typedef :pointer, :#{t.downcase}_pp" ]
+        r << [ t+' ***', indent+"typedef :pointer, :#{t.downcase}_ppp" ]
     end
     r
 end
 #
 def gen_callbacks path, indent
-    r = ''
+    r = []
     open(path+'-callbacks','r').readlines.each do |l|
         l.strip!
         if not l=~/^\s*typedef\s+([a-zA-Z0-9_\* ]+?\s+\**)((?:\(\*)?\w+\)?)\s*\((.*)\);\s*$/
-            r << indent+"# #{l}\n#{indent}# FIXME\n"
+            r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
         ret = $1
@@ -205,50 +208,70 @@ def gen_callbacks path, indent
         k = name.sub(/\(/,'').sub(/\)/,'').sub(/\*/,'')
         t = name.downcase.sub(/\(/,'').sub(/\)/,'').sub(/\*/,'')
         t = set_type k, t, true
-        r << indent+"# #{l}\n"
-        r << wrap_text(indent+"callback :#{t}, [ #{args} ], #{get_type ret}", 150, indent+' '*4 )+"\n"
+        r << indent+"# #{l}"
+        r << wrap_text(indent+"callback :#{t}, [ #{args} ], #{get_type ret}", 150, indent+' '*4 )
     end
     r
 end
 #
 def gen_functions path, indent
-    r = ''
-    r << indent+"fcts = [\n"
+    r = []
+    r << indent+"fcts = ["
     open(path+'-functions','r').readlines.each do |l|
         l.strip!
         if not l=~ /EAPI ([a-zA-Z0-9_\* ]+?)(\w+) ?\(([a-zA-Z0-9_ \*,\.]+)\)( *[A-Z]{2,})?/
-            r << indent+"# #{l}\n#{indent}# FIXME\n"
+            r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
         ret = $1
         func = $2.downcase
         args = $3.split(',').collect { |arg| get_type_from_arg arg, l }.join ', '
-        r << indent+"# #{l}\n"
-        r << wrap_text(indent+"[ :#{func}, [ #{args} ], #{get_type ret} ],", 150, indent+' '*4)+"\n"
+        r << indent+"# #{l}"
+        r << wrap_text(indent+"[ :#{func}, [ #{args} ], #{get_type ret} ],", 150, indent+' '*4)
     end
-    r << indent+"]\n"
+    r << indent+"]"
     r
 end
 #
-libraries.each do |header,lib|
+libraries.collect do |header,lib|
     module_name = header[0..-3].sub(/_/,'').capitalize
     base = File.join path, 'api', header
     dir = File.join lib_path, header[0..-3].split('_').first.downcase
     Dir.mkdir dir unless Dir.exists? dir
     output = File.join dir, "#{header[0..-3].downcase}-ffi.rb"
+    puts "parse #{base}-*"
+    r = [lib, output, module_name, header[0..-3].downcase ]
+    r << gen_enums(base, INDENT)
+    r << gen_typedefs(base, INDENT)
+    r << gen_callbacks(base, INDENT)
+    r << gen_functions(base, INDENT)
+    r
+end.each do |lib, output, module_name, module_base, enums, typedefs, callbacks, functions|
     puts "generate #{output}"
     open(output,'w:utf-8') do |f|
-        f << HEADER.sub(/MNAME/,module_name).sub(/MBASE/,header[0..-3].downcase)
-        f << "#{INDENT}#\n#{INDENT}ffi_lib '#{lib}'\n"
-        f << "#{INDENT}#\n#{INDENT}# ENUMS\n"
-        f << gen_enums(base, INDENT)
-        f << "#{INDENT}#\n#{INDENT}# TYPEDEFS\n"
-        f << gen_typedefs(base, INDENT)
-        f << "#{INDENT}#\n#{INDENT}# CALLBACKS\n"
-        f << gen_callbacks(base, INDENT)
-        f << "#{INDENT}#\n#{INDENT}# FUNCTIONS\n"
-        f <<  gen_functions(base, INDENT)
-        f << "#{INDENT}#\n#{INDENT}attach_fcts fcts\n"
+        f << HEADER.sub(/MNAME/,module_name).sub(/MBASE/,module_base)
+        f << "#{INDENT}#\n#{INDENT}ffi_lib '#{lib}'"
+        f << "\n#{INDENT}#\n#{INDENT}# ENUMS"
+        f << "\n"+enums.join("\n") unless enums.empty?
+        f << "\n#{INDENT}#\n#{INDENT}# TYPEDEFS"
+        unless typedefs.empty?
+            f << "\n"+typedefs.collect { |t|
+                if t.is_a? Array
+                    if TYPES_USAGE[t[0]]
+                        t[1]
+                    else
+                        nil
+                    end
+                else
+                    t
+                end
+            }.compact.join("\n")
+        end
+        f << "\n#{INDENT}#\n#{INDENT}# CALLBACKS"
+        f << "\n"+callbacks.join("\n") unless callbacks.empty?
+        f << "\n#{INDENT}#\n#{INDENT}# FUNCTIONS"
+        f << "\n"+functions.join("\n") unless functions.empty?
+        f << "\n#{INDENT}#\n#{INDENT}attach_fcts fcts\n"
         f << FOOTER
     end
 end
