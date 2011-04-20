@@ -24,10 +24,14 @@ module E17
         typedef :pointer, :uint_p
         typedef :pointer, :void_p
         typedef :pointer, :uchar_p
+        typedef :pointer, :float_p
+        typedef :pointer, :double_p
         typedef :pointer, :string_array
         typedef :pointer, :string_array_p
         #
         typedef :pointer, :eina_list_p
+        typedef :pointer, :eina_iterator_p
+        typedef :pointer, :eina_accessor_p
         #
     end
     #
