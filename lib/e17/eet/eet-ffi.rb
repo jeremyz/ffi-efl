@@ -29,7 +29,6 @@ module E17
         # TYPEDEFS
         # typedef struct _Eet_Version Eet_Version;
         typedef :pointer, :eet_version
-        typedef :pointer, :eet_version_p
         # typedef struct _Eet_File Eet_File;
         typedef :pointer, :eet_file
         typedef :pointer, :eet_file_p

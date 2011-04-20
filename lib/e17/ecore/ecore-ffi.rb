@@ -21,19 +21,14 @@ module E17
         # TYPEDEFS
         # typedef struct _Ecore_Version Ecore_Version;
         typedef :pointer, :ecore_version
-        typedef :pointer, :ecore_version_p
         # typedef enum _Ecore_Fd_Handler_Flags Ecore_Fd_Handler_Flags;
         typedef :pointer, :ecore_fd_handler_flags
-        typedef :pointer, :ecore_fd_handler_flags_p
         # typedef enum _Ecore_Exe_Flags Ecore_Exe_Flags;
         typedef :pointer, :ecore_exe_flags
-        typedef :pointer, :ecore_exe_flags_p
         # typedef enum _Ecore_Exe_Win32_Priority Ecore_Exe_Win32_Priority;
         typedef :pointer, :ecore_exe_win32_priority
-        typedef :pointer, :ecore_exe_win32_priority_p
         # typedef enum _Ecore_Poller_Type Ecore_Poller_Type;
         typedef :pointer, :ecore_poller_type
-        typedef :pointer, :ecore_poller_type_p
         # typedef struct _Ecore_Exe Ecore_Exe;
         typedef :pointer, :ecore_exe
         typedef :pointer, :ecore_exe_p
@@ -75,28 +70,20 @@ module E17
         typedef :pointer, :ecore_poller_p
         # typedef struct _Ecore_Event_Signal_User Ecore_Event_Signal_User;
         typedef :pointer, :ecore_event_signal_user
-        typedef :pointer, :ecore_event_signal_user_p
         # typedef struct _Ecore_Event_Signal_Hup Ecore_Event_Signal_Hup;
         typedef :pointer, :ecore_event_signal_hup
-        typedef :pointer, :ecore_event_signal_hup_p
         # typedef struct _Ecore_Event_Signal_Exit Ecore_Event_Signal_Exit;
         typedef :pointer, :ecore_event_signal_exit
-        typedef :pointer, :ecore_event_signal_exit_p
         # typedef struct _Ecore_Event_Signal_Power Ecore_Event_Signal_Power;
         typedef :pointer, :ecore_event_signal_power
-        typedef :pointer, :ecore_event_signal_power_p
         # typedef struct _Ecore_Event_Signal_Realtime Ecore_Event_Signal_Realtime;
         typedef :pointer, :ecore_event_signal_realtime
-        typedef :pointer, :ecore_event_signal_realtime_p
         # typedef struct _Ecore_Exe_Event_Add Ecore_Exe_Event_Add;
         typedef :pointer, :ecore_exe_event_add
-        typedef :pointer, :ecore_exe_event_add_p
         # typedef struct _Ecore_Exe_Event_Del Ecore_Exe_Event_Del;
         typedef :pointer, :ecore_exe_event_del
-        typedef :pointer, :ecore_exe_event_del_p
         # typedef struct _Ecore_Exe_Event_Data_Line Ecore_Exe_Event_Data_Line;
         typedef :pointer, :ecore_exe_event_data_line
-        typedef :pointer, :ecore_exe_event_data_line_p
         # typedef struct _Ecore_Exe_Event_Data Ecore_Exe_Event_Data;
         typedef :pointer, :ecore_exe_event_data
         typedef :pointer, :ecore_exe_event_data_p
