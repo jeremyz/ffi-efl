@@ -3,52 +3,52 @@
 #
 require 'e17/evas'
 #
-describe E17::EVAS do
+describe E17::Evas do
     #
     include E17
     #
     it "should init" do
-        EVAS.init.should eql 1
-        EVAS.init.should eql 2
-        EVAS.init.should eql 3
+        Evas.init.should eql 1
+        Evas.init.should eql 2
+        Evas.init.should eql 3
     end
     #
     it "should shutdown" do
-        EVAS.shutdown.should eql 2
-        EVAS.shutdown.should eql 1
-        EVAS.shutdown.should eql 0
+        Evas.shutdown.should eql 2
+        Evas.shutdown.should eql 1
+        Evas.shutdown.should eql 0
     end
     #
     it "evas alloc error enum is ok" do
-        EVAS.enum_value(:none).should eql 0
-        EVAS.enum_value(:fatal).should eql 1
-        EVAS.enum_value(:recovered).should eql 2
-        EVAS.enum_type(:evas_alloc_error)[0].should eql :none
-        EVAS.enum_type(:evas_alloc_error)[1].should eql :fatal
-        EVAS.enum_type(:evas_alloc_error)[2].should eql :recovered
-        EVAS.enum_type(:evas_alloc_error)[:none].should eql 0
-        EVAS.enum_type(:evas_alloc_error)[:fatal].should eql 1
-        EVAS.enum_type(:evas_alloc_error)[:recovered].should eql 2
+        E17::API.enum_value(:evas_alloc_error_none).should eql 0
+        E17::API.enum_value(:evas_alloc_error_fatal).should eql 1
+        E17::API.enum_value(:evas_alloc_error_recovered).should eql 2
+        E17::API.enum_type(:evas_alloc_error)[0].should eql :evas_alloc_error_none
+        E17::API.enum_type(:evas_alloc_error)[1].should eql :evas_alloc_error_fatal
+        E17::API.enum_type(:evas_alloc_error)[2].should eql :evas_alloc_error_recovered
+        E17::API.enum_type(:evas_alloc_error)[:evas_alloc_error_none].should eql 0
+        E17::API.enum_type(:evas_alloc_error)[:evas_alloc_error_fatal].should eql 1
+        E17::API.enum_type(:evas_alloc_error)[:evas_alloc_error_recovered].should eql 2
     end
     #
     it "should have no memory allocation error occured" do
-        EVAS.init
-        EVAS.alloc_error.should eql :none
-        EVAS.shutdown
+        Evas.init
+        Evas.alloc_error.should eql :evas_alloc_error_none
+        Evas.shutdown
     end
     #
     it "should process async events" do
         cb = Proc.new do |target,type,evt|
             target.read_string.should eql "target"
-            type.should eql :show
+            type.should eql :evas_callback_show
             evt.read_string.should eql "work"
         end
-        EVAS.init
+        Evas.init
         target = FFI::MemoryPointer.from_string("target")
         work = FFI::MemoryPointer.from_string("work")
-        EVAS.async_events_put target, :show, work, cb
-        EVAS.async_events_process.should eql 1
-        EVAS.async_events_process.should eql 0
-        EVAS.shutdown
+        Evas.async_events_put target, :evas_callback_show, work, cb
+        Evas.async_events_process.should eql 1
+        Evas.async_events_process.should eql 0
+        Evas.shutdown
     end
 end
