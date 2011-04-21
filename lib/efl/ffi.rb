@@ -41,6 +41,7 @@ module Efl
         def self.included m
             m.class_eval "def ptr; @ptr; end"
             m.class_eval "def self.func_prefixes; @func_prefixes; end"
+            m.class_eval "def self.inherited sub; sub.class_eval 'def self.func_prefixes; superclass.func_prefixes; end'; end"
         end
         def method_missing m, *args, &block
             self.class.func_prefixes.each do |p|
