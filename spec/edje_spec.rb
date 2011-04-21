@@ -5,7 +5,7 @@ require 'efl/edje'
 #
 describe Efl::Edje do
     #
-    include Efl
+    before(:all) { Edje = Efl::Edje }
     #
     it "should init" do
         Edje.init.should eql 1

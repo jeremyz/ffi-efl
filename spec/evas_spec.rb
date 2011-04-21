@@ -5,7 +5,7 @@ require 'efl/evas'
 #
 describe Efl::Evas do
     #
-    include Efl
+    before(:all) { Evas = Efl::Evas }
     #
     it "should init" do
         Evas.init.should eql 1

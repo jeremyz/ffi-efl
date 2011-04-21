@@ -5,9 +5,8 @@ require 'efl/ecore'
 #
 describe Efl::Ecore do
     #
-    include Efl
-    #
     before(:all) do
+        Ecore = Efl::Ecore
         USER_SIGNAL_CB = Proc.new do |data, type, event|
             data.read_string.should eql "ok"
             type.should eql Ecore::EVENT_SIGNAL_USER

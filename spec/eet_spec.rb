@@ -5,7 +5,7 @@ require 'efl/eet'
 #
 describe Efl::Eet do
     #
-    include Efl
+    before(:all) { Eet = Efl::Eet }
     #
     FP = '/tmp/_eet.cfg'
     #
