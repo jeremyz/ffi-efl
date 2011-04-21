@@ -147,4 +147,5 @@ describe Efl::Ecore do
         Ecore.main_loop_begin   # process event
         Ecore.shutdown
     end
+    #
 end
