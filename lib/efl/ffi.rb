@@ -12,7 +12,7 @@ module Efl
         def attach_fcts fcts
             fcts.each do |func|
                 begin
-                    attach_function *func
+                    attach_function(*func)
                 rescue Object => e
                     puts "Could not attach #{func} #{e.message}"
                 end
