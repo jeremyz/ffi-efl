@@ -37,6 +37,24 @@ module Efl
         #
     end
     #
+    module Helper
+        def self.included m
+            m.class_eval "def ptr; @ptr; end"
+            m.class_eval "def self.func_prefixes; @func_prefixes; end"
+        end
+        def method_missing m, *args, &block
+            self.class.func_prefixes.each do |p|
+                sym = p+m.to_s
+                if Efl::API.respond_to? sym
+                    self.class.class_eval "def #{m} *args, &block; r=Efl::API.#{sym}(@ptr,*args); yield r if block_given?; r; end" 
+                    return self.send m, *args, &block
+                end
+            end
+            r = Efl::API.send m, @ptr, *args
+            self.class.class_eval "def #{m} *args, &block; r=Efl::API.#{m}(@ptr,*args); yield r if block_given?; r; end" 
+            r
+        end
+    end
 end
 #
 require 'efl/eina/eina_types-ffi'

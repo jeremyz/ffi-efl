@@ -7,7 +7,8 @@ module Efl
     module Evas
         #
         class Evas
-            attr_reader :ptr
+            include Efl::Helper
+            @func_prefixes = [ 'evas_' ].freeze
             def initialize o=nil
                 @ptr = (
                     case o
@@ -31,12 +32,6 @@ module Efl
             end
             def === o
                 @ptr === o.ptr
-            end
-            def method_missing m, *args, &block
-                sym = 'evas_'+m.to_s
-                Efl::API.send sym if not Efl::API.respond_to? sym
-                self.class.class_eval "def #{m} *args, &block; r =Efl::API.#{sym}(@ptr,*args); yield r if block_given?; r; end" 
-                self.send m, *args, &block
             end
             def output_size_get
                 x = FFI::MemoryPointer.new :int
@@ -67,7 +62,8 @@ module Efl
         end
         #
         class EvasObject
-            attr_reader :ptr
+            include Efl::Helper
+            @func_prefixes = [ 'evas_object_', 'evas_' ].freeze
             def initialize o=nil
                 @ptr = (
                     case o
@@ -88,16 +84,6 @@ module Efl
             def free
                 Efl::API.evas_object_del @ptr
                 @ptr=nil
-            end
-            def method_missing m, *args, &block
-                if Efl::API.respond_to? m
-                    self.class.class_eval "def #{m} *args, &block; r=Efl::API.#{m}(@ptr,*args); yield r if block_given?; r; end" 
-                    return self.send m, *args, &block
-                end
-                sym = 'evas_object_'+m.to_s
-                Efl::API.send sym if not Efl::API.respond_to? sym
-                self.class.class_eval "def #{m} *args, &block; r=Efl::API.#{sym}(@ptr,*args); yield r if block_given?; r; end" 
-                self.send m, *args, &block
             end
             def geometry_get
                 x = FFI::MemoryPointer.new :int
