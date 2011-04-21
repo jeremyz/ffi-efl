@@ -29,6 +29,8 @@ module Efl
         typedef :pointer, :ecore_exe_win32_priority
         # typedef enum _Ecore_Poller_Type Ecore_Poller_Type;
         typedef :pointer, :ecore_poller_type
+        # typedef enum _Ecore_Pos_Map Ecore_Pos_Map;
+        typedef :pointer, :ecore_pos_map
         # typedef struct _Ecore_Exe Ecore_Exe;
         typedef :pointer, :ecore_exe
         typedef :pointer, :ecore_exe_p
@@ -115,6 +117,8 @@ module Efl
         callback :ecore_thread_notify_cb, [ :void_p, :ecore_thread_p, :void_p ], :void
         # typedef Eina_Bool (*Ecore_Task_Cb) (void *data);
         callback :ecore_task_cb, [ :void_p ], :eina_bool
+        # typedef Eina_Bool (*Ecore_Timeline_Cb) (void *data, double pos);
+        callback :ecore_timeline_cb, [ :void_p, :double ], :eina_bool
         # typedef void (*Ecore_Cb) (void *data);
         callback :ecore_cb, [ :void_p ], :void
         # typedef Eina_Bool (*Ecore_Fd_Cb) (void *data, Ecore_Fd_Handler *fd_handler);
@@ -196,6 +200,8 @@ module Efl
         [ :ecore_exe_cmd_get, [ :ecore_exe_p ], :string ],
         # EAPI void *ecore_exe_data_get(const Ecore_Exe *exe);
         [ :ecore_exe_data_get, [ :ecore_exe_p ], :void_p ],
+        # EAPI void *ecore_exe_data_set(Ecore_Exe *exe, void *data);
+        [ :ecore_exe_data_set, [ :ecore_exe_p, :void_p ], :void_p ],
         # EAPI Ecore_Exe_Flags ecore_exe_flags_get(const Ecore_Exe *exe);
         [ :ecore_exe_flags_get, [ :ecore_exe_p ], :ecore_exe_flags ],
         # EAPI void ecore_exe_pause(Ecore_Exe *exe);
@@ -345,6 +351,8 @@ module Efl
         [ :ecore_timer_precision_set, [ :double ], :void ],
         # EAPI Ecore_Animator *ecore_animator_add(Ecore_Task_Cb func, const void *data);
         [ :ecore_animator_add, [ :ecore_task_cb, :void_p ], :ecore_animator_p ],
+        # EAPI Ecore_Animator *ecore_animator_run_add(double runtime, Ecore_Timeline_Cb func, const void *data);
+        [ :ecore_animator_run_add, [ :double, :ecore_timeline_cb, :void_p ], :ecore_animator_p ],
         # EAPI void *ecore_animator_del(Ecore_Animator *animator);
         [ :ecore_animator_del, [ :ecore_animator_p ], :void_p ],
         # EAPI void ecore_animator_freeze(Ecore_Animator *animator);
@@ -355,6 +363,8 @@ module Efl
         [ :ecore_animator_frametime_set, [ :double ], :void ],
         # EAPI double ecore_animator_frametime_get(void);
         [ :ecore_animator_frametime_get, [  ], :double ],
+        # EAPI double ecore_animator_pos_map(double pos, Ecore_Pos_Map map, double v1, double v2);
+        [ :ecore_animator_pos_map, [ :double, :ecore_pos_map, :double, :double ], :double ],
         # EAPI void ecore_poller_poll_interval_set(Ecore_Poller_Type type, double poll_time);
         [ :ecore_poller_poll_interval_set, [ :ecore_poller_type, :double ], :void ],
         # EAPI double ecore_poller_poll_interval_get(Ecore_Poller_Type type);

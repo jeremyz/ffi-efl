@@ -1207,16 +1207,22 @@ module Efl
         [ :evas_object_filter_set, [ :evas_object_p, :evas_filter ], :eina_bool ],
         # EAPI Evas_Filter evas_object_filter_get (Evas_Object *o);
         [ :evas_object_filter_get, [ :evas_object_p ], :evas_filter ],
-        # EAPI Eina_Bool evas_object_filter_param_set_int (Evas_Object *o, const char *param, int val);
-        [ :evas_object_filter_param_set_int, [ :evas_object_p, :string, :int ], :eina_bool ],
-        # EAPI int evas_object_filter_param_get_int (Evas_Object *o, const char *param);
-        [ :evas_object_filter_param_get_int, [ :evas_object_p, :string ], :int ],
-        # EAPI Eina_Bool evas_object_filter_param_set_str (Evas_Object *o, const char *param, const char *val);
-        [ :evas_object_filter_param_set_str, [ :evas_object_p, :string, :string ], :eina_bool ],
-        # EAPI Eina_Bool evas_object_filter_param_set_obj (Evas_Object *o, const char *param, Evas_Object *);
-        [ :evas_object_filter_param_set_obj, [ :evas_object_p, :string, :evas_object_p ], :eina_bool ],
-        # EAPI Eina_Bool evas_object_filter_param_set_float(Evas_Object *o, const char *param, double val);
-        [ :evas_object_filter_param_set_float, [ :evas_object_p, :string, :double ], :eina_bool ],
+        # EAPI Eina_Bool evas_object_filter_param_int_set (Evas_Object *o, const char *param, int val);
+        [ :evas_object_filter_param_int_set, [ :evas_object_p, :string, :int ], :eina_bool ],
+        # EAPI int evas_object_filter_param_int_get (Evas_Object *o, const char *param);
+        [ :evas_object_filter_param_int_get, [ :evas_object_p, :string ], :int ],
+        # EAPI Eina_Bool evas_object_filter_param_str_set (Evas_Object *o, const char *param, const char *val);
+        [ :evas_object_filter_param_str_set, [ :evas_object_p, :string, :string ], :eina_bool ],
+        # EAPI const char *evas_object_filter_param_str_get (Evas_Object *o, const char *param);
+        [ :evas_object_filter_param_str_get, [ :evas_object_p, :string ], :string ],
+        # EAPI Eina_Bool evas_object_filter_param_obj_set (Evas_Object *o, const char *param, Evas_Object *val);
+        [ :evas_object_filter_param_obj_set, [ :evas_object_p, :string, :evas_object_p ], :eina_bool ],
+        # EAPI Evas_Object *evas_object_filter_param_obj_get (Evas_Object *o, const char *param);
+        [ :evas_object_filter_param_obj_get, [ :evas_object_p, :string ], :evas_object_p ],
+        # EAPI Eina_Bool evas_object_filter_param_float_set(Evas_Object *o, const char *param, double val);
+        [ :evas_object_filter_param_float_set, [ :evas_object_p, :string, :double ], :eina_bool ],
+        # EAPI double evas_object_filter_param_float_get(Evas_Object *o, const char *param);
+        [ :evas_object_filter_param_float_get, [ :evas_object_p, :string ], :double ],
         # EAPI Eina_Bool evas_cserve_want_get (void) EINA_WARN_UNUSED_RESULT EINA_PURE;
         [ :evas_cserve_want_get, [  ], :eina_bool ],
         # EAPI Eina_Bool evas_cserve_connected_get (void) EINA_WARN_UNUSED_RESULT;
