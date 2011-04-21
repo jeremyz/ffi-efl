@@ -20,20 +20,25 @@ module Efl
         end
         #
         class ElmWin < Efl::Evas::EvasObject
-            attr_reader :ptr
+            attr_reader :evas_object
             def initialize parent, title, type=:elm_win_basic
-                @ptr = Efl::API.elm_win_add parent, title, type
+                @evas_object = Evas::EvasObject.new Efl::API.elm_win_add parent, title, type
                 yield self if block_given?
             end
             def add e
-                Efl::API.send "elm_#{e}_add", @ptr
+                eo = Evas::EvasObject.new Efl::API.send "elm_#{e}_add", @evas_object.ptr
+                yield eo if block_given?
+                eo
+            end
+            def smart_callback_add event_str, cb, data=FFI::MemoryPointer::NULL
+                Efl::API.evas_object_smart_callback_add @evas_object.ptr, event_str, cb, data
             end
             def method_missing m, *args, &block
                 [ 'elm_win_', 'elm_' ].each do |s|
                     sym = s+m.to_s
-                    puts sym
-                    return Efl::API.send( sym, @ptr, *args, &block ) if Efl::API.respond_to? sym
+                    return Efl::API.send( sym, @evas_object.ptr, *args, &block ) if Efl::API.respond_to? sym
                 end
+                Efl::API.send m
             end
         end
         #

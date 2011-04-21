@@ -10,30 +10,34 @@ puts Elm.init
 class MyWin < Elm::ElmWin
     def initialize name, title
         super FFI::MemoryPointer::NULL, name
-        win_title_set title
+        title_set title
         feed
-        Efl::API.evas_object_smart_callback_add @ptr, "delete,request", method(:exit), FFI::MemoryPointer::NULL
+        smart_callback_add "delete,request", method(:exit)
     end
     def feed
-        @bg = add 'bg'
-        Efl::API.evas_object_size_hint_weight_set @bg, 1.0, 1.0
-        resize_object_add @bg
-        Efl::API.evas_object_show @bg
-        @lb = add 'label'
-        Efl::API.elm_label_label_set @lb, "Hello World!"
-        Efl::API.evas_object_size_hint_weight_set @lb, 1.0, 1.0
-        resize_object_add @lb
-        Efl::API.evas_object_show @lb
+        @bg = add 'bg' do |bg|
+            bg.size_hint_weight_set 1.0, 1.0
+            bg.show
+        end
+        resize_object_add @bg.ptr
+        @lb = add 'label'do |lb|
+            lb.elm_label_label_set "Hello World!"
+            lb.size_hint_weight_set 1.0, 1.0
+            lb.show
+        end
+        resize_object_add @lb.ptr
     end
     def exit *args
+        puts "EXIT"
         Efl::API.elm_exit();
     end
 end
 #
 win = MyWin.new "App name", "Window Title" do |w|
-    Efl::API.evas_object_move w.ptr, 300, 300
-    Efl::API.evas_object_resize w.ptr, 200, 100
-    Efl::API.evas_object_show w.ptr
+    eo = w.evas_object
+    eo.move 300, 300
+    eo.resize 200, 100
+    eo.show
 end
 
 Elm.run
