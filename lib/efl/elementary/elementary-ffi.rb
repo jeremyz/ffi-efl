@@ -2503,6 +2503,8 @@ module Efl
         [ :elm_map_utils_convert_coord_into_name, [ :evas_object_p, :double, :double ], :elm_map_name_p ],
         # EAPI Elm_Map_Name *elm_map_utils_convert_name_into_coord(const Evas_Object *obj, char *address);
         [ :elm_map_utils_convert_name_into_coord, [ :evas_object_p, :string ], :elm_map_name_p ],
+        # EAPI void elm_map_utils_rotate_coord(const Evas_Object *obj, const Evas_Coord x, const Evas_Coord y, const Evas_Coord cx, const Evas_Coord cy, const double degree, Evas_Coord *xx, Evas_Coord *yy);
+        [ :elm_map_utils_rotate_coord, [ :evas_object_p, :int, :int, :int, :int, :double, :int_p, :int_p ], :void ],
         # EAPI Elm_Map_Marker *elm_map_marker_add(Evas_Object *obj, double lon, double lat, Elm_Map_Marker_Class *clas, Elm_Map_Group_Class *clas_group, void *data);
         [ :elm_map_marker_add, [ :evas_object_p, :double, :double, :elm_map_marker_class_p, :elm_map_group_class_p, :void_p ], :elm_map_marker_p ],
         # EAPI void elm_map_max_marker_per_group_set(Evas_Object *obj, int max);
@@ -2588,6 +2590,10 @@ module Efl
         [ :elm_map_name_region_get, [ :elm_map_name_p, :double_p, :double_p ], :void ],
         # EAPI void elm_map_name_remove(Elm_Map_Name *name);
         [ :elm_map_name_remove, [ :elm_map_name_p ], :void ],
+        # EAPI void elm_map_rotate_set(Evas_Object *obj, double degree, Evas_Coord cx, Evas_Coord cy);
+        [ :elm_map_rotate_set, [ :evas_object_p, :double, :int, :int ], :void ],
+        # EAPI void elm_map_rotate_get(const Evas_Object *obj, double *degree, Evas_Coord *cx, Evas_Coord *cy);
+        [ :elm_map_rotate_get, [ :evas_object_p, :double_p, :int_p, :int_p ], :void ],
         # EAPI Evas_Object *elm_panel_add(Evas_Object *parent);
         [ :elm_panel_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_panel_orient_set(Evas_Object *obj, Elm_Panel_Orient orient);

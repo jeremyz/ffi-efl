@@ -972,8 +972,6 @@ module Efl
         [ :evas_textblock_cursor_format_append, [ :evas_textblock_cursor_p, :string ], :eina_bool ],
         # EAPI Eina_Bool evas_textblock_cursor_format_prepend(Evas_Textblock_Cursor *cur, const char *format);
         [ :evas_textblock_cursor_format_prepend, [ :evas_textblock_cursor_p, :string ], :eina_bool ],
-        # EAPI void evas_textblock_cursor_node_delete(Evas_Textblock_Cursor *cur);
-        [ :evas_textblock_cursor_node_delete, [ :evas_textblock_cursor_p ], :void ],
         # EAPI void evas_textblock_cursor_char_delete(Evas_Textblock_Cursor *cur);
         [ :evas_textblock_cursor_char_delete, [ :evas_textblock_cursor_p ], :void ],
         # EAPI void evas_textblock_cursor_range_delete(Evas_Textblock_Cursor *cur1, Evas_Textblock_Cursor *cur2);
