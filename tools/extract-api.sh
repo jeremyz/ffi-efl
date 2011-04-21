@@ -2,13 +2,21 @@
 #
 P=$(dirname $0)
 #
+[ $# -gt 0 -a "$1" == "-x" ] && SMASH="Yes"
+#
 CURRENT=$P/api
 PREV=$P/api-prev
 INCLUDE=$(pkg-config --libs ecore |gawk '{ print substr($1,3) }' | sed s/lib/include/)
 #
+if [ ! -d $CURRENT ]; then
+    mkdir $CURRENT
+elif [ "$SMASH" == "Yes" ]; then
+    rm -fr $PREV *-diff 2>/dev/null
+    mv $CURRENT $PREV && mkdir $CURRENT || exit 1
+else
+    echo "no -x argument, won't override previous data"
+fi
 [ ! -d $PREV ] && mkdir $PREV
-[ ! -d $CURRENT ] && mkdir $CURRENT
-rm *-diff 2>/dev/null
 #
 for header in \
     "${INCLUDE}/eina-1/eina/eina_types.h" \
@@ -28,8 +36,6 @@ for header in \
     #
     DIR=$(dirname $header)
     FILE=$(basename $header)
-    #
-    mv $CURRENT/$FILE-* $PREV/ 2>/dev/null
     #
     for what in functions enums types callbacks; do
         F=$FILE-$what
