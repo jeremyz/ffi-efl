@@ -3,7 +3,7 @@
 #
 #
 module Efl
-#    autoload :Eina,  './lib/efl/eina.rb'
+    VERSION = '0.0.1'
     autoload :Eet,   './lib/efl/eet.rb'
     autoload :Evas,  './lib/efl/evas.rb'
     autoload :Ecore, './lib/efl/ecore.rb'

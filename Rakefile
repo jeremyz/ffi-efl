@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 #
+require './lib/efl.rb'
 load './tasks/setup.rb'
 #
 # Project general information
@@ -7,7 +8,7 @@ PROJ.name = 'ffi-efl'
 PROJ.authors = 'Jérémy Zurcher'
 PROJ.email = 'jeremy@asynk.ch'
 PROJ.url = 'https://github.com/jeremyz/ffi-efl'
-PROJ.version = '0.0.1'
+PROJ.version = Efl::VERSION
 PROJ.rubyforge.name = 'ffi-efl'
 PROJ.readme_file = 'README.rdoc'
 #
