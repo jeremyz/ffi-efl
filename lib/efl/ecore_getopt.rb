@@ -240,21 +240,23 @@ module Efl
 #            end
             #
             def debug
-                puts "#{self.class} : #{@parser_p.to_ptr}"
+                r = ''
+                r << "#{self.class} : #{@parser_p.to_ptr}\n"
                 [:prog,:usage,:version,:copyright,:license,:description].each do |sym|
-                    puts "  #{sym.to_s} : #{@parser_p[sym]==FFI::Pointer::NULL ? 'NULL' : @parser_p[sym].read_string}"
+                    r<< "  #{sym.to_s} : #{@parser_p[sym]==FFI::Pointer::NULL ? 'NULL' : @parser_p[sym].read_string}\n"
                 end
-                puts "  strict : #{@parser_p[:strict]}"
+                r << "  strict : #{@parser_p[:strict]}\n"
                 i=0
                 while true
                     d = @parser_p.desc_ptr i
                     break if d[:shortname]==0 and d[:longname] == FFI::Pointer::NULL
-                    puts "    desc #{d.to_ptr}"
-                    puts "     short: #{d[:shortname].chr}" unless d[:shortname]==0
-                    puts "     long:  #{d[:longname].read_string}" unless d[:longname]==FFI::Pointer::NULL
-                    puts "     help:  #{d[:help].read_string}" unless d[:help]==FFI::Pointer::NULL
+                    r << "    desc #{d.to_ptr}\n"
+                    r << "     short: #{d[:shortname].chr}\n" unless d[:shortname]==0
+                    r << "     long:  #{d[:longname].read_string}\n" unless d[:longname]==FFI::Pointer::NULL
+                    r << "     help:  #{d[:help].read_string}\n" unless d[:help]==FFI::Pointer::NULL
                     i+=1
                 end
+                r
             end
         end
     end
