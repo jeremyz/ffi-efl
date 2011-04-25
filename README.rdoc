@@ -1,11 +1,13 @@
 ffi-efl
     by Jérémy Zurcher
-    http://cgit.asynk.ch
+    http://asynk.ch
 
 == DESCRIPTION:
 
 ffi-efl is a FFI[https://github.com/ffi/ffi/wiki] binding to Enlightenment Foundation Libraries (eina,eet,evas,ecore,edje...)
 base components of the Enlightenment project. (EFL API[http://www.enlightenment.org/p.php?p=docs&l=en])
+
+ffi-efl project is developed on asynk[http://cgit.asynk.ch/cgi-bin/cgit/ffi-efl], github[https://github.com/jeremyz] and gitorious[https://gitorious.org/~jeyzu]
 
 == FEATURES/PROBLEMS:
 

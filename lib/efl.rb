@@ -4,7 +4,7 @@
 #
 module Efl
     #
-    VERSION = '0.0.1'
+    VERSION = '0.0.2'
     #
     autoload :Eet,          './lib/efl/eet.rb'
     autoload :Evas,         './lib/efl/evas.rb'
