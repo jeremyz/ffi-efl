@@ -92,12 +92,22 @@ module Efl
                 @values = [
                     [ :ptrp, FFI::Pointer::NULL ]
                 ]
+                @refs = [] # to prevent FFI::MemoryPointer.from_string from beeing GC'ed
+            end
+            def p_from_string r
+                return r if r==FFI::Pointer::NULL
+                p = FFI::MemoryPointer.from_string r
+                @refs << p
+                p
             end
             def << o
                 @options.insert -2, o
             end
             def value type, ptr
                 @values.insert -2, [ type, ptr ]
+            end
+            def to_ptr
+                @parser_p.to_ptr
             end
             def create
                 @parser_p = Efl::API::EcoreGetopt.new FFI::MemoryPointer.new (Efl::API::EcoreGetopt.size+Efl::API::EcoreGetoptDesc.size*@options.length), 1
@@ -108,8 +118,8 @@ module Efl
                 @options.each_with_index do |o,i|
                     d = @parser_p.desc_ptr i
                     d[:shortname] = o[0].ord
-                    d[:longname] = (o[1]==FFI::Pointer::NULL ? FFI::Pointer::NULL : FFI::MemoryPointer.from_string(o[1]))
-                    d[:help] = (o[2]==FFI::Pointer::NULL ? FFI::Pointer::NULL : FFI::MemoryPointer.from_string(o[2]))
+                    d[:longname] = p_from_string o[1]
+                    d[:help] = p_from_string o[2]
                     d[:metavar] = o[3]
                     d[:action] = o[4]
                     k, v = o[5]
@@ -128,7 +138,7 @@ module Efl
                         st[:arg_req] = v[1]
                         if not v[2].nil?
                             if v[2][0]==:strv
-                                st[:def][:strv] = FFI::MemoryPointer.from_string v[2][1]
+                                st[:def][:strv] = p_from_string v[2][1]
                             else
                                 st[:def][v[2][0]] = v[2][1]
                             end
@@ -151,7 +161,7 @@ module Efl
             def parse argv
                 ptr = FFI::MemoryPointer.new(:pointer, argv.length+1)
                 argv.each_with_index do |s, i|
-                    ptr[i].put_pointer 0, FFI::MemoryPointer.from_string(s)
+                    ptr[i].put_pointer 0, p_from_string(s)
                 end
                 ptr[argv.length].put_pointer 0, FFI::Pointer::NULL
                 Efl::EcoreGetopt.parse @parser_p, @values_p, argv.length, ptr
@@ -192,7 +202,7 @@ module Efl
             def choice short, long, help, choices
                 ptr = FFI::MemoryPointer.new(:pointer, choices.length+1)
                 choices.each_with_index do |s, i|
-                    ptr[i].put_pointer 0, FFI::MemoryPointer.from_string(s)
+                    ptr[i].put_pointer 0, p_from_string(s)
                 end
                 ptr[choices.length].put_pointer 0, FFI::Pointer::NULL
                 self << [ short, long, help, FFI::Pointer::NULL, :ecore_getopt_action_choice, [:choices,ptr] ]
@@ -200,7 +210,7 @@ module Efl
             def choice_metavar short, long, help, meta, choices
                 ptr = FFI::MemoryPointer.new(:pointer, choices.length+1)
                 choices.each_with_index do |s, i|
-                    ptr[i].put_pointer 0, FFI::MemoryPointer.from_string(s)
+                    ptr[i].put_pointer 0, p_from_string(s)
                 end
                 ptr[choices.length].put_pointer 0, FFI::Pointer::NULL
                 self << [ short, long, help, meta, :ecore_getopt_action_choice, [:choices,ptr] ]

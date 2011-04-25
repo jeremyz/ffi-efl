@@ -11,6 +11,7 @@ describe Efl::EcoreGetopt do
         #
         @p = Efl::EcoreGetopt::Parser.new :prog =>"Prog", :usage => "Usage", :version => "0.0.0", :copyright => "less", :license => "MIT", :description => "description", :strict => 1
         @callback = Proc.new do |parser, desc, string, data, value|
+            parser.address.should eql @p.to_ptr.address
             string.should eql "my_data"
             data.read_string.should eql "cb_data"
             value.read_pointer.read_int.should eql 99
@@ -222,54 +223,54 @@ describe Efl::EcoreGetopt do
             args = @p.parse ["progname","-bmy_data"]
         end
     end
-#    describe "simple long options" do
-#        it "should handle --int" do
-#            @values[:int].read_int.should eql 0
-#            args = @p.parse ["progname","--int=666"]
-#            @values[:int].read_int.should eql 666
-#        end
-#        it "should handle --double" do
-#            @values[:double].read_double.should eql 3.1415926
-#            args = @p.parse ["progname","--double=6.66"]
-#            @values[:double].read_double.should eql 6.66
-#        end
-#        it "should handle --short" do
-#            @values[:short].read_short.should eql 9
-#            args = @p.parse ["progname","--short=125"]
-#            @values[:short].read_short.should eql 125
-#        end
-#        it "should handle --long" do
-#            @values[:long].read_long.should eql 666
-#            args = @p.parse ["progname","--long=69"]
-#            @values[:long].read_long.should eql 69
-#        end
-#        it "should handle --const" do
-#            @values[:const].read_int.should eql -666
-#            args = @p.parse ["progname","--const"]
-#            @values[:const].read_int.should eql 123456
-#        end
-#        it "should handle --true" do
-#            @values[:false].read_uchar.should eql 0
-#            args = @p.parse ["progname","--true"]
-#            @values[:false].read_uchar.should eql 1
-#        end
-#        it "should handle --false" do
-#            @values[:true].read_uchar.should eql 1
-#            args = @p.parse ["progname","--false"]
-#            @values[:true].read_uchar.should eql 0
-#        end
-#        it "should handle --many" do
-#            @values[:choice].read_pointer.should eql FFI::Pointer::NULL
-#            args = @p.parse ["progname","--many=ch3"]
-#            @values[:choice].read_pointer.read_string.should eql "ch3"
-#        end
-#        it "should handle --count" do
-#            @values[:count].read_int.should eql 664
-#            args = @p.parse ["progname","--count","--count"]
-#            @values[:count].read_int.should eql 666
-#        end
-#        it "should handle --callback" do
-#            args = @p.parse ["progname","--callback=my_data"]
-#        end
-#    end
+    describe "simple long options" do
+        it "should handle --int" do
+            @values[:int].read_int.should eql 0
+            args = @p.parse ["progname","--int=666"]
+            @values[:int].read_int.should eql 666
+        end
+        it "should handle --double" do
+            @values[:double].read_double.should eql 3.1415926
+            args = @p.parse ["progname","--double=6.66"]
+            @values[:double].read_double.should eql 6.66
+        end
+        it "should handle --short" do
+            @values[:short].read_short.should eql 9
+            args = @p.parse ["progname","--short=125"]
+            @values[:short].read_short.should eql 125
+        end
+        it "should handle --long" do
+            @values[:long].read_long.should eql 666
+            args = @p.parse ["progname","--long=69"]
+            @values[:long].read_long.should eql 69
+        end
+        it "should handle --const" do
+            @values[:const].read_int.should eql -666
+            args = @p.parse ["progname","--const"]
+            @values[:const].read_int.should eql 123456
+        end
+        it "should handle --true" do
+            @values[:false].read_uchar.should eql 0
+            args = @p.parse ["progname","--true"]
+            @values[:false].read_uchar.should eql 1
+        end
+        it "should handle --false" do
+            @values[:true].read_uchar.should eql 1
+            args = @p.parse ["progname","--false"]
+            @values[:true].read_uchar.should eql 0
+        end
+        it "should handle --many" do
+            @values[:choice].read_pointer.should eql FFI::Pointer::NULL
+            args = @p.parse ["progname","--many=ch3"]
+            @values[:choice].read_pointer.read_string.should eql "ch3"
+        end
+        it "should handle --count" do
+            @values[:count].read_int.should eql 664
+            args = @p.parse ["progname","--count","--count"]
+            @values[:count].read_int.should eql 666
+        end
+        it "should handle --callback" do
+            args = @p.parse ["progname","--callback=my_data"]
+        end
+    end
 end
