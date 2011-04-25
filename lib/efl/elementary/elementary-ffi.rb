@@ -336,6 +336,26 @@ module Efl
         [ :elm_run, [  ], :void ],
         # EAPI void elm_exit(void);
         [ :elm_exit, [  ], :void ],
+        # EAPI void elm_app_info_set(void *mainfunc, const char *dom, const char *checkfile);
+        [ :elm_app_info_set, [ :void_p, :string, :string ], :void ],
+        # EAPI void elm_app_compile_bin_dir_set(const char *dir);
+        [ :elm_app_compile_bin_dir_set, [ :string ], :void ],
+        # EAPI void elm_app_compile_lib_dir_set(const char *dir);
+        [ :elm_app_compile_lib_dir_set, [ :string ], :void ],
+        # EAPI void elm_app_compile_data_dir_set(const char *dir);
+        [ :elm_app_compile_data_dir_set, [ :string ], :void ],
+        # EAPI void elm_app_compile_locale_set(const char *dir);
+        [ :elm_app_compile_locale_set, [ :string ], :void ],
+        # EAPI const char *elm_app_prefix_dir_get(void);
+        [ :elm_app_prefix_dir_get, [  ], :string ],
+        # EAPI const char *elm_app_bin_dir_get(void);
+        [ :elm_app_bin_dir_get, [  ], :string ],
+        # EAPI const char *elm_app_lib_dir_get(void);
+        [ :elm_app_lib_dir_get, [  ], :string ],
+        # EAPI const char *elm_app_data_dir_get(void);
+        [ :elm_app_data_dir_get, [  ], :string ],
+        # EAPI const char *elm_app_locale_dir_get(void);
+        [ :elm_app_locale_dir_get, [  ], :string ],
         # EAPI void elm_quicklaunch_mode_set(Eina_Bool ql_on);
         [ :elm_quicklaunch_mode_set, [ :eina_bool ], :void ],
         # EAPI Eina_Bool elm_quicklaunch_mode_get(void);
