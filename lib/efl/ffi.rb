@@ -20,12 +20,19 @@ module Efl
         end
         module_function :attach_fcts
         #
+        typedef :pointer, :char_p
+        typedef :pointer, :short_p
         typedef :pointer, :int_p
-        typedef :pointer, :uint_p
-        typedef :pointer, :void_p
-        typedef :pointer, :uchar_p
+        typedef :pointer, :long_p
         typedef :pointer, :float_p
         typedef :pointer, :double_p
+        typedef :pointer, :uchar_p
+        typedef :pointer, :ushort_p
+        typedef :pointer, :uint_p
+        typedef :pointer, :ulong_p
+        typedef :pointer, :ufloat_p
+        typedef :pointer, :udouble_p
+        typedef :pointer, :void_p
         typedef :pointer, :string_array
         typedef :pointer, :string_array_p
         #

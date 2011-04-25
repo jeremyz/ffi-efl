@@ -3,12 +3,15 @@
 #
 #
 module Efl
+    #
     VERSION = '0.0.1'
-    autoload :Eet,   './lib/efl/eet.rb'
-    autoload :Evas,  './lib/efl/evas.rb'
-    autoload :Ecore, './lib/efl/ecore.rb'
-    autoload :Edje,  './lib/efl/edje.rb'
-    autoload :Elm,   './lib/efl/elementary.rb'
+    #
+    autoload :Eet,          './lib/efl/eet.rb'
+    autoload :Evas,         './lib/efl/evas.rb'
+    autoload :Ecore,        './lib/efl/ecore.rb'
+    autoload :EcoreGetopt,  './lib/efl/ecore_getopt.rb'
+    autoload :Edje,         './lib/efl/edje.rb'
+    autoload :Elm,          './lib/efl/elementary.rb'
 end
 #
 # EOF
