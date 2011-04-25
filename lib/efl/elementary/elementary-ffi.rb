@@ -2207,6 +2207,12 @@ module Efl
         [ :elm_genlist_item_cursor_engine_only_get, [ :elm_genlist_item_p ], :eina_bool ],
         # EAPI void elm_genlist_realized_items_update(Evas_Object *obj);
         [ :elm_genlist_realized_items_update, [ :evas_object_p ], :void ],
+        # EAPI void elm_genlist_item_mode_set(Elm_Genlist_Item *it, const char *mode_type, Eina_Bool mode_set);
+        [ :elm_genlist_item_mode_set, [ :elm_genlist_item_p, :string, :eina_bool ], :void ],
+        # EAPI const char *elm_genlist_mode_get(const Evas_Object *obj);
+        [ :elm_genlist_mode_get, [ :evas_object_p ], :string ],
+        # EAPI const Elm_Genlist_Item *elm_genlist_mode_item_get(const Evas_Object *obj);
+        [ :elm_genlist_mode_item_get, [ :evas_object_p ], :elm_genlist_item_p ],
         # EAPI Evas_Object *elm_check_add(Evas_Object *parent);
         [ :elm_check_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_check_label_set(Evas_Object *obj, const char *label);;
@@ -2295,6 +2301,14 @@ module Efl
         [ :elm_slideshow_layout_set, [ :evas_object_p, :string ], :void ],
         # EAPI const Eina_List *elm_slideshow_layouts_get(const Evas_Object *obj);
         [ :elm_slideshow_layouts_get, [ :evas_object_p ], :eina_list_p ],
+        # EAPI void elm_slideshow_cache_before_set(Evas_Object *obj, int count);
+        [ :elm_slideshow_cache_before_set, [ :evas_object_p, :int ], :void ],
+        # EAPI int elm_slideshow_cache_before_get(const Evas_Object *obj);
+        [ :elm_slideshow_cache_before_get, [ :evas_object_p ], :int ],
+        # EAPI void elm_slideshow_cache_after_set(Evas_Object *obj, int count);
+        [ :elm_slideshow_cache_after_set, [ :evas_object_p, :int ], :void ],
+        # EAPI int elm_slideshow_cache_after_get(const Evas_Object *obj);
+        [ :elm_slideshow_cache_after_get, [ :evas_object_p ], :int ],
         # EAPI Evas_Object *elm_fileselector_add(Evas_Object *parent);
         [ :elm_fileselector_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_fileselector_is_save_set(Evas_Object *obj, Eina_Bool is_save);

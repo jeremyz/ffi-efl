@@ -351,8 +351,8 @@ module Efl
         [ :ecore_timer_precision_set, [ :double ], :void ],
         # EAPI Ecore_Animator *ecore_animator_add(Ecore_Task_Cb func, const void *data);
         [ :ecore_animator_add, [ :ecore_task_cb, :void_p ], :ecore_animator_p ],
-        # EAPI Ecore_Animator *ecore_animator_run_add(double runtime, Ecore_Timeline_Cb func, const void *data);
-        [ :ecore_animator_run_add, [ :double, :ecore_timeline_cb, :void_p ], :ecore_animator_p ],
+        # EAPI Ecore_Animator *ecore_animator_timeline_add(double runtime, Ecore_Timeline_Cb func, const void *data);
+        [ :ecore_animator_timeline_add, [ :double, :ecore_timeline_cb, :void_p ], :ecore_animator_p ],
         # EAPI void *ecore_animator_del(Ecore_Animator *animator);
         [ :ecore_animator_del, [ :ecore_animator_p ], :void_p ],
         # EAPI void ecore_animator_freeze(Ecore_Animator *animator);
