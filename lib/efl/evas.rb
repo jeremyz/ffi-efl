@@ -4,6 +4,43 @@
 require 'efl/evas/evas-ffi'
 #
 module Efl
+    module API
+        #
+        EVAS_ENGINE_BUFFER_DEPTH_ARGB32 = 0
+        EVAS_ENGINE_BUFFER_DEPTH_BGRA32 = 1
+        EVAS_ENGINE_BUFFER_DEPTH_RGB24  = 2
+        EVAS_ENGINE_BUFFER_DEPTH_BGR24  = 3
+        EVAS_ENGINE_BUFFER_DEPTH_RGB32  = 4
+        #
+        class EvasEngineInfo < FFI::Struct
+            layout  :magic,         :int
+        end
+        callback :new_update_region_cb, [:int, :int, :int, :int, :int_p], :pointer
+        callback :free_update_region_cb, [:int, :int, :int, :int, :pointer], :void
+        class EvasEngineInfoBufferFunc < FFI::Struct
+            layout  :new_update_region,     :new_update_region_cb,
+                    :free_update_region,    :free_update_region_cb
+        end
+        class EvasEngineInfoBufferInfo < FFI::Struct
+            layout  :depth_type,            :int,
+                    :dest_buffer,           :pointer,
+                    :dest_buffer_row_bytes, :int,
+                    :use_color_key,         :char,
+                    :alpha_threshold,       :int,
+                    :color_key_r,           :int,
+                    :color_key_g,           :int,
+                    :color_key_b,           :int,
+                    :func,          EvasEngineInfoBufferFunc,
+        end
+        class EvasEngineInfoBuffer < FFI::Struct
+            layout  :magic,         EvasEngineInfo,
+                    :info,          EvasEngineInfoBufferInfo,
+#                    :func,          EvasEngineInfoBufferFunc,
+                    :mode,          :evas_engine_render_mode,
+        end
+        #
+    end
+    #
     module Evas
         #
         class Evas
