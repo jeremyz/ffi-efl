@@ -53,6 +53,9 @@ module Efl
             if m =~/^(.*)=$/
                 m_s = $1+'_set'
                 args_s = '*args[0]'
+            elsif m =~/^(.*)\?$/
+                m_s = $1+'_get'
+                args_s = '*args'
             else
                 m_s = m.to_s
                 args_s = '*args'
