@@ -4,9 +4,10 @@
 path = File.dirname __FILE__
 lib_path = File.join path, '..', 'lib', 'efl', 'ffi'
 #
-# header, module name, lfct prefix, lib
+# header, module name, fct prefix, lib
 libraries = [
     [ 'eina_types.h', 'Eina', 'eina', 'eina'],
+    [ 'eina_main.h', 'Eina', 'eina', 'eina'],
     [ 'Eet.h', 'Eet', 'eet', 'eet'],
     [ 'Evas.h', 'Evas', 'evas', 'evas'],
 #    [ 'Evas_GL.h', 'EvasGl', 'evas_gl', 'evas'],
