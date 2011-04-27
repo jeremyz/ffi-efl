@@ -216,7 +216,7 @@ describe Efl::Evas do
         #   evas_event_feed_key_up
         #   evas_event_feed_hold
         #
-        it "event callback should work" do
+        it "add/del event callback should work" do
             @cb = false
             kd_cb = Proc.new do |data, e, obj, event_info|
                 data.read_string.should eq "mouse_in"
@@ -230,11 +230,37 @@ describe Efl::Evas do
             @bg.move 0, 0
             @bg.resize 20, 20
             @bg.show
-            @bg.event_callback_add 0, kd_cb, kd_d
+            @bg.event_callback_add :evas_callback_mouse_in, kd_cb, kd_d
             @e.event_feed_mouse_in Time.now.to_i, FFI::Pointer::NULL
+            @bg.event_callback_del(:evas_callback_mouse_in, kd_cb).address.should eql kd_d.address
             @db.should be_true
         end
         #
+        it "image cache functions should work" do
+            @e.image_cache_flush
+            @e.image_cache_reload
+            @e.image_cache_set 666
+            @e.image_cache_get.should eql 666
+        end
+        #
+        it "font functions should work" do
+            @e.evas_font_hinting_set :evas_font_hinting_bytecode
+            @e.evas_font_hinting_get.should eql :evas_font_hinting_bytecode
+            @e.evas_font_hinting_can_hint(:evas_font_hinting_none).should be_true
+            @e.evas_font_cache_flush
+            @e.evas_font_cache_set 666
+            @e.evas_font_cache_get.should eql 666
+            l = @e.evas_font_available_list
+            @e.evas_font_available_list_free l
+            @e.evas_font_path_clear
+            a = ['/tmp1','/tmp2']
+            @e.evas_font_path_append a[1]
+            @e.evas_font_path_prepend a[0]
+            require 'efl/eina_list'
+            Efl::Eina::EinaList.new(@e.evas_font_path_list).each_with_index do |p,i|
+                p.read_string.should eql a[i]
+            end
+        end
     end
     #
 end
