@@ -18,6 +18,7 @@ class MyWin < Elm::ElmWin
         # using block
         @bg = add 'bg' do |bg|
             bg.size_hint_weight_set 1.0, 1.0
+            bg.color = 200,255,100,200 # same as bg.color_set 200,255,100,200
             bg.show
         end
         resize_object_add @bg.ptr
@@ -37,6 +38,7 @@ end
 Elm.init
 #
 win = MyWin.new "App name", "Window Title" do |w,eo|
+    w.alpha_set true
     eo.move 300, 300
     eo.resize 200, 100
     eo.show
