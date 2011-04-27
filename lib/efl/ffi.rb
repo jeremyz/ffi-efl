@@ -37,10 +37,9 @@ module Efl
         typedef :pointer, :string_array_p
         #
         typedef :pointer, :eina_list_p
+        typedef :pointer, :eina_hash_p
         typedef :pointer, :eina_iterator_p
         typedef :pointer, :eina_accessor_p
-        typedef :pointer, :evas_p
-        typedef :pointer, :evas_object_p
         #
     end
     #
