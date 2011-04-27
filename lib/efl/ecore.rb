@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ecore/ecore-ffi'
+require 'efl/ffi/ecore'
 #
 module Efl
     module Ecore

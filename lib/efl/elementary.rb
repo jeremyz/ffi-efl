@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 #
 require 'efl/evas'
-require 'efl/elementary/elementary-ffi'
+require 'efl/ffi/elementary'
 #
 module Efl
     module Elm

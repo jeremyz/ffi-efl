@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/evas/evas-ffi'
+require 'efl/ffi/evas'
 #
 module Efl
     module API

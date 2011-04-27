@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/eet/eet-ffi'
+require 'efl/ffi/eet'
 #
 module Efl
     module Eet
