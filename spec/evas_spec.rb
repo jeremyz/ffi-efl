@@ -217,18 +217,22 @@ describe Efl::Evas do
         #   evas_event_feed_hold
         #
         it "event callback should work" do
-            # FIXME
+            @cb = false
             kd_cb = Proc.new do |data, e, obj, event_info|
-                puts data
-                data.read_string.should eq "key_down"
-                puts e
-                e.should eql @e
-                puts obj
-                puts envent_info
+                data.read_string.should eq "mouse_in"
+                e.address.should eql @e.ptr.address
+                obj.address.should eql @bg.ptr.address
+                @db=true
+                true
             end
-            kd_d = FFI::MemoryPointer.from_string "key down"
-            @e.event_callback_add :evas_callback_mouse_in, kd_cb, kd_d
+            kd_d = FFI::MemoryPointer.from_string "mouse_in"
+            @bg = Evas::EvasObject.new @e.object_rectangle_add
+            @bg.move 0, 0
+            @bg.resize 20, 20
+            @bg.show
+            @bg.event_callback_add 0, kd_cb, kd_d
             @e.event_feed_mouse_in Time.now.to_i, FFI::Pointer::NULL
+            @db.should be_true
         end
         #
     end
