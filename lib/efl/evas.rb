@@ -128,6 +128,12 @@ module Efl
                 Efl::FFI.evas_object_del @ptr
                 @ptr=nil
             end
+            def === o
+                @ptr === o.ptr
+            end
+            def address
+                @ptr.address
+            end
             def geometry_get
                 x = ::FFI::MemoryPointer.new :int
                 y = ::FFI::MemoryPointer.new :int

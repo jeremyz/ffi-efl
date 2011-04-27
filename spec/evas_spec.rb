@@ -262,5 +262,90 @@ describe Efl::Evas do
             end
         end
     end
+    describe Efl::Evas::EvasObject do
+        #
+        before(:all) do
+            Evas.init
+            @pixels = FFI::MemoryPointer.new :int, 100*100
+            @e = Evas::Evas.new
+            @e.output_method_set Evas::render_method_lookup("buffer")
+            @e.output_viewport_set 0, 0, 100, 100
+            @e.output_size_set 100, 100
+            einfo = Efl::FFI::EvasEngineInfoBuffer.new @e.engine_info_get
+            einfo[:info][:depth_type] = Efl::FFI::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
+            einfo[:info][:dest_buffer] = @pixels
+            einfo[:info][:dest_buffer_row_bytes] = 100 * FFI::type_size(:int);
+            einfo[:info][:use_color_key] = 0;
+            einfo[:info][:alpha_threshold] = 0;
+            einfo[:info][:func][:new_update_region] = nil #FFI::Pointer::NULL;
+            einfo[:info][:func][:free_update_region] = nil #FFI::Pointer::NULL;
+            @e.engine_info_set einfo
+            @o = @e.object_add :rectangle
+            @o.color = 200,200,200,200
+            @o.move 0, 0
+            @o.resize 100, 100
+            @o.show
+        end
+        after(:all) do
+            @e.free
+            @o.free
+            @pixels.free
+            Evas.shutdown
+        end
+        #
+        it "clipper should work" do
+            clipper = @e.object_add :rectangle
+            clipper.color = 255,255,255,255
+            clipper.move 25, 25
+            clipper.resize 50, 50
+            @o.clip = clipper.ptr
+            clipper.show
+            @o.clip_get.address.should eql clipper.address
+            Efl::Eina::EinaList.new(clipper.clipees_get).to_ary[0].address.should eql @o.address
+            @o.clip_unset
+            @o.clip_get.address.should eql 0
+
+        end
+        #
+        it "focus functions should work" do
+            @o.focus_get.should be_false
+            @o.focus_set true
+            @o.focus_get.should be_true
+            @o.focus = false
+            @o.focus_get.should be_false
+        end
+        #
+        it "layer functions should work" do
+            @o.layer_get.should eql 0
+            @o.layer_set 2
+            @o.layer_get.should eql 2
+            @o.layer = 0
+            @o.layer_get.should eql 0
+        end
+        #
+        it "name functions should work" do
+            @o.name_set "My name"
+            @o.name_get.should eql "My name"
+        end
+        #
+        it "geometry functions should work" do
+            # FIXME
+#            @o.geometry_get.should eql [0,0,100,100]
+#            @o.resize 50,50
+#            @o.geometry_get.should eql [0,0,50,50]
+#            @o.move 10, 10
+#            @o.geometry_get.should eql [10,10,50,50]
+        end
+        #
+        it "show hide visible should work" do
+            @o.show
+            @o.visible?.should be_true
+            @o.hide
+            @o.visible_get.should be_false
+            @o.show
+            @o.visible?.should be_true
+        end
+        # line 2829
+    end
     #
 end
