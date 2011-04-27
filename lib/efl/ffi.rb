@@ -5,9 +5,9 @@ require 'ffi'
 #
 module Efl
     #
-    module API
+    module FFI
         #
-        extend FFI::Library
+        extend ::FFI::Library
         #
         def attach_fcts fcts
             fcts.each do |func|
@@ -60,13 +60,13 @@ module Efl
             end
             self.class.func_prefixes.each do |p|
                 sym = p+m_s
-                if Efl::API.respond_to? sym
-                    self.class.class_eval "def #{m} *args, &block; r=Efl::API.#{sym}(@ptr,#{args_s}); yield r if block_given?; r; end"
+                if Efl::FFI.respond_to? sym
+                    self.class.class_eval "def #{m} *args, &block; r=Efl::FFI.#{sym}(@ptr,#{args_s}); yield r if block_given?; r; end"
                     return self.send m, *args, &block
                 end
             end
-            r = Efl::API.send m, @ptr, *args
-            self.class.class_eval "def #{m} *args, &block; r=Efl::API.#{m}(@ptr,#{args_s}); yield r if block_given?; r; end"
+            r = Efl::FFI.send m, @ptr, *args
+            self.class.class_eval "def #{m} *args, &block; r=Efl::FFI.#{m}(@ptr,#{args_s}); yield r if block_given?; r; end"
             r
         end
     end

@@ -7,11 +7,11 @@ module Efl
     #
     module Eina
         def self.method_missing m, *args, &block
-            return Efl::API.send 'eina_'+m.to_s, *args, &block
+            return Efl::FFI.send 'eina_'+m.to_s, *args, &block
         end
     end
     #
-    module API
+    module FFI
         #
         #
         ffi_lib 'eina'

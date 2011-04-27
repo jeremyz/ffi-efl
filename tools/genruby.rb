@@ -33,11 +33,11 @@ module Efl
     #
     module MNAME
         def self.method_missing m, *args, &block
-            return Efl::API.send 'MBASE_'+m.to_s, *args, &block
+            return Efl::FFI.send 'MBASE_'+m.to_s, *args, &block
         end
     end
     #
-    module API
+    module FFI
         #
 EOF
 FOOTER =<<-EOF

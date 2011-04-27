@@ -4,7 +4,7 @@
 require 'efl/ffi/evas'
 #
 module Efl
-    module API
+    module FFI
         #
         EVAS_ENGINE_BUFFER_DEPTH_ARGB32 = 0
         EVAS_ENGINE_BUFFER_DEPTH_BGRA32 = 1
@@ -12,16 +12,16 @@ module Efl
         EVAS_ENGINE_BUFFER_DEPTH_BGR24  = 3
         EVAS_ENGINE_BUFFER_DEPTH_RGB32  = 4
         #
-        class EvasEngineInfo < FFI::Struct
+        class EvasEngineInfo < ::FFI::Struct
             layout  :magic,         :int
         end
         callback :new_update_region_cb, [:int, :int, :int, :int, :int_p], :pointer
         callback :free_update_region_cb, [:int, :int, :int, :int, :pointer], :void
-        class EvasEngineInfoBufferFunc < FFI::Struct
+        class EvasEngineInfoBufferFunc < ::FFI::Struct
             layout  :new_update_region,     :new_update_region_cb,
                     :free_update_region,    :free_update_region_cb
         end
-        class EvasEngineInfoBufferInfo < FFI::Struct
+        class EvasEngineInfoBufferInfo < ::FFI::Struct
             layout  :depth_type,            :int,
                     :dest_buffer,           :pointer,
                     :dest_buffer_row_bytes, :int,
@@ -32,7 +32,7 @@ module Efl
                     :color_key_b,           :int,
                     :func,          EvasEngineInfoBufferFunc,
         end
-        class EvasEngineInfoBuffer < FFI::Struct
+        class EvasEngineInfoBuffer < ::FFI::Struct
             layout  :magic,         EvasEngineInfo,
                     :info,          EvasEngineInfoBufferInfo,
 #                    :func,          EvasEngineInfoBufferFunc,
@@ -50,13 +50,13 @@ module Efl
                 @ptr = (
                     case o
                     when NilClass
-                        FFI::AutoPointer.new Efl::API.evas_new, method(:free)
+                        ::FFI::AutoPointer.new Efl::FFI.evas_new, method(:free)
                     when self.class
                         o.ptr
-                    when FFI::AutoPointer
+                    when ::FFI::AutoPointer
                         o
-                    when FFI::Pointer
-                        FFI::AutoPointer.new o, method(:free)
+                    when ::FFI::Pointer
+                        ::FFI::AutoPointer.new o, method(:free)
                     else
                         raise ArgumentError.new "#{ptr.class} valid argument"
                     end
@@ -64,36 +64,36 @@ module Efl
                 yield self if block_given?
             end
             def free
-                Efl::API.evas_free @ptr
+                Efl::FFI.evas_free @ptr
                 @ptr=nil
             end
             def === o
                 @ptr === o.ptr
             end
             def output_size_get
-                x = FFI::MemoryPointer.new :int
-                y = FFI::MemoryPointer.new :int
-                Efl::API.evas_output_size_get @ptr, x, y
+                x = ::FFI::MemoryPointer.new :int
+                y = ::FFI::MemoryPointer.new :int
+                Efl::FFI.evas_output_size_get @ptr, x, y
                 [ x.read_int, y.read_int ]
             end
             def output_viewport_get
-                x = FFI::MemoryPointer.new :int
-                y = FFI::MemoryPointer.new :int
-                w = FFI::MemoryPointer.new :int
-                h = FFI::MemoryPointer.new :int
-                Efl::API.evas_output_viewport_get @ptr, x, y, w, h
+                x = ::FFI::MemoryPointer.new :int
+                y = ::FFI::MemoryPointer.new :int
+                w = ::FFI::MemoryPointer.new :int
+                h = ::FFI::MemoryPointer.new :int
+                Efl::FFI.evas_output_viewport_get @ptr, x, y, w, h
                 [ x.read_int, y.read_int, w.read_int, h.read_int ]
             end
             def pointer_output_xy_get
-                x = FFI::MemoryPointer.new :int
-                y = FFI::MemoryPointer.new :int
-                Efl::API.evas_pointer_output_xy_get @ptr, x, y
+                x = ::FFI::MemoryPointer.new :int
+                y = ::FFI::MemoryPointer.new :int
+                Efl::FFI.evas_pointer_output_xy_get @ptr, x, y
                 [ x.read_int, y.read_int ]
             end
             def pointer_canvas_xy_get
-                x = FFI::MemoryPointer.new :int
-                y = FFI::MemoryPointer.new :int
-                Efl::API.evas_pointer_canvas_xy_get @ptr, x, y
+                x = ::FFI::MemoryPointer.new :int
+                y = ::FFI::MemoryPointer.new :int
+                Efl::FFI.evas_pointer_canvas_xy_get @ptr, x, y
                 [ x.read_int, y.read_int ]
             end
         end
@@ -105,13 +105,13 @@ module Efl
                 @ptr = (
                     case o
                     when NilClass
-                        FFI::AutoPointer.new Efl::API.evas_new, method(:free)
+                        ::FFI::AutoPointer.new Efl::FFI.evas_new, method(:free)
                     when self.class
                         o.ptr
-                    when FFI::AutoPointer
+                    when ::FFI::AutoPointer
                         o
-                    when FFI::Pointer
-                        FFI::AutoPointer.new o, method(:free)
+                    when ::FFI::Pointer
+                        ::FFI::AutoPointer.new o, method(:free)
                     else
                         raise ArgumentError.new "#{ptr.class} valid argument"
                     end
@@ -119,23 +119,23 @@ module Efl
                 yield self if block_given?
             end
             def free
-                Efl::API.evas_object_del @ptr
+                Efl::FFI.evas_object_del @ptr
                 @ptr=nil
             end
             def geometry_get
-                x = FFI::MemoryPointer.new :int
-                y = FFI::MemoryPointer.new :int
-                w = FFI::MemoryPointer.new :int
-                h = FFI::MemoryPointer.new :int
-                Efl::API.evas_object_geometry_get @evas, x, y, w, h
+                x = ::FFI::MemoryPointer.new :int
+                y = ::FFI::MemoryPointer.new :int
+                w = ::FFI::MemoryPointer.new :int
+                h = ::FFI::MemoryPointer.new :int
+                Efl::FFI.evas_object_geometry_get @evas, x, y, w, h
                 [ x.read_int, y.read_int, w.read_int, h.read_int ]
             end
             def color_get
-                r = FFI::MemoryPointer.new :int
-                g = FFI::MemoryPointer.new :int
-                b = FFI::MemoryPointer.new :int
-                a = FFI::MemoryPointer.new :int
-                Efl::API.evas_object_color_get @evas, r, g, b, a
+                r = ::FFI::MemoryPointer.new :int
+                g = ::FFI::MemoryPointer.new :int
+                b = ::FFI::MemoryPointer.new :int
+                a = ::FFI::MemoryPointer.new :int
+                Efl::FFI.evas_object_color_get @evas, r, g, b, a
                 [ r.read_int, g.read_int, b.read_int, a.read_int ]
             end
         end
