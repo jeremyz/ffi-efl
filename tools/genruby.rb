@@ -8,6 +8,7 @@ lib_path = File.join path, '..', 'lib', 'efl', 'ffi'
 libraries = [
     [ 'eina_types.h', 'Eina', 'eina', 'eina'],
     [ 'eina_main.h', 'Eina', 'eina', 'eina'],
+    [ 'eina_list.h', 'EinaList', 'eina_list', 'eina'],
     [ 'Eet.h', 'Eet', 'eet', 'eet'],
     [ 'Evas.h', 'Evas', 'evas', 'evas'],
 #    [ 'Evas_GL.h', 'EvasGl', 'evas_gl', 'evas'],
@@ -84,8 +85,6 @@ TYPES = {
     # Efl BASE TYPES
     'Eina_Bool' => ':eina_bool',
     'Eina_Bool *' => ':eina_bool_p',
-    'Eina_List' => ':eina_list',
-    'Eina_List *' => ':eina_list_p',
     'Eina_Hash' => ':eina_hash',
     'Eina_Hash *' => ':eina_hash_p',
     'Eina_Iterator' => ':eina_iterator',
