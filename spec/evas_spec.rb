@@ -52,7 +52,7 @@ describe Efl::Evas do
         Evas.shutdown
     end
     #
-    describe "Evas base object" do
+    describe Efl::Evas::Evas do
         before(:all) do
             Evas.init
             @width = 800
@@ -79,12 +79,12 @@ describe Efl::Evas do
         end
         it "should be able to create and destroy evas" do
             e1 = Evas::Evas.new
-            e1.ptr.address.should_not eql 0
+            e1.address.should_not eql 0
             e2 = Evas::Evas.new e1
-            e1.ptr.address.should eql e2.ptr.address
+            e1.address.should eql e2.address
             e3 = Evas::Evas.new e1.ptr
-            e1.ptr.address.should eql e3.ptr.address
-            e2.ptr.address.should eql e3.ptr.address
+            e1.address.should eql e3.address
+            e2.address.should eql e3.address
             (e1==e2).should be_false
             (e2==e3).should be_false
             (e1==e3).should be_false
@@ -94,11 +94,11 @@ describe Efl::Evas do
             e1.free
             e1.ptr.should be_nil
             e4 = Evas::Evas.new Efl::FFI.evas_new
-            e4.ptr.address.should_not eql 0
+            e4.address.should_not eql 0
             e5 = e4.dup
-            e4.ptr.address.should eql e5.ptr.address
+            e4.address.should eql e5.address
             e6 = e4.clone
-            e4.ptr.address.should eql e6.ptr.address
+            e4.address.should eql e6.address
             e4.free
             e4.ptr.should be_nil
         end
@@ -220,8 +220,8 @@ describe Efl::Evas do
             @cb = false
             kd_cb = Proc.new do |data, e, obj, event_info|
                 data.read_string.should eq "mouse_in"
-                e.address.should eql @e.ptr.address
-                obj.address.should eql @bg.ptr.address
+                e.address.should eql @e.address
+                obj.address.should eql @bg.address
                 @db=true
                 true
             end

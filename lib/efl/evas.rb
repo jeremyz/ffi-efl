@@ -70,6 +70,12 @@ module Efl
             def === o
                 @ptr === o.ptr
             end
+            def address
+                @ptr.address
+            end
+            def object_add t
+                Efl::Evas::EvasObject.new Efl::FFI.send "evas_object_#{t}_add", @ptr
+            end
             def output_size_get
                 x = ::FFI::MemoryPointer.new :int
                 y = ::FFI::MemoryPointer.new :int
