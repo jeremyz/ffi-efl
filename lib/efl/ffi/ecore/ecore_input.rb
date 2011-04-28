@@ -7,14 +7,14 @@ module Efl
     #
     module EcoreInput
         def self.method_missing m, *args, &block
-            return Efl::FFI.send 'ecore_'+m.to_s, *args, &block
+            return Efl::FFI.send 'ecore_event_'+m.to_s, *args, &block
         end
     end
     #
     module FFI
         #
         #
-        ffi_lib 'ecore'
+        ffi_lib 'ecore_input'
         #
         # ENUMS
         # typedef enum _Ecore_Event_Modifier {...} Ecore_Event_Modifier;
