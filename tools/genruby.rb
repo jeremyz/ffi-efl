@@ -6,21 +6,23 @@ lib_path = File.join path, '..', 'lib', 'efl', 'ffi'
 #
 # header, module name, fct prefix, lib
 libraries = [
-    [ 'eina_types.h', 'Eina', 'eina', 'eina'],
-    [ 'eina_main.h', 'Eina', 'eina', 'eina'],
-    [ 'eina_list.h', 'EinaList', 'eina_list', 'eina'],
-    [ 'Eet.h', 'Eet', 'eet', 'eet'],
-    [ 'Evas.h', 'Evas', 'evas', 'evas'],
-#    [ 'Evas_GL.h', 'EvasGl', 'evas_gl', 'evas'],
-    [ 'Edje.h', 'Edje', 'edje', 'edje'],
-    [ 'Ecore.h', 'Ecore', 'ecore', 'ecore'],
-#    [ 'Ecore_Con.h', 'EcoreCon', 'ecore_con', 'ecore'],
-    [ 'Ecore_Input.h', 'EcoreInput', 'ecore', 'ecore'],
-    [ 'Ecore_Getopt.h', 'EcoreGetopt', 'ecore_getopt', 'ecore'],
-    [ 'Ecore_Evas.h', 'Ecore_evas', 'ecore', 'ecore'],
-#    [ 'Ecore_Fb.h', 'Ecore_fb', 'ecore', 'ecore'],
-#    [ 'Ecore_File.h', 'Ecore_file', 'ecore', 'ecore'],
-    [ 'Elementary.h', 'Elm', 'elm', 'libelementary-ver-pre-svn-09.so.0' ],
+    # HEADER            MODUE NAME      FCT PREFIX      LIB     OUTPUT
+    [ 'eina_types.h',   'Eina',         'eina',         'eina',     'eina/eina_types.rb' ],
+    [ 'eina_main.h',    'Eina',         'eina',         'eina',     'eina.rb' ],
+    [ 'eina_list.h',    'EinaList',     'eina_list',    'eina',     'eina/eina_list.rb' ],
+#    [ 'eina_hash.h',    'EinaHash',     'eina_hash',    'eina',     'eina/eina_hash.rb' ],
+    [ 'Eet.h',          'Eet',          'eet',          'eet',      'eet.rb' ],
+    [ 'Evas.h',         'Evas',         'evas',         'evas',     'evas.rb' ],
+#    [ 'Evas_GL.h',      'EvasGl',       'evas_gl',      'evas',     'evas/evas_gl.rb' ],
+    [ 'Edje.h',         'Edje',         'edje',         'edje',     'edje.rb' ],
+    [ 'Ecore.h',        'Ecore',        'ecore',        'ecore',    'ecore.rb' ],
+#    [ 'Ecore_Con.h',    'EcoreCon',     'ecore_con',    'ecore',    'ecore/ecore_con.rb' ],
+    [ 'Ecore_Input.h',  'EcoreInput',   'ecore',        'ecore',    'ecore/ecore_input.rb' ],
+    [ 'Ecore_Getopt.h', 'EcoreGetopt',  'ecore_getopt', 'ecore',    'ecore/ecore_getopt.rb' ],
+    [ 'Ecore_Evas.h',   'EcoreEvas',    'ecore',        'ecore',    'ecore/ecore_evas.rb' ],
+#    [ 'Ecore_Fb.h',     'EcoreFb',      'ecore',        'ecore',    'ecore/ecore_fb.rb' ],
+#    [ 'Ecore_File.h',   'EcoreFile',    'ecore',        'ecore',    'ecore/ecore_file.rb' ],
+    [ 'Elementary.h',   'Elm',          'elm',          'libelementary-ver-pre-svn-09.so.0',    'elementary.rb' ],
 ]
 #
 INDENT=' '*8
@@ -35,7 +37,7 @@ module Efl
     #
     module MNAME
         def self.method_missing m, *args, &block
-            return Efl::FFI.send 'MBASE_'+m.to_s, *args, &block
+            return Efl::FFI.send 'PREFIX_'+m.to_s, *args, &block
         end
     end
     #
@@ -239,20 +241,21 @@ end
 #
 Dir.mkdir lib_path unless Dir.exists? lib_path
 #
-libraries.collect do |header,module_name,module_base,lib|
+libraries.collect do |header,module_name,fct_prefix,lib, output|
     base = File.join path, 'api', header
-    output = File.join lib_path, "#{header[0..-3].downcase}.rb"
+    output = File.join lib_path, output
+    Dir.mkdir File.dirname output unless Dir.exists? File.dirname output
     puts "parse #{base}-*"
-    r = [lib, output, module_name, module_base ]
+    r = [lib, output, module_name, fct_prefix ]
     r << gen_enums(base, INDENT)
     r << gen_typedefs(base, INDENT)
     r << gen_callbacks(base, INDENT)
     r << gen_functions(base, INDENT)
     r
-end.each do |lib, output, module_name, module_base, enums, typedefs, callbacks, functions|
+end.each do |lib, output, module_name, fct_prefix, enums, typedefs, callbacks, functions|
     puts "generate #{output}"
     open(output,'w:utf-8') do |f|
-        f << HEADER.sub(/MNAME/,module_name).sub(/MBASE/,module_base)
+        f << HEADER.sub(/MNAME/,module_name).sub(/PREFIX/,fct_prefix)
         f << "#{INDENT}#\n#{INDENT}ffi_lib '#{lib}'"
         f << "\n#{INDENT}#\n#{INDENT}# ENUMS"
         f << "\n"+enums.collect { |t| ( t.is_a?(Array) ? ( TYPES_USAGE[t[0]] ? t[1] : nil ) : t ) }.compact.join("\n") unless enums.empty?
