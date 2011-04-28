@@ -345,7 +345,6 @@ describe Efl::Evas do
             @o.show
             @o.visible?.should be_true
         end
-        # line 2829
     end
     #
 end

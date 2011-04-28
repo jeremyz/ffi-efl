@@ -8,7 +8,7 @@ module Efl
         #
         class << self
             #
-            def open path, mode=FILE_MODE_READ, &blk
+            def open path, mode=:eet_file_mode_read, &blk
                 if blk
                     f = Efl::FFI.eet_open path, mode
                     raise Exception.new "Unable to open file #{path}" if f.nil?
