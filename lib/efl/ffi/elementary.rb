@@ -1494,9 +1494,9 @@ module Efl
         # FIXME
         # EAPI void elm_entry_text_filter_remove(Evas_Object *obj, void (*func) (void *data, Evas_Object *entry, char **text), void *data);
         # FIXME
-        # EAPI char *elm_entry_markup_to_utf8(const char *s) EINA_MALLOC EINA_WARN_UNUSED_RESULT;
+        # EAPI char *elm_entry_markup_to_utf8(const char *s);
         [ :elm_entry_markup_to_utf8, [ :string ], :string ],
-        # EAPI char *elm_entry_utf8_to_markup(const char *s) EINA_MALLOC EINA_WARN_UNUSED_RESULT;
+        # EAPI char *elm_entry_utf8_to_markup(const char *s);
         [ :elm_entry_utf8_to_markup, [ :string ], :string ],
         # EAPI void elm_entry_file_set(Evas_Object *obj, const char *file, Elm_Text_Format format);
         [ :elm_entry_file_set, [ :evas_object_p, :string, :elm_text_format ], :void ],

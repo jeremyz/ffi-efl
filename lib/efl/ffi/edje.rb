@@ -121,7 +121,7 @@ module Efl
         fcts = [
         # EAPI extern Edje_Version *edje_version;
         # FIXME
-        # EAPI const char *edje_external_param_type_str(Edje_External_Param_Type type) EINA_PURE;
+        # EAPI const char *edje_external_param_type_str(Edje_External_Param_Type type);
         [ :edje_external_param_type_str, [ :edje_external_param_type ], :string ],
         # EAPI int edje_init (void);
         [ :edje_init, [  ], :int ],
@@ -410,7 +410,7 @@ module Efl
         [ :edje_external_type_array_register, [ :edje_external_type_info_p ], :void ],
         # EAPI void edje_external_type_array_unregister (const Edje_External_Type_Info *array);
         [ :edje_external_type_array_unregister, [ :edje_external_type_info_p ], :void ],
-        # EAPI unsigned int edje_external_type_abi_version_get (void) EINA_CONST;
+        # EAPI unsigned int edje_external_type_abi_version_get (void);
         [ :edje_external_type_abi_version_get, [  ], :uint ],
         # EAPI Eina_Iterator *edje_external_iterator_get (void);
         [ :edje_external_iterator_get, [  ], :eina_iterator_p ],
