@@ -5,7 +5,7 @@ require 'efl/ffi'
 #
 module Efl
     #
-    module Ecore_evas
+    module EcoreEvas
         def self.method_missing m, *args, &block
             return Efl::FFI.send 'ecore_'+m.to_s, *args, &block
         end

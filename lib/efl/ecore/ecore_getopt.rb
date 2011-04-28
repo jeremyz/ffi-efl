@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ffi/ecore_getopt'
+require 'efl/ffi/ecore/ecore_getopt'
 #
 module Efl
     module FFI

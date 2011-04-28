@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 #
 require 'efl/eina'
-require 'efl/ffi/eina_list'
+require 'efl/ffi/eina/eina_list'
 #
 class Array
     def self.from_eina_list o

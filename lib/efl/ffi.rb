@@ -74,6 +74,6 @@ module Efl
     end
 end
 #
-require 'efl/ffi/eina_types'
+require 'efl/ffi/eina/eina_types'
 #
 # EOF
