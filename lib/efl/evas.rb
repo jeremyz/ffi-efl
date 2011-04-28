@@ -67,12 +67,6 @@ module Efl
                 Efl::FFI.evas_free @ptr
                 @ptr=nil
             end
-            def === o
-                @ptr === o.ptr
-            end
-            def address
-                @ptr.address
-            end
             def object_add t
                 Efl::Evas::EvasObject.new Efl::FFI.send "evas_object_#{t}_add", @ptr
             end
@@ -127,12 +121,6 @@ module Efl
             def free
                 Efl::FFI.evas_object_del @ptr
                 @ptr=nil
-            end
-            def === o
-                @ptr === o.ptr
-            end
-            def address
-                @ptr.address
             end
             def geometry_get
                 x = ::FFI::MemoryPointer.new :int

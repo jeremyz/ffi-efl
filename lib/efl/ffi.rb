@@ -49,6 +49,12 @@ module Efl
             m.class_eval "def self.func_prefixes; @func_prefixes; end"
             m.class_eval "def self.inherited sub; sub.class_eval 'def self.func_prefixes; superclass.func_prefixes; end'; end"
         end
+        def === o
+            @ptr === o.ptr
+        end
+        def address
+            @ptr.address
+        end
         def method_missing m, *args, &block
             if m =~/^(.*)=$/
                 m_s = $1+'_set'
