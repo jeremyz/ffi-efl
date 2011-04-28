@@ -5,5 +5,5 @@
 :loop
 /,$/ { N; s/\n/ /; t loop }
 s/ {2,}/ /g
-s/\s+EINA_ARG.*/;/
+s/\s+EINA_.*/;/
 s/^\s*EAPI/EAPI/p
