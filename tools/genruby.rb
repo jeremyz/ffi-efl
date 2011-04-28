@@ -6,22 +6,22 @@ lib_path = File.join path, '..', 'lib', 'efl', 'ffi'
 #
 # header, module name, fct prefix, lib
 libraries = [
-    # HEADER            MODUE NAME      FCT PREFIX      LIB     OUTPUT
-    [ 'eina_types.h',   'Eina',         'eina',         'eina',     'eina/eina_types.rb' ],
-    [ 'eina_main.h',    'Eina',         'eina',         'eina',     'eina.rb' ],
-    [ 'eina_list.h',    'EinaList',     'eina_list',    'eina',     'eina/eina_list.rb' ],
-    [ 'eina_hash.h',    'EinaHash',     'eina_hash',    'eina',     'eina/eina_hash.rb' ],
-    [ 'Eet.h',          'Eet',          'eet',          'eet',      'eet.rb' ],
-    [ 'Evas.h',         'Evas',         'evas',         'evas',     'evas.rb' ],
-#    [ 'Evas_GL.h',      'EvasGl',       'evas_gl',      'evas',     'evas/evas_gl.rb' ],
-    [ 'Edje.h',         'Edje',         'edje',         'edje',     'edje.rb' ],
-    [ 'Ecore.h',        'Ecore',        'ecore',        'ecore',    'ecore.rb' ],
-#    [ 'Ecore_Con.h',    'EcoreCon',     'ecore_con',    'ecore',    'ecore/ecore_con.rb' ],
-    [ 'Ecore_Input.h',  'EcoreInput',   'ecore',        'ecore',    'ecore/ecore_input.rb' ],
-    [ 'Ecore_Getopt.h', 'EcoreGetopt',  'ecore_getopt', 'ecore',    'ecore/ecore_getopt.rb' ],
-    [ 'Ecore_Evas.h',   'EcoreEvas',    'ecore',        'ecore',    'ecore/ecore_evas.rb' ],
-#    [ 'Ecore_Fb.h',     'EcoreFb',      'ecore',        'ecore',    'ecore/ecore_fb.rb' ],
-#    [ 'Ecore_File.h',   'EcoreFile',    'ecore',        'ecore',    'ecore/ecore_file.rb' ],
+    # HEADER            MODUE NAME      FCT PREFIX      LIB             OUTPUT
+    [ 'eina_types.h',   'Eina',         'eina',         'eina',         'eina/eina_types.rb' ],
+    [ 'eina_main.h',    'Eina',         'eina',         'eina',         'eina.rb' ],
+    [ 'eina_list.h',    'EinaList',     'eina_list',    'eina',         'eina/eina_list.rb' ],
+    [ 'eina_hash.h',    'EinaHash',     'eina_hash',    'eina',         'eina/eina_hash.rb' ],
+    [ 'Eet.h',          'Eet',          'eet',          'eet',          'eet.rb' ],
+    [ 'Evas.h',         'Evas',         'evas',         'evas',         'evas.rb' ],
+#    [ 'Evas_GL.h',      'EvasGl',       'evas_gl',      'evas',         'evas/evas_gl.rb' ],
+    [ 'Edje.h',         'Edje',         'edje',         'edje',         'edje.rb' ],
+    [ 'Ecore.h',        'Ecore',        'ecore',        'ecore',        'ecore.rb' ],
+#    [ 'Ecore_Con.h',    'EcoreCon',     'ecore_con',    'ecore',        'ecore/ecore_con.rb' ],
+    [ 'Ecore_Input.h',  'EcoreInput',   'ecore',        'ecore',        'ecore/ecore_input.rb' ],
+    [ 'Ecore_Getopt.h', 'EcoreGetopt',  'ecore_getopt', 'ecore',        'ecore/ecore_getopt.rb' ],
+    [ 'Ecore_Evas.h',   'EcoreEvas',    'ecore',        'ecore_evas',   'ecore/ecore_evas.rb' ],
+#    [ 'Ecore_Fb.h',     'EcoreFb',      'ecore',        'ecore',        'ecore/ecore_fb.rb' ],
+#    [ 'Ecore_File.h',   'EcoreFile',    'ecore',        'ecore',        'ecore/ecore_file.rb' ],
     [ 'Elementary.h',   'Elm',          'elm',          'libelementary-ver-pre-svn-09.so.0',    'elementary.rb' ],
 ]
 #

@@ -14,7 +14,7 @@ module Efl
     module FFI
         #
         #
-        ffi_lib 'ecore'
+        ffi_lib 'ecore_evas'
         #
         # ENUMS
         # typedef enum _Ecore_Evas_Engine_Type {...} Ecore_Evas_Engine_Type;

@@ -2628,6 +2628,10 @@ module Efl
         [ :elm_map_rotate_set, [ :evas_object_p, :double, :int, :int ], :void ],
         # EAPI void elm_map_rotate_get(const Evas_Object *obj, double *degree, Evas_Coord *cx, Evas_Coord *cy);
         [ :elm_map_rotate_get, [ :evas_object_p, :double_p, :int_p, :int_p ], :void ],
+        # EAPI void elm_map_wheel_disabled_set(Evas_Object *obj, Eina_Bool disabled);
+        [ :elm_map_wheel_disabled_set, [ :evas_object_p, :eina_bool ], :void ],
+        # EAPI Eina_Bool elm_map_wheel_disabled_get(const Evas_Object *obj);
+        [ :elm_map_wheel_disabled_get, [ :evas_object_p ], :eina_bool ],
         # EAPI Evas_Object *elm_panel_add(Evas_Object *parent);
         [ :elm_panel_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_panel_orient_set(Evas_Object *obj, Elm_Panel_Orient orient);
