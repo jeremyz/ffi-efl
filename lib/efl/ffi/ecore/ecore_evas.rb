@@ -7,7 +7,7 @@ module Efl
     #
     module EcoreEvas
         def self.method_missing m, *args, &block
-            return Efl::FFI.send 'ecore_'+m.to_s, *args, &block
+            return Efl::FFI.send 'ecore_evas_'+m.to_s, *args, &block
         end
     end
     #

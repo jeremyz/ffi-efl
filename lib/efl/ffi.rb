@@ -35,11 +35,18 @@ module Efl
         typedef :pointer, :void_p
         typedef :pointer, :string_array
         typedef :pointer, :string_array_p
+        typedef :uint_p,  :uintptr_t
         #
         typedef :pointer, :eina_list_p
         typedef :pointer, :eina_hash_p
         typedef :pointer, :eina_iterator_p
         typedef :pointer, :eina_accessor_p
+        typedef :pointer, :evas_p
+        typedef :pointer, :evas_object_p
+        typedef :pointer, :evas_object_pp
+        typedef :pointer, :ecore_getopt_p
+        typedef :pointer, :ecore_getopt_desc_p
+        typedef :pointer, :ecore_getopt_value_p
         #
     end
     #

@@ -19,7 +19,7 @@ libraries = [
 #    [ 'Ecore_Con.h',    'EcoreCon',     'ecore_con',    'ecore',        'ecore/ecore_con.rb' ],
     [ 'Ecore_Input.h',  'EcoreInput',   'ecore_event',  'ecore_input',  'ecore/ecore_input.rb' ],
     [ 'Ecore_Getopt.h', 'EcoreGetopt',  'ecore_getopt', 'ecore',        'ecore/ecore_getopt.rb' ],
-    [ 'Ecore_Evas.h',   'EcoreEvas',    'ecore',        'ecore_evas',   'ecore/ecore_evas.rb' ],
+    [ 'Ecore_Evas.h',   'EcoreEvas',    'ecore_evas',   'ecore_evas',   'ecore/ecore_evas.rb' ],
 #    [ 'Ecore_Fb.h',     'EcoreFb',      'ecore',        'ecore',        'ecore/ecore_fb.rb' ],
 #    [ 'Ecore_File.h',   'EcoreFile',    'ecore',        'ecore',        'ecore/ecore_file.rb' ],
     [ 'Elementary.h',   'Elm',          'elm',          'libelementary-ver-pre-svn-09.so.0',    'elementary.rb' ],
