@@ -256,7 +256,7 @@ describe Efl::Evas do
             a = ['/tmp1','/tmp2']
             @e.evas_font_path_append a[1]
             @e.evas_font_path_prepend a[0]
-            require 'efl/eina_list'
+            require 'efl/eina/eina_list'
             Efl::Eina::EinaList.new(@e.evas_font_path_list).each_with_index do |p,i|
                 p.read_string.should eql a[i]
             end

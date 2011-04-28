@@ -2,7 +2,6 @@
 # -*- coding: UTF-8 -*-
 #
 require 'efl/evas'
-require 'efl/eina_list'
 #
 include Efl
 #
@@ -32,13 +31,16 @@ def destroy_canvas c, pixels
 end
 #
 def draw_scene c
-    updates = Eina::EinaList.new c.render_updates
+    updates = c.render_updates
+    Evas::render_updates_free updates
     # FIXME needs EinaRectangle
+#    require 'efl/eina/eina_list'
+#    updates = Eina::EinaList.new c.render_updates
 #    updates.each do |u|
 #        r = Eina::EinaRectangle.new u
 #        puts "UPDATED REGION: pos: #{r[:x]}, #{r[:y]}    size: #{r[:w]}x#{r[:h]}"
 #    end
-    Evas::render_updates_free updates.ptr
+#    Evas::render_updates_free updates.ptr
 end
 #
 def save_scene canvas, dest
