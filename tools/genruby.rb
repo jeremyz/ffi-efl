@@ -10,7 +10,7 @@ libraries = [
     [ 'eina_types.h',   'Eina',         'eina',         'eina',     'eina/eina_types.rb' ],
     [ 'eina_main.h',    'Eina',         'eina',         'eina',     'eina.rb' ],
     [ 'eina_list.h',    'EinaList',     'eina_list',    'eina',     'eina/eina_list.rb' ],
-#    [ 'eina_hash.h',    'EinaHash',     'eina_hash',    'eina',     'eina/eina_hash.rb' ],
+    [ 'eina_hash.h',    'EinaHash',     'eina_hash',    'eina',     'eina/eina_hash.rb' ],
     [ 'Eet.h',          'Eet',          'eet',          'eet',      'eet.rb' ],
     [ 'Evas.h',         'Evas',         'evas',         'evas',     'evas.rb' ],
 #    [ 'Evas_GL.h',      'EvasGl',       'evas_gl',      'evas',     'evas/evas_gl.rb' ],
@@ -87,8 +87,6 @@ TYPES = {
     # Efl BASE TYPES
     'Eina_Bool' => ':eina_bool',
     'Eina_Bool *' => ':eina_bool_p',
-    'Eina_Hash' => ':eina_hash',
-    'Eina_Hash *' => ':eina_hash_p',
     'Eina_Iterator' => ':eina_iterator',
     'Eina_Iterator *' => ':eina_iterator_p',
     'Eina_Accessor' => ':eina_accessor',
