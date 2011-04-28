@@ -204,12 +204,12 @@ def gen_callbacks path, indent
     r = []
     open(path+'-callbacks','r').readlines.each do |l|
         l.strip!
-        if not l=~/^\s*typedef\s+([a-zA-Z0-9_\* ]+?\s+\**)((?:\(\*)?\w+\)?)\s*\((.*)\);\s*$/
+        if not l=~/^\s*typedef\s+(.*)((?:\(\*?\w+\)| \*?\w+))\s*\((.*)\);\s*$/
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
         ret = $1
-        name = $2
+        name = $2.strip
         args = $3.split(',').collect { |arg| get_type_from_arg arg, l }.join ', '
         k = name.sub(/\(/,'').sub(/\)/,'').sub(/\*/,'')
         t = name.downcase.sub(/\(/,'').sub(/\)/,'').sub(/\*/,'')
@@ -245,25 +245,33 @@ libraries.collect do |header,module_name,fct_prefix,lib, output|
     base = File.join path, 'api', header
     output = File.join lib_path, output
     Dir.mkdir File.dirname output unless Dir.exists? File.dirname output
-    puts "parse #{base}-*"
+    printf "%-60s", "parse #{base}-*"
     r = [lib, output, module_name, fct_prefix ]
+    print "enums, "
     r << gen_enums(base, INDENT)
+    print "typedefs, "
     r << gen_typedefs(base, INDENT)
+    print "callbacks, "
     r << gen_callbacks(base, INDENT)
+    puts "functions."
     r << gen_functions(base, INDENT)
     r
 end.each do |lib, output, module_name, fct_prefix, enums, typedefs, callbacks, functions|
-    puts "generate #{output}"
+    printf "%-60s", "generate #{output}"
     open(output,'w:utf-8') do |f|
         f << HEADER.sub(/MNAME/,module_name).sub(/PREFIX/,fct_prefix)
         f << "#{INDENT}#\n#{INDENT}ffi_lib '#{lib}'"
         f << "\n#{INDENT}#\n#{INDENT}# ENUMS"
+        print "enums, "
         f << "\n"+enums.collect { |t| ( t.is_a?(Array) ? ( TYPES_USAGE[t[0]] ? t[1] : nil ) : t ) }.compact.join("\n") unless enums.empty?
         f << "\n#{INDENT}#\n#{INDENT}# TYPEDEFS"
+        print "typedefs, "
         f << "\n"+typedefs.collect { |t| ( t.is_a?(Array) ? ( TYPES_USAGE[t[0]] ? t[1] : nil ) : t ) }.compact.join("\n") unless typedefs.empty?
         f << "\n#{INDENT}#\n#{INDENT}# CALLBACKS"
+        print "callbacks, "
         f << "\n"+callbacks.join("\n") unless callbacks.empty?
         f << "\n#{INDENT}#\n#{INDENT}# FUNCTIONS"
+        puts "functions."
         f << "\n"+functions.join("\n") unless functions.empty?
         f << "\n#{INDENT}#\n#{INDENT}attach_fcts fcts\n"
         f << FOOTER
