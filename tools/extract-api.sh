@@ -37,6 +37,11 @@ for header in \
     "${INCLUDE}/elementary-0/Elementary.h" \
     ; do
     #
+    if [ ! -e "$header" ]; then
+        echo "$header not found, we won't generate bindings for this header."
+    continue
+    fi
+    #
     DIR=$(dirname $header)
     FILE=$(basename $header)
     #
