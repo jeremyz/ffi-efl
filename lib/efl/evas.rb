@@ -58,7 +58,7 @@ module Efl
                     when FFI::Pointer
                         FFI::AutoPointer.new o, method(:free)
                     else
-                        raise ArgumentError.new "#{o.class} valid argument"
+                        raise ArgumentError.new "wrong argument #{o.class.name}"
                     end
                 )
                 yield self if block_given?
@@ -115,7 +115,7 @@ module Efl
                     when FFI::Pointer
                         FFI::AutoPointer.new o, method(:free)
                     else
-                        raise ArgumentError.new "#{o.class} valid argument"
+                        raise ArgumentError.new "wrong argument #{o.class.name}"
                     end
                 )
                 yield self if block_given?

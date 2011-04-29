@@ -36,7 +36,7 @@ module Efl
                         o.each do |k,v| Efl::EinaHash.eina_hash_add ptr, k, v end
                         ptr
                     else
-                        raise ArgumentError.new "#{ptr.class} valid argument"
+                        raise ArgumentError.new "wrong argument #{o.class.name}"
                     end
                 )
             end

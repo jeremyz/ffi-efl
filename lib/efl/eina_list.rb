@@ -10,7 +10,7 @@ class Array
         elsif o.is_a? FFI::Pointer
             Efl::EinaList::REinaList.new(o).to_ary
         else
-            raise ArgumentError.new " wrong argument #{o.class.name}"
+            raise ArgumentError.new "wrong argument #{o.class.name}"
         end
     end
 end
@@ -41,7 +41,7 @@ module Efl
                     when Array
                         o.inject(FFI::Pointer::NULL) { |p,e| Efl::EinaList.eina_list_append p, e }
                     else
-                        raise ArgumentError.new "#{ptr.class} valid argument"
+                        raise ArgumentError.new "wrong argument #{o.class.name}"
                     end
                 )
             end
