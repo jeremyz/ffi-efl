@@ -157,7 +157,7 @@ def gen_enums path, indent
     r = []
     open(path+'-enums','r').readlines.each do |l|
         l.strip!
-        if not l=~/(typedef enum(?: \w+)?) {([A-Z0-9_ (\s*=\s*-?[\d+]),]+)} (\w+);/
+        if not l=~/(typedef enum(?: \w+)?) \{([-A-Z0-9_=, ]+)\} (\w+);/
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
@@ -239,12 +239,12 @@ def gen_functions path, indent
     r
 end
 #
-Dir.mkdir lib_path unless Dir.exists? lib_path
+Dir.mkdir lib_path unless (File.exists? lib_path)
 #
 libraries.collect do |header,module_name,fct_prefix,lib, output|
     base = File.join path, 'api', header
     output = File.join lib_path, output
-    Dir.mkdir File.dirname output unless Dir.exists? File.dirname output
+    Dir.mkdir File.dirname(output) unless File.exists? File.dirname(output)
     printf "%-60s", "parse #{base}-*"
     r = [lib, output, module_name, fct_prefix ]
     print "enums, "
