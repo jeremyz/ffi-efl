@@ -20,15 +20,15 @@ describe Efl::Evas do
     end
     #
     it "evas alloc error enum is ok" do
-        Efl::FFI.enum_value(:evas_alloc_error_none).should eql 0
-        Efl::FFI.enum_value(:evas_alloc_error_fatal).should eql 1
-        Efl::FFI.enum_value(:evas_alloc_error_recovered).should eql 2
-        Efl::FFI.enum_type(:evas_alloc_error)[0].should eql :evas_alloc_error_none
-        Efl::FFI.enum_type(:evas_alloc_error)[1].should eql :evas_alloc_error_fatal
-        Efl::FFI.enum_type(:evas_alloc_error)[2].should eql :evas_alloc_error_recovered
-        Efl::FFI.enum_type(:evas_alloc_error)[:evas_alloc_error_none].should eql 0
-        Efl::FFI.enum_type(:evas_alloc_error)[:evas_alloc_error_fatal].should eql 1
-        Efl::FFI.enum_type(:evas_alloc_error)[:evas_alloc_error_recovered].should eql 2
+        Efl::Evas.enum_value(:evas_alloc_error_none).should eql 0
+        Efl::Evas.enum_value(:evas_alloc_error_fatal).should eql 1
+        Efl::Evas.enum_value(:evas_alloc_error_recovered).should eql 2
+        Efl::Evas.enum_type(:evas_alloc_error)[0].should eql :evas_alloc_error_none
+        Efl::Evas.enum_type(:evas_alloc_error)[1].should eql :evas_alloc_error_fatal
+        Efl::Evas.enum_type(:evas_alloc_error)[2].should eql :evas_alloc_error_recovered
+        Efl::Evas.enum_type(:evas_alloc_error)[:evas_alloc_error_none].should eql 0
+        Efl::Evas.enum_type(:evas_alloc_error)[:evas_alloc_error_fatal].should eql 1
+        Efl::Evas.enum_type(:evas_alloc_error)[:evas_alloc_error_recovered].should eql 2
     end
     #
     it "should have no memory allocation error occured" do
@@ -52,18 +52,18 @@ describe Efl::Evas do
         Evas.shutdown
     end
     #
-    describe Efl::Evas::Evas do
+    describe Efl::Evas::REvas do
         before(:all) do
             Evas.init
             @width = 800
             @height = 600
             @pixels = FFI::MemoryPointer.new :int, @width*@height
-            @e = Evas::Evas.new
+            @e = Evas::REvas.new
             @e.output_method_set Evas::render_method_lookup("buffer")
             @e.output_viewport_set 0, 0, @width, @height
             @e.output_size_set @width, @height
-            einfo = Efl::FFI::EvasEngineInfoBuffer.new @e.engine_info_get
-            einfo[:info][:depth_type] = Efl::FFI::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
+            einfo = Efl::Evas::EngineInfoBufferStruct.new @e.engine_info_get
+            einfo[:info][:depth_type] = Efl::Evas::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
             einfo[:info][:dest_buffer] = @pixels
             einfo[:info][:dest_buffer_row_bytes] = @width * FFI::type_size(:int);
             einfo[:info][:use_color_key] = 0;
@@ -78,11 +78,11 @@ describe Efl::Evas do
             Evas.shutdown
         end
         it "should be able to create and destroy evas" do
-            e1 = Evas::Evas.new
+            e1 = Evas::REvas.new
             e1.address.should_not eql 0
-            e2 = Evas::Evas.new e1
+            e2 = Evas::REvas.new e1
             e1.address.should eql e2.address
-            e3 = Evas::Evas.new e1.ptr
+            e3 = Evas::REvas.new e1.to_ptr
             e1.address.should eql e3.address
             e2.address.should eql e3.address
             (e1==e2).should be_false
@@ -92,26 +92,26 @@ describe Efl::Evas do
             (e2===e3).should be_true
             (e1===e3).should be_true
             e1.free
-            e1.ptr.should be_nil
-            e4 = Evas::Evas.new Efl::FFI.evas_new
+            e1.to_ptr.should be_nil
+            e4 = Evas::REvas.new Evas.evas_new
             e4.address.should_not eql 0
             e5 = e4.dup
             e4.address.should eql e5.address
             e6 = e4.clone
             e4.address.should eql e6.address
             e4.free
-            e4.ptr.should be_nil
+            e4.to_ptr.should be_nil
         end
         #
         it "focus should work" do
-            Efl::FFI.evas_focus_in @e.ptr
-            Efl::FFI.evas_focus_state_get(@e.ptr).should be_true
-            Efl::FFI.evas_focus_out @e.ptr
-            Efl::FFI.evas_focus_state_get(@e.ptr).should be_false
-            Efl::Evas.focus_in @e.ptr
-            Efl::Evas.focus_state_get(@e.ptr).should be_true
-            Efl::Evas.focus_out @e.ptr
-            Efl::Evas.focus_state_get(@e.ptr).should be_false
+            Efl::Evas.evas_focus_in @e.to_ptr
+            Efl::Evas.evas_focus_state_get(@e.to_ptr).should be_true
+            Efl::Evas.evas_focus_out @e.to_ptr
+            Efl::Evas.evas_focus_state_get(@e.to_ptr).should be_false
+            Efl::Evas.focus_in @e.to_ptr
+            Efl::Evas.focus_state_get(@e.to_ptr).should be_true
+            Efl::Evas.focus_out @e.to_ptr
+            Efl::Evas.focus_state_get(@e.to_ptr).should be_false
             @e.focus_in { |r| r.should be_nil }
             @e.focus_state_get.should be_true
             @e.focus_state_get { |r| r.should be_true }
@@ -226,7 +226,7 @@ describe Efl::Evas do
                 true
             end
             kd_d = FFI::MemoryPointer.from_string "mouse_in"
-            @bg = Evas::EvasObject.new @e.object_rectangle_add
+            @bg = Evas::REvasObject.new @e.object_rectangle_add
             @bg.move 0, 0
             @bg.resize 20, 20
             @bg.show
@@ -244,35 +244,35 @@ describe Efl::Evas do
         end
         #
         it "font functions should work" do
-            @e.evas_font_hinting_set :evas_font_hinting_bytecode
-            @e.evas_font_hinting_get.should eql :evas_font_hinting_bytecode
-            @e.evas_font_hinting_can_hint(:evas_font_hinting_none).should be_true
-            @e.evas_font_cache_flush
-            @e.evas_font_cache_set 666
-            @e.evas_font_cache_get.should eql 666
-            l = @e.evas_font_available_list
-            @e.evas_font_available_list_free l
-            @e.evas_font_path_clear
+            @e.font_hinting_set :evas_font_hinting_bytecode
+            @e.font_hinting_get.should eql :evas_font_hinting_bytecode
+            @e.font_hinting_can_hint(:evas_font_hinting_none).should be_true
+            @e.font_cache_flush
+            @e.font_cache_set 666
+            @e.font_cache_get.should eql 666
+            l = @e.font_available_list
+            @e.font_available_list_free l
+            @e.font_path_clear
             a = ['/tmp1','/tmp2']
-            @e.evas_font_path_append a[1]
-            @e.evas_font_path_prepend a[0]
-            require 'efl/eina/eina_list'
-            Efl::Eina::EinaList.new(@e.evas_font_path_list).each_with_index do |p,i|
+            @e.font_path_append a[1]
+            @e.font_path_prepend a[0]
+            require 'efl/eina_list'
+            Efl::EinaList::REinaList.new(@e.font_path_list).each_with_index do |p,i|
                 p.read_string.should eql a[i]
             end
         end
     end
-    describe Efl::Evas::EvasObject do
+    describe Efl::Evas::REvasObject do
         #
         before(:all) do
             Evas.init
             @pixels = FFI::MemoryPointer.new :int, 100*100
-            @e = Evas::Evas.new
+            @e = Evas::REvas.new
             @e.output_method_set Evas::render_method_lookup("buffer")
             @e.output_viewport_set 0, 0, 100, 100
             @e.output_size_set 100, 100
-            einfo = Efl::FFI::EvasEngineInfoBuffer.new @e.engine_info_get
-            einfo[:info][:depth_type] = Efl::FFI::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
+            einfo = Efl::Evas::EngineInfoBufferStruct.new @e.engine_info_get
+            einfo[:info][:depth_type] = Efl::Evas::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
             einfo[:info][:dest_buffer] = @pixels
             einfo[:info][:dest_buffer_row_bytes] = 100 * FFI::type_size(:int);
             einfo[:info][:use_color_key] = 0;
@@ -298,10 +298,11 @@ describe Efl::Evas do
             clipper.color = 255,255,255,255
             clipper.move 25, 25
             clipper.resize 50, 50
-            @o.clip = clipper.ptr
+            @o.clip = clipper.to_ptr
             clipper.show
             @o.clip_get.address.should eql clipper.address
-            Efl::Eina::EinaList.new(clipper.clipees_get).to_ary[0].address.should eql @o.address
+            require 'efl/eina_list'
+            Efl::EinaList::REinaList.new(clipper.clipees_get).to_ary[0].address.should eql @o.address
             @o.clip_unset
             @o.clip_get.address.should eql 0
 
