@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ecore/ecore_input'
+require 'efl/ecore_input'
 #
 describe Efl::EcoreInput do
     #

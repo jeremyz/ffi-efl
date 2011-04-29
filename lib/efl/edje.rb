@@ -4,9 +4,11 @@
 require 'efl/ffi/edje'
 #
 module Efl
+    #
     module Edje
         #
     end
+    #
 end
 #
 # EOF

@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ecore/ecore_evas'
+require 'efl/ecore_evas'
 #
 describe Efl::EcoreEvas do
     #

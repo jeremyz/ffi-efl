@@ -1,15 +1,14 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ecore'
-require 'efl/ecore/ecore_getopt'
+require 'efl/ecore_getopt'
 #
 describe Efl::EcoreGetopt do
     #
     before(:all) do
         Efl::Ecore.init
         #
-        @p = Efl::EcoreGetopt::Parser.new :prog =>"Prog", :usage => "Usage", :version => "0.0.0", :copyright => "less", :license => "MIT", :description => "description", :strict => 1
+        @p = Efl::EcoreGetopt::REcoreGetopt.new :prog =>"Prog", :usage => "Usage", :version => "0.0.0", :copyright => "less", :license => "MIT", :description => "description", :strict => 1
         @callback = Proc.new do |parser, desc, string, data, value|
             parser.address.should eql @p.to_ptr.address
             string.should eql "my_data"

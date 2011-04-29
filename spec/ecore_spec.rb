@@ -50,7 +50,7 @@ describe Efl::Ecore do
             bytes.should eql 12
         end
         Ecore.init
-        pipe = Ecore::EcorePipe.new cb, data
+        pipe = Ecore::REcorePipe.new cb, data
         pipe.write("hello world").should be_true
         Ecore.main_loop_iterate
         pipe.read_close

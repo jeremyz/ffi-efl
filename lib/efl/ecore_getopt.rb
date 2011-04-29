@@ -1,12 +1,13 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ffi/ecore/ecore_getopt'
+require 'efl/ffi/ecore_getopt'
 #
 module Efl
-    module FFI
+    #
+    module EcoreGetopt
         #
-        class EcoreGetoptValue < ::FFI::Union
+        class Value < FFI::Union
             layout  :strp,          :pointer,
                     :boolp,         :eina_bool_p,
                     :shortp,        :short_p,
@@ -20,7 +21,7 @@ module Efl
                     :ptrp,          :void_p,
         end
         #
-        class EcoreGetoptDescStoreDef < ::FFI::Union
+        class DescStoreDef < FFI::Union
             layout  :strv,          :pointer,
                     :boolv,         :uchar,
                     :shortv,        :short,
@@ -32,40 +33,40 @@ module Efl
                     :doublev,       :double,
         end
         #
-        class EcoreGetoptDescStore < ::FFI::Struct
+        class DescStore < FFI::Struct
             layout  :type,          :ecore_getopt_type,                 # enum
                     :arg_req,       :ecore_getopt_desc_arg_requirement, # enum
-                    :def,           EcoreGetoptDescStoreDef,
+                    :def,           DescStoreDef,
         end
         #
         callback :ecore_getopt_desc_cb, [:ecore_getopt_p, :ecore_getopt_desc_p, :string, :pointer, :ecore_getopt_value_p ], :eina_bool
         #
-        class EcoreGetoptDescCallback < ::FFI::Struct
+        class DescCallback < FFI::Struct
             layout  :func,          :ecore_getopt_desc_cb,
                     :data,          :pointer,
                     :arg_req,       :ecore_getopt_desc_arg_requirement, # enum
                     :def,           :pointer,
         end
         #
-        class EcoreActionParam < ::FFI::Union
-            layout  :store,         EcoreGetoptDescStore,
+        class ActionParam < FFI::Union
+            layout  :store,         DescStore,
                     :store_const,   :pointer,
                     :choices,       :pointer,
                     :append_type,   :ecore_getopt_type,                 # enum
-                    :callback,      EcoreGetoptDescCallback,
+                    :callback,      DescCallback,
                     :dummy,         :pointer,
         end
         #
-        class EcoreGetoptDesc < ::FFI::Struct
+        class Desc < FFI::Struct
             layout  :shortname,     :char,
                     :longname,      :pointer,
                     :help,          :pointer,
                     :metavar,       :pointer,
                     :action,        :ecore_getopt_action,               # enum
-                    :action_param,  EcoreActionParam,
+                    :action_param,  ActionParam,
         end
         #
-        class EcoreGetopt < ::FFI::Struct
+        class EcoreGetopt < FFI::Struct
             layout  :prog,          :pointer,
                     :usage,         :pointer,
                     :version,       :pointer,
@@ -76,27 +77,25 @@ module Efl
 #                    :descs,         :pointer,   # NULL terminated  EcoreGetopt_Desc[]
 
             def desc_ptr idx
-                EcoreGetoptDesc.new to_ptr+Efl::FFI::EcoreGetopt.size+(idx*Efl::FFI::EcoreGetoptDesc.size)
+                Efl::EcoreGetopt::Desc.new to_ptr+Efl::EcoreGetopt::EcoreGetopt.size+(idx*Efl::EcoreGetopt::Desc.size)
             end
         end
         #
-    end
-    #
-    module EcoreGetopt
-        class Parser
+        class REcoreGetopt
             def initialize desc
+                @ecore_getopt = nil
                 @desc = desc
                 @options = [
-                    [ 0, ::FFI::Pointer::NULL, ::FFI::Pointer::NULL, ::FFI::Pointer::NULL, 0, {:dummy=>::FFI::Pointer::NULL} ]
+                    [ 0, FFI::Pointer::NULL, FFI::Pointer::NULL, FFI::Pointer::NULL, 0, {:dummy=>FFI::Pointer::NULL} ]
                 ]
                 @values = [
-                    [ :ptrp, ::FFI::Pointer::NULL ]
+                    [ :ptrp, FFI::Pointer::NULL ]
                 ]
-                @refs = [] # to prevent ::FFI::MemoryPointer.from_string from beeing GC'ed
+                @refs = [] # to prevent FFI::MemoryPointer.from_string from beeing GC'ed
             end
             def p_from_string r
-                return r if r==::FFI::Pointer::NULL
-                p = ::FFI::MemoryPointer.from_string r
+                return r if r==FFI::Pointer::NULL
+                p = FFI::MemoryPointer.from_string r
                 @refs << p
                 p
             end
@@ -107,16 +106,16 @@ module Efl
                 @values.insert -2, [ type, ptr ]
             end
             def to_ptr
-                @parser_p.to_ptr
+                @ecore_getopt.to_ptr
             end
             def create
-                @parser_p = Efl::FFI::EcoreGetopt.new ::FFI::MemoryPointer.new (Efl::FFI::EcoreGetopt.size+Efl::FFI::EcoreGetoptDesc.size*@options.length), 1
+                @ecore_getopt = Efl::EcoreGetopt::EcoreGetopt.new FFI::MemoryPointer.new (Efl::EcoreGetopt::EcoreGetopt.size+Efl::EcoreGetopt::Desc.size*@options.length), 1
                 [:prog,:usage,:version,:copyright,:license,:description].each do |sym|
-                    @parser_p[sym] = ( @desc.has_key?(sym) ? ::FFI::MemoryPointer.from_string(@desc[sym]) : ::FFI::Pointer::NULL )
+                    @ecore_getopt[sym] = ( @desc.has_key?(sym) ? FFI::MemoryPointer.from_string(@desc[sym]) : FFI::Pointer::NULL )
                 end
-                @parser_p[:strict] = @desc[:strict] if @desc.has_key? :strict
+                @ecore_getopt[:strict] = @desc[:strict] if @desc.has_key? :strict
                 @options.each_with_index do |o,i|
-                    d = @parser_p.desc_ptr i
+                    d = @ecore_getopt.desc_ptr i
                     d[:shortname] = o[0].ord
                     d[:longname] = p_from_string o[1]
                     d[:help] = p_from_string o[2]
@@ -150,27 +149,27 @@ module Efl
                     when :append
                         d[:action_param][:append_type] = v
                     else
-                        d[:action_param][:dummy] = ::FFI::Pointer::NULL
+                        d[:action_param][:dummy] = FFI::Pointer::NULL
                     end
                 end
-                @values_p = ::FFI::MemoryPointer.new Efl::FFI::EcoreGetoptValue, @values.length, false
+                @values_p = FFI::MemoryPointer.new Efl::EcoreGetopt::Value, @values.length, false
                 @values.each_with_index do |v,i|
-                    Efl::FFI::EcoreGetoptValue.new(@values_p+(i*Efl::FFI::EcoreGetoptValue.size))[v[0]] = v[1]
+                    Efl::EcoreGetopt::Value.new(@values_p+(i*Efl::EcoreGetopt::Value.size))[v[0]] = v[1]
                 end
             end
             def parse argv
-                ptr = ::FFI::MemoryPointer.new(:pointer, argv.length+1)
+                ptr = FFI::MemoryPointer.new(:pointer, argv.length+1)
                 argv.each_with_index do |s, i|
                     ptr[i].put_pointer 0, p_from_string(s)
                 end
-                ptr[argv.length].put_pointer 0, ::FFI::Pointer::NULL
-                Efl::EcoreGetopt.parse @parser_p, @values_p, argv.length, ptr
+                ptr[argv.length].put_pointer 0, FFI::Pointer::NULL
+                Efl::EcoreGetopt.ecore_getopt_parse @ecore_getopt, @values_p, argv.length, ptr
             end
             def store_full short, long, help, meta, type, arg_req, def_val
                 self << [ short, long, help, meta, :ecore_getopt_action_store, [:store, [type,arg_req, def_val] ] ]
             end
             def store short, long, help, type
-                store_full short, long, help, ::FFI::Pointer::NULL, type, :ecore_getopt_desc_arg_requirement_yes, nil
+                store_full short, long, help, FFI::Pointer::NULL, type, :ecore_getopt_desc_arg_requirement_yes, nil
             end
             def store_type type, short, long, help
                 store short, long, help, ('ecore_getopt_type_'+type.to_s).to_sym
@@ -182,7 +181,7 @@ module Efl
                 store_metavar short, long, help, meta, ('ecore_getopt_type_'+type.to_s).to_sym
             end
             def store_def short, long, help, type, def_val
-                store_full short, long, help, ::FFI::Pointer::NULL, type, :ecore_getopt_desc_arg_requirement_optional, def_val
+                store_full short, long, help, FFI::Pointer::NULL, type, :ecore_getopt_desc_arg_requirement_optional, def_val
             end
             def store_def_type type, short, long, help, def_val
                 store_def short, long, help, ('ecore_getopt_type_'+type.to_s).to_sym, [ (type.to_s+'v').to_sym, def_val ]
@@ -191,79 +190,79 @@ module Efl
                 store_full short, long, help, meta, ('ecore_getopt_type_'+type.to_s).to_sym, arg_req, [ (type.to_s+'v').to_sym, def_val ]
             end
             def store_const short, long, help, value
-                self << [ short, long, help, ::FFI::Pointer::NULL, :ecore_getopt_action_store_const, [:store_const, value] ]
+                self << [ short, long, help, FFI::Pointer::NULL, :ecore_getopt_action_store_const, [:store_const, value] ]
             end
             def store_true short, long, help
-                self << [ short, long, help, ::FFI::Pointer::NULL, :ecore_getopt_action_store_true, [:dummy,::FFI::MemoryPointer::NULL] ]
+                self << [ short, long, help, FFI::Pointer::NULL, :ecore_getopt_action_store_true, [:dummy,FFI::MemoryPointer::NULL] ]
             end
             def store_false short, long, help
-                self << [ short, long, help, ::FFI::Pointer::NULL, :ecore_getopt_action_store_false, [:dummy,::FFI::MemoryPointer::NULL] ]
+                self << [ short, long, help, FFI::Pointer::NULL, :ecore_getopt_action_store_false, [:dummy,FFI::MemoryPointer::NULL] ]
             end
             def choice short, long, help, choices
-                ptr = ::FFI::MemoryPointer.new(:pointer, choices.length+1)
+                ptr = FFI::MemoryPointer.new(:pointer, choices.length+1)
                 choices.each_with_index do |s, i|
                     ptr[i].put_pointer 0, p_from_string(s)
                 end
-                ptr[choices.length].put_pointer 0, ::FFI::Pointer::NULL
-                self << [ short, long, help, ::FFI::Pointer::NULL, :ecore_getopt_action_choice, [:choices,ptr] ]
+                ptr[choices.length].put_pointer 0, FFI::Pointer::NULL
+                self << [ short, long, help, FFI::Pointer::NULL, :ecore_getopt_action_choice, [:choices,ptr] ]
             end
             def choice_metavar short, long, help, meta, choices
-                ptr = ::FFI::MemoryPointer.new(:pointer, choices.length+1)
+                ptr = FFI::MemoryPointer.new(:pointer, choices.length+1)
                 choices.each_with_index do |s, i|
                     ptr[i].put_pointer 0, p_from_string(s)
                 end
-                ptr[choices.length].put_pointer 0, ::FFI::Pointer::NULL
+                ptr[choices.length].put_pointer 0, FFI::Pointer::NULL
                 self << [ short, long, help, meta, :ecore_getopt_action_choice, [:choices,ptr] ]
             end
             def append short, long, help, sub_type
-                self << [ short, long, help, ::FFI::Pointer::NULL, :ecore_getopt_action_append, [:append,sub_type] ]
+                self << [ short, long, help, FFI::Pointer::NULL, :ecore_getopt_action_append, [:append,sub_type] ]
             end
             def append_metavar short, long, help, meta, sub_type
                 self << [ short, long, help, meta, :ecore_getopt_action_append, [:append,sub_type] ]
             end
             def count short, long, help
-                self << [ short, long, help, ::FFI::Pointer::NULL, :ecore_getopt_action_count, [:dummy,::FFI::Pointer::NULL] ]
+                self << [ short, long, help, FFI::Pointer::NULL, :ecore_getopt_action_count, [:dummy,FFI::Pointer::NULL] ]
             end
             def callback_full short, long, help, meta, cb, data, arg_req, def_val
                 self << [ short, long, help, meta, :ecore_getopt_action_callback, [:callback, [cb, data, arg_req,def_val] ] ]
             end
             def callback_noargs short, long, help, cb, data
-                callback_full short, long, help, ::FFI::Pointer::NULL, cb, data, :ecore_getopt_desc_arg_requirement_no, ::FFI::Pointer::NULL
+                callback_full short, long, help, FFI::Pointer::NULL, cb, data, :ecore_getopt_desc_arg_requirement_no, FFI::Pointer::NULL
             end
             def callback_args short, long, help, meta, cb, data
-                callback_full short, long, help, meta, cb, data, :ecore_getopt_desc_arg_requirement_yes, ::FFI::Pointer::NULL
+                callback_full short, long, help, meta, cb, data, :ecore_getopt_desc_arg_requirement_yes, FFI::Pointer::NULL
             end
             def help short, long
-                self << [ short, long, 'show this message.', ::FFI::Pointer::NULL, :ecore_getopt_action_help, [:dummy,::FFI::Pointer::NULL] ]
+                self << [ short, long, 'show this message.', FFI::Pointer::NULL, :ecore_getopt_action_help, [:dummy,FFI::Pointer::NULL] ]
             end
             def version short, long
-                self << [ short, long, 'show program version.', ::FFI::Pointer::NULL, :ecore_getopt_action_version, [:dummy,::FFI::Pointer::NULL] ]
+                self << [ short, long, 'show program version.', FFI::Pointer::NULL, :ecore_getopt_action_version, [:dummy,FFI::Pointer::NULL] ]
             end
             def copyright short, long
-                self << [ short, long, 'show copyright.', ::FFI::Pointer::NULL, :ecore_getopt_action_copyright, [:dummy,::FFI::Pointer::NULL] ]
+                self << [ short, long, 'show copyright.', FFI::Pointer::NULL, :ecore_getopt_action_copyright, [:dummy,FFI::Pointer::NULL] ]
             end
             def license short, long
-                self << [ short, long, 'show license.', ::FFI::Pointer::NULL, :ecore_getopt_action_license, [:dummy,::FFI::Pointer::NULL] ]
+                self << [ short, long, 'show license.', FFI::Pointer::NULL, :ecore_getopt_action_license, [:dummy,FFI::Pointer::NULL] ]
             end
 #            def sentinel
-#                self << [ 0, ::FFI::Pointer::NULL, ::FFI::Pointer::NULL, ::FFI::Pointer::NULL, 0, {:dummy=>::FFI::Pointer::NULL} ]
+#                self << [ 0, FFI::Pointer::NULL, FFI::Pointer::NULL, FFI::Pointer::NULL, 0, {:dummy=>FFI::Pointer::NULL} ]
 #            end
             #
             def debug
                 r = ''
-                r << "#{self.class} : #{@parser_p.to_ptr}\n"
+                r << "#{self.class} : #{@ecore_getopt.to_ptr}\n"
                 [:prog,:usage,:version,:copyright,:license,:description].each do |sym|
-                    r<< "  #{sym.to_s} : #{@parser_p[sym]==FFI::Pointer::NULL ? 'NULL' : @parser_p[sym].read_string}\n"
+                    r<< "  #{sym.to_s} : #{@ecore_getopt[sym]==FFI::Pointer::NULL ? 'NULL' : @ecore_getopt[sym].read_string}\n"
                 end
-                r << "  strict : #{@parser_p[:strict]}\n"
+                r << "  strict : #{@ecore_getopt[:strict]}\n"
                 i=0
                 while true
-                    d = @parser_p.desc_ptr i
-                    break if d[:shortname]==0 and d[:longname] == ::FFI::Pointer::NULL
+                    d = @ecore_getopt.desc_ptr i
+                    break if d[:shortname]==0 and d[:longname] == FFI::Pointer::NULL
                     r << "    desc #{d.to_ptr}\n"
                     r << "     short: #{d[:shortname].chr}\n" unless d[:shortname]==0
-                    r << "     long:  #{d[:longname].read_string}\n" unless d[:longname]==::FFI::Pointer::NULL
-                    r << "     help:  #{d[:help].read_string}\n" unless d[:help]==::FFI::Pointer::NULL
+                    r << "     long:  #{d[:longname].read_string}\n" unless d[:longname]==FFI::Pointer::NULL
+                    r << "     help:  #{d[:help].read_string}\n" unless d[:help]==FFI::Pointer::NULL
                     i+=1
                 end
                 r

@@ -15,15 +15,15 @@ module Efl
         EVENT_SIGNAL_REALTIME = 5 # Realtime signal event
         EVENT_COUNT = 6
         #
-        class EcorePipe
+        class REcorePipe
             def initialize cb, data
-                @ptr = Efl::FFI.ecore_pipe_add cb, data
+                @ptr = Efl::Ecore.ecore_pipe_add cb, data
             end
-            def del; Efl::FFI.ecore_pipe_del @ptr; end
-            def read_close; Efl::FFI.ecore_pipe_read_close @ptr; end
-            def write_close; Efl::FFI.ecore_pipe_write_close @ptr; end
+            def del; Efl::Ecore.ecore_pipe_del @ptr; end
+            def read_close; Efl::Ecore.ecore_pipe_read_close @ptr; end
+            def write_close; Efl::Ecore.ecore_pipe_write_close @ptr; end
             def write data
-                Efl::FFI.ecore_pipe_write @ptr, ::FFI::MemoryPointer.from_string(data.to_s), data.to_s.length+1
+                Efl::Ecore.ecore_pipe_write @ptr, FFI::MemoryPointer.from_string(data.to_s), data.to_s.length+1
             end
             #
         end
