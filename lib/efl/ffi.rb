@@ -17,6 +17,14 @@ module Efl
             end
         end
         #
+        def ffi_typedefs
+            @ffi_typedefs
+        end
+        #
+        def steal_ffitype mod, sym
+            typedef mod.ffi_typedefs[sym], sym
+        end
+        #
         def self.extended mod
             #
             mod.extend FFI::Library
@@ -54,6 +62,7 @@ module Efl
             mod.callback :eina_compare_cb, [ :void_p, :void_p ], :int
             mod.callback :eina_each_cb, [ :void_p, :void_p, :void_p ], :eina_bool
             mod.callback :eina_free_cb, [ :void_p ], :void
+            #
         end
         #
     end
