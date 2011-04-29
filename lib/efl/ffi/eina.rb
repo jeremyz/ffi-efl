@@ -6,13 +6,15 @@ require 'efl/ffi'
 module Efl
     #
     module Eina
-        def self.method_missing m, *args, &block
-            return Efl::FFI.send 'eina_'+m.to_s, *args, &block
-        end
-    end
-    #
-    module FFI
         #
+        extend Efl::FFIHelper
+        #
+        def self.method_missing m, *args, &block
+            sym = 'eina_'+m.to_s
+            raise NameError.new "#{self.name}.#{sym} (#{m})" if not self.respond_to? sym
+            self.module_eval "def self.#{m} *args, &block; r=self.#{sym}(*args); yield r if block_given?; r; end"
+            self.send sym, *args, &block
+        end
         #
         ffi_lib 'eina'
         #
@@ -39,6 +41,7 @@ module Efl
         ]
         #
         attach_fcts fcts
+        #
     end
 end
 #
