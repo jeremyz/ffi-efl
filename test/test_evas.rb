@@ -9,12 +9,12 @@ Evas::init
 #
 def create_canvas w, h
     pixels = FFI::MemoryPointer.new :int, w*h
-    e = Evas::Evas.new
+    e = Evas::REvas.new
     e.output_method_set Evas::render_method_lookup("buffer")
     e.output_viewport_set 0, 0, w, h
     e.output_size_set w, h
-    einfo = Efl::FFI::EvasEngineInfoBuffer.new e.engine_info_get
-    einfo[:info][:depth_type] = Efl::FFI::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
+    einfo = Efl::Evas::EngineInfoBufferStruct.new e.engine_info_get
+    einfo[:info][:depth_type] = Efl::Evas::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
     einfo[:info][:dest_buffer] = pixels
     einfo[:info][:dest_buffer_row_bytes] = w * FFI::type_size(:int);
     einfo[:info][:use_color_key] = 0;
@@ -44,10 +44,10 @@ def draw_scene c
 end
 #
 def save_scene canvas, dest
-    einfo = Efl::FFI::EvasEngineInfoBuffer.new canvas.engine_info_get
+    einfo = Efl::Evas::EngineInfoBufferStruct.new canvas.engine_info_get
     w, h = canvas.output_size_get
      # PPM P6 format is dead simple to write:
-    p = ::FFI::Pointer.new :int, einfo[:info][:dest_buffer]
+    p = FFI::Pointer.new :int, einfo[:info][:dest_buffer]
     pixels_end = p + (w*h*::FFI.type_size(:int))
     open(dest,'w') do |f|
         f << "P6\n#{w} #{h}\n255\n"
@@ -73,7 +73,7 @@ w = 320
 h = 240
 canvas, pixels = create_canvas w, h
 #
-bg = Evas::EvasObject.new canvas.object_rectangle_add
+bg = Evas::REvasObject.new canvas.object_rectangle_add
 bg.color = 255, 255, 255, 255
 bg.move 0, 0
 bg.resize w, h
@@ -81,19 +81,19 @@ bg.show
 #
 draw_scene canvas
 #
-r1 = Evas::EvasObject.new canvas.object_rectangle_add
+r1 = Evas::REvasObject.new canvas.object_rectangle_add
 r1.color = 255, 0, 0, 255
 r1.move 10, 10
 r1.resize 100, 100
 r1.show
 #
-r2 = Evas::EvasObject.new canvas.object_rectangle_add
+r2 = Evas::REvasObject.new canvas.object_rectangle_add
 r2.color = 0, 128, 0, 128
 r2.move 10, 10
 r2.resize 50, 50
 r2.show
 #
-r3 = Evas::EvasObject.new canvas.object_rectangle_add
+r3 = Evas::REvasObject.new canvas.object_rectangle_add
 r3.color = 0, 128, 0, 255
 r3.move 60, 60
 r3.resize 50, 50
