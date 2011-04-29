@@ -12,7 +12,7 @@ namespace :ffi do
     #
     desc "generate ffi bindings"
     task :ruby do
-        sh 'ruby ./tools/genruby.rb'
+        sh './tools/genruby.rb'
     end
 end
 #
