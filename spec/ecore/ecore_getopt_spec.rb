@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-#require 'efl/ecore'
+require 'efl/ecore'
 require 'efl/ecore/ecore_getopt'
 #
 describe Efl::EcoreGetopt do
