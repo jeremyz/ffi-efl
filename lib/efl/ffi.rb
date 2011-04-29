@@ -99,7 +99,7 @@ module Efl
                     return self.send m, *args, &block
                 end
             end
-            raise NameError.new "unable to resolve #{m} into #{self.class.search_paths.inspect}"
+            raise NameError.new "#{self.class} is unable to resolve #{m} into #{self.class.search_paths.inspect}"
         end
     end
 end
