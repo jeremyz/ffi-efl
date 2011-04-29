@@ -20,7 +20,7 @@ module Efl
         class REinaHash
             include Enumerable
             include Efl::ClassHelper
-            @func_prefixes = [ [Efl::EinaHash,'eina_hash_'] ].freeze
+            @search_paths = [ [Efl::EinaHash,'eina_hash_'].freeze ]
             def initialize o=nil, &block
                 cstr = ( block_given? ? block : Proc.new { Efl::EinaHash.eina_hash_string_djb2_new FFI::Pointer::NULL } )
                 @ptr = (

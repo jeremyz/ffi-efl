@@ -28,7 +28,7 @@ module Efl
         class REinaList
             include Enumerable
             include Efl::ClassHelper
-            @search_paths = [ [Efl::EinaList,'eina_list_'] ].freeze
+            @search_paths = [ [Efl::EinaList,'eina_list_'].freeze ]
             def initialize o=nil
                 @ptr = (
                     case o
