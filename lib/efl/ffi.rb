@@ -67,7 +67,7 @@ module Efl
             @ptr
         end
         def === o
-            @ptr === o.ptr
+            @ptr === o.to_ptr
         end
         def address
             @ptr.address
