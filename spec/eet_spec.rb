@@ -5,7 +5,10 @@ require 'efl/eet'
 #
 describe Efl::Eet do
     #
-    before(:all) { Eet = Efl::Eet }
+    before(:all) {
+        Eet = Efl::Eet
+        REetFile = Efl::Eet::REetFile
+    }
     #
     FP = '/tmp/_eet.cfg'
     #
@@ -28,80 +31,76 @@ describe Efl::Eet do
     end
     #
     it "should have good enums" do
-        Efl::FFI.enum_type(:eet_file_mode)[:eet_file_mode_invalid].should eql -1
-        Efl::FFI.enum_type(:eet_file_mode)[:eet_file_mode_read].should eql 0
-        Efl::FFI.enum_type(:eet_file_mode)[:eet_file_mode_write].should eql 1
-        Efl::FFI.enum_type(:eet_file_mode)[:eet_file_mode_read_write].should eql 2
+        Eet.enum_type(:eet_file_mode)[:eet_file_mode_invalid].should eql -1
+        Eet.enum_type(:eet_file_mode)[:eet_file_mode_read].should eql 0
+        Eet.enum_type(:eet_file_mode)[:eet_file_mode_write].should eql 1
+        Eet.enum_type(:eet_file_mode)[:eet_file_mode_read_write].should eql 2
     end
     #
-    it "should open and close" do
-        Eet.init
-        f = Eet.open FP, Efl::FFI.enum_type(:eet_file_mode)[:eet_file_mode_write]
-        f.write 'fake', 'value'
-        f.close
-        Eet.shutdown
-    end
-    #
-    it "should be able to get file access mode" do
-        Eet.init
-        Efl::FFI.enum_type(:eet_file_mode).symbols.each do |m|
-            next if m==:eet_file_mode_invalid
-            Eet.open FP, Efl::FFI.enum_type(:eet_file_mode)[m] do |f|
-                f.mode_get.should eql m
+    describe Efl::Eet::REetFile do
+        before(:each) { Eet.init }
+        after(:each) { Eet.shutdown }
+        #
+        it "should open and close" do
+            f = REetFile.open FP, Eet.enum_type(:eet_file_mode)[:eet_file_mode_write]
+            f.write 'fake', 'value'
+            f.close
+        end
+        #
+        it "should be able to get file access mode" do
+            Eet.enum_type(:eet_file_mode).symbols.each do |m|
+                next if m==:eet_file_mode_invalid
+                REetFile.open FP, Eet.enum_type(:eet_file_mode)[m] do |f|
+                    f.mode_get.should eql m
+                end
             end
         end
-        Eet.shutdown
-    end
-    #
-    it "should write" do
-        Eet.init
-        f = Eet.open FP, :eet_file_mode_write
-        f.mode_get.should eql :eet_file_mode_write
-        f.write 'config', 'test key'
-        f.close
-        Eet.shutdown
-    end
-    #
-    it "should read" do
-        Eet.init
-        f = Eet.open FP, :eet_file_mode_read
-        f.mode_get.should eql :eet_file_mode_read
-        f.read('config').should eql 'test key'
-        f.close
-        Eet.shutdown
-    end
-    #
-    it "should read/write" do
-        Eet.init
-        f = Eet.open FP, :eet_file_mode_read_write
-        f.write 'configg', 'test key'
-        f.read('configg').should eql 'test key'
-        f.close
-        Eet.shutdown
-    end
-    #
-    it "should write in block" do
-        Eet.init
-        Eet.open FP, :eet_file_mode_write do |f|
-            f.write 'config2', 'test--key'
+        #
+        it "should write" do
+            f = REetFile.open FP, :eet_file_mode_write
+            f.mode_get.should eql :eet_file_mode_write
+            f.write 'config', 'test key'
+            f.close
         end
-        Eet.shutdown
-    end
-    #
-    it "should read in block" do
-        Eet.init
-        Eet.open FP, :eet_file_mode_read do |f|
-            f.read('config2').should eql 'test--key'
+        #
+        it "default mode should be read" do
+            f = REetFile.open FP
+            f.mode_get.should eql :eet_file_mode_read
+            f.close
         end
-        Eet.shutdown
-    end
-    #
-    it "should read/write in block" do
-        Eet.init
-        Eet.open FP, :eet_file_mode_read_write do |f|
-            f.write 'config22', 'test--key'
-            f.read('config22').should eql 'test--key'
+        #
+        it "should read" do
+            f = REetFile.open FP, :eet_file_mode_read
+            f.mode_get.should eql :eet_file_mode_read
+            f.read('config').should eql 'test key'
+            f.close
         end
-        Eet.shutdown
+        #
+        it "should read/write" do
+            f = REetFile.open FP, :eet_file_mode_read_write
+            f.write 'configg', 'test key'
+            f.read('configg').should eql 'test key'
+            f.close
+        end
+        #
+        it "should write in block" do
+            REetFile.open FP, :eet_file_mode_write do |f|
+                f.write 'config2', 'test--key'
+            end
+        end
+        #
+        it "should read in block" do
+            REetFile.open FP, :eet_file_mode_read do |f|
+                f.read('config2').should eql 'test--key'
+            end
+        end
+        #
+        it "should read/write in block" do
+            REetFile.open FP, :eet_file_mode_read_write do |f|
+                f.write 'config22', 'test--key'
+                f.read('config22').should eql 'test--key'
+            end
+        end
+        #
     end
 end

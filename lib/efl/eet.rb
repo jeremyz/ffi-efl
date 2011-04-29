@@ -4,46 +4,38 @@
 require 'efl/ffi/eet'
 #
 module Efl
+    #
     module Eet
         #
-        class << self
+        class REetFile
             #
-            def open path, mode=:eet_file_mode_read, &blk
-                if blk
-                    f = Efl::FFI.eet_open path, mode
-                    raise Exception.new "Unable to open file #{path}" if f.nil?
-                    yield EetFile.new f
-                    Efl::FFI.eet_close f
-                else
-                    f = Efl::FFI.eet_open path, mode
-                    return EetFile.new f unless f.nil?
-                end
-            end
-        end
-        #
-        class EetFile
+            include Efl::ClassHelper
+            @search_paths = [ [Efl::Eet,'eet_'] ].freeze
             #
             def initialize ptr
                 @ptr=ptr
             end
             private :initialize
             #
-            def close
-                Efl::FFI.eet_close @ptr
-                @ptr=nil
-            end
-            #
-            def mode_get
-                Efl::FFI.eet_mode_get @ptr
+            def self.open path, mode=:eet_file_mode_read, &blk
+                if blk
+                    f = Efl::Eet.eet_open path, mode
+                    raise Exception.new "Unable to open file #{path}" if f.nil?
+                    yield REetFile.new f
+                    Efl::Eet.eet_close f
+                else
+                    f = Efl::Eet.eet_open path, mode
+                    return REetFile.new f unless f.nil?
+                end
             end
             #
             def write key, data, compress=false
-                Efl::FFI.eet_write @ptr, key, ::FFI::MemoryPointer.from_string(data), data.bytesize, ( compress ? 1 : 0 )
+                Efl::Eet.eet_write @ptr, key, FFI::MemoryPointer.from_string(data), data.bytesize, ( compress ? 1 : 0 )
             end
             #
             def read key
-                ptr = ::FFI::MemoryPointer.new(:int)
-                data = Efl::FFI.eet_read @ptr, key, ptr
+                ptr = FFI::MemoryPointer.new(:int)
+                data = Efl::Eet.eet_read @ptr, key, ptr
                 s = ptr.read_int
                 ptr.free
                 return nil if s==0
@@ -53,6 +45,7 @@ module Efl
         end
         #
     end
+    #
 end
 #
 # EOF
