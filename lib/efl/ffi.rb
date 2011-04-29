@@ -5,9 +5,7 @@ require 'ffi'
 #
 module Efl
     #
-    module FFI
-        #
-        extend ::FFI::Library
+    module FFIHelper
         #
         def attach_fcts fcts
             fcts.each do |func|
@@ -18,43 +16,55 @@ module Efl
                 end
             end
         end
-        module_function :attach_fcts
         #
-        typedef :pointer, :char_p
-        typedef :pointer, :short_p
-        typedef :pointer, :int_p
-        typedef :pointer, :long_p
-        typedef :pointer, :float_p
-        typedef :pointer, :double_p
-        typedef :pointer, :uchar_p
-        typedef :pointer, :ushort_p
-        typedef :pointer, :uint_p
-        typedef :pointer, :ulong_p
-        typedef :pointer, :ufloat_p
-        typedef :pointer, :udouble_p
-        typedef :pointer, :void_p
-        typedef :pointer, :string_array
-        typedef :pointer, :string_array_p
-        typedef :uint_p,  :uintptr_t
-        #
-        typedef :pointer, :eina_list_p
-        typedef :pointer, :eina_hash_p
-        typedef :pointer, :eina_iterator_p
-        typedef :pointer, :eina_accessor_p
-        typedef :pointer, :evas_p
-        typedef :pointer, :evas_object_p
-        typedef :pointer, :evas_object_pp
-        typedef :pointer, :ecore_getopt_p
-        typedef :pointer, :ecore_getopt_desc_p
-        typedef :pointer, :ecore_getopt_value_p
+        def self.extended mod
+            #
+            mod.extend FFI::Library
+            #
+            mod.typedef :pointer, :char_p
+            mod.typedef :pointer, :short_p
+            mod.typedef :pointer, :int_p
+            mod.typedef :pointer, :long_p
+            mod.typedef :pointer, :float_p
+            mod.typedef :pointer, :double_p
+            mod.typedef :pointer, :uchar_p
+            mod.typedef :pointer, :ushort_p
+            mod.typedef :pointer, :uint_p
+            mod.typedef :pointer, :ulong_p
+            mod.typedef :pointer, :ufloat_p
+            mod.typedef :pointer, :udouble_p
+            mod.typedef :pointer, :void_p
+            mod.typedef :pointer, :string_array
+            mod.typedef :pointer, :string_array_p
+            mod.typedef :uint_p,  :uintptr_t
+            #
+            mod.typedef :bool,    :eina_bool
+            mod.typedef :pointer, :eina_bool_p
+            mod.typedef :pointer, :eina_list_p
+            mod.typedef :pointer, :eina_hash_p
+            mod.typedef :pointer, :eina_iterator_p
+            mod.typedef :pointer, :eina_accessor_p
+            mod.typedef :pointer, :evas_p
+            mod.typedef :pointer, :evas_object_p
+            mod.typedef :pointer, :evas_object_pp
+            mod.typedef :pointer, :ecore_getopt_p
+            mod.typedef :pointer, :ecore_getopt_desc_p
+            mod.typedef :pointer, :ecore_getopt_value_p
+            #
+            mod.callback :eina_compare_cb, [ :void_p, :void_p ], :int
+            mod.callback :eina_each_cb, [ :void_p, :void_p, :void_p ], :eina_bool
+            mod.callback :eina_free_cb, [ :void_p ], :void
+        end
         #
     end
     #
-    module Helper
-        def self.included m
-            m.class_eval "def ptr; @ptr; end"
-            m.class_eval "def self.func_prefixes; @func_prefixes; end"
-            m.class_eval "def self.inherited sub; sub.class_eval 'def self.func_prefixes; superclass.func_prefixes; end'; end"
+    module ClassHelper
+        def self.included kls
+            kls.class_eval "def self.search_paths; @search_paths; end"
+            kls.class_eval "def self.inherited sub; sub.class_eval 'def self.search_paths; superclass.search_paths; end'; end"
+        end
+        def to_ptr
+            @ptr
         end
         def === o
             @ptr === o.ptr
@@ -73,20 +83,16 @@ module Efl
                 m_s = m.to_s
                 args_s = '*args'
             end
-            self.class.func_prefixes.each do |p|
+            self.class.search_paths.each do |mod,p|
                 sym = p+m_s
-                if Efl::FFI.respond_to? sym
-                    self.class.class_eval "def #{m} *args, &block; r=Efl::FFI.#{sym}(@ptr,#{args_s}); yield r if block_given?; r; end"
+                if mod.respond_to? sym
+                    self.class.class_eval "def #{m} *args, &block; r=#{mod.name}.#{sym}(@ptr,#{args_s}); yield r if block_given?; r; end"
                     return self.send m, *args, &block
                 end
             end
-            r = Efl::FFI.send m, @ptr, *args
-            self.class.class_eval "def #{m} *args, &block; r=Efl::FFI.#{m}(@ptr,#{args_s}); yield r if block_given?; r; end"
-            r
+            raise NameError.new "unable to resolve #{m} into #{self.class.search_paths.inspect}"
         end
     end
 end
-#
-require 'efl/ffi/eina/eina_types'
 #
 # EOF
