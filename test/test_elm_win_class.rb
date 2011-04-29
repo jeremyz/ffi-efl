@@ -21,13 +21,13 @@ class MyWin < Elm::ElmWin
             bg.color = 200,255,100,200 # same as bg.color_set 200,255,100,200
             bg.show
         end
-        resize_object_add @bg.ptr
+        resize_object_add @bg.to_ptr
         @lb = add 'label'do |lb|
-            lb.elm_label_label_set "Hello World!"   # complete function name
-            lb.size_hint_weight_set 1.0, 1.0        # implicit evas_object function name prefix
+            lb.label_label_set "Hello World!"   # complete function name
+            lb.size_hint_weight_set 1.0, 1.0    # implicit evas_object function name prefix
         end
         @lb.show
-        resize_object_add @lb.ptr
+        resize_object_add @lb.to_ptr
     end
     def exit data, evas_object, event_info
         puts "EXIT #{data.read_string}"

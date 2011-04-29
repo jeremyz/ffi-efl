@@ -1162,8 +1162,8 @@ module Efl
         [ :elm_table_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_table_homogenous_set(Evas_Object *obj, Eina_Bool homogenous);
         [ :elm_table_homogenous_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool elm_table_homogeneous_get(const Evas_Object *obj);
-        [ :elm_table_homogeneous_get, [ :evas_object_p ], :eina_bool ],
+        # EAPI Eina_Bool elm_table_homogenous_get(const Evas_Object *obj);
+        [ :elm_table_homogenous_get, [ :evas_object_p ], :eina_bool ],
         # EAPI void elm_table_padding_set(Evas_Object *obj, Evas_Coord horizontal, Evas_Coord vertical);
         [ :elm_table_padding_set, [ :evas_object_p, :int, :int ], :void ],
         # EAPI void elm_table_padding_get(const Evas_Object *obj, Evas_Coord *horizontal, Evas_Coord *vertical);
