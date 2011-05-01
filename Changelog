@@ -1,5 +1,17 @@
+2011-05-01 Jérémy Zurcher <jeremy@asynk.ch>
+	* release 0.0.3
+	+ Evas, Evas_Ecore, Edje, Elm ... usable
+	* use FFI::AutoPointer in ruby classes
+	* cleanup method_missing proxies usage and definition
+	* Eina_List <=> Array
+	* Eina_Hash <=> Hash
+	* .*= setters handled
+	* .*? getters handled
+	* evas test from http://docs.enlightenment.org/auto/evas/ implemented
+	* edje test from http://docs.enlightenment.org/auto/edje/ implemented
+
 2011-04-25 Jérémy Zurcher <jeremy@asynk.ch>
-	* release 0.2.0
+	* release 0.0.2
 	* ecore getopt seems good
 	* basis of module function mapping and class method_missing usage setup
 	* small elementary elm_Win test app

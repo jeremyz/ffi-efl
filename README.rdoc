@@ -4,31 +4,27 @@ ffi-efl
 
 == DESCRIPTION:
 
-ffi-efl is a FFI[https://github.com/ffi/ffi/wiki] binding to Enlightenment Foundation Libraries (eina,eet,evas,ecore,edje...)
-base components of the Enlightenment project. (EFL API[http://www.enlightenment.org/p.php?p=docs&l=en])
-
-ffi-efl project is developed on asynk[http://cgit.asynk.ch/cgi-bin/cgit/ffi-efl], github[https://github.com/jeremyz] and gitorious[https://gitorious.org/~jeyzu]
+A ruby-ffi binding to efl libraries (Enlightenment Foundation Libraries).
 
 == FEATURES/PROBLEMS:
 
-* Project just started
+* Not 1.8 compatible yet !!!
 
 == SYNOPSIS:
 
-    require './lib/efl'
-    include Efl
-    Eet.init
-    Eet.open('/tmp/_eet.cfg', :eet_file_mode_write) do |f|
+    require 'efl'
+    Efl::Eet.init
+    Efl::Eet::REetFile.open('/tmp/_eet.cfg', :eet_file_mode_write) do |f|
         f.write 'config2', 'test--key'
     end
-    Eet.open('/tmp/_eet.cfg', :eet_file_mode_read) do |f|
+    Efl::Eet::REetFile.open('/tmp/_eet.cfg', :eet_file_mode_read) do |f|
         puts f.read('config2')
     end
-    Eet.shutdown
+    Efl::Eet.shutdown
 
 For less minimalistic and more sane examples you may look at:
 
-* the spec/ folder
+* the spec/ and test/ folders
 
 == REQUIREMENTS:
 
@@ -37,7 +33,7 @@ For less minimalistic and more sane examples you may look at:
 
 == DOWNLOAD/INSTALL:
 
-From rubyforge:
+From rubygems:
 
   [sudo] gem install ffi-efl
 
@@ -47,11 +43,25 @@ or from the git repository on github:
   cd ffi-efl
   rake gem:install
 
+== RESOURCES:
+
+You can find this project in a few places:
+
+Online repositories:
+
+* https://github.com/jeremyz/ffi-efl
+* http://cgit.asynk.ch/cgi-bin/cgit/ffi-efl/
+* https://gitorious.org/ffi-efl
+
+Gem:
+
+* https://rubygems.org/gems/ffi-efl
+
 == CREDITS:
 
 Special thanks to:
 
-* need help ...
+* Lionel Orry
 
 == LICENSE:
 
