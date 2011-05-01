@@ -15,7 +15,7 @@ end
 #
 require 'efl/ffi/elementary'
 #
-Efl::Evas::REvasObject.search_paths << [Efl::Elm,'elm_'].freeze
+Efl::Evas::REvasObject.proxy_list << [Efl::Elm,'elm_'].freeze   # append not prepend !
 #
 module Efl
     module Elm
@@ -34,7 +34,7 @@ module Efl
         #
         class ElmWin
             include Efl::ClassHelper
-            @search_paths = [ [Efl::Elm,'elm_win_'].freeze, [Efl::Elm,'elm_'].freeze ]
+            proxy_list [Efl::Elm,'elm_win_'].freeze, [Efl::Elm,'elm_'].freeze
             def initialize parent, title, type=:elm_win_basic
                 @evas_object = Efl::Evas::REvasObject.new Efl::Elm.elm_win_add parent, title, type
                 @ptr = @evas_object.to_ptr

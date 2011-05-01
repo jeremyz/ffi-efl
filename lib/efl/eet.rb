@@ -10,7 +10,7 @@ module Efl
         class REetFile
             #
             include Efl::ClassHelper
-            @search_paths = [ [Efl::Eet,'eet_'].freeze ]
+            proxy_list [Efl::Eet,'eet_'].freeze
             #
             def initialize ptr
                 @ptr=ptr

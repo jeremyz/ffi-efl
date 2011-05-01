@@ -68,18 +68,21 @@ module Efl
     end
     #
     module ClassHelper
+        def to_ptr; @ptr; end
+        def === o; @ptr === o.to_ptr; end
+        def address; @ptr.address; end
         def self.included kls
-            kls.class_eval "def self.search_paths; @search_paths; end"
-            kls.class_eval "def self.inherited sub; sub.class_eval 'def self.search_paths; superclass.search_paths; end'; end"
-        end
-        def to_ptr
-            @ptr
-        end
-        def === o
-            @ptr === o.to_ptr
-        end
-        def address
-            @ptr.address
+            # create class instance @proxy_list
+            kls.class_eval "@proxy_list ||=[]"
+            # access and prepend *args to @proxy_list
+            kls.class_eval "def self.proxy_list *args; @proxy_list.unshift *args unless args.empty?; @proxy_list; end"
+            # on inheritance, copy ancestor's @proxy_list
+            kls.class_eval <<-EOF
+            def self.inherited sub
+                sub.class_eval '@proxy_list = []'
+                sub.proxy_list *self.proxy_list
+            end
+            EOF
         end
         def method_missing m, *args, &block
             if m =~/^(.*)=$/
@@ -92,14 +95,17 @@ module Efl
                 m_s = m.to_s
                 args_s = '*args'
             end
-            self.class.search_paths.each do |mod,p|
+            self.class.proxy_list.each do |mod,p|
                 sym = p+m_s
                 if mod.respond_to? sym
                     self.class.class_eval "def #{m} *args, &block; r=#{mod.name}.#{sym}(@ptr,#{args_s}); yield r if block_given?; r; end"
                     return self.send m, *args, &block
+                elsif mod.respond_to? m
+                    self.class.class_eval "def #{m} *args, &block; r=#{mod.name}.#{m}(@ptr,#{args_s}); yield r if block_given?; r; end"
+                    return self.send m, *args, &block
                 end
             end
-            raise NameError.new "#{self.class} is unable to resolve #{m} into #{self.class.search_paths.inspect}"
+            raise NameError.new "#{self.class} is unable to resolve #{m} within #{self.class.proxy_list.inspect}"
         end
     end
 end

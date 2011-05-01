@@ -9,7 +9,7 @@ module Efl
         #
         class REcoreEvas
             include Efl::ClassHelper
-            @search_paths = [ [Efl::EcoreEvas,'ecore_evas_'].freeze ]
+            proxy_list [Efl::EcoreEvas,'ecore_evas_'].freeze
             def initialize o=nil, &block
                 @ptr = (
                     case o

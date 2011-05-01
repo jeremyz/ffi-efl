@@ -44,7 +44,7 @@ module Efl
         class REvas
             #
             include Efl::ClassHelper
-            @search_paths = [ [Efl::Evas,'evas_'].freeze ]
+            proxy_list [Efl::Evas,'evas_'].freeze
             #
             def initialize o=nil
                 @ptr = (
@@ -101,7 +101,7 @@ module Efl
         class REvasObject
             #
             include Efl::ClassHelper
-            @search_paths = [ [Efl::Evas,'evas_object_'].freeze, [Efl::Evas,'evas_'].freeze ]
+            proxy_list [Efl::Evas,'evas_object_'].freeze, [Efl::Evas,'evas_'].freeze
             #
             def initialize o=nil
                 @ptr = (
