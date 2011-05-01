@@ -37,7 +37,7 @@ module Efl
                     when NilClass
                         FFI::Pointer::NULL
                     when self.class
-                        o.ptr
+                        o.to_ptr
                     when Array
                         o.inject(FFI::Pointer::NULL) { |p,e| Efl::EinaList.eina_list_append p, e }
                     else
@@ -45,9 +45,10 @@ module Efl
                     end
                 )
             end
-            def free
-                return if @ptr==FFI::Pointer::NULL
-                @ptr = Efl::EinaList.eina_list_free @ptr
+            def free p=nil
+                return Efl::EinaList.eina_list_free p unless p.nil?
+                Efl::EinaList.eina_list_free @ptr
+                @ptr = nil
             end
             def each
                 p = @ptr

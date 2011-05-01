@@ -27,7 +27,8 @@ module Efl
                 )
                 yield self if block_given?
             end
-            def free
+            def free p=nil
+                return Efl::EcoreEvas.ecore_evas_free p unless p.nil?
                 Efl::EcoreEvas.ecore_evas_free @ptr
                 @ptr=nil
             end

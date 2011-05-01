@@ -63,7 +63,8 @@ module Efl
                 )
                 yield self if block_given?
             end
-            def free
+            def free p=nil
+                return Efl::Evas.evas_free p unless p.nil?
                 Efl::Evas.evas_free @ptr
                 @ptr=nil
             end
@@ -120,7 +121,8 @@ module Efl
                 )
                 yield self if block_given?
             end
-            def free
+            def free p=nil
+                return Efl::Evas.evas_object_del p unless p.nil?
                 Efl::Evas.evas_object_del @ptr
                 @ptr=nil
             end
