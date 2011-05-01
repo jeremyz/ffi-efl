@@ -5,14 +5,12 @@ require 'efl/elementary'
 #
 include Efl
 #
-DATA = FFI::MemoryPointer.from_string("my data")
-#
 class MyWin < Elm::ElmWin
     def initialize name, title
         super FFI::MemoryPointer::NULL, name
         title_set title
         feed
-        smart_callback_add "delete,request", method(:exit), DATA
+        smart_callback_add "delete,request", method(:exit), FFI::MemoryPointer.from_string("my data")
     end
     def feed
         # using block
