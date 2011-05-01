@@ -8,10 +8,10 @@ describe Efl::EinaList do
     #
     before(:all) {
         REinaList = Efl::EinaList::REinaList
-        Efl::Eina.init.should eql 1
+        Efl::Eina.init.should == 1
     }
     after(:all) {
-        Efl::Eina.shutdown.should eql 0
+        Efl::Eina.shutdown.should == 0
     }
     #
     it "should append prepend and fetch" do
@@ -25,7 +25,7 @@ describe Efl::EinaList do
         l << d4
         l.unshift d1
         0.upto 3 do |i|
-            l.nth(i).read_string.should eql "D#{i}"
+            l.nth(i).read_string.should == "D#{i}"
         end
         l.each { |p| p.read_string.empty?.should be_false }
         l.free
@@ -60,9 +60,9 @@ describe Efl::EinaList do
         l << d4
         l.unshift d1
         ary =  Array.from_eina_list l
-        ary.length.should eql 4
+        ary.length.should == 4
         0.upto 3 do |i|
-            ary[i].read_string.should eql "D#{i}"
+            ary[i].read_string.should == "D#{i}"
         end
         l.free
     end
@@ -78,9 +78,9 @@ describe Efl::EinaList do
         l << d4
         l.unshift d1
         ary =  Array.from_eina_list l.to_ptr
-        ary.length.should eql 4
+        ary.length.should == 4
         0.upto 3 do |i|
-            ary[i].read_string.should eql "D#{i}"
+            ary[i].read_string.should == "D#{i}"
         end
         l.free
     end
@@ -93,7 +93,7 @@ describe Efl::EinaList do
         a << ::FFI::MemoryPointer.from_string("D3")
         l = REinaList.new a
         0.upto 3 do |i|
-            l.nth(i).read_string.should eql "D#{i}"
+            l.nth(i).read_string.should == "D#{i}"
         end
         l.free
     end

@@ -8,47 +8,47 @@ describe Efl::Evas do
     before(:all) { Evas = Efl::Evas }
     #
     it "should init" do
-        Evas.init.should eql 1
-        Evas.init.should eql 2
-        Evas.init.should eql 3
+        Evas.init.should == 1
+        Evas.init.should == 2
+        Evas.init.should == 3
     end
     #
     it "should shutdown" do
-        Evas.shutdown.should eql 2
-        Evas.shutdown.should eql 1
-        Evas.shutdown.should eql 0
+        Evas.shutdown.should == 2
+        Evas.shutdown.should == 1
+        Evas.shutdown.should == 0
     end
     #
     it "evas alloc error enum is ok" do
-        Efl::Evas.enum_value(:evas_alloc_error_none).should eql 0
-        Efl::Evas.enum_value(:evas_alloc_error_fatal).should eql 1
-        Efl::Evas.enum_value(:evas_alloc_error_recovered).should eql 2
-        Efl::Evas.enum_type(:evas_alloc_error)[0].should eql :evas_alloc_error_none
-        Efl::Evas.enum_type(:evas_alloc_error)[1].should eql :evas_alloc_error_fatal
-        Efl::Evas.enum_type(:evas_alloc_error)[2].should eql :evas_alloc_error_recovered
-        Efl::Evas.enum_type(:evas_alloc_error)[:evas_alloc_error_none].should eql 0
-        Efl::Evas.enum_type(:evas_alloc_error)[:evas_alloc_error_fatal].should eql 1
-        Efl::Evas.enum_type(:evas_alloc_error)[:evas_alloc_error_recovered].should eql 2
+        Efl::Evas.enum_value(:evas_alloc_error_none).should == 0
+        Efl::Evas.enum_value(:evas_alloc_error_fatal).should == 1
+        Efl::Evas.enum_value(:evas_alloc_error_recovered).should == 2
+        Efl::Evas.enum_type(:evas_alloc_error)[0].should == :evas_alloc_error_none
+        Efl::Evas.enum_type(:evas_alloc_error)[1].should == :evas_alloc_error_fatal
+        Efl::Evas.enum_type(:evas_alloc_error)[2].should == :evas_alloc_error_recovered
+        Efl::Evas.enum_type(:evas_alloc_error)[:evas_alloc_error_none].should == 0
+        Efl::Evas.enum_type(:evas_alloc_error)[:evas_alloc_error_fatal].should == 1
+        Efl::Evas.enum_type(:evas_alloc_error)[:evas_alloc_error_recovered].should == 2
     end
     #
     it "should have no memory allocation error occured" do
         Evas.init
-        Evas.alloc_error.should eql :evas_alloc_error_none
+        Evas.alloc_error.should == :evas_alloc_error_none
         Evas.shutdown
     end
     #
     it "should process async events" do
         cb = Proc.new do |target,type,evt|
-            target.read_string.should eql "target"
-            type.should eql :evas_callback_show
-            evt.read_string.should eql "work"
+            target.read_string.should == "target"
+            type.should == :evas_callback_show
+            evt.read_string.should == "work"
         end
         Evas.init
         target = FFI::MemoryPointer.from_string("target")
         work = FFI::MemoryPointer.from_string("work")
         Evas.async_events_put target, :evas_callback_show, work, cb
-        Evas.async_events_process.should eql 1
-        Evas.async_events_process.should eql 0
+        Evas.async_events_process.should == 1
+        Evas.async_events_process.should == 0
         Evas.shutdown
     end
     #
@@ -79,12 +79,12 @@ describe Efl::Evas do
         end
         it "should be able to create and destroy evas" do
             e1 = Evas::REvas.new
-            e1.address.should_not eql 0
+            e1.address.should_not == 0
             e2 = Evas::REvas.new e1
-            e1.address.should eql e2.address
+            e1.address.should == e2.address
             e3 = Evas::REvas.new e1.to_ptr
-            e1.address.should eql e3.address
-            e2.address.should eql e3.address
+            e1.address.should == e3.address
+            e2.address.should == e3.address
             (e1==e2).should be_false
             (e2==e3).should be_false
             (e1==e3).should be_false
@@ -94,11 +94,11 @@ describe Efl::Evas do
             e1.free
             e1.to_ptr.should be_nil
             e4 = Evas::REvas.new Evas.evas_new
-            e4.address.should_not eql 0
+            e4.address.should_not == 0
             e5 = e4.dup
-            e4.address.should eql e5.address
+            e4.address.should == e5.address
             e6 = e4.clone
-            e4.address.should eql e6.address
+            e4.address.should == e6.address
             e4.free
             e4.to_ptr.should be_nil
         end
@@ -128,7 +128,7 @@ describe Efl::Evas do
         it "attach data should work" do
             data = FFI::MemoryPointer.from_string "my data"
             @e.data_attach_set data
-            @e.data_attach_get.read_string.should eql "my data"
+            @e.data_attach_get.read_string.should == "my data"
         end
         #
         it "should not crash" do
@@ -143,7 +143,7 @@ describe Efl::Evas do
             @e.render_dump
         end
         it "output method should work" do
-            @e.output_method_get.should eql Evas::render_method_lookup("buffer")
+            @e.output_method_get.should == Evas::render_method_lookup("buffer")
             # output_method_set tested in before(:all)
             l = Efl::Evas::render_method_list
             Evas::render_method_list_free l
@@ -156,11 +156,11 @@ describe Efl::Evas do
         #
         it "output size should work" do
             @e.output_size_set 69, 666
-            @e.output_size_get.should eql [69,666]
+            @e.output_size_get.should == [69,666]
         end
         it "output viewport should work" do
             @e.output_viewport_set 0, 0, 666, 69
-            @e.output_viewport_get.should eql [0,0,666,69]
+            @e.output_viewport_get.should == [0,0,666,69]
         end
         #
         it "coordinates evas<=>world should work" do
@@ -176,26 +176,26 @@ describe Efl::Evas do
         end
         #
         it "freeze and thaw should work" do
-            @e.event_freeze_get.should eql 0
+            @e.event_freeze_get.should == 0
             @e.event_freeze
-            @e.event_freeze_get.should eql 1
+            @e.event_freeze_get.should == 1
             @e.event_thaw
-            @e.event_freeze_get.should eql 0
+            @e.event_freeze_get.should == 0
         end
         #
         it "up/down mouse event should work" do
             @e.event_feed_mouse_down 2, :evas_button_double_click, Time.now.to_i, FFI::Pointer::NULL
-            @e.pointer_button_down_mask_get.should eql 2
+            @e.pointer_button_down_mask_get.should == 2
             @e.event_feed_mouse_up 2, :evas_button_double_click, Time.now.to_i, FFI::Pointer::NULL
-            @e.pointer_button_down_mask_get.should eql 0
+            @e.pointer_button_down_mask_get.should == 0
         end
         #
         it "move mouse event should work" do
-            @e.pointer_output_xy_get.should eql [0,0]
-            @e.pointer_canvas_xy_get.should eql [0,0]
+            @e.pointer_output_xy_get.should == [0,0]
+            @e.pointer_canvas_xy_get.should == [0,0]
             @e.event_feed_mouse_move 6, 6, Time.now.to_i, FFI::Pointer::NULL
-            @e.pointer_output_xy_get.should eql [6,6]
-            @e.pointer_canvas_xy_get.should eql [6,6]
+            @e.pointer_output_xy_get.should == [6,6]
+            @e.pointer_canvas_xy_get.should == [6,6]
         end
         #
         it "in/out mouse event should work" do
@@ -220,8 +220,8 @@ describe Efl::Evas do
             @cb = false
             kd_cb = Proc.new do |data, e, obj, event_info|
                 data.read_string.should eq "mouse_in"
-                e.address.should eql @e.address
-                obj.address.should eql @bg.address
+                e.address.should == @e.address
+                obj.address.should == @bg.address
                 @db=true
                 true
             end
@@ -232,7 +232,7 @@ describe Efl::Evas do
             @bg.show
             @bg.event_callback_add :evas_callback_mouse_in, kd_cb, kd_d
             @e.event_feed_mouse_in Time.now.to_i, FFI::Pointer::NULL
-            @bg.event_callback_del(:evas_callback_mouse_in, kd_cb).address.should eql kd_d.address
+            @bg.event_callback_del(:evas_callback_mouse_in, kd_cb).address.should == kd_d.address
             @db.should be_true
         end
         #
@@ -240,16 +240,16 @@ describe Efl::Evas do
             @e.image_cache_flush
             @e.image_cache_reload
             @e.image_cache_set 666
-            @e.image_cache_get.should eql 666
+            @e.image_cache_get.should == 666
         end
         #
         it "font functions should work" do
             @e.font_hinting_set :evas_font_hinting_bytecode
-            @e.font_hinting_get.should eql :evas_font_hinting_bytecode
+            @e.font_hinting_get.should == :evas_font_hinting_bytecode
             @e.font_hinting_can_hint(:evas_font_hinting_none).should be_true
             @e.font_cache_flush
             @e.font_cache_set 666
-            @e.font_cache_get.should eql 666
+            @e.font_cache_get.should == 666
             l = @e.font_available_list
             @e.font_available_list_free l
             @e.font_path_clear
@@ -258,7 +258,7 @@ describe Efl::Evas do
             @e.font_path_prepend a[0]
             require 'efl/eina_list'
             Efl::EinaList::REinaList.new(@e.font_path_list).each_with_index do |p,i|
-                p.read_string.should eql a[i]
+                p.read_string.should == a[i]
             end
         end
     end
@@ -300,11 +300,11 @@ describe Efl::Evas do
             clipper.resize 50, 50
             @o.clip = clipper.to_ptr
             clipper.show
-            @o.clip_get.address.should eql clipper.address
+            @o.clip_get.address.should == clipper.address
             require 'efl/eina_list'
-            Efl::EinaList::REinaList.new(clipper.clipees_get).to_ary[0].address.should eql @o.address
+            Efl::EinaList::REinaList.new(clipper.clipees_get).to_ary[0].address.should == @o.address
             @o.clip_unset
-            @o.clip_get.address.should eql 0
+            @o.clip_get.address.should == 0
 
         end
         #
@@ -317,25 +317,25 @@ describe Efl::Evas do
         end
         #
         it "layer functions should work" do
-            @o.layer_get.should eql 0
+            @o.layer_get.should == 0
             @o.layer_set 2
-            @o.layer_get.should eql 2
+            @o.layer_get.should == 2
             @o.layer = 0
-            @o.layer_get.should eql 0
+            @o.layer_get.should == 0
         end
         #
         it "name functions should work" do
             @o.name_set "My name"
-            @o.name_get.should eql "My name"
+            @o.name_get.should == "My name"
         end
         #
         it "geometry functions should work" do
             # FIXME
-#            @o.geometry_get.should eql [0,0,100,100]
+#            @o.geometry_get.should == [0,0,100,100]
 #            @o.resize 50,50
-#            @o.geometry_get.should eql [0,0,50,50]
+#            @o.geometry_get.should == [0,0,50,50]
 #            @o.move 10, 10
-#            @o.geometry_get.should eql [10,10,50,50]
+#            @o.geometry_get.should == [10,10,50,50]
         end
         #
         it "show hide visible should work" do

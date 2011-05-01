@@ -8,15 +8,15 @@ describe Efl::Edje do
     before(:all) { Edje = Efl::Edje }
     #
     it "should init" do
-        Edje.init.should eql 1
-        Edje.init.should eql 2
-        Edje.init.should eql 3
+        Edje.init.should == 1
+        Edje.init.should == 2
+        Edje.init.should == 3
     end
     #
     it "should shutdown" do
-        Edje.shutdown.should eql 2
-        Edje.shutdown.should eql 1
-        Edje.shutdown.should eql 0
+        Edje.shutdown.should == 2
+        Edje.shutdown.should == 1
+        Edje.shutdown.should == 0
     end
     #
 end

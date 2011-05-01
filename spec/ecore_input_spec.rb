@@ -10,15 +10,15 @@ describe Efl::EcoreInput do
     end
     #
     it "should init" do
-        EcoreInput.init.should eql 1
-        EcoreInput.init.should eql 2
-        EcoreInput.init.should eql 3
+        EcoreInput.init.should == 1
+        EcoreInput.init.should == 2
+        EcoreInput.init.should == 3
     end
     #
     it "should shutdown" do
-        EcoreInput.shutdown.should eql 2
-        EcoreInput.shutdown.should eql 1
-        EcoreInput.shutdown.should eql 0
+        EcoreInput.shutdown.should == 2
+        EcoreInput.shutdown.should == 1
+        EcoreInput.shutdown.should == 0
     end
     #
 end

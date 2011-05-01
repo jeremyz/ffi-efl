@@ -13,15 +13,15 @@ describe Efl::Eet do
     FP = '/tmp/_eet.cfg'
     #
     it "should init" do
-        Eet.init.should eql 1
-        Eet.init.should eql 2
-        Eet.init.should eql 3
+        Eet.init.should == 1
+        Eet.init.should == 2
+        Eet.init.should == 3
     end
     #
     it "should shutdown" do
-        Eet.shutdown.should eql 2
-        Eet.shutdown.should eql 1
-        Eet.shutdown.should eql 0
+        Eet.shutdown.should == 2
+        Eet.shutdown.should == 1
+        Eet.shutdown.should == 0
     end
     #
     it "should clearcache" do
@@ -31,10 +31,10 @@ describe Efl::Eet do
     end
     #
     it "should have good enums" do
-        Eet.enum_type(:eet_file_mode)[:eet_file_mode_invalid].should eql -1
-        Eet.enum_type(:eet_file_mode)[:eet_file_mode_read].should eql 0
-        Eet.enum_type(:eet_file_mode)[:eet_file_mode_write].should eql 1
-        Eet.enum_type(:eet_file_mode)[:eet_file_mode_read_write].should eql 2
+        Eet.enum_type(:eet_file_mode)[:eet_file_mode_invalid].should == -1
+        Eet.enum_type(:eet_file_mode)[:eet_file_mode_read].should == 0
+        Eet.enum_type(:eet_file_mode)[:eet_file_mode_write].should == 1
+        Eet.enum_type(:eet_file_mode)[:eet_file_mode_read_write].should == 2
     end
     #
     describe Efl::Eet::REetFile do
@@ -51,35 +51,35 @@ describe Efl::Eet do
             Eet.enum_type(:eet_file_mode).symbols.each do |m|
                 next if m==:eet_file_mode_invalid
                 REetFile.open FP, Eet.enum_type(:eet_file_mode)[m] do |f|
-                    f.mode_get.should eql m
+                    f.mode_get.should == m
                 end
             end
         end
         #
         it "should write" do
             f = REetFile.open FP, :eet_file_mode_write
-            f.mode_get.should eql :eet_file_mode_write
+            f.mode_get.should == :eet_file_mode_write
             f.write 'config', 'test key'
             f.close
         end
         #
         it "default mode should be read" do
             f = REetFile.open FP
-            f.mode_get.should eql :eet_file_mode_read
+            f.mode_get.should == :eet_file_mode_read
             f.close
         end
         #
         it "should read" do
             f = REetFile.open FP, :eet_file_mode_read
-            f.mode_get.should eql :eet_file_mode_read
-            f.read('config').should eql 'test key'
+            f.mode_get.should == :eet_file_mode_read
+            f.read('config').should == 'test key'
             f.close
         end
         #
         it "should read/write" do
             f = REetFile.open FP, :eet_file_mode_read_write
             f.write 'configg', 'test key'
-            f.read('configg').should eql 'test key'
+            f.read('configg').should == 'test key'
             f.close
         end
         #
@@ -91,14 +91,14 @@ describe Efl::Eet do
         #
         it "should read in block" do
             REetFile.open FP, :eet_file_mode_read do |f|
-                f.read('config2').should eql 'test--key'
+                f.read('config2').should == 'test--key'
             end
         end
         #
         it "should read/write in block" do
             REetFile.open FP, :eet_file_mode_read_write do |f|
                 f.write 'config22', 'test--key'
-                f.read('config22').should eql 'test--key'
+                f.read('config22').should == 'test--key'
             end
         end
         #

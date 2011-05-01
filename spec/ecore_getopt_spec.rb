@@ -1,6 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
+require 'efl/ecore'
 require 'efl/ecore_getopt'
 #
 describe Efl::EcoreGetopt do
@@ -10,10 +11,10 @@ describe Efl::EcoreGetopt do
         #
         @p = Efl::EcoreGetopt::REcoreGetopt.new :prog =>"Prog", :usage => "Usage", :version => "0.0.0", :copyright => "less", :license => "MIT", :description => "description", :strict => 1
         @callback = Proc.new do |parser, desc, string, data, value|
-            parser.address.should eql @p.to_ptr.address
-            string.should eql "my_data"
-            data.read_string.should eql "cb_data"
-            value.read_pointer.read_int.should eql 99
+            parser.address.should == @p.to_ptr.address
+            string.should == "my_data"
+            data.read_string.should == "cb_data"
+            value.read_pointer.read_int.should == 99
             true
         end
         #
@@ -93,130 +94,130 @@ describe Efl::EcoreGetopt do
     describe "license copyright version help" do
         it "should handle -L" do
             [ :license, :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should eql 0
+                @values[sym].read_char.should == 0
             end
             args = @p.parse ["My lovely prog name","-L"]
-            @values[:license].read_char.should eql 1
+            @values[:license].read_char.should == 1
             [ :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should eql 0
+                @values[sym].read_char.should == 0
             end
         end
         it "should handle --license" do
             [ :license, :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should eql 0
+                @values[sym].read_char.should == 0
             end
             args = @p.parse ["My lovely prog name","--license"]
-            @values[:license].read_char.should eql 1
+            @values[:license].read_char.should == 1
             [ :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should eql 0
+                @values[sym].read_char.should == 0
             end
         end
         it "should handle -C" do
             [ :license, :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should eql 0
+                @values[sym].read_char.should == 0
             end
             args = @p.parse ["progname","-C"]
-            @values[:copyright].read_char.should eql 1
+            @values[:copyright].read_char.should == 1
             [ :license, :version, :help ].each do |sym|
-                @values[sym].read_char.should eql 0
+                @values[sym].read_char.should == 0
             end
         end
         it "should handle --copyright" do
             [ :license, :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should eql 0
+                @values[sym].read_char.should == 0
             end
             args = @p.parse ["My lovely prog name","--copyright"]
-            @values[:copyright].read_char.should eql 1
+            @values[:copyright].read_char.should == 1
             [ :license, :version, :help ].each do |sym|
-                @values[sym].read_char.should eql 0
+                @values[sym].read_char.should == 0
             end
         end
         it "should handle -V" do
             [ :license, :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should eql 0
+                @values[sym].read_char.should == 0
             end
             args = @p.parse ["My lovely prog name","-V"]
-            @values[:version].read_char.should eql 1
+            @values[:version].read_char.should == 1
             [ :license, :copyright, :help ].each do |sym|
-                @values[sym].read_char.should eql 0
+                @values[sym].read_char.should == 0
             end
         end
         it "should handle --version" do
             [ :license, :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should eql 0
+                @values[sym].read_char.should == 0
             end
             args = @p.parse ["progname","--version"]
-            @values[:version].read_char.should eql 1
+            @values[:version].read_char.should == 1
             [ :license, :copyright, :help ].each do |sym|
-                @values[sym].read_char.should eql 0
+                @values[sym].read_char.should == 0
             end
         end
         it "should handle -H" do
             [ :license, :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should eql 0
+                @values[sym].read_char.should == 0
             end
             args = @p.parse ["My lovely prog name","-H"]
-            @values[:help].read_char.should eql 1
+            @values[:help].read_char.should == 1
             [ :license, :copyright, :version ].each do |sym|
-                @values[sym].read_char.should eql 0
+                @values[sym].read_char.should == 0
             end
         end
         it "should handle --help" do
             [ :license, :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should eql 0
+                @values[sym].read_char.should == 0
             end
             args = @p.parse ["progname","--help"]
-            @values[:help].read_char.should eql 1
+            @values[:help].read_char.should == 1
             [ :license, :copyright, :version ].each do |sym|
-                @values[sym].read_char.should eql 0
+                @values[sym].read_char.should == 0
             end
         end
     end
     describe "simple short options" do
         it "should handle -i" do
-            @values[:int].read_int.should eql 0
+            @values[:int].read_int.should == 0
             args = @p.parse ["progname","-i 666"]
-            @values[:int].read_int.should eql 666
+            @values[:int].read_int.should == 666
         end
         it "should handle -d" do
-            @values[:double].read_double.should eql 3.1415926
+            @values[:double].read_double.should == 3.1415926
             args = @p.parse ["progname","-d 6.66"]
-            @values[:double].read_double.should eql 6.66
+            @values[:double].read_double.should == 6.66
         end
         it "should handle -s" do
-            @values[:short].read_short.should eql 9
+            @values[:short].read_short.should == 9
             args = @p.parse ["progname","-s 125"]
-            @values[:short].read_short.should eql 125
+            @values[:short].read_short.should == 125
         end
         it "should handle -l" do
-            @values[:long].read_long.should eql 666
+            @values[:long].read_long.should == 666
             args = @p.parse ["progname","-l 69"]
-            @values[:long].read_long.should eql 69
+            @values[:long].read_long.should == 69
         end
         it "should handle -c" do
-            @values[:const].read_int.should eql -666
+            @values[:const].read_int.should == -666
             args = @p.parse ["progname","-c"]
-            @values[:const].read_int.should eql 123456
+            @values[:const].read_int.should == 123456
         end
         it "should handle -t" do
-            @values[:false].read_uchar.should eql 0
+            @values[:false].read_uchar.should == 0
             args = @p.parse ["progname","-t"]
-            @values[:false].read_uchar.should eql 1
+            @values[:false].read_uchar.should == 1
         end
         it "should handle -f" do
-            @values[:true].read_uchar.should eql 1
+            @values[:true].read_uchar.should == 1
             args = @p.parse ["progname","-f"]
-            @values[:true].read_uchar.should eql 0
+            @values[:true].read_uchar.should == 0
         end
         it "should handle -m" do
-            @values[:choice].read_pointer.should eql FFI::Pointer::NULL
+            @values[:choice].read_pointer.should == FFI::Pointer::NULL
             args = @p.parse ["progname","-mch2"]
-            @values[:choice].read_pointer.read_string.should eql "ch2"
+            @values[:choice].read_pointer.read_string.should == "ch2"
         end
         it "should handle -k" do
-            @values[:count].read_int.should eql 664
+            @values[:count].read_int.should == 664
             args = @p.parse ["progname","-kk"]
-            @values[:count].read_int.should eql 666
+            @values[:count].read_int.should == 666
         end
         it "should handle -b" do
             args = @p.parse ["progname","-bmy_data"]
@@ -224,49 +225,49 @@ describe Efl::EcoreGetopt do
     end
     describe "simple long options" do
         it "should handle --int" do
-            @values[:int].read_int.should eql 0
+            @values[:int].read_int.should == 0
             args = @p.parse ["progname","--int=666"]
-            @values[:int].read_int.should eql 666
+            @values[:int].read_int.should == 666
         end
         it "should handle --double" do
-            @values[:double].read_double.should eql 3.1415926
+            @values[:double].read_double.should == 3.1415926
             args = @p.parse ["progname","--double=6.66"]
-            @values[:double].read_double.should eql 6.66
+            @values[:double].read_double.should == 6.66
         end
         it "should handle --short" do
-            @values[:short].read_short.should eql 9
+            @values[:short].read_short.should == 9
             args = @p.parse ["progname","--short=125"]
-            @values[:short].read_short.should eql 125
+            @values[:short].read_short.should == 125
         end
         it "should handle --long" do
-            @values[:long].read_long.should eql 666
+            @values[:long].read_long.should == 666
             args = @p.parse ["progname","--long=69"]
-            @values[:long].read_long.should eql 69
+            @values[:long].read_long.should == 69
         end
         it "should handle --const" do
-            @values[:const].read_int.should eql -666
+            @values[:const].read_int.should == -666
             args = @p.parse ["progname","--const"]
-            @values[:const].read_int.should eql 123456
+            @values[:const].read_int.should == 123456
         end
         it "should handle --true" do
-            @values[:false].read_uchar.should eql 0
+            @values[:false].read_uchar.should == 0
             args = @p.parse ["progname","--true"]
-            @values[:false].read_uchar.should eql 1
+            @values[:false].read_uchar.should == 1
         end
         it "should handle --false" do
-            @values[:true].read_uchar.should eql 1
+            @values[:true].read_uchar.should == 1
             args = @p.parse ["progname","--false"]
-            @values[:true].read_uchar.should eql 0
+            @values[:true].read_uchar.should == 0
         end
         it "should handle --many" do
-            @values[:choice].read_pointer.should eql FFI::Pointer::NULL
+            @values[:choice].read_pointer.should == FFI::Pointer::NULL
             args = @p.parse ["progname","--many=ch3"]
-            @values[:choice].read_pointer.read_string.should eql "ch3"
+            @values[:choice].read_pointer.read_string.should == "ch3"
         end
         it "should handle --count" do
-            @values[:count].read_int.should eql 664
+            @values[:count].read_int.should == 664
             args = @p.parse ["progname","--count","--count"]
-            @values[:count].read_int.should eql 666
+            @values[:count].read_int.should == 666
         end
         it "should handle --callback" do
             args = @p.parse ["progname","--callback=my_data"]
