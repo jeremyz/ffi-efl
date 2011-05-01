@@ -30,6 +30,7 @@ module Efl
             def free p=nil
                 return Efl::EcoreEvas.ecore_evas_free p unless p.nil?
                 Efl::EcoreEvas.ecore_evas_free @ptr
+                @ptr.free
                 @ptr=nil
             end
             def get

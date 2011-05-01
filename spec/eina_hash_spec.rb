@@ -33,7 +33,6 @@ describe Efl::EinaHash do
             v.read_string.empty?.should be_false
         }
         cpt.should eql 4
-        h.free
     end
     #
     it "should be able to convert into ruby Hash from NULL pointer" do
@@ -86,7 +85,6 @@ describe Efl::EinaHash do
         rh2['k1'].should eql 'D1'
         rh2['k2'].should eql 'D2'
         rh2['k3'].should eql 'D3'
-        h.free
     end
     #
     it "should be able to convert into ruby Hash from non empty REinaHash pointer" do
@@ -105,7 +103,6 @@ describe Efl::EinaHash do
         h['k3'].read_string.should eql "D3"
         rh =  Hash.from_eina_hash h.to_ptr
         rh.length.should eql 4
-        h.free
     end
     #
     it "should be able to convert into ruby Hash from non empty REinaHash pointer, with key from string" do
@@ -128,7 +125,6 @@ describe Efl::EinaHash do
         rh['k1'].read_string.should eql "D1"
         rh['k2'].read_string.should eql "D2"
         rh['k3'].read_string.should eql "D3"
-        h.free
     end
     #
     it "should be able to convert into ruby Hash from non empty REinaHash pointer, with key from string block" do
@@ -153,7 +149,6 @@ describe Efl::EinaHash do
         rh['k1'].read_string.should eql "D1"
         rh['k2'].read_string.should eql "D2"
         rh['k3'].read_string.should eql "D3"
-        h.free
     end
     #
     it "should be able to build from ruby Hash" do
@@ -175,7 +170,6 @@ describe Efl::EinaHash do
         h[k1].read_string.should eql "D1"
         h[k2].read_string.should eql "D2"
         h[k3].read_string.should eql "D3"
-        h.free
     end
     #
     it "alternate constructor should work" do

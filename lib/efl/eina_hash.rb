@@ -26,20 +26,17 @@ module Efl
                 @ptr = (
                     case o
                     when NilClass
-                        cstr.call
-#                        FFI::AutoPointer.new cstr.call, method(:free)
+                        FFI::AutoPointer.new cstr.call, method(:free)
                     when self.class
                         o.to_ptr
-#                    when FFI::AutoPointer
-#                        o
+                    when FFI::AutoPointer
+                        o
                     when FFI::Pointer
-                        ( o==FFI::Pointer::NULL ? cstr.call : o )
-#                        FFI::AutoPointer.new ( o==FFI::Pointer::NULL ? cstr.call : o ), method(:free)
+                        FFI::AutoPointer.new ( o==FFI::Pointer::NULL ? cstr.call : o ), method(:free)
                     when Hash
                         ptr = cstr.call
                         o.each do |k,v| Efl::EinaHash.eina_hash_add ptr, k, v end
-                        ptr
-#                        FFI::AutoPointer.new ptr, method(:free)
+                        FFI::AutoPointer.new ptr, method(:free)
                     else
                         raise ArgumentError.new "wrong argument #{o.class.name}"
                     end
@@ -48,6 +45,7 @@ module Efl
             def free p=nil
                 return Efl::EinaHash.eina_hash_free p unless p.nil?
                 Efl::EinaHash.eina_hash_free @ptr
+                @ptr.free
                 @ptr = nil
             end
             def each data=FFI::Pointer::NULL, &block

@@ -124,6 +124,7 @@ module Efl
             def free p=nil
                 return Efl::Evas.evas_object_del p unless p.nil?
                 Efl::Evas.evas_object_del @ptr
+                @ptr.free
                 @ptr=nil
             end
             def geometry_get
