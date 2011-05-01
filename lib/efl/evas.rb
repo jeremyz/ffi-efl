@@ -132,7 +132,7 @@ module Efl
                 y = FFI::MemoryPointer.new :int
                 w = FFI::MemoryPointer.new :int
                 h = FFI::MemoryPointer.new :int
-                Efl::Evas.evas_object_geometry_get @evas, x, y, w, h
+                Efl::Evas.evas_object_geometry_get @ptr, x, y, w, h
                 [ x.read_int, y.read_int, w.read_int, h.read_int ]
             end
             def color_get
@@ -140,7 +140,7 @@ module Efl
                 g = FFI::MemoryPointer.new :int
                 b = FFI::MemoryPointer.new :int
                 a = FFI::MemoryPointer.new :int
-                Efl::Evas.evas_object_color_get @evas, r, g, b, a
+                Efl::Evas.evas_object_color_get @ptr, r, g, b, a
                 [ r.read_int, g.read_int, b.read_int, a.read_int ]
             end
         end
