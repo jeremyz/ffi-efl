@@ -50,22 +50,21 @@ module Efl
                 @ptr = (
                     case o
                     when NilClass
-                        FFI::AutoPointer.new Efl::Evas.evas_new, method(:free)
-                    when self.class
-                        o.to_ptr
-                    when FFI::AutoPointer
-                        o
+                        FFI::AutoPointer.new Efl::Evas.evas_new, REvas.method(:release)
                     when FFI::Pointer
-                        FFI::AutoPointer.new o, method(:free)
+                        o
                     else
                         raise ArgumentError.new "wrong argument #{o.class.name}"
                     end
                 )
                 yield self if block_given?
             end
-            def free p=nil
-                return Efl::Evas.evas_free p unless p.nil?
-                Efl::Evas.evas_free @ptr
+            def self.release p
+                Efl::Evas.evas_free p unless p.nil?
+            end
+            def free
+                @ptr.autorelease=false if @ptr.is_a? FFI::AutoPointer
+                REvas.release @ptr
                 @ptr=nil
             end
             def object_add t
@@ -108,23 +107,21 @@ module Efl
                 @ptr = (
                     case o
                     when NilClass
-                        FFI::AutoPointer.new Efl::Evas.evas_new, method(:free)
-                    when self.class
-                        o.to_ptr
-                    when FFI::AutoPointer
-                        o
+                        FFI::AutoPointer.new Efl::Evas.evas_new, REvasObject.method(:release)
                     when FFI::Pointer
-                        FFI::AutoPointer.new o, method(:free)
+                        o
                     else
                         raise ArgumentError.new "wrong argument #{o.class.name}"
                     end
                 )
                 yield self if block_given?
             end
-            def free p=nil
-                return Efl::Evas.evas_object_del p unless p.nil?
-                Efl::Evas.evas_object_del @ptr
-                @ptr.free
+            def self.release p
+                Efl::Evas.evas_object_del p unless p.nil?
+            end
+            def free
+                @ptr.autopointer=false if @ptr.is_a? FFI::AutoPointer
+                REvasObject.release @ptr
                 @ptr=nil
             end
             def geometry_get

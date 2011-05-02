@@ -80,19 +80,15 @@ describe Efl::Evas do
         it "should be able to create and destroy evas" do
             e1 = Evas::REvas.new
             e1.address.should_not == 0
-            e2 = Evas::REvas.new e1
+            e2 = Evas::REvas.new e1.to_ptr
             e1.address.should == e2.address
-            e3 = Evas::REvas.new e1.to_ptr
-            e1.address.should == e3.address
-            e2.address.should == e3.address
             (e1==e2).should be_false
-            (e2==e3).should be_false
-            (e1==e3).should be_false
             (e1===e2).should be_true
-            (e2===e3).should be_true
-            (e1===e3).should be_true
+            e1.free
             e1.free
             e1.to_ptr.should be_nil
+            e2.free
+            e2.free
             e4 = Evas::REvas.new Evas.evas_new
             e4.address.should_not == 0
             e5 = e4.dup
