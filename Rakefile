@@ -44,7 +44,7 @@ PROJ.spec.opts << '--color'
 PROJ.rcov.opts << '-I lib'
 #
 # Dependencies
-depend_on 'rake', '>=0.8.7'
+depend_on 'ffi', '>=1.0.7'
 #
 task :default  => [:spec]
 #

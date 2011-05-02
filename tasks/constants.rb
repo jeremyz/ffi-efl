@@ -104,6 +104,10 @@ end
 HAVE_SVN = (Dir.entries(Dir.pwd).include?('.svn') and system("svn --version 2>&1 > #{DEV_NULL}"))
 HAVE_GIT = (Dir.entries(Dir.pwd).include?('.git') and system("git --version 2>&1 > #{DEV_NULL}"))
 
+# Add rake as a development dependency
+#
+PROJ.gem.development_dependencies << ['rake', '>=0.8.7']
+
 # Add bones as a development dependency
 #
 if HAVE_BONES
