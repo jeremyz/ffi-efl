@@ -23,9 +23,14 @@ describe Efl::Ecore do
         KO = FFI::MemoryPointer.from_string "ko"
         NONE = FFI::MemoryPointer.from_string "none"
     end
+    before(:each) {
+        Ecore.init
+    }
+    after(:each) {
+        Ecore.shutdown
+    }
     #
     it "should init" do
-        Ecore.init.should == 1
         Ecore.init.should == 2
         Ecore.init.should == 3
     end
@@ -33,34 +38,13 @@ describe Efl::Ecore do
     it "should shutdown" do
         Ecore.shutdown.should == 2
         Ecore.shutdown.should == 1
-        Ecore.shutdown.should == 0
     end
     #
     it "should run a single iteration of the mainloop" do
-        Ecore.init
         Ecore.main_loop_iterate
-        Ecore.shutdown
-    end
-    #
-    it 'should write and read data from pipe' do
-        data = FFI::MemoryPointer.from_string("none")
-        cb = Proc.new do |data,buffer,bytes|
-            data.read_string.should == 'none'
-            buffer.read_string.should == 'hello world'
-            bytes.should == 12
-        end
-        Ecore.init
-        pipe = Ecore::REcorePipe.new cb, data
-        pipe.write("hello world").should be_true
-        Ecore.main_loop_iterate
-        pipe.read_close
-        pipe.write_close
-        pipe.del
-        Ecore.shutdown
     end
     #
     it 'should be able to add, del event hanlder and process event' do
-        Ecore.init
         evt = FFI::MemoryPointer.new(:int)
         evt.write_int 666
         # add, del, add event handler
@@ -76,11 +60,9 @@ describe Efl::Ecore do
         ecore_evt = Ecore.event_add Ecore::EVENT_SIGNAL_USER, evt, EVENT_FREE_CB, NONE
         ecore_evt.null?.should be_false
         Ecore.main_loop_begin   # process event
-        Ecore.shutdown
     end
     #
     it "should be able to get and set event handler data" do
-        Ecore.init
         evt = FFI::MemoryPointer.new(:int)
         evt.write_int 666
         evt_handler = Ecore.event_handler_add Ecore::EVENT_SIGNAL_USER, USER_SIGNAL_CB, KO
@@ -91,19 +73,15 @@ describe Efl::Ecore do
         ecore_evt = Ecore.event_add Ecore::EVENT_SIGNAL_USER, evt, EVENT_FREE_CB, NONE
         ecore_evt.null?.should be_false
         Ecore.main_loop_begin   # process event
-        Ecore.shutdown
     end
     #
     it "should be able to create new event type" do
-        Ecore.init
         Ecore.event_type_new.should_not == 0
         Ecore.event_type_new.should_not == 0
         Ecore.event_type_new.should_not == 0
-        Ecore.shutdown
     end
     #
     it "should be possible to add and del event filters" do
-        Ecore.init
         loop_data = FFI::MemoryPointer.from_string("loop_data")
         event_free_cb = Proc.new do |data,event|
             data.read_string.should == "ko"
@@ -144,7 +122,32 @@ describe Efl::Ecore do
         Ecore.event_filter_del(filter).address.should == OK.address
         evt2 = Ecore.event_add Ecore::EVENT_SIGNAL_USER, e2, EVENT_FREE_CB, NONE
         Ecore.main_loop_begin   # process event
-        Ecore.shutdown
     end
     #
+    describe Efl::Ecore::REcorePipe do
+    #
+        it 'should write and read data from pipe' do
+            data = FFI::MemoryPointer.from_string("none")
+            cb = Proc.new do |data,buffer,bytes|
+                data.read_string.should == 'none'
+                buffer.read_string.should == 'hello world'
+                bytes.should == 12
+            end
+            pipe = Ecore::REcorePipe.new cb, data
+            pipe.write("hello world").should be_true
+            Ecore.main_loop_iterate
+            pipe.read_close
+            pipe.write_close
+        end
+        it "manual destructor should not raise FFI::AutoPointer error" do
+            data = FFI::MemoryPointer.from_string("none")
+            cb = Proc.new do |data,buffer,bytes|
+                data.read_string.should == 'none'
+                buffer.read_string.should == 'hello world'
+                bytes.should == 12
+            end
+            pipe = Ecore::REcorePipe.new cb, data
+            pipe.del
+        end
+    end
 end
