@@ -99,6 +99,7 @@ module Efl
                 @refs << p
                 p
             end
+            private :p_from_string
             def << o
                 @options.insert -2, o
             end

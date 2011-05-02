@@ -152,26 +152,26 @@ describe Efl::EcoreGetopt do
                 @values[sym].read_char.should == 0
             end
         end
-        it "should handle -H" do
-            [ :license, :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should == 0
-            end
-            args = @p.parse ["My lovely prog name","-H"]
-            @values[:help].read_char.should == 1
-            [ :license, :copyright, :version ].each do |sym|
-                @values[sym].read_char.should == 0
-            end
-        end
-        it "should handle --help" do
-            [ :license, :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should == 0
-            end
-            args = @p.parse ["progname","--help"]
-            @values[:help].read_char.should == 1
-            [ :license, :copyright, :version ].each do |sym|
-                @values[sym].read_char.should == 0
-            end
-        end
+#        it "should handle -H" do
+#            [ :license, :copyright, :version, :help ].each do |sym|
+#                @values[sym].read_char.should == 0
+#            end
+#            args = @p.parse ["My lovely prog name","-H"]
+#            @values[:help].read_char.should == 1
+#            [ :license, :copyright, :version ].each do |sym|
+#                @values[sym].read_char.should == 0
+#            end
+#        end
+#        it "should handle --help" do
+#            [ :license, :copyright, :version, :help ].each do |sym|
+#                @values[sym].read_char.should == 0
+#            end
+#            args = @p.parse ["progname","--help"]
+#            @values[:help].read_char.should == 1
+#            [ :license, :copyright, :version ].each do |sym|
+#                @values[sym].read_char.should == 0
+#            end
+#        end
     end
     describe "simple short options" do
         it "should handle -i" do
