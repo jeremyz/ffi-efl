@@ -66,7 +66,7 @@ describe Efl::EcoreGetopt do
 #        @p.append 'a', 'append', 'store append', :ecore_getopt_type_int
         @p.count 'k', 'count', 'store count'
         @p.value :intp, @values[:count]
-        @p.callback_args 'b', 'callback', 'callback full', @meta, @callback, @cb_data
+        @p.callback_args 'b', 'callback', 'callback full', @meta1, @callback, @cb_data
         @p.value :intp, @values[:callback]
         @p.create
 #        puts @p.debug
