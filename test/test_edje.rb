@@ -1,4 +1,4 @@
-﻿#! /usr/bin/env ruby
+#! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
 require 'efl/eina'
