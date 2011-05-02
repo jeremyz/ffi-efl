@@ -17,9 +17,16 @@ module Efl
         #
         class REcorePipe
             def initialize cb, data
-                @ptr = Efl::Ecore.ecore_pipe_add cb, data
+                @ptr = FFI::AutoPointer.new Efl::Ecore.ecore_pipe_add(cb, data), REcorePipe.method(:release)
             end
-            def del; Efl::Ecore.ecore_pipe_del @ptr; end
+            def self.release p
+                Efl::Ecore.ecore_pipe_del p
+            end
+            def del
+                @ptr.autorelease=false
+                REcorePipe.release @ptr
+                @ptr=nil
+            end
             def read_close; Efl::Ecore.ecore_pipe_read_close @ptr; end
             def write_close; Efl::Ecore.ecore_pipe_write_close @ptr; end
             def write data

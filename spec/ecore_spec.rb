@@ -55,7 +55,7 @@ describe Efl::Ecore do
         Ecore.main_loop_iterate
         pipe.read_close
         pipe.write_close
-        pipe.del.address.should == data.address
+        pipe.del
         Ecore.shutdown
     end
     #
