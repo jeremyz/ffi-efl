@@ -105,7 +105,7 @@ module Efl
                     return self.send m, *args, &block
                 end
             end
-            raise NameError.new "#{self.class} is unable to resolve #{m} within #{self.class.proxy_list.inspect}"
+            Kernel.raise NameError.new "#{self.class.name} is unable to resolve #{m} within #{self.class.proxy_list.inspect}"
         end
     end
 end
