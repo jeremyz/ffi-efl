@@ -17,16 +17,22 @@ module Efl
             end
             private :initialize
             #
-            def self.open path, mode=:eet_file_mode_read, &blk
-                if blk
-                    f = Efl::Eet.eet_open path, mode
-                    raise Exception.new "Unable to open file #{path}" if f.nil?
-                    yield REetFile.new f
-                    Efl::Eet.eet_close f
-                else
-                    f = Efl::Eet.eet_open path, mode
-                    return REetFile.new f unless f.nil?
-                end
+            def self.open path, mode=:eet_file_mode_read
+                p = Efl::Eet.eet_open path, mode
+                raise Exception.new "Unable to open file #{path}" if p.nil?
+                o = REetFile.new FFI::AutoPointer.new p, REetFile.method(:release)
+                return o if not block_given?
+                yield o
+                o.close
+                nil
+            end
+            def self.release p
+                Efl::Eet.eet_close f
+            end
+            def close
+                @ptr.autorelease=false
+                Efl::Eet.eet_close @ptr
+                @ptr = nil
             end
             #
             def write key, data, compress=false

@@ -80,7 +80,7 @@ describe Efl::Eet do
             f = REetFile.open FP, :eet_file_mode_read_write
             f.write 'configg', 'test key'
             f.read('configg').should == 'test key'
-            f.close
+#            f.close    #leave it to FFI::AutoPointer
         end
         #
         it "should write in block" do
