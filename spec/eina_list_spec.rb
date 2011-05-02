@@ -32,19 +32,13 @@ describe Efl::EinaList do
     end
     #
     it "should be able to convert into ruby Array from NULL pointer" do
-        ary = Array.from_eina_list ::FFI::Pointer::NULL
+        ary = REinaList.new(FFI::Pointer::NULL).to_ary
         ary.empty?.should be_true
         ary.is_a?(Array).should be_true
     end
     #
     it "should be able to convert into ruby Array from empty REinaList" do
-        ary = Array.from_eina_list REinaList.new
-        ary.empty?.should be_true
-        ary.is_a?(Array).should be_true
-    end
-    #
-    it "should be able to convert into ruby Array from empty REinaList pointer" do
-        ary = Array.from_eina_list REinaList.new.to_ptr
+        ary = REinaList.new.to_ary
         ary.empty?.should be_true
         ary.is_a?(Array).should be_true
     end
@@ -59,7 +53,7 @@ describe Efl::EinaList do
         l.prepend d2
         l << d4
         l.unshift d1
-        ary =  Array.from_eina_list l
+        ary = l.to_ary
         ary.length.should == 4
         0.upto 3 do |i|
             ary[i].read_string.should == "D#{i}"
@@ -77,7 +71,7 @@ describe Efl::EinaList do
         l.prepend d2
         l << d4
         l.unshift d1
-        ary =  Array.from_eina_list l.to_ptr
+        ary = l.to_ary
         ary.length.should == 4
         0.upto 3 do |i|
             ary[i].read_string.should == "D#{i}"

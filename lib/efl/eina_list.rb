@@ -3,17 +3,6 @@
 #
 require 'efl/ffi/eina_list'
 #
-class Array
-    def self.from_eina_list o
-        if o.is_a? Efl::EinaList::REinaList
-            o.to_ary
-        elsif o.is_a? FFI::Pointer
-            Efl::EinaList::REinaList.new(o).to_ary
-        else
-            raise ArgumentError.new "wrong argument #{o.class.name}"
-        end
-    end
-end
 module Efl
     module EinaList
         #
@@ -36,8 +25,6 @@ module Efl
                         o
                     when NilClass
                         FFI::Pointer::NULL
-                    when self.class
-                        o.to_ptr
                     when Array
                         o.inject(FFI::Pointer::NULL) { |p,e| Efl::EinaList.eina_list_append p, e }
                     else
@@ -45,8 +32,7 @@ module Efl
                     end
                 )
             end
-            def free p=nil
-                return Efl::EinaList.eina_list_free p unless p.nil?
+            def free
                 Efl::EinaList.eina_list_free @ptr
                 @ptr = nil
             end
