@@ -36,7 +36,7 @@ module Efl
             end
             #
             def write key, data, compress=false
-                Efl::Eet.eet_write @ptr, key, FFI::MemoryPointer.from_string(data), data.bytesize, ( compress ? 1 : 0 )
+                Efl::Eet.eet_write @ptr, key, data, data.bytesize, ( compress ? 1 : 0 )
             end
             #
             def read key
