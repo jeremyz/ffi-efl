@@ -37,19 +37,13 @@ describe Efl::EinaHash do
     end
     #
     it "should be able to convert into ruby Hash from NULL pointer" do
-        h = Hash.from_eina_hash FFI::Pointer::NULL
+        h = REinaHash.new(FFI::Pointer::NULL).to_h
         h.empty?.should be_true
         h.is_a?(Hash).should be_true
     end
     #
     it "should be able to convert into ruby Hash from empty REinaHash" do
-        h = Hash.from_eina_hash REinaHash.new
-        h.empty?.should be_true
-        h.is_a?(Hash).should be_true
-    end
-    #
-    it "should be able to convert into ruby Hash from empty REinaHash pointer" do
-        h = Hash.from_eina_hash REinaHash.new.to_ptr
+        h = REinaHash.new(FFI::Pointer::NULL).to_h
         h.empty?.should be_true
         h.is_a?(Hash).should be_true
     end
@@ -75,7 +69,7 @@ describe Efl::EinaHash do
             true
         }
         cpt.should == 4
-        rh =  Hash.from_eina_hash h
+        rh = h.to_h
         rh.length.should == 4
         rh2 = {}
         rh.each { |k,v|
@@ -102,7 +96,7 @@ describe Efl::EinaHash do
         h['k1'].read_string.should == "D1"
         h['k2'].read_string.should == "D2"
         h['k3'].read_string.should == "D3"
-        rh =  Hash.from_eina_hash h.to_ptr
+        rh = h.to_h
         rh.length.should == 4
     end
     #
@@ -152,7 +146,7 @@ describe Efl::EinaHash do
         rh['k3'].read_string.should == "D3"
     end
     #
-    it "should be able to build from ruby Hash" do
+    it "should be able to build REinaHash from ruby Hash" do
         rh = {}
         k0 = FFI::MemoryPointer.from_string "0"
         k1 = FFI::MemoryPointer.from_string "1"

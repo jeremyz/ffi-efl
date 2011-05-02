@@ -3,17 +3,6 @@
 #
 require 'efl/ffi/eina_hash'
 #
-class Hash
-    def self.from_eina_hash o
-        if o.is_a? Efl::EinaHash::REinaHash
-            o.to_h
-        elsif o.is_a? FFI::Pointer
-            Efl::EinaHash::REinaHash.new(o).to_h
-        else
-            raise ArgumentError.new " wrong argument #{o.class.name}"
-        end
-    end
-end
 module Efl
     module EinaHash
         #
@@ -26,27 +15,25 @@ module Efl
                 @ptr = (
                     case o
                     when NilClass
-                        FFI::AutoPointer.new cstr.call, method(:free)
-                    when self.class
-                        o.to_ptr
-                    when FFI::AutoPointer
-                        o
+                        FFI::AutoPointer.new cstr.call, REinaHash.method(:release)
                     when FFI::Pointer
-                        FFI::AutoPointer.new ( o==FFI::Pointer::NULL ? cstr.call : o ), method(:free)
+                        FFI::AutoPointer.new ( o==FFI::Pointer::NULL ? cstr.call : o ), REinaHash.method(:release)
                     when Hash
                         ptr = cstr.call
                         o.each do |k,v| Efl::EinaHash.eina_hash_add ptr, k, v end
-                        FFI::AutoPointer.new ptr, method(:free)
+                        FFI::AutoPointer.new ptr, REinaHash.method(:release)
                     else
                         raise ArgumentError.new "wrong argument #{o.class.name}"
                     end
                 )
             end
-            def free p=nil
-                return Efl::EinaHash.eina_hash_free p unless p.nil?
-                Efl::EinaHash.eina_hash_free @ptr
-                @ptr.free
-                @ptr = nil
+            def self.release p
+                Efl::EinaHash.eina_hash_free p
+            end
+            def del
+                @ptr.autorelease=false
+                EinaHash.release @ptr
+                @ptr=nil
             end
             def each data=FFI::Pointer::NULL, &block
                 return if not block_given?
