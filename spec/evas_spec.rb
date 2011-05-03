@@ -326,12 +326,11 @@ describe Efl::Evas do
         end
         #
         it "geometry functions should work" do
-            # FIXME
-#            @o.geometry_get.should == [0,0,100,100]
-#            @o.resize 50,50
-#            @o.geometry_get.should == [0,0,50,50]
-#            @o.move 10, 10
-#            @o.geometry_get.should == [10,10,50,50]
+            @o.geometry_get.should == [0,0,100,100]
+            @o.resize 50,50
+            @o.geometry.should == [0,0,50,50]
+            @o.move 10, 10
+            @o.geometry_get.should == [10,10,50,50]
         end
         #
         it "show hide visible should work" do
