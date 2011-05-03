@@ -68,7 +68,9 @@ module Efl
                 @ptr=nil
             end
             def object_add t
-                Efl::Evas::REvasObject.new Efl::Evas.send "evas_object_#{t}_add", @ptr
+                r = Efl::Evas::REvasObject.new Efl::Evas.send "evas_object_#{t.to_s}_add", @ptr
+                yield r if block_given?
+                r
             end
             def output_size_get
                 x = FFI::MemoryPointer.new :int
@@ -132,6 +134,13 @@ module Efl
                 Efl::Evas.evas_object_geometry_get @ptr, x, y, w, h
                 [ x.read_int, y.read_int, w.read_int, h.read_int ]
             end
+            alias :geometry :geometry_get
+            def size
+                geometry_get[2..-1]
+            end
+            def size= wh
+                Efl::Evas.evas_object_resize @ptr, *wh
+            end
             def color_get
                 r = FFI::MemoryPointer.new :int
                 g = FFI::MemoryPointer.new :int
@@ -140,6 +149,7 @@ module Efl
                 Efl::Evas.evas_object_color_get @ptr, r, g, b, a
                 [ r.read_int, g.read_int, b.read_int, a.read_int ]
             end
+            alias :color :color_get
         end
     end
 end
