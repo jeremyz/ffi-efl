@@ -35,9 +35,9 @@ module Efl
                 # EAPI Evas_Object *edje_object_part_box_remove_at (Evas_Object *obj, const char *part, unsigned int pos);
                 Efl::Evas::RevasObject.new Efl::Edje.edje_object_part_box_remove_at @ptr, part, pos
             end
-            def part_child_get part, col, row
+            def part_table_child_get part, col, row
                 # EAPI Evas_Object *edje_object_part_table_child_get (Evas_Object *obj, const char *part, unsigned int col, unsigned int row);
-                Efl::Evas::RevasObject.new Efl::Edje.edje_object_part_child_get @ptr, part, col, row
+                Efl::Evas::RevasObject.new Efl::Edje.edje_object_part_table_child_get @ptr, part, col, row
             end
         end
         #
