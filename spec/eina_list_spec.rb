@@ -92,4 +92,20 @@ describe Efl::EinaList do
         l.free
     end
     #
+    it "Enumerable should work" do
+        l = REinaList.new
+        d1 = ::FFI::MemoryPointer.from_string "D0"
+        d2 = ::FFI::MemoryPointer.from_string "D1"
+        d3 = ::FFI::MemoryPointer.from_string "D2"
+        d4 = ::FFI::MemoryPointer.from_string "D3"
+        l.append d3
+        l.prepend d2
+        l << d4
+        l.unshift d1
+        r = 0
+        l.each do |e| r+=1; end
+        r.should == 4
+        r = l.inject(0) do |s,e| s+=1; s; end
+        r.should == 4
+    end
 end
