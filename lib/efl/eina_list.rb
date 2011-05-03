@@ -37,6 +37,7 @@ module Efl
                 @ptr = nil
             end
             def each
+                return if not block_given?
                 p = @ptr
                 while p!=::FFI::Pointer::NULL
                     l = Efl::EinaList::EinaListStruct.new p
