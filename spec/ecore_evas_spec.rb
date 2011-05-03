@@ -1,6 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
+require 'efl/eina_list'
 require 'efl/evas'
 require 'efl/ecore'
 require 'efl/ecore_evas'
@@ -34,10 +35,24 @@ describe Efl::EcoreEvas do
     #
     it "should work" do
         EcoreEvas.engines_free EcoreEvas.engines_get
-#        require 'efl/eina_list'
-#        l = Efl::EinaList::REinaList.new EcoreEvas.engines_get
-#        l.each do |e| puts e.read_string end
-#        EcoreEvas.engines_free l
+        l = EcoreEvas.engines_list
+        r = l.inject("\t") do |s,e| s+=e.read_string+' ' end
+        puts r
+        EcoreEvas.engines_free l
+    end
+    #
+    it "ecore_evas_list should work" do
+        el = EcoreEvas.ecore_evas_list
+        el.to_ary.length.should == 0
+        el.free
+        r=[]
+        0.upto(3) do
+            r << EcoreEvas::REcoreEvas.new
+        end
+        el = EcoreEvas.ecore_evas_list
+        el.to_ary.length.should == 4
+        el.free
+        r.each do |e| e.free end
     end
     #
     describe Efl::EcoreEvas::REcoreEvas do
@@ -46,13 +61,14 @@ describe Efl::EcoreEvas do
         }
         before(:each) do
             @e = EcoreEvas::REcoreEvas.new :engine_name=>"software_x11", :x=>10, :y=>10, :w=>100, :h=>120
-            @e.move 10, 10
             @canvas = @e.evas
             @bg = @canvas.object_add(:rectangle) { |o|
                 o.color = 100, 100, 255, 255
                 o.size = @e.size
             }
             @bg.show
+            @e.object_associate @bg, :ecore_evas_object_associate_base
+            @e.move 10, 10
             @e.show
         end
         after(:each) do
@@ -71,17 +87,21 @@ describe Efl::EcoreEvas do
             @e.data_get('key').read_string.should == '666'
         end
         #
-        it "move, resize move_resize and geometry_get should work" do
+        it "move, resize move_resize and geometry_get should work (and check association)" do
             @e.geometry_get.should == [10,10,100,120]
+            @bg.geometry_get.should == [0,0,100,120]
             @e.move 20, 17  # w+23 window bar height
             ecore_loop 3
             @e.geometry_get.should == [20,40,100,120]
+            @bg.geometry_get.should == [0,0,100,120]
             @e.resize 200,150
             ecore_loop 3
             @e.geometry_get.should == [20,40,200,150]
+            @bg.geometry_get.should == [0,0,200,150]
             @e.move_resize 10, 0, 130, 100
             ecore_loop 3
             @e.geometry_get.should == [10,23,130,100]
+            @bg.geometry_get.should == [0,0,130,100]
             g = @e.geometry_get
         end
         #
@@ -167,8 +187,6 @@ describe Efl::EcoreEvas do
             @e.size_step_set 20, 30
             @e.size_step_get.should == [20, 30]
         end
-        #
-        # TODO : 3 * cursor
         #
         it "layer set/get should work" do
             @e.layer_set 2
@@ -259,9 +277,6 @@ describe Efl::EcoreEvas do
             @e.ignore_events?.should be_false
         end
         #
-#        it "object_associate dissociate should work" do
-#            @e.object_associate_set true
-#            @e.object_associate_set true
-#        end
+        # TODO ecore_evas_callback_*
     end
 end

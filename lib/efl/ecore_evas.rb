@@ -7,6 +7,13 @@ module Efl
     #
     module EcoreEvas
         #
+        def self.ecore_evas_list
+            Efl::EinaList::REinaList.new Efl::EcoreEvas.ecore_evas_ecore_evas_list_get
+        end
+        def self.engines_list
+            Efl::EinaList::REinaList.new Efl::EcoreEvas.engines_get
+        end
+        #
         class REcoreEvas
             include Efl::ClassHelper
             proxy_list [Efl::EcoreEvas,'ecore_evas_'].freeze
