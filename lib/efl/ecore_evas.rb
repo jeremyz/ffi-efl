@@ -123,8 +123,6 @@ module Efl
             end
         end
     end
-    # TODO
-    #EAPI unsigned char ecore_getopt_callback_ecore_evas_list_engines(const Ecore_Getopt *parser, const Ecore_Getopt_Desc *desc, const char *str, void *data, Ecore_Getopt_Value *storage);
     #
 end
 #

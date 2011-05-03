@@ -224,7 +224,7 @@ describe Efl::EcoreEvas do
             @e.override?.should be_false
         end
         #
-        # FIXME
+        # FIXME maximized
         # ecore/src/lib/ecore_evas/ecore_evas.c => ecore_evas_maximized_set => IFC => return
 #        it "maximized set/get should work" do
 #            @e.maximized?.should be_false

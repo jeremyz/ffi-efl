@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 #
 require 'efl/ecore'
+require 'efl/ecore_evas'
 require 'efl/ecore_getopt'
 #
 describe Efl::EcoreGetopt do
@@ -23,6 +24,7 @@ describe Efl::EcoreGetopt do
             :copyright => FFI::MemoryPointer.new(:uchar),
             :version => FFI::MemoryPointer.new(:uchar),
             :help => FFI::MemoryPointer.new(:uchar),
+            :engines => FFI::MemoryPointer.new(:uchar),
             :int => FFI::MemoryPointer.new(:int),
             :double => FFI::MemoryPointer.new(:double),
             :short => FFI::MemoryPointer.new(:short),
@@ -46,6 +48,9 @@ describe Efl::EcoreGetopt do
         @p.value :boolp, @values[:version]
         @p.help 'H', 'help'
         @p.value :boolp, @values[:help]
+        # FIXME debug callback : ecore_getopt_callback_ecore_evas_list_engines
+        @p.callback_noargs 'E', 'list-engines', 'list ecore-evas available engines', Efl::EcoreEvas.method(:ecore_getopt_callback_ecore_evas_list_engines), FFI::Pointer::NULL
+        @p.value :boolp, @values[:engines]
         @p.store_type :int, 'i', 'int', 'store an integer'
         @p.value :intp, @values[:int]
         @p.store_meta_type :double, 'd', 'double', 'store an double+meta', @meta1
@@ -73,7 +78,7 @@ describe Efl::EcoreGetopt do
         #
     end
     before(:each) do
-        [ :license, :copyright, :version, :help ].each do |sym|
+        [ :license, :copyright, :version, :help, :engines ].each do |sym|
             @values[sym].write_char 0
         end
         @values[:int].write_int 0
@@ -93,85 +98,45 @@ describe Efl::EcoreGetopt do
     #
     describe "license copyright version help" do
         it "should handle -L" do
-            [ :license, :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should == 0
-            end
             args = @p.parse ["My lovely prog name","-L"]
             @values[:license].read_char.should == 1
-            [ :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should == 0
-            end
         end
         it "should handle --license" do
-            [ :license, :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should == 0
-            end
             args = @p.parse ["My lovely prog name","--license"]
             @values[:license].read_char.should == 1
-            [ :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should == 0
-            end
         end
         it "should handle -C" do
-            [ :license, :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should == 0
-            end
             args = @p.parse ["progname","-C"]
             @values[:copyright].read_char.should == 1
-            [ :license, :version, :help ].each do |sym|
-                @values[sym].read_char.should == 0
-            end
         end
         it "should handle --copyright" do
-            [ :license, :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should == 0
-            end
             args = @p.parse ["My lovely prog name","--copyright"]
             @values[:copyright].read_char.should == 1
-            [ :license, :version, :help ].each do |sym|
-                @values[sym].read_char.should == 0
-            end
         end
         it "should handle -V" do
-            [ :license, :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should == 0
-            end
             args = @p.parse ["My lovely prog name","-V"]
             @values[:version].read_char.should == 1
-            [ :license, :copyright, :help ].each do |sym|
-                @values[sym].read_char.should == 0
-            end
         end
         it "should handle --version" do
-            [ :license, :copyright, :version, :help ].each do |sym|
-                @values[sym].read_char.should == 0
-            end
             args = @p.parse ["progname","--version"]
             @values[:version].read_char.should == 1
-            [ :license, :copyright, :help ].each do |sym|
-                @values[sym].read_char.should == 0
-            end
         end
 #        it "should handle -H" do
-#            [ :license, :copyright, :version, :help ].each do |sym|
-#                @values[sym].read_char.should == 0
-#            end
 #            args = @p.parse ["My lovely prog name","-H"]
 #            @values[:help].read_char.should == 1
-#            [ :license, :copyright, :version ].each do |sym|
-#                @values[sym].read_char.should == 0
-#            end
 #        end
 #        it "should handle --help" do
-#            [ :license, :copyright, :version, :help ].each do |sym|
-#                @values[sym].read_char.should == 0
-#            end
 #            args = @p.parse ["progname","--help"]
 #            @values[:help].read_char.should == 1
-#            [ :license, :copyright, :version ].each do |sym|
-#                @values[sym].read_char.should == 0
-#            end
 #        end
+        it "should handle -E" do
+            args = @p.parse ["My lovely prog name","-E"]
+            @values[:engines].read_char.should == 1
+        end
+        it "should handle --list-engines" do
+            args = @p.parse ["My lovely prog name","--list-engines"]
+            @values[:engines].read_char.should == 1
+        end
     end
     describe "simple short options" do
         it "should handle -i" do

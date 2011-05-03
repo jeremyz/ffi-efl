@@ -202,7 +202,7 @@ describe Efl::Evas do
             @e.pointer_inside_get.should be_false
         end
         #
-        # TODO
+        # TODO evas_event_feed_*
         #   evas_event_feed_multi_down
         #   evas_event_feed_multi_up
         #   evas_event_feed_multi_move
