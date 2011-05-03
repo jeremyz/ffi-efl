@@ -32,7 +32,7 @@ end
 #
 def draw_scene c
     updates = c.render_updates
-    Evas::render_updates_free updates
+    Evas.render_updates_free updates
     # FIXME needs EinaRectangle
 #    require 'efl/eina/eina_list'
 #    updates = Eina::EinaList.new c.render_updates
