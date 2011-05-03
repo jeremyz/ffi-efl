@@ -32,13 +32,13 @@ module Efl
                     :color_key_r,           :int,
                     :color_key_g,           :int,
                     :color_key_b,           :int,
-                    :func,                  EngineInfoBufferFuncStruct,
+                    :func,                  EngineInfoBufferFuncStruct
         end
         class EngineInfoBufferStruct < FFI::Struct
             layout  :magic,                 EngineInfoStruct,
                     :info,                  EngineInfoBufferInfoStruct,
 #                    :func,                  EvasEngineInfoBufferFunc,
-                    :mode,                  :evas_engine_render_mode,
+                    :mode,                  :evas_engine_render_mode
         end
         #
         class REvas

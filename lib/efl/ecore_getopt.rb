@@ -18,7 +18,7 @@ module Efl
                     :ulongp,        :ulong_p,
                     :doublep,       :double_p,
                     :listp,         :eina_list_p,
-                    :ptrp,          :void_p,
+                    :ptrp,          :void_p
         end
         #
         class DescStoreDef < FFI::Union
@@ -30,13 +30,13 @@ module Efl
                     :ushortv,       :ushort,
                     :uintv,         :uint,
                     :ulongv,        :ulong,
-                    :doublev,       :double,
+                    :doublev,       :double
         end
         #
         class DescStore < FFI::Struct
             layout  :type,          :ecore_getopt_type,                 # enum
                     :arg_req,       :ecore_getopt_desc_arg_requirement, # enum
-                    :def,           DescStoreDef,
+                    :def,           DescStoreDef
         end
         #
         callback :ecore_getopt_desc_cb, [:ecore_getopt_p, :ecore_getopt_desc_p, :string, :pointer, :ecore_getopt_value_p ], :eina_bool
@@ -45,7 +45,7 @@ module Efl
             layout  :func,          :ecore_getopt_desc_cb,
                     :data,          :pointer,
                     :arg_req,       :ecore_getopt_desc_arg_requirement, # enum
-                    :def,           :pointer,
+                    :def,           :pointer
         end
         #
         class ActionParam < FFI::Union
@@ -54,7 +54,7 @@ module Efl
                     :choices,       :pointer,
                     :append_type,   :ecore_getopt_type,                 # enum
                     :callback,      DescCallback,
-                    :dummy,         :pointer,
+                    :dummy,         :pointer
         end
         #
         class Desc < FFI::Struct
@@ -63,7 +63,7 @@ module Efl
                     :help,          :pointer,
                     :metavar,       :pointer,
                     :action,        :ecore_getopt_action,               # enum
-                    :action_param,  ActionParam,
+                    :action_param,  ActionParam
         end
         #
         class EcoreGetopt < FFI::Struct
@@ -110,14 +110,14 @@ module Efl
                 @ecore_getopt.to_ptr
             end
             def create
-                @ecore_getopt = Efl::EcoreGetopt::EcoreGetopt.new FFI::MemoryPointer.new (Efl::EcoreGetopt::EcoreGetopt.size+Efl::EcoreGetopt::Desc.size*@options.length), 1
+                @ecore_getopt = Efl::EcoreGetopt::EcoreGetopt.new( FFI::MemoryPointer.new( :uchar, Efl::EcoreGetopt::EcoreGetopt.size+Efl::EcoreGetopt::Desc.size*@options.length) )
                 [:prog,:usage,:version,:copyright,:license,:description].each do |sym|
                     @ecore_getopt[sym] = ( @desc.has_key?(sym) ? FFI::MemoryPointer.from_string(@desc[sym]) : FFI::Pointer::NULL )
                 end
                 @ecore_getopt[:strict] = @desc[:strict] if @desc.has_key? :strict
                 @options.each_with_index do |o,i|
                     d = @ecore_getopt.desc_ptr i
-                    d[:shortname] = o[0].ord
+                    d[:shortname] = o[0].to_s.bytes.first
                     d[:longname] = p_from_string o[1]
                     d[:help] = p_from_string o[2]
                     d[:metavar] = o[3]

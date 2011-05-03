@@ -85,14 +85,14 @@ module Efl
             EOF
         end
         def method_missing m, *args, &block
-            if m =~/^(.*)=$/
+            m_s = m.to_s
+            if m_s =~/^(.*)=$/
                 m_s = $1+'_set'
                 args_s = '*args[0]'
-            elsif m =~/^(.*)\?$/
+            elsif m_s =~/^(.*)\?$/
                 m_s = $1+'_get'
                 args_s = '*args'
             else
-                m_s = m.to_s
                 args_s = '*args'
             end
             self.class.proxy_list.each do |mod,p|

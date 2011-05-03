@@ -17,7 +17,7 @@ module Efl
                     when NilClass
                         FFI::AutoPointer.new cstr.call, REinaHash.method(:release)
                     when FFI::Pointer
-                        FFI::AutoPointer.new ( o==FFI::Pointer::NULL ? cstr.call : o ), REinaHash.method(:release)
+                        FFI::AutoPointer.new( (o==FFI::Pointer::NULL ? cstr.call : o), REinaHash.method(:release))
                     when Hash
                         ptr = cstr.call
                         o.each do |k,v| Efl::EinaHash.eina_hash_add ptr, k, v end
