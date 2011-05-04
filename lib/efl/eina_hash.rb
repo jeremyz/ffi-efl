@@ -9,7 +9,7 @@ module Efl
         class REinaHash
             include Enumerable
             include Efl::ClassHelper
-            proxy_list [Efl::EinaHash::Native,'eina_hash_'].freeze
+            proxy_list [Efl::Native,'eina_hash_'].freeze
             def initialize o=nil, &block
                 cstr = ( block_given? ? block : Proc.new { Native.eina_hash_string_djb2_new FFI::Pointer::NULL } )
                 @ptr = (

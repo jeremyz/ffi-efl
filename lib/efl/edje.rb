@@ -10,7 +10,7 @@ module Efl
         #
         class REdje < Efl::Evas::REvasObject
             #
-            proxy_list [Efl::Edje::Native,'edje_object_'].freeze
+            proxy_list [Efl::Native,'edje_object_'].freeze
             def part_object_get part
                 # EAPI const Evas_Object *edje_object_part_object_get (const Evas_Object *obj, const char *part);
                 Evas::RevasObject.new Native.edje_object_part_object_get @ptr, part
@@ -48,7 +48,7 @@ module Efl
         class REvas
             def edje_object_add
                 # EAPI Evas_Object *edje_object_add (Evas *evas);
-                Edje::REdje.new Edje::Native.edje_object_add @ptr
+                Edje::REdje.new Native.edje_object_add @ptr
             end
         end
         #

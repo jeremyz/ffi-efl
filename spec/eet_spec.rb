@@ -7,6 +7,7 @@ describe Efl::Eet do
     #
     before(:all) {
         Eet = Efl::Eet
+        Native = Efl::Native
         REetFile = Efl::Eet::REetFile
     }
     #
@@ -31,10 +32,10 @@ describe Efl::Eet do
     end
     #
     it "should have good enums" do
-        Eet::Native.enum_type(:eet_file_mode)[:eet_file_mode_invalid].should == -1
-        Eet::Native.enum_type(:eet_file_mode)[:eet_file_mode_read].should == 0
-        Eet::Native.enum_type(:eet_file_mode)[:eet_file_mode_write].should == 1
-        Eet::Native.enum_type(:eet_file_mode)[:eet_file_mode_read_write].should == 2
+        Native.enum_type(:eet_file_mode)[:eet_file_mode_invalid].should == -1
+        Native.enum_type(:eet_file_mode)[:eet_file_mode_read].should == 0
+        Native.enum_type(:eet_file_mode)[:eet_file_mode_write].should == 1
+        Native.enum_type(:eet_file_mode)[:eet_file_mode_read_write].should == 2
     end
     #
     describe Efl::Eet::REetFile do
@@ -42,15 +43,15 @@ describe Efl::Eet do
         after(:each) { Eet.shutdown }
         #
         it "should open and close" do
-            f = REetFile.open FP, Eet::Native.enum_type(:eet_file_mode)[:eet_file_mode_write]
+            f = REetFile.open FP, Native.enum_type(:eet_file_mode)[:eet_file_mode_write]
             f.write 'fake', 'value'
             f.close
         end
         #
         it "should be able to get file access mode" do
-            Eet::Native.enum_type(:eet_file_mode).symbols.each do |m|
+            Native.enum_type(:eet_file_mode).symbols.each do |m|
                 next if m==:eet_file_mode_invalid
-                REetFile.open FP, Eet::Native.enum_type(:eet_file_mode)[m] do |f|
+                REetFile.open FP, Native.enum_type(:eet_file_mode)[m] do |f|
                     f.mode_get.should == m
                 end
             end

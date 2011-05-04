@@ -16,7 +16,7 @@ module Efl
         #
         class REcoreEvas
             include Efl::ClassHelper
-            proxy_list [Efl::EcoreEvas::Native,'ecore_evas_'].freeze
+            proxy_list [Efl::Native,'ecore_evas_'].freeze
             def initialize o=nil
                 @ptr = (
                     case o

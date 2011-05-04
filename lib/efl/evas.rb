@@ -5,39 +5,39 @@ require 'efl/native/evas'
 #
 module Efl
     #
-    module Evas
+    module Native
         #
-        module Native
-            #
-            callback :new_update_region_cb, [:int, :int, :int, :int, :int_p], :pointer
-            callback :free_update_region_cb, [:int, :int, :int, :int, :pointer], :void
-            #
-            class EngineInfoStruct < FFI::Struct
-                layout  :magic,                 :int
-            end
-            class EngineInfoBufferFuncStruct < FFI::Struct
-                layout  :new_update_region,     :new_update_region_cb,
-                        :free_update_region,    :free_update_region_cb
-            end
-            class EngineInfoBufferInfoStruct < FFI::Struct
-                layout  :depth_type,            :int,
-                        :dest_buffer,           :pointer,
-                        :dest_buffer_row_bytes, :int,
-                        :use_color_key,         :char,
-                        :alpha_threshold,       :int,
-                        :color_key_r,           :int,
-                        :color_key_g,           :int,
-                        :color_key_b,           :int,
-                        :func,                  EngineInfoBufferFuncStruct
-            end
-            class EngineInfoBufferStruct < FFI::Struct
-                layout  :magic,                 EngineInfoStruct,
-                        :info,                  EngineInfoBufferInfoStruct,
-#                    :func,                  EvasEngineInfoBufferFunc,
-                        :mode,                  :evas_engine_render_mode
-            end
-            #
+        callback :new_update_region_cb, [:int, :int, :int, :int, :int_p], :pointer
+        callback :free_update_region_cb, [:int, :int, :int, :int, :pointer], :void
+        #
+        class EngineInfoStruct < FFI::Struct
+            layout  :magic,                 :int
         end
+        class EngineInfoBufferFuncStruct < FFI::Struct
+            layout  :new_update_region,     :new_update_region_cb,
+                    :free_update_region,    :free_update_region_cb
+        end
+        class EngineInfoBufferInfoStruct < FFI::Struct
+            layout  :depth_type,            :int,
+                    :dest_buffer,           :pointer,
+                    :dest_buffer_row_bytes, :int,
+                    :use_color_key,         :char,
+                    :alpha_threshold,       :int,
+                    :color_key_r,           :int,
+                    :color_key_g,           :int,
+                    :color_key_b,           :int,
+                    :func,                  EngineInfoBufferFuncStruct
+        end
+        class EngineInfoBufferStruct < FFI::Struct
+            layout  :magic,                 EngineInfoStruct,
+                    :info,                  EngineInfoBufferInfoStruct,
+#                    :func,                  EvasEngineInfoBufferFunc,
+                    :mode,                  :evas_engine_render_mode
+        end
+        #
+    end
+    #
+    module Evas
         #
         EVAS_ENGINE_BUFFER_DEPTH_ARGB32 = 0
         EVAS_ENGINE_BUFFER_DEPTH_BGRA32 = 1
@@ -48,7 +48,7 @@ module Efl
         class REvas
             #
             include Efl::ClassHelper
-            proxy_list [Efl::Evas::Native,'evas_'].freeze
+            proxy_list [Efl::Native,'evas_'].freeze
             #
             def initialize o=nil
                 @ptr = (
@@ -108,7 +108,7 @@ module Efl
         class REvasObject
             #
             include Efl::ClassHelper
-            proxy_list [Efl::Evas::Native,'evas_object_'].freeze, [Efl::Evas::Native,'evas_'].freeze
+            proxy_list [Efl::Native,'evas_object_'].freeze, [Efl::Native,'evas_'].freeze
             #
             def initialize o=nil
                 @ptr = (

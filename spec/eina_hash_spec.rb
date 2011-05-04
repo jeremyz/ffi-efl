@@ -169,7 +169,7 @@ describe Efl::EinaHash do
     #
     it "alternate constructor should work" do
         cstr_cnt = 0
-        h = REinaHash.new { cstr_cnt+=1; Efl::EinaHash::Native.eina_hash_string_superfast_new FFI::Pointer::NULL }
+        h = REinaHash.new { cstr_cnt+=1; Efl::Native.eina_hash_string_superfast_new FFI::Pointer::NULL }
         cstr_cnt.should == 1
     end
 end

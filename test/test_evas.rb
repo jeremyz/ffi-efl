@@ -13,7 +13,7 @@ def create_canvas w, h
     e.output_method_set Evas::render_method_lookup("buffer")
     e.output_viewport_set 0, 0, w, h
     e.output_size_set w, h
-    einfo = Evas::Native::EngineInfoBufferStruct.new e.engine_info_get
+    einfo = Native::EngineInfoBufferStruct.new e.engine_info_get
     einfo[:info][:depth_type] = Evas::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
     einfo[:info][:dest_buffer] = pixels
     einfo[:info][:dest_buffer_row_bytes] = w * FFI::type_size(:int);
@@ -44,7 +44,7 @@ def draw_scene c
 end
 #
 def save_scene canvas, dest
-    einfo = Evas::Native::EngineInfoBufferStruct.new canvas.engine_info_get
+    einfo = Native::EngineInfoBufferStruct.new canvas.engine_info_get
     w, h = canvas.output_size_get
      # PPM P6 format is dead simple to write:
     p = FFI::Pointer.new :int, einfo[:info][:dest_buffer]

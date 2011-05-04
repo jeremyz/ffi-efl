@@ -25,7 +25,7 @@ libraries = [
     [ 'Elementary.h',   'Elm',          'elm',          'libelementary-ver-pre-svn-09.so.0',    'elementary.rb' ],
 ]
 #
-INDENT=' '*12
+INDENT=' '*8
 #
 HEADER =<<-EOF
 #! /usr/bin/env ruby
@@ -39,17 +39,18 @@ module Efl
         #
         def self.method_missing m, *args, &block
             sym = 'FCT_PREFIX_'+m.to_s
-            raise NameError.new "\#{self.name}.\#{sym} (\#{m})" if not Efl::MNAME::Native.respond_to? sym
-            self.module_eval "def self.\#{m} *args, &block; r=Efl::MNAME::Native.\#{sym}(*args); yield r if block_given?; r; end"
+            raise NameError.new "\#{self.name}.\#{sym} (\#{m})" if not Efl::Native.respond_to? sym
+            self.module_eval "def self.\#{m} *args, &block; r=Efl::Native.\#{sym}(*args); yield r if block_given?; r; end"
             self.send m, *args, &block
         end
         #
-        module Native
-            #
-            extend Efl::FFIHelper
+    end
+    #
+    module Native
+        #
+        extend Efl::FFIHelper
 EOF
 FOOTER =<<-EOF
-        end
     end
 end
 #

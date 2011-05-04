@@ -2,22 +2,9 @@
 # -*- coding: UTF-8 -*-
 #
 require 'efl/evas'
-#
-module Efl
-    module Elm
-        module Native
-            extend Efl::FFIHelper
-            steal_ffitype Efl::Evas::Native, :evas_smart_cb
-            steal_ffitype Efl::Evas::Native, :evas_load_error
-            steal_ffitype Efl::Evas::Native, :evas_callback_type
-            steal_ffitype Efl::Evas::Native, :evas_object_box_data_p
-        end
-    end
-end
-#
 require 'efl/native/elementary'
 #
-Efl::Evas::REvasObject.proxy_list << [Efl::Elm::Native,'elm_'].freeze   # append not prepend !
+Efl::Evas::REvasObject.proxy_list << [Efl::Native,'elm_'].freeze   # append not prepend !
 #
 module Efl
     module Elm
@@ -36,7 +23,7 @@ module Efl
         #
         class ElmWin
             include Efl::ClassHelper
-            proxy_list [Efl::Elm::Native,'elm_win_'].freeze, [Efl::Elm::Native,'elm_'].freeze
+            proxy_list [Efl::Native,'elm_win_'].freeze, [Efl::Native,'elm_'].freeze
             def initialize parent, title, type=:elm_win_basic
                 @evas_object = Evas::REvasObject.new Native.elm_win_add parent, title, type
                 @ptr = @evas_object.to_ptr
@@ -48,7 +35,7 @@ module Efl
                 eo
             end
             def smart_callback_add event_str, cb, data=FFI::MemoryPointer::NULL
-                Evas::Native.evas_object_smart_callback_add @ptr, event_str, cb, data
+                Native.evas_object_smart_callback_add @ptr, event_str, cb, data
             end
         end
         #

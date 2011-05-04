@@ -4,23 +4,24 @@
 require 'efl/native/eina_list'
 #
 module Efl
-    module EinaList
+    #
+    module Native
         #
-        module Native
-            #
-            class EinaListStruct < FFI::Struct
-                layout  :data,          :pointer,
+        class EinaListStruct < FFI::Struct
+            layout  :data,          :pointer,
                         :next,          :pointer,
-                        :prev,          :pointer,
-                        :accounting,    :pointer,
-                        :magic,         :uint
-            end
+                    :prev,          :pointer,
+                    :accounting,    :pointer,
+                    :magic,         :uint
         end
+    end
+    #
+    module EinaList
         #
         class REinaList
             include Enumerable
             include Efl::ClassHelper
-            proxy_list [Efl::EinaList::Native,'eina_list_'].freeze
+            proxy_list [Efl::Native,'eina_list_'].freeze
             def initialize o=nil
                 @ptr = (
                     case o
