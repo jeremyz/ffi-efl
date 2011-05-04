@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ffi/ecore_input'
+require 'efl/native/ecore_input'
 #
 module Efl
     #

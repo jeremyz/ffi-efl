@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ffi/eina_hash'
+require 'efl/native/eina_hash'
 #
 module Efl
     module EinaHash
@@ -9,9 +9,9 @@ module Efl
         class REinaHash
             include Enumerable
             include Efl::ClassHelper
-            proxy_list [Efl::EinaHash,'eina_hash_'].freeze
+            proxy_list [Efl::EinaHash::Native,'eina_hash_'].freeze
             def initialize o=nil, &block
-                cstr = ( block_given? ? block : Proc.new { Efl::EinaHash.eina_hash_string_djb2_new FFI::Pointer::NULL } )
+                cstr = ( block_given? ? block : Proc.new { Native.eina_hash_string_djb2_new FFI::Pointer::NULL } )
                 @ptr = (
                     case o
                     when NilClass
@@ -20,7 +20,7 @@ module Efl
                         FFI::AutoPointer.new( (o==FFI::Pointer::NULL ? cstr.call : o), REinaHash.method(:release))
                     when Hash
                         ptr = cstr.call
-                        o.each do |k,v| Efl::EinaHash.eina_hash_add ptr, k, v end
+                        o.each do |k,v| Native.eina_hash_add ptr, k, v end
                         FFI::AutoPointer.new ptr, REinaHash.method(:release)
                     else
                         raise ArgumentError.new "wrong argument #{o.class.name}"
@@ -28,7 +28,7 @@ module Efl
                 )
             end
             def self.release p
-                Efl::EinaHash.eina_hash_free p
+                Native.eina_hash_free p
             end
             def del
                 @ptr.autorelease=false
@@ -37,7 +37,7 @@ module Efl
             end
             def each data=FFI::Pointer::NULL, &block
                 return if not block_given?
-                Efl::EinaHash::eina_hash_foreach @ptr, Proc.new{|h,k,v,d| block.call(k,v) }, data
+                Native.eina_hash_foreach @ptr, Proc.new{|h,k,v,d| block.call(k,v) }, data
             end
             def to_h
                  rh = {}
@@ -55,12 +55,12 @@ module Efl
             end
             # for fun and tests
             def add k, v
-                Efl::EinaHash.eina_hash_add @ptr, k, v
+                Native.eina_hash_add @ptr, k, v
                 v
             end
             alias :[]= :add
             def find k
-                r = Efl::EinaHash.eina_hash_find @ptr, k
+                r = Native.eina_hash_find @ptr, k
                 return ( r==FFI::Pointer::NULL ? nil : r )
             end
             alias :[] :find

@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ffi/ecore'
+require 'efl/native/ecore'
 #
 module Efl
     module Ecore
@@ -17,20 +17,24 @@ module Efl
         #
         class REcorePipe
             def initialize cb, data
-                @ptr = FFI::AutoPointer.new Efl::Ecore.ecore_pipe_add(cb, data), REcorePipe.method(:release)
+                @ptr = FFI::AutoPointer.new Native.ecore_pipe_add(cb, data), REcorePipe.method(:release)
             end
             def self.release p
-                Efl::Ecore.ecore_pipe_del p
+                Native.ecore_pipe_del p
             end
             def del
                 @ptr.autorelease=false
                 REcorePipe.release @ptr
                 @ptr=nil
             end
-            def read_close; Efl::Ecore.ecore_pipe_read_close @ptr; end
-            def write_close; Efl::Ecore.ecore_pipe_write_close @ptr; end
+            def read_close
+                Native.ecore_pipe_read_close @ptr
+            end
+            def write_close
+                Native.ecore_pipe_write_close @ptr
+            end
             def write data
-                Efl::Ecore.ecore_pipe_write @ptr, FFI::MemoryPointer.from_string(data.to_s), data.to_s.length+1
+                Native.ecore_pipe_write @ptr, FFI::MemoryPointer.from_string(data.to_s), data.to_s.length+1
             end
             #
         end

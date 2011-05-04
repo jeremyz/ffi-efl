@@ -1,83 +1,86 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ffi/ecore_getopt'
+require 'efl/native/ecore_getopt'
 #
 module Efl
     #
     module EcoreGetopt
         #
-        class Value < FFI::Union
-            layout  :strp,          :pointer,
-                    :boolp,         :eina_bool_p,
-                    :shortp,        :short_p,
-                    :intp,          :int_p,
-                    :longp,         :long_p,
-                    :ushortp,       :ushort_p,
-                    :uintp,         :uint_p,
-                    :ulongp,        :ulong_p,
-                    :doublep,       :double_p,
-                    :listp,         :eina_list_p,
-                    :ptrp,          :void_p
-        end
-        #
-        class DescStoreDef < FFI::Union
-            layout  :strv,          :pointer,
-                    :boolv,         :uchar,
-                    :shortv,        :short,
-                    :intv,          :int,
-                    :longv,         :long,
-                    :ushortv,       :ushort,
-                    :uintv,         :uint,
-                    :ulongv,        :ulong,
-                    :doublev,       :double
-        end
-        #
-        class DescStore < FFI::Struct
-            layout  :type,          :ecore_getopt_type,                 # enum
-                    :arg_req,       :ecore_getopt_desc_arg_requirement, # enum
-                    :def,           DescStoreDef
-        end
-        #
-        callback :ecore_getopt_desc_cb, [:ecore_getopt_p, :ecore_getopt_desc_p, :string, :pointer, :ecore_getopt_value_p ], :eina_bool
-        #
-        class DescCallback < FFI::Struct
-            layout  :func,          :ecore_getopt_desc_cb,
-                    :data,          :pointer,
-                    :arg_req,       :ecore_getopt_desc_arg_requirement, # enum
-                    :def,           :pointer
-        end
-        #
-        class ActionParam < FFI::Union
-            layout  :store,         DescStore,
-                    :store_const,   :pointer,
-                    :choices,       :pointer,
-                    :append_type,   :ecore_getopt_type,                 # enum
-                    :callback,      DescCallback,
-                    :dummy,         :pointer
-        end
-        #
-        class Desc < FFI::Struct
-            layout  :shortname,     :char,
-                    :longname,      :pointer,
-                    :help,          :pointer,
-                    :metavar,       :pointer,
-                    :action,        :ecore_getopt_action,               # enum
-                    :action_param,  ActionParam
-        end
-        #
-        class EcoreGetopt < FFI::Struct
-            layout  :prog,          :pointer,
-                    :usage,         :pointer,
-                    :version,       :pointer,
-                    :copyright,     :pointer,
-                    :license,       :pointer,
-                    :description,   :pointer,
-                    :strict,        :char
-#                    :descs,         :pointer,   # NULL terminated  EcoreGetopt_Desc[]
+        module Native
+            #
+            class Value < FFI::Union
+                layout  :strp,          :pointer,
+                        :boolp,         :eina_bool_p,
+                        :shortp,        :short_p,
+                        :intp,          :int_p,
+                        :longp,         :long_p,
+                        :ushortp,       :ushort_p,
+                        :uintp,         :uint_p,
+                        :ulongp,        :ulong_p,
+                        :doublep,       :double_p,
+                        :listp,         :eina_list_p,
+                        :ptrp,          :void_p
+            end
+            #
+            class DescStoreDef < FFI::Union
+                layout  :strv,          :pointer,
+                        :boolv,         :uchar,
+                        :shortv,        :short,
+                        :intv,          :int,
+                        :longv,         :long,
+                        :ushortv,       :ushort,
+                        :uintv,         :uint,
+                        :ulongv,        :ulong,
+                        :doublev,       :double
+            end
+            #
+            class DescStore < FFI::Struct
+                layout  :type,          :ecore_getopt_type,                 # enum
+                        :arg_req,       :ecore_getopt_desc_arg_requirement, # enum
+                        :def,           DescStoreDef
+            end
+            #
+            callback :ecore_getopt_desc_cb, [:ecore_getopt_p, :ecore_getopt_desc_p, :string, :pointer, :ecore_getopt_value_p ], :eina_bool
+            #
+            class DescCallback < FFI::Struct
+                layout  :func,          :ecore_getopt_desc_cb,
+                        :data,          :pointer,
+                        :arg_req,       :ecore_getopt_desc_arg_requirement, # enum
+                        :def,           :pointer
+            end
+            #
+            class ActionParam < FFI::Union
+                layout  :store,         DescStore,
+                        :store_const,   :pointer,
+                        :choices,       :pointer,
+                        :append_type,   :ecore_getopt_type,                 # enum
+                        :callback,      DescCallback,
+                        :dummy,         :pointer
+            end
+            #
+            class Desc < FFI::Struct
+                layout  :shortname,     :char,
+                        :longname,      :pointer,
+                        :help,          :pointer,
+                        :metavar,       :pointer,
+                        :action,        :ecore_getopt_action,               # enum
+                        :action_param,  ActionParam
+            end
+            #
+            class EcoreGetopt < FFI::Struct
+                layout  :prog,          :pointer,
+                        :usage,         :pointer,
+                        :version,       :pointer,
+                        :copyright,     :pointer,
+                        :license,       :pointer,
+                        :description,   :pointer,
+                        :strict,        :char
+#                        :descs,         :pointer,   # NULL terminated  EcoreGetopt_Desc[]
 
-            def desc_ptr idx
-                Efl::EcoreGetopt::Desc.new to_ptr+Efl::EcoreGetopt::EcoreGetopt.size+(idx*Efl::EcoreGetopt::Desc.size)
+                def desc_ptr idx
+                    Native::Desc.new to_ptr+Native::EcoreGetopt.size+(idx*Native::Desc.size)
+                end
             end
         end
         #
@@ -110,7 +113,7 @@ module Efl
                 @ecore_getopt.to_ptr
             end
             def create
-                @ecore_getopt = Efl::EcoreGetopt::EcoreGetopt.new( FFI::MemoryPointer.new( :uchar, Efl::EcoreGetopt::EcoreGetopt.size+Efl::EcoreGetopt::Desc.size*@options.length) )
+                @ecore_getopt = Native::EcoreGetopt.new( FFI::MemoryPointer.new( :uchar, Native::EcoreGetopt.size+Native::Desc.size*@options.length) )
                 [:prog,:usage,:version,:copyright,:license,:description].each do |sym|
                     @ecore_getopt[sym] = ( @desc.has_key?(sym) ? FFI::MemoryPointer.from_string(@desc[sym]) : FFI::Pointer::NULL )
                 end
@@ -153,9 +156,9 @@ module Efl
                         d[:action_param][:dummy] = FFI::Pointer::NULL
                     end
                 end
-                @values_p = FFI::MemoryPointer.new Efl::EcoreGetopt::Value, @values.length, false
+                @values_p = FFI::MemoryPointer.new Native::Value, @values.length, false
                 @values.each_with_index do |v,i|
-                    Efl::EcoreGetopt::Value.new(@values_p+(i*Efl::EcoreGetopt::Value.size))[v[0]] = v[1]
+                    Native::Value.new(@values_p+(i*Native::Value.size))[v[0]] = v[1]
                 end
             end
             def parse argv
@@ -164,7 +167,7 @@ module Efl
                     ptr[i].put_pointer 0, p_from_string(s)
                 end
                 ptr[argv.length].put_pointer 0, FFI::Pointer::NULL
-                Efl::EcoreGetopt.ecore_getopt_parse @ecore_getopt, @values_p, argv.length, ptr
+                Native.ecore_getopt_parse @ecore_getopt, @values_p, argv.length, ptr
             end
             def store_full short, long, help, meta, type, arg_req, def_val
                 self << [ short, long, help, meta, :ecore_getopt_action_store, [:store, [type,arg_req, def_val] ] ]

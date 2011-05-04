@@ -49,7 +49,7 @@ describe Efl::EcoreGetopt do
         @p.help 'H', 'help'
         @p.value :boolp, @values[:help]
         # FIXME debug callback : ecore_getopt_callback_ecore_evas_list_engines
-        @p.callback_noargs 'E', 'list-engines', 'list ecore-evas available engines', Efl::EcoreEvas.method(:ecore_getopt_callback_ecore_evas_list_engines), FFI::Pointer::NULL
+        @p.callback_noargs 'E', 'list-engines', 'list ecore-evas available engines', Efl::EcoreEvas::Native.method(:ecore_getopt_callback_ecore_evas_list_engines), FFI::Pointer::NULL
         @p.value :boolp, @values[:engines]
         @p.store_type :int, 'i', 'int', 'store an integer'
         @p.value :intp, @values[:int]

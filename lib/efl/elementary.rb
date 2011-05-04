@@ -5,17 +5,19 @@ require 'efl/evas'
 #
 module Efl
     module Elm
-        extend Efl::FFIHelper
-        steal_ffitype Efl::Evas, :evas_smart_cb
-        steal_ffitype Efl::Evas, :evas_load_error
-        steal_ffitype Efl::Evas, :evas_callback_type
-        steal_ffitype Efl::Evas, :evas_object_box_data_p
+        module Native
+            extend Efl::FFIHelper
+            steal_ffitype Efl::Evas::Native, :evas_smart_cb
+            steal_ffitype Efl::Evas::Native, :evas_load_error
+            steal_ffitype Efl::Evas::Native, :evas_callback_type
+            steal_ffitype Efl::Evas::Native, :evas_object_box_data_p
+        end
     end
 end
 #
-require 'efl/ffi/elementary'
+require 'efl/native/elementary'
 #
-Efl::Evas::REvasObject.proxy_list << [Efl::Elm,'elm_'].freeze   # append not prepend !
+Efl::Evas::REvasObject.proxy_list << [Efl::Elm::Native,'elm_'].freeze   # append not prepend !
 #
 module Efl
     module Elm
@@ -23,30 +25,30 @@ module Efl
         class << self
             def init *args
                 a = args.select { |e| e.is_a? String }
-                return Efl::Elm.elm_init 0, FFI::MemoryPointer::NULL if a.length==0
+                return Native.elm_init 0, FFI::MemoryPointer::NULL if a.length==0
                 ptr = FFI::MemoryPointer.new :pointer, a.length
                 a.each_with_index do |s,i|
                     ptr[i].write_pointer FFI::MemoryPointer.from_string(s)
                 end
-                Efl::Elm.elm_init a.length, ptr
+                Native.elm_init a.length, ptr
             end
         end
         #
         class ElmWin
             include Efl::ClassHelper
-            proxy_list [Efl::Elm,'elm_win_'].freeze, [Efl::Elm,'elm_'].freeze
+            proxy_list [Efl::Elm::Native,'elm_win_'].freeze, [Efl::Elm::Native,'elm_'].freeze
             def initialize parent, title, type=:elm_win_basic
-                @evas_object = Efl::Evas::REvasObject.new Efl::Elm.elm_win_add parent, title, type
+                @evas_object = Evas::REvasObject.new Native.elm_win_add parent, title, type
                 @ptr = @evas_object.to_ptr
                 yield self,@evas_object if block_given?
             end
             def add e
-                eo = Efl::Evas::REvasObject.new Efl::Elm.send "elm_#{e}_add", @ptr
+                eo = Evas::REvasObject.new Native.send "elm_#{e}_add", @ptr
                 yield eo if block_given?
                 eo
             end
             def smart_callback_add event_str, cb, data=FFI::MemoryPointer::NULL
-                Efl::Evas.evas_object_smart_callback_add @ptr, event_str, cb, data
+                Evas::Native.evas_object_smart_callback_add @ptr, event_str, cb, data
             end
         end
         #

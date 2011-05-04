@@ -21,15 +21,15 @@ describe Efl::Evas do
     end
     #
     it "evas alloc error enum is ok" do
-        Efl::Evas.enum_value(:evas_alloc_error_none).should == 0
-        Efl::Evas.enum_value(:evas_alloc_error_fatal).should == 1
-        Efl::Evas.enum_value(:evas_alloc_error_recovered).should == 2
-        Efl::Evas.enum_type(:evas_alloc_error)[0].should == :evas_alloc_error_none
-        Efl::Evas.enum_type(:evas_alloc_error)[1].should == :evas_alloc_error_fatal
-        Efl::Evas.enum_type(:evas_alloc_error)[2].should == :evas_alloc_error_recovered
-        Efl::Evas.enum_type(:evas_alloc_error)[:evas_alloc_error_none].should == 0
-        Efl::Evas.enum_type(:evas_alloc_error)[:evas_alloc_error_fatal].should == 1
-        Efl::Evas.enum_type(:evas_alloc_error)[:evas_alloc_error_recovered].should == 2
+        Evas::Native.enum_value(:evas_alloc_error_none).should == 0
+        Evas::Native.enum_value(:evas_alloc_error_fatal).should == 1
+        Evas::Native.enum_value(:evas_alloc_error_recovered).should == 2
+        Evas::Native.enum_type(:evas_alloc_error)[0].should == :evas_alloc_error_none
+        Evas::Native.enum_type(:evas_alloc_error)[1].should == :evas_alloc_error_fatal
+        Evas::Native.enum_type(:evas_alloc_error)[2].should == :evas_alloc_error_recovered
+        Evas::Native.enum_type(:evas_alloc_error)[:evas_alloc_error_none].should == 0
+        Evas::Native.enum_type(:evas_alloc_error)[:evas_alloc_error_fatal].should == 1
+        Evas::Native.enum_type(:evas_alloc_error)[:evas_alloc_error_recovered].should == 2
     end
     #
     it "should have no memory allocation error occured" do
@@ -63,7 +63,7 @@ describe Efl::Evas do
             @e.output_method_set Evas::render_method_lookup("buffer")
             @e.output_viewport_set 0, 0, @width, @height
             @e.output_size_set @width, @height
-            einfo = Efl::Evas::EngineInfoBufferStruct.new @e.engine_info_get
+            einfo = Evas::Native::EngineInfoBufferStruct.new @e.engine_info_get
             einfo[:info][:depth_type] = Efl::Evas::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
             einfo[:info][:dest_buffer] = @pixels
             einfo[:info][:dest_buffer_row_bytes] = @width * FFI::type_size(:int);
@@ -90,7 +90,7 @@ describe Efl::Evas do
             e1.to_ptr.should be_nil
             e2.free
             e2.free
-            e4 = Evas::REvas.new Evas.evas_new
+            e4 = Evas::REvas.new Evas::Native.evas_new
             e4.address.should_not == 0
             e5 = e4.dup
             e4.address.should == e5.address
@@ -101,14 +101,14 @@ describe Efl::Evas do
         end
         #
         it "focus should work" do
-            Efl::Evas.evas_focus_in @e.to_ptr
-            Efl::Evas.evas_focus_state_get(@e.to_ptr).should be_true
-            Efl::Evas.evas_focus_out @e.to_ptr
-            Efl::Evas.evas_focus_state_get(@e.to_ptr).should be_false
-            Efl::Evas.focus_in @e.to_ptr
-            Efl::Evas.focus_state_get(@e.to_ptr).should be_true
-            Efl::Evas.focus_out @e.to_ptr
-            Efl::Evas.focus_state_get(@e.to_ptr).should be_false
+            Evas::Native.evas_focus_in @e.to_ptr
+            Evas::Native.evas_focus_state_get(@e.to_ptr).should be_true
+            Evas::Native.evas_focus_out @e.to_ptr
+            Evas::Native.evas_focus_state_get(@e.to_ptr).should be_false
+            Evas.focus_in @e.to_ptr
+            Evas.focus_state_get(@e.to_ptr).should be_true
+            Evas.focus_out @e.to_ptr
+            Evas.focus_state_get(@e.to_ptr).should be_false
             @e.focus_in { |r| r.should be_nil }
             @e.focus_state_get.should be_true
             @e.focus_state_get { |r| r.should be_true }
@@ -142,7 +142,7 @@ describe Efl::Evas do
         it "output method should work" do
             @e.output_method_get.should == Evas::render_method_lookup("buffer")
             # output_method_set tested in before(:all)
-            l = Efl::Evas::render_method_list
+            l = Efl::Evas.render_method_list
             Evas::render_method_list_free l
         end
         #
@@ -268,7 +268,7 @@ describe Efl::Evas do
             @e.output_method_set Evas.render_method_lookup("buffer")
             @e.output_viewport_set 0, 0, 100, 100
             @e.output_size_set 100, 100
-            einfo = Efl::Evas::EngineInfoBufferStruct.new @e.engine_info_get
+            einfo = Evas::Native::EngineInfoBufferStruct.new @e.engine_info_get
             einfo[:info][:depth_type] = Efl::Evas::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
             einfo[:info][:dest_buffer] = @pixels
             einfo[:info][:dest_buffer_row_bytes] = 100 * FFI::type_size(:int);
