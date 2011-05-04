@@ -48,7 +48,7 @@ module Efl
         class REvas
             #
             include Efl::ClassHelper
-            proxy_list [Efl::Native,'evas_'].freeze
+            search_prefixes 'evas_'
             #
             def initialize o=nil
                 @ptr = (
@@ -108,7 +108,7 @@ module Efl
         class REvasObject
             #
             include Efl::ClassHelper
-            proxy_list [Efl::Native,'evas_object_'].freeze, [Efl::Native,'evas_'].freeze
+            search_prefixes 'evas_object_', 'evas_'
             #
             def initialize o=nil
                 @ptr = (

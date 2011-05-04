@@ -4,7 +4,7 @@
 require 'efl/evas'
 require 'efl/native/elementary'
 #
-Efl::Evas::REvasObject.proxy_list << [Efl::Native,'elm_'].freeze   # append not prepend !
+Efl::Evas::REvasObject.search_prefixes << 'elm_'   # append not prepend !
 #
 module Efl
     module Elm
@@ -23,7 +23,7 @@ module Efl
         #
         class ElmWin
             include Efl::ClassHelper
-            proxy_list [Efl::Native,'elm_win_'].freeze, [Efl::Native,'elm_'].freeze
+            search_prefixes 'elm_win_', 'elm_'
             def initialize parent, title, type=:elm_win_basic
                 @evas_object = Evas::REvasObject.new Native.elm_win_add parent, title, type
                 @ptr = @evas_object.to_ptr

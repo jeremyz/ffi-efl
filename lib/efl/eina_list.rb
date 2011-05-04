@@ -21,7 +21,7 @@ module Efl
         class REinaList
             include Enumerable
             include Efl::ClassHelper
-            proxy_list [Efl::Native,'eina_list_'].freeze
+            search_prefixes 'eina_list_'
             def initialize o=nil
                 @ptr = (
                     case o

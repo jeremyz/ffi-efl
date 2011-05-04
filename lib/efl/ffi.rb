@@ -72,15 +72,15 @@ module Efl
         def === o; @ptr === o.to_ptr; end
         def address; @ptr.address; end
         def self.included kls
-            # create class instance @proxy_list
-            kls.class_eval "@proxy_list ||=[]"
-            # access and prepend *args to @proxy_list
-            kls.class_eval "def self.proxy_list *args; @proxy_list.unshift *args unless args.empty?; @proxy_list; end"
-            # on inheritance, copy ancestor's @proxy_list
+            # create class instance @search_prefixes
+            kls.class_eval "@search_prefixes ||=[]"
+            # access and prepend *args to @search_prefixes
+            kls.class_eval "def self.search_prefixes *args; @search_prefixes.unshift *args unless args.empty?; @search_prefixes; end"
+            # on inheritance, copy ancestor's @search_prefixes
             kls.class_eval <<-EOF
             def self.inherited sub
-                sub.class_eval '@proxy_list = []'
-                sub.proxy_list *self.proxy_list
+                sub.class_eval '@search_prefixes = []'
+                sub.search_prefixes *self.search_prefixes
             end
             EOF
         end
@@ -95,18 +95,18 @@ module Efl
             else
                 args_s = '*args'
             end
-            self.class.proxy_list.each do |mod,p|
+            self.class.search_prefixes.each do |p|
                 sym = p+m_s
-                if mod.respond_to? sym
-                    self.class.class_eval "def #{m} *args, &block; r=#{mod.name}.#{sym}(@ptr,#{args_s}); yield r if block_given?; r; end"
+                if Efl::Native.respond_to? sym
+                    self.class.class_eval "def #{m} *args, &block; r=#{Efl::Native.name}.#{sym}(@ptr,#{args_s}); yield r if block_given?; r; end"
                     return self.send m, *args, &block
-                elsif mod.respond_to? m
-                    self.class.class_eval "def #{m} *args, &block; r=#{mod.name}.#{m}(@ptr,#{args_s}); yield r if block_given?; r; end"
+                elsif Efl::Native.respond_to? m
+                    self.class.class_eval "def #{m} *args, &block; r=#{Efl::Native.name}.#{m}(@ptr,#{args_s}); yield r if block_given?; r; end"
                     return self.send m, *args, &block
                 end
             end
             return [self.to_s+' ['+self.to_ptr.to_s+']'] if m_s=~/^to_ary$/
-            Kernel.raise NameError.new "#{self.class.name} is unable to resolve #{m} within #{self.class.proxy_list.inspect}"
+            Kernel.raise NameError.new "#{self.class.name} is unable to resolve #{m} within #{self.class.search_prefixes.inspect}"
         end
     end
 end

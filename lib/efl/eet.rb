@@ -10,7 +10,7 @@ module Efl
         class REetFile
             #
             include Efl::ClassHelper
-            proxy_list [Efl::Native,'eet_'].freeze
+            search_prefixes 'eet_'
             #
             def initialize ptr
                 @ptr=ptr
