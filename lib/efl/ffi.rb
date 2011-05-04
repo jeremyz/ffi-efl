@@ -105,6 +105,7 @@ module Efl
                     return self.send m, *args, &block
                 end
             end
+            return [self.to_s+' ['+self.to_ptr.to_s+']'] if m_s=~/^to_ary$/
             Kernel.raise NameError.new "#{self.class.name} is unable to resolve #{m} within #{self.class.proxy_list.inspect}"
         end
     end
