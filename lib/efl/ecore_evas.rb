@@ -117,10 +117,13 @@ module Efl
                 # EAPI Ecore_Evas *ecore_evas_object_ecore_evas_get(Evas_Object *obj);
                 Efl::EcoreEvas::REcoreEvas.new Efl::EcoreEvas.ecore_evas_object_ecore_evas_get @ptr
             end
-            def evas_get
-                # EAPI Evas *ecore_evas_object_evas_get(Evas_Object *obj);
-                Efl::Evas::REvas.new Efl::EcoreEvas.ecore_evas_object_evas_get @ptr
-            end
+            alias :ecore_evas :ecore_evas_get
+            # FIXME override REvas#evas_get => evas_object_evas_get
+#            def evas_get
+#                # EAPI Evas *ecore_evas_object_evas_get(Evas_Object *obj);
+#                Efl::Evas::REvas.new Efl::EcoreEvas.ecore_evas_object_evas_get @ptr
+#            end
+#            alias :evas :evas_get
         end
     end
     #

@@ -78,6 +78,7 @@ module Efl
                 Efl::Evas.evas_output_size_get @ptr, x, y
                 [ x.read_int, y.read_int ]
             end
+            alias :size :output_size_get
             def output_viewport_get
                 x = FFI::MemoryPointer.new :int
                 y = FFI::MemoryPointer.new :int
@@ -150,6 +151,18 @@ module Efl
                 [ r.read_int, g.read_int, b.read_int, a.read_int ]
             end
             alias :color :color_get
+            def evas_get
+                REvas.new Efl::Evas.evas_object_evas_get @ptr
+            end
+            alias :evas :evas_get
+            def above_get
+                REvasObject.new Efl::Evas.evas_object_above_get @ptr
+            end
+            alias :above :above_get
+            def below_get
+                REvasObject.new Efl::Evas.evas_object_below_get @ptr
+            end
+            alias :below :below_get
         end
     end
 end

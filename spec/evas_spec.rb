@@ -1,6 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
+require 'efl/ecore'
 require 'efl/evas'
 #
 describe Efl::Evas do
@@ -264,7 +265,7 @@ describe Efl::Evas do
             Evas.init
             @pixels = FFI::MemoryPointer.new :int, 100*100
             @e = Evas::REvas.new
-            @e.output_method_set Evas::render_method_lookup("buffer")
+            @e.output_method_set Evas.render_method_lookup("buffer")
             @e.output_viewport_set 0, 0, 100, 100
             @e.output_size_set 100, 100
             einfo = Efl::Evas::EngineInfoBufferStruct.new @e.engine_info_get
@@ -276,11 +277,12 @@ describe Efl::Evas do
             einfo[:info][:func][:new_update_region] = nil #FFI::Pointer::NULL;
             einfo[:info][:func][:free_update_region] = nil #FFI::Pointer::NULL;
             @e.engine_info_set einfo
-            @o = @e.object_add :rectangle
-            @o.color = 200,200,200,200
-            @o.move 0, 0
-            @o.resize 100, 100
-            @o.show
+            @o = @e.object_add(:rectangle) { |o|
+                o.color = 200,200,200,200
+                o.move 0, 0
+                o.resize 100, 100
+                o.show
+            }
         end
         after(:all) do
             @e.free
@@ -340,6 +342,66 @@ describe Efl::Evas do
             @o.visible_get.should be_false
             @o.show
             @o.visible?.should be_true
+        end
+        #
+        it "color get/set should work" do
+            @o.color_get.should == [200,200,200,200]
+            @o.color_set 0,50,100,200
+            @o.color.should == [0,50,100,200]
+            @o.color = 200,200,200,200
+            @o.color.should == [200,200,200,200]
+        end
+        #
+        it "evas_get should worl" do
+            @o.evas_get.should === @e
+            @o.evas.should === @e
+        end
+        #
+        it "type_get should work" do
+            @o.type_get.should == 'rectangle'
+        end
+        # TODO raise, lower
+        it "raise, lower, stck_below, stack_above should work" do
+            os = []
+            0.upto(3) do
+                os << @e.object_add(:rectangle)
+            end
+            os[2].above.should === os[3]
+            os[2].below.should === os[1]
+            os[2].above_get.should === os[3]
+            os[2].below_get.should === os[1]
+            os[2].stack_below os[1]
+            os[2].above_get.should === os[1]
+            os[2].below_get.should === os[0]
+            os[2].stack_above os[1]
+            os[2].above_get.should === os[3]
+            os[2].below_get.should === os[1]
+            os.each do |o| o.free; end
+        end
+        #
+        it "event_callback should work" do
+            @o.move 0, 0 # FIXME why should I need this ?!?
+            count = 0
+            cb = Proc.new do |data,evas,evas_object,event_info|
+                count +=1
+            end
+            cb_data = FFI::MemoryPointer.from_string "my cb data"
+            @o.event_callback_add :evas_callback_mouse_in, cb, @o
+            Efl::Evas.event_feed_mouse_in @o.evas, Time.now.to_i, cb_data
+            sleep 0.1
+            count.should==1
+        end
+        #
+        it "pass event should work" do
+            @o.pass_events_get.should be_false
+            @o.pass_events_set true
+            @o.pass_events_get.should be_true
+            @o.pass_events=false
+            @o.pass_events_get.should be_false
+            @o.pass_events_set true
+            @o.pass_events_get.should be_true
+            @o.pass_events=false
+            @o.pass_events_get.should be_false
         end
     end
     #
