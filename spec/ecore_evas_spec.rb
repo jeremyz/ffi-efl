@@ -108,8 +108,10 @@ describe Efl::EcoreEvas do
         it "rotation should work" do
             @e.rotation_set 25
             @e.rotation_get.should == 25
-            @e.rotation_set 50
+            @e.rotation = 50
             @e.rotation_get.should == 50
+            @e.rotation_with_resize_set 0
+            @e.rotation_get.should == 0
         end
         #
         it "shaped get/set should work" do
@@ -277,6 +279,65 @@ describe Efl::EcoreEvas do
             @e.ignore_events?.should be_false
         end
         #
-        # TODO ecore_evas_callback_*
+        it "manual_render set/get should work" do
+            @e.manual_render_set true
+            @e.manual_render_get.should be_true
+            @e.manual_render = false
+            @e.manual_render?.should be_false
+        end
+        #
+        it "comp_sync set/get should work" do
+            @e.comp_sync_set true
+            @e.comp_sync_get.should be_true
+            @e.comp_sync = false
+            @e.comp_sync?.should be_false
+        end
+        #
+        it "ecore_evas_callback_resize should work" do
+            cpt = 0
+            cb = Proc.new do |ecore_evas|
+                cpt+=1
+            end
+            @e.callback_resize_set cb
+            @e.resize 60,90
+            ecore_loop 3
+            cpt.should >0
+        end
+        #
+        it "ecore_evas_callback_move should work" do
+            cpt = 0
+            cb = Proc.new do |ecore_evas|
+                cpt+=1
+            end
+            @e.callback_move_set cb
+            @e.move 60,90
+            ecore_loop 3
+            cpt.should >0
+        end
+        #
+        it "ecore_evas_callback_show should work" do
+            cpt = 0
+            cb = Proc.new do |ecore_evas|
+                cpt+=1
+            end
+            @e.callback_show_set cb
+            @e.show
+            ecore_loop 3
+            cpt.should >0
+        end
+        #
+        it "ecore_evas_callback_hide should work" do
+            cpt = 0
+            cb = Proc.new do |ecore_evas|
+                cpt+=1
+            end
+            @e.show
+            ecore_loop 3
+            @e.callback_hide_set cb
+            @e.hide
+            ecore_loop 3
+            cpt.should >0
+        end
+        #
     end
 end
