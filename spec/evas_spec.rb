@@ -5,6 +5,24 @@ require 'efl/ecore'
 require 'efl/evas'
 #
 describe Efl::Evas do
+    def realize_evas
+        @width = 800
+        @height = 600
+        @pixels = FFI::MemoryPointer.new :int, @width*@height
+        @e = Evas::REvas.new
+        @e.output_method_set Evas::render_method_lookup("buffer")
+        @e.output_viewport_set 0, 0, @width, @height
+        @e.output_size_set @width, @height
+        einfo = Native::EngineInfoBufferStruct.new @e.engine_info
+        einfo[:info][:depth_type] = Efl::Evas::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
+        einfo[:info][:dest_buffer] = @pixels
+        einfo[:info][:dest_buffer_row_bytes] = @width * FFI::type_size(:int);
+        einfo[:info][:use_color_key] = 0;
+        einfo[:info][:alpha_threshold] = 0;
+        einfo[:info][:func][:new_update_region] = nil #FFI::Pointer::NULL;
+        einfo[:info][:func][:free_update_region] = nil #FFI::Pointer::NULL;
+        @e.engine_info_set einfo
+    end
     #
     before(:all) {
         Evas = Efl::Evas
@@ -59,22 +77,7 @@ describe Efl::Evas do
     describe Efl::Evas::REvas do
         before(:all) do
             Evas.init
-            @width = 800
-            @height = 600
-            @pixels = FFI::MemoryPointer.new :int, @width*@height
-            @e = Evas::REvas.new
-            @e.output_method_set Evas::render_method_lookup("buffer")
-            @e.output_viewport_set 0, 0, @width, @height
-            @e.output_size_set @width, @height
-            einfo = Native::EngineInfoBufferStruct.new @e.engine_info
-            einfo[:info][:depth_type] = Efl::Evas::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
-            einfo[:info][:dest_buffer] = @pixels
-            einfo[:info][:dest_buffer_row_bytes] = @width * FFI::type_size(:int);
-            einfo[:info][:use_color_key] = 0;
-            einfo[:info][:alpha_threshold] = 0;
-            einfo[:info][:func][:new_update_region] = nil #FFI::Pointer::NULL;
-            einfo[:info][:func][:free_update_region] = nil #FFI::Pointer::NULL;
-            @e.engine_info_set einfo
+            realize_evas
         end
         after(:all) do
             @e.free
@@ -306,20 +309,7 @@ describe Efl::Evas do
         #
         before(:all) do
             Evas.init
-            @pixels = FFI::MemoryPointer.new :int, 100*100
-            @e = Evas::REvas.new
-            @e.output_method_set Evas.render_method_lookup("buffer")
-            @e.output_viewport_set 0, 0, 100, 100
-            @e.output_size_set 100, 100
-            einfo = Native::EngineInfoBufferStruct.new @e.engine_info
-            einfo[:info][:depth_type] = Efl::Evas::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
-            einfo[:info][:dest_buffer] = @pixels
-            einfo[:info][:dest_buffer_row_bytes] = 100 * FFI::type_size(:int);
-            einfo[:info][:use_color_key] = 0;
-            einfo[:info][:alpha_threshold] = 0;
-            einfo[:info][:func][:new_update_region] = nil #FFI::Pointer::NULL;
-            einfo[:info][:func][:free_update_region] = nil #FFI::Pointer::NULL;
-            @e.engine_info_set einfo
+            realize_evas
             @o = @e.object_add(:rectangle) { |o|
                 o.color = 200,200,200,200
                 o.move 0, 0
@@ -566,6 +556,47 @@ describe Efl::Evas do
             @o.static_clip=false
             @o.static_clip?.should be_false
             @o.static_clip.should be_false
+        end
+        #
+    end
+    #
+    describe Efl::Evas::REvasLine do
+        #
+        before(:all) do
+            Evas.init
+            realize_evas
+            @l = @e.object_add 'line'
+        end
+        after(:all) do
+            @e.free
+            Evas.shutdown
+        end
+        it "xy get/set should work" do
+            @l.line_xy_set 10, 20, 30, 40
+            @l.line_xy_get.should == [10, 20, 30, 40]
+        end
+    end
+    #
+    describe Efl::Evas::REvasPolygon do
+        #
+        before(:all) do
+            Evas.init
+            realize_evas
+            @p = @e.object_add 'polygon'
+        end
+        after(:all) do
+            @e.free
+            Evas.shutdown
+        end
+        it "xy point_add should work" do
+            @p.point_add 10, 20
+            @p.point_add 30, 40
+            @p.point_add 50, 60
+            @p.point_add 80, 80
+        end
+        #
+        it "point clear shold work" do
+            @p.points_clear
         end
     end
     #

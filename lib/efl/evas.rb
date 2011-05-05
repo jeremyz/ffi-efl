@@ -72,10 +72,21 @@ module Efl
                 @ptr=nil
             end
             def object_add t
-                # TODO should return Objects
-                r = Evas::REvasObject.new Native.send "evas_object_#{t.to_s}_add", @ptr
-                yield r if block_given?
-                r
+                ts = t.to_s
+                o =  (
+                    case ts
+                    when 'rectangle'
+                        Evas::REvasRectangle.new Native.evas_object_rectangle_add @ptr
+                    when 'line'
+                        Evas::REvasLine.new Native.evas_object_line_add @ptr
+                    when 'polygon'
+                        Evas::REvasPolygon.new Native.evas_object_polygon_add @ptr
+                    else
+                        raise NameError.new "unknown or not implemented yet evas_object type #{ts}"
+                    end
+                )
+                yield o if block_given?
+                o
             end
             def output_size_get
                 x = FFI::MemoryPointer.new :int
@@ -238,6 +249,30 @@ module Efl
             end
             alias :data :data_get
         end
+        #
+        class REvasRectangle < REvasObject
+        end
+        #
+        class REvasLine < REvasObject
+            #
+            search_prefixes 'evas_object_line_'
+            #
+            def line_xy_get
+                x1 = FFI::MemoryPointer.new :int
+                y1 = FFI::MemoryPointer.new :int
+                x2 = FFI::MemoryPointer.new :int
+                y2 = FFI::MemoryPointer.new :int
+                Native.evas_object_line_xy_get @ptr, x1, y1, x2, y2
+                [ x1.read_int, y1.read_int, x2.read_int, y2.read_int ]
+            end
+        end
+        #
+        class REvasPolygon < REvasObject
+            #
+            search_prefixes 'evas_object_polygon_'
+            #
+        end
+        #
     end
 end
 #
