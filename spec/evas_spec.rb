@@ -26,7 +26,7 @@ describe Efl::Evas do
     #
     before(:all) {
         Evas = Efl::Evas
-        Native = Efl::Native
+        Native = Efl::Native unless Kernel.const_defined? 'Native'
     }
     #
     it "should init" do

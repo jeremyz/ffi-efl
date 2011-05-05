@@ -7,7 +7,7 @@ describe Efl::Eet do
     #
     before(:all) {
         Eet = Efl::Eet
-        Native = Efl::Native
+        Native = Efl::Native unless Kernel.const_defined? 'Native'
         REetFile = Efl::Eet::REetFile
     }
     #
