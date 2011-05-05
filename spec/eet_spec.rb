@@ -59,14 +59,14 @@ describe Efl::Eet do
         #
         it "should write" do
             f = REetFile.open FP, :eet_file_mode_write
-            f.mode_get.should == :eet_file_mode_write
+            f.mode.should == :eet_file_mode_write
             f.write 'config', 'test key'
             f.close
         end
         #
         it "default mode should be read" do
             f = REetFile.open FP
-            f.mode_get.should == :eet_file_mode_read
+            f.mode.should == :eet_file_mode_read
             f.close
         end
         #

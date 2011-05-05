@@ -97,11 +97,21 @@ module Efl
             end
             self.class.search_prefixes.each do |p|
                 sym = p+m_s
-                if Efl::Native.respond_to? sym
-                    self.class.class_eval "def #{m} *args, &block; r=#{Efl::Native.name}.#{sym}(@ptr,#{args_s}); yield r if block_given?; r; end"
-                    return self.send m, *args, &block
-                elsif Efl::Native.respond_to? m
-                    self.class.class_eval "def #{m} *args, &block; r=#{Efl::Native.name}.#{m}(@ptr,#{args_s}); yield r if block_given?; r; end"
+                meth = (
+                    if Efl::Native.respond_to? sym
+                        sym
+                    elsif Efl::Native.respond_to? m
+                        m
+                    elsif Efl::Native.respond_to? sym+'_get'
+                        sym+'_get'
+                    elsif Efl::Native.respond_to? m+'_get'
+                        m+'_get'
+                    else
+                        nil
+                    end
+                )
+                if not meth.nil?
+                    self.class.class_eval "def #{m} *args, &block; r=Efl::Native.#{meth}(@ptr,#{args_s}); yield r if block_given?; r; end"
                     return self.send m, *args, &block
                 end
             end

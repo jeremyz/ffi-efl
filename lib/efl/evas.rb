@@ -83,6 +83,7 @@ module Efl
                 Native.evas_output_size_get @ptr, x, y
                 [ x.read_int, y.read_int ]
             end
+            alias :output_size :output_size_get
             alias :size :output_size_get
             def output_viewport_get
                 x = FFI::MemoryPointer.new :int
@@ -92,6 +93,7 @@ module Efl
                 Native.evas_output_viewport_get @ptr, x, y, w, h
                 [ x.read_int, y.read_int, w.read_int, h.read_int ]
             end
+            alias :output_viewport :output_viewport_get
             alias :viewport :output_viewport_get
             def pointer_output_xy_get
                 x = FFI::MemoryPointer.new :int
@@ -134,6 +136,9 @@ module Efl
                 @ptr.autopointer=false if @ptr.is_a? FFI::AutoPointer
                 REvasObject.release @ptr
                 @ptr=nil
+            end
+            def name
+                Native.evas_object_name_get @ptr
             end
             def geometry_get
                 x = FFI::MemoryPointer.new :int

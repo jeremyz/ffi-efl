@@ -66,7 +66,7 @@ describe Efl::Evas do
             @e.output_method_set Evas::render_method_lookup("buffer")
             @e.output_viewport_set 0, 0, @width, @height
             @e.output_size_set @width, @height
-            einfo = Native::EngineInfoBufferStruct.new @e.engine_info_get
+            einfo = Native::EngineInfoBufferStruct.new @e.engine_info
             einfo[:info][:depth_type] = Efl::Evas::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
             einfo[:info][:dest_buffer] = @pixels
             einfo[:info][:dest_buffer_row_bytes] = @width * FFI::type_size(:int);
@@ -113,11 +113,11 @@ describe Efl::Evas do
             Evas.focus_out @e.to_ptr
             Evas.focus_state_get(@e.to_ptr).should be_false
             @e.focus_in { |r| r.should be_nil }
-            @e.focus_state_get.should be_true
+            @e.focus_state.should be_true
             @e.focus_state_get { |r| r.should be_true }
             @e.focus_out.should be_nil
             @e.focus_state_get.should be_false
-            @e.focus_state_get { |r| r.should be_false }
+            @e.focus_state { |r| r.should be_false }
         end
         #
         it "nochange should work" do
@@ -128,6 +128,7 @@ describe Efl::Evas do
         it "attach data should work" do
             data = FFI::MemoryPointer.from_string "my data"
             @e.data_attach_set data
+            @e.data_attach.read_string.should == "my data"
             @e.data_attach_get.read_string.should == "my data"
         end
         #
@@ -143,6 +144,7 @@ describe Efl::Evas do
             @e.render_dump
         end
         it "output method should work" do
+            @e.output_method.should == Evas::render_method_lookup("buffer")
             @e.output_method_get.should == Evas::render_method_lookup("buffer")
             # output_method_set tested in before(:all)
             l = Efl::Evas.render_method_list
@@ -156,12 +158,16 @@ describe Efl::Evas do
         #
         it "output size should work" do
             @e.output_size_set 69, 666
+            @e.size.should == [69,666]
+            @e.output_size.should == [69,666]
             @e.output_size_get.should == [69,666]
             @e.output_size = 666, 69
             @e.size == [666,69]
         end
         it "output viewport should work" do
             @e.output_viewport_set 0, 0, 666, 69
+            @e.viewport.should == [0,0,666,69]
+            @e.output_viewport.should == [0,0,666,69]
             @e.output_viewport_get.should == [0,0,666,69]
             @e.output_viewport =  0, 0, 69, 666
             @e.viewport.should == [0,0,69,666]
@@ -180,34 +186,38 @@ describe Efl::Evas do
         end
         #
         it "freeze and thaw should work" do
-            @e.event_freeze_get.should == 0
+            @e.event_freeze?.should == 0
             @e.event_freeze
-            @e.event_freeze_get.should == 1
+            @e.event_freeze?.should == 1
             @e.event_thaw
             @e.event_freeze_get.should == 0
         end
         #
         it "up/down mouse event should work" do
             @e.event_feed_mouse_down 2, :evas_button_double_click, Time.now.to_i, FFI::Pointer::NULL
-            @e.pointer_button_down_mask_get.should == 2
+            @e.pointer_button_down_mask.should == 2
             @e.event_feed_mouse_up 2, :evas_button_double_click, Time.now.to_i, FFI::Pointer::NULL
             @e.pointer_button_down_mask_get.should == 0
         end
         #
         it "move mouse event should work" do
+            @e.pointer_output.should == [0,0]
             @e.pointer_output_xy_get.should == [0,0]
+            @e.pointer_canvas.should == [0,0]
             @e.pointer_canvas_xy_get.should == [0,0]
             @e.event_feed_mouse_move 6, 6, Time.now.to_i, FFI::Pointer::NULL
+            @e.pointer_output.should == [6,6]
             @e.pointer_output_xy_get.should == [6,6]
+            @e.pointer_canvas.should == [6,6]
             @e.pointer_canvas_xy_get.should == [6,6]
         end
         #
         it "in/out mouse event should work" do
             @e.pointer_inside_get.should be_false
             @e.event_feed_mouse_in Time.now.to_i, FFI::Pointer::NULL
-            @e.pointer_inside_get.should be_true
+            @e.pointer_inside.should be_true
             @e.event_feed_mouse_out Time.now.to_i, FFI::Pointer::NULL
-            @e.pointer_inside_get.should be_false
+            @e.pointer_inside.should be_false
         end
         #
         # TODO evas_event_feed_*
@@ -244,15 +254,18 @@ describe Efl::Evas do
             @e.image_cache_flush
             @e.image_cache_reload
             @e.image_cache_set 666
+            @e.image_cache.should == 666
             @e.image_cache_get.should == 666
         end
         #
         it "font functions should work" do
             @e.font_hinting_set :evas_font_hinting_bytecode
+            @e.font_hinting.should == :evas_font_hinting_bytecode
             @e.font_hinting_get.should == :evas_font_hinting_bytecode
             @e.font_hinting_can_hint(:evas_font_hinting_none).should be_true
             @e.font_cache_flush
             @e.font_cache_set 666
+            @e.font_cache.should == 666
             @e.font_cache_get.should == 666
             l = @e.font_available_list
             @e.font_available_list_free l
@@ -275,7 +288,7 @@ describe Efl::Evas do
             @e.output_method_set Evas.render_method_lookup("buffer")
             @e.output_viewport_set 0, 0, 100, 100
             @e.output_size_set 100, 100
-            einfo = Native::EngineInfoBufferStruct.new @e.engine_info_get
+            einfo = Native::EngineInfoBufferStruct.new @e.engine_info
             einfo[:info][:depth_type] = Efl::Evas::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
             einfo[:info][:dest_buffer] = @pixels
             einfo[:info][:dest_buffer_row_bytes] = 100 * FFI::type_size(:int);
@@ -305,7 +318,7 @@ describe Efl::Evas do
             clipper.resize 50, 50
             @o.clip = clipper.to_ptr
             clipper.show
-            @o.clip_get.address.should == clipper.address
+            @o.clip.address.should == clipper.address
             require 'efl/eina_list'
             Efl::EinaList::REinaList.new(clipper.clipees_get).to_ary[0].address.should == @o.address
             @o.clip_unset
@@ -314,7 +327,7 @@ describe Efl::Evas do
         end
         #
         it "focus functions should work" do
-            @o.focus_get.should be_false
+            @o.focus.should be_false
             @o.focus_set true
             @o.focus_get.should be_true
             @o.focus = false
@@ -322,7 +335,7 @@ describe Efl::Evas do
         end
         #
         it "layer functions should work" do
-            @o.layer_get.should == 0
+            @o.layer.should == 0
             @o.layer_set 2
             @o.layer_get.should == 2
             @o.layer = 0
@@ -331,11 +344,12 @@ describe Efl::Evas do
         #
         it "name functions should work" do
             @o.name_set "My name"
+            @o.name.should == "My name"
             @o.name_get.should == "My name"
         end
         #
         it "geometry functions should work" do
-            @o.geometry_get.should == [0,0,100,100]
+            @o.geometry.should == [0,0,100,100]
             @o.resize 50,50
             @o.geometry.should == [0,0,50,50]
             @o.move 10, 10
@@ -346,12 +360,14 @@ describe Efl::Evas do
             @o.show
             @o.visible?.should be_true
             @o.hide
+            @o.visible.should be_false
             @o.visible_get.should be_false
             @o.show
             @o.visible?.should be_true
         end
         #
         it "color get/set should work" do
+            @o.color.should == [200,200,200,200]
             @o.color_get.should == [200,200,200,200]
             @o.color_set 0,50,100,200
             @o.color.should == [0,50,100,200]
@@ -360,11 +376,12 @@ describe Efl::Evas do
         end
         #
         it "evas_get should worl" do
-            @o.evas_get.should === @e
             @o.evas.should === @e
+            @o.evas_get.should === @e
         end
         #
         it "type_get should work" do
+            @o.type.should == 'rectangle'
             @o.type_get.should == 'rectangle'
         end
         # TODO raise, lower
@@ -375,19 +392,19 @@ describe Efl::Evas do
             end
             os[2].above.should === os[3]
             os[2].below.should === os[1]
-            os[2].above_get.should === os[3]
-            os[2].below_get.should === os[1]
+            os[2].above.should === os[3]
+            os[2].below.should === os[1]
             os[2].stack_below os[1]
             os[2].above_get.should === os[1]
             os[2].below_get.should === os[0]
             os[2].stack_above os[1]
-            os[2].above_get.should === os[3]
-            os[2].below_get.should === os[1]
+            os[2].above.should === os[3]
+            os[2].below.should === os[1]
             os.each do |o| o.free; end
         end
         #
         it "event_callback should work" do
-            @o.move 0, 0 # FIXME why should I need this ?!?
+            @o.move 0, 0 # FIXME why do I need this ?!?
             count = 0
             cb = Proc.new do |data,evas,evas_object,event_info|
                 count +=1
@@ -399,14 +416,14 @@ describe Efl::Evas do
             count.should==1
         end
         #
-        it "pass event should work" do
-            @o.pass_events_get.should be_false
+        it "pass events should work" do
+            @o.pass_events.should be_false
             @o.pass_events_set true
-            @o.pass_events_get.should be_true
+            @o.pass_events.should be_true
             @o.pass_events=false
-            @o.pass_events_get.should be_false
+            @o.pass_events.should be_false
             @o.pass_events_set true
-            @o.pass_events_get.should be_true
+            @o.pass_events.should be_true
             @o.pass_events=false
             @o.pass_events_get.should be_false
         end
