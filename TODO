@@ -4,6 +4,7 @@ global
     - spec/ecore_evas_spec.rb 23px is window frame height
     - find an elegant way to have require 'efl/native' work with Efl::Evas::Native, Efl::Ecore::Native, ...
         see tag "seperate-natives"
+    - maybe allow meth= within module#method_missing ( tools/genruby.rb)
 
 Eet
     - ...
