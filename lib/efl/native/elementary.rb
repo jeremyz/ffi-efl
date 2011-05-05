@@ -35,6 +35,8 @@ module Efl
         # typedef enum _Elm_Text_Format {...} Elm_Text_Format;
         enum :elm_text_format, [ :elm_text_format_plain_utf8, :elm_text_format_markup_utf8 ]
         typedef :pointer, :elm_text_format_p
+        # typedef enum _Elm_Wrap_Type {...} Elm_Wrap_Type;
+        enum :elm_wrap_type, [ :elm_wrap_none, 0, :elm_wrap_char, :elm_wrap_word, :elm_wrap_mixed, :elm_wrap_last ]
         # typedef enum _Elm_Win_Type {...} Elm_Win_Type;
         enum :elm_win_type, [ :elm_win_basic, :elm_win_dialog_basic, :elm_win_desktop, :elm_win_dock, :elm_win_toolbar, :elm_win_menu,
             :elm_win_utility, :elm_win_splash, :elm_win_dropdown_menu, :elm_win_popup_menu, :elm_win_tooltip, :elm_win_notification, :elm_win_combo, :elm_win_dnd,
@@ -88,18 +90,11 @@ module Efl
             :elm_photocam_zoom_mode_last ]
         # typedef enum _Elm_Map_Zoom_Mode {...} Elm_Map_Zoom_Mode;
         enum :elm_map_zoom_mode, [ :elm_map_zoom_mode_manual, :elm_map_zoom_mode_auto_fit, :elm_map_zoom_mode_auto_fill, :elm_map_zoom_mode_last ]
-        # typedef enum _Elm_Map_Sources {...} Elm_Map_Sources;
-        enum :elm_map_sources, [ :elm_map_source_mapnik, :elm_map_source_osmarender, :elm_map_source_cyclemap, :elm_map_source_maplint,
-            :elm_map_source_custom_1, :elm_map_source_custom_2, :elm_map_source_custom_3, :elm_map_source_custom_4, :elm_map_source_custom_5,
-            :elm_map_source_custom_6, :elm_map_source_module, :elm_map_source_last ]
         # typedef enum _Elm_Map_Route_Sources {...} Elm_Map_Route_Sources;
-        enum :elm_map_route_sources, [ :elm_map_route_source_yours, :elm_map_route_source_monav, :elm_map_route_source_ors,
-            :elm_map_route_source_custom_1, :elm_map_route_source_custom_2, :elm_map_route_source_custom_3, :elm_map_route_source_custom_4,
-            :elm_map_route_source_custom_5, :elm_map_route_source_custom_6, :elm_map_route_source_module, :elm_map_route_source_last ]
+        enum :elm_map_route_sources, [ :elm_map_route_source_yours, :elm_map_route_source_monav, :elm_map_route_source_ors, :elm_map_route_source_last
+            ]
         # typedef enum _Elm_Map_Name_Sources {...} Elm_Map_Name_Sources;
-        enum :elm_map_name_sources, [ :elm_map_name_source_nominatim, :elm_map_name_source_custom_1, :elm_map_name_source_custom_2,
-            :elm_map_name_source_custom_3, :elm_map_name_source_custom_4, :elm_map_name_source_custom_5, :elm_map_name_source_custom_6,
-            :elm_map_name_source_module, :elm_map_name_source_last ]
+        enum :elm_map_name_sources, [ :elm_map_name_source_nominatim, :elm_map_name_source_last ]
         # typedef enum _Elm_Map_Route_Type {...} Elm_Map_Route_Type;
         enum :elm_map_route_type, [ :elm_map_route_type_motocar, :elm_map_route_type_bicycle, :elm_map_route_type_foot, :elm_map_route_type_last ]
         # typedef enum _Elm_Map_Route_Method {...} Elm_Map_Route_Method;
@@ -303,12 +298,24 @@ module Efl
         callback :elmmapmarkericongetfunc, [ :evas_object_p, :elm_map_marker_p, :void_p ], :evas_object_p
         # typedef Evas_Object *(*ElmMapGroupIconGetFunc) (Evas_Object *obj, void *data);
         callback :elmmapgroupicongetfunc, [ :evas_object_p, :void_p ], :evas_object_p
-        # typedef char *(*ElmMapSourceURLFunc) (Evas_Object *obj, int x, int y, int zoom);
-        callback :elmmapsourceurlfunc, [ :evas_object_p, :int, :int, :int ], :string
-        # typedef char *(*ElmMapRouteSourceURLFunc) (Evas_Object *obj, char *type_name, int method, double flon, double flat, double tlon, double tlat);
-        callback :elmmaproutesourceurlfunc, [ :evas_object_p, :string, :int, :double, :double, :double, :double ], :string
-        # typedef char *(*ElmMapNameSourceURLFunc) (Evas_Object *obj, int method, char *name, double lon, double lat);
-        callback :elmmapnamesourceurlfunc, [ :evas_object_p, :int, :string, :double, :double ], :string
+        # typedef char *(*ElmMapModuleSourceFunc) (void);
+        callback :elmmapmodulesourcefunc, [  ], :string
+        # typedef int (*ElmMapModuleZoomMinFunc) (void);
+        callback :elmmapmodulezoomminfunc, [  ], :int
+        # typedef int (*ElmMapModuleZoomMaxFunc) (void);
+        callback :elmmapmodulezoommaxfunc, [  ], :int
+        # typedef char *(*ElmMapModuleUrlFunc) (Evas_Object *obj, int x, int y, int zoom);
+        callback :elmmapmoduleurlfunc, [ :evas_object_p, :int, :int, :int ], :string
+        # typedef int (*ElmMapModuleRouteSourceFunc) (void);
+        callback :elmmapmoduleroutesourcefunc, [  ], :int
+        # typedef char *(*ElmMapModuleRouteUrlFunc) (Evas_Object *obj, char *type_name, int method, double flon, double flat, double tlon, double tlat);
+        callback :elmmapmodulerouteurlfunc, [ :evas_object_p, :string, :int, :double, :double, :double, :double ], :string
+        # typedef char *(*ElmMapModuleNameUrlFunc) (Evas_Object *obj, int method, char *name, double lon, double lat);
+        callback :elmmapmodulenameurlfunc, [ :evas_object_p, :int, :string, :double, :double ], :string
+        # typedef Eina_Bool (*ElmMapModuleGeoIntoCoordFunc) (const Evas_Object *obj, int zoom, double lon, double lat, int size, int *x, int *y);
+        callback :elmmapmodulegeointocoordfunc, [ :evas_object_p, :int, :double, :double, :int, :int_p, :int_p ], :eina_bool
+        # typedef Eina_Bool (*ElmMapModuleCoordIntoGeoFunc) (const Evas_Object *obj, int zoom, int x, int y, int size, double *lon, double *lat);
+        callback :elmmapmodulecoordintogeofunc, [ :evas_object_p, :int, :int, :int, :int, :double_p, :double_p ], :eina_bool
         # typedef void (*Elm_Animator_Operation_Cb) (void *data, Elm_Animator *animator, double frame);
         callback :elm_animator_operation_cb, [ :void_p, :elm_animator_p, :double ], :void
         # typedef void (*Elm_Animator_Completion_Cb) (void *data);
@@ -916,10 +923,10 @@ module Efl
         [ :elm_box_horizontal_set, [ :evas_object_p, :eina_bool ], :void ],
         # EAPI Eina_Bool elm_box_horizontal_get(const Evas_Object *obj);
         [ :elm_box_horizontal_get, [ :evas_object_p ], :eina_bool ],
-        # EAPI void elm_box_homogenous_set(Evas_Object *obj, Eina_Bool homogenous);
-        [ :elm_box_homogenous_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool elm_box_homogenous_get(const Evas_Object *obj);
-        [ :elm_box_homogenous_get, [ :evas_object_p ], :eina_bool ],
+        # EAPI void elm_box_homogeneous_set(Evas_Object *obj, Eina_Bool homogeneous);
+        [ :elm_box_homogeneous_set, [ :evas_object_p, :eina_bool ], :void ],
+        # EAPI Eina_Bool elm_box_homogeneous_get(const Evas_Object *obj);
+        [ :elm_box_homogeneous_get, [ :evas_object_p ], :eina_bool ],
         # EAPI void elm_box_pack_start(Evas_Object *obj, Evas_Object *subobj);
         [ :elm_box_pack_start, [ :evas_object_p, :evas_object_p ], :void ],
         # EAPI void elm_box_pack_end(Evas_Object *obj, Evas_Object *subobj);
@@ -1102,10 +1109,10 @@ module Efl
         [ :elm_label_label_set, [ :evas_object_p, :string ], :void ],
         # EAPI const char *elm_label_label_get(const Evas_Object *obj);
         [ :elm_label_label_get, [ :evas_object_p ], :string ],
-        # EAPI void elm_label_line_wrap_set(Evas_Object *obj, Eina_Bool wrap);
-        [ :elm_label_line_wrap_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool elm_label_line_wrap_get(const Evas_Object *obj);
-        [ :elm_label_line_wrap_get, [ :evas_object_p ], :eina_bool ],
+        # EAPI void elm_label_line_wrap_set(Evas_Object *obj, Elm_Wrap_Type wrap);
+        [ :elm_label_line_wrap_set, [ :evas_object_p, :elm_wrap_type ], :void ],
+        # EAPI Elm_Wrap_Type elm_label_line_wrap_get(const Evas_Object *obj);
+        [ :elm_label_line_wrap_get, [ :evas_object_p ], :elm_wrap_type ],
         # EAPI void elm_label_wrap_width_set(Evas_Object *obj, Evas_Coord w);
         [ :elm_label_wrap_width_set, [ :evas_object_p, :int ], :void ],
         # EAPI Evas_Coord elm_label_wrap_width_get(const Evas_Object *obj);
@@ -1164,10 +1171,10 @@ module Efl
         [ :elm_frame_content_unset, [ :evas_object_p ], :evas_object_p ],
         # EAPI Evas_Object *elm_table_add(Evas_Object *parent);
         [ :elm_table_add, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_table_homogenous_set(Evas_Object *obj, Eina_Bool homogenous);
-        [ :elm_table_homogenous_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool elm_table_homogenous_get(const Evas_Object *obj);
-        [ :elm_table_homogenous_get, [ :evas_object_p ], :eina_bool ],
+        # EAPI void elm_table_homogeneous_set(Evas_Object *obj, Eina_Bool homogeneous);
+        [ :elm_table_homogeneous_set, [ :evas_object_p, :eina_bool ], :void ],
+        # EAPI Eina_Bool elm_table_homogeneous_get(const Evas_Object *obj);
+        [ :elm_table_homogeneous_get, [ :evas_object_p ], :eina_bool ],
         # EAPI void elm_table_padding_set(Evas_Object *obj, Evas_Coord horizontal, Evas_Coord vertical);
         [ :elm_table_padding_set, [ :evas_object_p, :int, :int ], :void ],
         # EAPI void elm_table_padding_get(const Evas_Object *obj, Evas_Coord *horizontal, Evas_Coord *vertical);
@@ -1322,7 +1329,7 @@ module Efl
         [ :elm_layout_theme_set, [ :evas_object_p, :string, :string, :string ], :eina_bool ],
         # EAPI void elm_layout_content_set(Evas_Object *obj, const char *swallow, Evas_Object *content);
         [ :elm_layout_content_set, [ :evas_object_p, :string, :evas_object_p ], :void ],
-        # EAPI const Evas_Object *elm_layout_content_get(const Evas_Object *obj, const char *swallow);
+        # EAPI Evas_Object *elm_layout_content_get(const Evas_Object *obj, const char *swallow);
         [ :elm_layout_content_get, [ :evas_object_p, :string ], :evas_object_p ],
         # EAPI Evas_Object *elm_layout_content_unset(Evas_Object *obj, const char *swallow);
         [ :elm_layout_content_unset, [ :evas_object_p, :string ], :evas_object_p ],
@@ -1430,10 +1437,8 @@ module Efl
         [ :elm_entry_selection_get, [ :evas_object_p ], :string ],
         # EAPI void elm_entry_entry_insert(Evas_Object *obj, const char *entry);
         [ :elm_entry_entry_insert, [ :evas_object_p, :string ], :void ],
-        # EAPI void elm_entry_line_wrap_set(Evas_Object *obj, Eina_Bool wrap);
-        [ :elm_entry_line_wrap_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI void elm_entry_line_char_wrap_set(Evas_Object *obj, Eina_Bool wrap);
-        [ :elm_entry_line_char_wrap_set, [ :evas_object_p, :eina_bool ], :void ],
+        # EAPI void elm_entry_line_wrap_set(Evas_Object *obj, Elm_Wrap_Type wrap);
+        [ :elm_entry_line_wrap_set, [ :evas_object_p, :elm_wrap_type ], :void ],
         # EAPI void elm_entry_editable_set(Evas_Object *obj, Eina_Bool editable);
         [ :elm_entry_editable_set, [ :evas_object_p, :eina_bool ], :void ],
         # EAPI Eina_Bool elm_entry_editable_get(const Evas_Object *obj);
@@ -1744,10 +1749,10 @@ module Efl
         [ :elm_toolbar_mode_shrink_set, [ :evas_object_p, :elm_toolbar_shrink_mode ], :void ],
         # EAPI Elm_Toolbar_Shrink_Mode elm_toolbar_mode_shrink_get(const Evas_Object *obj);
         [ :elm_toolbar_mode_shrink_get, [ :evas_object_p ], :elm_toolbar_shrink_mode ],
-        # EAPI void elm_toolbar_homogenous_set(Evas_Object *obj, Eina_Bool homogenous);
-        [ :elm_toolbar_homogenous_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool elm_toolbar_homogenous_get(const Evas_Object *obj);
-        [ :elm_toolbar_homogenous_get, [ :evas_object_p ], :eina_bool ],
+        # EAPI void elm_toolbar_homogeneous_set(Evas_Object *obj, Eina_Bool homogeneous);
+        [ :elm_toolbar_homogeneous_set, [ :evas_object_p, :eina_bool ], :void ],
+        # EAPI Eina_Bool elm_toolbar_homogeneous_get(const Evas_Object *obj);
+        [ :elm_toolbar_homogeneous_get, [ :evas_object_p ], :eina_bool ],
         # EAPI void elm_toolbar_menu_parent_set(Evas_Object *obj, Evas_Object *parent);
         [ :elm_toolbar_menu_parent_set, [ :evas_object_p, :evas_object_p ], :void ],
         # EAPI Evas_Object *elm_toolbar_menu_parent_get(const Evas_Object *obj);
@@ -2589,26 +2594,23 @@ module Efl
         [ :elm_map_marker_class_get_cb_set, [ :elm_map_marker_class_p, :elmmapmarkergetfunc ], :void ],
         # EAPI void elm_map_marker_class_del_cb_set(Elm_Map_Marker_Class *clas, ElmMapMarkerDelFunc del);
         [ :elm_map_marker_class_del_cb_set, [ :elm_map_marker_class_p, :elmmapmarkerdelfunc ], :void ],
-        # EAPI void elm_map_source_set(Evas_Object *obj, Elm_Map_Sources source);
-        [ :elm_map_source_set, [ :evas_object_p, :elm_map_sources ], :void ],
+        # EAPI const char **elm_map_source_names_get(const Evas_Object *obj);
+        [ :elm_map_source_names_get, [ :evas_object_p ], :string_array ],
+        # EAPI void elm_map_source_name_set(Evas_Object *obj, const char *source_name);
+        [ :elm_map_source_name_set, [ :evas_object_p, :string ], :void ],
+        # EAPI const char *elm_map_source_name_get(const Evas_Object *obj);
+        [ :elm_map_source_name_get, [ :evas_object_p ], :string ],
         # EAPI void elm_map_route_source_set(Evas_Object *obj, Elm_Map_Route_Sources source);
         [ :elm_map_route_source_set, [ :evas_object_p, :elm_map_route_sources ], :void ],
-        # EAPI Elm_Map_Sources elm_map_source_get(const Evas_Object *obj);
-        [ :elm_map_source_get, [ :evas_object_p ], :elm_map_sources ],
         # EAPI Elm_Map_Route_Sources elm_map_route_source_get(const Evas_Object *obj);
         [ :elm_map_route_source_get, [ :evas_object_p ], :elm_map_route_sources ],
-        # EAPI void elm_map_source_custom_api_set(Elm_Map_Sources source, const char *label, int zoom_min, int zoom_max, ElmMapSourceURLFunc url_cb, ElmMapRouteSourceURLFunc route_url_cb, ElmMapNameSourceURLFunc name_url_cb);
-        [ :elm_map_source_custom_api_set, [ :elm_map_sources, :string, :int, :int, :elmmapsourceurlfunc, :elmmaproutesourceurlfunc,
-            :elmmapnamesourceurlfunc ], :void ],
-        # EAPI int elm_map_source_zoom_min_get(Elm_Map_Sources source);
-        [ :elm_map_source_zoom_min_get, [ :elm_map_sources ], :int ],
-        # EAPI int elm_map_source_zoom_max_get(Elm_Map_Sources source);
-        [ :elm_map_source_zoom_max_get, [ :elm_map_sources ], :int ],
-        # EAPI const char *elm_map_source_name_get(Elm_Map_Sources source);
-        [ :elm_map_source_name_get, [ :elm_map_sources ], :string ],
+        # EAPI int elm_map_source_zoom_min_get(const Evas_Object *obj);
+        [ :elm_map_source_zoom_min_get, [ :evas_object_p ], :int ],
+        # EAPI int elm_map_source_zoom_max_get(const Evas_Object *obj);
+        [ :elm_map_source_zoom_max_get, [ :evas_object_p ], :int ],
         # EAPI void elm_map_user_agent_set(Evas_Object *obj, const char *user_agent);
         [ :elm_map_user_agent_set, [ :evas_object_p, :string ], :void ],
-        # EAPI const char *elm_map_user_agent_get(Evas_Object *obj);
+        # EAPI const char *elm_map_user_agent_get(const Evas_Object *obj);
         [ :elm_map_user_agent_get, [ :evas_object_p ], :string ],
         # EAPI Elm_Map_Route *elm_map_route_add(Evas_Object *obj, Elm_Map_Route_Type type, Elm_Map_Route_Method method, double flon, double flat, double tlon, double tlat);
         [ :elm_map_route_add, [ :evas_object_p, :elm_map_route_type, :elm_map_route_method, :double, :double, :double, :double ], :elm_map_route_p ],
@@ -2616,17 +2618,17 @@ module Efl
         [ :elm_map_route_remove, [ :elm_map_route_p ], :void ],
         # EAPI void elm_map_route_color_set(Elm_Map_Route *route, int r, int g , int b, int a);
         [ :elm_map_route_color_set, [ :elm_map_route_p, :int, :int, :int, :int ], :void ],
-        # EAPI void elm_map_route_color_get(Elm_Map_Route *route, int *r, int *g , int *b, int *a);
+        # EAPI void elm_map_route_color_get(const Elm_Map_Route *route, int *r, int *g , int *b, int *a);
         [ :elm_map_route_color_get, [ :elm_map_route_p, :int_p, :int_p, :int_p, :int_p ], :void ],
-        # EAPI double elm_map_route_distance_get(Elm_Map_Route *route);
+        # EAPI double elm_map_route_distance_get(const Elm_Map_Route *route);
         [ :elm_map_route_distance_get, [ :elm_map_route_p ], :double ],
-        # EAPI const char *elm_map_route_node_get(Elm_Map_Route *route);
+        # EAPI const char *elm_map_route_node_get(const Elm_Map_Route *route);
         [ :elm_map_route_node_get, [ :elm_map_route_p ], :string ],
-        # EAPI const char *elm_map_route_waypoint_get(Elm_Map_Route *route);
+        # EAPI const char *elm_map_route_waypoint_get(const Elm_Map_Route *route);
         [ :elm_map_route_waypoint_get, [ :elm_map_route_p ], :string ],
-        # EAPI const char *elm_map_name_address_get(Elm_Map_Name *name);
+        # EAPI const char *elm_map_name_address_get(const Elm_Map_Name *name);
         [ :elm_map_name_address_get, [ :elm_map_name_p ], :string ],
-        # EAPI void elm_map_name_region_get(Elm_Map_Name *name, double *lon, double *lat);
+        # EAPI void elm_map_name_region_get(const Elm_Map_Name *name, double *lon, double *lat);
         [ :elm_map_name_region_get, [ :elm_map_name_p, :double_p, :double_p ], :void ],
         # EAPI void elm_map_name_remove(Elm_Map_Name *name);
         [ :elm_map_name_remove, [ :elm_map_name_p ], :void ],
@@ -2718,10 +2720,8 @@ module Efl
         [ :elm_scrolled_entry_selection_get, [ :evas_object_p ], :string ],
         # EAPI void elm_scrolled_entry_entry_insert(Evas_Object *obj, const char *entry);
         [ :elm_scrolled_entry_entry_insert, [ :evas_object_p, :string ], :void ],
-        # EAPI void elm_scrolled_entry_line_wrap_set(Evas_Object *obj, Eina_Bool wrap);
-        [ :elm_scrolled_entry_line_wrap_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI void elm_scrolled_entry_line_char_wrap_set(Evas_Object *obj, Eina_Bool wrap);
-        [ :elm_scrolled_entry_line_char_wrap_set, [ :evas_object_p, :eina_bool ], :void ],
+        # EAPI void elm_scrolled_entry_line_wrap_set(Evas_Object *obj, Elm_Wrap_Type wrap);
+        [ :elm_scrolled_entry_line_wrap_set, [ :evas_object_p, :elm_wrap_type ], :void ],
         # EAPI void elm_scrolled_entry_editable_set(Evas_Object *obj, Eina_Bool editable);
         [ :elm_scrolled_entry_editable_set, [ :evas_object_p, :eina_bool ], :void ],
         # EAPI Eina_Bool elm_scrolled_entry_editable_get(const Evas_Object *obj);
