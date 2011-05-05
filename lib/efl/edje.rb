@@ -40,6 +40,16 @@ module Efl
                 # EAPI Evas_Object *edje_object_part_table_child_get (Evas_Object *obj, const char *part, unsigned int col, unsigned int row);
                 Evas::RevasObject.new Native.edje_object_part_table_child_get @ptr, part, col, row
             end
+            def file_get
+                f = FFI::MemoryPointer.new :pointer
+                g = FFI::MemoryPointer.new :pointer
+                Native.edje_object_file_get @ptr, f, g
+                [ f.read_pointer.read_string, g.read_pointer.read_string ]
+            end
+            def data_get k
+                Native.edje_object_data_get @ptr, k
+            end
+            alias :data :data_get
         end
         #
     end

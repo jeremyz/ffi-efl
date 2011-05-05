@@ -28,7 +28,7 @@ Ecore
     - ecore_evas_maximized_set
 
 Edje
-    - ...
+    - test/test_edje.rb crashes or freeze at exit
 
 Elementary
     - ...

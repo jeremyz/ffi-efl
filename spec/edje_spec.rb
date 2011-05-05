@@ -5,10 +5,8 @@ EDC_FILE=File.join '/tmp','edje_spec.edc'
 EDJE_FILE=File.join '/tmp','edje_spec.edj'
 #
 if __FILE__==$0
-    if not File.exists? EDJE_FILE
-        File.open(EDC_FILE,'w') do |f| f << DATA.read end
-        system "edje_cc #{EDC_FILE}"
-    end
+    File.open(EDC_FILE,'w') do |f| f << DATA.read end
+    system "edje_cc #{EDC_FILE}"
     exit File.exists?(EDJE_FILE)
 else
     describe "generate #{EDJE_FILE}" do
@@ -94,8 +92,8 @@ describe Efl::Edje do
     end
     #
     it "file_data_get should work" do
-        Edje.file_data_get(EDJE_FILE, "key1").should == "value1"
-        Edje.file_data_get(EDJE_FILE, "key6").should == nil
+        Edje.file_data_get(EDJE_FILE, "key1").should == "val1"
+        Edje.file_data_get(EDJE_FILE, "key2").should == nil
     end
     #
     it "file_cache get/set should work" do
@@ -116,6 +114,7 @@ describe Efl::Edje do
     describe Efl::Edje::REdje do
         before(:all) do
             Efl::Evas.init
+            Efl::Edje.init
             realize_evas
             @ed = @e.edje_object_add
             @ed.file_set EDJE_FILE, "my_group"
@@ -126,6 +125,7 @@ describe Efl::Edje do
         after(:all) do
             @e.free
             @pixels.free
+            Efl::Edje.shutdown
             Efl::Evas.shutdown
         end
         #
@@ -142,14 +142,21 @@ describe Efl::Edje do
             @ed.mirrored?.should be_false
             @ed.mirrored_get.should be_false
         end
+        #
+        it "data_get hould work" do
+            @ed.data("key2").should == "val2"
+            @ed.data_get("key2").should == "val2"
+            @ed.data_get("key1").should == nil
+        end
+        #
+        it "file_get should work" do
+            @ed.file_get[0].should == EDJE_FILE
+            @ed.file_get[1].should == "my_group"
+        end
         # EAPI void edje_extern_object_min_size_set (Evas_Object *obj, Evas_Coord minw, Evas_Coord minh);
         # EAPI void edje_extern_object_max_size_set (Evas_Object *obj, Evas_Coord maxw, Evas_Coord maxh);
         # EAPI void edje_extern_object_aspect_set (Evas_Object *obj, Edje_Aspect_Control aspect, Evas_Coord aw, Evas_Coord ah);
         # EAPI void edje_box_layout_register (const char *name, Evas_Object_Box_Layout func, void *(*layout_data_get)(void *), void (*layout_data_free)(void *), void (*free_data)(void *), void *data);
-        # EAPI Evas_Object *edje_object_add (Evas *evas);
-        # EAPI const char *edje_object_data_get (const Evas_Object *obj, const char *key);
-        # EAPI Eina_Bool edje_object_file_set (Evas_Object *obj, const char *file, const char *group);
-        # EAPI void edje_object_file_get (const Evas_Object *obj, const char **file, const char **group);
         # EAPI Edje_Load_Error edje_object_load_error_get (const Evas_Object *obj);
         # EAPI const char *edje_load_error_str (Edje_Load_Error error);
         # EAPI Eina_Bool edje_object_preload (Evas_Object *obj, Eina_Bool cancel);
@@ -279,12 +286,14 @@ end
 __END__
 
 data {
-    item: "key1" "value1";
-    item: "key2" "value2";
+    item: "key1" "val1";
 }
 collections {
    group {
         name: "my_group";
+        data {
+            item: "key2" "val2";
+        }
         parts {
             part {
                 name: "background";
@@ -293,8 +302,14 @@ collections {
                 description {
                     state: "default" 0.0;
                     color: 255 255 255 255;
-                    rel1 { relative: 0.0 0.0; offset: 0 0; }
-                    rel2 { relative: 1.0 1.0; offset: -1 -1; }
+                    rel1 {
+                        relative: 0.0 0.0;
+                        offset: 0 0;
+                    }
+                    rel2 {
+                        relative: 1.0 1.0;
+                        offset: -1 -1;
+                    }
                 }
             }
             part {
@@ -304,8 +319,14 @@ collections {
                 description {
                     state: "default" 0.0;
                     color: 255 0 0 255;
-                    rel1 { relative: 0.1 0.2; offset: 5 10; }
-                    rel2 { relative: 0.9 0.8; offset: -6 -11; }
+                    rel1 {
+                        relative: 0.1 0.2;
+                        offset: 5 10;
+                    }
+                    rel2 {
+                        relative: 0.9 0.8;
+                        offset: -6 -11;
+                    }
                     text {
                         font: "Sans";
                         size: 10;
