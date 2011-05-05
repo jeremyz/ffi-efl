@@ -1,3 +1,15 @@
+2011-05-11 Jérémy Zurcher <jeremy@asynk.ch>
+	* release 0.0.4
+	* ruby 1.8.7 compatible
+	* FFI::AutoPointer usage fixed, constructors cleaned
+	* module Efl::Native used for all FFI => require 'efl/native'
+	* ClassHelper#method_missing enhanced
+	* REinaList and REinaHash cleaned
+	* EcoreEvas specs completed
+	* REvas and REvasObject spec completed
+	* REvasRectanlge, REvasLine, EvasPolygon classes added
+	* more test/*.rb
+
 2011-05-01 Jérémy Zurcher <jeremy@asynk.ch>
 	* release 0.0.3
 	+ Evas, Evas_Ecore, Edje, Elm ... usable
