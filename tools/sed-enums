@@ -1,7 +1,7 @@
 s/^\s*typedef\s+(enum(\s+\w+)?).*$/typedef \1 { /
 T;h
 :attrs;n
-s/^\s*([A-Z0-9_]+)(\s*=\s*-?[0-9])?.*$/\1\2, /
+s/^\s*([A-Z0-9_]+)(\s*=\s*-?[0-9]+)?.*$/\1\2, /
 T next;H;b attrs
 :next
 /^\s*\}/ ! b attrs

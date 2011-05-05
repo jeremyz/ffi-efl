@@ -26,7 +26,7 @@ module Efl
         # typedef enum _Edje_Message_Type {...} Edje_Message_Type;
         enum :edje_message_type, [ :edje_message_none, 0, :edje_message_signal, 1, :edje_message_string, 2, :edje_message_int, 3, :edje_message_float,
             4, :edje_message_string_set, 5, :edje_message_int_set, 6, :edje_message_float_set, 7, :edje_message_string_int, 8, :edje_message_string_float, 9,
-            :edje_message_string_int_set, 1, :edje_message_string_float_set, 1 ]
+            :edje_message_string_int_set, 10, :edje_message_string_float_set, 11 ]
         # typedef enum _Edje_Aspect_Control {...} Edje_Aspect_Control;
         enum :edje_aspect_control, [ :edje_aspect_control_none, 0, :edje_aspect_control_neither, 1, :edje_aspect_control_horizontal, 2,
             :edje_aspect_control_vertical, 3, :edje_aspect_control_both, 4 ]
@@ -36,19 +36,19 @@ module Efl
         # typedef enum _Edje_Part_Type {...} Edje_Part_Type;
         enum :edje_part_type, [ :edje_part_type_none, 0, :edje_part_type_rectangle, 1, :edje_part_type_text, 2, :edje_part_type_image, 3,
             :edje_part_type_swallow, 4, :edje_part_type_textblock, 5, :edje_part_type_gradient, 6, :edje_part_type_group, 7, :edje_part_type_box, 8,
-            :edje_part_type_table, 9, :edje_part_type_external, 1, :edje_part_type_proxy, 1, :edje_part_type_last, 1 ]
+            :edje_part_type_table, 9, :edje_part_type_external, 10, :edje_part_type_proxy, 11, :edje_part_type_last, 12 ]
         # typedef enum _Edje_Text_Effect {...} Edje_Text_Effect;
         enum :edje_text_effect, [ :edje_text_effect_none, 0, :edje_text_effect_plain, 1, :edje_text_effect_outline, 2, :edje_text_effect_soft_outline,
             3, :edje_text_effect_shadow, 4, :edje_text_effect_soft_shadow, 5, :edje_text_effect_outline_shadow, 6, :edje_text_effect_outline_soft_shadow, 7,
-            :edje_text_effect_far_shadow, 8, :edje_text_effect_far_soft_shadow, 9, :edje_text_effect_glow, 1, :edje_text_effect_last, 1,
+            :edje_text_effect_far_shadow, 8, :edje_text_effect_far_soft_shadow, 9, :edje_text_effect_glow, 10, :edje_text_effect_last, 11,
             :edje_text_effect_shadow_direction_bottom_right, :edje_text_effect_shadow_direction_bottom, :edje_text_effect_shadow_direction_bottom_left,
             :edje_text_effect_shadow_direction_left, :edje_text_effect_shadow_direction_top_left, :edje_text_effect_shadow_direction_top,
             :edje_text_effect_shadow_direction_top_right, :edje_text_effect_shadow_direction_right ]
         # typedef enum _Edje_Action_Type {...} Edje_Action_Type;
         enum :edje_action_type, [ :edje_action_type_none, 0, :edje_action_type_state_set, 1, :edje_action_type_action_stop, 2,
             :edje_action_type_signal_emit, 3, :edje_action_type_drag_val_set, 4, :edje_action_type_drag_val_step, 5, :edje_action_type_drag_val_page, 6,
-            :edje_action_type_script, 7, :edje_action_type_focus_set, 8, :edje_action_type_reserved00, 9, :edje_action_type_focus_object, 1,
-            :edje_action_type_param_copy, 1, :edje_action_type_param_set, 1, :edje_action_type_last, 1 ]
+            :edje_action_type_script, 7, :edje_action_type_focus_set, 8, :edje_action_type_reserved00, 9, :edje_action_type_focus_object, 10,
+            :edje_action_type_param_copy, 11, :edje_action_type_param_set, 12, :edje_action_type_last, 13 ]
         # typedef enum _Edje_Tween_Mode {...} Edje_Tween_Mode;
         enum :edje_tween_mode, [ :edje_tween_mode_none, 0, :edje_tween_mode_linear, 1, :edje_tween_mode_sinusoidal, 2, :edje_tween_mode_accelerate, 3,
             :edje_tween_mode_decelerate, 4, :edje_tween_mode_last, 5 ]
