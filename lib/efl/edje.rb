@@ -11,6 +11,7 @@ module Efl
         class REdje < Efl::Evas::REvasObject
             #
             search_prefixes 'edje_object_'
+            #
             def part_object_get part
                 # EAPI const Evas_Object *edje_object_part_object_get (const Evas_Object *obj, const char *part);
                 Evas::RevasObject.new Native.edje_object_part_object_get @ptr, part
