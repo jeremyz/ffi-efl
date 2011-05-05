@@ -157,10 +157,14 @@ describe Efl::Evas do
         it "output size should work" do
             @e.output_size_set 69, 666
             @e.output_size_get.should == [69,666]
+            @e.output_size = 666, 69
+            @e.size == [666,69]
         end
         it "output viewport should work" do
             @e.output_viewport_set 0, 0, 666, 69
             @e.output_viewport_get.should == [0,0,666,69]
+            @e.output_viewport =  0, 0, 69, 666
+            @e.viewport.should == [0,0,69,666]
         end
         #
         it "coordinates evas<=>world should work" do

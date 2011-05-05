@@ -72,6 +72,7 @@ module Efl
                 @ptr=nil
             end
             def object_add t
+                # TODO should return Objects
                 r = Evas::REvasObject.new Native.send "evas_object_#{t.to_s}_add", @ptr
                 yield r if block_given?
                 r
@@ -91,18 +92,21 @@ module Efl
                 Native.evas_output_viewport_get @ptr, x, y, w, h
                 [ x.read_int, y.read_int, w.read_int, h.read_int ]
             end
+            alias :viewport :output_viewport_get
             def pointer_output_xy_get
                 x = FFI::MemoryPointer.new :int
                 y = FFI::MemoryPointer.new :int
                 Native.evas_pointer_output_xy_get @ptr, x, y
                 [ x.read_int, y.read_int ]
             end
+            alias :pointer_output :pointer_output_xy_get
             def pointer_canvas_xy_get
                 x = FFI::MemoryPointer.new :int
                 y = FFI::MemoryPointer.new :int
                 Native.evas_pointer_canvas_xy_get @ptr, x, y
                 [ x.read_int, y.read_int ]
             end
+            alias :pointer_canvas :pointer_canvas_xy_get
         end
         #
         class REvasObject
