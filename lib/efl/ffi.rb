@@ -104,8 +104,8 @@ module Efl
                         m
                     elsif Efl::Native.respond_to? sym+'_get'
                         sym+'_get'
-                    elsif Efl::Native.respond_to? m+'_get'
-                        m+'_get'
+                    elsif Efl::Native.respond_to? m_s+'_get'
+                        m_s+'_get'
                     else
                         nil
                     end
