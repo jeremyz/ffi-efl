@@ -65,8 +65,8 @@ module Efl
         enum :evas_native_surface_type, [ :evas_native_surface_none, :evas_native_surface_x11, :evas_native_surface_opengl ]
         # typedef enum _Evas_Render_Op {...} Evas_Render_Op;
         enum :evas_render_op, [ :evas_render_blend, 0, :evas_render_blend_rel, 1, :evas_render_copy, 2, :evas_render_copy_rel, 3, :evas_render_add, 4,
-            :evas_render_add_rel, 5, :evas_render_sub, 6, :evas_render_sub_rel, 7, :evas_render_tint, 8, :evas_render_tint_rel, 9, :evas_render_mask, 1,
-            :evas_render_mul, 1 ]
+            :evas_render_add_rel, 5, :evas_render_sub, 6, :evas_render_sub_rel, 7, :evas_render_tint, 8, :evas_render_tint_rel, 9, :evas_render_mask, 10,
+            :evas_render_mul, 11 ]
         # typedef enum _Evas_Border_Fill_Mode {...} Evas_Border_Fill_Mode;
         enum :evas_border_fill_mode, [ :evas_border_fill_none, 0, :evas_border_fill_default, 1, :evas_border_fill_solid, 2 ]
         # typedef enum _Evas_Image_Scale_Hint {...} Evas_Image_Scale_Hint;

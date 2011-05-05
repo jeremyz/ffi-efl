@@ -278,6 +278,29 @@ describe Efl::Evas do
                 p.read_string.should == a[i]
             end
         end
+        #
+        it "focus should work" do
+            @e.focus.should == FFI::Pointer::NULL
+            @e.focus_get.should == FFI::Pointer::NULL
+            @o = @e.object_add(:rectangle) { |o|
+                o.color = 200,200,200,200
+                o.move 0, 0
+                o.resize 100, 100
+                o.show
+            }
+            @o.focus = true
+            @e.focus.should == @o.to_ptr
+            @e.focus_get.should == @o.to_ptr
+        end
+        #
+        it "object_name_find should work" do
+            @e.object_name_find("name").should == FFI::Pointer::NULL
+            @o = @e.object_add(:rectangle)
+            @o.name="name"
+            @e.object_name_find("name").should == @o.to_ptr
+        end
+        # TODO evas_object_top_at_xy_get, evas_object_top_at_pointer_get, evas_object_top_in_rectangle_get
+        # TODO evas_objects_at_xy_get, evas_objects_in_rectangle_get, evas_object_bottom_get, evas_object_top_get
     end
     describe Efl::Evas::REvasObject do
         #
@@ -344,7 +367,7 @@ describe Efl::Evas do
         #
         it "name functions should work" do
             @o.name_set "My name"
-            @o.name.should == "My name"
+            @o.evas_name.should == "My name"
             @o.name_get.should == "My name"
         end
         #
@@ -381,7 +404,7 @@ describe Efl::Evas do
         end
         #
         it "type_get should work" do
-            @o.type.should == 'rectangle'
+            @o.evas_type.should == 'rectangle'
             @o.type_get.should == 'rectangle'
         end
         # TODO raise, lower
@@ -426,6 +449,123 @@ describe Efl::Evas do
             @o.pass_events.should be_true
             @o.pass_events=false
             @o.pass_events_get.should be_false
+        end
+        #
+        it "repeat events should work" do
+            @o.repeat_events.should be_false
+            @o.repeat_events_set true
+            @o.repeat_events.should be_true
+            @o.repeat_events=false
+            @o.repeat_events.should be_false
+            @o.repeat_events_set true
+            @o.repeat_events.should be_true
+            @o.repeat_events=false
+            @o.repeat_events_get.should be_false
+        end
+        #
+        it "propagate event should work" do
+            @o.propagate_events.should be_true
+            @o.propagate_events=false
+            @o.propagate_events.should be_false
+            @o.propagate_events_set true
+            @o.propagate_events.should be_true
+            @o.propagate_events=false
+            @o.propagate_events.should be_false
+            @o.propagate_events_set true
+            @o.propagate_events_get.should be_true
+        end
+        #
+        it "map enable should work" do
+            @o.map_enable.should be_false
+            @o.map_enable_set true
+            @o.map_enable.should be_true
+            @o.map_enable=false
+            @o.map_enable.should be_false
+            @o.map_enable_set true
+            @o.map_enable.should be_true
+            @o.map_enable=false
+            @o.map_enable_get.should be_false
+        end
+        #
+        it "size_hint_ should work" do
+            @o.size_hint_min_set 100, 150
+            @o.size_hint_min.should == [100,150]
+            @o.size_hint_min_get.should == [100,150]
+            @o.size_hint_max_set 300, 350
+            @o.size_hint_max.should == [300,350]
+            @o.size_hint_max_get.should == [300,350]
+            @o.size_hint_request_set 400, 450
+            @o.size_hint_request.should == [400,450]
+            @o.size_hint_request_get.should == [400,450]
+            @o.size_hint_aspect_set :evas_aspect_control_both, 400, 450
+            @o.size_hint_aspect.should == [:evas_aspect_control_both,400,450]
+            @o.size_hint_aspect_get.should == [:evas_aspect_control_both,400,450]
+            @o.size_hint_align_set 0.2, 0.5
+            @o.size_hint_align.should == [0.2,0.5]
+            @o.size_hint_align_get.should == [0.2,0.5]
+            @o.size_hint_weight_set 0.3, 0.6
+            @o.size_hint_weight.should == [0.3,0.6]
+            @o.size_hint_weight_get.should == [0.3,0.6]
+            @o.size_hint_padding_set 10, 20, 30, 40
+            @o.size_hint_padding.should == [10,20,30,40]
+            @o.size_hint_padding_get.should == [10,20,30,40]
+        end
+        #
+        it "data get/set should work" do
+            @o.data_set "key", "val"
+            @o.data("key").should == "val"
+            @o.data_get("key").should == "val"
+            @o.data_del("key")
+            @o.data_get("key").should == nil
+        end
+        #
+        it "pointer mode get/set should work" do
+            @o.pointer_mode = :evas_object_pointer_mode_nograb
+            @o.pointer_mode.should == :evas_object_pointer_mode_nograb
+            @o.pointer_mode_get.should == :evas_object_pointer_mode_nograb
+            @o.pointer_mode = :evas_object_pointer_mode_autograb
+            @o.pointer_mode.should == :evas_object_pointer_mode_autograb
+            @o.pointer_mode_get.should == :evas_object_pointer_mode_autograb
+        end
+        #
+        it "anti_alias get/set should work" do
+            @o.anti_alias_set true
+            @o.anti_alias_get.should be_true
+            @o.anti_alias=false
+            @o.anti_alias.should be_false
+            @o.anti_alias_get.should be_false
+        end
+        #
+        it "sccale set/get should work" do
+            @o.scale_set 1.5
+            @o.scale_get.should == 1.5
+            @o.scale= 1.6
+            @o.scale.should == 1.6
+        end
+        #
+        it "render op get/set" do
+            @o.render_op_set :evas_render_copy
+            @o.render_op_get.should == :evas_render_copy
+            @o.render_op = :evas_render_mask
+            @o.render_op.should == :evas_render_mask
+        end
+        #
+        it "precise_is_inside get/set should work" do
+            @o.precise_is_inside_set true
+            @o.precise_is_inside?.should be_true
+            @o.precise_is_inside_get.should be_true
+            @o.precise_is_inside=false
+            @o.precise_is_inside?.should be_false
+            @o.precise_is_inside.should be_false
+        end
+        #
+        it "static_clip get/set should work" do
+            @o.static_clip_set true
+            @o.static_clip?.should be_true
+            @o.static_clip_get.should be_true
+            @o.static_clip=false
+            @o.static_clip?.should be_false
+            @o.static_clip.should be_false
         end
     end
     #

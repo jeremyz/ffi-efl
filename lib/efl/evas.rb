@@ -137,8 +137,11 @@ module Efl
                 REvasObject.release @ptr
                 @ptr=nil
             end
-            def name
+            def evas_name
                 Native.evas_object_name_get @ptr
+            end
+            def evas_type
+                Native.evas_object_type_get @ptr
             end
             def geometry_get
                 x = FFI::MemoryPointer.new :int
@@ -176,6 +179,64 @@ module Efl
                 REvasObject.new Native.evas_object_below_get @ptr
             end
             alias :below :below_get
+            def size_hint_min_get
+                w = FFI::MemoryPointer.new :int
+                h = FFI::MemoryPointer.new :int
+                Native.evas_object_size_hint_min_get @ptr, w, h
+                [ w.read_int, h.read_int ]
+            end
+            alias :size_hint_min :size_hint_min_get
+            def size_hint_max_get
+                w = FFI::MemoryPointer.new :int
+                h = FFI::MemoryPointer.new :int
+                Native.evas_object_size_hint_max_get @ptr, w, h
+                [ w.read_int, h.read_int ]
+            end
+            alias :size_hint_max :size_hint_max_get
+            def size_hint_request_get
+                w = FFI::MemoryPointer.new :int
+                h = FFI::MemoryPointer.new :int
+                Native.evas_object_size_hint_request_get @ptr, w, h
+                [ w.read_int, h.read_int ]
+            end
+            alias :size_hint_request :size_hint_request_get
+            def size_hint_aspect_get
+                a = FFI::MemoryPointer.new :int
+                w = FFI::MemoryPointer.new :int
+                h = FFI::MemoryPointer.new :int
+                Native.evas_object_size_hint_aspect_get @ptr, a, w, h
+                [ Native.enum_type(:evas_aspect_control)[a.read_int], w.read_int, h.read_int ]
+            end
+            alias :size_hint_aspect :size_hint_aspect_get
+            def size_hint_align_get
+                w = FFI::MemoryPointer.new :double
+                h = FFI::MemoryPointer.new :double
+                Native.evas_object_size_hint_align_get @ptr, w, h
+                [ w.read_double, h.read_double ]
+            end
+            alias :size_hint_align :size_hint_align_get
+            def size_hint_weight_get
+                w = FFI::MemoryPointer.new :double
+                h = FFI::MemoryPointer.new :double
+                Native.evas_object_size_hint_weight_get @ptr, w, h
+                [ w.read_double, h.read_double ]
+            end
+            alias :size_hint_weight :size_hint_weight_get
+            def size_hint_padding_get
+                l = FFI::MemoryPointer.new :int
+                r = FFI::MemoryPointer.new :int
+                t = FFI::MemoryPointer.new :int
+                b = FFI::MemoryPointer.new :int
+                Native.evas_object_size_hint_padding_get @ptr, l, r, t, b
+                [ l.read_int, r.read_int, t.read_int, b.read_int ]
+            end
+            alias :size_hint_padding :size_hint_padding_get
+            def data_get k
+                r = Native.evas_object_data_get @ptr, k
+                return nil if r==FFI::Pointer::NULL
+                r.read_string
+            end
+            alias :data :data_get
         end
     end
 end
