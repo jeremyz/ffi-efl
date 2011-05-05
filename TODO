@@ -1,0 +1,34 @@
+
+global
+    - prevent calling #free with non FFI::AutoPointer ??
+    - spec/ecore_evas_spec.rb 23px is window frame height
+    - find an elegant way to have require 'efl/native' work with Efl::Evas::Native, Efl::Ecore::Native, ...
+        see tag "seperate-natives"
+
+Eet
+    - ...
+
+Eina
+    - ...
+
+Evas
+    - REvasMap
+    - REvasImage
+    - REvasText
+    - REvasTextBlock
+    - REvasSmart
+    - REvasBox
+    - REvasTable
+    - REvasFilter
+    - REvasCservv
+    - continue Evas.h from evas_load_error_str till $
+
+Ecore
+    - ecore_evas_maximized_set
+
+Edje
+    - ...
+
+Elementary
+    - ...
+
