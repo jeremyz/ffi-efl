@@ -611,8 +611,8 @@ describe Efl::Evas do
         it "xy point_add should work" do
             @p.point_add 10, 20
             @p.point_add 30, 40
-            @p.point_add 50, 60
-            @p.point_add 80, 80
+            @p.<< 50, 60
+            @p.<< 80, 80
         end
         #
         it "point clear shold work" do

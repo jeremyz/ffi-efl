@@ -266,6 +266,7 @@ module Efl
         end
         #
         class REvasRectangle < REvasObject
+            #
         end
         #
         class REvasLine < REvasObject
@@ -286,6 +287,10 @@ module Efl
             #
             search_prefixes 'evas_object_polygon_'
             #
+            def point_add *args
+                Native.evas_object_polygon_point_add @ptr, *args
+            end
+            alias :<< :point_add
         end
         #
         class REvasText < REvasObject
