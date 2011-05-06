@@ -1,0 +1,32 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Add a distributed bugtracker
+desc: For example, ditz should be nice... ;)
+type: :task
+component: tools
+release: 
+reporter: Lionel Orry <lionel.orry@gmail.com>
+status: :closed
+disposition: :fixed
+creation_time: 2011-05-06 13:24:02.266465 Z
+references: []
+
+id: d652294b3c643575252098407481cbf4e58ff53c
+log_events: 
+- - 2011-05-06 13:24:04.762410 Z
+  - Lionel Orry <lionel.orry@gmail.com>
+  - created
+  - ""
+- - 2011-05-06 13:25:06.426548 Z
+  - Lionel Orry <lionel.orry@gmail.com>
+  - changed status from unstarted to in_progress
+  - ""
+- - 2011-05-06 13:26:55.483451 Z
+  - Lionel Orry <lionel.orry@gmail.com>
+  - closed with disposition fixed
+  - Ditz added! Yay!
+- - 2011-05-06 13:28:00.043467 Z
+  - Lionel Orry <lionel.orry@gmail.com>
+  - issue claimed
+  - ""
+git_branch: 
+claimer: Lionel Orry <lionel.orry@gmail.com>

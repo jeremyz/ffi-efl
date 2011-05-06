@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: REvasTable
+desc: ""
+type: :feature
+component: evas
+release: 
+reporter: Lionel Orry <lionel.orry@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-06 13:13:52.488464 Z
+references: []
+
+id: 221ff8a7733ad77eaad33a06d26d1d09c6f27805
+log_events: 
+- - 2011-05-06 13:13:53.032382 Z
+  - Lionel Orry <lionel.orry@gmail.com>
+  - created
+  - ""
+git_branch: 
+claimer: 

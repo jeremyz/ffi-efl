@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: REvasMap
+desc: ""
+type: :feature
+component: evas
+release: 
+reporter: Lionel Orry <lionel.orry@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-06 13:12:18.184449 Z
+references: []
+
+id: c37e4611c8b227329ab13ddf1642a9a1aaa1c992
+log_events: 
+- - 2011-05-06 13:12:22.280381 Z
+  - Lionel Orry <lionel.orry@gmail.com>
+  - created
+  - ""
+git_branch: 
+claimer: 

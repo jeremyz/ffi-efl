@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/project 
+name: ffi-efl
+version: "0.5"
+components: 
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: ffi-efl
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: tools
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: validation
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: eina
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: eet
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: ecore
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: evas
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: elementary
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: edje
+releases: []
+

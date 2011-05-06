@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: REvasTextBlock
+desc: ""
+type: :feature
+component: evas
+release: 
+reporter: Lionel Orry <lionel.orry@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-06 13:13:17.080445 Z
+references: []
+
+id: 958038b0a9382db83924605e0f3f778ba544e26d
+log_events: 
+- - 2011-05-06 13:13:17.960443 Z
+  - Lionel Orry <lionel.orry@gmail.com>
+  - created
+  - ""
+git_branch: 
+claimer: 

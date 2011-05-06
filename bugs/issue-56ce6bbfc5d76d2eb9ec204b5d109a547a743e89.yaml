@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: REvasImage
+desc: ""
+type: :feature
+component: evas
+release: 
+reporter: Lionel Orry <lionel.orry@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-06 13:12:36.728509 Z
+references: []
+
+id: 56ce6bbfc5d76d2eb9ec204b5d109a547a743e89
+log_events: 
+- - 2011-05-06 13:12:37.496434 Z
+  - Lionel Orry <lionel.orry@gmail.com>
+  - created
+  - ""
+git_branch: 
+claimer: 

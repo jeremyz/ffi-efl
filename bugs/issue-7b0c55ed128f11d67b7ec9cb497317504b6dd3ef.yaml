@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: REvasBox
+desc: ""
+type: :feature
+component: evas
+release: 
+reporter: Lionel Orry <lionel.orry@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-06 13:13:40.792454 Z
+references: []
+
+id: 7b0c55ed128f11d67b7ec9cb497317504b6dd3ef
+log_events: 
+- - 2011-05-06 13:13:41.464554 Z
+  - Lionel Orry <lionel.orry@gmail.com>
+  - created
+  - ""
+git_branch: 
+claimer: 

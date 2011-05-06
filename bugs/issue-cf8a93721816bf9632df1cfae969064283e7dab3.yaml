@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Rework Native modules
+desc: |-
+  find an elegant way to have require 'efl/native' work with Efl::Evas::Native, Efl::Ecore::Native, ...
+  see tag 'separate-natives'
+type: :task
+component: ffi-efl
+release: 
+reporter: Lionel Orry <lionel.orry@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-06 13:15:51.576669 Z
+references: []
+
+id: cf8a93721816bf9632df1cfae969064283e7dab3
+log_events: 
+- - 2011-05-06 13:15:53.704417 Z
+  - Lionel Orry <lionel.orry@gmail.com>
+  - created
+  - ""
+git_branch: 
+claimer: 

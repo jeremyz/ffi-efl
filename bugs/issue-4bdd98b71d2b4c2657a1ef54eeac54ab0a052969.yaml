@@ -1,0 +1,23 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: test/test_edje.rb crashes or freeze at exit
+desc: test/test_edje.rb crashes or freeze at exit
+type: :bugfix
+component: edje
+release: 
+reporter: Lionel Orry <lionel.orry@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-06 13:11:29.191454 Z
+references: []
+
+id: 4bdd98b71d2b4c2657a1ef54eeac54ab0a052969
+log_events: 
+- - 2011-05-06 13:11:35.735417 Z
+  - Lionel Orry <lionel.orry@gmail.com>
+  - created
+  - ""
+- - 2011-05-06 13:17:31.673387 Z
+  - Lionel Orry <lionel.orry@gmail.com>
+  - commented
+  - Seems to work for me under ruby1.8... How do you reproduce it? What happens?
+claimer: 
