@@ -168,6 +168,16 @@ module Efl
                 [ x.read_int, y.read_int, w.read_int, h.read_int ]
             end
             alias :geometry :geometry_get
+            def center_get
+                g = geometry_get
+                [ g[0]+(g[2]/2.0), g[1]+(g[3]/2.0) ]
+            end
+            alias :center :center_get
+            def center_set x, y
+                g = geometry_get
+                move x-(g[2]/2.0), y-(g[3]/2.0)
+            end
+            alias :center= :center_set
             def size
                 geometry_get[2..-1]
             end

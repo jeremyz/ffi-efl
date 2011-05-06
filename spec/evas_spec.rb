@@ -378,6 +378,15 @@ describe Efl::Evas do
             @o.geometry_get.should == [10,10,50,50]
         end
         #
+        it "center should work" do
+            @o.geometry.should == [10,10,50,50]
+            @o.center_get.should == [35,35]
+            @o.center.should == [35,35]
+            @o.center_set 50, 50
+            @o.center.should == [50,50]
+            @o.geometry.should == [25,25,50,50]
+        end
+        #
         it "show hide visible should work" do
             @o.show
             @o.visible?.should be_true
