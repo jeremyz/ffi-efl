@@ -71,25 +71,20 @@ module Efl
                 REvas.release @ptr
                 @ptr=nil
             end
-            def object_rectangle_add
-                o = Evas::REvasRectangle.new FFI::AutoPointer.new Native.evas_object_rectangle_add(@ptr), REvasObject.method(:release)
-                yield o if block_given?
-                o
+            def object_rectangle_add &block
+                 REvasRectangle.new Native.method(:evas_object_rectangle_add), @ptr, &block
             end
-            def object_line_add
-                o = Evas::REvasLine.new FFI::AutoPointer.new Native.evas_object_line_add(@ptr), REvasObject.method(:release)
-                yield o if block_given?
-                o
+            def object_line_add &block
+                Evas::REvasLine.new Native.method(:evas_object_line_add), @ptr, &block
             end
-            def object_polygon_add
-                o = Evas::REvasPolygon.new FFI::AutoPointer.new Native.evas_object_polygon_add(@ptr), REvasObject.method(:release)
-                yield o if block_given?
-                o
+            def object_polygon_add &block
+                Evas::REvasPolygon.new Native.method(:evas_object_polygon_add), @ptr, &block
             end
-            def object_text_add
-                o = Evas::REvasText.new FFI::AutoPointer.new Native.evas_object_text_add(@ptr), REvasObject.method(:release)
-                yield o if block_given?
-                o
+            def object_text_add &block
+                Evas::REvasText.new Native.method(:evas_object_text_add), @ptr, &block
+            end
+            def object_box_add &block
+                Evas::REvasBox.new Native.method(:evas_object_box_add), @ptr, &block
             end
             def output_size_get
                 x = FFI::MemoryPointer.new :int
@@ -130,15 +125,17 @@ module Efl
             include Efl::ClassHelper
             search_prefixes 'evas_object_', 'evas_'
             #
-            def initialize o=nil
+            def initialize *args
                 @ptr = (
-                    case o
+                    case args[0]
                     when NilClass
                         FFI::AutoPointer.new Native.evas_new, REvasObject.method(:release)
                     when FFI::Pointer
-                        o
+                        args[0]
+                    when Method
+                        FFI::AutoPointer.new args[0].call(args[1]), REvasObject.method(:release)
                     else
-                        raise ArgumentError.new "wrong argument #{o.class.name}"
+                        raise ArgumentError.new "wrong argument #{args[0].class.name}"
                     end
                 )
                 yield self if block_given?
@@ -150,6 +147,11 @@ module Efl
                 @ptr.autorelease=false if @ptr.is_a? FFI::AutoPointer
                 REvasObject.release @ptr
                 @ptr=nil
+            end
+            def object_box_add
+                o = Evas::REvasBox.new FFI::AutoPointer.new Native.evas_object_box_add_to(@ptr), REvasObject.method(:release)
+                yield o if block_given?
+                o
             end
             def evas_name
                 Native.evas_object_name_get @ptr
@@ -350,6 +352,12 @@ module Efl
                 return [ r.read_int, g.read_int, b.read_int, a.read_int ]
             end
             alias :outline_color :outline_color_get
+        end
+        #
+        class REvasBox < REvasObject
+            #
+            search_prefixes 'evas_object_box_'
+            #
         end
     end
 end
