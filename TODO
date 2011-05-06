@@ -6,30 +6,30 @@ global
         see tag "seperate-natives"
     - maybe allow meth= within module#method_missing ( tools/genruby.rb)
 
-Eet
-    - ...
-
-Eina
-    - ...
-
 Evas
-    - REvasMap
+    - complete REvasBox specs
     - REvasImage
-    - REvasText
-    - REvasTextBlock
     - REvasSmart
-    - REvasBox
     - REvasTable
+    - REvasMap
     - REvasFilter
+    - REvasTextBlock
     - REvasCservv
     - continue Evas.h from evas_load_error_str till $
 
 Ecore
+    - getopt why -E => ERROR: invalid options found. See --help
     - ecore_evas_maximized_set
 
-Edje
-    - test/test_edje.rb crashes or freeze at exit
-
 Elementary
+    - ...
+
+Edje
+    - ...
+
+Eet
+    - ...
+
+Eina
     - ...
 

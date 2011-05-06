@@ -1,4 +1,15 @@
-2011-05-11 Jérémy Zurcher <jeremy@asynk.ch>
+2011-05-06 Jérémy Zurcher <jeremy@asynk.ch>
+	* release 0.0.5
+	* add REvasText class + specs
+	* add REvasBox class + specs
+	* add EinaRectangleStruct
+	* add REvasPolygon#<<
+	* add REvasObject#center set/get/=
+	* update REvasObject#initialize
+	* bugfix REvasObject#free
+	* bugfix evas_spec and test_evas
+
+2011-05-05 Jérémy Zurcher <jeremy@asynk.ch>
 	* release 0.0.4
 	* ruby 1.8.7 compatible
 	* FFI::AutoPointer usage fixed, constructors cleaned
