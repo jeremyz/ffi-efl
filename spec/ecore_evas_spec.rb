@@ -62,7 +62,7 @@ describe Efl::EcoreEvas do
         before(:each) do
             @e = EcoreEvas::REcoreEvas.new :engine_name=>"software_x11", :x=>10, :y=>10, :w=>100, :h=>120
             @canvas = @e.evas
-            @bg = @canvas.object_add(:rectangle) { |o|
+            @bg = @canvas.object_rectangle_add { |o|
                 o.color = 100, 100, 255, 255
                 o.size = @e.size
             }

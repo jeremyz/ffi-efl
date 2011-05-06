@@ -73,7 +73,7 @@ w = 320
 h = 240
 canvas, pixels = create_canvas w, h
 #
-bg = Evas::REvasObject.new canvas.object_rectangle_add
+bg = canvas.object_rectangle_add
 bg.color = 255, 255, 255, 255
 bg.move 0, 0
 bg.resize w, h
@@ -81,19 +81,19 @@ bg.show
 #
 draw_scene canvas
 #
-r1 = Evas::REvasObject.new canvas.object_rectangle_add
+r1 = canvas.object_rectangle_add
 r1.color = 255, 0, 0, 255
 r1.move 10, 10
 r1.resize 100, 100
 r1.show
 #
-r2 = Evas::REvasObject.new canvas.object_rectangle_add
+r2 = canvas.object_rectangle_add
 r2.color = 0, 128, 0, 128
 r2.move 10, 10
 r2.resize 50, 50
 r2.show
 #
-r3 = Evas::REvasObject.new canvas.object_rectangle_add
+r3 = canvas.object_rectangle_add
 r3.color = 0, 128, 0, 255
 r3.move 60, 60
 r3.resize 50, 50

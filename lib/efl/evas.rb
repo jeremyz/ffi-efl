@@ -71,20 +71,23 @@ module Efl
                 REvas.release @ptr
                 @ptr=nil
             end
-            def object_add t
-                ts = t.to_s
-                o =  (
-                    case ts
-                    when 'rectangle'
-                        Evas::REvasRectangle.new Native.evas_object_rectangle_add @ptr
-                    when 'line'
-                        Evas::REvasLine.new Native.evas_object_line_add @ptr
-                    when 'polygon'
-                        Evas::REvasPolygon.new Native.evas_object_polygon_add @ptr
-                    else
-                        raise NameError.new "unknown or not implemented yet evas_object type #{ts}"
-                    end
-                )
+            def object_rectangle_add
+                o = Evas::REvasRectangle.new FFI::AutoPointer.new Native.evas_object_rectangle_add(@ptr), REvasObject.method(:release)
+                yield o if block_given?
+                o
+            end
+            def object_line_add
+                o = Evas::REvasLine.new FFI::AutoPointer.new Native.evas_object_line_add(@ptr), REvasObject.method(:release)
+                yield o if block_given?
+                o
+            end
+            def object_polygon_add
+                o = Evas::REvasPolygon.new FFI::AutoPointer.new Native.evas_object_polygon_add(@ptr), REvasObject.method(:release)
+                yield o if block_given?
+                o
+            end
+            def object_text_add
+                o = Evas::REvasText.new FFI::AutoPointer.new Native.evas_object_text_add(@ptr), REvasObject.method(:release)
                 yield o if block_given?
                 o
             end
@@ -273,6 +276,11 @@ module Efl
             #
         end
         #
+        class REvasText < REvasObject
+            #
+            search_prefixes 'evas_object_text_'
+            #
+        end
     end
 end
 #

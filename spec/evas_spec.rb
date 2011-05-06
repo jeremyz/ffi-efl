@@ -243,7 +243,7 @@ describe Efl::Evas do
                 true
             end
             kd_d = FFI::MemoryPointer.from_string "mouse_in"
-            @bg = Evas::REvasObject.new @e.object_rectangle_add
+            @bg = @e.object_rectangle_add
             @bg.move 0, 0
             @bg.resize 20, 20
             @bg.show
@@ -285,7 +285,7 @@ describe Efl::Evas do
         it "focus should work" do
             @e.focus.should == FFI::Pointer::NULL
             @e.focus_get.should == FFI::Pointer::NULL
-            @o = @e.object_add(:rectangle) { |o|
+            @o = @e.object_rectangle_add { |o|
                 o.color = 200,200,200,200
                 o.move 0, 0
                 o.resize 100, 100
@@ -298,7 +298,7 @@ describe Efl::Evas do
         #
         it "object_name_find should work" do
             @e.object_name_find("name").should == FFI::Pointer::NULL
-            @o = @e.object_add(:rectangle)
+            @o = @e.object_rectangle_add
             @o.name="name"
             @e.object_name_find("name").should == @o.to_ptr
         end
@@ -310,7 +310,7 @@ describe Efl::Evas do
         before(:all) do
             Evas.init
             realize_evas
-            @o = @e.object_add(:rectangle) { |o|
+            @o = @e.object_rectangle_add { |o|
                 o.color = 200,200,200,200
                 o.move 0, 0
                 o.resize 100, 100
@@ -325,7 +325,7 @@ describe Efl::Evas do
         end
         #
         it "clipper should work" do
-            clipper = @e.object_add :rectangle
+            clipper = @e.object_rectangle_add
             clipper.color = 255,255,255,255
             clipper.move 25, 25
             clipper.resize 50, 50
@@ -401,7 +401,7 @@ describe Efl::Evas do
         it "raise, lower, stck_below, stack_above should work" do
             os = []
             0.upto(3) do
-                os << @e.object_add(:rectangle)
+                os << @e.object_rectangle_add
             end
             os[2].above.should === os[3]
             os[2].below.should === os[1]
@@ -565,7 +565,7 @@ describe Efl::Evas do
         before(:all) do
             Evas.init
             realize_evas
-            @l = @e.object_add 'line'
+            @l = @e.object_line_add
         end
         after(:all) do
             @e.free
@@ -582,7 +582,7 @@ describe Efl::Evas do
         before(:all) do
             Evas.init
             realize_evas
-            @p = @e.object_add 'polygon'
+            @p = @e.object_polygon_add
         end
         after(:all) do
             @e.free
