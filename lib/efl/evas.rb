@@ -144,7 +144,7 @@ module Efl
                 Native.evas_object_del p unless p.nil?
             end
             def free
-                @ptr.autopointer=false if @ptr.is_a? FFI::AutoPointer
+                @ptr.autorelease=false if @ptr.is_a? FFI::AutoPointer
                 REvasObject.release @ptr
                 @ptr=nil
             end
