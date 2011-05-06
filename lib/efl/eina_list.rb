@@ -9,7 +9,7 @@ module Efl
         #
         class EinaListStruct < FFI::Struct
             layout  :data,          :pointer,
-                        :next,          :pointer,
+                    :next,          :pointer,
                     :prev,          :pointer,
                     :accounting,    :pointer,
                     :magic,         :uint
