@@ -10,15 +10,20 @@ Efl::Edje::init
 #
 WIDTH=320
 HEIGHT=240
+#
 EDC_FILE=File.join '/tmp','edje_test.edc'
 EDJE_FILE=File.join '/tmp','edje_test.edj'
 #
+txt = ( ARGV.length>0 ? ARGV[0] : nil )
+#
+# compile edje_file
 puts "write #{EDC_FILE}"
 content = DATA.read
 File.open(EDC_FILE,'w') do |f| f << content end
 puts "compile #{EDJE_FILE}"
 system "edje_cc #{EDC_FILE}"
 #
+# load edje
 def create_my_group canvas, txt
     edje = canvas.edje_object_add
     if not edje.file_set EDJE_FILE, "my_group"
@@ -35,13 +40,15 @@ def create_my_group canvas, txt
     edje
 end
 #
-txt = ( ARGV.length>0 ? ARGV[0] : nil )
+def del_cb ecore_evas
+    Efl::Ecore.main_loop_quit
+end
 #
 window = Efl::EcoreEvas::REcoreEvas.new { |w|
     w.resize WIDTH, HEIGHT
     w.move 100, 100
 }
-#
+window.ecore_evas_callback_delete_request_set  method(:del_cb)
 canvas = window.get
 edje = create_my_group canvas, txt
 window.show
