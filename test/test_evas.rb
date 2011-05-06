@@ -2,6 +2,8 @@
 # -*- coding: UTF-8 -*-
 #
 require 'efl/evas'
+require 'efl/eina_list'
+require 'efl/eina_rectangle'
 #
 include Efl
 #
@@ -19,28 +21,19 @@ def create_canvas w, h
     einfo[:info][:dest_buffer_row_bytes] = w * FFI::type_size(:int);
     einfo[:info][:use_color_key] = 0;
     einfo[:info][:alpha_threshold] = 0;
-    einfo[:info][:func][:new_update_region] = nil #FFI::Pointer::NULL;
-    einfo[:info][:func][:free_update_region] = nil #FFI::Pointer::NULL;
+    einfo[:info][:func][:new_update_region] = nil
+    einfo[:info][:func][:free_update_region] = nil
     e.engine_info_set einfo
     [e,pixels]
 end
 #
-def destroy_canvas c, pixels
-    pixels.free
-    c.free
-end
-#
 def draw_scene c
-    updates = c.render_updates
-    Evas.render_updates_free updates
-    # FIXME needs EinaRectangle
-#    require 'efl/eina/eina_list'
-#    updates = Eina::EinaList.new c.render_updates
-#    updates.each do |u|
-#        r = Eina::EinaRectangle.new u
-#        puts "UPDATED REGION: pos: #{r[:x]}, #{r[:y]}    size: #{r[:w]}x#{r[:h]}"
-#    end
-#    Evas::render_updates_free updates.ptr
+    updates = Efl::EinaList::REinaList.new c.render_updates
+    updates.each do |u|
+        r = Native::EinaRectangleStruct.new u
+        puts "UPDATED REGION: pos: #{r[:x]}, #{r[:y]}    size: #{r[:w]}x#{r[:h]}"
+    end
+    Evas::render_updates_free updates
 end
 #
 def save_scene canvas, dest
@@ -57,50 +50,68 @@ def save_scene canvas, dest
             f << a.pack("ccc")
             p = p+::FFI.type_size(:int)
         end
-
-#    for (; pixels < pixels_end; pixels++) {
-#        int r, g, b;
-#        r = ((*pixels) & 0xff0000) >> 16;
-#        g = ((*pixels) & 0x00ff00) >> 8;
-#        b = (*pixels) & 0x0000ff;
-#        fprintf(f, "%c%c%c", r, g, b);
-#    }
     end
     puts "saved scene as '#{dest}'"
 end
 #
 w = 320
 h = 240
+#
 canvas, pixels = create_canvas w, h
 #
-bg = canvas.object_rectangle_add
-bg.color = 255, 255, 255, 255
-bg.move 0, 0
-bg.resize w, h
+bg = canvas.object_rectangle_add do |b|
+    b.color = 255, 255, 255, 255
+    b.move 0, 0
+    b.resize w, h
+end
 bg.show
 #
 draw_scene canvas
 #
-r1 = canvas.object_rectangle_add
-r1.color = 255, 0, 0, 255
-r1.move 10, 10
-r1.resize 100, 100
+r1 = canvas.object_rectangle_add do |r|
+    r.color = 255, 0, 0, 255
+    r.move 10, 10
+    r.resize 100, 100
+end
 r1.show
 #
-r2 = canvas.object_rectangle_add
-r2.color = 0, 128, 0, 128
-r2.move 10, 10
-r2.resize 50, 50
+r2 = canvas.object_rectangle_add do |r|
+    r.color = 0, 128, 0, 128
+    r.move 10, 10
+    r.resize 50, 50
+end
 r2.show
 #
-r3 = canvas.object_rectangle_add
-r3.color = 0, 128, 0, 255
-r3.move 60, 60
-r3.resize 50, 50
+r3 = canvas.object_rectangle_add do |r|
+    r.color = 0, 128, 0, 255
+    r.move 60, 60
+    r.resize 50, 50
+end
 r3.show
+#
+l1 = canvas.object_line_add
+l1.xy = *(r2.center+r3.center)
+l1.show
+#
+p1 = canvas.object_polygon_add do |p|
+    p.color = 100, 128, 0, 100
+    p.<< w/2.0,10
+    p.<< w-10,h/2.0
+    p.<< w/2.0, h-10
+    p.<< 10, h/2.0
+end
+p1.show
 #
 draw_scene canvas
 save_scene canvas, '/tmp/ffi-efl-evas-buffer-simple-render.ppm'
-destroy_canvas canvas, pixels
+#
+r1.free
+r2.free
+r3.free
+l1.free
+p1.free
+bg.free
+canvas.free
+pixels.free
 #
 Evas::shutdown
