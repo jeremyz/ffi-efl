@@ -568,6 +568,7 @@ describe Efl::Evas do
             @l = @e.object_line_add
         end
         after(:all) do
+            @l.free
             @e.free
             Evas.shutdown
         end
@@ -585,6 +586,7 @@ describe Efl::Evas do
             @p = @e.object_polygon_add
         end
         after(:all) do
+            @p.free
             @e.free
             Evas.shutdown
         end
@@ -598,6 +600,116 @@ describe Efl::Evas do
         it "point clear shold work" do
             @p.points_clear
         end
+    end
+    #
+    describe Efl::Evas::REvasText do
+        #
+        before(:all) do
+            Evas.init
+            realize_evas
+            @t = @e.object_text_add
+        end
+        after(:all) do
+            @t.free
+            @e.free
+            Evas.shutdown
+        end
+        #
+        it "font_source get/set should work" do
+            @t.font_source_set "myFont"
+            @t.font_source_get.should == "myFont"
+            @t.font_source = "myFont2"
+            @t.font_source.should == "myFont2"
+        end
+        #
+        it "font get/set should work" do
+            @t.font_set "Arial", 12
+            @t.font_get.should == ["Arial",12]
+            @t.font =  "Ariall", 16
+            @t.font_get.should == ["Ariall",16]
+        end
+        #
+        it "text set/get should work" do
+            @t.text_set "hello"
+            @t.text_get.should == "hello"
+            @t.text="hello world"
+            @t.text.should == "hello world"
+        end
+        #
+        it "test different accessors" do
+            @t.ascent_get.should > 0
+            @t.descent_get.should > 0
+            @t.max_ascent_get.should > 0
+            @t.max_descent_get.should > 0
+            @t.horiz_advance_get.should > 0
+            @t.vert_advance_get.should > 0
+            @t.inset_get.should > 0
+            @t.direction_get.should == :evas_bidi_direction_ltr
+            @t.style_pad_get.length.should == 4
+            @t.ascent.should > 0
+            @t.descent.should > 0
+            @t.max_ascent.should > 0
+            @t.max_descent.should > 0
+            @t.horiz_advance.should > 0
+            @t.vert_advance.should > 0
+            @t.inset.should > 0
+            @t.direction.should == :evas_bidi_direction_ltr
+            @t.style_pad.length.should == 4
+        end
+        #
+        it "bidi_delimiters set/get should work" do
+            @t.bidi_delimiters_set "@"
+            @t.bidi_delimiters_get.should == "@"
+            @t.bidi_delimiters= "#"
+            @t.bidi_delimiters.should == "#"
+        end
+        #
+        it "char_pos_get char_coords_get last_up_to_pos should work" do
+            @t.text="hello world"
+            coords = @t.char_pos_get 6
+            @t.char_coords(coords[0], coords[1])[0].should == 6
+            @t.char_coords_get(coords[0], coords[1])[0].should == 6
+            coords = @t.char_pos_get 3
+            @t.char_coords(coords[0], coords[1])[0].should == 3
+            @t.char_coords_get(coords[0], coords[1])[0].should == 3
+            @t.last_up_to_pos(coords[0], coords[1]).should == 3
+        end
+        #
+        it "style ste/get should work" do
+            @t.style_set :evas_text_style_shadow
+            @t.style_get.should == :evas_text_style_shadow
+            @t.style= :evas_text_style_outline
+            @t.style.should == :evas_text_style_outline
+        end
+        #
+        it "shadow_color set/get should work" do
+            @t.shadow_color_set 100, 150, 200, 50
+            @t.shadow_color_get.should == [100, 150, 200, 50]
+            @t.shadow_color = 100, 150, 200, 50
+            @t.shadow_color.should == [100, 150, 200, 50]
+        end
+        #
+        it "glow_color set/get should work" do
+            @t.glow_color_set 100, 150, 200, 50
+            @t.glow_color_get.should == [100, 150, 200, 50]
+            @t.glow_color = 100, 150, 200, 50
+            @t.glow_color.should == [100, 150, 200, 50]
+        end
+        #
+        it "glow2_color set/get should work" do
+            @t.glow2_color_set 100, 150, 200, 50
+            @t.glow2_color_get.should == [100, 150, 200, 50]
+            @t.glow2_color = 100, 150, 200, 50
+            @t.glow2_color.should == [100, 150, 200, 50]
+        end
+        #
+        it "outline_color set/get should work" do
+            @t.outline_color_set 100, 150, 200, 50
+            @t.outline_color_get.should == [100, 150, 200, 50]
+            @t.outline_color = 100, 150, 200, 50
+            @t.outline_color.should == [100, 150, 200, 50]
+        end
+        #
     end
     #
         # EAPI Evas_Object *evas_object_image_filled_add (Evas *e);
@@ -656,37 +768,6 @@ describe Efl::Evas do
         # EAPI Eina_Bool evas_object_image_source_set (Evas_Object *obj, Evas_Object *src);
         # EAPI Evas_Object *evas_object_image_source_get (Evas_Object *obj);
         # EAPI Eina_Bool evas_object_image_source_unset (Evas_Object *obj);
-        # EAPI Evas_Object *evas_object_text_add (Evas *e);
-        # EAPI void evas_object_text_font_source_set (Evas_Object *obj, const char *font);
-        # EAPI const char *evas_object_text_font_source_get (const Evas_Object *obj);
-        # EAPI void evas_object_text_font_set (Evas_Object *obj, const char *font, Evas_Font_Size size);
-        # EAPI void evas_object_text_font_get (const Evas_Object *obj, const char **font, Evas_Font_Size *size);
-        # EAPI void evas_object_text_text_set (Evas_Object *obj, const char *text);
-        # EAPI void evas_object_text_bidi_delimiters_set(Evas_Object *obj, const char *delim);
-        # EAPI const char *evas_object_text_bidi_delimiters_get(const Evas_Object *obj);
-        # EAPI const char *evas_object_text_text_get (const Evas_Object *obj);
-        # EAPI Evas_Coord evas_object_text_ascent_get (const Evas_Object *obj);
-        # EAPI Evas_Coord evas_object_text_descent_get (const Evas_Object *obj);
-        # EAPI Evas_Coord evas_object_text_max_ascent_get (const Evas_Object *obj);
-        # EAPI Evas_Coord evas_object_text_max_descent_get (const Evas_Object *obj);
-        # EAPI Evas_Coord evas_object_text_horiz_advance_get(const Evas_Object *obj);
-        # EAPI Evas_Coord evas_object_text_vert_advance_get (const Evas_Object *obj);
-        # EAPI Evas_Coord evas_object_text_inset_get (const Evas_Object *obj);
-        # EAPI Eina_Bool evas_object_text_char_pos_get (const Evas_Object *obj, int pos, Evas_Coord *cx, Evas_Coord *cy, Evas_Coord *cw, Evas_Coord *ch);
-        # EAPI int evas_object_text_char_coords_get (const Evas_Object *obj, Evas_Coord x, Evas_Coord y, Evas_Coord *cx, Evas_Coord *cy, Evas_Coord *cw, Evas_Coord *ch);
-        # EAPI int evas_object_text_last_up_to_pos (const Evas_Object *obj, Evas_Coord x, Evas_Coord y);
-        # EAPI Evas_Text_Style_Type evas_object_text_style_get (const Evas_Object *obj);
-        # EAPI void evas_object_text_style_set (Evas_Object *obj, Evas_Text_Style_Type type);
-        # EAPI void evas_object_text_shadow_color_set (Evas_Object *obj, int r, int g, int b, int a);
-        # EAPI void evas_object_text_shadow_color_get (const Evas_Object *obj, int *r, int *g, int *b, int *a);
-        # EAPI void evas_object_text_glow_color_set (Evas_Object *obj, int r, int g, int b, int a);
-        # EAPI void evas_object_text_glow_color_get (const Evas_Object *obj, int *r, int *g, int *b, int *a);
-        # EAPI void evas_object_text_glow2_color_set (Evas_Object *obj, int r, int g, int b, int a);
-        # EAPI void evas_object_text_glow2_color_get (const Evas_Object *obj, int *r, int *g, int *b, int *a);
-        # EAPI void evas_object_text_outline_color_set(Evas_Object *obj, int r, int g, int b, int a);
-        # EAPI void evas_object_text_outline_color_get(const Evas_Object *obj, int *r, int *g, int *b, int *a);
-        # EAPI void evas_object_text_style_pad_get (const Evas_Object *obj, int *l, int *r, int *t, int *b);
-        # EAPI Evas_BiDi_Direction evas_object_text_direction_get (const Evas_Object *obj);
         # EAPI Evas_Object *evas_object_textblock_add(Evas *e);
         # EAPI const char *evas_textblock_escape_string_get(const char *escape);
         # EAPI const char *evas_textblock_string_escape_get(const char *string, int *len_ret);

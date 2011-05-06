@@ -280,6 +280,76 @@ module Efl
             #
             search_prefixes 'evas_object_text_'
             #
+            def font_get
+                f = FFI::MemoryPointer.new :string
+                s = FFI::MemoryPointer.new :int
+                Native.evas_object_text_font_get @ptr, f, s
+                [ f.read_pointer.read_string, s.read_int ]
+            end
+            alias :font :font_get
+            def char_pos_get pos
+                cx = FFI::MemoryPointer.new :int
+                cy = FFI::MemoryPointer.new :int
+                cw = FFI::MemoryPointer.new :int
+                ch = FFI::MemoryPointer.new :int
+                Native.evas_object_text_char_pos_get @ptr, pos, cx, cy, cw, ch
+                return [ cx.read_int, cy.read_int, cw.read_int, ch.read_int ]
+            end
+            alias :char_pos :char_pos_get
+            def char_coords_get x, y
+                cx = FFI::MemoryPointer.new :int
+                cy = FFI::MemoryPointer.new :int
+                cw = FFI::MemoryPointer.new :int
+                ch = FFI::MemoryPointer.new :int
+                r = Native.evas_object_text_char_coords_get @ptr, x, y, cx, cy, cw, ch
+                return [ r, cx.read_int, cy.read_int, cw.read_int, ch.read_int ]
+            end
+            alias :char_coords :char_coords_get
+            def style_pad_get
+                l = FFI::MemoryPointer.new :int
+                r = FFI::MemoryPointer.new :int
+                t = FFI::MemoryPointer.new :int
+                b = FFI::MemoryPointer.new :int
+                Native.evas_object_text_shadow_color_get @ptr, l, r, t, b
+                return [ l.read_int, r.read_int, t.read_int, b.read_int ]
+            end
+            alias :style_pad :style_pad_get
+            def shadow_color_get
+                r = FFI::MemoryPointer.new :int
+                g = FFI::MemoryPointer.new :int
+                b = FFI::MemoryPointer.new :int
+                a = FFI::MemoryPointer.new :int
+                Native.evas_object_text_shadow_color_get @ptr, r, g, b, a
+                return [ r.read_int, g.read_int, b.read_int, a.read_int ]
+            end
+            alias :shadow_color :shadow_color_get
+            def glow_color_get
+                r = FFI::MemoryPointer.new :int
+                g = FFI::MemoryPointer.new :int
+                b = FFI::MemoryPointer.new :int
+                a = FFI::MemoryPointer.new :int
+                Native.evas_object_text_glow_color_get @ptr, r, g, b, a
+                return [ r.read_int, g.read_int, b.read_int, a.read_int ]
+            end
+            alias :glow_color :glow_color_get
+            def glow2_color_get
+                r = FFI::MemoryPointer.new :int
+                g = FFI::MemoryPointer.new :int
+                b = FFI::MemoryPointer.new :int
+                a = FFI::MemoryPointer.new :int
+                Native.evas_object_text_glow2_color_get @ptr, r, g, b, a
+                return [ r.read_int, g.read_int, b.read_int, a.read_int ]
+            end
+            alias :glow2_color :glow2_color_get
+            def outline_color_get
+                r = FFI::MemoryPointer.new :int
+                g = FFI::MemoryPointer.new :int
+                b = FFI::MemoryPointer.new :int
+                a = FFI::MemoryPointer.new :int
+                Native.evas_object_text_outline_color_get @ptr, r, g, b, a
+                return [ r.read_int, g.read_int, b.read_int, a.read_int ]
+            end
+            alias :outline_color :outline_color_get
         end
     end
 end
