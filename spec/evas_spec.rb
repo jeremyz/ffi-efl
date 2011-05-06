@@ -5,25 +5,26 @@ require 'efl/eina_list'
 require 'efl/ecore'
 require 'efl/evas'
 #
+def realize_evas
+    width = 800
+    height = 600
+    @pixels = FFI::MemoryPointer.new :int, width*height
+    @e = Evas::REvas.new
+    @e.output_method_set Evas::render_method_lookup("buffer")
+    @e.output_viewport_set 0, 0, width, height
+    @e.output_size_set width, height
+    einfo = Native::EngineInfoBufferStruct.new @e.engine_info
+    einfo[:info][:depth_type] = Efl::Evas::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
+    einfo[:info][:dest_buffer] = @pixels
+    einfo[:info][:dest_buffer_row_bytes] = width * FFI::type_size(:int);
+    einfo[:info][:use_color_key] = 0;
+    einfo[:info][:alpha_threshold] = 0;
+    einfo[:info][:func][:new_update_region] = nil #FFI::Pointer::NULL;
+    einfo[:info][:func][:free_update_region] = nil #FFI::Pointer::NULL;
+    @e.engine_info_set einfo
+end
+#
 describe Efl::Evas do
-    def realize_evas
-        @width = 800
-        @height = 600
-        @pixels = FFI::MemoryPointer.new :int, @width*@height
-        @e = Evas::REvas.new
-        @e.output_method_set Evas::render_method_lookup("buffer")
-        @e.output_viewport_set 0, 0, @width, @height
-        @e.output_size_set @width, @height
-        einfo = Native::EngineInfoBufferStruct.new @e.engine_info
-        einfo[:info][:depth_type] = Efl::Evas::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
-        einfo[:info][:dest_buffer] = @pixels
-        einfo[:info][:dest_buffer_row_bytes] = @width * FFI::type_size(:int);
-        einfo[:info][:use_color_key] = 0;
-        einfo[:info][:alpha_threshold] = 0;
-        einfo[:info][:func][:new_update_region] = nil #FFI::Pointer::NULL;
-        einfo[:info][:func][:free_update_region] = nil #FFI::Pointer::NULL;
-        @e.engine_info_set einfo
-    end
     #
     before(:all) {
         Evas = Efl::Evas
@@ -85,6 +86,7 @@ describe Efl::Evas do
             @pixels.free
             Evas.shutdown
         end
+        #
         it "should be able to create and destroy evas" do
             e1 = Evas::REvas.new
             e1.address.should_not == 0
@@ -147,6 +149,7 @@ describe Efl::Evas do
             @e.render_idle_flush
             @e.render_dump
         end
+        #
         it "output method should work" do
             @e.output_method.should == Evas::render_method_lookup("buffer")
             @e.output_method_get.should == Evas::render_method_lookup("buffer")
@@ -168,6 +171,7 @@ describe Efl::Evas do
             @e.output_size = 666, 69
             @e.size == [666,69]
         end
+        #
         it "output viewport should work" do
             @e.output_viewport_set 0, 0, 666, 69
             @e.viewport.should == [0,0,666,69]
@@ -252,6 +256,7 @@ describe Efl::Evas do
             @e.event_feed_mouse_in Time.now.to_i, FFI::Pointer::NULL
             @bg.event_callback_del(:evas_callback_mouse_in, kd_cb).address.should == kd_d.address
             @db.should be_true
+            @bg.free
         end
         #
         it "image cache functions should work" do
@@ -295,6 +300,7 @@ describe Efl::Evas do
             @o.focus = true
             @e.focus.should == @o.to_ptr
             @e.focus_get.should == @o.to_ptr
+            @o.free
         end
         #
         it "object_name_find should work" do
@@ -302,10 +308,12 @@ describe Efl::Evas do
             @o = @e.object_rectangle_add
             @o.name="name"
             @e.object_name_find("name").should == @o.to_ptr
+            @o.free
         end
         # TODO evas_object_top_at_xy_get, evas_object_top_at_pointer_get, evas_object_top_in_rectangle_get
         # TODO evas_objects_at_xy_get, evas_objects_in_rectangle_get, evas_object_bottom_get, evas_object_top_get
     end
+    #
     describe Efl::Evas::REvasObject do
         #
         before(:all) do
