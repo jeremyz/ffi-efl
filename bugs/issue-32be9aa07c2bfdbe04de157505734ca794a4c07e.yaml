@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: EcoreGetopt specs -E
+desc: "EcoreGetopt -E/--list-engines yields >>ERROR: invalid options found. See --help."
+type: :bugfix
+component: ecore
+release: 
+reporter: Jeremy Zurcher <jeremy@asynk.ch>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-06 21:17:44.772471 Z
+references: []
+
+id: 32be9aa07c2bfdbe04de157505734ca794a4c07e
+log_events: 
+- - 2011-05-06 21:17:46.459016 Z
+  - Jeremy Zurcher <jeremy@asynk.ch>
+  - created
+  - ""
+git_branch: 
+claimer: 

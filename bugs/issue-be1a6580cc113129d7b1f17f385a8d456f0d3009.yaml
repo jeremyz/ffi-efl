@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: evas general specs
+desc: continue Evas.h from evas_load_error_str till $
+type: :task
+component: evas
+release: 
+reporter: Jeremy Zurcher <jeremy@asynk.ch>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-06 21:11:45.182500 Z
+references: []
+
+id: be1a6580cc113129d7b1f17f385a8d456f0d3009
+log_events: 
+- - 2011-05-06 21:11:47.695649 Z
+  - Jeremy Zurcher <jeremy@asynk.ch>
+  - created
+  - ""
+git_branch: 
+claimer: 

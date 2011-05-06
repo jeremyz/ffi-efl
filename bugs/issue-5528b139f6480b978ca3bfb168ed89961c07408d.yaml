@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: meth= in module#method_missing
+desc: maybe allow meth= within module#method_missing (tools/genruby.rb)
+type: :task
+component: tools
+release: 
+reporter: Jeremy Zurcher <jeremy@asynk.ch>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-06 21:24:37.979116 Z
+references: []
+
+id: 5528b139f6480b978ca3bfb168ed89961c07408d
+log_events: 
+- - 2011-05-06 21:24:39.178935 Z
+  - Jeremy Zurcher <jeremy@asynk.ch>
+  - created
+  - ""
+git_branch: 
+claimer: 

@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: 23px window title height in spec might not be portable
+desc: spec/ecore_evas_spec.rb 23px is window frame height
+type: :task
+component: ecore
+release: 
+reporter: Jeremy Zurcher <jeremy@asynk.ch>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-06 21:23:44.732436 Z
+references: []
+
+id: b459ab36b7d1a226763f92036c5e44f56a6cf070
+log_events: 
+- - 2011-05-06 21:23:45.765585 Z
+  - Jeremy Zurcher <jeremy@asynk.ch>
+  - created
+  - ""
+git_branch: 
+claimer: 

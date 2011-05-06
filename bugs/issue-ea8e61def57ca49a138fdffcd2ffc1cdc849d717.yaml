@@ -5,8 +5,8 @@ type: :feature
 component: evas
 release: 
 reporter: Lionel Orry <lionel.orry@gmail.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2011-05-06 13:13:03.768466 Z
 references: []
 
@@ -16,5 +16,13 @@ log_events:
   - Lionel Orry <lionel.orry@gmail.com>
   - created
   - ""
+- - 2011-05-06 20:49:51.805960 Z
+  - Jeremy Zurcher <jeremy@asynk.ch>
+  - issue claimed
+  - ""
+- - 2011-05-06 21:08:44.655764 Z
+  - Jeremy Zurcher <jeremy@asynk.ch>
+  - closed with disposition fixed
+  - commit 86c7bb0aa79ddea6fd26c4525af0fbf212658d1b
 git_branch: 
-claimer: 
+claimer: Jeremy Zurcher <jeremy@asynk.ch>

@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "#free with FFI::Pointer"
+desc: "prevent calling #free with non FFI::AutoPointer ??"
+type: :task
+component: ffi-efl
+release: 
+reporter: Jeremy Zurcher <jeremy@asynk.ch>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-06 21:22:17.459253 Z
+references: []
+
+id: d670fb3875f90798ab6b014e847b68681c3779a6
+log_events: 
+- - 2011-05-06 21:22:18.655653 Z
+  - Jeremy Zurcher <jeremy@asynk.ch>
+  - created
+  - ""
+git_branch: 
+claimer: 
