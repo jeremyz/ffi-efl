@@ -1,6 +1,8 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
+require 'ffi'
+#
 module Efl
     #
     module Native
