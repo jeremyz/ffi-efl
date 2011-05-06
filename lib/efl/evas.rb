@@ -358,6 +358,24 @@ module Efl
             #
             search_prefixes 'evas_object_box_'
             #
+            def children_get
+                EinaList::REinaList.new Native.evas_object_box_children_get @ptr
+            end
+            alias :children :children_get
+            def align_get
+                h = FFI::MemoryPointer.new :double
+                v = FFI::MemoryPointer.new :double
+                Native.evas_object_box_align_get @ptr, h, v
+                [ h.read_double, v.read_double ]
+            end
+            alias :align :align_get
+            def padding_get
+                h = FFI::MemoryPointer.new :int
+                v = FFI::MemoryPointer.new :int
+                Native.evas_object_box_padding_get @ptr, h, v
+                [ h.read_int, v.read_int ]
+            end
+            alias :padding :padding_get
         end
     end
 end

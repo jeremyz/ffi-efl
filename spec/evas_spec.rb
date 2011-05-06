@@ -1,6 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
+require 'efl/eina_list'
 require 'efl/ecore'
 require 'efl/evas'
 #
@@ -712,6 +713,85 @@ describe Efl::Evas do
         #
     end
     #
+    describe Efl::Evas::REvasBox do
+        #
+        before(:all) do
+            Evas.init
+            realize_evas
+            @b = @e.object_box_add
+            @os = []
+            0.upto(4) do
+                @os << @e.object_rectangle_add
+            end
+        end
+        after(:all) do
+            @b.free
+            @e.free
+            Evas.shutdown
+        end
+        #
+        it "append, prepend, insert_before, insert_after, insert_at, remove, remove_at, remove_all  and children_get should work" do
+            @b.append @os[4]
+            @b.prepend @os[0]
+            @b.insert_before @os[1], @os[4]
+            @b.insert_after @os[2], @os[1]
+            @b.insert_at @os[3], 3
+            @b.children_get.each_with_index do |o,i|
+                Evas::REvasRectangle.new(o).should === @os[i]
+            end
+            @os.delete_at 2
+            @b.remove_at(2).should be_true
+            @b.remove_at(20).should be_false
+            o = @os.delete_at 2
+            @b.remove(o).should be_true
+            @b.children_get.each_with_index do |o,i|
+                Evas::REvasRectangle.new(o).should === @os[i]
+            end
+            @b.remove_all true
+            @b.children.to_a.length.should == 0
+        end
+        #
+        it "align set/get should work" do
+            @b.align_set 0.2, 0.3
+            @b.align_get.should == [0.2,0.3]
+            @b.align = 0.3, 0.2
+            @b.align.should == [0.3,0.2]
+        end
+        #
+        it "padding set/get should work" do
+            @b.padding_set 20, 30
+            @b.padding_get.should == [20,30]
+            @b.padding = 30, 20
+            @b.padding.should == [30,20]
+        end
+        #
+
+        # EAPI void evas_object_box_smart_set (Evas_Object_Box_Api *api);
+        # EAPI const Evas_Object_Box_Api *evas_object_box_smart_class_get (void);
+        # EAPI void evas_object_box_layout_set (Evas_Object *o, Evas_Object_Box_Layout cb, const void *data, void (*free_data)(void *data));
+
+        # EAPI void evas_object_box_layout_horizontal (Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
+        # EAPI void evas_object_box_layout_vertical (Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
+        # EAPI void evas_object_box_layout_homogeneous_vertical (Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
+        # EAPI void evas_object_box_layout_homogeneous_horizontal (Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
+        # EAPI void evas_object_box_layout_homogeneous_max_size_horizontal(Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
+        # EAPI void evas_object_box_layout_homogeneous_max_size_vertical (Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
+        # EAPI void evas_object_box_layout_flow_horizontal (Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
+        # EAPI void evas_object_box_layout_flow_vertical (Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
+        # EAPI void evas_object_box_layout_stack (Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
+
+        # EAPI Eina_Iterator *evas_object_box_iterator_new (const Evas_Object *o);
+        # EAPI Eina_Accessor *evas_object_box_accessor_new (const Evas_Object *o);
+
+        # EAPI const char *evas_object_box_option_property_name_get (Evas_Object *o, int property);
+
+        # EAPI int evas_object_box_option_property_id_get (Evas_Object *o, const char *name);
+        # EAPI Eina_Bool evas_object_box_option_property_set (Evas_Object *o, Evas_Object_Box_Option *opt, int property, ...);
+        # EAPI Eina_Bool evas_object_box_option_property_vset (Evas_Object *o, Evas_Object_Box_Option *opt, int property, va_list args);
+        # EAPI Eina_Bool evas_object_box_option_property_get (Evas_Object *o, Evas_Object_Box_Option *opt, int property, ...);
+        # EAPI Eina_Bool evas_object_box_option_property_vget (Evas_Object *o, Evas_Object_Box_Option *opt, int property, va_list args);
+    end
+    #
         # EAPI Evas_Object *evas_object_image_filled_add (Evas *e);
         # EAPI void evas_object_image_memfile_set (Evas_Object *obj, void *data, int size, char *format, char *key);
         # EAPI void evas_object_image_file_set (Evas_Object *obj, const char *file, const char *key);
@@ -876,41 +956,6 @@ describe Efl::Evas do
         # EAPI void evas_object_smart_clipped_smart_set (Evas_Smart_Class *sc);
         # EAPI const Evas_Smart_Class *evas_object_smart_clipped_class_get (void);
         # EAPI void evas_object_smart_move_children_relative(Evas_Object *obj, Evas_Coord dx, Evas_Coord dy);
-        # EAPI void evas_object_box_smart_set (Evas_Object_Box_Api *api);
-        # EAPI const Evas_Object_Box_Api *evas_object_box_smart_class_get (void);
-        # EAPI void evas_object_box_layout_set (Evas_Object *o, Evas_Object_Box_Layout cb, const void *data, void (*free_data)(void *data));
-        # EAPI Evas_Object *evas_object_box_add (Evas *evas);
-        # EAPI Evas_Object *evas_object_box_add_to (Evas_Object *parent);
-        # EAPI void evas_object_box_layout_horizontal (Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
-        # EAPI void evas_object_box_layout_vertical (Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
-        # EAPI void evas_object_box_layout_homogeneous_vertical (Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
-        # EAPI void evas_object_box_layout_homogeneous_horizontal (Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
-        # EAPI void evas_object_box_layout_homogeneous_max_size_horizontal(Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
-        # EAPI void evas_object_box_layout_homogeneous_max_size_vertical (Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
-        # EAPI void evas_object_box_layout_flow_horizontal (Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
-        # EAPI void evas_object_box_layout_flow_vertical (Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
-        # EAPI void evas_object_box_layout_stack (Evas_Object *o, Evas_Object_Box_Data *priv, void *data);
-        # EAPI void evas_object_box_align_set (Evas_Object *o, double horizontal, double vertical);
-        # EAPI void evas_object_box_align_get (const Evas_Object *o, double *horizontal, double *vertical);
-        # EAPI void evas_object_box_padding_set (Evas_Object *o, Evas_Coord horizontal, Evas_Coord vertical);
-        # EAPI void evas_object_box_padding_get (const Evas_Object *o, Evas_Coord *horizontal, Evas_Coord *vertical);
-        # EAPI Evas_Object_Box_Option *evas_object_box_append (Evas_Object *o, Evas_Object *child);
-        # EAPI Evas_Object_Box_Option *evas_object_box_prepend (Evas_Object *o, Evas_Object *child);
-        # EAPI Evas_Object_Box_Option *evas_object_box_insert_before (Evas_Object *o, Evas_Object *child, const Evas_Object *reference);
-        # EAPI Evas_Object_Box_Option *evas_object_box_insert_after (Evas_Object *o, Evas_Object *child, const Evas_Object *referente);
-        # EAPI Evas_Object_Box_Option *evas_object_box_insert_at (Evas_Object *o, Evas_Object *child, unsigned int pos);
-        # EAPI Eina_Bool evas_object_box_remove (Evas_Object *o, Evas_Object *child);
-        # EAPI Eina_Bool evas_object_box_remove_at (Evas_Object *o, unsigned int pos);
-        # EAPI Eina_Bool evas_object_box_remove_all (Evas_Object *o, Eina_Bool clear);
-        # EAPI Eina_Iterator *evas_object_box_iterator_new (const Evas_Object *o);
-        # EAPI Eina_Accessor *evas_object_box_accessor_new (const Evas_Object *o);
-        # EAPI Eina_List *evas_object_box_children_get (const Evas_Object *o);
-        # EAPI const char *evas_object_box_option_property_name_get (Evas_Object *o, int property);
-        # EAPI int evas_object_box_option_property_id_get (Evas_Object *o, const char *name);
-        # EAPI Eina_Bool evas_object_box_option_property_set (Evas_Object *o, Evas_Object_Box_Option *opt, int property, ...);
-        # EAPI Eina_Bool evas_object_box_option_property_vset (Evas_Object *o, Evas_Object_Box_Option *opt, int property, va_list args);
-        # EAPI Eina_Bool evas_object_box_option_property_get (Evas_Object *o, Evas_Object_Box_Option *opt, int property, ...);
-        # EAPI Eina_Bool evas_object_box_option_property_vget (Evas_Object *o, Evas_Object_Box_Option *opt, int property, va_list args);
         # EAPI Evas_Object *evas_object_table_add (Evas *evas);
         # EAPI Evas_Object *evas_object_table_add_to (Evas_Object *parent);
         # EAPI void evas_object_table_homogeneous_set (Evas_Object *o, Evas_Object_Table_Homogeneous_Mode homogeneous);
