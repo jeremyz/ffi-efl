@@ -68,6 +68,9 @@ module Efl
     end
     #
     module ClassHelper
+        def to_a; [self] end
+        def to_ary; [self] end
+        def to_s; Object.instance_method(:to_s).bind(self).call+' ['+self.to_ptr.to_s+']' end
         def to_ptr; @ptr; end
         def === o; @ptr === o.to_ptr; end
         def address; @ptr.address; end
@@ -115,7 +118,6 @@ module Efl
                     return self.send m, *args, &block
                 end
             end
-            return [self.to_s+' ['+self.to_ptr.to_s+']'] if m_s=~/^to_ary$/
             Kernel.raise NameError.new "#{self.class.name} is unable to resolve #{m} within #{self.class.search_prefixes.inspect}"
         end
     end
