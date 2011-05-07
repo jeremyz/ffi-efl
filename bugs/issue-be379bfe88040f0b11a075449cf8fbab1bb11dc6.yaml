@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: superclass method access
+desc: find an elegant way to call superclass overriden methods
+type: :feature
+component: ffi-efl
+release: 
+reporter: Jeremy Zurcher <jeremy@asynk.ch>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-07 22:40:32.597560 Z
+references: []
+
+id: be379bfe88040f0b11a075449cf8fbab1bb11dc6
+log_events: 
+- - 2011-05-07 22:41:04.704038 Z
+  - Jeremy Zurcher <jeremy@asynk.ch>
+  - created
+  - see what is used in Efl::Elm::ElmBg specs
+git_branch: 
+claimer: 

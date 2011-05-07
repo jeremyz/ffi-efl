@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: better MemoryPointers management
+desc: maybe have some (pre init/on demand) instance variable :i1, :i2, :d1, FFI::MemoryPointers and reuse them across methods
+type: :task
+component: ffi-efl
+release: 
+reporter: Jeremy Zurcher <jeremy@asynk.ch>
+status: :unstarted
+disposition: 
+creation_time: 2011-05-06 21:54:48.098882 Z
+references: []
+
+id: abb0d15c5cbd0288cb6bbdb12c01013d323543b6
+log_events: 
+- - 2011-05-06 21:54:49.775452 Z
+  - Jeremy Zurcher <jeremy@asynk.ch>
+  - created
+  - ""
+git_branch: 
+claimer: 
