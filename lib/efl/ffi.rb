@@ -95,7 +95,7 @@ module Efl
             else
                 args_s = '*args'
             end
-            self.class.search_prefixes.each do |p|
+            (['']+self.class.search_prefixes).each do |p|
                 sym = p+m_s
                 meth = (
                     if Efl::Native.respond_to? sym
