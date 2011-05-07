@@ -129,5 +129,35 @@ describe Efl::Elm do
             @lb.slide_duration.should == 3.1415926
         end
     end
+    describe Efl::Elm::ElmPager do
+        #
+        before(:all) {
+            realize_app
+            @p = Elm::ElmPager.new @win
+            @os = []
+            0.upto(3) do
+                @os << @win.evas.object_rectangle_add
+            end
+        }
+        after(:all) {
+            @p.free
+            @bg.free
+            @win.free
+        }
+        #
+        it "content push pop promote bottom_get top_get" do
+            @os.each do |o|
+                @p.content_push o
+            end
+            @p.content_top_get.should == @os[-1].to_ptr
+            @p.content_bottom_get.should == @os[0].to_ptr
+            @p.content_pop
+            @p.content_top_get.should == @os[-2].to_ptr
+            @p.content_bottom_get.should == @os[0].to_ptr
+            @p.content_promote @os[0]
+            @p.content_top_get.should == @os[0].to_ptr
+            @p.content_bottom_get.should == @os[1].to_ptr
+        end
+    end
 end
 
