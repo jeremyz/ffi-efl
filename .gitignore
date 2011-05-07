@@ -2,5 +2,5 @@ tools/api*
 tools/*diff
 git*
 check*
-.ditz-*
+.ditz-config
 html
