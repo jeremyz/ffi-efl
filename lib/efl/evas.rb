@@ -125,17 +125,15 @@ module Efl
             include Efl::ClassHelper
             search_prefixes 'evas_object_', 'evas_'
             #
-            def initialize *args
+            def initialize a, *args
                 @ptr = (
-                    case args[0]
-                    when NilClass
-                        FFI::AutoPointer.new Native.evas_new, REvasObject.method(:release)
+                    case a
                     when FFI::Pointer
-                        args[0]
+                        a
                     when Method
-                        FFI::AutoPointer.new args[0].call(args[1]), REvasObject.method(:release)
+                        FFI::AutoPointer.new a.call(*args), REvasObject.method(:release)
                     else
-                        raise ArgumentError.new "wrong argument #{args[0].class.name}"
+                        raise ArgumentError.new "wrong argument #{a.class.name}"
                     end
                 )
                 yield self if block_given?
