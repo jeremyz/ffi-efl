@@ -6,10 +6,15 @@ require 'efl/elementary'
 #
 describe Efl::Elm do
     #
-    before(:all) { Elm = Efl::Elm }
-    #
-    before(:each) {
+    before(:all) {
+        Elm = Efl::Elm
         Elm.init
+    }
+    after(:all) {
+        Elm.shutdown
+    }
+    #
+    def realize_app
         @win = Elm::ElmWin.new(nil, 'TEST') do |w|
             w.title= 'spec win'
             w.move 100, 100
@@ -21,14 +26,16 @@ describe Efl::Elm do
             bg.evas_object_color_set 200,255,100,150
             bg.show
         end
-    }
-    after(:each) {
-        @bg.free
-        @win.free
-        Elm.shutdown
-    }
+    end
     #
     describe Efl::Elm::ElmBg do
+        before(:all) {
+            realize_app
+        }
+        after(:all) {
+            @bg.free
+            @win.free
+        }
         #
         it "file set/get" do
             @bg.file_set "file", "group1"
@@ -63,5 +70,64 @@ describe Efl::Elm do
         end
     end
     #
+    describe Efl::Elm::ElmLabel do
+        #
+        before(:all) {
+            realize_app
+            @lb = Elm::ElmLabel.new @win
+        }
+        after(:all) {
+            @lb.free
+            @bg.free
+            @win.free
+        }
+        #
+        it "label set/get" do
+            @lb.label_set "label1"
+            @lb.label_get.should == "label1"
+            @lb.label= "label2"
+            @lb.label.should == "label2"
+        end
+        #
+        it "line_wrap set/get" do
+            @lb.line_wrap_set :elm_wrap_char
+            @lb.line_wrap_get.should == :elm_wrap_char
+            @lb.line_wrap= :elm_wrap_none
+            @lb.line_wrap.should == :elm_wrap_none
+        end
+        #
+        it "wrap_width set/get" do
+            @lb.wrap_width_set 69
+            @lb.wrap_width_get.should == 69
+            @lb.wrap_width= 666
+            @lb.wrap_width.should == 666
+        end
+        #
+        it "wrap_height set/get" do
+            @lb.wrap_height_set 69
+            @lb.wrap_height_get.should == 69
+            @lb.wrap_height= 666
+            @lb.wrap_height.should == 666
+        end
+        #
+        it "ellipsis_set" do
+            @lb.ellipsis_set true
+            @lb.ellipsis= true
+        end
+        #
+        it "slide_set" do
+            @lb.slide_set true
+            @lb.slide_get.should be_true
+            @lb.slide= false
+            @lb.slide.should be_false
+        end
+        #
+        it "slide_duration_set" do
+            @lb.slide_duration_set 3.1415926
+            @lb.slide_duration_get.should == 3.1415926
+            @lb.slide_duration= 3.1415926
+            @lb.slide_duration.should == 3.1415926
+        end
+    end
 end
 

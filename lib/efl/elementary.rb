@@ -54,6 +54,16 @@ module Efl
             end
             alias :color :color_get
         end
+        #
+        class ElmLabel < Efl::Evas::REvasObject
+            #
+            search_prefixes 'elm_label_'
+            #
+            def initialize parent, &block
+                super Native.method(:elm_label_add), parent, &block
+            end
+        end
+        #
     end
 end
 #
