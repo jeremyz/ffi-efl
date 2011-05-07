@@ -4,8 +4,6 @@
 require 'efl/evas'
 require 'efl/native/elementary'
 #
-Efl::Evas::REvasObject.search_prefixes << 'elm_'   # append not prepend !
-#
 module Efl
     module Elm
         #
@@ -21,24 +19,41 @@ module Efl
             end
         end
         #
-        class ElmWin
-            include Efl::ClassHelper
-            search_prefixes 'elm_win_', 'elm_'
-            def initialize parent, title, type=:elm_win_basic
-                @evas_object = Evas::REvasObject.new Native.elm_win_add parent, title, type
-                @ptr = @evas_object.to_ptr
-                yield self,@evas_object if block_given?
-            end
-            def add e
-                eo = Evas::REvasObject.new Native.send "elm_#{e}_add", @ptr
-                yield eo if block_given?
-                eo
+        class ElmWin < Efl::Evas::REvasObject
+            #
+            search_prefixes 'elm_win_'
+            #
+            def initialize parent, title, type=:elm_win_basic, &block
+                super Native.method(:elm_win_add), parent, title, type, &block
             end
             def smart_callback_add event_str, cb, data=FFI::MemoryPointer::NULL
                 Native.evas_object_smart_callback_add @ptr, event_str, cb, data
             end
         end
         #
+        class ElmBg < Efl::Evas::REvasObject
+            #
+            search_prefixes 'elm_bg_'
+            #
+            def initialize parent, &block
+                super Native.method(:elm_bg_add), parent, &block
+            end
+            def file_get
+                f = FFI::MemoryPointer.new :pointer
+                g = FFI::MemoryPointer.new :pointer
+                Native.elm_bg_file_get @ptr, f, g
+                [ f.read_pointer.read_string, g.read_pointer.read_string ]
+            end
+            alias :file :file_get
+            def color_get
+                r = FFI::MemoryPointer.new :int
+                g = FFI::MemoryPointer.new :int
+                b = FFI::MemoryPointer.new :int
+                Native.elm_bg_color_get @ptr, r, g, b
+                [ r.read_int, g.read_int, b.read_int ]
+            end
+            alias :color :color_get
+        end
     end
 end
 #
