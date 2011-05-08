@@ -72,7 +72,16 @@ module Efl
                 super Native.method(:elm_pager_add), parent, &block
             end
         end
-
+        #
+        class ElmPanel < Efl::Evas::REvasObject
+            #
+            search_prefixes 'elm_panel_'
+            #
+            def initialize parent, &block
+                super Native.method(:elm_panel_add), parent, &block
+            end
+        end
+        #
     end
 end
 #

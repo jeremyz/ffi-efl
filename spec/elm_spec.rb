@@ -60,13 +60,13 @@ describe Efl::Elm do
         end
         #
         it "overlay get/set unset" do
-            @r = @win.evas.object_rectangle_add
+            r = @win.evas.object_rectangle_add
             @bg.overlay_get.should==FFI::Pointer::NULL
-            @bg.overlay_set @r
-            @bg.overlay_get.should == @r.to_ptr
-            @bg.overlay_unset.should == @r.to_ptr
+            @bg.overlay_set r
+            @bg.overlay_get.should == r.to_ptr
+            @bg.overlay_unset.should == r.to_ptr
             @bg.overlay_get.should == FFI::Pointer::NULL
-            @r.free
+            r.free
         end
     end
     #
@@ -129,6 +129,7 @@ describe Efl::Elm do
             @lb.slide_duration.should == 3.1415926
         end
     end
+    #
     describe Efl::Elm::ElmPager do
         #
         before(:all) {
@@ -157,6 +158,53 @@ describe Efl::Elm do
             @p.content_promote @os[0]
             @p.content_top_get.should == @os[0].to_ptr
             @p.content_bottom_get.should == @os[1].to_ptr
+        end
+    end
+    #
+    describe Efl::Elm::ElmPanel do
+        #
+        before(:all) {
+            realize_app
+            @p = Elm::ElmPanel.new @win
+            @os = []
+        }
+        after(:all) {
+            @p.free
+            @bg.free
+            @win.free
+        }
+        #
+        it "orient set/get" do
+            @p.orient_set :elm_panel_orient_bottom
+            @p.orient_get.should == :elm_panel_orient_bottom
+            @p.orient= :elm_panel_orient_top
+            @p.orient.should == :elm_panel_orient_top
+        end
+        #
+        it "content set/get/unset" do
+            o = @win.evas.object_rectangle_add
+            @p.content_set o
+            @p.content_get.should == o.to_ptr
+            @p.content_unset.should == o.to_ptr
+            o.free
+            o = @win.evas.object_rectangle_add
+            @p.content= o
+            @p.content.should == o.to_ptr
+            @p.content_unset.should == o.to_ptr
+            o.free
+        end
+        #
+        it "hidden set/get toggle" do
+            @p.hidden_set true
+            @p.hidden_get.should be_true
+            @p.hidden=false
+            @p.hidden.should be_false
+            @p.toggle
+            @p.hidden_get.should be_true
+            @p.hidden.should be_true
+            @p.toggle
+            @p.hidden_get.should be_false
+            @p.hidden.should be_false
         end
     end
 end
