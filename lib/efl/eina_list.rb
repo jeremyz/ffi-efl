@@ -49,9 +49,10 @@ module Efl
                     p = l[:next]
                 end
             end
-            def to_ary
+            def to_a
                 inject([]) { |s,e| s<<e }
             end
+            alias :to_ary :to_a
             # for fun and tests
             def append p
                 @ptr = Native.eina_list_append @ptr, p
