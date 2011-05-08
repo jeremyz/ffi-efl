@@ -1,6 +1,10 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
+require 'efl/eina'
+require 'efl/evas'
+require 'efl/ecore'
+#
 def realize_evas
     width = 300
     height = 200
@@ -19,4 +23,33 @@ def realize_evas
     einfo[:info][:func][:free_update_region] = nil #FFI::Pointer::NULL;
     @e.engine_info_set einfo
 end
-
+#
+def ecore_loop n
+    n.downto(0) do
+        sleep 0.1
+        Efl::Ecore.main_loop_iterate
+    end
+end
+#
+def bool_check t, fct, delay=nil
+    t.send fct+'_set', true
+    ecore_loop delay if delay
+    t.send(fct+'_get').should be_true
+    t.send fct+'=', false
+    ecore_loop delay if delay
+    t.send(fct).should be_false
+end
+#
+def realize_win
+    @win = Elm::ElmWin.new(nil, 'TEST') do |w|
+        w.title= 'spec win'
+        w.move 100, 100
+        w.resize 100, 100
+    end
+    @bg = Elm::ElmBg.new(@win) do |bg|
+        bg.size_hint_weight_set 1.0, 1.0
+        bg.evas_object_color_set 200,255,100,150
+        bg.show
+    end
+    @win.show
+end
