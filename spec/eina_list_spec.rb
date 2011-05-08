@@ -92,7 +92,7 @@ describe Efl::EinaList do
         l.free
     end
     #
-    it "Enumerable should work" do
+    it "Enumerable" do
         l = REinaList.new
         d1 = ::FFI::MemoryPointer.from_string "D0"
         d2 = ::FFI::MemoryPointer.from_string "D1"

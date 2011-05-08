@@ -91,7 +91,7 @@ describe Efl::Evas do
             e4.to_ptr.should be_nil
         end
         #
-        it "focus should work" do
+        it "focus " do
             Native.evas_focus_in @e.to_ptr
             Native.evas_focus_state_get(@e.to_ptr).should be_true
             Native.evas_focus_out @e.to_ptr
@@ -108,12 +108,12 @@ describe Efl::Evas do
             @e.focus_state { |r| r.should be_false }
         end
         #
-        it "nochange should work" do
+        it "nochange " do
             @e.nochange_push
             @e.nochange_pop
         end
         #
-        it "attach data should work" do
+        it "attach data " do
             data = FFI::MemoryPointer.from_string "my data"
             @e.data_attach_set data
             @e.data_attach.read_string.should == "my data"
@@ -132,7 +132,7 @@ describe Efl::Evas do
             @e.render_dump
         end
         #
-        it "output method should work" do
+        it "output method " do
             @e.output_method.should == Evas::render_method_lookup("buffer")
             @e.output_method_get.should == Evas::render_method_lookup("buffer")
             # output_method_set tested in before(:all)
@@ -140,12 +140,12 @@ describe Efl::Evas do
             Evas::render_method_list_free l
         end
         #
-        it "engine info should work" do
+        it "engine info " do
             # engine_info_get and engine_info_set tested in before(:all)
             true.should be_true
         end
         #
-        it "output size should work" do
+        it "output size " do
             @e.output_size_set 69, 666
             @e.size.should == [69,666]
             @e.output_size.should == [69,666]
@@ -154,7 +154,7 @@ describe Efl::Evas do
             @e.size == [666,69]
         end
         #
-        it "output viewport should work" do
+        it "output viewport " do
             @e.output_viewport_set 0, 0, 666, 69
             @e.viewport.should == [0,0,666,69]
             @e.output_viewport.should == [0,0,666,69]
@@ -163,7 +163,7 @@ describe Efl::Evas do
             @e.viewport.should == [0,0,69,666]
         end
         #
-        it "coordinates evas<=>world should work" do
+        it "coordinates evas<=>world " do
             @e.output_viewport_set 0, 0, 800, 600
             x = @e.coord_screen_x_to_world 666
             r = @e.coord_world_x_to_screen x
@@ -175,7 +175,7 @@ describe Efl::Evas do
             r.should >= 67
         end
         #
-        it "freeze and thaw should work" do
+        it "freeze and thaw " do
             @e.event_freeze?.should == 0
             @e.event_freeze
             @e.event_freeze?.should == 1
@@ -183,14 +183,14 @@ describe Efl::Evas do
             @e.event_freeze_get.should == 0
         end
         #
-        it "up/down mouse event should work" do
+        it "up/down mouse event " do
             @e.event_feed_mouse_down 2, :evas_button_double_click, Time.now.to_i, FFI::Pointer::NULL
             @e.pointer_button_down_mask.should == 2
             @e.event_feed_mouse_up 2, :evas_button_double_click, Time.now.to_i, FFI::Pointer::NULL
             @e.pointer_button_down_mask_get.should == 0
         end
         #
-        it "move mouse event should work" do
+        it "move mouse event " do
             @e.pointer_output.should == [0,0]
             @e.pointer_output_xy_get.should == [0,0]
             @e.pointer_canvas.should == [0,0]
@@ -202,7 +202,7 @@ describe Efl::Evas do
             @e.pointer_canvas_xy_get.should == [6,6]
         end
         #
-        it "in/out mouse event should work" do
+        it "in/out mouse event " do
             @e.pointer_inside_get.should be_false
             @e.event_feed_mouse_in Time.now.to_i, FFI::Pointer::NULL
             @e.pointer_inside.should be_true
@@ -220,7 +220,7 @@ describe Efl::Evas do
         #   evas_event_feed_key_up
         #   evas_event_feed_hold
         #
-        it "add/del event callback should work" do
+        it "add/del event callback " do
             @cb = false
             kd_cb = Proc.new do |data, e, obj, event_info|
                 data.read_string.should eq "mouse_in"
@@ -241,7 +241,7 @@ describe Efl::Evas do
             @bg.free
         end
         #
-        it "image cache functions should work" do
+        it "image cache functions " do
             @e.image_cache_flush
             @e.image_cache_reload
             @e.image_cache_set 666
@@ -249,7 +249,7 @@ describe Efl::Evas do
             @e.image_cache_get.should == 666
         end
         #
-        it "font functions should work" do
+        it "font functions " do
             @e.font_hinting_set :evas_font_hinting_bytecode
             @e.font_hinting.should == :evas_font_hinting_bytecode
             @e.font_hinting_get.should == :evas_font_hinting_bytecode
@@ -270,7 +270,7 @@ describe Efl::Evas do
             end
         end
         #
-        it "focus should work" do
+        it "focus " do
             @e.focus.should == FFI::Pointer::NULL
             @e.focus_get.should == FFI::Pointer::NULL
             @o = @e.object_rectangle_add { |o|
@@ -285,7 +285,7 @@ describe Efl::Evas do
             @o.free
         end
         #
-        it "object_name_find should work" do
+        it "object_name_find " do
             @e.object_name_find("name").should == FFI::Pointer::NULL
             @o = @e.object_rectangle_add
             @o.name="name"
@@ -315,7 +315,7 @@ describe Efl::Evas do
             Evas.shutdown
         end
         #
-        it "clipper should work" do
+        it "clipper " do
             clipper = @e.object_rectangle_add
             clipper.color = 255,255,255,255
             clipper.move 25, 25
@@ -330,7 +330,7 @@ describe Efl::Evas do
 
         end
         #
-        it "focus functions should work" do
+        it "focus functions " do
             @o.focus.should be_false
             @o.focus_set true
             @o.focus_get.should be_true
@@ -338,7 +338,7 @@ describe Efl::Evas do
             @o.focus_get.should be_false
         end
         #
-        it "layer functions should work" do
+        it "layer functions " do
             @o.layer.should == 0
             @o.layer_set 2
             @o.layer_get.should == 2
@@ -346,13 +346,13 @@ describe Efl::Evas do
             @o.layer_get.should == 0
         end
         #
-        it "name functions should work" do
+        it "name functions " do
             @o.name_set "My name"
             @o.evas_name.should == "My name"
             @o.name_get.should == "My name"
         end
         #
-        it "geometry functions should work" do
+        it "geometry functions " do
             @o.geometry.should == [0,0,100,100]
             @o.resize 50,50
             @o.geometry.should == [0,0,50,50]
@@ -360,7 +360,7 @@ describe Efl::Evas do
             @o.geometry_get.should == [10,10,50,50]
         end
         #
-        it "center should work" do
+        it "center " do
             @o.geometry.should == [10,10,50,50]
             @o.center_get.should == [35,35]
             @o.center.should == [35,35]
@@ -369,7 +369,7 @@ describe Efl::Evas do
             @o.geometry.should == [25,25,50,50]
         end
         #
-        it "show hide visible should work" do
+        it "show hide visible " do
             @o.show
             @o.visible?.should be_true
             @o.hide
@@ -379,7 +379,7 @@ describe Efl::Evas do
             @o.visible?.should be_true
         end
         #
-        it "color get/set should work" do
+        it "color get/set " do
             @o.color.should == [200,200,200,200]
             @o.color_get.should == [200,200,200,200]
             @o.color_set 0,50,100,200
@@ -393,12 +393,12 @@ describe Efl::Evas do
             @o.evas_get.should === @e
         end
         #
-        it "type_get should work" do
+        it "type_get " do
             @o.evas_type.should == 'rectangle'
             @o.type_get.should == 'rectangle'
         end
         # TODO raise, lower
-        it "raise, lower, stck_below, stack_above should work" do
+        it "raise, lower, stck_below, stack_above " do
             os = []
             0.upto(3) do
                 os << @e.object_rectangle_add
@@ -416,7 +416,7 @@ describe Efl::Evas do
             os.each do |o| o.free; end
         end
         #
-        it "event_callback should work" do
+        it "event_callback " do
             @o.move 0, 0 # FIXME why do I need this ?!?
             count = 0
             cb = Proc.new do |data,evas,evas_object,event_info|
@@ -429,7 +429,7 @@ describe Efl::Evas do
             count.should==1
         end
         #
-        it "pass events should work" do
+        it "pass events " do
             @o.pass_events.should be_false
             @o.pass_events_set true
             @o.pass_events.should be_true
@@ -441,7 +441,7 @@ describe Efl::Evas do
             @o.pass_events_get.should be_false
         end
         #
-        it "repeat events should work" do
+        it "repeat events " do
             @o.repeat_events.should be_false
             @o.repeat_events_set true
             @o.repeat_events.should be_true
@@ -453,7 +453,7 @@ describe Efl::Evas do
             @o.repeat_events_get.should be_false
         end
         #
-        it "propagate event should work" do
+        it "propagate event " do
             @o.propagate_events.should be_true
             @o.propagate_events=false
             @o.propagate_events.should be_false
@@ -465,7 +465,7 @@ describe Efl::Evas do
             @o.propagate_events_get.should be_true
         end
         #
-        it "map enable should work" do
+        it "map enable " do
             @o.map_enable.should be_false
             @o.map_enable_set true
             @o.map_enable.should be_true
@@ -477,7 +477,7 @@ describe Efl::Evas do
             @o.map_enable_get.should be_false
         end
         #
-        it "size_hint_ should work" do
+        it "size_hint_ " do
             @o.size_hint_min_set 100, 150
             @o.size_hint_min.should == [100,150]
             @o.size_hint_min_get.should == [100,150]
@@ -501,7 +501,7 @@ describe Efl::Evas do
             @o.size_hint_padding_get.should == [10,20,30,40]
         end
         #
-        it "data get/set should work" do
+        it "data get/set " do
             @o.data_set "key", "val"
             @o.data("key").should == "val"
             @o.data_get("key").should == "val"
@@ -509,7 +509,7 @@ describe Efl::Evas do
             @o.data_get("key").should == nil
         end
         #
-        it "pointer mode get/set should work" do
+        it "pointer mode get/set " do
             @o.pointer_mode = :evas_object_pointer_mode_nograb
             @o.pointer_mode.should == :evas_object_pointer_mode_nograb
             @o.pointer_mode_get.should == :evas_object_pointer_mode_nograb
@@ -518,7 +518,7 @@ describe Efl::Evas do
             @o.pointer_mode_get.should == :evas_object_pointer_mode_autograb
         end
         #
-        it "anti_alias get/set should work" do
+        it "anti_alias get/set " do
             @o.anti_alias_set true
             @o.anti_alias_get.should be_true
             @o.anti_alias=false
@@ -526,7 +526,7 @@ describe Efl::Evas do
             @o.anti_alias_get.should be_false
         end
         #
-        it "sccale set/get should work" do
+        it "sccale set/get " do
             @o.scale_set 1.5
             @o.scale_get.should == 1.5
             @o.scale= 1.6
@@ -540,7 +540,7 @@ describe Efl::Evas do
             @o.render_op.should == :evas_render_mask
         end
         #
-        it "precise_is_inside get/set should work" do
+        it "precise_is_inside get/set " do
             @o.precise_is_inside_set true
             @o.precise_is_inside?.should be_true
             @o.precise_is_inside_get.should be_true
@@ -549,7 +549,7 @@ describe Efl::Evas do
             @o.precise_is_inside.should be_false
         end
         #
-        it "static_clip get/set should work" do
+        it "static_clip get/set " do
             @o.static_clip_set true
             @o.static_clip?.should be_true
             @o.static_clip_get.should be_true
@@ -572,7 +572,7 @@ describe Efl::Evas do
             @e.free
             Evas.shutdown
         end
-        it "xy get/set should work" do
+        it "xy get/set " do
             @l.line_xy_set 10, 20, 30, 40
             @l.line_xy_get.should == [10, 20, 30, 40]
         end
@@ -590,14 +590,14 @@ describe Efl::Evas do
             @e.free
             Evas.shutdown
         end
-        it "xy point_add should work" do
+        it "xy point_add " do
             @p.point_add 10, 20
             @p.point_add 30, 40
             @p.<< 50, 60
             @p.<< 80, 80
         end
         #
-        it "point clear shold work" do
+        it "point clear" do
             @p.points_clear
         end
     end
@@ -615,21 +615,21 @@ describe Efl::Evas do
             Evas.shutdown
         end
         #
-        it "font_source get/set should work" do
+        it "font_source get/set " do
             @t.font_source_set "myFont"
             @t.font_source_get.should == "myFont"
             @t.font_source = "myFont2"
             @t.font_source.should == "myFont2"
         end
         #
-        it "font get/set should work" do
+        it "font get/set " do
             @t.font_set "Arial", 12
             @t.font_get.should == ["Arial",12]
             @t.font =  "Ariall", 16
             @t.font_get.should == ["Ariall",16]
         end
         #
-        it "text set/get should work" do
+        it "text set/get " do
             @t.text_set "hello"
             @t.text_get.should == "hello"
             @t.text="hello world"
@@ -657,14 +657,14 @@ describe Efl::Evas do
             @t.style_pad.length.should == 4
         end
         #
-        it "bidi_delimiters set/get should work" do
+        it "bidi_delimiters set/get " do
             @t.bidi_delimiters_set "@"
             @t.bidi_delimiters_get.should == "@"
             @t.bidi_delimiters= "#"
             @t.bidi_delimiters.should == "#"
         end
         #
-        it "char_pos_get char_coords_get last_up_to_pos should work" do
+        it "char_pos_get char_coords_get last_up_to_pos " do
             @t.text="hello world"
             coords = @t.char_pos_get 6
             @t.char_coords(coords[0], coords[1])[0].should == 6
@@ -675,35 +675,35 @@ describe Efl::Evas do
             @t.last_up_to_pos(coords[0], coords[1]).should == 3
         end
         #
-        it "style ste/get should work" do
+        it "style ste/get " do
             @t.style_set :evas_text_style_shadow
             @t.style_get.should == :evas_text_style_shadow
             @t.style= :evas_text_style_outline
             @t.style.should == :evas_text_style_outline
         end
         #
-        it "shadow_color set/get should work" do
+        it "shadow_color set/get " do
             @t.shadow_color_set 100, 150, 200, 50
             @t.shadow_color_get.should == [100, 150, 200, 50]
             @t.shadow_color = 100, 150, 200, 50
             @t.shadow_color.should == [100, 150, 200, 50]
         end
         #
-        it "glow_color set/get should work" do
+        it "glow_color set/get " do
             @t.glow_color_set 100, 150, 200, 50
             @t.glow_color_get.should == [100, 150, 200, 50]
             @t.glow_color = 100, 150, 200, 50
             @t.glow_color.should == [100, 150, 200, 50]
         end
         #
-        it "glow2_color set/get should work" do
+        it "glow2_color set/get " do
             @t.glow2_color_set 100, 150, 200, 50
             @t.glow2_color_get.should == [100, 150, 200, 50]
             @t.glow2_color = 100, 150, 200, 50
             @t.glow2_color.should == [100, 150, 200, 50]
         end
         #
-        it "outline_color set/get should work" do
+        it "outline_color set/get " do
             @t.outline_color_set 100, 150, 200, 50
             @t.outline_color_get.should == [100, 150, 200, 50]
             @t.outline_color = 100, 150, 200, 50
@@ -729,7 +729,7 @@ describe Efl::Evas do
             Evas.shutdown
         end
         #
-        it "append, prepend, insert_before, insert_after, insert_at, remove, remove_at, remove_all  and children_get should work" do
+        it "append, prepend, insert_before, insert_after, insert_at, remove, remove_at, remove_all  and children_get " do
             @b.append @os[4]
             @b.prepend @os[0]
             @b.insert_before @os[1], @os[4]
@@ -750,14 +750,14 @@ describe Efl::Evas do
             @b.children.to_a.length.should == 0
         end
         #
-        it "align set/get should work" do
+        it "align set/get " do
             @b.align_set 0.2, 0.3
             @b.align_get.should == [0.2,0.3]
             @b.align = 0.3, 0.2
             @b.align.should == [0.3,0.2]
         end
         #
-        it "padding set/get should work" do
+        it "padding set/get " do
             @b.padding_set 20, 30
             @b.padding_get.should == [20,30]
             @b.padding = 30, 20

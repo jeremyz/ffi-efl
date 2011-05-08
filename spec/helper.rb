@@ -34,10 +34,14 @@ end
 def bool_check t, fct, delay=nil
     t.send fct+'_set', true
     ecore_loop delay if delay
+    t.send(fct).should be_true
+    t.send(fct+'?').should be_true
     t.send(fct+'_get').should be_true
     t.send fct+'=', false
     ecore_loop delay if delay
     t.send(fct).should be_false
+    t.send(fct+'?').should be_false
+    t.send(fct+'_get').should be_false
 end
 #
 def realize_win

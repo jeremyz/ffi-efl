@@ -1,8 +1,8 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/eina'
 require 'efl/elementary'
+require './spec/helper'
 #
 describe Efl::Elm do
     #
@@ -14,23 +14,131 @@ describe Efl::Elm do
         Elm.shutdown
     }
     #
-    def realize_app
-        @win = Elm::ElmWin.new(nil, 'TEST') do |w|
-            w.title= 'spec win'
-            w.move 100, 100
-            w.resize 100, 100
-            w.show
+    describe Efl::Elm::ElmWin do
+        before(:each) {
+            realize_win
+        }
+        after(:each) {
+            @bg.free
+            @win.free
+        }
+        #
+        it "resize_object add/del" do
+            r = @win.evas.object_rectangle_add
+            @win.resize_object_add r
+            @win.resize_object_del r
         end
-        @bg = Elm::ElmBg.new(@win) do |bg|
-            bg.size_hint_weight_set 1.0, 1.0
-            bg.evas_object_color_set 200,255,100,150
-            bg.show
+        #
+        it "title set/get" do
+            @win.title_set "title1"
+            @win.title_get.should == "title1"
+            @win.title= "title2"
+            @win.title.should == "title2"
         end
+        #
+        it "autodel set/get" do
+            bool_check @win, 'autodel'
+        end
+        #
+        it "activate, lower, raise" do
+            @win.activate
+            @win.lower
+            @win.raise
+        end
+        #
+        it "borderless set/get" do
+            bool_check @win, 'borderless'
+            @win.borderless.should be_false
+        end
+        #
+        it "shaped set/get" do
+            bool_check @win, 'shaped'
+        end
+        #
+        it "alpha set/get" do
+            bool_check @win, 'alpha'
+        end
+        #
+        it "transparent set/get" do
+            bool_check @win, 'transparent'
+        end
+        #
+        it "override set/get" do
+            bool_check @win, 'override'
+        end
+        #
+        it "fullscreen set/get" do
+            bool_check @win, 'fullscreen', 4
+        end
+        # FIXME depends on issue: ecore-2
+        it "maximized set/get" do
+            bool_check @win, 'maximized', 3
+        end
+        #
+        it "iconified set/get" do
+            bool_check @win, 'iconified'
+        end
+        #
+        it "layet set/get" do
+            @win.layer_set 2
+            @win.layer_get.should == 2
+            @win.layer = 3
+            @win.layer.should == 3
+        end
+        #
+        it "rotation set/get" do
+            @win.rotation_set 90
+            @win.rotation_get.should == 90
+            @win.rotation = 180
+            @win.rotation.should == 180
+            @win.rotation_with_resize_set 90
+            @win.rotation_get.should == 90
+            @win.rotation_with_resize= 180
+            @win.rotation.should == 180
+        end
+        #
+        it "sticky set/get" do
+            bool_check @win, 'sticky', 3
+        end
+        #
+        it "conformant set/get" do
+            bool_check @win, 'conformant'
+        end
+        #
+        it "quickpanel set/get" do
+            bool_check @win, 'quickpanel'
+        end
+        # EAPI void elm_win_quickpanel_set(Evas_Object *obj, Eina_Bool quickpanel);
+        # EAPI Eina_Bool elm_win_quickpanel_get(const Evas_Object *obj);
+        # EAPI void elm_win_quickpanel_priority_major_set(Evas_Object *obj, int priority);
+        # EAPI int elm_win_quickpanel_priority_major_get(const Evas_Object *obj);
+        # EAPI void elm_win_quickpanel_priority_minor_set(Evas_Object *obj, int priority);
+        # EAPI int elm_win_quickpanel_priority_minor_get(const Evas_Object *obj);
+        # EAPI void elm_win_quickpanel_zone_set(Evas_Object *obj, int zone);
+        # EAPI int elm_win_quickpanel_zone_get(const Evas_Object *obj);
+        # EAPI void elm_win_prop_focus_skip_set(Evas_Object *obj, Eina_Bool skip);;
+        # EAPI void elm_win_illume_command_send(Evas_Object *obj, Elm_Illume_Command command, void *params);;
+        # EAPI Evas_Object *elm_win_inlined_image_object_get(Evas_Object *obj);
+        # EAPI void elm_win_focus_highlight_enabled_set(Evas_Object *obj, Eina_Bool enabled);
+        # EAPI Eina_Bool elm_win_focus_highlight_enabled_get(const Evas_Object *obj);
+        # EAPI void elm_win_focus_highlight_style_set(Evas_Object *obj, const char *style);
+        # EAPI const char *elm_win_focus_highlight_style_get(const Evas_Object *obj);
+        # EAPI void elm_win_keyboard_mode_set(Evas_Object *obj, Elm_Win_Keyboard_Mode mode);
+        # EAPI Elm_Win_Keyboard_Mode elm_win_keyboard_mode_get(const Evas_Object *obj);
+        # EAPI void elm_win_keyboard_win_set(Evas_Object *obj, Eina_Bool is_keyboard);
+        # EAPI Eina_Bool elm_win_keyboard_win_get(const Evas_Object *obj);
+        # EAPI void elm_win_screen_position_get(const Evas_Object *obj, int *x, int *y);
+        # EAPI Evas_Object *elm_win_inwin_add(Evas_Object *obj);
+        # EAPI void elm_win_inwin_activate(Evas_Object *obj);
+        # EAPI void elm_win_inwin_content_set(Evas_Object *obj, Evas_Object *content);
+        # EAPI Evas_Object *elm_win_inwin_content_get(const Evas_Object *obj);
+        # EAPI Evas_Object *elm_win_inwin_content_unset(Evas_Object *obj);
+        # EAPI Ecore_X_Window elm_win_xwindow_get(const Evas_Object *obj);
     end
     #
     describe Efl::Elm::ElmBg do
         before(:all) {
-            realize_app
+            realize_win
         }
         after(:all) {
             @bg.free
@@ -73,7 +181,7 @@ describe Efl::Elm do
     describe Efl::Elm::ElmLabel do
         #
         before(:all) {
-            realize_app
+            realize_win
             @lb = Elm::ElmLabel.new @win
         }
         after(:all) {
@@ -112,14 +220,11 @@ describe Efl::Elm do
         #
         it "ellipsis_set" do
             @lb.ellipsis_set true
-            @lb.ellipsis= true
+            @lb.ellipsis= false
         end
         #
         it "slide_set" do
-            @lb.slide_set true
-            @lb.slide_get.should be_true
-            @lb.slide= false
-            @lb.slide.should be_false
+            bool_check @lb, 'slide'
         end
         #
         it "slide_duration_set" do
@@ -133,7 +238,7 @@ describe Efl::Elm do
     describe Efl::Elm::ElmPager do
         #
         before(:all) {
-            realize_app
+            realize_win
             @p = Elm::ElmPager.new @win
             @os = []
             0.upto(3) do
@@ -164,7 +269,7 @@ describe Efl::Elm do
     describe Efl::Elm::ElmPanel do
         #
         before(:all) {
-            realize_app
+            realize_win
             @p = Elm::ElmPanel.new @win
             @os = []
         }

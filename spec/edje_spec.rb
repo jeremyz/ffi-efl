@@ -42,7 +42,7 @@ describe Efl::Edje do
         Edje.shutdown.should == 1
     end
     #
-    it "frametime get/set should work" do
+    it "frametime get/set " do
         Edje.frametime_set 10
         Edje.frametime_get.should == 10
     end
@@ -52,39 +52,39 @@ describe Efl::Edje do
         Edje.thaw
     end
     #
-    it "font_set_append should work" do
+    it "font_set_append " do
         Edje.fontset_append_set "my font"
         Edje.fontset_append_get.should == "my font"
     end
     #
-    it "scale get/set should work" do
+    it "scale get/set " do
         Edje.scale_set 0.3
         Edje.scale_get.should == 0.3
     end
     #
-    it "file_collection_list should work" do
+    it "file_collection_list " do
         l = Efl::EinaList::REinaList.new Edje.file_collection_list EDJE_FILE
         l.to_ary.length.should > 0
         Edje.file_collection_list_free l
     end
     #
-    it "file_group_exists should work" do
+    it "file_group_exists " do
         Edje.file_group_exists(EDJE_FILE, "my_group").should be_true
         Edje.file_group_exists(EDJE_FILE, "my_grup").should be_false
     end
     #
-    it "file_data_get should work" do
+    it "file_data_get " do
         Edje.file_data_get(EDJE_FILE, "key1").should == "val1"
         Edje.file_data_get(EDJE_FILE, "key2").should == nil
     end
     #
-    it "file_cache get/set should work" do
+    it "file_cache get/set " do
         Edje.file_cache_set 2
         Edje.file_cache_get.should == 2
         Edje.file_cache_flush
     end
     #
-    it "collection_cache get/set should work" do
+    it "collection_cache get/set " do
         Edje.collection_cache_set 6
         Edje.collection_cache_get.should == 6
         Edje.collection_cache_flush
@@ -111,27 +111,22 @@ describe Efl::Edje do
             Efl::Evas.shutdown
         end
         #
-        it "scale get/set should work" do
+        it "scale get/set " do
             @ed.scale_set 0.3
             @ed.scale_get.should == 0.3
         end
         #
-        it "mirrored get/set should work" do
-            @ed.mirrored_set true
-            @ed.mirrored_get.should be_true
-            @ed.mirrored = false
-            @ed.mirrored.should be_false
-            @ed.mirrored?.should be_false
-            @ed.mirrored_get.should be_false
+        it "mirrored get/set " do
+            bool_check @ed, 'mirrored'
         end
         #
-        it "data_get hould work" do
+        it "data_get" do
             @ed.data("key2").should == "val2"
             @ed.data_get("key2").should == "val2"
             @ed.data_get("key1").should == nil
         end
         #
-        it "file_get should work" do
+        it "file_get " do
             @ed.file_get[0].should == EDJE_FILE
             @ed.file_get[1].should == "my_group"
         end

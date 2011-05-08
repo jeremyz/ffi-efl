@@ -167,7 +167,7 @@ describe Efl::EinaHash do
         h[k3].read_string.should == "D3"
     end
     #
-    it "alternate constructor should work" do
+    it "alternate constructor" do
         cstr_cnt = 0
         h = REinaHash.new { cstr_cnt+=1; Efl::Native.eina_hash_string_superfast_new FFI::Pointer::NULL }
         cstr_cnt.should == 1
