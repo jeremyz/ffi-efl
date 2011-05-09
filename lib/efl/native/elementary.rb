@@ -2590,7 +2590,7 @@ module Efl
         # EAPI const char *elm_map_source_name_get(const Evas_Object *obj);
         [ :elm_map_source_name_get, [ :evas_object_p ], :string ],
         # EAPI void elm_map_route_source_set(Evas_Object *obj, Elm_Map_Route_Sources source);
-        [ :elm_map_route_source_set, [ :evas_object_p, :elm_map_route_sources ], :void ],
+        # FIXME [ :elm_map_route_source_set, [ :evas_object_p, :elm_map_route_sources ], :void ],
         # EAPI Elm_Map_Route_Sources elm_map_route_source_get(const Evas_Object *obj);
         [ :elm_map_route_source_get, [ :evas_object_p ], :elm_map_route_sources ],
         # EAPI int elm_map_source_zoom_min_get(const Evas_Object *obj);
