@@ -5,9 +5,6 @@ require 'efl/ecore'
 require 'efl/ecore_evas'
 require 'efl/edje'
 #
-Efl::EcoreEvas::init
-Efl::Edje::init
-#
 WIDTH=320
 HEIGHT=240
 #
@@ -41,8 +38,12 @@ def create_my_group canvas, txt
 end
 #
 def del_cb ecore_evas
+    puts "delete request callback"
     Efl::Ecore.main_loop_quit
 end
+#
+Efl::EcoreEvas::init
+Efl::Edje::init
 #
 window = Efl::EcoreEvas::REcoreEvas.new { |w|
     w.resize WIDTH, HEIGHT

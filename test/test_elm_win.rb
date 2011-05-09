@@ -42,7 +42,6 @@ win = MyWin.new "App name", "Window Title" do |w|
     w.resize 200, 100
     w.show
 end
-win.show
 #
 Elm.run
 Elm.shutdown
