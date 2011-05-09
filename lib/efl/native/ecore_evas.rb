@@ -356,8 +356,7 @@ module Efl
         # EAPI Evas_Object *ecore_evas_object_associate_get(const Ecore_Evas *ee);
         [ :ecore_evas_object_associate_get, [ :ecore_evas_p ], :evas_object_p ],
         # EAPI unsigned char ecore_getopt_callback_ecore_evas_list_engines(const Ecore_Getopt *parser, const Ecore_Getopt_Desc *desc, const char *str, void *data, Ecore_Getopt_Value *storage);
-        [ :ecore_getopt_callback_ecore_evas_list_engines, [ :ecore_getopt_p, :ecore_getopt_desc_p, :string, :void_p, :ecore_getopt_value_p ], :uchar
-            ],
+        [ :ecore_getopt_callback_ecore_evas_list_engines, [ :ecore_getopt_p, :ecore_getopt_desc_p, :string, :void_p, :ecore_getopt_value_p ], :eina_bool ],
         # EAPI Eina_List *ecore_evas_ecore_evas_list_get(void);
         [ :ecore_evas_ecore_evas_list_get, [  ], :eina_list_p ],
         # EAPI void ecore_evas_x11_leader_set(Ecore_Evas *ee, Ecore_X_Window win);

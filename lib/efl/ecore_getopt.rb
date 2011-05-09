@@ -228,7 +228,7 @@ module Efl
                 self << [ short, long, help, FFI::Pointer::NULL, :ecore_getopt_action_count, [:dummy,FFI::Pointer::NULL] ]
             end
             def callback_full short, long, help, meta, cb, data, arg_req, def_val
-                self << [ short, long, help, meta, :ecore_getopt_action_callback, [:callback, [cb, data, arg_req,def_val] ] ]
+                self << [ short, long, help, meta, :ecore_getopt_action_callback, [:callback, [cb, data, arg_req, def_val] ] ]
             end
             def callback_noargs short, long, help, cb, data
                 callback_full short, long, help, FFI::Pointer::NULL, cb, data, :ecore_getopt_desc_arg_requirement_no, FFI::Pointer::NULL

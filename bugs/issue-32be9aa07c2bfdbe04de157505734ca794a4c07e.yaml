@@ -5,8 +5,8 @@ type: :bugfix
 component: ecore
 release: 
 reporter: Jeremy Zurcher <jeremy@asynk.ch>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2011-05-06 21:17:44.772471 Z
 references: []
 
@@ -16,5 +16,9 @@ log_events:
   - Jeremy Zurcher <jeremy@asynk.ch>
   - created
   - ""
+- - 2011-05-09 12:04:04.046730 Z
+  - Jeremy Zurcher <jeremy@asynk.ch>
+  - closed with disposition fixed
+  - ":ecore_getopt_callback_ecore_evas_list_engines returns :eina_bool instead of: uchar"
 git_branch: 
 claimer: 
