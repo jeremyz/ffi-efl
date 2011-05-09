@@ -125,14 +125,14 @@ describe Efl::EcoreGetopt do
             args = @p.parse ["progname","--version"]
             @values[:version].read_char.should == 1
         end
-#        it "should handle -H" do
-#            args = @p.parse ["My lovely prog name","-H"]
-#            @values[:help].read_char.should == 1
-#        end
-#        it "should handle --help" do
-#            args = @p.parse ["progname","--help"]
-#            @values[:help].read_char.should == 1
-#        end
+        it "should handle -H" do
+            args = @p.parse ["My lovely prog name","-H"]
+            @values[:help].read_char.should == 1
+        end
+        it "should handle --help" do
+            args = @p.parse ["progname","--help"]
+            @values[:help].read_char.should == 1
+        end
         it "should handle -E" do
             args = @p.parse ["My lovely prog name","-E"]
             @values[:engines].read_char.should == 1

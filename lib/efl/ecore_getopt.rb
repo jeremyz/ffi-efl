@@ -89,7 +89,7 @@ module Efl
                 @ecore_getopt = nil
                 @desc = desc
                 @options = [
-                    [ 0, FFI::Pointer::NULL, FFI::Pointer::NULL, FFI::Pointer::NULL, 0, {:dummy=>FFI::Pointer::NULL} ]
+                    [ 0 ],
                 ]
                 @values = [
                     [ :ptrp, FFI::Pointer::NULL ]
@@ -120,6 +120,10 @@ module Efl
                 @ecore_getopt[:strict] = @desc[:strict] if @desc.has_key? :strict
                 @options.each_with_index do |o,i|
                     d = @ecore_getopt.desc_ptr i
+                    if o[0]==0
+                        d[:shortname] = d[:longname] = d[:help] = d[:metavar] = d[:action] = d[:action_param][:dummy] = 0
+                        break
+                    end
                     d[:shortname] = o[0].to_s.bytes.first
                     d[:longname] = p_from_string o[1]
                     d[:help] = p_from_string o[2]
@@ -230,10 +234,10 @@ module Efl
             def callback_full short, long, help, meta, cb, data, arg_req, def_val
                 self << [ short, long, help, meta, :ecore_getopt_action_callback, [:callback, [cb, data, arg_req, def_val] ] ]
             end
-            def callback_noargs short, long, help, cb, data
+            def callback_noargs short, long, help, cb, data=nil
                 callback_full short, long, help, FFI::Pointer::NULL, cb, data, :ecore_getopt_desc_arg_requirement_no, FFI::Pointer::NULL
             end
-            def callback_args short, long, help, meta, cb, data
+            def callback_args short, long, help, meta, cb, data=nil
                 callback_full short, long, help, meta, cb, data, :ecore_getopt_desc_arg_requirement_yes, FFI::Pointer::NULL
             end
             def help short, long
