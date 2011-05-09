@@ -153,8 +153,8 @@ def get_type_from_arg arg, l
     t
 end
 #
-def wrap_text txt, col, indent
-    txt.gsub( /(.{1,#{col}})(?: +|$\n?)|(.{1,#{col}})/,"\\1\\2\n#{indent}").sub(/\n\s+$/,'')
+def wrap_text txt, indent
+    txt.gsub( /(.{1,#{170}})(?: +|$\n?)|(.{1,#{170}})/,"\\1\\2\n#{indent}").sub(/\n\s+$/,'')
 end
 #
 def gen_enums path, indent
@@ -171,7 +171,7 @@ def gen_enums path, indent
         v = set_type typename, typename
         args = values.split(',').collect { |cst| ':'+cst.strip.downcase }.join(', ').gsub(/=/,',').gsub(/ ,/,',')
         r << indent+"# #{typedef} {...} #{typename};"
-        r << wrap_text( indent+"enum :#{v}, [ #{args} ]", 150, indent+' '*4 )
+        r << wrap_text( indent+"enum :#{v}, [ #{args} ]", indent+' '*4 )
         r << [ typename+' *', indent+"typedef :pointer, :#{v}_p" ]
         r << [ typename+' **', indent+"typedef :pointer, :#{v}_pp" ]
         r << [ typename+' ***', indent+"typedef :pointer, :#{v}_ppp" ]
@@ -219,7 +219,7 @@ def gen_callbacks path, indent
         t = name.downcase.sub(/\(/,'').sub(/\)/,'').sub(/\*/,'')
         t = set_type k, t, true
         r << indent+"# #{l}"
-        r << wrap_text(indent+"callback :#{t}, [ #{args} ], #{get_type ret}", 150, indent+' '*4 )
+        r << wrap_text(indent+"callback :#{t}, [ #{args} ], #{get_type ret}", indent+' '*4 )
     end
     r
 end
@@ -237,7 +237,7 @@ def gen_functions path, indent
         func = $2.downcase
         args = $3.split(',').collect { |arg| get_type_from_arg arg, l }.join ', '
         r << indent+"# #{l}"
-        r << wrap_text(indent+"[ :#{func}, [ #{args} ], #{get_type ret} ],", 150, indent+' '*4)
+        r << wrap_text(indent+"[ :#{func}, [ #{args} ], #{get_type ret} ],", indent+' '*4)
     end
     r << indent+"]"
     r

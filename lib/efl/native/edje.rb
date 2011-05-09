@@ -24,44 +24,42 @@ module Efl
         #
         # ENUMS
         # typedef enum _Edje_Message_Type {...} Edje_Message_Type;
-        enum :edje_message_type, [ :edje_message_none, 0, :edje_message_signal, 1, :edje_message_string, 2, :edje_message_int, 3, :edje_message_float,
-            4, :edje_message_string_set, 5, :edje_message_int_set, 6, :edje_message_float_set, 7, :edje_message_string_int, 8, :edje_message_string_float, 9,
+        enum :edje_message_type, [ :edje_message_none, 0, :edje_message_signal, 1, :edje_message_string, 2, :edje_message_int, 3, :edje_message_float, 4,
+            :edje_message_string_set, 5, :edje_message_int_set, 6, :edje_message_float_set, 7, :edje_message_string_int, 8, :edje_message_string_float, 9,
             :edje_message_string_int_set, 10, :edje_message_string_float_set, 11 ]
         # typedef enum _Edje_Aspect_Control {...} Edje_Aspect_Control;
-        enum :edje_aspect_control, [ :edje_aspect_control_none, 0, :edje_aspect_control_neither, 1, :edje_aspect_control_horizontal, 2,
-            :edje_aspect_control_vertical, 3, :edje_aspect_control_both, 4 ]
+        enum :edje_aspect_control, [ :edje_aspect_control_none, 0, :edje_aspect_control_neither, 1, :edje_aspect_control_horizontal, 2, :edje_aspect_control_vertical, 3,
+            :edje_aspect_control_both, 4 ]
         # typedef enum _Edje_Object_Table_Homogeneous_Mode {...} Edje_Object_Table_Homogeneous_Mode;
-        enum :edje_object_table_homogeneous_mode, [ :edje_object_table_homogeneous_none, 0, :edje_object_table_homogeneous_table, 1,
-            :edje_object_table_homogeneous_item, 2 ]
+        enum :edje_object_table_homogeneous_mode, [ :edje_object_table_homogeneous_none, 0, :edje_object_table_homogeneous_table, 1, :edje_object_table_homogeneous_item,
+            2 ]
         # typedef enum _Edje_Part_Type {...} Edje_Part_Type;
-        enum :edje_part_type, [ :edje_part_type_none, 0, :edje_part_type_rectangle, 1, :edje_part_type_text, 2, :edje_part_type_image, 3,
-            :edje_part_type_swallow, 4, :edje_part_type_textblock, 5, :edje_part_type_gradient, 6, :edje_part_type_group, 7, :edje_part_type_box, 8,
-            :edje_part_type_table, 9, :edje_part_type_external, 10, :edje_part_type_proxy, 11, :edje_part_type_last, 12 ]
+        enum :edje_part_type, [ :edje_part_type_none, 0, :edje_part_type_rectangle, 1, :edje_part_type_text, 2, :edje_part_type_image, 3, :edje_part_type_swallow, 4,
+            :edje_part_type_textblock, 5, :edje_part_type_gradient, 6, :edje_part_type_group, 7, :edje_part_type_box, 8, :edje_part_type_table, 9, :edje_part_type_external, 10,
+            :edje_part_type_proxy, 11, :edje_part_type_last, 12 ]
         # typedef enum _Edje_Text_Effect {...} Edje_Text_Effect;
-        enum :edje_text_effect, [ :edje_text_effect_none, 0, :edje_text_effect_plain, 1, :edje_text_effect_outline, 2, :edje_text_effect_soft_outline,
-            3, :edje_text_effect_shadow, 4, :edje_text_effect_soft_shadow, 5, :edje_text_effect_outline_shadow, 6, :edje_text_effect_outline_soft_shadow, 7,
+        enum :edje_text_effect, [ :edje_text_effect_none, 0, :edje_text_effect_plain, 1, :edje_text_effect_outline, 2, :edje_text_effect_soft_outline, 3,
+            :edje_text_effect_shadow, 4, :edje_text_effect_soft_shadow, 5, :edje_text_effect_outline_shadow, 6, :edje_text_effect_outline_soft_shadow, 7,
             :edje_text_effect_far_shadow, 8, :edje_text_effect_far_soft_shadow, 9, :edje_text_effect_glow, 10, :edje_text_effect_last, 11,
             :edje_text_effect_shadow_direction_bottom_right, :edje_text_effect_shadow_direction_bottom, :edje_text_effect_shadow_direction_bottom_left,
             :edje_text_effect_shadow_direction_left, :edje_text_effect_shadow_direction_top_left, :edje_text_effect_shadow_direction_top,
             :edje_text_effect_shadow_direction_top_right, :edje_text_effect_shadow_direction_right ]
         # typedef enum _Edje_Action_Type {...} Edje_Action_Type;
-        enum :edje_action_type, [ :edje_action_type_none, 0, :edje_action_type_state_set, 1, :edje_action_type_action_stop, 2,
-            :edje_action_type_signal_emit, 3, :edje_action_type_drag_val_set, 4, :edje_action_type_drag_val_step, 5, :edje_action_type_drag_val_page, 6,
-            :edje_action_type_script, 7, :edje_action_type_focus_set, 8, :edje_action_type_reserved00, 9, :edje_action_type_focus_object, 10,
-            :edje_action_type_param_copy, 11, :edje_action_type_param_set, 12, :edje_action_type_last, 13 ]
+        enum :edje_action_type, [ :edje_action_type_none, 0, :edje_action_type_state_set, 1, :edje_action_type_action_stop, 2, :edje_action_type_signal_emit, 3,
+            :edje_action_type_drag_val_set, 4, :edje_action_type_drag_val_step, 5, :edje_action_type_drag_val_page, 6, :edje_action_type_script, 7, :edje_action_type_focus_set, 8,
+            :edje_action_type_reserved00, 9, :edje_action_type_focus_object, 10, :edje_action_type_param_copy, 11, :edje_action_type_param_set, 12, :edje_action_type_last, 13 ]
         # typedef enum _Edje_Tween_Mode {...} Edje_Tween_Mode;
         enum :edje_tween_mode, [ :edje_tween_mode_none, 0, :edje_tween_mode_linear, 1, :edje_tween_mode_sinusoidal, 2, :edje_tween_mode_accelerate, 3,
             :edje_tween_mode_decelerate, 4, :edje_tween_mode_last, 5 ]
         # typedef enum _Edje_Cursor {...} Edje_Cursor;
-        enum :edje_cursor, [ :edje_cursor_main, :edje_cursor_selection_begin, :edje_cursor_selection_end, :edje_cursor_preedit_start,
-            :edje_cursor_preedit_end, :edje_cursor_user, :edje_cursor_user_extra ]
+        enum :edje_cursor, [ :edje_cursor_main, :edje_cursor_selection_begin, :edje_cursor_selection_end, :edje_cursor_preedit_start, :edje_cursor_preedit_end,
+            :edje_cursor_user, :edje_cursor_user_extra ]
         # typedef enum _Edje_Drag_Dir {...} Edje_Drag_Dir;
         enum :edje_drag_dir, [ :edje_drag_dir_none, 0, :edje_drag_dir_x, 1, :edje_drag_dir_y, 2, :edje_drag_dir_xy, 3 ]
         # typedef enum _Edje_Load_Error {...} Edje_Load_Error;
-        enum :edje_load_error, [ :edje_load_error_none, 0, :edje_load_error_generic, 1, :edje_load_error_does_not_exist, 2,
-            :edje_load_error_permission_denied, 3, :edje_load_error_resource_allocation_failed, 4, :edje_load_error_corrupt_file, 5,
-            :edje_load_error_unknown_format, 6, :edje_load_error_incompatible_file, 7, :edje_load_error_unknown_collection, 8,
-            :edje_load_error_recursive_reference, 9 ]
+        enum :edje_load_error, [ :edje_load_error_none, 0, :edje_load_error_generic, 1, :edje_load_error_does_not_exist, 2, :edje_load_error_permission_denied, 3,
+            :edje_load_error_resource_allocation_failed, 4, :edje_load_error_corrupt_file, 5, :edje_load_error_unknown_format, 6, :edje_load_error_incompatible_file, 7,
+            :edje_load_error_unknown_collection, 8, :edje_load_error_recursive_reference, 9 ]
         # typedef enum _Edje_Text_Filter_Type {...} Edje_Text_Filter_Type;
         enum :edje_text_filter_type, [ :edje_text_filter_text, 0, :edje_text_filter_format, 1, :edje_text_filter_markup, 2 ]
         # typedef enum _Edje_External_Param_Type {...} Edje_External_Param_Type;
@@ -180,8 +178,7 @@ module Efl
         # EAPI Eina_Bool edje_color_class_set (const char *color_class, int r, int g, int b, int a, int r2, int g2, int b2, int a2, int r3, int g3, int b3, int a3);
         [ :edje_color_class_set, [ :string, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int ], :eina_bool ],
         # EAPI Eina_Bool edje_color_class_get (const char *color_class, int *r, int *g, int *b, int *a, int *r2, int *g2, int *b2, int *a2, int *r3, int *g3, int *b3, int *a3);
-        [ :edje_color_class_get, [ :string, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p ],
-            :eina_bool ],
+        [ :edje_color_class_get, [ :string, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p ], :eina_bool ],
         # EAPI void edje_color_class_del (const char *color_class);
         [ :edje_color_class_del, [ :string ], :void ],
         # EAPI Eina_List *edje_color_class_list (void);
@@ -235,11 +232,10 @@ module Efl
         # EAPI int edje_object_thaw (Evas_Object *obj);
         [ :edje_object_thaw, [ :evas_object_p ], :int ],
         # EAPI Eina_Bool edje_object_color_class_set (Evas_Object *obj, const char *color_class, int r, int g, int b, int a, int r2, int g2, int b2, int a2, int r3, int g3, int b3, int a3);
-        [ :edje_object_color_class_set, [ :evas_object_p, :string, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int ],
-            :eina_bool ],
+        [ :edje_object_color_class_set, [ :evas_object_p, :string, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int ], :eina_bool ],
         # EAPI Eina_Bool edje_object_color_class_get (const Evas_Object *o, const char *color_class, int *r, int *g, int *b, int *a, int *r2, int *g2, int *b2, int *a2, int *r3, int *g3, int *b3, int *a3);
-        [ :edje_object_color_class_get, [ :evas_object_p, :string, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p,
-            :int_p, :int_p ], :eina_bool ],
+        [ :edje_object_color_class_get, [ :evas_object_p, :string, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p, :int_p ],
+            :eina_bool ],
         # EAPI void edje_object_color_class_del (Evas_Object *obj, const char *color_class);
         [ :edje_object_color_class_del, [ :evas_object_p, :string ], :void ],
         # EAPI Eina_Bool edje_object_text_class_set (Evas_Object *obj, const char *text_class, const char *font, Evas_Font_Size size);

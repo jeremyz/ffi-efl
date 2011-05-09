@@ -283,8 +283,7 @@ module Efl
         # EAPI Ecore_Thread *ecore_thread_run(Ecore_Thread_Cb func_blocking, Ecore_Thread_Cb func_end, Ecore_Thread_Cb func_cancel, const void *data);
         [ :ecore_thread_run, [ :ecore_thread_cb, :ecore_thread_cb, :ecore_thread_cb, :void_p ], :ecore_thread_p ],
         # EAPI Ecore_Thread *ecore_thread_feedback_run(Ecore_Thread_Cb func_heavy, Ecore_Thread_Notify_Cb func_notify, Ecore_Thread_Cb func_end, Ecore_Thread_Cb func_cancel, const void *data, Eina_Bool try_no_queue);
-        [ :ecore_thread_feedback_run, [ :ecore_thread_cb, :ecore_thread_notify_cb, :ecore_thread_cb, :ecore_thread_cb, :void_p, :eina_bool ],
-            :ecore_thread_p ],
+        [ :ecore_thread_feedback_run, [ :ecore_thread_cb, :ecore_thread_notify_cb, :ecore_thread_cb, :ecore_thread_cb, :void_p, :eina_bool ], :ecore_thread_p ],
         # EAPI Eina_Bool ecore_thread_cancel(Ecore_Thread *thread);
         [ :ecore_thread_cancel, [ :ecore_thread_p ], :eina_bool ],
         # EAPI Eina_Bool ecore_thread_check(Ecore_Thread *thread);

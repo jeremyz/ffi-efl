@@ -38,49 +38,44 @@ module Efl
         # typedef enum _Elm_Wrap_Type {...} Elm_Wrap_Type;
         enum :elm_wrap_type, [ :elm_wrap_none, 0, :elm_wrap_char, :elm_wrap_word, :elm_wrap_mixed, :elm_wrap_last ]
         # typedef enum _Elm_Win_Type {...} Elm_Win_Type;
-        enum :elm_win_type, [ :elm_win_basic, :elm_win_dialog_basic, :elm_win_desktop, :elm_win_dock, :elm_win_toolbar, :elm_win_menu,
-            :elm_win_utility, :elm_win_splash, :elm_win_dropdown_menu, :elm_win_popup_menu, :elm_win_tooltip, :elm_win_notification, :elm_win_combo, :elm_win_dnd,
-            :elm_win_inlined_image ]
+        enum :elm_win_type, [ :elm_win_basic, :elm_win_dialog_basic, :elm_win_desktop, :elm_win_dock, :elm_win_toolbar, :elm_win_menu, :elm_win_utility, :elm_win_splash,
+            :elm_win_dropdown_menu, :elm_win_popup_menu, :elm_win_tooltip, :elm_win_notification, :elm_win_combo, :elm_win_dnd, :elm_win_inlined_image ]
         # typedef enum _Elm_Win_Keyboard_Mode {...} Elm_Win_Keyboard_Mode;
-        enum :elm_win_keyboard_mode, [ :elm_win_keyboard_unknown, :elm_win_keyboard_off, :elm_win_keyboard_on, :elm_win_keyboard_alpha,
-            :elm_win_keyboard_numeric, :elm_win_keyboard_pin, :elm_win_keyboard_phone_number, :elm_win_keyboard_hex, :elm_win_keyboard_terminal,
-            :elm_win_keyboard_password, :elm_win_keyboard_ip, :elm_win_keyboard_host, :elm_win_keyboard_file, :elm_win_keyboard_url, :elm_win_keyboard_keypad,
-            :elm_win_keyboard_j2me ]
+        enum :elm_win_keyboard_mode, [ :elm_win_keyboard_unknown, :elm_win_keyboard_off, :elm_win_keyboard_on, :elm_win_keyboard_alpha, :elm_win_keyboard_numeric,
+            :elm_win_keyboard_pin, :elm_win_keyboard_phone_number, :elm_win_keyboard_hex, :elm_win_keyboard_terminal, :elm_win_keyboard_password, :elm_win_keyboard_ip,
+            :elm_win_keyboard_host, :elm_win_keyboard_file, :elm_win_keyboard_url, :elm_win_keyboard_keypad, :elm_win_keyboard_j2me ]
         # typedef enum _Elm_Illume_Command {...} Elm_Illume_Command;
-        enum :elm_illume_command, [ :elm_illume_command_focus_back, :elm_illume_command_focus_forward, :elm_illume_command_focus_home,
-            :elm_illume_command_close ]
+        enum :elm_illume_command, [ :elm_illume_command_focus_back, :elm_illume_command_focus_forward, :elm_illume_command_focus_home, :elm_illume_command_close ]
         # typedef enum _Elm_Bg_Option {...} Elm_Bg_Option;
         enum :elm_bg_option, [ :elm_bg_option_center, :elm_bg_option_scale, :elm_bg_option_stretch, :elm_bg_option_tile ]
         # typedef enum _Elm_Icon_Lookup_Order {...} Elm_Icon_Lookup_Order;
         enum :elm_icon_lookup_order, [ :elm_icon_lookup_fdo_theme, :elm_icon_lookup_theme_fdo, :elm_icon_lookup_fdo, :elm_icon_lookup_theme ]
         # typedef enum _Elm_Image_Orient {...} Elm_Image_Orient;
-        enum :elm_image_orient, [ :elm_image_orient_none, :elm_image_rotate_90_cw, :elm_image_rotate_180_cw, :elm_image_rotate_90_ccw,
-            :elm_image_flip_horizontal, :elm_image_flip_vertical, :elm_image_flip_transpose, :elm_image_flip_transverse ]
+        enum :elm_image_orient, [ :elm_image_orient_none, :elm_image_rotate_90_cw, :elm_image_rotate_180_cw, :elm_image_rotate_90_ccw, :elm_image_flip_horizontal,
+            :elm_image_flip_vertical, :elm_image_flip_transpose, :elm_image_flip_transverse ]
         # typedef enum _Elm_Scroller_Policy {...} Elm_Scroller_Policy;
         enum :elm_scroller_policy, [ :elm_scroller_policy_auto, 0, :elm_scroller_policy_on, :elm_scroller_policy_off, :elm_scroller_policy_last ]
         typedef :pointer, :elm_scroller_policy_p
         # typedef enum _Elm_Clock_Digedit {...} Elm_Clock_Digedit;
-        enum :elm_clock_digedit, [ :elm_clock_none, 0, :elm_clock_hour_decimal, 1, :elm_clock_hour_unit, 1, :elm_clock_min_decimal, 1,
-            :elm_clock_min_unit, 1, :elm_clock_sec_decimal, 1, :elm_clock_sec_unit, 1, :elm_clock_all ]
+        enum :elm_clock_digedit, [ :elm_clock_none, 0, :elm_clock_hour_decimal, 1, :elm_clock_hour_unit, 1, :elm_clock_min_decimal, 1, :elm_clock_min_unit, 1,
+            :elm_clock_sec_decimal, 1, :elm_clock_sec_unit, 1, :elm_clock_all ]
         # typedef enum _Elm_Notify_Orient {...} Elm_Notify_Orient;
-        enum :elm_notify_orient, [ :elm_notify_orient_top, :elm_notify_orient_center, :elm_notify_orient_bottom, :elm_notify_orient_left,
-            :elm_notify_orient_right, :elm_notify_orient_top_left, :elm_notify_orient_top_right, :elm_notify_orient_bottom_left, :elm_notify_orient_bottom_right,
-            :elm_notify_orient_last ]
+        enum :elm_notify_orient, [ :elm_notify_orient_top, :elm_notify_orient_center, :elm_notify_orient_bottom, :elm_notify_orient_left, :elm_notify_orient_right,
+            :elm_notify_orient_top_left, :elm_notify_orient_top_right, :elm_notify_orient_bottom_left, :elm_notify_orient_bottom_right, :elm_notify_orient_last ]
         # typedef enum _Elm_Hover_Axis {...} Elm_Hover_Axis;
         enum :elm_hover_axis, [ :elm_hover_axis_none, :elm_hover_axis_horizontal, :elm_hover_axis_vertical, :elm_hover_axis_both ]
         # typedef enum _Elm_Icon_Type {...} Elm_Icon_Type;
         enum :elm_icon_type, [ :elm_icon_none, :elm_icon_file, :elm_icon_standard ]
         typedef :pointer, :elm_icon_type_p
         # typedef enum _Elm_Thumb_Animation_Setting {...} Elm_Thumb_Animation_Setting;
-        enum :elm_thumb_animation_setting, [ :elm_thumb_animation_start, 0, :elm_thumb_animation_loop, :elm_thumb_animation_stop,
-            :elm_thumb_animation_last ]
+        enum :elm_thumb_animation_setting, [ :elm_thumb_animation_start, 0, :elm_thumb_animation_loop, :elm_thumb_animation_stop, :elm_thumb_animation_last ]
         # typedef enum _Elm_Toolbar_Shrink_Mode {...} Elm_Toolbar_Shrink_Mode;
         enum :elm_toolbar_shrink_mode, [ :elm_toolbar_shrink_none, :elm_toolbar_shrink_hide, :elm_toolbar_shrink_scroll, :elm_toolbar_shrink_menu ]
         # typedef enum _Elm_List_Mode {...} Elm_List_Mode;
         enum :elm_list_mode, [ :elm_list_compress, 0, :elm_list_scroll, :elm_list_limit, :elm_list_expand, :elm_list_last ]
         # typedef enum _Elm_Actionslider_Pos {...} Elm_Actionslider_Pos;
-        enum :elm_actionslider_pos, [ :elm_actionslider_none, 0, :elm_actionslider_left, 1, :elm_actionslider_center, 1, :elm_actionslider_right, 1,
-            :elm_actionslider_all ]
+        enum :elm_actionslider_pos, [ :elm_actionslider_none, 0, :elm_actionslider_left, 1, :elm_actionslider_center, 1, :elm_actionslider_right, 1, :elm_actionslider_all
+            ]
         # typedef enum _Elm_Genlist_Item_Flags {...} Elm_Genlist_Item_Flags;
         enum :elm_genlist_item_flags, [ :elm_genlist_item_none, 0, :elm_genlist_item_subitems, :elm_genlist_item_group ]
         # typedef enum _Elm_Fileselector_Mode {...} Elm_Fileselector_Mode;
@@ -91,8 +86,7 @@ module Efl
         # typedef enum _Elm_Map_Zoom_Mode {...} Elm_Map_Zoom_Mode;
         enum :elm_map_zoom_mode, [ :elm_map_zoom_mode_manual, :elm_map_zoom_mode_auto_fit, :elm_map_zoom_mode_auto_fill, :elm_map_zoom_mode_last ]
         # typedef enum _Elm_Map_Route_Sources {...} Elm_Map_Route_Sources;
-        enum :elm_map_route_sources, [ :elm_map_route_source_yours, :elm_map_route_source_monav, :elm_map_route_source_ors, :elm_map_route_source_last
-            ]
+        enum :elm_map_route_sources, [ :elm_map_route_source_yours, :elm_map_route_source_monav, :elm_map_route_source_ors, :elm_map_route_source_last ]
         # typedef enum _Elm_Map_Name_Sources {...} Elm_Map_Name_Sources;
         enum :elm_map_name_sources, [ :elm_map_name_source_nominatim, :elm_map_name_source_last ]
         # typedef enum _Elm_Map_Route_Type {...} Elm_Map_Route_Type;
@@ -104,16 +98,14 @@ module Efl
         # typedef enum _Elm_Panel_Orient {...} Elm_Panel_Orient;
         enum :elm_panel_orient, [ :elm_panel_orient_top, :elm_panel_orient_bottom, :elm_panel_orient_left, :elm_panel_orient_right ]
         # typedef enum _Elm_Flip_Mode {...} Elm_Flip_Mode;
-        enum :elm_flip_mode, [ :elm_flip_rotate_y_center_axis, :elm_flip_rotate_x_center_axis, :elm_flip_rotate_xz_center_axis,
-            :elm_flip_rotate_yz_center_axis, :elm_flip_cube_left, :elm_flip_cube_right, :elm_flip_cube_up, :elm_flip_cube_down ]
+        enum :elm_flip_mode, [ :elm_flip_rotate_y_center_axis, :elm_flip_rotate_x_center_axis, :elm_flip_rotate_xz_center_axis, :elm_flip_rotate_yz_center_axis,
+            :elm_flip_cube_left, :elm_flip_cube_right, :elm_flip_cube_up, :elm_flip_cube_down ]
         # typedef enum {...} Elm_Animator_Curve_Style;
         enum :elm_animator_curve_style, [ :elm_animator_curve_linear, :elm_animator_curve_in_out, :elm_animator_curve_in, :elm_animator_curve_out ]
         # typedef enum {...} Elm_Calendar_Mark_Repeat;
-        enum :elm_calendar_mark_repeat, [ :elm_calendar_unique, :elm_calendar_daily, :elm_calendar_weekly, :elm_calendar_monthly,
-            :elm_calendar_annually ]
+        enum :elm_calendar_mark_repeat, [ :elm_calendar_unique, :elm_calendar_daily, :elm_calendar_weekly, :elm_calendar_monthly, :elm_calendar_annually ]
         # typedef enum _Elm_Ctxpopup_Direction {...} Elm_Ctxpopup_Direction;
-        enum :elm_ctxpopup_direction, [ :elm_ctxpopup_direction_down, :elm_ctxpopup_direction_right, :elm_ctxpopup_direction_left,
-            :elm_ctxpopup_direction_up ]
+        enum :elm_ctxpopup_direction, [ :elm_ctxpopup_direction_down, :elm_ctxpopup_direction_right, :elm_ctxpopup_direction_left, :elm_ctxpopup_direction_up ]
         typedef :pointer, :elm_ctxpopup_direction_p
         # typedef enum {...} Elm_Transit_Tween_Mode;
         enum :elm_transit_tween_mode, [ :elm_transit_tween_mode_linear, :elm_transit_tween_mode_sinusoidal, :elm_transit_tween_mode_decelerate,
@@ -126,8 +118,8 @@ module Efl
         # typedef enum {...} Elm_Transit_Effect_Wipe_Type;
         enum :elm_transit_effect_wipe_type, [ :elm_transit_effect_wipe_type_hide, :elm_transit_effect_wipe_type_show ]
         # typedef enum {...} Elm_Store_Item_Mapping_Type;
-        enum :elm_store_item_mapping_type, [ :elm_store_item_mapping_none, 0, :elm_store_item_mapping_label, :elm_store_item_mapping_state,
-            :elm_store_item_mapping_icon, :elm_store_item_mapping_photo, :elm_store_item_mapping_custom, :elm_store_item_mapping_last ]
+        enum :elm_store_item_mapping_type, [ :elm_store_item_mapping_none, 0, :elm_store_item_mapping_label, :elm_store_item_mapping_state, :elm_store_item_mapping_icon,
+            :elm_store_item_mapping_photo, :elm_store_item_mapping_custom, :elm_store_item_mapping_last ]
         #
         # TYPEDEFS
         # typedef struct _Elm_Version Elm_Version;
@@ -1290,11 +1282,9 @@ module Efl
         # EAPI Elm_Gengrid_Item *elm_gengrid_item_prepend(Evas_Object *obj, const Elm_Gengrid_Item_Class *gic, const void *data, Evas_Smart_Cb func, const void *func_data);
         [ :elm_gengrid_item_prepend, [ :evas_object_p, :elm_gengrid_item_class_p, :void_p, :evas_smart_cb, :void_p ], :elm_gengrid_item_p ],
         # EAPI Elm_Gengrid_Item *elm_gengrid_item_insert_before(Evas_Object *obj, const Elm_Gengrid_Item_Class *gic, const void *data, Elm_Gengrid_Item *relative, Evas_Smart_Cb func, const void *func_data);
-        [ :elm_gengrid_item_insert_before, [ :evas_object_p, :elm_gengrid_item_class_p, :void_p, :elm_gengrid_item_p, :evas_smart_cb, :void_p ],
-            :elm_gengrid_item_p ],
+        [ :elm_gengrid_item_insert_before, [ :evas_object_p, :elm_gengrid_item_class_p, :void_p, :elm_gengrid_item_p, :evas_smart_cb, :void_p ], :elm_gengrid_item_p ],
         # EAPI Elm_Gengrid_Item *elm_gengrid_item_insert_after(Evas_Object *obj, const Elm_Gengrid_Item_Class *gic, const void *data, Elm_Gengrid_Item *relative, Evas_Smart_Cb func, const void *func_data);
-        [ :elm_gengrid_item_insert_after, [ :evas_object_p, :elm_gengrid_item_class_p, :void_p, :elm_gengrid_item_p, :evas_smart_cb, :void_p ],
-            :elm_gengrid_item_p ],
+        [ :elm_gengrid_item_insert_after, [ :evas_object_p, :elm_gengrid_item_class_p, :void_p, :elm_gengrid_item_p, :evas_smart_cb, :void_p ], :elm_gengrid_item_p ],
         # EAPI Evas_Object *elm_clock_add(Evas_Object *parent);
         [ :elm_clock_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_clock_time_set(Evas_Object *obj, int hrs, int min, int sec);
@@ -1904,14 +1894,11 @@ module Efl
         # EAPI Elm_List_Item *elm_list_item_prepend(Evas_Object *obj, const char *label, Evas_Object *icon, Evas_Object *end, Evas_Smart_Cb func, const void *data);
         [ :elm_list_item_prepend, [ :evas_object_p, :string, :evas_object_p, :evas_object_p, :evas_smart_cb, :void_p ], :elm_list_item_p ],
         # EAPI Elm_List_Item *elm_list_item_insert_before(Evas_Object *obj, Elm_List_Item *before, const char *label, Evas_Object *icon, Evas_Object *end, Evas_Smart_Cb func, const void *data);
-        [ :elm_list_item_insert_before, [ :evas_object_p, :elm_list_item_p, :string, :evas_object_p, :evas_object_p, :evas_smart_cb, :void_p ],
-            :elm_list_item_p ],
+        [ :elm_list_item_insert_before, [ :evas_object_p, :elm_list_item_p, :string, :evas_object_p, :evas_object_p, :evas_smart_cb, :void_p ], :elm_list_item_p ],
         # EAPI Elm_List_Item *elm_list_item_insert_after(Evas_Object *obj, Elm_List_Item *after, const char *label, Evas_Object *icon, Evas_Object *end, Evas_Smart_Cb func, const void *data);
-        [ :elm_list_item_insert_after, [ :evas_object_p, :elm_list_item_p, :string, :evas_object_p, :evas_object_p, :evas_smart_cb, :void_p ],
-            :elm_list_item_p ],
+        [ :elm_list_item_insert_after, [ :evas_object_p, :elm_list_item_p, :string, :evas_object_p, :evas_object_p, :evas_smart_cb, :void_p ], :elm_list_item_p ],
         # EAPI Elm_List_Item *elm_list_item_sorted_insert(Evas_Object *obj, const char *label, Evas_Object *icon, Evas_Object *end, Evas_Smart_Cb func, const void *data, Eina_Compare_Cb cmp_func);
-        [ :elm_list_item_sorted_insert, [ :evas_object_p, :string, :evas_object_p, :evas_object_p, :evas_smart_cb, :void_p, :eina_compare_cb ],
-            :elm_list_item_p ],
+        [ :elm_list_item_sorted_insert, [ :evas_object_p, :string, :evas_object_p, :evas_object_p, :evas_smart_cb, :void_p, :eina_compare_cb ], :elm_list_item_p ],
         # EAPI void elm_list_clear(Evas_Object *obj);
         [ :elm_list_clear, [ :evas_object_p ], :void ],
         # EAPI void elm_list_go(Evas_Object *obj);
@@ -2131,17 +2118,17 @@ module Efl
         # EAPI double elm_genlist_longpress_timeout_get(const Evas_Object *obj);
         [ :elm_genlist_longpress_timeout_get, [ :evas_object_p ], :double ],
         # EAPI Elm_Genlist_Item *elm_genlist_item_append(Evas_Object *obj, const Elm_Genlist_Item_Class *itc, const void *data, Elm_Genlist_Item *parent, Elm_Genlist_Item_Flags flags, Evas_Smart_Cb func, const void *func_data);
-        [ :elm_genlist_item_append, [ :evas_object_p, :elm_genlist_item_class_p, :void_p, :elm_genlist_item_p, :elm_genlist_item_flags,
-            :evas_smart_cb, :void_p ], :elm_genlist_item_p ],
+        [ :elm_genlist_item_append, [ :evas_object_p, :elm_genlist_item_class_p, :void_p, :elm_genlist_item_p, :elm_genlist_item_flags, :evas_smart_cb, :void_p ],
+            :elm_genlist_item_p ],
         # EAPI Elm_Genlist_Item *elm_genlist_item_prepend(Evas_Object *obj, const Elm_Genlist_Item_Class *itc, const void *data, Elm_Genlist_Item *parent, Elm_Genlist_Item_Flags flags, Evas_Smart_Cb func, const void *func_data);
-        [ :elm_genlist_item_prepend, [ :evas_object_p, :elm_genlist_item_class_p, :void_p, :elm_genlist_item_p, :elm_genlist_item_flags,
-            :evas_smart_cb, :void_p ], :elm_genlist_item_p ],
+        [ :elm_genlist_item_prepend, [ :evas_object_p, :elm_genlist_item_class_p, :void_p, :elm_genlist_item_p, :elm_genlist_item_flags, :evas_smart_cb, :void_p ],
+            :elm_genlist_item_p ],
         # EAPI Elm_Genlist_Item *elm_genlist_item_insert_before(Evas_Object *obj, const Elm_Genlist_Item_Class *itc, const void *data, Elm_Genlist_Item *parent, Elm_Genlist_Item *before, Elm_Genlist_Item_Flags flags, Evas_Smart_Cb func, const void *func_data);
-        [ :elm_genlist_item_insert_before, [ :evas_object_p, :elm_genlist_item_class_p, :void_p, :elm_genlist_item_p, :elm_genlist_item_p,
-            :elm_genlist_item_flags, :evas_smart_cb, :void_p ], :elm_genlist_item_p ],
+        [ :elm_genlist_item_insert_before, [ :evas_object_p, :elm_genlist_item_class_p, :void_p, :elm_genlist_item_p, :elm_genlist_item_p, :elm_genlist_item_flags,
+            :evas_smart_cb, :void_p ], :elm_genlist_item_p ],
         # EAPI Elm_Genlist_Item *elm_genlist_item_insert_after(Evas_Object *obj, const Elm_Genlist_Item_Class *itc, const void *data, Elm_Genlist_Item *parent, Elm_Genlist_Item *after, Elm_Genlist_Item_Flags flags, Evas_Smart_Cb func, const void *func_data);
-        [ :elm_genlist_item_insert_after, [ :evas_object_p, :elm_genlist_item_class_p, :void_p, :elm_genlist_item_p, :elm_genlist_item_p,
-            :elm_genlist_item_flags, :evas_smart_cb, :void_p ], :elm_genlist_item_p ],
+        [ :elm_genlist_item_insert_after, [ :evas_object_p, :elm_genlist_item_class_p, :void_p, :elm_genlist_item_p, :elm_genlist_item_p, :elm_genlist_item_flags,
+            :evas_smart_cb, :void_p ], :elm_genlist_item_p ],
         # EAPI Elm_Genlist_Item *elm_genlist_selected_item_get(const Evas_Object *obj);
         [ :elm_genlist_selected_item_get, [ :evas_object_p ], :elm_genlist_item_p ],
         # EAPI const Eina_List *elm_genlist_selected_items_get(const Evas_Object *obj);
@@ -2294,6 +2281,8 @@ module Efl
         [ :elm_slideshow_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI Elm_Slideshow_Item *elm_slideshow_item_add(Evas_Object *obj, const Elm_Slideshow_Item_Class *itc, const void *data);
         [ :elm_slideshow_item_add, [ :evas_object_p, :elm_slideshow_item_class_p, :void_p ], :elm_slideshow_item_p ],
+        # EAPI Elm_Slideshow_Item *elm_slideshow_item_sorted_insert(Evas_Object *obj, const Elm_Slideshow_Item_Class *itc, const void *data, Eina_Compare_Cb func);
+        [ :elm_slideshow_item_sorted_insert, [ :evas_object_p, :elm_slideshow_item_class_p, :void_p, :eina_compare_cb ], :elm_slideshow_item_p ],
         # EAPI void elm_slideshow_show(Elm_Slideshow_Item *item);
         [ :elm_slideshow_show, [ :elm_slideshow_item_p ], :void ],
         # EAPI void elm_slideshow_next(Evas_Object *obj);
@@ -2518,8 +2507,8 @@ module Efl
         [ :elm_map_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_map_zoom_set(Evas_Object *obj, int zoom);
         [ :elm_map_zoom_set, [ :evas_object_p, :int ], :void ],
-        # EAPI double elm_map_zoom_get(const Evas_Object *obj);
-        [ :elm_map_zoom_get, [ :evas_object_p ], :double ],
+        # EAPI int elm_map_zoom_get(const Evas_Object *obj);
+        [ :elm_map_zoom_get, [ :evas_object_p ], :int ],
         # EAPI void elm_map_zoom_mode_set(Evas_Object *obj, Elm_Map_Zoom_Mode mode);
         [ :elm_map_zoom_mode_set, [ :evas_object_p, :elm_map_zoom_mode ], :void ],
         # EAPI Elm_Map_Zoom_Mode elm_map_zoom_mode_get(const Evas_Object *obj);
@@ -3067,8 +3056,8 @@ module Efl
         # EAPI Evas_Object *elm_ctxpopup_content_unset(Evas_Object *obj);
         [ :elm_ctxpopup_content_unset, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_ctxpopup_direction_priority_set(Evas_Object *obj, Elm_Ctxpopup_Direction first, Elm_Ctxpopup_Direction second, Elm_Ctxpopup_Direction third, Elm_Ctxpopup_Direction fourth);
-        [ :elm_ctxpopup_direction_priority_set, [ :evas_object_p, :elm_ctxpopup_direction, :elm_ctxpopup_direction, :elm_ctxpopup_direction,
-            :elm_ctxpopup_direction ], :void ],
+        [ :elm_ctxpopup_direction_priority_set, [ :evas_object_p, :elm_ctxpopup_direction, :elm_ctxpopup_direction, :elm_ctxpopup_direction, :elm_ctxpopup_direction ],
+            :void ],
         # EAPI void elm_ctxpopup_direction_priority_get(Evas_Object *obj, Elm_Ctxpopup_Direction *first, Elm_Ctxpopup_Direction *second, Elm_Ctxpopup_Direction *third, Elm_Ctxpopup_Direction *fourth);
         [ :elm_ctxpopup_direction_priority_get, [ :evas_object_p, :elm_ctxpopup_direction_p, :elm_ctxpopup_direction_p, :elm_ctxpopup_direction_p,
             :elm_ctxpopup_direction_p ], :void ],

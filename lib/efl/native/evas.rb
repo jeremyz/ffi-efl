@@ -27,13 +27,12 @@ module Efl
         enum :evas_bidi_direction, [ :evas_bidi_direction_natural, :evas_bidi_direction_ltr, :evas_bidi_direction_rtl ]
         typedef :pointer, :evas_bidi_direction_p
         # typedef enum _Evas_Callback_Type {...} Evas_Callback_Type;
-        enum :evas_callback_type, [ :evas_callback_mouse_in, :evas_callback_mouse_out, :evas_callback_mouse_down, :evas_callback_mouse_up,
-            :evas_callback_mouse_move, :evas_callback_mouse_wheel, :evas_callback_multi_down, :evas_callback_multi_up, :evas_callback_multi_move,
-            :evas_callback_free, :evas_callback_key_down, :evas_callback_key_up, :evas_callback_focus_in, :evas_callback_focus_out, :evas_callback_show,
-            :evas_callback_hide, :evas_callback_move, :evas_callback_resize, :evas_callback_restack, :evas_callback_del, :evas_callback_hold,
-            :evas_callback_changed_size_hints, :evas_callback_image_preloaded, :evas_callback_canvas_focus_in, :evas_callback_canvas_focus_out,
-            :evas_callback_render_flush_pre, :evas_callback_render_flush_post, :evas_callback_canvas_object_focus_in, :evas_callback_canvas_object_focus_out,
-            :evas_callback_image_unloaded, :evas_callback_last ]
+        enum :evas_callback_type, [ :evas_callback_mouse_in, :evas_callback_mouse_out, :evas_callback_mouse_down, :evas_callback_mouse_up, :evas_callback_mouse_move,
+            :evas_callback_mouse_wheel, :evas_callback_multi_down, :evas_callback_multi_up, :evas_callback_multi_move, :evas_callback_free, :evas_callback_key_down,
+            :evas_callback_key_up, :evas_callback_focus_in, :evas_callback_focus_out, :evas_callback_show, :evas_callback_hide, :evas_callback_move, :evas_callback_resize,
+            :evas_callback_restack, :evas_callback_del, :evas_callback_hold, :evas_callback_changed_size_hints, :evas_callback_image_preloaded, :evas_callback_canvas_focus_in,
+            :evas_callback_canvas_focus_out, :evas_callback_render_flush_pre, :evas_callback_render_flush_post, :evas_callback_canvas_object_focus_in,
+            :evas_callback_canvas_object_focus_out, :evas_callback_image_unloaded, :evas_callback_last ]
         # typedef enum _Evas_Button_Flags {...} Evas_Button_Flags;
         enum :evas_button_flags, [ :evas_button_none, 0, :evas_button_double_click, :evas_button_triple_click ]
         # typedef enum _Evas_Event_Flags {...} Evas_Event_Flags;
@@ -41,19 +40,18 @@ module Efl
         # typedef enum _Evas_Font_Hinting_Flags {...} Evas_Font_Hinting_Flags;
         enum :evas_font_hinting_flags, [ :evas_font_hinting_none, :evas_font_hinting_auto, :evas_font_hinting_bytecode ]
         # typedef enum _Evas_Colorspace {...} Evas_Colorspace;
-        enum :evas_colorspace, [ :evas_colorspace_argb8888, :evas_colorspace_ycbcr422p601_pl, :evas_colorspace_ycbcr422p709_pl,
-            :evas_colorspace_rgb565_a5p, :evas_colorspace_gry8 ]
+        enum :evas_colorspace, [ :evas_colorspace_argb8888, :evas_colorspace_ycbcr422p601_pl, :evas_colorspace_ycbcr422p709_pl, :evas_colorspace_rgb565_a5p,
+            :evas_colorspace_gry8 ]
         # typedef enum _Evas_Object_Table_Homogeneous_Mode {...} Evas_Object_Table_Homogeneous_Mode;
-        enum :evas_object_table_homogeneous_mode, [ :evas_object_table_homogeneous_none, 0, :evas_object_table_homogeneous_table, 1,
-            :evas_object_table_homogeneous_item, 2 ]
+        enum :evas_object_table_homogeneous_mode, [ :evas_object_table_homogeneous_none, 0, :evas_object_table_homogeneous_table, 1, :evas_object_table_homogeneous_item,
+            2 ]
         # typedef enum _Evas_Aspect_Control {...} Evas_Aspect_Control;
-        enum :evas_aspect_control, [ :evas_aspect_control_none, 0, :evas_aspect_control_neither, 1, :evas_aspect_control_horizontal, 2,
-            :evas_aspect_control_vertical, 3, :evas_aspect_control_both, 4 ]
+        enum :evas_aspect_control, [ :evas_aspect_control_none, 0, :evas_aspect_control_neither, 1, :evas_aspect_control_horizontal, 2, :evas_aspect_control_vertical, 3,
+            :evas_aspect_control_both, 4 ]
         typedef :pointer, :evas_aspect_control_p
         # typedef enum _Evas_Load_Error {...} Evas_Load_Error;
-        enum :evas_load_error, [ :evas_load_error_none, 0, :evas_load_error_generic, 1, :evas_load_error_does_not_exist, 2,
-            :evas_load_error_permission_denied, 3, :evas_load_error_resource_allocation_failed, 4, :evas_load_error_corrupt_file, 5,
-            :evas_load_error_unknown_format, 6 ]
+        enum :evas_load_error, [ :evas_load_error_none, 0, :evas_load_error_generic, 1, :evas_load_error_does_not_exist, 2, :evas_load_error_permission_denied, 3,
+            :evas_load_error_resource_allocation_failed, 4, :evas_load_error_corrupt_file, 5, :evas_load_error_unknown_format, 6 ]
         # typedef enum _Evas_Alloc_Error {...} Evas_Alloc_Error;
         enum :evas_alloc_error, [ :evas_alloc_error_none, 0, :evas_alloc_error_fatal, 1, :evas_alloc_error_recovered, 2 ]
         # typedef enum _Evas_Fill_Spread {...} Evas_Fill_Spread;
@@ -65,8 +63,7 @@ module Efl
         enum :evas_native_surface_type, [ :evas_native_surface_none, :evas_native_surface_x11, :evas_native_surface_opengl ]
         # typedef enum _Evas_Render_Op {...} Evas_Render_Op;
         enum :evas_render_op, [ :evas_render_blend, 0, :evas_render_blend_rel, 1, :evas_render_copy, 2, :evas_render_copy_rel, 3, :evas_render_add, 4,
-            :evas_render_add_rel, 5, :evas_render_sub, 6, :evas_render_sub_rel, 7, :evas_render_tint, 8, :evas_render_tint_rel, 9, :evas_render_mask, 10,
-            :evas_render_mul, 11 ]
+            :evas_render_add_rel, 5, :evas_render_sub, 6, :evas_render_sub_rel, 7, :evas_render_tint, 8, :evas_render_tint_rel, 9, :evas_render_mask, 10, :evas_render_mul, 11 ]
         # typedef enum _Evas_Border_Fill_Mode {...} Evas_Border_Fill_Mode;
         enum :evas_border_fill_mode, [ :evas_border_fill_none, 0, :evas_border_fill_default, 1, :evas_border_fill_solid, 2 ]
         # typedef enum _Evas_Image_Scale_Hint {...} Evas_Image_Scale_Hint;
@@ -78,11 +75,10 @@ module Efl
         # typedef enum _Evas_Object_Pointer_Mode {...} Evas_Object_Pointer_Mode;
         enum :evas_object_pointer_mode, [ :evas_object_pointer_mode_autograb, :evas_object_pointer_mode_nograb ]
         # typedef enum _Evas_Text_Style_Type {...} Evas_Text_Style_Type;
-        enum :evas_text_style_type, [ :evas_text_style_plain, :evas_text_style_shadow, :evas_text_style_outline, :evas_text_style_soft_outline,
-            :evas_text_style_glow, :evas_text_style_outline_shadow, :evas_text_style_far_shadow, :evas_text_style_outline_soft_shadow,
-            :evas_text_style_soft_shadow, :evas_text_style_far_soft_shadow, :evas_text_style_shadow_direction_bottom_right,
-            :evas_text_style_shadow_direction_bottom, :evas_text_style_shadow_direction_bottom_left, :evas_text_style_shadow_direction_left,
-            :evas_text_style_shadow_direction_top_left, :evas_text_style_shadow_direction_top, :evas_text_style_shadow_direction_top_right,
+        enum :evas_text_style_type, [ :evas_text_style_plain, :evas_text_style_shadow, :evas_text_style_outline, :evas_text_style_soft_outline, :evas_text_style_glow,
+            :evas_text_style_outline_shadow, :evas_text_style_far_shadow, :evas_text_style_outline_soft_shadow, :evas_text_style_soft_shadow, :evas_text_style_far_soft_shadow,
+            :evas_text_style_shadow_direction_bottom_right, :evas_text_style_shadow_direction_bottom, :evas_text_style_shadow_direction_bottom_left,
+            :evas_text_style_shadow_direction_left, :evas_text_style_shadow_direction_top_left, :evas_text_style_shadow_direction_top, :evas_text_style_shadow_direction_top_right,
             :evas_text_style_shadow_direction_right ]
         # typedef enum _Evas_Textblock_Text_Type {...} Evas_Textblock_Text_Type;
         enum :evas_textblock_text_type, [ :evas_textblock_text_raw, :evas_textblock_text_plain, :evas_textblock_text_markup ]
@@ -91,8 +87,8 @@ module Efl
         # typedef enum {...} Evas_Filter_Mode;
         enum :evas_filter_mode, [ :evas_filter_mode_object, :evas_filter_mode_below ]
         # typedef enum {...} Evas_Filter;
-        enum :evas_filter, [ :evas_filter_none, :evas_filter_blur, :evas_filter_invert, :evas_filter_solarize, :evas_filter_sepia,
-            :evas_filter_greyscale, :evas_filter_grayscale, :evas_filter_brightness, :evas_filter_contrast, :evas_filter_last ]
+        enum :evas_filter, [ :evas_filter_none, :evas_filter_blur, :evas_filter_invert, :evas_filter_solarize, :evas_filter_sepia, :evas_filter_greyscale,
+            :evas_filter_grayscale, :evas_filter_brightness, :evas_filter_contrast, :evas_filter_last ]
         #
         # TYPEDEFS
         # typedef struct _Evas_Version Evas_Version;
@@ -366,14 +362,13 @@ module Efl
         # EAPI void evas_event_feed_mouse_out (Evas *e, unsigned int timestamp, const void *data);
         [ :evas_event_feed_mouse_out, [ :evas_p, :uint, :void_p ], :void ],
         # EAPI void evas_event_feed_multi_down (Evas *e, int d, int x, int y, double rad, double radx, double rady, double pres, double ang, double fx, double fy, Evas_Button_Flags flags, unsigned int timestamp, const void *data);
-        [ :evas_event_feed_multi_down, [ :evas_p, :int, :int, :int, :double, :double, :double, :double, :double, :double, :double, :evas_button_flags,
-            :uint, :void_p ], :void ],
-        # EAPI void evas_event_feed_multi_up (Evas *e, int d, int x, int y, double rad, double radx, double rady, double pres, double ang, double fx, double fy, Evas_Button_Flags flags, unsigned int timestamp, const void *data);
-        [ :evas_event_feed_multi_up, [ :evas_p, :int, :int, :int, :double, :double, :double, :double, :double, :double, :double, :evas_button_flags,
-            :uint, :void_p ], :void ],
-        # EAPI void evas_event_feed_multi_move (Evas *e, int d, int x, int y, double rad, double radx, double rady, double pres, double ang, double fx, double fy, unsigned int timestamp, const void *data);
-        [ :evas_event_feed_multi_move, [ :evas_p, :int, :int, :int, :double, :double, :double, :double, :double, :double, :double, :uint, :void_p ],
+        [ :evas_event_feed_multi_down, [ :evas_p, :int, :int, :int, :double, :double, :double, :double, :double, :double, :double, :evas_button_flags, :uint, :void_p ],
             :void ],
+        # EAPI void evas_event_feed_multi_up (Evas *e, int d, int x, int y, double rad, double radx, double rady, double pres, double ang, double fx, double fy, Evas_Button_Flags flags, unsigned int timestamp, const void *data);
+        [ :evas_event_feed_multi_up, [ :evas_p, :int, :int, :int, :double, :double, :double, :double, :double, :double, :double, :evas_button_flags, :uint, :void_p ],
+            :void ],
+        # EAPI void evas_event_feed_multi_move (Evas *e, int d, int x, int y, double rad, double radx, double rady, double pres, double ang, double fx, double fy, unsigned int timestamp, const void *data);
+        [ :evas_event_feed_multi_move, [ :evas_p, :int, :int, :int, :double, :double, :double, :double, :double, :double, :double, :uint, :void_p ], :void ],
         # EAPI void evas_event_feed_mouse_cancel (Evas *e, unsigned int timestamp, const void *data);
         [ :evas_event_feed_mouse_cancel, [ :evas_p, :uint, :void_p ], :void ],
         # EAPI void evas_event_feed_mouse_wheel (Evas *e, int direction, int z, unsigned int timestamp, const void *data);
@@ -991,8 +986,7 @@ module Efl
         # EAPI char *evas_textblock_cursor_content_get(const Evas_Textblock_Cursor *cur);
         [ :evas_textblock_cursor_content_get, [ :evas_textblock_cursor_p ], :string ],
         # EAPI int evas_textblock_cursor_geometry_get(const Evas_Textblock_Cursor *cur, Evas_Coord *cx, Evas_Coord *cy, Evas_Coord *cw, Evas_Coord *ch, Evas_BiDi_Direction *dir, Evas_Textblock_Cursor_Type ctype);
-        [ :evas_textblock_cursor_geometry_get, [ :evas_textblock_cursor_p, :int_p, :int_p, :int_p, :int_p, :evas_bidi_direction_p,
-            :evas_textblock_cursor_type ], :int ],
+        [ :evas_textblock_cursor_geometry_get, [ :evas_textblock_cursor_p, :int_p, :int_p, :int_p, :int_p, :evas_bidi_direction_p, :evas_textblock_cursor_type ], :int ],
         # EAPI int evas_textblock_cursor_char_geometry_get(const Evas_Textblock_Cursor *cur, Evas_Coord *cx, Evas_Coord *cy, Evas_Coord *cw, Evas_Coord *ch);
         [ :evas_textblock_cursor_char_geometry_get, [ :evas_textblock_cursor_p, :int_p, :int_p, :int_p, :int_p ], :int ],
         # EAPI int evas_textblock_cursor_pen_geometry_get(const Evas_Textblock_Cursor *cur, Evas_Coord *cpen_x, Evas_Coord *cy, Evas_Coord *cadv, Evas_Coord *ch);
@@ -1074,11 +1068,9 @@ module Efl
         # EAPI Eina_Bool evas_object_smart_callbacks_descriptions_set(Evas_Object *obj, const Evas_Smart_Cb_Description *descriptions);
         [ :evas_object_smart_callbacks_descriptions_set, [ :evas_object_p, :evas_smart_cb_description_p ], :eina_bool ],
         # EAPI void evas_object_smart_callbacks_descriptions_get(const Evas_Object *obj, const Evas_Smart_Cb_Description ***class_descriptions, unsigned int *class_count, const Evas_Smart_Cb_Description ***instance_descriptions, unsigned int *instance_count);
-        [ :evas_object_smart_callbacks_descriptions_get, [ :evas_object_p, :evas_smart_cb_description_ppp, :uint_p, :evas_smart_cb_description_ppp,
-            :uint_p ], :void ],
+        [ :evas_object_smart_callbacks_descriptions_get, [ :evas_object_p, :evas_smart_cb_description_ppp, :uint_p, :evas_smart_cb_description_ppp, :uint_p ], :void ],
         # EAPI void evas_object_smart_callback_description_find(const Evas_Object *obj, const char *name, const Evas_Smart_Cb_Description **class_description, const Evas_Smart_Cb_Description **instance_description);
-        [ :evas_object_smart_callback_description_find, [ :evas_object_p, :string, :evas_smart_cb_description_pp, :evas_smart_cb_description_pp ],
-            :void ],
+        [ :evas_object_smart_callback_description_find, [ :evas_object_p, :string, :evas_smart_cb_description_pp, :evas_smart_cb_description_pp ], :void ],
         # EAPI void evas_object_smart_changed (Evas_Object *obj);
         [ :evas_object_smart_changed, [ :evas_object_p ], :void ],
         # EAPI void evas_object_smart_need_recalculate_set(Evas_Object *obj, Eina_Bool value);

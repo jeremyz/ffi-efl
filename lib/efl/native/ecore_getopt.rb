@@ -24,12 +24,12 @@ module Efl
         #
         # ENUMS
         # typedef enum {...} Ecore_Getopt_Action;
-        enum :ecore_getopt_action, [ :ecore_getopt_action_store, :ecore_getopt_action_store_const, :ecore_getopt_action_store_true,
-            :ecore_getopt_action_store_false, :ecore_getopt_action_choice, :ecore_getopt_action_append, :ecore_getopt_action_count, :ecore_getopt_action_callback,
-            :ecore_getopt_action_help, :ecore_getopt_action_version, :ecore_getopt_action_copyright, :ecore_getopt_action_license ]
+        enum :ecore_getopt_action, [ :ecore_getopt_action_store, :ecore_getopt_action_store_const, :ecore_getopt_action_store_true, :ecore_getopt_action_store_false,
+            :ecore_getopt_action_choice, :ecore_getopt_action_append, :ecore_getopt_action_count, :ecore_getopt_action_callback, :ecore_getopt_action_help,
+            :ecore_getopt_action_version, :ecore_getopt_action_copyright, :ecore_getopt_action_license ]
         # typedef enum {...} Ecore_Getopt_Type;
-        enum :ecore_getopt_type, [ :ecore_getopt_type_str, :ecore_getopt_type_bool, :ecore_getopt_type_short, :ecore_getopt_type_int,
-            :ecore_getopt_type_long, :ecore_getopt_type_ushort, :ecore_getopt_type_uint, :ecore_getopt_type_ulong, :ecore_getopt_type_double ]
+        enum :ecore_getopt_type, [ :ecore_getopt_type_str, :ecore_getopt_type_bool, :ecore_getopt_type_short, :ecore_getopt_type_int, :ecore_getopt_type_long,
+            :ecore_getopt_type_ushort, :ecore_getopt_type_uint, :ecore_getopt_type_ulong, :ecore_getopt_type_double ]
         # typedef enum {...} Ecore_Getopt_Desc_Arg_Requirement;
         enum :ecore_getopt_desc_arg_requirement, [ :ecore_getopt_desc_arg_requirement_no, 0, :ecore_getopt_desc_arg_requirement_yes, 1,
             :ecore_getopt_desc_arg_requirement_optional, 3 ]

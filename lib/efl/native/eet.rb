@@ -24,11 +24,10 @@ module Efl
         #
         # ENUMS
         # typedef enum _Eet_Error {...} Eet_Error;
-        enum :eet_error, [ :eet_error_none, :eet_error_bad_object, :eet_error_empty, :eet_error_not_writable, :eet_error_out_of_memory,
-            :eet_error_write_error, :eet_error_write_error_file_too_big, :eet_error_write_error_io_error, :eet_error_write_error_out_of_space,
-            :eet_error_write_error_file_closed, :eet_error_mmap_failed, :eet_error_x509_encoding_failed, :eet_error_signature_failed,
-            :eet_error_invalid_signature, :eet_error_not_signed, :eet_error_not_implemented, :eet_error_prng_not_seeded, :eet_error_encrypt_failed,
-            :eet_error_decrypt_failed ]
+        enum :eet_error, [ :eet_error_none, :eet_error_bad_object, :eet_error_empty, :eet_error_not_writable, :eet_error_out_of_memory, :eet_error_write_error,
+            :eet_error_write_error_file_too_big, :eet_error_write_error_io_error, :eet_error_write_error_out_of_space, :eet_error_write_error_file_closed, :eet_error_mmap_failed,
+            :eet_error_x509_encoding_failed, :eet_error_signature_failed, :eet_error_invalid_signature, :eet_error_not_signed, :eet_error_not_implemented, :eet_error_prng_not_seeded,
+            :eet_error_encrypt_failed, :eet_error_decrypt_failed ]
         # typedef enum _Eet_File_Mode {...} Eet_File_Mode;
         enum :eet_file_mode, [ :eet_file_mode_invalid, -1, :eet_file_mode_read, :eet_file_mode_write, :eet_file_mode_read_write ]
         #
@@ -172,8 +171,7 @@ module Efl
         # EAPI void * eet_data_image_read(Eet_File *ef, const char *name, unsigned int *w, unsigned int *h, int *alpha, int *compress, int *quality, int *lossy);
         [ :eet_data_image_read, [ :eet_file_p, :string, :uint_p, :uint_p, :int_p, :int_p, :int_p, :int_p ], :void_p ],
         # EAPI int eet_data_image_read_to_surface(Eet_File *ef, const char *name, unsigned int src_x, unsigned int src_y, unsigned int *d, unsigned int w, unsigned int h, unsigned int row_stride, int *alpha, int *compress, int *quality, int *lossy);
-        [ :eet_data_image_read_to_surface, [ :eet_file_p, :string, :uint, :uint, :uint_p, :uint, :uint, :uint, :int_p, :int_p, :int_p, :int_p ], :int
-            ],
+        [ :eet_data_image_read_to_surface, [ :eet_file_p, :string, :uint, :uint, :uint_p, :uint, :uint, :uint, :int_p, :int_p, :int_p, :int_p ], :int ],
         # EAPI int eet_data_image_write(Eet_File *ef, const char *name, const void *data, unsigned int w, unsigned int h, int alpha, int compress, int quality, int lossy);
         [ :eet_data_image_write, [ :eet_file_p, :string, :void_p, :uint, :uint, :int, :int, :int, :int ], :int ],
         # EAPI int eet_data_image_header_decode(const void *data, int size, unsigned int *w, unsigned int *h, int *alpha, int *compress, int *quality, int *lossy);
@@ -189,8 +187,7 @@ module Efl
         # EAPI void * eet_data_image_read_cipher(Eet_File *ef, const char *name, const char *cipher_key, unsigned int *w, unsigned int *h, int *alpha, int *compress, int *quality, int *lossy);
         [ :eet_data_image_read_cipher, [ :eet_file_p, :string, :string, :uint_p, :uint_p, :int_p, :int_p, :int_p, :int_p ], :void_p ],
         # EAPI int eet_data_image_read_to_surface_cipher(Eet_File *ef, const char *name, const char *cipher_key, unsigned int src_x, unsigned int src_y, unsigned int *d, unsigned int w, unsigned int h, unsigned int row_stride, int *alpha, int *compress, int *quality, int *lossy);
-        [ :eet_data_image_read_to_surface_cipher, [ :eet_file_p, :string, :string, :uint, :uint, :uint_p, :uint, :uint, :uint, :int_p, :int_p, :int_p,
-            :int_p ], :int ],
+        [ :eet_data_image_read_to_surface_cipher, [ :eet_file_p, :string, :string, :uint, :uint, :uint_p, :uint, :uint, :uint, :int_p, :int_p, :int_p, :int_p ], :int ],
         # EAPI int eet_data_image_write_cipher(Eet_File *ef, const char *name, const char *cipher_key, const void *data, unsigned int w, unsigned int h, int alpha, int compress, int quality, int lossy);
         [ :eet_data_image_write_cipher, [ :eet_file_p, :string, :string, :void_p, :uint, :uint, :int, :int, :int, :int ], :int ],
         # EAPI int eet_data_image_header_decode_cipher(const void *data, const char *cipher_key, int size, unsigned int *w, unsigned int *h, int *alpha, int *compress, int *quality, int *lossy);
@@ -198,8 +195,7 @@ module Efl
         # EAPI void * eet_data_image_decode_cipher(const void *data, const char *cipher_key, int size, unsigned int *w, unsigned int *h, int *alpha, int *compress, int *quality, int *lossy);
         [ :eet_data_image_decode_cipher, [ :void_p, :string, :int, :uint_p, :uint_p, :int_p, :int_p, :int_p, :int_p ], :void_p ],
         # EAPI int eet_data_image_decode_to_surface_cipher(const void *data, const char *cipher_key, int size, unsigned int src_x, unsigned int src_y, unsigned int *d, unsigned int w, unsigned int h, unsigned int row_stride, int *alpha, int *compress, int *quality, int *lossy);
-        [ :eet_data_image_decode_to_surface_cipher, [ :void_p, :string, :int, :uint, :uint, :uint_p, :uint, :uint, :uint, :int_p, :int_p, :int_p,
-            :int_p ], :int ],
+        [ :eet_data_image_decode_to_surface_cipher, [ :void_p, :string, :int, :uint, :uint, :uint_p, :uint, :uint, :uint, :int_p, :int_p, :int_p, :int_p ], :int ],
         # EAPI void * eet_data_image_encode_cipher(const void *data, const char *cipher_key, unsigned int w, unsigned int h, int alpha, int compress, int quality, int lossy, int *size_ret);
         [ :eet_data_image_encode_cipher, [ :void_p, :string, :uint, :uint, :int, :int, :int, :int, :int_p ], :void_p ],
         # EAPI Eet_Key * eet_identity_open(const char *certificate_file, const char *private_key_file, Eet_Key_Password_Callback cb);
