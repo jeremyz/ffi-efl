@@ -8,10 +8,10 @@ describe Efl::Elm do
     #
     before(:all) {
         Elm = Efl::Elm
-        Elm.init
+        Elm.init.should == 1
     }
     after(:all) {
-        Elm.shutdown
+        Elm.shutdown.should == 0
     }
     #
     describe Efl::Elm::ElmWin do
@@ -108,32 +108,88 @@ describe Efl::Elm do
         it "quickpanel set/get" do
             bool_check @win, 'quickpanel'
         end
-        # EAPI void elm_win_quickpanel_set(Evas_Object *obj, Eina_Bool quickpanel);
-        # EAPI Eina_Bool elm_win_quickpanel_get(const Evas_Object *obj);
-        # EAPI void elm_win_quickpanel_priority_major_set(Evas_Object *obj, int priority);
-        # EAPI int elm_win_quickpanel_priority_major_get(const Evas_Object *obj);
-        # EAPI void elm_win_quickpanel_priority_minor_set(Evas_Object *obj, int priority);
-        # EAPI int elm_win_quickpanel_priority_minor_get(const Evas_Object *obj);
-        # EAPI void elm_win_quickpanel_zone_set(Evas_Object *obj, int zone);
-        # EAPI int elm_win_quickpanel_zone_get(const Evas_Object *obj);
-        # EAPI void elm_win_prop_focus_skip_set(Evas_Object *obj, Eina_Bool skip);;
-        # EAPI void elm_win_illume_command_send(Evas_Object *obj, Elm_Illume_Command command, void *params);;
-        # EAPI Evas_Object *elm_win_inlined_image_object_get(Evas_Object *obj);
-        # EAPI void elm_win_focus_highlight_enabled_set(Evas_Object *obj, Eina_Bool enabled);
-        # EAPI Eina_Bool elm_win_focus_highlight_enabled_get(const Evas_Object *obj);
-        # EAPI void elm_win_focus_highlight_style_set(Evas_Object *obj, const char *style);
-        # EAPI const char *elm_win_focus_highlight_style_get(const Evas_Object *obj);
-        # EAPI void elm_win_keyboard_mode_set(Evas_Object *obj, Elm_Win_Keyboard_Mode mode);
-        # EAPI Elm_Win_Keyboard_Mode elm_win_keyboard_mode_get(const Evas_Object *obj);
-        # EAPI void elm_win_keyboard_win_set(Evas_Object *obj, Eina_Bool is_keyboard);
-        # EAPI Eina_Bool elm_win_keyboard_win_get(const Evas_Object *obj);
-        # EAPI void elm_win_screen_position_get(const Evas_Object *obj, int *x, int *y);
-        # EAPI Evas_Object *elm_win_inwin_add(Evas_Object *obj);
-        # EAPI void elm_win_inwin_activate(Evas_Object *obj);
-        # EAPI void elm_win_inwin_content_set(Evas_Object *obj, Evas_Object *content);
-        # EAPI Evas_Object *elm_win_inwin_content_get(const Evas_Object *obj);
-        # EAPI Evas_Object *elm_win_inwin_content_unset(Evas_Object *obj);
-        # EAPI Ecore_X_Window elm_win_xwindow_get(const Evas_Object *obj);
+        #
+        it "quickpanel_priority_major set/get" do
+            @win.quickpanel_priority_major_set 6
+            @win.quickpanel_priority_major_get.should == 6
+            @win.quickpanel_priority_major= 1
+            @win.quickpanel_priority_major.should == 1
+        end
+        #
+        it "quickpanel_priority_minor set/get" do
+            @win.quickpanel_priority_minor_set 6
+            @win.quickpanel_priority_minor_get.should == 6
+            @win.quickpanel_priority_minor= 1
+            @win.quickpanel_priority_minor.should == 1
+        end
+        #
+        it "quickpanel_zone set/get" do
+            @win.quickpanel_zone_set 6
+            @win.quickpanel_zone_get.should == 6
+            @win.quickpanel_zone= 1
+            @win.quickpanel_zone.should == 1
+        end
+        #
+        it "focus_highlight_enabled" do
+            bool_check @win, 'focus_highlight_enabled'
+        end
+        #
+        it "focus_highlight_style set/get" do
+            char_check @win, 'focus_highlight_style'
+        end
+        #
+        it "keyboard_mode set/get" do
+            @win.keyboard_mode_set :elm_win_keyboard_off
+            @win.keyboard_mode_get.should == :elm_win_keyboard_off
+            @win.keyboard_mode= :elm_win_keyboard_on
+            @win.keyboard_mode.should == :elm_win_keyboard_on
+            @win.keyboard_mode?.should == :elm_win_keyboard_on
+        end
+        #
+        it "keyboard_winset/get" do
+            bool_check @win, 'keyboard_win'
+        end
+        #
+        it "screen_position_get" do
+            @win.screen_position_get.should == [0,0]
+            @win.screen_position.should == [0,0]
+        end
+        #
+        it "prop_focus_skip_set" do
+            @win.prop_focus_skip_set true
+            @win.prop_focus_skip= false
+        end
+        #
+        it "inlined_image_object_get" do
+            o1 = @win.inlined_image_object_get
+            o2 = @win.inlined_image_object
+            o1.should === o2
+        end
+        # TODO EAPI void elm_win_illume_command_send(Evas_Object *obj, Elm_Illume_Command command, void *params);;
+        # TODO EAPI Ecore_X_Window elm_win_xwindow_get(const Evas_Object *obj);
+        #
+        describe Efl::Elm::ElmInWin do
+            it "activate, content set/get/unset" do
+                @iwin = @win.inwin_add
+                o1 = @win.evas.object_rectangle_add
+                o2 = @win.evas.object_rectangle_add
+                @iwin.activate
+                @iwin.content_set o1
+                @iwin.content.should == o1.to_ptr
+                @iwin.content?.should == o1.to_ptr
+                @iwin.content_get.should === o1.to_ptr
+                @iwin.content= o2
+                @iwin.content.should === o2.to_ptr
+                @iwin.content?.should === o2.to_ptr
+                @iwin.content_get.should === o2.to_ptr
+                @iwin.content_unset
+                @iwin.content.should == FFI::Pointer::NULL
+                @iwin.content?.should == FFI::Pointer::NULL
+                @iwin.content_get.should == FFI::Pointer::NULL
+                o1.free
+                o2.free
+            end
+        end
     end
     #
     describe Efl::Elm::ElmBg do

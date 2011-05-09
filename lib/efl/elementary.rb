@@ -29,6 +29,25 @@ module Efl
             def smart_callback_add event_str, cb, data=FFI::MemoryPointer::NULL
                 Native.evas_object_smart_callback_add @ptr, event_str, cb, data
             end
+            def inwin_add
+                ElmInWin.new @ptr
+            end
+            def screen_position_get
+                x = FFI::MemoryPointer.new :int
+                y = FFI::MemoryPointer.new :int
+                Native.elm_win_screen_position_get @ptr, x, y
+                [ x.read_int, y.read_int ]
+            end
+            alias :screen_position :screen_position_get
+        end
+        #
+        class ElmInWin < Efl::Evas::REvasObject
+            #
+            search_prefixes 'elm_win_inwin_', 'elm_win'
+            #
+            def initialize parent, &block
+                super Native.method(:elm_win_inwin_add), parent, &block
+            end
         end
         #
         class ElmBg < Efl::Evas::REvasObject
