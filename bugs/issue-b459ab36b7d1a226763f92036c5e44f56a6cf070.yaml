@@ -5,8 +5,8 @@ type: :task
 component: ecore
 release: 
 reporter: Jeremy Zurcher <jeremy@asynk.ch>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2011-05-06 21:23:44.732436 Z
 references: []
 
@@ -16,5 +16,9 @@ log_events:
   - Jeremy Zurcher <jeremy@asynk.ch>
   - created
   - ""
+- - 2011-05-09 19:16:21.217139 Z
+  - Jeremy Zurcher <jeremy@asynk.ch>
+  - closed with disposition fixed
+  - don't check y coordinate which is window manager specific
 git_branch: 
 claimer: 

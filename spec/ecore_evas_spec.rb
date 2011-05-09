@@ -82,17 +82,23 @@ describe Efl::EcoreEvas do
         it "move, resize move_resize and geometry_get  (and check association)" do
             @e.geometry_get.should == [10,10,100,120]
             @bg.geometry_get.should == [0,0,100,120]
-            @e.move 20, 17  # w+23 window bar height
+            @e.move 20, 20
             ecore_loop 3
-            @e.geometry_get.should == [20,40,100,120]
+            g = @e.geometry_get
+            g.delete_at 1
+            g.should == [20,100,120]
             @bg.geometry_get.should == [0,0,100,120]
             @e.resize 200,150
             ecore_loop 3
-            @e.geometry_get.should == [20,40,200,150]
+            g = @e.geometry_get
+            g.delete_at 1
+            g.should == [20,200,150]
             @bg.geometry_get.should == [0,0,200,150]
             @e.move_resize 10, 0, 130, 100
             ecore_loop 3
-            @e.geometry_get.should == [10,23,130,100]
+            g = @e.geometry_get
+            g.delete_at 1
+            g.should == [10,130,100]
             @bg.geometry_get.should == [0,0,130,100]
             g = @e.geometry_get
         end
