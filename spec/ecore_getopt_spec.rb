@@ -3,10 +3,14 @@
 #
 require 'efl/ecore'
 require 'efl/ecore_evas'
+require 'efl/eina_list'
 require 'efl/ecore_getopt'
 #
 describe Efl::EcoreGetopt do
     #
+    after(:all) do
+        Efl::Ecore.shutdown
+    end
     before(:all) do
         Efl::Ecore.init
         #
@@ -33,6 +37,7 @@ describe Efl::EcoreGetopt do
             :true => FFI::MemoryPointer.new(:uchar),
             :false => FFI::MemoryPointer.new(:uchar),
             :choice => FFI::MemoryPointer.new(:pointer),
+            :append => FFI::MemoryPointer.new(:pointer),
             :count => FFI::MemoryPointer.new(:int),
             :callback => FFI::MemoryPointer.new(:int),
         }
@@ -49,6 +54,7 @@ describe Efl::EcoreGetopt do
         @p.help 'H', 'help'
         @p.value :boolp, @values[:help]
         # FIXME debug callback : ecore_getopt_callback_ecore_evas_list_engines
+#        @p.callback_noargs 'E', 'list-engines', 'list ecore-evas available engines', @engines_cb, FFI::Pointer::NULL
         @p.callback_noargs 'E', 'list-engines', 'list ecore-evas available engines', Efl::Native.method(:ecore_getopt_callback_ecore_evas_list_engines), FFI::Pointer::NULL
         @p.value :boolp, @values[:engines]
         @p.store_type :int, 'i', 'int', 'store an integer'
@@ -67,8 +73,8 @@ describe Efl::EcoreGetopt do
         @p.value :boolp, @values[:true]
         @p.choice 'm', 'many', 'store choice', ['ch1','ch2','ch3']
         @p.value :strp, @values[:choice]
-#        # FIXME: uses listp with Eina_List
-#        @p.append 'a', 'append', 'store append', :ecore_getopt_type_int
+        @p.append 'a', 'append', 'store append', :ecore_getopt_type_int
+        @p.value :listp, @values[:append]
         @p.count 'k', 'count', 'store count'
         @p.value :intp, @values[:count]
         @p.callback_args 'b', 'callback', 'callback full', @meta1, @callback, @cb_data
@@ -89,11 +95,9 @@ describe Efl::EcoreGetopt do
         @values[:true].write_uchar 1
         @values[:false].write_uchar 0
         @values[:choice].write_pointer FFI::Pointer::NULL
+        @values[:append].write_pointer FFI::Pointer::NULL
         @values[:count].write_int 664
         @values[:callback].write_int 99
-    end
-    after(:all) do
-        Efl::Ecore.shutdown
     end
     #
     describe "license copyright version help" do
@@ -179,6 +183,13 @@ describe Efl::EcoreGetopt do
             args = @p.parse ["progname","-mch2"]
             @values[:choice].read_pointer.read_string.should == "ch2"
         end
+        it "should handle -a" do
+            @values[:append].read_pointer.should == FFI::Pointer::NULL
+            args = @p.parse ["progname","-a10", "-a20"]
+            l = Efl::EinaList::REinaList.new(@values[:append].read_pointer).to_a
+            l[0].read_int.should==10
+            l[1].read_int.should==20
+        end
         it "should handle -k" do
             @values[:count].read_int.should == 664
             args = @p.parse ["progname","-kk"]
@@ -228,6 +239,13 @@ describe Efl::EcoreGetopt do
             @values[:choice].read_pointer.should == FFI::Pointer::NULL
             args = @p.parse ["progname","--many=ch3"]
             @values[:choice].read_pointer.read_string.should == "ch3"
+        end
+        it "should handle -append" do
+            @values[:append].read_pointer.should == FFI::Pointer::NULL
+            args = @p.parse ["progname","--append=10", "--append=20"]
+            l = Efl::EinaList::REinaList.new(@values[:append].read_pointer).to_a
+            l[0].read_int.should==10
+            l[1].read_int.should==20
         end
         it "should handle --count" do
             @values[:count].read_int.should == 664

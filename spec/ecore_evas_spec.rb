@@ -9,10 +9,10 @@ describe Efl::EcoreEvas do
     #
     before(:all) do
         EcoreEvas = Efl::EcoreEvas
-        EcoreEvas.init
+        EcoreEvas.init.should==1
     end
     after(:all) do
-        EcoreEvas.shutdown
+        EcoreEvas.shutdown.should==0
     end
     #
     it "should init" do
@@ -49,7 +49,7 @@ describe Efl::EcoreEvas do
     #
     describe Efl::EcoreEvas::REcoreEvas do
         before(:all) {
-            EcoreEvas.init
+            EcoreEvas.init.should == 2
         }
         before(:each) do
             @e = EcoreEvas::REcoreEvas.new :engine_name=>"software_x11", :x=>10, :y=>10, :w=>100, :h=>120
@@ -67,7 +67,7 @@ describe Efl::EcoreEvas do
             @e.free
         end
         after(:all) do
-            EcoreEvas.shutdown
+            EcoreEvas.shutdown.should == 1
         end
         #
         it "engine_name_get " do
@@ -200,17 +200,11 @@ describe Efl::EcoreEvas do
         # FIXME maximized
         # ecore/src/lib/ecore_evas/ecore_evas.c => ecore_evas_maximized_set => IFC => return
         it "maximized set/get " do
-            @e.maximized?.should be_false
-            @e.maximized_set true
-            ecore_loop 10
-            @e.maximized_get.should be_true
-            @e.maximized = false
-            ecore_loop 3
-            @e.maximized?.should be_false
+            bool_check @e, 'maximized', 5
         end
         #
         it "fullscreen set/get " do
-            bool_check @e, 'fullscreen', 3
+            bool_check @e, 'fullscreen', 5
         end
         #
         it "avoid_damage set/get " do

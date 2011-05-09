@@ -39,8 +39,8 @@ describe Efl::Eet do
     end
     #
     describe Efl::Eet::REetFile do
-        before(:each) { Eet.init }
-        after(:each) { Eet.shutdown }
+        before(:all) { Eet.init.should==1 }
+        after(:all) { Eet.shutdown.should==0 }
         #
         it "should open and close" do
             f = REetFile.open FP, Native.enum_type(:eet_file_mode)[:eet_file_mode_write]

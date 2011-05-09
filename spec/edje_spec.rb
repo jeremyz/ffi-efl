@@ -23,13 +23,12 @@ require './spec/helper'
 #
 describe Efl::Edje do
     #
-    before(:all) { Edje = Efl::Edje }
-    #
-    before(:each) {
-        Edje.init
+    before(:all) {
+        Edje = Efl::Edje
+        Edje.init.should == 1
     }
-    after(:each) {
-        Edje.shutdown
+    after(:all) {
+        Edje.shutdown == 0
     }
     #
     it "should init" do
@@ -96,7 +95,6 @@ describe Efl::Edje do
     describe Efl::Edje::REdje do
         before(:all) do
             Efl::Evas.init
-            Efl::Edje.init
             realize_evas
             @ed = @e.edje_object_add
             @ed.file_set EDJE_FILE, "my_group"
@@ -107,8 +105,7 @@ describe Efl::Edje do
         after(:all) do
             @e.free
             @pixels.free
-            Efl::Edje.shutdown
-            Efl::Evas.shutdown
+            Efl::Evas.shutdown.should==0
         end
         #
         it "scale get/set " do

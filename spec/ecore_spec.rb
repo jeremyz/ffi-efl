@@ -24,10 +24,10 @@ describe Efl::Ecore do
         NONE = FFI::MemoryPointer.from_string "none"
     end
     before(:each) {
-        Ecore.init
+        Ecore.init==1
     }
     after(:each) {
-        Ecore.shutdown
+        Ecore.shutdown==0
     }
     #
     it "should init" do

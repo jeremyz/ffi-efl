@@ -44,6 +44,19 @@ def bool_check t, fct, delay=nil
     t.send(fct+'_get').should be_false
 end
 #
+def char_check t, fct, delay=nil
+    t.send fct+'_set', "char1"
+    ecore_loop delay if delay
+    t.send(fct).should == "char1"
+    t.send(fct+'?').should == "char1"
+    t.send(fct+'_get').should == "char1"
+    t.send fct+'=', "char2"
+    ecore_loop delay if delay
+    t.send(fct).should == "char2"
+    t.send(fct+'?').should == "char2"
+    t.send(fct+'_get').should == "char2"
+end
+#
 def realize_win
     @win = Elm::ElmWin.new(nil, 'TEST') do |w|
         w.title= 'spec win'

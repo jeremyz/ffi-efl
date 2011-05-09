@@ -11,10 +11,13 @@ describe Efl::Evas do
     before(:all) {
         Evas = Efl::Evas
         Native = Efl::Native unless Kernel.const_defined? 'Native'
+        Evas.init.should == 1
+    }
+    after(:all) {
+        Evas.shutdown.should == 0
     }
     #
     it "should init" do
-        Evas.init.should == 1
         Evas.init.should == 2
         Evas.init.should == 3
     end
@@ -22,7 +25,6 @@ describe Efl::Evas do
     it "should shutdown" do
         Evas.shutdown.should == 2
         Evas.shutdown.should == 1
-        Evas.shutdown.should == 0
     end
     #
     it "evas alloc error enum is ok" do
@@ -38,9 +40,7 @@ describe Efl::Evas do
     end
     #
     it "should have no memory allocation error occured" do
-        Evas.init
         Evas.alloc_error.should == :evas_alloc_error_none
-        Evas.shutdown
     end
     #
     it "should process async events" do
@@ -49,24 +49,20 @@ describe Efl::Evas do
             type.should == :evas_callback_show
             evt.read_string.should == "work"
         end
-        Evas.init
         target = FFI::MemoryPointer.from_string("target")
         work = FFI::MemoryPointer.from_string("work")
         Evas.async_events_put target, :evas_callback_show, work, cb
         Evas.async_events_process.should == 1
         Evas.async_events_process.should == 0
-        Evas.shutdown
     end
     #
     describe Efl::Evas::REvas do
         before(:all) do
-            Evas.init
             realize_evas
         end
         after(:all) do
             @e.free
             @pixels.free
-            Evas.shutdown
         end
         #
         it "should be able to create and destroy evas" do
@@ -299,7 +295,6 @@ describe Efl::Evas do
     describe Efl::Evas::REvasObject do
         #
         before(:all) do
-            Evas.init
             realize_evas
             @o = @e.object_rectangle_add { |o|
                 o.color = 200,200,200,200
@@ -312,7 +307,6 @@ describe Efl::Evas do
             @e.free
             @o.free
             @pixels.free
-            Evas.shutdown
         end
         #
         it "clipper " do
@@ -563,14 +557,12 @@ describe Efl::Evas do
     describe Efl::Evas::REvasLine do
         #
         before(:all) do
-            Evas.init
             realize_evas
             @l = @e.object_line_add
         end
         after(:all) do
             @l.free
             @e.free
-            Evas.shutdown
         end
         it "xy get/set " do
             @l.line_xy_set 10, 20, 30, 40
@@ -581,14 +573,12 @@ describe Efl::Evas do
     describe Efl::Evas::REvasPolygon do
         #
         before(:all) do
-            Evas.init
             realize_evas
             @p = @e.object_polygon_add
         end
         after(:all) do
             @p.free
             @e.free
-            Evas.shutdown
         end
         it "xy point_add " do
             @p.point_add 10, 20
@@ -605,14 +595,12 @@ describe Efl::Evas do
     describe Efl::Evas::REvasText do
         #
         before(:all) do
-            Evas.init
             realize_evas
             @t = @e.object_text_add
         end
         after(:all) do
             @t.free
             @e.free
-            Evas.shutdown
         end
         #
         it "font_source get/set " do
@@ -715,7 +703,6 @@ describe Efl::Evas do
     describe Efl::Evas::REvasBox do
         #
         before(:all) do
-            Evas.init
             realize_evas
             @b = @e.object_box_add
             @os = []
@@ -726,7 +713,6 @@ describe Efl::Evas do
         after(:all) do
             @b.free
             @e.free
-            Evas.shutdown
         end
         #
         it "append, prepend, insert_before, insert_after, insert_at, remove, remove_at, remove_all  and children_get " do
