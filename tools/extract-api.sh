@@ -6,7 +6,7 @@ P=$(dirname $0)
 #
 CURRENT=$P/api
 PREV=$P/api-prev
-INCLUDE=$(pkg-config --libs ecore |gawk '{ print substr($1,3) }' | sed s/lib/include/)
+INCLUDE=$(pkg-config --variable=includedir ecore)
 #
 if [ ! -d $CURRENT ]; then
     mkdir $CURRENT
