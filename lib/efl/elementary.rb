@@ -21,7 +21,7 @@ module Efl
         #
         class ElmWin < Efl::Evas::REvasObject
             #
-            search_prefixes 'elm_win_'
+            search_prefixes 'elm_win_', 'elm_object_'
             #
             def initialize parent, title, type=:elm_win_basic, &block
                 super Native.method(:elm_win_add), parent, title, type, &block
@@ -43,7 +43,7 @@ module Efl
         #
         class ElmInWin < Efl::Evas::REvasObject
             #
-            search_prefixes 'elm_win_inwin_', 'elm_win'
+            search_prefixes 'elm_win_inwin_', 'elm_win', 'elm_object_'
             #
             def initialize parent, &block
                 super Native.method(:elm_win_inwin_add), parent, &block
@@ -52,7 +52,7 @@ module Efl
         #
         class ElmBg < Efl::Evas::REvasObject
             #
-            search_prefixes 'elm_bg_'
+            search_prefixes 'elm_bg_', 'elm_object_'
             #
             def initialize parent, &block
                 super Native.method(:elm_bg_add), parent, &block
@@ -74,9 +74,57 @@ module Efl
             alias :color :color_get
         end
         #
+        class ElmLayout < Efl::Evas::REvasObject
+            #
+            search_prefixes 'elm_layout_', 'elm_object_'
+            #
+            def initialize parent, &block
+                super Native.method(:elm_layout_add), parent, &block
+            end
+            #
+            def edje_get &block
+                Efl::Edje::REdje.new Native.method(:elm_layout_edje_get), @ptr, &block
+            end
+            alias :edje :edje_get
+        end
+        #
+        class ElmBox < Efl::Evas::REvasObject
+            #
+            search_prefixes 'elm_box_', 'elm_object_'
+            #
+            def initialize parent, &block
+                super Native.method(:elm_box_add), parent, &block
+            end
+            #
+        end
+        #
+        class ElmList < Efl::Evas::REvasObject
+            #
+            search_prefixes 'elm_list_', 'elm_object_'
+            #
+            def initialize parent, &block
+                super Native.method(:elm_list_add), parent, &block
+            end
+            #
+        end
+        #
+        class ElmIcon < Efl::Evas::REvasObject
+            #
+            search_prefixes 'elm_icon_', 'elm_object_'
+            #
+            def initialize parent, &block
+                super Native.method(:elm_icon_add), parent, &block
+            end
+            #
+            def scale_set args
+                Native.elm_icon_scale_set @ptr, *args
+            end
+            alias :scale= :scale_set
+        end
+        #
         class ElmLabel < Efl::Evas::REvasObject
             #
-            search_prefixes 'elm_label_'
+            search_prefixes 'elm_label_', 'elm_object_'
             #
             def initialize parent, &block
                 super Native.method(:elm_label_add), parent, &block
@@ -85,7 +133,7 @@ module Efl
         #
         class ElmPager < Efl::Evas::REvasObject
             #
-            search_prefixes 'elm_pager_'
+            search_prefixes 'elm_pager_', 'elm_object_'
             #
             def initialize parent, &block
                 super Native.method(:elm_pager_add), parent, &block
@@ -94,7 +142,7 @@ module Efl
         #
         class ElmPanel < Efl::Evas::REvasObject
             #
-            search_prefixes 'elm_panel_'
+            search_prefixes 'elm_panel_', 'elm_object'
             #
             def initialize parent, &block
                 super Native.method(:elm_panel_add), parent, &block
