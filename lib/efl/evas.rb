@@ -45,6 +45,9 @@ module Efl
         EVAS_ENGINE_BUFFER_DEPTH_BGR24  = 3
         EVAS_ENGINE_BUFFER_DEPTH_RGB32  = 4
         #
+        EVAS_HINT_FILL = -1.0
+        EVAS_HINT_EXPAND = 1.0
+        #
         class REvas
             #
             include Efl::ClassHelper
@@ -232,6 +235,10 @@ module Efl
                 [ Native.enum_type(:evas_aspect_control)[a.read_int], w.read_int, h.read_int ]
             end
             alias :size_hint_aspect :size_hint_aspect_get
+            def size_hint_align_set_fill
+                Native.evas_object_size_hint_align_set @ptr, EVAS_HINT_FILL, EVAS_HINT_FILL
+            end
+            alias :size_hint_align_fill :size_hint_align_set_fill
             def size_hint_align_get
                 w = FFI::MemoryPointer.new :double
                 h = FFI::MemoryPointer.new :double
@@ -239,6 +246,10 @@ module Efl
                 [ w.read_double, h.read_double ]
             end
             alias :size_hint_align :size_hint_align_get
+            def size_hint_weight_set_expand
+                Native.evas_object_size_hint_weight_set @ptr, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND
+            end
+            alias :size_hint_weight_expand :size_hint_weight_set_expand
             def size_hint_weight_get
                 w = FFI::MemoryPointer.new :double
                 h = FFI::MemoryPointer.new :double
