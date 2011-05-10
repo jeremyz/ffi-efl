@@ -73,6 +73,7 @@ module Efl
         def to_s; Object.instance_method(:to_s).bind(self).call+' ['+self.to_ptr.to_s+']' end
         def to_ptr; @ptr; end
         def === o; @ptr === o.to_ptr; end
+        def null?; @ptr.null?; end
         def address; @ptr.address; end
         def self.included kls
             # create class instance @search_prefixes
