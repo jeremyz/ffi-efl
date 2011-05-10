@@ -43,7 +43,7 @@ module Efl
         #
         class ElmInWin < Efl::Evas::REvasObject
             #
-            search_prefixes 'elm_win_inwin_', 'elm_win', 'elm_object_'
+            search_prefixes 'elm_win_inwin_', 'elm_win_', 'elm_object_'
             #
             def initialize parent, &block
                 super Native.method(:elm_win_inwin_add), parent, &block
@@ -146,6 +146,24 @@ module Efl
             #
             def initialize parent, &block
                 super Native.method(:elm_panel_add), parent, &block
+            end
+        end
+        #
+        class ElmDiskSelector < Efl::Evas::REvasObject
+            #
+            search_prefixes 'elm_diskselector_', 'elm_object'
+            #
+            def initialize parent, &block
+                super Native.method(:elm_diskselector_add), parent, &block
+            end
+        end
+        #
+        class ElmNotify < Efl::Evas::REvasObject
+            #
+            search_prefixes 'elm_notify_', 'elm_object'
+            #
+            def initialize parent, &block
+                super Native.method(:elm_notify_add), parent, &block
             end
         end
         #
