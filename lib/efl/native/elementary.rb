@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 #
 require 'efl/ffi'
+require 'efl/native/evas'
 #
 module Efl
     #
