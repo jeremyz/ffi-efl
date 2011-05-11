@@ -1,4 +1,4 @@
-
+/EAPI extern/ b
 # if return type on single line, append next line
 /EAPI.*[^;]\s*$/ { N; s/\n/ / }
 # while unfinished argument list, append next line

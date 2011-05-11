@@ -51,6 +51,8 @@ module Efl
         #
         # CALLBACKS
         #
+        # VARIABLES
+        #
         # FUNCTIONS
         fcts = [
         # EAPI void ecore_getopt_help(FILE *fp, const Ecore_Getopt *info);

@@ -41,6 +41,8 @@ module Efl
         # typedef Eina_Bool (*Eina_Hash_Foreach) (const Eina_Hash *hash, const void *key, void *data, void *fdata);
         callback :eina_hash_foreach, [ :eina_hash_p, :void_p, :void_p, :void_p ], :eina_bool
         #
+        # VARIABLES
+        #
         # FUNCTIONS
         fcts = [
         # EAPI Eina_Hash *eina_hash_new(Eina_Key_Length key_length_cb, Eina_Key_Cmp key_cmp_cb, Eina_Key_Hash key_hash_cb, Eina_Free_Cb data_free_cb, int buckets_power_size);

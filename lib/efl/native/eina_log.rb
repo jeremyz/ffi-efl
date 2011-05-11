@@ -36,10 +36,12 @@ module Efl
         # typedef void (*Eina_Log_Print_Cb) (const Eina_Log_Domain *d, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, void *data, va_list args);
         callback :eina_log_print_cb, [ :eina_log_domain_p, :eina_log_level, :string, :string, :int, :string, :void_p, :pointer ], :void
         #
+        # VARIABLES
+        # EAPI extern int EINA_LOG_DOMAIN_GLOBAL;
+        attach_variable :EINA_LOG_DOMAIN_GLOBAL, :int
+        #
         # FUNCTIONS
         fcts = [
-        # EAPI extern int;
-        # FIXME
         # EAPI void eina_log_threads_enable(void);
         [ :eina_log_threads_enable, [  ], :void ],
         # EAPI void eina_log_print_cb_set(Eina_Log_Print_Cb cb, void *data);

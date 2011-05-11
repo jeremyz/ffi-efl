@@ -55,6 +55,7 @@ module Efl
         # void (*func) (Ecore_Evas *ee)
         callback :ecore_evas_event_cb, [:ecore_evas_p], :void
         #
+        # VARIABLES
         #
         # FUNCTIONS
         fcts = [

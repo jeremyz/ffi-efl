@@ -124,6 +124,7 @@ module Efl
         # TYPEDEFS
         # typedef struct _Elm_Version Elm_Version;
         typedef :pointer, :elm_version
+        typedef :pointer, :elm_version_p
         # typedef struct _Elm_Event_Policy_Changed Elm_Event_Policy_Changed;
         typedef :pointer, :elm_event_policy_changed
         # typedef struct _Elm_Text_Class Elm_Text_Class;
@@ -325,14 +326,16 @@ module Efl
         # typedef void *(*Elm_Store_Item_Mapping_Cb) (void *data, Elm_Store_Item *sti, const char *part);
         callback :elm_store_item_mapping_cb, [ :void_p, :elm_store_item_p, :string ], :void_p
         #
+        # VARIABLES
+        # EAPI extern Elm_Version *elm_version;
+        attach_variable :elm_version, :elm_version_p
+        # EAPI extern int ELM_ECORE_EVENT_ETHUMB_CONNECT;
+        attach_variable :ELM_ECORE_EVENT_ETHUMB_CONNECT, :int
+        # EAPI extern int ELM_EVENT_POLICY_CHANGED;
+        attach_variable :ELM_EVENT_POLICY_CHANGED, :int
+        #
         # FUNCTIONS
         fcts = [
-        # EAPI extern Elm_Version *elm_version;
-        # FIXME
-        # EAPI extern int ELM_ECORE_EVENT_ETHUMB_CONNECT;
-        # FIXME
-        # EAPI extern int ELM_EVENT_POLICY_CHANGED;
-        # FIXME
         # EAPI int elm_init(int argc, char **argv);
         [ :elm_init, [ :int, :string_array ], :int ],
         # EAPI int elm_shutdown(void);

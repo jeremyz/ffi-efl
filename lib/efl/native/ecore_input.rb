@@ -49,24 +49,26 @@ module Efl
         #
         # CALLBACKS
         #
+        # VARIABLES
+        # EAPI extern int ECORE_EVENT_KEY_DOWN;
+        attach_variable :ECORE_EVENT_KEY_DOWN, :int
+        # EAPI extern int ECORE_EVENT_KEY_UP;
+        attach_variable :ECORE_EVENT_KEY_UP, :int
+        # EAPI extern int ECORE_EVENT_MOUSE_BUTTON_DOWN;
+        attach_variable :ECORE_EVENT_MOUSE_BUTTON_DOWN, :int
+        # EAPI extern int ECORE_EVENT_MOUSE_BUTTON_UP;
+        attach_variable :ECORE_EVENT_MOUSE_BUTTON_UP, :int
+        # EAPI extern int ECORE_EVENT_MOUSE_MOVE;
+        attach_variable :ECORE_EVENT_MOUSE_MOVE, :int
+        # EAPI extern int ECORE_EVENT_MOUSE_WHEEL;
+        attach_variable :ECORE_EVENT_MOUSE_WHEEL, :int
+        # EAPI extern int ECORE_EVENT_MOUSE_IN;
+        attach_variable :ECORE_EVENT_MOUSE_IN, :int
+        # EAPI extern int ECORE_EVENT_MOUSE_OUT;
+        attach_variable :ECORE_EVENT_MOUSE_OUT, :int
+        #
         # FUNCTIONS
         fcts = [
-        # EAPI extern int ECORE_EVENT_KEY_DOWN;
-        # FIXME
-        # EAPI extern int ECORE_EVENT_KEY_UP;
-        # FIXME
-        # EAPI extern int ECORE_EVENT_MOUSE_BUTTON_DOWN;
-        # FIXME
-        # EAPI extern int ECORE_EVENT_MOUSE_BUTTON_UP;
-        # FIXME
-        # EAPI extern int ECORE_EVENT_MOUSE_MOVE;
-        # FIXME
-        # EAPI extern int ECORE_EVENT_MOUSE_WHEEL;
-        # FIXME
-        # EAPI extern int ECORE_EVENT_MOUSE_IN;
-        # FIXME
-        # EAPI extern int ECORE_EVENT_MOUSE_OUT;
-        # FIXME
         # EAPI int ecore_event_init(void);
         [ :ecore_event_init, [  ], :int ],
         # EAPI int ecore_event_shutdown(void);

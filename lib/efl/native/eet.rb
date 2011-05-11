@@ -34,6 +34,7 @@ module Efl
         # TYPEDEFS
         # typedef struct _Eet_Version Eet_Version;
         typedef :pointer, :eet_version
+        typedef :pointer, :eet_version_p
         # typedef struct _Eet_File Eet_File;
         typedef :pointer, :eet_file
         typedef :pointer, :eet_file_p
@@ -124,10 +125,12 @@ module Efl
         # typedef Eina_Bool Eet_Write_Cb (const void *data, size_t size, void *user_data);
         callback :eet_write_cb, [ :void_p, :ulong, :void_p ], :eina_bool
         #
+        # VARIABLES
+        # EAPI extern Eet_Version *eet_version;
+        attach_variable :eet_version, :eet_version_p
+        #
         # FUNCTIONS
         fcts = [
-        # EAPI extern Eet_Version *eet_version;
-        # FIXME
         # EAPI int eet_init(void);
         [ :eet_init, [  ], :int ],
         # EAPI int eet_shutdown(void);

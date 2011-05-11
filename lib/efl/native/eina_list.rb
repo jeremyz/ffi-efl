@@ -34,6 +34,8 @@ module Efl
         #
         # CALLBACKS
         #
+        # VARIABLES
+        #
         # FUNCTIONS
         fcts = [
         # EAPI Eina_List *eina_list_append(Eina_List *list, const void *data);

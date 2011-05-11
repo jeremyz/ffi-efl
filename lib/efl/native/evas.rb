@@ -93,6 +93,7 @@ module Efl
         # TYPEDEFS
         # typedef struct _Evas_Version Evas_Version;
         typedef :pointer, :evas_version
+        typedef :pointer, :evas_version_p
         # typedef struct _Evas_Coord_Rectangle Evas_Coord_Rectangle;
         typedef :pointer, :evas_coord_rectangle
         # typedef struct _Evas_Point Evas_Point;
@@ -253,10 +254,12 @@ module Efl
         # typedef void (*Evas_Object_Box_Layout) (Evas_Object *o, Evas_Object_Box_Data *priv, void *user_data);
         callback :evas_object_box_layout, [ :evas_object_p, :evas_object_box_data_p, :void_p ], :void
         #
+        # VARIABLES
+        # EAPI extern Evas_Version *evas_version;
+        attach_variable :evas_version, :evas_version_p
+        #
         # FUNCTIONS
         fcts = [
-        # EAPI extern Evas_Version *evas_version;
-        # FIXME
         # EAPI int evas_init (void);
         [ :evas_init, [  ], :int ],
         # EAPI int evas_shutdown (void);

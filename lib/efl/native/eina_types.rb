@@ -37,10 +37,10 @@ module Efl
         # typedef void (*Eina_Free_Cb) (void *data);
         callback :eina_free_cb, [ :void_p ], :void
         #
+        # VARIABLES
+        #
         # FUNCTIONS
         fcts = [
-        # EAPI extern const unsigned int eina_prime_table[];
-        # FIXME
         ]
         #
         attach_fcts fcts

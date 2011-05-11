@@ -46,7 +46,7 @@ for header in \
     DIR=$(dirname $header)
     FILE=$(basename $header)
     #
-    for what in functions enums types callbacks; do
+    for what in functions enums types callbacks variables; do
         F=$FILE-$what
         cat $header | sed -r -n -f $P/sed-$what > $CURRENT/$F
         if [ -f $PREV/$F ]; then

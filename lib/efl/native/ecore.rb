@@ -27,6 +27,7 @@ module Efl
         # TYPEDEFS
         # typedef struct _Ecore_Version Ecore_Version;
         typedef :pointer, :ecore_version
+        typedef :pointer, :ecore_version_p
         # typedef enum _Ecore_Fd_Handler_Flags Ecore_Fd_Handler_Flags;
         typedef :pointer, :ecore_fd_handler_flags
         # typedef enum _Ecore_Exe_Flags Ecore_Exe_Flags;
@@ -134,14 +135,20 @@ module Efl
         # typedef Eina_Bool (*Ecore_Win32_Handle_Cb) (void *data, Ecore_Win32_Handler *wh);
         callback :ecore_win32_handle_cb, [ :void_p, :ecore_win32_handler_p ], :eina_bool
         #
+        # VARIABLES
+        # EAPI extern Ecore_Version *ecore_version;
+        attach_variable :ecore_version, :ecore_version_p
+        # EAPI extern int ECORE_EXE_EVENT_ADD;
+        attach_variable :ECORE_EXE_EVENT_ADD, :int
+        # EAPI extern int ECORE_EXE_EVENT_DEL;
+        attach_variable :ECORE_EXE_EVENT_DEL, :int
+        # EAPI extern int ECORE_EXE_EVENT_DATA;
+        attach_variable :ECORE_EXE_EVENT_DATA, :int
+        # EAPI extern int ECORE_EXE_EVENT_ERROR;
+        attach_variable :ECORE_EXE_EVENT_ERROR, :int
+        #
         # FUNCTIONS
         fcts = [
-        # EAPI extern Ecore_Version *ecore_version;
-        # FIXME
-        # EAPI extern int ECORE_EXE_EVENT_ADD; /**< A child process has been added */ EAPI extern int ECORE_EXE_EVENT_DEL; /**< A child process has been deleted (it exited, naming consistent with the rest of ecore). */
-        # FIXME
-        # EAPI extern int ECORE_EXE_EVENT_DATA; /**< Data from a child process. */ EAPI extern int ECORE_EXE_EVENT_ERROR; /**< Errors from a child process. */
-        # FIXME
         # EAPI int ecore_init(void);
         [ :ecore_init, [  ], :int ],
         # EAPI int ecore_shutdown(void);

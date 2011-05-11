@@ -225,6 +225,22 @@ def gen_callbacks path, indent
     r
 end
 #
+def gen_variables path, indent
+    r = []
+    open(path+'-variables','r').readlines.each do |l|
+        l.strip!
+        if not l=~ /EAPI\s+extern\s+(\w+\s+\*?)(\w+)/
+            r << indent+"# #{l}\n#{indent}# FIXME"
+            next
+        end
+        var = $2
+        t = $1
+        r << indent+"# #{l}"
+        r << wrap_text(indent+"attach_variable :#{var}, #{get_type t}", indent+' '*4)
+    end
+    r
+end
+#
 def gen_functions path, indent
     r = []
     r << indent+"fcts = ["
@@ -258,10 +274,12 @@ libraries.collect do |header,module_name,fct_prefix,lib, output|
     r << gen_typedefs(base, INDENT)
     print "callbacks, "
     r << gen_callbacks(base, INDENT)
+    print "variables, "
+    r << gen_variables(base, INDENT)
     puts "functions."
     r << gen_functions(base, INDENT)
     r
-end.each do |lib, output, module_name, fct_prefix, enums, typedefs, callbacks, functions|
+end.each do |lib, output, module_name, fct_prefix, enums, typedefs, callbacks, variables, functions|
     printf "%-60s", "generate #{output}"
     open(output,'w:utf-8') do |f|
         f << HEADER.gsub(/MNAME/,module_name).sub(/FCT_PREFIX/,fct_prefix)
@@ -275,6 +293,9 @@ end.each do |lib, output, module_name, fct_prefix, enums, typedefs, callbacks, f
         f << "\n#{INDENT}#\n#{INDENT}# CALLBACKS"
         print "callbacks, "
         f << "\n"+callbacks.join("\n") unless callbacks.empty?
+        f << "\n#{INDENT}#\n#{INDENT}# VARIABLES"
+        print "variables, "
+        f << "\n"+variables.join("\n") unless variables.empty?
         f << "\n#{INDENT}#\n#{INDENT}# FUNCTIONS"
         puts "functions."
         f << "\n"+functions.join("\n") unless functions.empty?

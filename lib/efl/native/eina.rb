@@ -27,13 +27,16 @@ module Efl
         # TYPEDEFS
         # typedef struct _Eina_Version Eina_Version;
         typedef :pointer, :eina_version
+        typedef :pointer, :eina_version_p
         #
         # CALLBACKS
         #
+        # VARIABLES
+        # EAPI extern Eina_Version *eina_version;
+        attach_variable :eina_version, :eina_version_p
+        #
         # FUNCTIONS
         fcts = [
-        # EAPI extern Eina_Version *eina_version;
-        # FIXME
         # EAPI int eina_init(void);
         [ :eina_init, [  ], :int ],
         # EAPI int eina_shutdown(void);

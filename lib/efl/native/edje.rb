@@ -73,6 +73,7 @@ module Efl
         # TYPEDEFS
         # typedef struct _Edje_Version Edje_Version;
         typedef :pointer, :edje_version
+        typedef :pointer, :edje_version_p
         # typedef struct _Edje_Message_String Edje_Message_String;
         typedef :pointer, :edje_message_string
         # typedef struct _Edje_Message_Int Edje_Message_Int;
@@ -121,10 +122,12 @@ module Efl
         # typedef Evas_Object *(*Edje_Item_Provider_Cb) (void *data, Evas_Object *obj, const char *part, const char *item);
         callback :edje_item_provider_cb, [ :void_p, :evas_object_p, :string, :string ], :evas_object_p
         #
+        # VARIABLES
+        # EAPI extern Edje_Version *edje_version;
+        attach_variable :edje_version, :edje_version_p
+        #
         # FUNCTIONS
         fcts = [
-        # EAPI extern Edje_Version *edje_version;
-        # FIXME
         # EAPI const char *edje_external_param_type_str(Edje_External_Param_Type type);
         [ :edje_external_param_type_str, [ :edje_external_param_type ], :string ],
         # EAPI int edje_init (void);
