@@ -7,6 +7,10 @@ module Efl
     #
     module Eet
         #
+        def self.version
+            Native::VersionStruct.new(Native.eet_version)
+        end
+        #
         class REetFile
             #
             include Efl::ClassHelper

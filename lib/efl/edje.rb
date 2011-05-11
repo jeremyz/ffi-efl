@@ -8,6 +8,10 @@ module Efl
     #
     module Edje
         #
+        def self.version
+            Native::VersionStruct.new(Native.edje_version)
+        end
+        #
         class REdje < Efl::Evas::REvasObject
             #
             search_prefixes 'edje_object_'

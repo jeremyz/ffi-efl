@@ -7,6 +7,10 @@ module Efl
     #
     module Eina
         #
+        def self.version
+            Native::VersionStruct.new(Native.eina_version)
+        end
+        #
     end
     #
 end

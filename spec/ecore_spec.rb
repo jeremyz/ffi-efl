@@ -3,7 +3,7 @@
 #
 require 'efl/ecore'
 #
-describe Efl::Ecore do
+describe "Efl::Ecore #{Efl::Ecore.version.full}" do
     #
     before(:all) do
         Ecore = Efl::Ecore

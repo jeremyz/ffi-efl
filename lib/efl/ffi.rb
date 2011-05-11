@@ -5,6 +5,19 @@ require 'ffi'
 #
 module Efl
     #
+    module Native
+        class VersionStruct < FFI::Struct
+            layout  :major,     :int,
+                    :minor,     :int,
+                    :micro,     :int,
+                    :revision,  :int
+
+            def full
+                [:major,:minor,:micro,:revision].collect { |e| self[e].to_s }.join '.'
+            end
+        end
+    end
+    #
     module FFIHelper
         #
         def attach_fcts fcts

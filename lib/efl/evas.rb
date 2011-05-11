@@ -48,6 +48,10 @@ module Efl
         EVAS_HINT_FILL = -1.0
         EVAS_HINT_EXPAND = 1.0
         #
+        def self.version
+            Native::VersionStruct.new(Native.evas_version)
+        end
+        #
         class REvas
             #
             include Efl::ClassHelper

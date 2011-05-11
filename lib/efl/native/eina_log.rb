@@ -5,7 +5,7 @@ require 'efl/ffi'
 #
 module Efl
     #
-    module Eina
+    module EinaLog
         #
         def self.method_missing m, *args, &block
             sym = 'eina_log_'+m.to_s

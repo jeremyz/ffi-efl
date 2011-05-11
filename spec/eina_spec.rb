@@ -3,7 +3,7 @@
 #
 require 'efl/eina'
 #
-describe Efl::Eina do
+describe "Efl::Eina #{Efl::Eina.version.full}" do
     before(:all) {
         @i = Efl::Eina.init
     }

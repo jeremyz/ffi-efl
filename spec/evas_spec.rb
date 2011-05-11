@@ -6,7 +6,7 @@ require 'efl/ecore'
 require 'efl/evas'
 require './spec/helper'
 #
-describe Efl::Evas do
+describe "Efl::Evas #{Efl::Evas.version.full}" do
     #
     before(:all) {
         Evas = Efl::Evas

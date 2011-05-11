@@ -7,6 +7,10 @@ require 'efl/native/elementary'
 module Efl
     module Elm
         #
+        def self.version
+            Native::VersionStruct.new(Native.elm_version)
+        end
+        #
         class << self
             def init *args
                 a = args.select { |e| e.is_a? String }

@@ -1,0 +1,1 @@
+s/(EAPI\s+extern\s+\w+\s+\*?\w+\s*;).*$/\1/p

@@ -3,7 +3,7 @@
 #
 require 'efl/eet'
 #
-describe Efl::Eet do
+describe "Efl::Eet #{Efl::Eet.version.full}" do
     #
     before(:all) {
         Eet = Efl::Eet

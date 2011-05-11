@@ -4,7 +4,7 @@
 require 'efl/elementary'
 require './spec/helper'
 #
-describe Efl::Elm do
+describe "Efl::Elm #{Efl::Elm.version.full}" do
     #
     before(:all) {
         Elm = Efl::Elm

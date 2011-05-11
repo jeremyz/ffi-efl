@@ -21,7 +21,7 @@ require 'efl/evas'
 require 'efl/edje'
 require './spec/helper'
 #
-describe Efl::Edje do
+describe "Efl::Edje #{Efl::Edje.version.full}" do
     #
     before(:all) {
         Edje = Efl::Edje

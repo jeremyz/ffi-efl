@@ -15,6 +15,10 @@ module Efl
         EVENT_SIGNAL_REALTIME = 5 # Realtime signal event
         EVENT_COUNT = 6
         #
+        def self.version
+            Native::VersionStruct.new(Native.ecore_version)
+        end
+        #
         class REcorePipe
             def initialize cb, data
                 @ptr = FFI::AutoPointer.new Native.ecore_pipe_add(cb, data), REcorePipe.method(:release)
