@@ -21,6 +21,7 @@ fi
 for header in \
     "${INCLUDE}/eina-1/eina/eina_types.h" \
     "${INCLUDE}/eina-1/eina/eina_main.h" \
+    "${INCLUDE}/eina-1/eina/eina_log.h" \
     "${INCLUDE}/eina-1/eina/eina_list.h" \
     "${INCLUDE}/eina-1/eina/eina_hash.h" \
     "${INCLUDE}/eet-1/Eet.h" \

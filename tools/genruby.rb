@@ -9,6 +9,7 @@ libraries = [
     # HEADER            MODUE NAME      FCT PREFIX      LIB             OUTPUT
     [ 'eina_types.h',   'Eina',         'eina',         'eina',         'eina_types.rb' ],
     [ 'eina_main.h',    'Eina',         'eina',         'eina',         'eina.rb' ],
+    [ 'eina_log.h',     'Eina',         'eina_log',     'eina',         'eina_log.rb' ],
     [ 'eina_list.h',    'EinaList',     'eina_list',    'eina',         'eina_list.rb' ],
     [ 'eina_hash.h',    'EinaHash',     'eina_hash',    'eina',         'eina_hash.rb' ],
     [ 'Eet.h',          'Eet',          'eet',          'eet',          'eet.rb' ],
