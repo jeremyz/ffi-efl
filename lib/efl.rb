@@ -4,7 +4,7 @@
 #
 module Efl
     #
-    VERSION = '0.0.5'
+    VERSION = '0.0.6'
     #
     autoload :EcoreEvas,    './lib/efl/ecore_evas.rb'
     autoload :EcoreGetopt,  './lib/efl/ecore_getopt.rb'
@@ -12,8 +12,9 @@ module Efl
     autoload :Ecore,        './lib/efl/ecore.rb'
     autoload :Edje,         './lib/efl/edje.rb'
     autoload :Eet,          './lib/efl/eet.rb'
-    autoload :EinHash,      './lib/efl/eina_hash.rb'
+    autoload :EinaHash,     './lib/efl/eina_hash.rb'
     autoload :EinaList,     './lib/efl/eina_list.rb'
+    autoload :EinaLog,      './lib/efl/eina_log.rb'
     autoload :Eina,         './lib/efl/eina.rb'
     autoload :Elm,          './lib/efl/elementary.rb'
     autoload :Evas,         './lib/efl/evas.rb'

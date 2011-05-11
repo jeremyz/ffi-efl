@@ -1,3 +1,13 @@
+2011-05-11 Jérémy Zurcher <jeremy@asynk.ch>
+	* use ditz ass issure tracker
+	* use FFI.attach_variable for EAPI extern ...
+	* Efl::EinaLog module and specs
+	* quick add classes : ElmWin, ElmInWIn, ElmBg, ElmLayout, ElmBox, ElmList, ElmIcon, ElmNotify, ElmDiskSelector, ElmPager
+	* REinaList has #to_a and #to_ary
+	* add ClassHelper #null? #to_a #to_ary #to_s
+	* rework REvasObject#initialize
+	* rework ClassHelper#method_missing
+
 2011-05-06 Jérémy Zurcher <jeremy@asynk.ch>
 	* release 0.0.5
 	* add REvasText class + specs
