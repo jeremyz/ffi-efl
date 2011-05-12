@@ -1,6 +1,7 @@
 2011-05-xx Jérémy Zurcher <jeremy@asynk.ch>
 	* add REinaList#from_a ptrt
 	* add REinaList#to_a ptrt=nil
+	* rework EcoreGetopt
 
 2011-05-11 Jérémy Zurcher <jeremy@asynk.ch>
 	* use ditz ass issure tracker
