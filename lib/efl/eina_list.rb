@@ -58,6 +58,7 @@ module Efl
             end
             def to_a ptrt=nil
                 return inject([]) { |s,e| s<<e } if ptrt.nil?
+                inject([]) { |s,e| s<< e.send('read_'+ptrt.to_s) }
             end
             alias :to_ary :to_a
             # for fun and tests

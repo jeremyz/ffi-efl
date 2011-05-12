@@ -1,3 +1,7 @@
+2011-05-xx Jérémy Zurcher <jeremy@asynk.ch>
+	* add REinaList#from_a ptrt
+	* add REinaList#to_a ptrt=nil
+
 2011-05-11 Jérémy Zurcher <jeremy@asynk.ch>
 	* use ditz ass issure tracker
 	* use FFI.attach_variable for EAPI extern ...

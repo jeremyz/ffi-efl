@@ -38,7 +38,7 @@ describe Efl::EinaList do
     end
     #
     it "should be able to convert into ruby Array from empty REinaList" do
-        ary = REinaList.new.to_ary
+        ary = REinaList.new.to_a
         ary.empty?.should be_true
         ary.is_a?(Array).should be_true
     end
@@ -71,10 +71,28 @@ describe Efl::EinaList do
         l.prepend d2
         l << d4
         l.unshift d1
-        ary = l.to_ary
+        ary = l.to_a
         ary.length.should == 4
         0.upto 3 do |i|
             ary[i].read_string.should == "D#{i}"
+        end
+        l.free
+    end
+    #
+    it "should be able to convert into ruby Array from non empty REinaList pointer" do
+        l = REinaList.new
+        d1 = ::FFI::MemoryPointer.from_string "D0"
+        d2 = ::FFI::MemoryPointer.from_string "D1"
+        d3 = ::FFI::MemoryPointer.from_string "D2"
+        d4 = ::FFI::MemoryPointer.from_string "D3"
+        l.append d3
+        l.prepend d2
+        l << d4
+        l.unshift d1
+        ary = l.to_a :string
+        ary.length.should == 4
+        0.upto 3 do |i|
+            ary[i].should == "D#{i}"
         end
         l.free
     end
