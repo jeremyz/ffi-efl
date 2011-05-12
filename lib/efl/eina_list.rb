@@ -40,6 +40,13 @@ module Efl
                 Native.eina_list_free @ptr
                 @ptr = nil
             end
+            def self.from_a ary, ptrt
+                REinaList.new ary.inject(FFI::Pointer::NULL) { |p,e|
+                    ptr = FFI::MemoryPointer.new ptrt
+                    ptr.send 'write_'+ptrt.to_s, e
+                    Native.eina_list_append p, ptr
+                }
+            end
             def each
                 return if not block_given?
                 p = @ptr
@@ -49,8 +56,8 @@ module Efl
                     p = l[:next]
                 end
             end
-            def to_a
-                inject([]) { |s,e| s<<e }
+            def to_a ptrt=nil
+                return inject([]) { |s,e| s<<e } if ptrt.nil?
             end
             alias :to_ary :to_a
             # for fun and tests

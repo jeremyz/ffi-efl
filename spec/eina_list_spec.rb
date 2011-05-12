@@ -79,7 +79,7 @@ describe Efl::EinaList do
         l.free
     end
     #
-    it "should be able to build from ruby Array" do
+    it "should be able to build from a ruby Array of pointers" do
         a =  []
         a << ::FFI::MemoryPointer.from_string("D0")
         a << ::FFI::MemoryPointer.from_string("D1")
@@ -88,6 +88,15 @@ describe Efl::EinaList do
         l = REinaList.new a
         0.upto 3 do |i|
             l.nth(i).read_string.should == "D#{i}"
+        end
+        l.free
+    end
+    #
+    it "should be able to build from a ruby Array of int" do
+        a =  [3,4,5,6]
+        l = REinaList.from_a a, :int
+        0.upto 3 do |i|
+            l.nth(i).read_int.should == i+3
         end
         l.free
     end
