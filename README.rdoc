@@ -12,17 +12,42 @@ A ruby-ffi binding to efl libraries (Enlightenment Foundation Libraries).
 
 == SYNOPSIS:
 
-    require 'efl'
-    Efl::Eet.init
-    Efl::Eet::REetFile.open('/tmp/_eet.cfg', :eet_file_mode_write) do |f|
-        f.write 'config2', 'test--key'
+    require 'efl/elementary'
+    
+    Efl::Elm.init
+    
+    on_exit = Proc.new do |data, evas_object, event_info|
+        puts "EXIT #{data.read_string}"
+        Efl::Elm.exit
     end
-    Efl::Eet::REetFile.open('/tmp/_eet.cfg', :eet_file_mode_read) do |f|
-        puts f.read('config2')
+    
+    win = Efl::Elm::ElmWin.new nil, "Window name" do |w|
+        w.title = "My title"
+        w.alpha = true
+        w.move 300, 300
+        w.resize 200, 100
+        bg = Efl::Elm::ElmBg.new w  do |bg|
+            bg.size_hint_weight_expand
+            bg.size_hint_align_fill
+            bg.evas_object_color_set 200,255,100,150
+            bg.show
+        end
+        w.resize_object_add bg
+        lb = Efl::Elm::ElmLabel.new w do |lb|
+            lb.label_set "Hello World!"
+            lb.size_hint_weight_set 1.0, 1.0
+        end
+        lb.show
+        w.resize_object_add lb
+        w.smart_callback_add "delete,request", on_exit, FFI::MemoryPointer.from_string("my data")
     end
-    Efl::Eet.shutdown
 
-For less minimalistic and more sane examples you may look at:
+    win.show
+
+    Efl::Elm.run
+    Efl::Elm.shutdown
+
+For more examples you may look at:
 
 * the spec/ and test/ folders
 
