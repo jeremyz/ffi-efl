@@ -4,6 +4,7 @@
 require 'efl/ecore'
 require 'efl/ecore_evas'
 require 'efl/eina_list'
+require 'efl/eina_rectangle'
 require 'efl/ecore_getopt'
 #
 describe Efl::EcoreGetopt do
@@ -32,6 +33,8 @@ describe Efl::EcoreGetopt do
         @meta1 = FFI::MemoryPointer.from_string "My pretty meta"
         @meta2 = FFI::MemoryPointer.from_string "My precious meta"
         @cb_data = FFI::MemoryPointer.from_string "cb_data"
+        @g = Efl::Native::EinaRectangleStruct.new
+        @g[:x] = 100; @g[:y] = 200; @g[:w] = 300; @g[:h] = 400
         #
         # license and copyright share the same flag named quit
         @p.license 'L', 'license', 'quit'
@@ -49,6 +52,7 @@ describe Efl::EcoreGetopt do
         @p.append 'a', 'append', 'store append', :int, [1,2,3]
         @p.choice 'm', 'many', 'store choice', ['ch1','ch2','ch3']
         @p.callback_noargs 'E', 'list-engines', 'list ecore-evas available engines', Efl::Native.method(:ecore_getopt_callback_ecore_evas_list_engines)
+        @p.callback_args 'g', 'geometry', 'x:y:w:h', FFI::MemoryPointer.from_string("X:Y:W:H"), Efl::Native.method(:ecore_getopt_callback_geometry_parse), nil, :pointer, @g.to_ptr
         @p.callback_args 'b', 'callback', 'callback full', @meta1, @callback, @cb_data, :int, 69
         @p.create
         #
@@ -151,6 +155,19 @@ describe Efl::EcoreGetopt do
             args = @p.parse ["progname","-buser_arg"]
             @p['b'].should == 666
         end
+        it "should handle -g" do
+            g = Efl::Native::EinaRectangleStruct.new @p['g']
+            g[:x].should == 100
+            g[:y].should == 200
+            g[:w].should == 300
+            g[:h].should == 400
+            args = @p.parse ["progname","-g=10:20:30:40"]
+            g = Efl::Native::EinaRectangleStruct.new @p['g']
+            g[:x].should == 10
+            g[:y].should == 20
+            g[:w].should == 30
+            g[:h].should == 40
+        end
     end
     describe "simple long options" do
         it "should handle --int" do
@@ -211,6 +228,19 @@ describe Efl::EcoreGetopt do
             @p['b'].should == 69
             args = @p.parse ["progname","--callback=user_arg"]
             @p['b'].should == 666
+        end
+        it "should handle --geometry" do
+            g = Efl::Native::EinaRectangleStruct.new @p['g']
+            g[:x].should == 100
+            g[:y].should == 200
+            g[:w].should == 300
+            g[:h].should == 400
+            args = @p.parse ["progname","--geometry=10:20:30:40"]
+            g = Efl::Native::EinaRectangleStruct.new @p['g']
+            g[:x].should == 10
+            g[:y].should == 20
+            g[:w].should == 30
+            g[:h].should == 40
         end
     end
 end
