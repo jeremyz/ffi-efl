@@ -118,7 +118,7 @@ module Efl
 #                @refs = [] # to prevent FFI::MemoryPointer.from_string from beeing GC'ed
             end
             def p_from_string r
-                return r if r==FFI::Pointer::NULL
+                return FFI::Pointer::NULL if r.nil?
                 FFI::MemoryPointer.from_string r
             end
             private :p_from_string
@@ -135,6 +135,10 @@ module Efl
                         p.write_pointer val[0]
                         r = @values[skey] = [ ptype, p, val[1] ]    # add sub_type info
                     when :choice
+                        p = FFI::MemoryPointer.new :pointer
+                        p.write_pointer FFI::Pointer::NULL
+                        r = @values[skey] = [ ptype, p ]
+                    when :string
                         p = FFI::MemoryPointer.new :pointer
                         p.write_pointer FFI::Pointer::NULL
                         r = @values[skey] = [ ptype, p ]
@@ -157,6 +161,9 @@ module Efl
                 when :choice
                     p = ptr.read_pointer
                     ( p==FFI::Pointer::NULL ? nil : p.read_string )
+                when :string
+                    p = ptr.read_pointer
+                    (p==FFI::Pointer::NULL ? nil : p.read_string )
                 when :pointer
                     p = ptr.read_pointer
                     ( p==FFI::Pointer::NULL ? nil : p )
@@ -198,7 +205,7 @@ module Efl
                         st = d[:action_param][:store]
                         st[:type] = v[0]
                         st[:arg_req] = v[1]
-                        st[:def][v[2]] = (v[2]==:str ?  p_from_string(v[3]) : v[3] ) unless v[3].nil?
+                        st[:def][v[2]] = (v[2]==:strv ?  p_from_string(v[3]) : v[3] ) unless v[3].nil?
                     when :store_const
                         d[:action_param][:store_const] = v
                     when :choices
@@ -212,6 +219,7 @@ module Efl
                 @ecore_values_st = Native::EcoreGetoptValue.new FFI::MemoryPointer.new Native::EcoreGetoptValue, @values_order.length, false
                 @values_order.each_with_index do |k,i|
                     vtype, vpointer, *sub_type = @values[k]
+                    vpointer.write_pointer @ecore_getopt_st.desc_ptr(i)[:action_param][:store][:def][:strv] if vtype==:string
                     etype, vfield, pfield = @types[vtype]
                     @ecore_values_st.value_ptr(i)[pfield] = vpointer
                 end

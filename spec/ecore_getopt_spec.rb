@@ -40,7 +40,7 @@ describe Efl::EcoreGetopt do
         @p.help 'H', 'help'
         @p.store 'i', 'int', 'store an integer', :int, 2
         @p.store_meta 'd', 'double', 'store an double+meta', @meta1, :double, 3.1415926
-        @p.store_def 's', 'short', 'store an short+default', :short, 9
+        @p.store_def 's', 'string', 'store an string+default', :string, "default"
         @p.store_full 'l', 'long', 'store a long+full', @meta2, :ecore_getopt_desc_arg_requirement_yes, :long, 666
         @p.store_const 'c', 'const', 'store a constant', -666, 123456
         @p.store_true 't', 'true', 'store true'
@@ -55,9 +55,9 @@ describe Efl::EcoreGetopt do
     end
     #
     describe "license copyright version help" do
-#        it "DEBUG" do
-#            puts @p.debug
-#        end
+        it "DEBUG" do
+            puts @p.debug
+        end
         it "should handle -L" do
             args = @p.parse ["My lovely prog name","-L"]
             @p['quit'].should == 1
@@ -103,9 +103,9 @@ describe Efl::EcoreGetopt do
             @p['d'].should == 6.66
         end
         it "should handle -s" do
-            @p['s'].should == 9
-            args = @p.parse ["progname","-s 125"]
-            @p['s'].should == 125
+            @p['s'].should == 'default'
+            args = @p.parse ["progname","-sset"]
+            @p['s'].should == 'set'
         end
         it "should handle -l" do
             @p['l'].should == 666
@@ -163,10 +163,10 @@ describe Efl::EcoreGetopt do
             args = @p.parse ["progname","--double=6.66"]
             @p['d'].should == 6.66
         end
-        it "should handle --short" do
-            @p['s'].should == 9
-            args = @p.parse ["progname","--short=125"]
-            @p['s'].should == 125
+        it "should handle --string" do
+            @p['s'].should == 'default'
+            args = @p.parse ["progname","--string=set"]
+            @p['s'].should == 'set'
         end
         it "should handle --long" do
             @p['l'].should == 666
