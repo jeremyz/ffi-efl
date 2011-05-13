@@ -115,7 +115,6 @@ module Efl
                     :pointer=> [ :pointer, nil, :ptrp ],
                     :choice => [ :pointer, nil, :ptrp ]
                 }
-#                @refs = [] # to prevent FFI::MemoryPointer.from_string from beeing GC'ed
             end
             def p_from_string r
                 return FFI::Pointer::NULL if r.nil?
@@ -142,6 +141,8 @@ module Efl
                         p = FFI::MemoryPointer.new :pointer
                         p.write_pointer FFI::Pointer::NULL
                         r = @values[skey] = [ ptype, p ]
+                    when :pointer
+                        r = @values[skey] = [ ptype, val ]
                     else
                         p = FFI::MemoryPointer.new ptype
                         p.send 'write_'+ptype.to_s, val unless val.nil?
@@ -165,8 +166,7 @@ module Efl
                     p = ptr.read_pointer
                     (p==FFI::Pointer::NULL ? nil : p.read_string )
                 when :pointer
-                    p = ptr.read_pointer
-                    ( p==FFI::Pointer::NULL ? nil : p )
+                    ptr
                 else
                     ptr.send 'read_'+ptype.to_s
                 end
