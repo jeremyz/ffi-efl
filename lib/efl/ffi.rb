@@ -80,6 +80,36 @@ module Efl
         #
     end
     #
+    module ModuleHelper
+        def find_function m, prefix
+            m_s = m.to_s
+            if m_s =~/^(.*)=$/
+                m_s = $1+'_set'
+                args_s = '*args[0]'
+            elsif m_s =~/^(.*)\?$/
+                m_s = $1+'_get'
+                args_s = '*args'
+            else
+                args_s = '*args'
+            end
+            sym = (
+                if Efl::Native.respond_to? prefix+m_s
+                    prefix+m_s
+                elsif Efl::Native.respond_to? m_s
+                    m_s
+                elsif Efl::Native.respond_to? prefix+m_s+'_get'
+                    prefix+m_s+'_get'
+                elsif Efl::Native.respond_to? m_s+'_get'
+                    m_s+'_get'
+                else
+                    raise NameError.new "#{self.name}.#{m_s} (#{m})"
+                end
+            )
+            [sym, args_s]
+        end
+        module_function :find_function
+    end
+    #
     module ClassHelper
         def to_a; [self] end
         def to_ary; [self] end
