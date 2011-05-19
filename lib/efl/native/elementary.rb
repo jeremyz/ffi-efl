@@ -9,8 +9,29 @@ module Efl
     module Elm
         #
         def self.method_missing m, *args, &block
-            sym = 'elm_'+m.to_s
-            raise NameError.new "#{self.name}.#{sym} (#{m})" if not Efl::Native.respond_to? sym
+            m_s = m.to_s
+            if m_s =~/^(.*)=$/
+                m_s = $1+'_set'
+                args_s = '*args[0]'
+            elsif m_s =~/^(.*)\?$/
+                m_s = $1+'_get'
+                args_s = '*args'
+            else
+                args_s = '*args'
+            end
+            sym = (
+                if Efl::Native.respond_to? 'elm_'+m_s
+                    'elm_'+m_s
+                elsif Efl::Native.respond_to? m_s
+                    m_s
+                elsif Efl::Native.respond_to? 'elm_'+m_s+'_get'
+                    'elm_'+m_s+'_get'
+                elsif Efl::Native.respond_to? m_s+'_get'
+                    m_s+'_get'
+                else
+                    raise NameError.new "#{self.name}.#{m_s} (#{m})"
+                end
+            )
             self.module_eval "def self.#{m} *args, &block; r=Efl::Native.#{sym}(*args); yield r if block_given?; r; end"
             self.send m, *args, &block
         end
@@ -3211,6 +3232,22 @@ module Efl
         [ :elm_segment_control_item_selected_get, [ :evas_object_p ], :elm_segment_item_p ],
         # EAPI void elm_segment_control_item_selected_set(Elm_Segment_Item *it, Eina_Bool select);
         [ :elm_segment_control_item_selected_set, [ :elm_segment_item_p, :eina_bool ], :void ],
+        # EAPI Evas_Object *elm_grid_add(Evas_Object *parent);
+        [ :elm_grid_add, [ :evas_object_p ], :evas_object_p ],
+        # EAPI void elm_grid_size_set(Evas_Object *obj, int w, int h);
+        [ :elm_grid_size_set, [ :evas_object_p, :int, :int ], :void ],
+        # EAPI void elm_grid_size_get(Evas_Object *obj, int *w, int *h);
+        [ :elm_grid_size_get, [ :evas_object_p, :int_p, :int_p ], :void ],
+        # EAPI void elm_grid_pack(Evas_Object *obj, Evas_Object *subobj, int x, int y, int w, int h);
+        [ :elm_grid_pack, [ :evas_object_p, :evas_object_p, :int, :int, :int, :int ], :void ],
+        # EAPI void elm_grid_unpack(Evas_Object *obj, Evas_Object *subobj);
+        [ :elm_grid_unpack, [ :evas_object_p, :evas_object_p ], :void ],
+        # EAPI void elm_grid_clear(Evas_Object *obj, Eina_Bool clear);
+        [ :elm_grid_clear, [ :evas_object_p, :eina_bool ], :void ],
+        # EAPI void elm_grid_pack_set(Evas_Object *subobj, int x, int y, int w, int h);
+        [ :elm_grid_pack_set, [ :evas_object_p, :int, :int, :int, :int ], :void ],
+        # EAPI void elm_grid_pack_get(Evas_Object *subobj, int *x, int *y, int *w, int *h);
+        [ :elm_grid_pack_get, [ :evas_object_p, :int_p, :int_p, :int_p, :int_p ], :void ],
         ]
         #
         attach_fcts fcts

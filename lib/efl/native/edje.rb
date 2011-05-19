@@ -8,8 +8,29 @@ module Efl
     module Edje
         #
         def self.method_missing m, *args, &block
-            sym = 'edje_'+m.to_s
-            raise NameError.new "#{self.name}.#{sym} (#{m})" if not Efl::Native.respond_to? sym
+            m_s = m.to_s
+            if m_s =~/^(.*)=$/
+                m_s = $1+'_set'
+                args_s = '*args[0]'
+            elsif m_s =~/^(.*)\?$/
+                m_s = $1+'_get'
+                args_s = '*args'
+            else
+                args_s = '*args'
+            end
+            sym = (
+                if Efl::Native.respond_to? 'edje_'+m_s
+                    'edje_'+m_s
+                elsif Efl::Native.respond_to? m_s
+                    m_s
+                elsif Efl::Native.respond_to? 'edje_'+m_s+'_get'
+                    'edje_'+m_s+'_get'
+                elsif Efl::Native.respond_to? m_s+'_get'
+                    m_s+'_get'
+                else
+                    raise NameError.new "#{self.name}.#{m_s} (#{m})"
+                end
+            )
             self.module_eval "def self.#{m} *args, &block; r=Efl::Native.#{sym}(*args); yield r if block_given?; r; end"
             self.send m, *args, &block
         end
@@ -50,7 +71,8 @@ module Efl
             :edje_action_type_reserved00, 9, :edje_action_type_focus_object, 10, :edje_action_type_param_copy, 11, :edje_action_type_param_set, 12, :edje_action_type_last, 13 ]
         # typedef enum _Edje_Tween_Mode {...} Edje_Tween_Mode;
         enum :edje_tween_mode, [ :edje_tween_mode_none, 0, :edje_tween_mode_linear, 1, :edje_tween_mode_sinusoidal, 2, :edje_tween_mode_accelerate, 3,
-            :edje_tween_mode_decelerate, 4, :edje_tween_mode_last, 5 ]
+            :edje_tween_mode_decelerate, 4, :edje_tween_mode_accelerate_factor, 5, :edje_tween_mode_decelerate_factor, 6, :edje_tween_mode_sinusoidal_factor, 7,
+            :edje_tween_mode_divisor_interp, 8, :edje_tween_mode_bounce, 9, :edje_tween_mode_spring, 10, :edje_tween_mode_last, 11 ]
         # typedef enum _Edje_Cursor {...} Edje_Cursor;
         enum :edje_cursor, [ :edje_cursor_main, :edje_cursor_selection_begin, :edje_cursor_selection_end, :edje_cursor_preedit_start, :edje_cursor_preedit_end,
             :edje_cursor_user, :edje_cursor_user_extra ]
@@ -281,6 +303,8 @@ module Efl
         [ :edje_object_part_text_select_all, [ :evas_object_p, :string ], :void ],
         # EAPI void edje_object_part_text_insert (Evas_Object *obj, const char *part, const char *text);
         [ :edje_object_part_text_insert, [ :evas_object_p, :string, :string ], :void ],
+        # EAPI void edje_object_part_text_append(Evas_Object *obj, const char *part, const char *text);
+        [ :edje_object_part_text_append, [ :evas_object_p, :string, :string ], :void ],
         # EAPI const Eina_List *edje_object_part_text_anchor_list_get (const Evas_Object *obj, const char *part);
         [ :edje_object_part_text_anchor_list_get, [ :evas_object_p, :string ], :eina_list_p ],
         # EAPI const Eina_List *edje_object_part_text_anchor_geometry_get (const Evas_Object *obj, const char *part, const char *anchor);

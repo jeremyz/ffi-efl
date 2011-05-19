@@ -8,8 +8,29 @@ module Efl
     module Ecore
         #
         def self.method_missing m, *args, &block
-            sym = 'ecore_'+m.to_s
-            raise NameError.new "#{self.name}.#{sym} (#{m})" if not Efl::Native.respond_to? sym
+            m_s = m.to_s
+            if m_s =~/^(.*)=$/
+                m_s = $1+'_set'
+                args_s = '*args[0]'
+            elsif m_s =~/^(.*)\?$/
+                m_s = $1+'_get'
+                args_s = '*args'
+            else
+                args_s = '*args'
+            end
+            sym = (
+                if Efl::Native.respond_to? 'ecore_'+m_s
+                    'ecore_'+m_s
+                elsif Efl::Native.respond_to? m_s
+                    m_s
+                elsif Efl::Native.respond_to? 'ecore_'+m_s+'_get'
+                    'ecore_'+m_s+'_get'
+                elsif Efl::Native.respond_to? m_s+'_get'
+                    m_s+'_get'
+                else
+                    raise NameError.new "#{self.name}.#{m_s} (#{m})"
+                end
+            )
             self.module_eval "def self.#{m} *args, &block; r=Efl::Native.#{sym}(*args); yield r if block_given?; r; end"
             self.send m, *args, &block
         end
@@ -38,6 +59,8 @@ module Efl
         typedef :pointer, :ecore_poller_type
         # typedef enum _Ecore_Pos_Map Ecore_Pos_Map;
         typedef :pointer, :ecore_pos_map
+        # typedef enum _Ecore_Animator_Source Ecore_Animator_Source;
+        typedef :pointer, :ecore_animator_source
         # typedef struct _Ecore_Exe Ecore_Exe;
         typedef :pointer, :ecore_exe
         typedef :pointer, :ecore_exe_p
@@ -361,6 +384,8 @@ module Efl
         [ :ecore_timer_precision_get, [  ], :double ],
         # EAPI void ecore_timer_precision_set(double precision);
         [ :ecore_timer_precision_set, [ :double ], :void ],
+        # EAPI char *ecore_timer_dump(void);
+        [ :ecore_timer_dump, [  ], :string ],
         # EAPI Ecore_Animator *ecore_animator_add(Ecore_Task_Cb func, const void *data);
         [ :ecore_animator_add, [ :ecore_task_cb, :void_p ], :ecore_animator_p ],
         # EAPI Ecore_Animator *ecore_animator_timeline_add(double runtime, Ecore_Timeline_Cb func, const void *data);
@@ -377,6 +402,16 @@ module Efl
         [ :ecore_animator_frametime_get, [  ], :double ],
         # EAPI double ecore_animator_pos_map(double pos, Ecore_Pos_Map map, double v1, double v2);
         [ :ecore_animator_pos_map, [ :double, :ecore_pos_map, :double, :double ], :double ],
+        # EAPI void ecore_animator_source_set(Ecore_Animator_Source source);
+        [ :ecore_animator_source_set, [ :ecore_animator_source ], :void ],
+        # EAPI Ecore_Animator_Source ecore_animator_source_get(void);
+        [ :ecore_animator_source_get, [  ], :ecore_animator_source ],
+        # EAPI void ecore_animator_custom_source_tick_begin_callback_set(Ecore_Cb func, const void *data);
+        [ :ecore_animator_custom_source_tick_begin_callback_set, [ :ecore_cb, :void_p ], :void ],
+        # EAPI void ecore_animator_custom_source_tick_end_callback_set(Ecore_Cb func, const void *data);
+        [ :ecore_animator_custom_source_tick_end_callback_set, [ :ecore_cb, :void_p ], :void ],
+        # EAPI void ecore_animator_custom_tick(void);
+        [ :ecore_animator_custom_tick, [  ], :void ],
         # EAPI void ecore_poller_poll_interval_set(Ecore_Poller_Type type, double poll_time);
         [ :ecore_poller_poll_interval_set, [ :ecore_poller_type, :double ], :void ],
         # EAPI double ecore_poller_poll_interval_get(Ecore_Poller_Type type);

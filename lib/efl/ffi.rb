@@ -117,8 +117,8 @@ module Efl
                 meth = (
                     if Efl::Native.respond_to? sym
                         sym
-                    elsif Efl::Native.respond_to? m
-                        m
+                    elsif Efl::Native.respond_to? m_s
+                        m_s
                     elsif Efl::Native.respond_to? sym+'_get'
                         sym+'_get'
                     elsif Efl::Native.respond_to? m_s+'_get'
