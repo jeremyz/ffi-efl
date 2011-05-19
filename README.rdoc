@@ -49,7 +49,7 @@ A ruby-ffi binding to efl libraries (Enlightenment Foundation Libraries).
 
 For more examples you may look at:
 
-* the spec/ and test/ folders
+* the spec/[https://github.com/jeremyz/ffi-efl/tree/master/spec] and test/[https://github.com/jeremyz/ffi-efl/tree/master/test] folders
 
 == REQUIREMENTS:
 
