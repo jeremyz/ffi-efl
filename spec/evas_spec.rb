@@ -520,7 +520,7 @@ describe "Efl::Evas #{Efl::Evas.version.full}" do
             @o.anti_alias_get.should be_false
         end
         #
-        it "sccale set/get " do
+        it "scale set/get " do
             @o.scale_set 1.5
             @o.scale_get.should == 1.5
             @o.scale= 1.6

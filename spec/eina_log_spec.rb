@@ -17,43 +17,31 @@ describe Efl::EinaLog do
     it "level set/get" do
         EinaLog.level_set 2
         EinaLog.level_get.should == 2
-        EinaLog.level_set 3
-        EinaLog.level_get.should == 3
+        EinaLog.level = 3
+        EinaLog.level.should == 3
     end
     #
     it "color_disable set/get" do
-        EinaLog.color_disable_set true
-        EinaLog.color_disable_get.should be_true
-        EinaLog.color_disable_set false
-        EinaLog.color_disable_get.should be_false
+        bool_check EinaLog, 'color_disable'
     end
     #
     it "file_disable set/get" do
-        EinaLog.file_disable_set true
-        EinaLog.file_disable_get.should be_true
-        EinaLog.file_disable_set false
-        EinaLog.file_disable_get.should be_false
+        bool_check EinaLog, 'file_disable'
     end
     #
     it "function_disable set/get" do
-        EinaLog.function_disable_set true
-        EinaLog.function_disable_get.should be_true
-        EinaLog.function_disable_set false
-        EinaLog.function_disable_get.should be_false
+        bool_check EinaLog, 'function_disable'
     end
     #
     it "abort_on_critical set/get" do
-        EinaLog.abort_on_critical_set true
-        EinaLog.abort_on_critical_get.should be_true
-        EinaLog.abort_on_critical_set false
-        EinaLog.abort_on_critical_get.should be_false
+        bool_check EinaLog, 'abort_on_critical'
     end
     #
     it "abort_on_critical_level set/get" do
         EinaLog.abort_on_critical_level_set 2
         EinaLog.abort_on_critical_level_get.should == 2
-        EinaLog.abort_on_critical_level_set 3
-        EinaLog.abort_on_critical_level_get.should == 3
+        EinaLog.abort_on_critical_level = 3
+        EinaLog.abort_on_critical_level.should == 3
     end
     #
     it "domain register, unregister, level set/get" do
