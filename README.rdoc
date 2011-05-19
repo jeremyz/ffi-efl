@@ -8,7 +8,7 @@ A ruby-ffi binding to efl libraries (Enlightenment Foundation Libraries).
 
 == FEATURES/PROBLEMS:
 
-* Not 1.8 compatible yet !!!
+* pretty young project ...
 
 == SYNOPSIS:
 
