@@ -160,6 +160,11 @@ module Efl
             def initialize parent, &block
                 super Native.method(:elm_diskselector_add), parent, &block
             end
+            #
+            def item_selected_set it, b
+                Native::elm_diskselector_item_selected_set it, b
+            end
+            alias :item_selected= :item_selected_set
         end
         #
         class ElmNotify < Efl::Evas::REvasObject
