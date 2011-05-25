@@ -100,6 +100,26 @@ module Efl
                 super Native.method(:elm_box_add), parent, &block
             end
             #
+            def padding_get
+                x = FFI::MemoryPointer.new :int
+                y = FFI::MemoryPointer.new :int
+                Native::elm_box_padding_get @ptr, x, y
+                [ x.read_int, y.read_int ]
+            end
+            alias :padding :padding_get
+            #
+            def align_get
+                x = FFI::MemoryPointer.new :float
+                y = FFI::MemoryPointer.new :float
+                Native::elm_box_align_get @ptr, x, y
+                [ x.read_float, y.read_float ]
+            end
+            alias :align :padding_get
+            #
+            def children_get
+                Efl::EinaList::REinaList.new Native.elm_box_children_get @ptr
+            end
+            alias :children :children_get
         end
         #
         class ElmList < Efl::Evas::REvasObject
@@ -167,6 +187,16 @@ module Efl
             alias :item_selected= :item_selected_set
         end
         #
+        class ElmDiskSelectorItem < Efl::Evas::REvasObject
+            #
+            search_prefixes 'elm_diskselector_item_', 'elm_object'
+            #
+            def data_get
+                Native::elm_diskselector_item_data_get @ptr
+            end
+            alias :data :data_get
+        end
+        #
         class ElmNotify < Efl::Evas::REvasObject
             #
             search_prefixes 'elm_notify_', 'elm_object'
@@ -174,6 +204,39 @@ module Efl
             def initialize parent, &block
                 super Native.method(:elm_notify_add), parent, &block
             end
+        end
+        #
+        class ElmEntry < Efl::Evas::REvasObject
+            #
+            search_prefixes 'elm_entry_', 'elm_object'
+            #
+            def initialize parent, &block
+                super Native.method(:elm_entry_add), parent, &block
+            end
+        end
+        #
+        class ElmFlipSelector < Efl::Evas::REvasObject
+            #
+            search_prefixes 'elm_flipselector_', 'elm_object'
+            #
+            def initialize parent, &block
+                super Native.method(:elm_flipselector_add), parent, &block
+            end
+            #
+            def item_append label, cb, data
+                ElmFlipSelectorItem.new Native::elm_flipselector_item_append @ptr, label, cb, data
+            end
+            #
+            def selected_item_get
+                ElmFlipSelectorItem.new Native::elm_flipselector_selected_item_get @ptr
+            end
+            alias :selected_item :selected_item_get
+        end
+        #
+        class ElmFlipSelectorItem < Efl::Evas::REvasObject
+            #
+            search_prefixes 'elm_flipselector_item_', 'elm_object'
+            #
         end
         #
     end

@@ -330,6 +330,8 @@ module Efl
         callback :elm_store_item_unfetch_cb, [ :void_p, :elm_store_item_p ], :void
         # typedef void *(*Elm_Store_Item_Mapping_Cb) (void *data, Elm_Store_Item *sti, const char *part);
         callback :elm_store_item_mapping_cb, [ :void_p, :elm_store_item_p, :string ], :void_p
+        # Elm_Flipselector_Item : void (*func)(void *data, Evas_Object *obj, void *event_info)
+        callback :elm_flipselector_cb, [ :void_p, :evas_object_p, :void_p ], :void
         #
         # VARIABLES
         # EAPI extern Elm_Version *elm_version;
@@ -2604,7 +2606,7 @@ module Efl
         # EAPI const char *elm_map_source_name_get(const Evas_Object *obj);
         [ :elm_map_source_name_get, [ :evas_object_p ], :string ],
         # EAPI void elm_map_route_source_set(Evas_Object *obj, Elm_Map_Route_Sources source);
-        # FIXME [ :elm_map_route_source_set, [ :evas_object_p, :elm_map_route_sources ], :void ],
+        [ :elm_map_route_source_set, [ :evas_object_p, :elm_map_route_sources ], :void ],
         # EAPI Elm_Map_Route_Sources elm_map_route_source_get(const Evas_Object *obj);
         [ :elm_map_route_source_get, [ :evas_object_p ], :elm_map_route_sources ],
         # EAPI int elm_map_source_zoom_min_get(const Evas_Object *obj);
@@ -2870,9 +2872,9 @@ module Efl
         # EAPI void elm_flipselector_flip_prev(Evas_Object *obj);
         [ :elm_flipselector_flip_prev, [ :evas_object_p ], :void ],
         # EAPI Elm_Flipselector_Item *elm_flipselector_item_append(Evas_Object *obj, const char *label, void (*func)(void *data, Evas_Object *obj, void *event_info), void *data);
-        # FIXME
+        [ :elm_flipselector_item_append, [ :evas_object_p, :string, :elm_flipselector_cb, :void_p ], :evas_object_p ],
         # EAPI Elm_Flipselector_Item *elm_flipselector_item_prepend(Evas_Object *obj, const char *label, void (*func)(void *data, Evas_Object *obj, void *event_info), void *data);
-        # FIXME
+        [ :elm_flipselector_item_prepend, [ :evas_object_p, :string, :elm_flipselector_cb, :void_p ], :evas_object_p ],
         # EAPI const Eina_List *elm_flipselector_items_get(const Evas_Object *obj);
         [ :elm_flipselector_items_get, [ :evas_object_p ], :eina_list_p ],
         # EAPI Elm_Flipselector_Item *elm_flipselector_first_item_get(const Evas_Object *obj);
