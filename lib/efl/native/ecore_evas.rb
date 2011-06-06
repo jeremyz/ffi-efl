@@ -348,6 +348,8 @@ module Efl
         [ :ecore_evas_comp_sync_get, [ :ecore_evas_p ], :eina_bool ],
         # EAPI Ecore_Window ecore_evas_window_get(const Ecore_Evas *ee);
         [ :ecore_evas_window_get, [ :ecore_evas_p ], :uintptr_t ],
+        # EAPI void ecore_evas_screen_geometry_get(const Ecore_Evas *ee, int *x, int *y, int *w, int *h);
+        [ :ecore_evas_screen_geometry_get, [ :ecore_evas_p, :int_p, :int_p, :int_p, :int_p ], :void ],
         # EAPI Eina_Bool ecore_evas_object_associate(Ecore_Evas *ee, Evas_Object *obj, Ecore_Evas_Object_Associate_Flags flags);
         [ :ecore_evas_object_associate, [ :ecore_evas_p, :evas_object_p, :ecore_evas_object_associate_flags ], :eina_bool ],
         # EAPI Eina_Bool ecore_evas_object_dissociate(Ecore_Evas *ee, Evas_Object *obj);

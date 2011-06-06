@@ -99,6 +99,7 @@ TYPES = {
     'Eina_Iterator *' => ':eina_iterator_p',
     'Eina_Accessor' => ':eina_accessor',
     'Eina_Accessor *' => ':eina_accessor_p',
+    'Evas_GL_API *' => ':evas_gl_api_p',
 }
 #
 TYPES_USAGE = {}

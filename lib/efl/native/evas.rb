@@ -85,11 +85,6 @@ module Efl
         enum :evas_textblock_text_type, [ :evas_textblock_text_raw, :evas_textblock_text_plain, :evas_textblock_text_markup ]
         # typedef enum _Evas_Textblock_Cursor_Type {...} Evas_Textblock_Cursor_Type;
         enum :evas_textblock_cursor_type, [ :evas_textblock_cursor_under, :evas_textblock_cursor_before ]
-        # typedef enum {...} Evas_Filter_Mode;
-        enum :evas_filter_mode, [ :evas_filter_mode_object, :evas_filter_mode_below ]
-        # typedef enum {...} Evas_Filter;
-        enum :evas_filter, [ :evas_filter_none, :evas_filter_blur, :evas_filter_invert, :evas_filter_solarize, :evas_filter_sepia, :evas_filter_greyscale,
-            :evas_filter_grayscale, :evas_filter_brightness, :evas_filter_contrast, :evas_filter_last ]
         #
         # TYPEDEFS
         # typedef struct _Evas_Version Evas_Version;
@@ -355,6 +350,8 @@ module Efl
         [ :evas_event_thaw, [ :evas_p ], :void ],
         # EAPI int evas_event_freeze_get (const Evas *e);
         [ :evas_event_freeze_get, [ :evas_p ], :int ],
+        # EAPI void evas_event_thaw_eval (Evas *e);
+        [ :evas_event_thaw_eval, [ :evas_p ], :void ],
         # EAPI void evas_event_feed_mouse_down (Evas *e, int b, Evas_Button_Flags flags, unsigned int timestamp, const void *data);
         [ :evas_event_feed_mouse_down, [ :evas_p, :int, :evas_button_flags, :uint, :void_p ], :void ],
         # EAPI void evas_event_feed_mouse_up (Evas *e, int b, Evas_Button_Flags flags, unsigned int timestamp, const void *data);
@@ -803,6 +800,10 @@ module Efl
         [ :evas_object_image_source_get, [ :evas_object_p ], :evas_object_p ],
         # EAPI Eina_Bool evas_object_image_source_unset (Evas_Object *obj);
         [ :evas_object_image_source_unset, [ :evas_object_p ], :eina_bool ],
+        # EAPI Eina_Bool evas_object_image_extension_can_load_get(const char *file);
+        [ :evas_object_image_extension_can_load_get, [ :string ], :eina_bool ],
+        # EAPI Eina_Bool evas_object_image_extension_can_load_fast_get(const char *file);
+        [ :evas_object_image_extension_can_load_fast_get, [ :string ], :eina_bool ],
         # EAPI Evas_Object *evas_object_text_add (Evas *e);
         [ :evas_object_text_add, [ :evas_p ], :evas_object_p ],
         # EAPI void evas_object_text_font_source_set (Evas_Object *obj, const char *font);
@@ -1229,30 +1230,6 @@ module Efl
         [ :evas_object_grid_accessor_new, [ :evas_object_p ], :eina_accessor_p ],
         # EAPI Eina_List *evas_object_grid_children_get (const Evas_Object *o);
         [ :evas_object_grid_children_get, [ :evas_object_p ], :eina_list_p ],
-        # EAPI Eina_Bool evas_object_filter_mode_set (Evas_Object *o, Evas_Filter_Mode mode);
-        [ :evas_object_filter_mode_set, [ :evas_object_p, :evas_filter_mode ], :eina_bool ],
-        # EAPI Evas_Filter_Mode evas_object_filter_mode_get (Evas_Object *o);
-        [ :evas_object_filter_mode_get, [ :evas_object_p ], :evas_filter_mode ],
-        # EAPI Eina_Bool evas_object_filter_set (Evas_Object *o, Evas_Filter filter);
-        [ :evas_object_filter_set, [ :evas_object_p, :evas_filter ], :eina_bool ],
-        # EAPI Evas_Filter evas_object_filter_get (Evas_Object *o);
-        [ :evas_object_filter_get, [ :evas_object_p ], :evas_filter ],
-        # EAPI Eina_Bool evas_object_filter_param_int_set (Evas_Object *o, const char *param, int val);
-        [ :evas_object_filter_param_int_set, [ :evas_object_p, :string, :int ], :eina_bool ],
-        # EAPI int evas_object_filter_param_int_get (Evas_Object *o, const char *param);
-        [ :evas_object_filter_param_int_get, [ :evas_object_p, :string ], :int ],
-        # EAPI Eina_Bool evas_object_filter_param_str_set (Evas_Object *o, const char *param, const char *val);
-        [ :evas_object_filter_param_str_set, [ :evas_object_p, :string, :string ], :eina_bool ],
-        # EAPI const char *evas_object_filter_param_str_get (Evas_Object *o, const char *param);
-        [ :evas_object_filter_param_str_get, [ :evas_object_p, :string ], :string ],
-        # EAPI Eina_Bool evas_object_filter_param_obj_set (Evas_Object *o, const char *param, Evas_Object *val);
-        [ :evas_object_filter_param_obj_set, [ :evas_object_p, :string, :evas_object_p ], :eina_bool ],
-        # EAPI Evas_Object *evas_object_filter_param_obj_get (Evas_Object *o, const char *param);
-        [ :evas_object_filter_param_obj_get, [ :evas_object_p, :string ], :evas_object_p ],
-        # EAPI Eina_Bool evas_object_filter_param_float_set(Evas_Object *o, const char *param, double val);
-        [ :evas_object_filter_param_float_set, [ :evas_object_p, :string, :double ], :eina_bool ],
-        # EAPI double evas_object_filter_param_float_get(Evas_Object *o, const char *param);
-        [ :evas_object_filter_param_float_get, [ :evas_object_p, :string ], :double ],
         # EAPI Eina_Bool evas_cserve_want_get (void);
         [ :evas_cserve_want_get, [  ], :eina_bool ],
         # EAPI Eina_Bool evas_cserve_connected_get (void);

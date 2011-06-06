@@ -68,6 +68,7 @@ module Efl
             mod.typedef :pointer, :evas_p
             mod.typedef :pointer, :evas_object_p
             mod.typedef :pointer, :evas_object_pp
+            mod.typedef :pointer, :evas_gl_api_p
             mod.typedef :pointer, :ecore_getopt_p
             mod.typedef :pointer, :ecore_getopt_desc_p
             mod.typedef :pointer, :ecore_getopt_value_p

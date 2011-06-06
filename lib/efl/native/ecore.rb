@@ -290,6 +290,10 @@ module Efl
         [ :ecore_pipe_write_close, [ :ecore_pipe_p ], :void ],
         # EAPI void ecore_pipe_read_close(Ecore_Pipe *p);
         [ :ecore_pipe_read_close, [ :ecore_pipe_p ], :void ],
+        # EAPI void ecore_pipe_thaw(Ecore_Pipe *p);
+        [ :ecore_pipe_thaw, [ :ecore_pipe_p ], :void ],
+        # EAPI void ecore_pipe_freeze(Ecore_Pipe *p);
+        [ :ecore_pipe_freeze, [ :ecore_pipe_p ], :void ],
         # EAPI Ecore_Thread *ecore_thread_run(Ecore_Thread_Cb func_blocking, Ecore_Thread_Cb func_end, Ecore_Thread_Cb func_cancel, const void *data);
         [ :ecore_thread_run, [ :ecore_thread_cb, :ecore_thread_cb, :ecore_thread_cb, :void_p ], :ecore_thread_p ],
         # EAPI Ecore_Thread *ecore_thread_feedback_run(Ecore_Thread_Cb func_heavy, Ecore_Thread_Notify_Cb func_notify, Ecore_Thread_Cb func_end, Ecore_Thread_Cb func_cancel, const void *data, Eina_Bool try_no_queue);
