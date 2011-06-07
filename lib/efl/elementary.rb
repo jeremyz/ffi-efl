@@ -15,8 +15,12 @@ module Efl
             def self.included kls
                 def kls.constructor meth
                     self.class_eval <<-EOF
-                    def initialize parent, &block
-                        super Native.method(:#{meth}), parent, &block
+                    def initialize ptr, &block
+                        if ptr.is_a? FFI::Pointer
+                            super ptr, &block
+                        else
+                            super Native.method(:#{meth}), ptr, &block
+                        end
                     end
                     EOF
                 end
@@ -187,8 +191,6 @@ module Efl
         #
         class ElmDiskSelectorItem < Efl::Evas::REvasObject
             #
-#            include Helper
-#            constructor :elm_icon_add
             search_prefixes 'elm_diskselector_item_', 'elm_object'
             #
             def data_get
@@ -231,8 +233,6 @@ module Efl
         #
         class ElmFlipSelectorItem < Efl::Evas::REvasObject
             #
-#            include Helper
-#            constructor :elm_icon_add
             search_prefixes 'elm_flipselector_item_', 'elm_object'
             #
         end
