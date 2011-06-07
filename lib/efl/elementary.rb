@@ -5,6 +5,21 @@ require 'efl/evas'
 require 'efl/native/elementary'
 #
 module Efl
+    #
+    module Native
+        #
+        class ElmGenlistItemClassStruct < FFI::Struct
+            layout  :item_style,        :string,
+                    :label_get,         :pointer,
+                    :icon_get,          :pointer,
+                    :state_get,         :pointer,
+                    :del,               :pointer,
+                    :moved,             :pointer,
+                    :mode_item_style,   :string,
+        end
+        #
+    end
+    #
     module Elm
         #
         def self.version
