@@ -269,6 +269,22 @@ module Efl
             #
         end
         #
+        class ElmHover < Efl::Evas::REvasObject
+            #
+            include Helper
+            constructor :elm_hover_add
+            search_prefixes 'elm_hover_', 'elm_object'
+            #
+        end
+        #
+        class ElmButton < Efl::Evas::REvasObject
+            #
+            include Helper
+            constructor :elm_button_add
+            search_prefixes 'elm_button_', 'elm_object'
+            #
+        end
+        #
     end
 end
 #
