@@ -237,6 +237,23 @@ module Efl
             #
         end
         #
+        class ElmHoversel < Efl::Evas::REvasObject
+            #
+            include Helper
+            constructor :elm_hoversel_add
+            search_prefixes 'elm_hoversel_', 'elm_object'
+            #
+            def item_add label, icon_file=nil, icon_type=:elm_icon_none, cb=nil, data=nil
+                ElmHoverselItem.new Native::elm_hoversel_item_add @ptr, label, icon_file, icon_type, cb, data
+            end
+        end
+        #
+        class ElmHoverselItem < Efl::Evas::REvasObject
+            #
+            search_prefixes 'elm_hoversel_item_', 'elm_object'
+            #
+        end
+        #
     end
 end
 #
