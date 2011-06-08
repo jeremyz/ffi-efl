@@ -154,6 +154,9 @@ module Efl
             constructor :elm_list_add
             search_prefixes 'elm_list_', 'elm_object_'
             #
+            def item_append label, left_icon=nil, right_icon=nil, cb=nil, data=nil
+                ElmListItem.new Native::elm_list_item_append @ptr, label, left_icon, right_icon, cb, data
+            end
         end
         #
         class ElmListItem < Efl::Evas::REvasObject
