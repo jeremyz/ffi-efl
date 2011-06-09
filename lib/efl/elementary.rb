@@ -15,7 +15,7 @@ module Efl
                     :state_get,         :pointer,
                     :del,               :pointer,
                     :moved,             :pointer,
-                    :mode_item_style,   :pointer,
+                    :mode_item_style,   :pointer
         end
         #
     end
