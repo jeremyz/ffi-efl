@@ -1,4 +1,4 @@
-s/^\s*typedef\s+(.*)(\(\*?\w+\))?\s*(\(.*\));/typedef \1 \2 \3;/
+s/^\s*typedef\s+(.*)(\(\*?\w+\))?\s*(\(.*\));.*$/typedef \1 \2 \3;/
 t finish
 s/^\s*typedef\s+(.*)(\(\*?\w+\))?\s*(\(.*,)/typedef \1 \2 \3/
 T;h
