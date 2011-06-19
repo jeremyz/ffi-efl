@@ -83,6 +83,7 @@ TYPES = {
     'double *' => ':double_p',
     'unsigned int *' => ':uint_p',
     'unsigned char *' => ':uchar_p',
+    'unsigned short *' => ':ushort_p',
     'char *' => ':string',                                              # FIXME ?!?!
     'char **' => ':string_array',                                       # FIXME ?!?!
     'char ***' => ':string_array_p',                                    # FIXME ?!?!
@@ -211,7 +212,7 @@ def gen_callbacks path, indent
     r = []
     open(path+'-callbacks','r').readlines.each do |l|
         l.strip!
-        if not l=~/^\s*typedef\s+(.*)((?:\(\*?\w+\)| \*?\w+))\s*\((.*)\);\s*$/
+        if not l=~/^\s*typedef\s+(.*)((?:\(\*?\w+\)| \*?\w+))\s*\((.*)\);/
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
