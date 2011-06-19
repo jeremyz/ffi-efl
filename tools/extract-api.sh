@@ -6,17 +6,22 @@ P=$(dirname $0)
 #
 CURRENT=$P/api
 PREV=$P/api-prev
+NEXT=$P/api-next
 INCLUDE=$(pkg-config --variable=includedir ecore)
 #
-if [ ! -d $CURRENT ]; then
-    mkdir $CURRENT
-elif [ "$SMASH" == "Yes" ]; then
-    rm -fr $PREV *-diff 2>/dev/null
-    mv $CURRENT $PREV && mkdir $CURRENT || exit 1
-else
-    echo "no -x argument, won't override previous data"
-fi
+[ ! -d $NEXT ] && mkdir $NEXT
 [ ! -d $PREV ] && mkdir $PREV
+[ ! -d $CURRENT ] && mkdir $CURRENT
+#
+rm *-diff 2>/dev/null
+#
+if [ "$SMASH" == "Yes" ]; then
+    rm -fr $PREV &&  cp -R $CURRENT $PREV || exit 1
+else
+    PREV=$CURRENT
+    echo "no -x argument, won't override previous data"
+    echo "new api will be stored in $NEXT"
+fi
 #
 for header in \
     "${INCLUDE}/eina-1/eina/eina_types.h" \
@@ -48,12 +53,16 @@ for header in \
     #
     for what in functions enums types callbacks variables; do
         F=$FILE-$what
-        cat $header | sed -r -n -f $P/sed-$what > $CURRENT/$F
+        cat $header | sed -r -n -f $P/sed-$what > $NEXT/$F
         if [ -f $PREV/$F ]; then
-            diff -u0 $PREV/$F $CURRENT/$F > $P/$F-diff
+            diff -u0 $PREV/$F $NEXT/$F > $P/$F-diff
             N=$(cat $P/$F-diff | wc -l)
             [ $N -eq 0 ] && rm $P/$F-diff || echo "see $P/$F-diff"
         fi
     done
     #
 done
+#
+if [ "$SMASH" == "Yes" ]; then
+    rm -fr $CURRENT && mv $NEXT $CURRENT || exit 1
+fi
