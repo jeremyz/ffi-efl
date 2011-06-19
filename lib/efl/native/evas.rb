@@ -344,6 +344,18 @@ module Efl
         [ :evas_pointer_inside_get, [ :evas_p ], :eina_bool ],
         # EAPI void evas_sync(Evas *e);
         [ :evas_sync, [ :evas_p ], :void ],
+        # EAPI void evas_event_callback_add (Evas *e, Evas_Callback_Type type, Evas_Event_Cb func, const void *data);
+        [ :evas_event_callback_add, [ :evas_p, :evas_callback_type, :evas_event_cb, :void_p ], :void ],
+        # EAPI void *evas_event_callback_del (Evas *e, Evas_Callback_Type type, Evas_Event_Cb func);
+        [ :evas_event_callback_del, [ :evas_p, :evas_callback_type, :evas_event_cb ], :void_p ],
+        # EAPI void *evas_event_callback_del_full (Evas *e, Evas_Callback_Type type, Evas_Event_Cb func, const void *data);
+        [ :evas_event_callback_del_full, [ :evas_p, :evas_callback_type, :evas_event_cb, :void_p ], :void_p ],
+        # EAPI void evas_post_event_callback_push (Evas *e, Evas_Object_Event_Post_Cb func, const void *data);
+        [ :evas_post_event_callback_push, [ :evas_p, :evas_object_event_post_cb, :void_p ], :void ],
+        # EAPI void evas_post_event_callback_remove (Evas *e, Evas_Object_Event_Post_Cb func);
+        [ :evas_post_event_callback_remove, [ :evas_p, :evas_object_event_post_cb ], :void ],
+        # EAPI void evas_post_event_callback_remove_full (Evas *e, Evas_Object_Event_Post_Cb func, const void *data);
+        [ :evas_post_event_callback_remove_full, [ :evas_p, :evas_object_event_post_cb, :void_p ], :void ],
         # EAPI void evas_event_freeze (Evas *e);
         [ :evas_event_freeze, [ :evas_p ], :void ],
         # EAPI void evas_event_thaw (Evas *e);
@@ -380,18 +392,6 @@ module Efl
         [ :evas_event_feed_key_up, [ :evas_p, :string, :string, :string, :string, :uint, :void_p ], :void ],
         # EAPI void evas_event_feed_hold (Evas *e, int hold, unsigned int timestamp, const void *data);
         [ :evas_event_feed_hold, [ :evas_p, :int, :uint, :void_p ], :void ],
-        # EAPI void evas_event_callback_add (Evas *e, Evas_Callback_Type type, Evas_Event_Cb func, const void *data);
-        [ :evas_event_callback_add, [ :evas_p, :evas_callback_type, :evas_event_cb, :void_p ], :void ],
-        # EAPI void *evas_event_callback_del (Evas *e, Evas_Callback_Type type, Evas_Event_Cb func);
-        [ :evas_event_callback_del, [ :evas_p, :evas_callback_type, :evas_event_cb ], :void_p ],
-        # EAPI void *evas_event_callback_del_full (Evas *e, Evas_Callback_Type type, Evas_Event_Cb func, const void *data);
-        [ :evas_event_callback_del_full, [ :evas_p, :evas_callback_type, :evas_event_cb, :void_p ], :void_p ],
-        # EAPI void evas_post_event_callback_push (Evas *e, Evas_Object_Event_Post_Cb func, const void *data);
-        [ :evas_post_event_callback_push, [ :evas_p, :evas_object_event_post_cb, :void_p ], :void ],
-        # EAPI void evas_post_event_callback_remove (Evas *e, Evas_Object_Event_Post_Cb func);
-        [ :evas_post_event_callback_remove, [ :evas_p, :evas_object_event_post_cb ], :void ],
-        # EAPI void evas_post_event_callback_remove_full (Evas *e, Evas_Object_Event_Post_Cb func, const void *data);
-        [ :evas_post_event_callback_remove_full, [ :evas_p, :evas_object_event_post_cb, :void_p ], :void ],
         # EAPI void evas_image_cache_flush (Evas *e);
         [ :evas_image_cache_flush, [ :evas_p ], :void ],
         # EAPI void evas_image_cache_reload (Evas *e);
@@ -776,6 +776,10 @@ module Efl
         [ :evas_object_image_load_region_set, [ :evas_object_p, :int, :int, :int, :int ], :void ],
         # EAPI void evas_object_image_load_region_get (const Evas_Object *obj, int *x, int *y, int *w, int *h);
         [ :evas_object_image_load_region_get, [ :evas_object_p, :int_p, :int_p, :int_p, :int_p ], :void ],
+        # EAPI void evas_object_image_load_orientation_set (Evas_Object *obj, Eina_Bool enable);
+        [ :evas_object_image_load_orientation_set, [ :evas_object_p, :eina_bool ], :void ],
+        # EAPI Eina_Bool evas_object_image_load_orientation_get (const Evas_Object *obj);
+        [ :evas_object_image_load_orientation_get, [ :evas_object_p ], :eina_bool ],
         # EAPI void evas_object_image_colorspace_set (Evas_Object *obj, Evas_Colorspace cspace);
         [ :evas_object_image_colorspace_set, [ :evas_object_p, :evas_colorspace ], :void ],
         # EAPI Evas_Colorspace evas_object_image_colorspace_get (const Evas_Object *obj);
@@ -1188,6 +1192,8 @@ module Efl
         [ :evas_object_table_mirrored_set, [ :evas_object_p, :eina_bool ], :void ],
         # EAPI Eina_Bool evas_object_table_mirrored_get (const Evas_Object *o);
         [ :evas_object_table_mirrored_get, [ :evas_object_p ], :eina_bool ],
+        # EAPI Eina_Bool evas_object_table_pack_get(Evas_Object *o, Evas_Object *child, unsigned short *col, unsigned short *row, unsigned short *colspan, unsigned short *rowspan);
+        [ :evas_object_table_pack_get, [ :evas_object_p, :evas_object_p, :ushort_p, :ushort_p, :ushort_p, :ushort_p ], :eina_bool ],
         # EAPI Eina_Bool evas_object_table_pack (Evas_Object *o, Evas_Object *child, unsigned short col, unsigned short row, unsigned short colspan, unsigned short rowspan);
         [ :evas_object_table_pack, [ :evas_object_p, :evas_object_p, :ushort, :ushort, :ushort, :ushort ], :eina_bool ],
         # EAPI Eina_Bool evas_object_table_unpack (Evas_Object *o, Evas_Object *child);

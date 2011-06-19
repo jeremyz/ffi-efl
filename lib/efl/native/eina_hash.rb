@@ -48,6 +48,8 @@ module Efl
         fcts = [
         # EAPI Eina_Hash *eina_hash_new(Eina_Key_Length key_length_cb, Eina_Key_Cmp key_cmp_cb, Eina_Key_Hash key_hash_cb, Eina_Free_Cb data_free_cb, int buckets_power_size);
         [ :eina_hash_new, [ :eina_key_length, :eina_key_cmp, :eina_key_hash, :eina_free_cb, :int ], :eina_hash_p ],
+        # EAPI void eina_hash_free_cb_set(Eina_Hash *hash, Eina_Free_Cb data_free_cb);
+        [ :eina_hash_free_cb_set, [ :eina_hash_p, :eina_free_cb ], :void ],
         # EAPI Eina_Hash *eina_hash_string_djb2_new(Eina_Free_Cb data_free_cb);
         [ :eina_hash_string_djb2_new, [ :eina_free_cb ], :eina_hash_p ],
         # EAPI Eina_Hash *eina_hash_string_superfast_new(Eina_Free_Cb data_free_cb);

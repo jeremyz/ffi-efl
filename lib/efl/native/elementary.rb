@@ -1223,6 +1223,10 @@ module Efl
         [ :elm_table_unpack, [ :evas_object_p, :evas_object_p ], :void ],
         # EAPI void elm_table_clear(Evas_Object *obj, Eina_Bool clear);
         [ :elm_table_clear, [ :evas_object_p, :eina_bool ], :void ],
+        # EAPI void elm_table_pack_set(Evas_Object *subobj, int x, int y, int w, int h);
+        [ :elm_table_pack_set, [ :evas_object_p, :int, :int, :int, :int ], :void ],
+        # EAPI void elm_table_pack_get(Evas_Object *subobj, int *x, int *y, int *w, int *h);
+        [ :elm_table_pack_get, [ :evas_object_p, :int_p, :int_p, :int_p, :int_p ], :void ],
         # EAPI Evas_Object *elm_gengrid_add(Evas_Object *parent);
         [ :elm_gengrid_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_gengrid_item_size_set(Evas_Object *obj, Evas_Coord w, Evas_Coord h);
@@ -1471,6 +1475,8 @@ module Efl
         [ :elm_entry_entry_set, [ :evas_object_p, :string ], :void ],
         # EAPI const char *elm_entry_entry_get(const Evas_Object *obj);
         [ :elm_entry_entry_get, [ :evas_object_p ], :string ],
+        # EAPI void elm_entry_entry_append(Evas_Object *obj, const char *entry);
+        [ :elm_entry_entry_append, [ :evas_object_p, :string ], :void ],
         # EAPI Eina_Bool elm_entry_is_empty(const Evas_Object *obj);
         [ :elm_entry_is_empty, [ :evas_object_p ], :eina_bool ],
         # EAPI const char *elm_entry_selection_get(const Evas_Object *obj);
@@ -1561,8 +1567,34 @@ module Efl
         [ :elm_entry_autosave_get, [ :evas_object_p ], :eina_bool ],
         # EAPI void elm_entry_cnp_textonly_set(Evas_Object *obj, Eina_Bool textonly);
         [ :elm_entry_cnp_textonly_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool elm_entry_cnp_textonly_get(Evas_Object *obj);
+        # EAPI Eina_Bool elm_entry_cnp_textonly_get(const Evas_Object *obj);
         [ :elm_entry_cnp_textonly_get, [ :evas_object_p ], :eina_bool ],
+        # EAPI void elm_entry_scrollable_set(Evas_Object *obj, Eina_Bool scroll);
+        [ :elm_entry_scrollable_set, [ :evas_object_p, :eina_bool ], :void ],
+        # EAPI Eina_Bool elm_entry_scrollable_get(const Evas_Object *obj);
+        [ :elm_entry_scrollable_get, [ :evas_object_p ], :eina_bool ],
+        # EAPI void elm_entry_icon_set(Evas_Object *obj, Evas_Object *icon);
+        [ :elm_entry_icon_set, [ :evas_object_p, :evas_object_p ], :void ],
+        # EAPI Evas_Object *elm_entry_icon_get(const Evas_Object *obj);
+        [ :elm_entry_icon_get, [ :evas_object_p ], :evas_object_p ],
+        # EAPI Evas_Object *elm_entry_icon_unset(Evas_Object *obj);
+        [ :elm_entry_icon_unset, [ :evas_object_p ], :evas_object_p ],
+        # EAPI void elm_entry_icon_visible_set(Evas_Object *obj, Eina_Bool setting);
+        [ :elm_entry_icon_visible_set, [ :evas_object_p, :eina_bool ], :void ],
+        # EAPI void elm_entry_end_set(Evas_Object *obj, Evas_Object *end);
+        [ :elm_entry_end_set, [ :evas_object_p, :evas_object_p ], :void ],
+        # EAPI Evas_Object *elm_entry_end_get(const Evas_Object *obj);
+        [ :elm_entry_end_get, [ :evas_object_p ], :evas_object_p ],
+        # EAPI Evas_Object *elm_entry_end_unset(Evas_Object *obj);
+        [ :elm_entry_end_unset, [ :evas_object_p ], :evas_object_p ],
+        # EAPI void elm_entry_end_visible_set(Evas_Object *obj, Eina_Bool setting);
+        [ :elm_entry_end_visible_set, [ :evas_object_p, :eina_bool ], :void ],
+        # EAPI void elm_entry_scrollbar_policy_set(Evas_Object *obj, Elm_Scroller_Policy h, Elm_Scroller_Policy v);
+        [ :elm_entry_scrollbar_policy_set, [ :evas_object_p, :elm_scroller_policy, :elm_scroller_policy ], :void ],
+        # EAPI void elm_entry_bounce_set(Evas_Object *obj, Eina_Bool h_bounce, Eina_Bool v_bounce);
+        [ :elm_entry_bounce_set, [ :evas_object_p, :eina_bool, :eina_bool ], :void ],
+        # EAPI void elm_entry_bounce_get(const Evas_Object *obj, Eina_Bool *h_bounce, Eina_Bool *v_bounce);
+        [ :elm_entry_bounce_get, [ :evas_object_p, :eina_bool_p, :eina_bool_p ], :void ],
         # EAPI void elm_entry_filter_limit_size(void *data, Evas_Object *entry, char **text);
         [ :elm_entry_filter_limit_size, [ :void_p, :evas_object_p, :string_array ], :void ],
         # EAPI void elm_entry_filter_accept_set(void *data, Evas_Object *entry, char **text);
@@ -2776,128 +2808,6 @@ module Efl
         [ :elm_flip_interacton_direction_hitsize_set, [ :evas_object_p, :elm_flip_direction, :double ], :void ],
         # EAPI double elm_flip_interacton_direction_hitsize_get(Evas_Object *obj, Elm_Flip_Direction dir);
         [ :elm_flip_interacton_direction_hitsize_get, [ :evas_object_p, :elm_flip_direction ], :double ],
-        # EAPI Evas_Object *elm_scrolled_entry_add(Evas_Object *parent);
-        [ :elm_scrolled_entry_add, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_scrolled_entry_single_line_set(Evas_Object *obj, Eina_Bool single_line);
-        [ :elm_scrolled_entry_single_line_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool elm_scrolled_entry_single_line_get(const Evas_Object *obj);
-        [ :elm_scrolled_entry_single_line_get, [ :evas_object_p ], :eina_bool ],
-        # EAPI void elm_scrolled_entry_password_set(Evas_Object *obj, Eina_Bool password);
-        [ :elm_scrolled_entry_password_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool elm_scrolled_entry_password_get(const Evas_Object *obj);
-        [ :elm_scrolled_entry_password_get, [ :evas_object_p ], :eina_bool ],
-        # EAPI void elm_scrolled_entry_entry_set(Evas_Object *obj, const char *entry);
-        [ :elm_scrolled_entry_entry_set, [ :evas_object_p, :string ], :void ],
-        # EAPI const char *elm_scrolled_entry_entry_get(const Evas_Object *obj);
-        [ :elm_scrolled_entry_entry_get, [ :evas_object_p ], :string ],
-        # EAPI Eina_Bool elm_scrolled_entry_is_empty(const Evas_Object *obj);
-        [ :elm_scrolled_entry_is_empty, [ :evas_object_p ], :eina_bool ],
-        # EAPI const char *elm_scrolled_entry_selection_get(const Evas_Object *obj);
-        [ :elm_scrolled_entry_selection_get, [ :evas_object_p ], :string ],
-        # EAPI void elm_scrolled_entry_entry_insert(Evas_Object *obj, const char *entry);
-        [ :elm_scrolled_entry_entry_insert, [ :evas_object_p, :string ], :void ],
-        # EAPI void elm_scrolled_entry_line_wrap_set(Evas_Object *obj, Elm_Wrap_Type wrap);
-        [ :elm_scrolled_entry_line_wrap_set, [ :evas_object_p, :elm_wrap_type ], :void ],
-        # EAPI void elm_scrolled_entry_editable_set(Evas_Object *obj, Eina_Bool editable);
-        [ :elm_scrolled_entry_editable_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool elm_scrolled_entry_editable_get(const Evas_Object *obj);
-        [ :elm_scrolled_entry_editable_get, [ :evas_object_p ], :eina_bool ],
-        # EAPI void elm_scrolled_entry_select_none(Evas_Object *obj);
-        [ :elm_scrolled_entry_select_none, [ :evas_object_p ], :void ],
-        # EAPI void elm_scrolled_entry_select_all(Evas_Object *obj);
-        [ :elm_scrolled_entry_select_all, [ :evas_object_p ], :void ],
-        # EAPI Eina_Bool elm_scrolled_entry_cursor_next(Evas_Object *obj);
-        [ :elm_scrolled_entry_cursor_next, [ :evas_object_p ], :eina_bool ],
-        # EAPI Eina_Bool elm_scrolled_entry_cursor_prev(Evas_Object *obj);
-        [ :elm_scrolled_entry_cursor_prev, [ :evas_object_p ], :eina_bool ],
-        # EAPI Eina_Bool elm_scrolled_entry_cursor_up(Evas_Object *obj);
-        [ :elm_scrolled_entry_cursor_up, [ :evas_object_p ], :eina_bool ],
-        # EAPI Eina_Bool elm_scrolled_entry_cursor_down(Evas_Object *obj);
-        [ :elm_scrolled_entry_cursor_down, [ :evas_object_p ], :eina_bool ],
-        # EAPI void elm_scrolled_entry_cursor_begin_set(Evas_Object *obj);
-        [ :elm_scrolled_entry_cursor_begin_set, [ :evas_object_p ], :void ],
-        # EAPI void elm_scrolled_entry_cursor_end_set(Evas_Object *obj);
-        [ :elm_scrolled_entry_cursor_end_set, [ :evas_object_p ], :void ],
-        # EAPI void elm_scrolled_entry_cursor_line_begin_set(Evas_Object *obj);
-        [ :elm_scrolled_entry_cursor_line_begin_set, [ :evas_object_p ], :void ],
-        # EAPI void elm_scrolled_entry_cursor_line_end_set(Evas_Object *obj);
-        [ :elm_scrolled_entry_cursor_line_end_set, [ :evas_object_p ], :void ],
-        # EAPI void elm_scrolled_entry_cursor_selection_begin(Evas_Object *obj);
-        [ :elm_scrolled_entry_cursor_selection_begin, [ :evas_object_p ], :void ],
-        # EAPI void elm_scrolled_entry_cursor_selection_end(Evas_Object *obj);
-        [ :elm_scrolled_entry_cursor_selection_end, [ :evas_object_p ], :void ],
-        # EAPI Eina_Bool elm_scrolled_entry_cursor_is_format_get(const Evas_Object *obj);
-        [ :elm_scrolled_entry_cursor_is_format_get, [ :evas_object_p ], :eina_bool ],
-        # EAPI Eina_Bool elm_scrolled_entry_cursor_is_visible_format_get(const Evas_Object *obj);
-        [ :elm_scrolled_entry_cursor_is_visible_format_get, [ :evas_object_p ], :eina_bool ],
-        # EAPI const char *elm_scrolled_entry_cursor_content_get(const Evas_Object *obj);
-        [ :elm_scrolled_entry_cursor_content_get, [ :evas_object_p ], :string ],
-        # EAPI void elm_scrolled_entry_cursor_pos_set(Evas_Object *obj, int pos);
-        [ :elm_scrolled_entry_cursor_pos_set, [ :evas_object_p, :int ], :void ],
-        # EAPI int elm_scrolled_entry_cursor_pos_get(const Evas_Object *obj);
-        [ :elm_scrolled_entry_cursor_pos_get, [ :evas_object_p ], :int ],
-        # EAPI void elm_scrolled_entry_selection_cut(Evas_Object *obj);
-        [ :elm_scrolled_entry_selection_cut, [ :evas_object_p ], :void ],
-        # EAPI void elm_scrolled_entry_selection_copy(Evas_Object *obj);
-        [ :elm_scrolled_entry_selection_copy, [ :evas_object_p ], :void ],
-        # EAPI void elm_scrolled_entry_selection_paste(Evas_Object *obj);
-        [ :elm_scrolled_entry_selection_paste, [ :evas_object_p ], :void ],
-        # EAPI void elm_scrolled_entry_context_menu_clear(Evas_Object *obj);
-        [ :elm_scrolled_entry_context_menu_clear, [ :evas_object_p ], :void ],
-        # EAPI void elm_scrolled_entry_context_menu_item_add(Evas_Object *obj, const char *label, const char *icon_file, Elm_Icon_Type icon_type, Evas_Smart_Cb func, const void *data);
-        [ :elm_scrolled_entry_context_menu_item_add, [ :evas_object_p, :string, :string, :elm_icon_type, :evas_smart_cb, :void_p ], :void ],
-        # EAPI void elm_scrolled_entry_context_menu_disabled_set(Evas_Object *obj, Eina_Bool disabled);
-        [ :elm_scrolled_entry_context_menu_disabled_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool elm_scrolled_entry_context_menu_disabled_get(const Evas_Object *obj);
-        [ :elm_scrolled_entry_context_menu_disabled_get, [ :evas_object_p ], :eina_bool ],
-        # EAPI void elm_scrolled_entry_scrollbar_policy_set(Evas_Object *obj, Elm_Scroller_Policy h, Elm_Scroller_Policy v);
-        [ :elm_scrolled_entry_scrollbar_policy_set, [ :evas_object_p, :elm_scroller_policy, :elm_scroller_policy ], :void ],
-        # EAPI void elm_scrolled_entry_bounce_set(Evas_Object *obj, Eina_Bool h_bounce, Eina_Bool v_bounce);
-        [ :elm_scrolled_entry_bounce_set, [ :evas_object_p, :eina_bool, :eina_bool ], :void ],
-        # EAPI void elm_scrolled_entry_bounce_get(const Evas_Object *obj, Eina_Bool *h_bounce, Eina_Bool *v_bounce);
-        [ :elm_scrolled_entry_bounce_get, [ :evas_object_p, :eina_bool_p, :eina_bool_p ], :void ],
-        # EAPI void elm_scrolled_entry_icon_set(Evas_Object *obj, Evas_Object *icon);
-        [ :elm_scrolled_entry_icon_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_scrolled_entry_icon_get(const Evas_Object *obj);
-        [ :elm_scrolled_entry_icon_get, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_scrolled_entry_icon_unset(Evas_Object *obj);
-        [ :elm_scrolled_entry_icon_unset, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_scrolled_entry_icon_visible_set(Evas_Object *obj, Eina_Bool setting);
-        [ :elm_scrolled_entry_icon_visible_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI void elm_scrolled_entry_end_set(Evas_Object *obj, Evas_Object *end);
-        [ :elm_scrolled_entry_end_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_scrolled_entry_end_get(const Evas_Object *obj);
-        [ :elm_scrolled_entry_end_get, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_scrolled_entry_end_unset(Evas_Object *obj);
-        [ :elm_scrolled_entry_end_unset, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_scrolled_entry_end_visible_set(Evas_Object *obj, Eina_Bool setting);
-        [ :elm_scrolled_entry_end_visible_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI void elm_scrolled_entry_item_provider_append(Evas_Object *obj, Evas_Object *(*func) (void *data, Evas_Object *entry, const char *item), void *data);
-        # FIXME
-        # EAPI void elm_scrolled_entry_item_provider_prepend(Evas_Object *obj, Evas_Object *(*func) (void *data, Evas_Object *entry, const char *item), void *data);
-        # FIXME
-        # EAPI void elm_scrolled_entry_item_provider_remove(Evas_Object *obj, Evas_Object *(*func) (void *data, Evas_Object *entry, const char *item), void *data);
-        # FIXME
-        # EAPI void elm_scrolled_entry_text_filter_append(Evas_Object *obj, void (*func) (void *data, Evas_Object *entry, char **text), void *data);
-        # FIXME
-        # EAPI void elm_scrolled_entry_text_filter_prepend(Evas_Object *obj, void (*func) (void *data, Evas_Object *entry, char **text), void *data);
-        # FIXME
-        # EAPI void elm_scrolled_entry_text_filter_remove(Evas_Object *obj, void (*func) (void *data, Evas_Object *entry, char **text), void *data);
-        # FIXME
-        # EAPI void elm_scrolled_entry_file_set(Evas_Object *obj, const char *file, Elm_Text_Format format);
-        [ :elm_scrolled_entry_file_set, [ :evas_object_p, :string, :elm_text_format ], :void ],
-        # EAPI void elm_scrolled_entry_file_get(const Evas_Object *obj, const char **file, Elm_Text_Format *format);
-        [ :elm_scrolled_entry_file_get, [ :evas_object_p, :string_array, :elm_text_format_p ], :void ],
-        # EAPI void elm_scrolled_entry_file_save(Evas_Object *obj);
-        [ :elm_scrolled_entry_file_save, [ :evas_object_p ], :void ],
-        # EAPI void elm_scrolled_entry_autosave_set(Evas_Object *obj, Eina_Bool autosave);
-        [ :elm_scrolled_entry_autosave_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool elm_scrolled_entry_autosave_get(const Evas_Object *obj);
-        [ :elm_scrolled_entry_autosave_get, [ :evas_object_p ], :eina_bool ],
-        # EAPI void elm_scrolled_entry_cnp_textonly_set(Evas_Object *obj, Eina_Bool textonly);
-        [ :elm_scrolled_entry_cnp_textonly_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool elm_scrolled_entry_cnp_textonly_get(Evas_Object *obj);
-        [ :elm_scrolled_entry_cnp_textonly_get, [ :evas_object_p ], :eina_bool ],
         # EAPI Evas_Object *elm_conformant_add(Evas_Object *parent);
         [ :elm_conformant_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_conformant_content_set(Evas_Object *obj, Evas_Object *content);
