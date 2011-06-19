@@ -59,8 +59,10 @@ describe Efl::EcoreGetopt do
     end
     #
     describe "license copyright version help" do
-        it "DEBUG" do
-            puts @p.debug
+        if ENV['DEBUG']
+            it "DEBUG" do
+                puts @p.debug
+            end
         end
         it "should handle -L" do
             args = @p.parse ["My lovely prog name","-L"]
