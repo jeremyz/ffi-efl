@@ -8,7 +8,7 @@ namespace :doc do
         rdoc = PROJ.rdoc
         rd.main = rdoc.main
         rd.rdoc_dir = rdoc.dir
-        
+
         incl = Regexp.new(rdoc.include.join('|'))
         excl = Regexp.new(rdoc.exclude.join('|'))
         files = PROJ.gem.files.find_all do |fn|
@@ -24,12 +24,12 @@ namespace :doc do
         rd.options << "-t #{title}"
         rd.options.concat(rdoc.opts)
     end
-    
+
     desc 'Generate ri locally for testing'
     task :ri => :clobber_ri do
         sh "#{RDOC} --ri -o ri ."
     end
-    
+
     task :clobber_ri do
         rm_r 'ri' rescue nil
     end

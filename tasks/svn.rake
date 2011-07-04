@@ -35,7 +35,7 @@ namespace :svn do
 
         puts "Creating SVN tag '#{tag}'"
         unless system "svn cp -m '#{msg}' #{trunk} #{tag}"
-            abort "Tag creation failed" 
+            abort "Tag creation failed"
         end
     end
 

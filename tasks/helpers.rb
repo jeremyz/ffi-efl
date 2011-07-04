@@ -89,7 +89,7 @@ end
 #    files = []
 #    exclude = PROJ.exclude.dup
 #    comment = %r/^\s*#/
-# 
+#
 #    # process the ignore file and add the items there to the exclude list
 #    if test(?f, PROJ.ignore_file)
 #        ary = []
