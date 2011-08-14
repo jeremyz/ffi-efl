@@ -46,6 +46,8 @@ module Efl
         [ :eina_threads_init, [  ], :int ],
         # EAPI int eina_threads_shutdown(void);
         [ :eina_threads_shutdown, [  ], :int ],
+        # EAPI Eina_Bool eina_main_loop_is(void);
+        [ :eina_main_loop_is, [  ], :eina_bool ],
         ]
         #
         attach_fcts fcts

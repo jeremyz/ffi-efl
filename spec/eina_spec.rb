@@ -17,6 +17,13 @@ describe "Efl::Eina #{Efl::Eina.version.full}" do
         Efl::Eina.init.should == @i+3
     end
     #
+    it "should be main thread" do
+        Efl::Eina.main_loop_is.should be_true
+        Thread.new do
+            Efl::Eina.main_loop_is.should be_false
+        end.join
+    end
+    #
     it "should shutdown" do
         Efl::Eina.shutdown.should == @i+2
         Efl::Eina.shutdown.should == @i+1
