@@ -162,6 +162,8 @@ module Efl
         [ :eet_delete, [ :eet_file_p, :string ], :int ],
         # EAPI Eina_Bool eet_alias(Eet_File *ef, const char *name, const char *destination, int compress);
         [ :eet_alias, [ :eet_file_p, :string, :string, :int ], :eina_bool ],
+        # EAPI const char * eet_alias_get(Eet_File *ef, const char *name);
+        [ :eet_alias_get, [ :eet_file_p, :string ], :string ],
         # EAPI char ** eet_list(Eet_File *ef, const char *glob, int *count_ret);
         [ :eet_list, [ :eet_file_p, :string, :int_p ], :string_array ],
         # EAPI int eet_num_entries(Eet_File *ef);
@@ -300,6 +302,12 @@ module Efl
         [ :eet_node_struct_new, [ :string, :eina_list_p ], :eet_node_p ],
         # EAPI Eet_Node * eet_node_struct_child_new(const char *parent, Eet_Node *child);
         [ :eet_node_struct_child_new, [ :string, :eet_node_p ], :eet_node_p ],
+        # EAPI Eet_Node * eet_node_children_get(Eet_Node *node);
+        [ :eet_node_children_get, [ :eet_node_p ], :eet_node_p ],
+        # EAPI Eet_Node * eet_node_next_get(Eet_Node *node);
+        [ :eet_node_next_get, [ :eet_node_p ], :eet_node_p ],
+        # EAPI Eet_Node * eet_node_parent_get(Eet_Node *node);
+        [ :eet_node_parent_get, [ :eet_node_p ], :eet_node_p ],
         # EAPI void eet_node_list_append(Eet_Node *parent, const char *name, Eet_Node *child);
         [ :eet_node_list_append, [ :eet_node_p, :string, :eet_node_p ], :void ],
         # EAPI void eet_node_struct_append(Eet_Node *parent, const char *name, Eet_Node *child);
@@ -308,6 +316,10 @@ module Efl
         [ :eet_node_hash_add, [ :eet_node_p, :string, :string, :eet_node_p ], :void ],
         # EAPI void eet_node_dump(Eet_Node *n, int dumplevel, Eet_Dump_Callback dumpfunc, void *dumpdata);
         [ :eet_node_dump, [ :eet_node_p, :int, :eet_dump_callback, :void_p ], :void ],
+        # EAPI int eet_node_type_get(Eet_Node *node);
+        [ :eet_node_type_get, [ :eet_node_p ], :int ],
+        # EAPI Eet_Node_Data * eet_node_value_get(Eet_Node *node);
+        [ :eet_node_value_get, [ :eet_node_p ], :eet_node_data_p ],
         # EAPI void eet_node_del(Eet_Node *n);
         [ :eet_node_del, [ :eet_node_p ], :void ],
         # EAPI void * eet_data_node_encode_cipher(Eet_Node *node, const char *cipher_key, int *size_ret);
