@@ -109,7 +109,7 @@ TYPES_USAGE = {}
 #
 def set_type t, v, cb=false
     return 'bool' if t =~/Eina_Bool/
-    v = v.downcase.gsub(/(const|enum|union)/,'').strip
+    v = v.downcase.gsub(/(const|struct|enum|union)/,'').strip
     if not TYPES[t].nil?
         puts "type already exists >#{t}< #{v}"
         exit 1
@@ -128,7 +128,7 @@ def set_type t, v, cb=false
 end
 #
 def get_type t
-    k = t.gsub(/(const|enum|union)/, '').strip
+    k = t.gsub(/(const|struct|enum|union)/, '').strip
     k.sub!(/\*/,' *') if k=~/\w+\*/
     r = TYPES[k]
     if r.nil?
