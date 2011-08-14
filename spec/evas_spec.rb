@@ -632,7 +632,7 @@ describe "Efl::Evas #{Efl::Evas.version.full}" do
             @t.horiz_advance_get.should > 0
             @t.vert_advance_get.should > 0
             @t.inset_get.should > 0
-            @t.direction_get.should == :evas_bidi_direction_ltr
+            @t.direction_get.should == :evas_bidi_direction_neutral
             @t.style_pad_get.length.should == 4
             @t.ascent.should > 0
             @t.descent.should > 0
@@ -641,7 +641,7 @@ describe "Efl::Evas #{Efl::Evas.version.full}" do
             @t.horiz_advance.should > 0
             @t.vert_advance.should > 0
             @t.inset.should > 0
-            @t.direction.should == :evas_bidi_direction_ltr
+            @t.direction.should == :evas_bidi_direction_neutral
             @t.style_pad.length.should == 4
         end
         #

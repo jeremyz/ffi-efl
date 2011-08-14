@@ -25,7 +25,7 @@ module Efl
         #
         # ENUMS
         # typedef enum _Evas_BiDi_Direction {...} Evas_BiDi_Direction;
-        enum :evas_bidi_direction, [ :evas_bidi_direction_natural, :evas_bidi_direction_ltr, :evas_bidi_direction_rtl ]
+        enum :evas_bidi_direction, [ :evas_bidi_direction_natural, :evas_bidi_direction_neutral, :evas_bidi_direction_ltr, :evas_bidi_direction_rtl ]
         typedef :pointer, :evas_bidi_direction_p
         # typedef enum _Evas_Callback_Type {...} Evas_Callback_Type;
         enum :evas_callback_type, [ :evas_callback_mouse_in, :evas_callback_mouse_out, :evas_callback_mouse_down, :evas_callback_mouse_up, :evas_callback_mouse_move,
@@ -42,7 +42,7 @@ module Efl
         enum :evas_font_hinting_flags, [ :evas_font_hinting_none, :evas_font_hinting_auto, :evas_font_hinting_bytecode ]
         # typedef enum _Evas_Colorspace {...} Evas_Colorspace;
         enum :evas_colorspace, [ :evas_colorspace_argb8888, :evas_colorspace_ycbcr422p601_pl, :evas_colorspace_ycbcr422p709_pl, :evas_colorspace_rgb565_a5p,
-            :evas_colorspace_gry8 ]
+            :evas_colorspace_gry8, :evas_colorspace_ycbcr422601_pl ]
         # typedef enum _Evas_Object_Table_Homogeneous_Mode {...} Evas_Object_Table_Homogeneous_Mode;
         enum :evas_object_table_homogeneous_mode, [ :evas_object_table_homogeneous_none, 0, :evas_object_table_homogeneous_table, 1, :evas_object_table_homogeneous_item,
             2 ]
@@ -69,6 +69,8 @@ module Efl
         enum :evas_border_fill_mode, [ :evas_border_fill_none, 0, :evas_border_fill_default, 1, :evas_border_fill_solid, 2 ]
         # typedef enum _Evas_Image_Scale_Hint {...} Evas_Image_Scale_Hint;
         enum :evas_image_scale_hint, [ :evas_image_scale_hint_none, 0, :evas_image_scale_hint_dynamic, 1, :evas_image_scale_hint_static, 2 ]
+        # typedef enum _Evas_Image_Animated_Loop_Hint {...} Evas_Image_Animated_Loop_Hint;
+        enum :evas_image_animated_loop_hint, [ :evas_image_animated_hint_none, 0, :evas_image_animated_hint_loop, 1, :evas_image_animated_hint_pingpong, 2 ]
         # typedef enum _Evas_Engine_Render_Mode {...} Evas_Engine_Render_Mode;
         enum :evas_engine_render_mode, [ :evas_render_mode_blocking, 0, :evas_render_mode_nonblocking, 1 ]
         # typedef enum _Evas_Image_Content_Hint {...} Evas_Image_Content_Hint;
@@ -392,6 +394,8 @@ module Efl
         [ :evas_event_feed_key_up, [ :evas_p, :string, :string, :string, :string, :uint, :void_p ], :void ],
         # EAPI void evas_event_feed_hold (Evas *e, int hold, unsigned int timestamp, const void *data);
         [ :evas_event_feed_hold, [ :evas_p, :int, :uint, :void_p ], :void ],
+        # EAPI void evas_event_refeed_event (Evas *e, void *event_copy, Evas_Callback_Type event_type);;
+        [ :evas_event_refeed_event, [ :evas_p, :void_p, :evas_callback_type ], :void ],
         # EAPI void evas_image_cache_flush (Evas *e);
         [ :evas_image_cache_flush, [ :evas_p ], :void ],
         # EAPI void evas_image_cache_reload (Evas *e);
@@ -730,10 +734,10 @@ module Efl
         [ :evas_object_image_load_error_get, [ :evas_object_p ], :evas_load_error ],
         # EAPI void evas_object_image_data_set (Evas_Object *obj, void *data);
         [ :evas_object_image_data_set, [ :evas_object_p, :void_p ], :void ],
-        # EAPI void *evas_object_image_data_convert (Evas_Object *obj, Evas_Colorspace to_cspace);
-        [ :evas_object_image_data_convert, [ :evas_object_p, :evas_colorspace ], :void_p ],
         # EAPI void *evas_object_image_data_get (const Evas_Object *obj, Eina_Bool for_writing);
         [ :evas_object_image_data_get, [ :evas_object_p, :eina_bool ], :void_p ],
+        # EAPI void *evas_object_image_data_convert (Evas_Object *obj, Evas_Colorspace to_cspace);
+        [ :evas_object_image_data_convert, [ :evas_object_p, :evas_colorspace ], :void_p ],
         # EAPI void evas_object_image_data_copy_set (Evas_Object *obj, void *data);
         [ :evas_object_image_data_copy_set, [ :evas_object_p, :void_p ], :void ],
         # EAPI void evas_object_image_data_update_add (Evas_Object *obj, int x, int y, int w, int h);
@@ -808,6 +812,18 @@ module Efl
         [ :evas_object_image_extension_can_load_get, [ :string ], :eina_bool ],
         # EAPI Eina_Bool evas_object_image_extension_can_load_fast_get(const char *file);
         [ :evas_object_image_extension_can_load_fast_get, [ :string ], :eina_bool ],
+        # EAPI Eina_Bool evas_object_image_animated_get(const Evas_Object *obj);
+        [ :evas_object_image_animated_get, [ :evas_object_p ], :eina_bool ],
+        # EAPI int evas_object_image_animated_frame_count_get(const Evas_Object *obj);
+        [ :evas_object_image_animated_frame_count_get, [ :evas_object_p ], :int ],
+        # EAPI Evas_Image_Animated_Loop_Hint evas_object_image_animated_loop_type_get(const Evas_Object *obj);
+        [ :evas_object_image_animated_loop_type_get, [ :evas_object_p ], :evas_image_animated_loop_hint ],
+        # EAPI int evas_object_image_animated_loop_count_get(const Evas_Object *obj);
+        [ :evas_object_image_animated_loop_count_get, [ :evas_object_p ], :int ],
+        # EAPI double evas_object_image_animated_frame_duration_get(const Evas_Object *obj, int start_frame, int fram_num);
+        [ :evas_object_image_animated_frame_duration_get, [ :evas_object_p, :int, :int ], :double ],
+        # EAPI void evas_object_image_animated_frame_set(Evas_Object *obj, int frame_num);
+        [ :evas_object_image_animated_frame_set, [ :evas_object_p, :int ], :void ],
         # EAPI Evas_Object *evas_object_text_add (Evas *e);
         [ :evas_object_text_add, [ :evas_p ], :evas_object_p ],
         # EAPI void evas_object_text_font_source_set (Evas_Object *obj, const char *font);
@@ -820,12 +836,12 @@ module Efl
         [ :evas_object_text_font_get, [ :evas_object_p, :string_array, :int_p ], :void ],
         # EAPI void evas_object_text_text_set (Evas_Object *obj, const char *text);
         [ :evas_object_text_text_set, [ :evas_object_p, :string ], :void ],
+        # EAPI const char *evas_object_text_text_get (const Evas_Object *obj);
+        [ :evas_object_text_text_get, [ :evas_object_p ], :string ],
         # EAPI void evas_object_text_bidi_delimiters_set(Evas_Object *obj, const char *delim);
         [ :evas_object_text_bidi_delimiters_set, [ :evas_object_p, :string ], :void ],
         # EAPI const char *evas_object_text_bidi_delimiters_get(const Evas_Object *obj);
         [ :evas_object_text_bidi_delimiters_get, [ :evas_object_p ], :string ],
-        # EAPI const char *evas_object_text_text_get (const Evas_Object *obj);
-        [ :evas_object_text_text_get, [ :evas_object_p ], :string ],
         # EAPI Evas_Coord evas_object_text_ascent_get (const Evas_Object *obj);
         [ :evas_object_text_ascent_get, [ :evas_object_p ], :int ],
         # EAPI Evas_Coord evas_object_text_descent_get (const Evas_Object *obj);
@@ -902,19 +918,19 @@ module Efl
         [ :evas_object_textblock_bidi_delimiters_set, [ :evas_object_p, :string ], :void ],
         # EAPI const char *evas_object_textblock_bidi_delimiters_get(const Evas_Object *obj);
         [ :evas_object_textblock_bidi_delimiters_get, [ :evas_object_p ], :string ],
-        # EAPI void evas_object_textblock_newline_mode_set(Evas_Object *obj, Eina_Bool mode);
-        [ :evas_object_textblock_newline_mode_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool evas_object_textblock_newline_mode_get(const Evas_Object *obj);
-        [ :evas_object_textblock_newline_mode_get, [ :evas_object_p ], :eina_bool ],
+        # EAPI void evas_object_textblock_legacy_newline_set(Evas_Object *obj, Eina_Bool mode);
+        [ :evas_object_textblock_legacy_newline_set, [ :evas_object_p, :eina_bool ], :void ],
+        # EAPI Eina_Bool evas_object_textblock_legacy_newline_get(const Evas_Object *obj);
+        [ :evas_object_textblock_legacy_newline_get, [ :evas_object_p ], :eina_bool ],
         # EAPI void evas_object_textblock_text_markup_set(Evas_Object *obj, const char *text);
         [ :evas_object_textblock_text_markup_set, [ :evas_object_p, :string ], :void ],
         # EAPI void evas_object_textblock_text_markup_prepend(Evas_Textblock_Cursor *cur, const char *text);
         [ :evas_object_textblock_text_markup_prepend, [ :evas_textblock_cursor_p, :string ], :void ],
         # EAPI const char *evas_object_textblock_text_markup_get(const Evas_Object *obj);
         [ :evas_object_textblock_text_markup_get, [ :evas_object_p ], :string ],
-        # EAPI const Evas_Textblock_Cursor *evas_object_textblock_cursor_get(const Evas_Object *obj);
+        # EAPI Evas_Textblock_Cursor *evas_object_textblock_cursor_get(const Evas_Object *obj);
         [ :evas_object_textblock_cursor_get, [ :evas_object_p ], :evas_textblock_cursor_p ],
-        # EAPI Evas_Textblock_Cursor *evas_object_textblock_cursor_new(Evas_Object *obj);
+        # EAPI Evas_Textblock_Cursor *evas_object_textblock_cursor_new(const Evas_Object *obj);
         [ :evas_object_textblock_cursor_new, [ :evas_object_p ], :evas_textblock_cursor_p ],
         # EAPI void evas_textblock_cursor_free(Evas_Textblock_Cursor *cur);
         [ :evas_textblock_cursor_free, [ :evas_textblock_cursor_p ], :void ],
@@ -938,11 +954,9 @@ module Efl
         [ :evas_textblock_node_format_prev_get, [ :evas_object_textblock_node_format_p ], :evas_object_textblock_node_format_p ],
         # EAPI void evas_textblock_node_format_remove_pair(Evas_Object *obj, Evas_Object_Textblock_Node_Format *n);
         [ :evas_textblock_node_format_remove_pair, [ :evas_object_p, :evas_object_textblock_node_format_p ], :void ],
-        # EAPI void evas_textblock_cursor_set_at_format(Evas_Textblock_Cursor *cur, const Evas_Object_Textblock_Node_Format *n);
-        [ :evas_textblock_cursor_set_at_format, [ :evas_textblock_cursor_p, :evas_object_textblock_node_format_p ], :void ],
         # EAPI const Evas_Object_Textblock_Node_Format *evas_textblock_cursor_format_get(const Evas_Textblock_Cursor *cur);
         [ :evas_textblock_cursor_format_get, [ :evas_textblock_cursor_p ], :evas_object_textblock_node_format_p ],
-        # EAPI const char *evas_textblock_node_format_text_get(const Evas_Object_Textblock_Node_Format *cur);
+        # EAPI const char *evas_textblock_node_format_text_get(const Evas_Object_Textblock_Node_Format *fnode);
         [ :evas_textblock_node_format_text_get, [ :evas_object_textblock_node_format_p ], :string ],
         # EAPI void evas_textblock_cursor_at_format_set(Evas_Textblock_Cursor *cur, const Evas_Object_Textblock_Node_Format *fmt);
         [ :evas_textblock_cursor_at_format_set, [ :evas_textblock_cursor_p, :evas_object_textblock_node_format_p ], :void ],
@@ -992,6 +1006,8 @@ module Efl
         [ :evas_textblock_cursor_paragraph_text_get, [ :evas_textblock_cursor_p ], :string ],
         # EAPI int evas_textblock_cursor_paragraph_text_length_get(const Evas_Textblock_Cursor *cur);
         [ :evas_textblock_cursor_paragraph_text_length_get, [ :evas_textblock_cursor_p ], :int ],
+        # EAPI Eina_List * evas_textblock_cursor_range_formats_get(const Evas_Textblock_Cursor *cur1, const Evas_Textblock_Cursor *cur2);
+        [ :evas_textblock_cursor_range_formats_get, [ :evas_textblock_cursor_p, :evas_textblock_cursor_p ], :eina_list_p ],
         # EAPI char *evas_textblock_cursor_range_text_get(const Evas_Textblock_Cursor *cur1, const Evas_Textblock_Cursor *cur2, Evas_Textblock_Text_Type format);
         [ :evas_textblock_cursor_range_text_get, [ :evas_textblock_cursor_p, :evas_textblock_cursor_p, :evas_textblock_text_type ], :string ],
         # EAPI char *evas_textblock_cursor_content_get(const Evas_Textblock_Cursor *cur);
@@ -1058,14 +1074,14 @@ module Efl
         [ :evas_object_smart_member_add, [ :evas_object_p, :evas_object_p ], :void ],
         # EAPI void evas_object_smart_member_del (Evas_Object *obj);
         [ :evas_object_smart_member_del, [ :evas_object_p ], :void ],
+        # EAPI Eina_List *evas_object_smart_members_get (const Evas_Object *obj);
+        [ :evas_object_smart_members_get, [ :evas_object_p ], :eina_list_p ],
         # EAPI Evas_Object *evas_object_smart_parent_get (const Evas_Object *obj);
         [ :evas_object_smart_parent_get, [ :evas_object_p ], :evas_object_p ],
         # EAPI Eina_Bool evas_object_smart_type_check (const Evas_Object *obj, const char *type);
         [ :evas_object_smart_type_check, [ :evas_object_p, :string ], :eina_bool ],
         # EAPI Eina_Bool evas_object_smart_type_check_ptr (const Evas_Object *obj, const char *type);
         [ :evas_object_smart_type_check_ptr, [ :evas_object_p, :string ], :eina_bool ],
-        # EAPI Eina_List *evas_object_smart_members_get (const Evas_Object *obj);
-        [ :evas_object_smart_members_get, [ :evas_object_p ], :eina_list_p ],
         # EAPI Evas_Smart *evas_object_smart_smart_get (const Evas_Object *obj);
         [ :evas_object_smart_smart_get, [ :evas_object_p ], :evas_smart_p ],
         # EAPI void *evas_object_smart_data_get (const Evas_Object *obj);
@@ -1094,14 +1110,14 @@ module Efl
         [ :evas_object_smart_calculate, [ :evas_object_p ], :void ],
         # EAPI void evas_smart_objects_calculate (Evas *e);
         [ :evas_smart_objects_calculate, [ :evas_p ], :void ],
+        # EAPI void evas_object_smart_move_children_relative(Evas_Object *obj, Evas_Coord dx, Evas_Coord dy);
+        [ :evas_object_smart_move_children_relative, [ :evas_object_p, :int, :int ], :void ],
         # EAPI Evas_Object *evas_object_smart_clipped_clipper_get (Evas_Object *obj);
         [ :evas_object_smart_clipped_clipper_get, [ :evas_object_p ], :evas_object_p ],
         # EAPI void evas_object_smart_clipped_smart_set (Evas_Smart_Class *sc);
         [ :evas_object_smart_clipped_smart_set, [ :evas_smart_class_p ], :void ],
         # EAPI const Evas_Smart_Class *evas_object_smart_clipped_class_get (void);
         [ :evas_object_smart_clipped_class_get, [  ], :evas_smart_class_p ],
-        # EAPI void evas_object_smart_move_children_relative(Evas_Object *obj, Evas_Coord dx, Evas_Coord dy);
-        [ :evas_object_smart_move_children_relative, [ :evas_object_p, :int, :int ], :void ],
         # EAPI void evas_object_box_smart_set (Evas_Object_Box_Api *api);
         [ :evas_object_box_smart_set, [ :evas_object_box_api_p ], :void ],
         # EAPI const Evas_Object_Box_Api *evas_object_box_smart_class_get (void);
