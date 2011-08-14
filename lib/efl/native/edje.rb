@@ -152,6 +152,10 @@ module Efl
         [ :edje_scale_set, [ :double ], :void ],
         # EAPI double edje_scale_get (void);
         [ :edje_scale_get, [  ], :double ],
+        # EAPI void edje_password_show_last_set(Eina_Bool password_show_last);
+        [ :edje_password_show_last_set, [ :eina_bool ], :void ],
+        # EAPI void edje_password_show_last_timeout_set(double password_show_last_timeout);
+        [ :edje_password_show_last_timeout_set, [ :double ], :void ],
         # EAPI Eina_Bool edje_object_scale_set (Evas_Object *obj, double scale);
         [ :edje_object_scale_set, [ :evas_object_p, :double ], :eina_bool ],
         # EAPI double edje_object_scale_get (const Evas_Object *obj);
