@@ -91,6 +91,7 @@ module Efl
         class REcoreGetopt
             #
             def initialize desc
+                @pts = []
                 @ecore_getopt_st = nil
                 @ecore_values_st = nil
                 @desc = desc
@@ -116,11 +117,14 @@ module Efl
                     :choice => [ :pointer, nil, :ptrp ]
                 }
             end
-            def p_from_string r
+            def want_p r
+                return r if r.is_a? FFI::Pointer
                 return FFI::Pointer::NULL if r.nil?
-                FFI::MemoryPointer.from_string r
+                p = FFI::MemoryPointer.from_string r
+                @pts << p
+                p
             end
-            private :p_from_string
+            private :want_p
             def set_option o
                 @options.insert -2, o
             end
@@ -148,6 +152,7 @@ module Efl
                         p.send 'write_'+ptype.to_s, val unless val.nil?
                         r = @values[skey] = [ ptype, p ]
                     end
+                    @pts << p
                 end
                 @values_order.insert -2, skey
                 r
@@ -166,7 +171,7 @@ module Efl
                     p = ptr.read_pointer
                     (p==FFI::Pointer::NULL ? nil : p.read_string )
                 when :pointer
-                    ptr
+                    ptr.to_ptr
                 else
                     ptr.send 'read_'+ptype.to_s
                 end
@@ -187,9 +192,9 @@ module Efl
                         break
                     end
                     d[:shortname] = o[0].to_s.bytes.first
-                    d[:longname] = p_from_string o[1]
-                    d[:help] = p_from_string o[2]
-                    d[:metavar] = o[3]
+                    d[:longname] = want_p o[1]
+                    d[:help] = want_p o[2]
+                    d[:metavar] = want_p o[3]
                     d[:action] = o[4]
                     k, v = o[5]
                     case k
@@ -205,7 +210,7 @@ module Efl
                         st = d[:action_param][:store]
                         st[:type] = v[0]
                         st[:arg_req] = v[1]
-                        st[:def][v[2]] = (v[2]==:strv ?  p_from_string(v[3]) : v[3] ) unless v[3].nil?
+                        st[:def][v[2]] = (v[2]==:strv ?  want_p(v[3]) : v[3] ) unless v[3].nil?
                     when :store_const
                         d[:action_param][:store_const] = v
                     when :choices
@@ -228,7 +233,7 @@ module Efl
             def parse argv
                 ptr = FFI::MemoryPointer.new(:pointer, argv.length+1)
                 argv.each_with_index do |s, i|
-                    ptr[i].put_pointer 0, p_from_string(s)
+                    ptr[i].put_pointer 0, want_p(s)
                 end
                 ptr[argv.length].put_pointer 0, FFI::Pointer::NULL
                 Native.ecore_getopt_parse @ecore_getopt_st, @ecore_values_st, argv.length, ptr
@@ -283,10 +288,14 @@ module Efl
                 if def_val.nil?
                     p = FFI::Pointer::NULL
                 else
-                    require 'efl/eina_list'
-                    p = Efl::EinaList::REinaList.from_a def_val, sub_type
+                    p = def_val.inject(FFI::Pointer::NULL) { |list,e|
+                        ptr = FFI::MemoryPointer.new sub_type
+                        @pts << ptr
+                        ptr.send 'write_'+sub_type.to_s, e
+                        Native.eina_list_append list, ptr
+                    }
                 end
-                set_value short, :list, [p,sub_type]
+                set_value short, :list, [want_p(p),sub_type]
                 set_option [ short, long, help, meta, :ecore_getopt_action_append, [:append,@types[sub_type][0]] ]
             end
             def append short, long, help, sub_type, def_val=nil
@@ -294,8 +303,9 @@ module Efl
             end
             def choice_meta short, long, help, meta, choices
                 p = FFI::MemoryPointer.new(:pointer, choices.length+1)
+                @pts << p
                 choices.each_with_index do |s, i|
-                        p[i].put_pointer 0, p_from_string(s)
+                        p[i].put_pointer 0, want_p(s)
                 end
                 p[choices.length].put_pointer 0, FFI::Pointer::NULL
                 set_value short, :choice
@@ -307,7 +317,7 @@ module Efl
             def callback_full short, long, help, meta, cb, data, arg_req, type, def_val
                 pt, ptr = set_value short, type, def_val
                 arg_req = ( arg_req ? :ecore_getopt_desc_arg_requirement_yes : :ecore_getopt_desc_arg_requirement_no )
-                set_option [ short, long, help, meta, :ecore_getopt_action_callback, [:callback, [cb, data, arg_req, ptr ] ] ]
+                set_option [ short, long, help, meta, :ecore_getopt_action_callback, [:callback, [cb, want_p(data), arg_req, ptr ] ] ]
             end
             def callback_noargs short, long, help, cb, data=nil
                 callback_full short, long, help, FFI::Pointer::NULL, cb, data, false, :uchar, 0

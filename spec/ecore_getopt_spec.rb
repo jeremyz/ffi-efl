@@ -14,8 +14,8 @@ describe Efl::EcoreGetopt do
     }
     before(:all) {
         Efl::Ecore.init
-        #
     }
+    #
     before(:each) do
         #
         @p = Efl::EcoreGetopt::REcoreGetopt.new :prog =>"Prog", :usage => "Usage", :version => "0.0.0", :copyright => "less", :license => "MIT", :description => "description", :strict => 1
@@ -25,14 +25,10 @@ describe Efl::EcoreGetopt do
             Efl::Native::EcoreGetoptDesc.new(desc)[:shortname].chr.should == 'b'
             string.should == "user_arg"
             data.read_string.should == "cb_data"
-            storage.read_pointer.read_int == 69
+            storage.read_pointer.read_int.should == 69
             storage.read_pointer.write_int 666
             true
         end
-        #
-        @meta1 = FFI::MemoryPointer.from_string "My pretty meta"
-        @meta2 = FFI::MemoryPointer.from_string "My precious meta"
-        @cb_data = FFI::MemoryPointer.from_string "cb_data"
         @g = Efl::Native::EinaRectangleStruct.new
         @g[:x] = 100; @g[:y] = 200; @g[:w] = 300; @g[:h] = 400
         #
@@ -42,18 +38,20 @@ describe Efl::EcoreGetopt do
         @p.version 'V', 'version'
         @p.help 'H', 'help'
         @p.store 'i', 'int', 'store an integer', :int, 2
-        @p.store_meta 'd', 'double', 'store an double+meta', @meta1, :double, 3.1415926
+        @p.store_meta 'd', 'double', 'store an double+meta', "My pretty meta", :double, 3.1415926
         @p.store_def 's', 'string', 'store an string+default', :string, "default"
-        @p.store_full 'l', 'long', 'store a long+full', @meta2, :ecore_getopt_desc_arg_requirement_yes, :long, 666
+        @p.store_full 'l', 'long', 'store a long+full', "My precious meta", :ecore_getopt_desc_arg_requirement_yes, :long, 666
         @p.store_const 'c', 'const', 'store a constant', -666, 123456
         @p.store_true 't', 'true', 'store true'
         @p.store_false 'f', 'false', 'store false'
         @p.count 'k', 'count', 'store count', 664
         @p.append 'a', 'append', 'store append', :int, [1,2,3]
         @p.choice 'm', 'many', 'store choice', ['ch1','ch2','ch3']
-        @p.callback_noargs 'E', 'list-engines', 'list ecore-evas available engines', Efl::Native.method(:ecore_getopt_callback_ecore_evas_list_engines)
-        @p.callback_args 'g', 'geometry', 'x:y:w:h', FFI::MemoryPointer.from_string("X:Y:W:H"), Efl::Native.method(:ecore_getopt_callback_geometry_parse), nil, :pointer, @g.to_ptr
-        @p.callback_args 'b', 'callback', 'callback full', @meta1, @callback, @cb_data, :int, 69
+        @p.callback_args 'b', 'callback', 'callback full', "Another meta", @callback, "cb_data", :int, 69
+        @p.callback_noargs 'E', 'list-engines', 'list ecore-evas available engines',
+            Efl::Native.method(:ecore_getopt_callback_ecore_evas_list_engines)
+        @p.callback_args 'g', 'geometry', 'x:y:w:h', "X:Y:W:H",
+            Efl::Native.method(:ecore_getopt_callback_geometry_parse), nil, :pointer, @g
         @p.create
         #
     end
@@ -148,14 +146,14 @@ describe Efl::EcoreGetopt do
             args = @p.parse ["progname","-mch2"]
             @p['m'].should == "ch2"
         end
-        it "should handle -E" do
-            args = @p.parse ["My lovely prog name","-E"]
-            @p['E'].should == 1
-        end
         it "should handle -b" do
             @p['b'].should == 69
             args = @p.parse ["progname","-buser_arg"]
             @p['b'].should == 666
+        end
+        it "should handle -E" do
+            args = @p.parse ["My lovely prog name","-E"]
+            @p['E'].should == 1
         end
         it "should handle -g" do
             g = Efl::Native::EinaRectangleStruct.new @p['g']
@@ -212,7 +210,7 @@ describe Efl::EcoreGetopt do
             args = @p.parse ["progname","--count","--count"]
             @p['k'].should == 666
         end
-        it "should handle -a" do
+        it "should handle --append" do
             @p['a'].should == [1,2,3]
             args = @p.parse ["progname","--append=10", "--append=20"]
             @p['a'].should == [1,2,3,10,20]
@@ -222,14 +220,14 @@ describe Efl::EcoreGetopt do
             args = @p.parse ["progname","--many=ch3"]
             @p['m'].should == "ch3"
         end
-        it "should handle --list-engines" do
-            args = @p.parse ["My lovely prog name","--list-engines"]
-            @p['E'].should == 1
-        end
         it "should handle --callback" do
             @p['b'].should == 69
             args = @p.parse ["progname","--callback=user_arg"]
             @p['b'].should == 666
+        end
+        it "should handle --list-engines" do
+            args = @p.parse ["My lovely prog name","--list-engines"]
+            @p['E'].should == 1
         end
         it "should handle --geometry" do
             g = Efl::Native::EinaRectangleStruct.new @p['g']
