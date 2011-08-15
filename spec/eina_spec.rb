@@ -19,9 +19,13 @@ describe "Efl::Eina #{Efl::Eina.version.full}" do
     #
     it "should be main thread" do
         Efl::Eina.main_loop_is.should be_true
-        Thread.new do
-            Efl::Eina.main_loop_is.should be_false
-        end.join
+        if RUBY_VERSION > "1.9.0"
+            Thread.new do
+                Efl::Eina.main_loop_is.should be_false
+            end.join
+        else
+            puts "  no bother on 1.8 branch"
+        end
     end
     #
     it "should shutdown" do
