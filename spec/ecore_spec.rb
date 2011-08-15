@@ -118,10 +118,8 @@ describe "Efl::Ecore #{Efl::Ecore.version.full}" do
         e2 = FFI::MemoryPointer.new(:int)
         e2.write_int 666
         evt2 = Ecore.event_add Ecore::EVENT_SIGNAL_USER, e2, EVENT_FREE_CB, NONE
-        Ecore.main_loop_begin   # process event
         Ecore.event_filter_del(filter).address.should == OK.address
         evt2 = Ecore.event_add Ecore::EVENT_SIGNAL_USER, e2, EVENT_FREE_CB, NONE
-        Ecore.main_loop_begin   # process event
     end
     #
     describe Efl::Ecore::REcorePipe do

@@ -24,41 +24,23 @@ module Efl
         ffi_lib 'ecore'
         #
         # ENUMS
+        # typedef enum _Ecore_Exe_Flags { ECORE_EXE_NONE = 0, ECORE_EXE_PIPE_READ = 1, ECORE_EXE_PIPE_WRITE = 2, ECORE_EXE_PIPE_ERROR = 4, ECORE_EXE_PIPE_READ_LINE_BUFFERED = 8, ECORE_EXE_PIPE_ERROR_LINE_BUFFERED = 16, ECORE_EXE_PIPE_AUTO = 32, ECORE_EXE_RESPAWN = 64, ECORE_EXE_USE_SH = 128, ECORE_EXE_NOT_LEADER = 256 } Ecore_Exe_Flags
+        # FIXME
+        # typedef enum _Ecore_Exe_Win32_Priority { ECORE_EXE_WIN32_PRIORITY_IDLE, ECORE_EXE_WIN32_PRIORITY_BELOW_NORMAL, ECORE_EXE_WIN32_PRIORITY_NORMAL, ECORE_EXE_WIN32_PRIORITY_ABOVE_NORMAL, ECORE_EXE_WIN32_PRIORITY_HIGH, ECORE_EXE_WIN32_PRIORITY_REALTIME } Ecore_Exe_Win32_Priority
+        # FIXME
+        # typedef enum _Ecore_Fd_Handler_Flags { ECORE_FD_READ = 1, ECORE_FD_WRITE = 2, ECORE_FD_ERROR = 4 } Ecore_Fd_Handler_Flags
+        # FIXME
+        # typedef enum _Ecore_Poller_Type { ECORE_POLLER_CORE = 0 } Ecore_Poller_Type
+        # FIXME
+        # typedef enum _Ecore_Pos_Map { ECORE_POS_MAP_LINEAR, ECORE_POS_MAP_ACCELERATE, ECORE_POS_MAP_DECELERATE, ECORE_POS_MAP_SINUSOIDAL, ECORE_POS_MAP_ACCELERATE_FACTOR, ECORE_POS_MAP_DECELERATE_FACTOR, ECORE_POS_MAP_SINUSOIDAL_FACTOR, ECORE_POS_MAP_DIVISOR_INTERP, ECORE_POS_MAP_BOUNCE, ECORE_POS_MAP_SPRING } Ecore_Pos_Map
+        # FIXME
+        # typedef enum _Ecore_Animator_Source { ECORE_ANIMATOR_SOURCE_TIMER, ECORE_ANIMATOR_SOURCE_CUSTOM } Ecore_Animator_Source
+        # FIXME
         #
         # TYPEDEFS
         # typedef struct _Ecore_Version Ecore_Version;
         typedef :pointer, :ecore_version
         typedef :pointer, :ecore_version_p
-        # typedef enum _Ecore_Fd_Handler_Flags Ecore_Fd_Handler_Flags;
-        typedef :pointer, :ecore_fd_handler_flags
-        # typedef enum _Ecore_Exe_Flags Ecore_Exe_Flags;
-        typedef :pointer, :ecore_exe_flags
-        # typedef enum _Ecore_Exe_Win32_Priority Ecore_Exe_Win32_Priority;
-        typedef :pointer, :ecore_exe_win32_priority
-        # typedef enum _Ecore_Poller_Type Ecore_Poller_Type;
-        typedef :pointer, :ecore_poller_type
-        # typedef enum _Ecore_Pos_Map Ecore_Pos_Map;
-        typedef :pointer, :ecore_pos_map
-        # typedef enum _Ecore_Animator_Source Ecore_Animator_Source;
-        typedef :pointer, :ecore_animator_source
-        # typedef struct _Ecore_Exe Ecore_Exe;
-        typedef :pointer, :ecore_exe
-        typedef :pointer, :ecore_exe_p
-        # typedef struct _Ecore_Timer Ecore_Timer;
-        typedef :pointer, :ecore_timer
-        typedef :pointer, :ecore_timer_p
-        # typedef struct _Ecore_Idler Ecore_Idler;
-        typedef :pointer, :ecore_idler
-        typedef :pointer, :ecore_idler_p
-        # typedef struct _Ecore_Idle_Enterer Ecore_Idle_Enterer;
-        typedef :pointer, :ecore_idle_enterer
-        typedef :pointer, :ecore_idle_enterer_p
-        # typedef struct _Ecore_Idle_Exiter Ecore_Idle_Exiter;
-        typedef :pointer, :ecore_idle_exiter
-        typedef :pointer, :ecore_idle_exiter_p
-        # typedef struct _Ecore_Fd_Handler Ecore_Fd_Handler;
-        typedef :pointer, :ecore_fd_handler
-        typedef :pointer, :ecore_fd_handler_p
         # typedef struct _Ecore_Win32_Handler Ecore_Win32_Handler;
         typedef :pointer, :ecore_win32_handler
         typedef :pointer, :ecore_win32_handler_p
@@ -71,15 +53,6 @@ module Efl
         # typedef struct _Ecore_Event Ecore_Event;
         typedef :pointer, :ecore_event
         typedef :pointer, :ecore_event_p
-        # typedef struct _Ecore_Animator Ecore_Animator;
-        typedef :pointer, :ecore_animator
-        typedef :pointer, :ecore_animator_p
-        # typedef struct _Ecore_Pipe Ecore_Pipe;
-        typedef :pointer, :ecore_pipe
-        typedef :pointer, :ecore_pipe_p
-        # typedef struct _Ecore_Poller Ecore_Poller;
-        typedef :pointer, :ecore_poller
-        typedef :pointer, :ecore_poller_p
         # typedef struct _Ecore_Event_Signal_User Ecore_Event_Signal_User;
         typedef :pointer, :ecore_event_signal_user
         # typedef struct _Ecore_Event_Signal_Hup Ecore_Event_Signal_Hup;
@@ -90,6 +63,13 @@ module Efl
         typedef :pointer, :ecore_event_signal_power
         # typedef struct _Ecore_Event_Signal_Realtime Ecore_Event_Signal_Realtime;
         typedef :pointer, :ecore_event_signal_realtime
+        # typedef enum _Ecore_Exe_Flags Ecore_Exe_Flags;
+        typedef :pointer, :ecore_exe_flags
+        # typedef enum _Ecore_Exe_Win32_Priority Ecore_Exe_Win32_Priority;
+        typedef :pointer, :ecore_exe_win32_priority
+        # typedef struct _Ecore_Exe Ecore_Exe;
+        typedef :pointer, :ecore_exe
+        typedef :pointer, :ecore_exe_p
         # typedef struct _Ecore_Exe_Event_Add Ecore_Exe_Event_Add;
         typedef :pointer, :ecore_exe_event_add
         # typedef struct _Ecore_Exe_Event_Del Ecore_Exe_Event_Del;
@@ -99,44 +79,76 @@ module Efl
         # typedef struct _Ecore_Exe_Event_Data Ecore_Exe_Event_Data;
         typedef :pointer, :ecore_exe_event_data
         typedef :pointer, :ecore_exe_event_data_p
+        # typedef struct _Ecore_Fd_Handler Ecore_Fd_Handler;
+        typedef :pointer, :ecore_fd_handler
+        typedef :pointer, :ecore_fd_handler_p
+        # typedef enum _Ecore_Fd_Handler_Flags Ecore_Fd_Handler_Flags;
+        typedef :pointer, :ecore_fd_handler_flags
+        # typedef enum _Ecore_Poller_Type Ecore_Poller_Type;
+        typedef :pointer, :ecore_poller_type
+        # typedef struct _Ecore_Poller Ecore_Poller;
+        typedef :pointer, :ecore_poller
+        typedef :pointer, :ecore_poller_p
+        # typedef struct _Ecore_Animator Ecore_Animator;
+        typedef :pointer, :ecore_animator
+        typedef :pointer, :ecore_animator_p
+        # typedef enum _Ecore_Pos_Map Ecore_Pos_Map;
+        typedef :pointer, :ecore_pos_map
+        # typedef enum _Ecore_Animator_Source Ecore_Animator_Source;
+        typedef :pointer, :ecore_animator_source
+        # typedef struct _Ecore_Timer Ecore_Timer;
+        typedef :pointer, :ecore_timer
+        typedef :pointer, :ecore_timer_p
+        # typedef struct _Ecore_Idler Ecore_Idler;
+        typedef :pointer, :ecore_idler
+        typedef :pointer, :ecore_idler_p
+        # typedef struct _Ecore_Idle_Enterer Ecore_Idle_Enterer;
+        typedef :pointer, :ecore_idle_enterer
+        typedef :pointer, :ecore_idle_enterer_p
+        # typedef struct _Ecore_Idle_Exiter Ecore_Idle_Exiter;
+        typedef :pointer, :ecore_idle_exiter
+        typedef :pointer, :ecore_idle_exiter_p
         # typedef struct _Ecore_Thread Ecore_Thread;
         typedef :pointer, :ecore_thread
         typedef :pointer, :ecore_thread_p
+        # typedef struct _Ecore_Pipe Ecore_Pipe;
+        typedef :pointer, :ecore_pipe
+        typedef :pointer, :ecore_pipe_p
         # typedef struct _Ecore_Job Ecore_Job;
         typedef :pointer, :ecore_job
         typedef :pointer, :ecore_job_p
         #
         # CALLBACKS
+        # typedef Eina_Bool (*Ecore_Task_Cb) (void *data);
+        callback :ecore_task_cb, [ :void_p ], :eina_bool
+        # typedef int (*Ecore_Select_Function) (int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
+        callback :ecore_select_function, [ :int, :pointer, :pointer, :pointer, :pointer ], :int
+        # typedef void (*Ecore_Cb) (void *data);
+        callback :ecore_cb, [ :void_p ], :void
         # typedef void *(*Ecore_Data_Cb) (void *data);
         callback :ecore_data_cb, [ :void_p ], :void_p
         # typedef Eina_Bool (*Ecore_Filter_Cb) (void *data, void *loop_data, int type, void *event);
         callback :ecore_filter_cb, [ :void_p, :void_p, :int, :void_p ], :eina_bool
-        # typedef int (*Ecore_Select_Function) (int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
-        callback :ecore_select_function, [ :int, :pointer, :pointer, :pointer, :pointer ], :int
         # typedef void (*Ecore_End_Cb) (void *user_data, void *func_data);
         callback :ecore_end_cb, [ :void_p, :void_p ], :void
-        # typedef void (*Ecore_Pipe_Cb) (void *data, void *buffer, unsigned int nbyte);
-        callback :ecore_pipe_cb, [ :void_p, :void_p, :uint ], :void
-        # typedef void (*Ecore_Exe_Cb) (void *data, const Ecore_Exe *exe);
-        callback :ecore_exe_cb, [ :void_p, :ecore_exe_p ], :void
         # typedef Eina_Bool (*Ecore_Event_Handler_Cb) (void *data, int type, void *event);
         callback :ecore_event_handler_cb, [ :void_p, :int, :void_p ], :eina_bool
-        # typedef void (*Ecore_Thread_Cb) (void *data, Ecore_Thread *thread);
-        callback :ecore_thread_cb, [ :void_p, :ecore_thread_p ], :void
-        # typedef void (*Ecore_Thread_Notify_Cb) (void *data, Ecore_Thread *thread, void *msg_data);
-        callback :ecore_thread_notify_cb, [ :void_p, :ecore_thread_p, :void_p ], :void
-        # typedef Eina_Bool (*Ecore_Task_Cb) (void *data);
-        callback :ecore_task_cb, [ :void_p ], :eina_bool
-        # typedef Eina_Bool (*Ecore_Timeline_Cb) (void *data, double pos);
-        callback :ecore_timeline_cb, [ :void_p, :double ], :eina_bool
-        # typedef void (*Ecore_Cb) (void *data);
-        callback :ecore_cb, [ :void_p ], :void
+        # typedef void (*Ecore_Exe_Cb) (void *data, const Ecore_Exe *exe);
+        callback :ecore_exe_cb, [ :void_p, :ecore_exe_p ], :void
         # typedef Eina_Bool (*Ecore_Fd_Cb) (void *data, Ecore_Fd_Handler *fd_handler);
         callback :ecore_fd_cb, [ :void_p, :ecore_fd_handler_p ], :eina_bool
         # typedef void (*Ecore_Fd_Prep_Cb) (void *data, Ecore_Fd_Handler *fd_handler);
         callback :ecore_fd_prep_cb, [ :void_p, :ecore_fd_handler_p ], :void
         # typedef Eina_Bool (*Ecore_Win32_Handle_Cb) (void *data, Ecore_Win32_Handler *wh);
         callback :ecore_win32_handle_cb, [ :void_p, :ecore_win32_handler_p ], :eina_bool
+        # typedef Eina_Bool (*Ecore_Timeline_Cb) (void *data, double pos);
+        callback :ecore_timeline_cb, [ :void_p, :double ], :eina_bool
+        # typedef void (*Ecore_Thread_Cb) (void *data, Ecore_Thread *thread);
+        callback :ecore_thread_cb, [ :void_p, :ecore_thread_p ], :void
+        # typedef void (*Ecore_Thread_Notify_Cb) (void *data, Ecore_Thread *thread, void *msg_data);
+        callback :ecore_thread_notify_cb, [ :void_p, :ecore_thread_p, :void_p ], :void
+        # typedef void (*Ecore_Pipe_Cb) (void *data, void *buffer, unsigned int nbyte);
+        callback :ecore_pipe_cb, [ :void_p, :void_p, :uint ], :void
         #
         # VARIABLES
         # EAPI extern Ecore_Version *ecore_version;
@@ -156,12 +168,22 @@ module Efl
         [ :ecore_init, [  ], :int ],
         # EAPI int ecore_shutdown(void);
         [ :ecore_shutdown, [  ], :int ],
-        # EAPI void ecore_app_args_set(int argc, const char **argv);
-        [ :ecore_app_args_set, [ :int, :string_array ], :void ],
-        # EAPI void ecore_app_args_get(int *argc, char ***argv);
-        [ :ecore_app_args_get, [ :int_p, :string_array_p ], :void ],
-        # EAPI void ecore_app_restart(void);
-        [ :ecore_app_restart, [  ], :void ],
+        # EAPI void ecore_main_loop_iterate(void);
+        [ :ecore_main_loop_iterate, [  ], :void ],
+        # EAPI void ecore_main_loop_select_func_set(Ecore_Select_Function func);
+        [ :ecore_main_loop_select_func_set, [ :ecore_select_function ], :void ],
+        # EAPI Ecore_Select_Function ecore_main_loop_select_func_get(void);
+        [ :ecore_main_loop_select_func_get, [  ], :ecore_select_function ],
+        # EAPI Eina_Bool ecore_main_loop_glib_integrate(void);
+        [ :ecore_main_loop_glib_integrate, [  ], :eina_bool ],
+        # EAPI void ecore_main_loop_glib_always_integrate_disable(void);
+        [ :ecore_main_loop_glib_always_integrate_disable, [  ], :void ],
+        # EAPI void ecore_main_loop_begin(void);
+        [ :ecore_main_loop_begin, [  ], :void ],
+        # EAPI void ecore_main_loop_quit(void);
+        [ :ecore_main_loop_quit, [  ], :void ],
+        # EAPI void ecore_main_loop_thread_safe_call(Ecore_Cb callback, void *data);
+        [ :ecore_main_loop_thread_safe_call, [ :ecore_cb, :void_p ], :void ],
         # EAPI Ecore_Event_Handler *ecore_event_handler_add(int type, Ecore_Event_Handler_Cb func, const void *data);
         [ :ecore_event_handler_add, [ :int, :ecore_event_handler_cb, :void_p ], :ecore_event_handler_p ],
         # EAPI void *ecore_event_handler_del(Ecore_Event_Handler *event_handler);
@@ -172,7 +194,7 @@ module Efl
         [ :ecore_event_del, [ :ecore_event_p ], :void_p ],
         # EAPI void *ecore_event_handler_data_get(Ecore_Event_Handler *eh);
         [ :ecore_event_handler_data_get, [ :ecore_event_handler_p ], :void_p ],
-        # EAPI void *ecore_event_handler_data_set(Ecore_Event_Handler *eh, void *data);
+        # EAPI void *ecore_event_handler_data_set(Ecore_Event_Handler *eh, const void *data);
         [ :ecore_event_handler_data_set, [ :ecore_event_handler_p, :void_p ], :void_p ],
         # EAPI int ecore_event_type_new(void);
         [ :ecore_event_type_new, [  ], :int ],
@@ -236,34 +258,6 @@ module Efl
         [ :ecore_exe_signal, [ :ecore_exe_p, :int ], :void ],
         # EAPI void ecore_exe_hup(Ecore_Exe *exe);
         [ :ecore_exe_hup, [ :ecore_exe_p ], :void ],
-        # EAPI Ecore_Idler *ecore_idler_add(Ecore_Task_Cb func, const void *data);
-        [ :ecore_idler_add, [ :ecore_task_cb, :void_p ], :ecore_idler_p ],
-        # EAPI void *ecore_idler_del(Ecore_Idler *idler);
-        [ :ecore_idler_del, [ :ecore_idler_p ], :void_p ],
-        # EAPI Ecore_Idle_Enterer *ecore_idle_enterer_add(Ecore_Task_Cb func, const void *data);
-        [ :ecore_idle_enterer_add, [ :ecore_task_cb, :void_p ], :ecore_idle_enterer_p ],
-        # EAPI Ecore_Idle_Enterer *ecore_idle_enterer_before_add(Ecore_Task_Cb func, const void *data);
-        [ :ecore_idle_enterer_before_add, [ :ecore_task_cb, :void_p ], :ecore_idle_enterer_p ],
-        # EAPI void *ecore_idle_enterer_del(Ecore_Idle_Enterer *idle_enterer);
-        [ :ecore_idle_enterer_del, [ :ecore_idle_enterer_p ], :void_p ],
-        # EAPI Ecore_Idle_Exiter *ecore_idle_exiter_add(Ecore_Task_Cb func, const void *data);
-        [ :ecore_idle_exiter_add, [ :ecore_task_cb, :void_p ], :ecore_idle_exiter_p ],
-        # EAPI void *ecore_idle_exiter_del(Ecore_Idle_Exiter *idle_exiter);
-        [ :ecore_idle_exiter_del, [ :ecore_idle_exiter_p ], :void_p ],
-        # EAPI void ecore_main_loop_iterate(void);
-        [ :ecore_main_loop_iterate, [  ], :void ],
-        # EAPI void ecore_main_loop_select_func_set(Ecore_Select_Function func);
-        [ :ecore_main_loop_select_func_set, [ :ecore_select_function ], :void ],
-        # EAPI Ecore_Select_Function ecore_main_loop_select_func_get(void);
-        [ :ecore_main_loop_select_func_get, [  ], :ecore_select_function ],
-        # EAPI Eina_Bool ecore_main_loop_glib_integrate(void);
-        [ :ecore_main_loop_glib_integrate, [  ], :eina_bool ],
-        # EAPI void ecore_main_loop_glib_always_integrate_disable(void);
-        [ :ecore_main_loop_glib_always_integrate_disable, [  ], :void ],
-        # EAPI void ecore_main_loop_begin(void);
-        [ :ecore_main_loop_begin, [  ], :void ],
-        # EAPI void ecore_main_loop_quit(void);
-        [ :ecore_main_loop_quit, [  ], :void ],
         # EAPI Ecore_Fd_Handler *ecore_main_fd_handler_add(int fd, Ecore_Fd_Handler_Flags flags, Ecore_Fd_Cb func, const void *data, Ecore_Fd_Cb buf_func, const void *buf_data);
         [ :ecore_main_fd_handler_add, [ :int, :ecore_fd_handler_flags, :ecore_fd_cb, :void_p, :ecore_fd_cb, :void_p ], :ecore_fd_handler_p ],
         # EAPI void ecore_main_fd_handler_prepare_callback_set(Ecore_Fd_Handler *fd_handler, Ecore_Fd_Prep_Cb func, const void *data);
@@ -280,22 +274,88 @@ module Efl
         [ :ecore_main_win32_handler_add, [ :void_p, :ecore_win32_handle_cb, :void_p ], :ecore_win32_handler_p ],
         # EAPI void *ecore_main_win32_handler_del(Ecore_Win32_Handler *win32_handler);
         [ :ecore_main_win32_handler_del, [ :ecore_win32_handler_p ], :void_p ],
-        # EAPI Ecore_Pipe *ecore_pipe_add(Ecore_Pipe_Cb handler, const void *data);
-        [ :ecore_pipe_add, [ :ecore_pipe_cb, :void_p ], :ecore_pipe_p ],
-        # EAPI void *ecore_pipe_del(Ecore_Pipe *p);
-        [ :ecore_pipe_del, [ :ecore_pipe_p ], :void_p ],
-        # EAPI Eina_Bool ecore_pipe_write(Ecore_Pipe *p, const void *buffer, unsigned int nbytes);
-        [ :ecore_pipe_write, [ :ecore_pipe_p, :void_p, :uint ], :eina_bool ],
-        # EAPI void ecore_pipe_write_close(Ecore_Pipe *p);
-        [ :ecore_pipe_write_close, [ :ecore_pipe_p ], :void ],
-        # EAPI void ecore_pipe_read_close(Ecore_Pipe *p);
-        [ :ecore_pipe_read_close, [ :ecore_pipe_p ], :void ],
-        # EAPI void ecore_pipe_thaw(Ecore_Pipe *p);
-        [ :ecore_pipe_thaw, [ :ecore_pipe_p ], :void ],
-        # EAPI void ecore_pipe_freeze(Ecore_Pipe *p);
-        [ :ecore_pipe_freeze, [ :ecore_pipe_p ], :void ],
-        # EAPI int ecore_pipe_wait(Ecore_Pipe *p, int message_count, double wait);
-        [ :ecore_pipe_wait, [ :ecore_pipe_p, :int, :double ], :int ],
+        # EAPI void ecore_poller_poll_interval_set(Ecore_Poller_Type type, double poll_time);
+        [ :ecore_poller_poll_interval_set, [ :ecore_poller_type, :double ], :void ],
+        # EAPI double ecore_poller_poll_interval_get(Ecore_Poller_Type type);
+        [ :ecore_poller_poll_interval_get, [ :ecore_poller_type ], :double ],
+        # EAPI Eina_Bool ecore_poller_poller_interval_set(Ecore_Poller *poller, int interval);
+        [ :ecore_poller_poller_interval_set, [ :ecore_poller_p, :int ], :eina_bool ],
+        # EAPI int ecore_poller_poller_interval_get(Ecore_Poller *poller);
+        [ :ecore_poller_poller_interval_get, [ :ecore_poller_p ], :int ],
+        # EAPI Ecore_Poller *ecore_poller_add(Ecore_Poller_Type type, int interval, Ecore_Task_Cb func, const void *data);
+        [ :ecore_poller_add, [ :ecore_poller_type, :int, :ecore_task_cb, :void_p ], :ecore_poller_p ],
+        # EAPI void *ecore_poller_del(Ecore_Poller *poller);
+        [ :ecore_poller_del, [ :ecore_poller_p ], :void_p ],
+        # EAPI Ecore_Animator *ecore_animator_add(Ecore_Task_Cb func, const void *data);
+        [ :ecore_animator_add, [ :ecore_task_cb, :void_p ], :ecore_animator_p ],
+        # EAPI Ecore_Animator *ecore_animator_timeline_add(double runtime, Ecore_Timeline_Cb func, const void *data);
+        [ :ecore_animator_timeline_add, [ :double, :ecore_timeline_cb, :void_p ], :ecore_animator_p ],
+        # EAPI void *ecore_animator_del(Ecore_Animator *animator);
+        [ :ecore_animator_del, [ :ecore_animator_p ], :void_p ],
+        # EAPI void ecore_animator_freeze(Ecore_Animator *animator);
+        [ :ecore_animator_freeze, [ :ecore_animator_p ], :void ],
+        # EAPI void ecore_animator_thaw(Ecore_Animator *animator);
+        [ :ecore_animator_thaw, [ :ecore_animator_p ], :void ],
+        # EAPI void ecore_animator_frametime_set(double frametime);
+        [ :ecore_animator_frametime_set, [ :double ], :void ],
+        # EAPI double ecore_animator_frametime_get(void);
+        [ :ecore_animator_frametime_get, [  ], :double ],
+        # EAPI double ecore_animator_pos_map(double pos, Ecore_Pos_Map map, double v1, double v2);
+        [ :ecore_animator_pos_map, [ :double, :ecore_pos_map, :double, :double ], :double ],
+        # EAPI void ecore_animator_source_set(Ecore_Animator_Source source);
+        [ :ecore_animator_source_set, [ :ecore_animator_source ], :void ],
+        # EAPI Ecore_Animator_Source ecore_animator_source_get(void);
+        [ :ecore_animator_source_get, [  ], :ecore_animator_source ],
+        # EAPI void ecore_animator_custom_source_tick_begin_callback_set(Ecore_Cb func, const void *data);
+        [ :ecore_animator_custom_source_tick_begin_callback_set, [ :ecore_cb, :void_p ], :void ],
+        # EAPI void ecore_animator_custom_source_tick_end_callback_set(Ecore_Cb func, const void *data);
+        [ :ecore_animator_custom_source_tick_end_callback_set, [ :ecore_cb, :void_p ], :void ],
+        # EAPI void ecore_animator_custom_tick(void);
+        [ :ecore_animator_custom_tick, [  ], :void ],
+        # EAPI double ecore_time_get(void);
+        [ :ecore_time_get, [  ], :double ],
+        # EAPI double ecore_time_unix_get(void);
+        [ :ecore_time_unix_get, [  ], :double ],
+        # EAPI double ecore_loop_time_get(void);
+        [ :ecore_loop_time_get, [  ], :double ],
+        # EAPI Ecore_Timer *ecore_timer_add(double in, Ecore_Task_Cb func, const void *data);
+        [ :ecore_timer_add, [ :double, :ecore_task_cb, :void_p ], :ecore_timer_p ],
+        # EAPI Ecore_Timer *ecore_timer_loop_add(double in, Ecore_Task_Cb func, const void *data);
+        [ :ecore_timer_loop_add, [ :double, :ecore_task_cb, :void_p ], :ecore_timer_p ],
+        # EAPI void *ecore_timer_del(Ecore_Timer *timer);
+        [ :ecore_timer_del, [ :ecore_timer_p ], :void_p ],
+        # EAPI void ecore_timer_interval_set(Ecore_Timer *timer, double in);
+        [ :ecore_timer_interval_set, [ :ecore_timer_p, :double ], :void ],
+        # EAPI double ecore_timer_interval_get(Ecore_Timer *timer);
+        [ :ecore_timer_interval_get, [ :ecore_timer_p ], :double ],
+        # EAPI void ecore_timer_freeze(Ecore_Timer *timer);
+        [ :ecore_timer_freeze, [ :ecore_timer_p ], :void ],
+        # EAPI void ecore_timer_thaw(Ecore_Timer *timer);
+        [ :ecore_timer_thaw, [ :ecore_timer_p ], :void ],
+        # EAPI void ecore_timer_delay(Ecore_Timer *timer, double add);
+        [ :ecore_timer_delay, [ :ecore_timer_p, :double ], :void ],
+        # EAPI double ecore_timer_pending_get(Ecore_Timer *timer);
+        [ :ecore_timer_pending_get, [ :ecore_timer_p ], :double ],
+        # EAPI double ecore_timer_precision_get(void);
+        [ :ecore_timer_precision_get, [  ], :double ],
+        # EAPI void ecore_timer_precision_set(double precision);
+        [ :ecore_timer_precision_set, [ :double ], :void ],
+        # EAPI char *ecore_timer_dump(void);
+        [ :ecore_timer_dump, [  ], :string ],
+        # EAPI Ecore_Idler *ecore_idler_add(Ecore_Task_Cb func, const void *data);
+        [ :ecore_idler_add, [ :ecore_task_cb, :void_p ], :ecore_idler_p ],
+        # EAPI void *ecore_idler_del(Ecore_Idler *idler);
+        [ :ecore_idler_del, [ :ecore_idler_p ], :void_p ],
+        # EAPI Ecore_Idle_Enterer *ecore_idle_enterer_add(Ecore_Task_Cb func, const void *data);
+        [ :ecore_idle_enterer_add, [ :ecore_task_cb, :void_p ], :ecore_idle_enterer_p ],
+        # EAPI Ecore_Idle_Enterer *ecore_idle_enterer_before_add(Ecore_Task_Cb func, const void *data);
+        [ :ecore_idle_enterer_before_add, [ :ecore_task_cb, :void_p ], :ecore_idle_enterer_p ],
+        # EAPI void *ecore_idle_enterer_del(Ecore_Idle_Enterer *idle_enterer);
+        [ :ecore_idle_enterer_del, [ :ecore_idle_enterer_p ], :void_p ],
+        # EAPI Ecore_Idle_Exiter *ecore_idle_exiter_add(Ecore_Task_Cb func, const void *data);
+        [ :ecore_idle_exiter_add, [ :ecore_task_cb, :void_p ], :ecore_idle_exiter_p ],
+        # EAPI void *ecore_idle_exiter_del(Ecore_Idle_Exiter *idle_exiter);
+        [ :ecore_idle_exiter_del, [ :ecore_idle_exiter_p ], :void_p ],
         # EAPI Ecore_Thread *ecore_thread_run(Ecore_Thread_Cb func_blocking, Ecore_Thread_Cb func_end, Ecore_Thread_Cb func_cancel, const void *data);
         [ :ecore_thread_run, [ :ecore_thread_cb, :ecore_thread_cb, :ecore_thread_cb, :void_p ], :ecore_thread_p ],
         # EAPI Ecore_Thread *ecore_thread_feedback_run(Ecore_Thread_Cb func_heavy, Ecore_Thread_Notify_Cb func_notify, Ecore_Thread_Cb func_end, Ecore_Thread_Cb func_cancel, const void *data, Eina_Bool try_no_queue);
@@ -342,78 +402,36 @@ module Efl
         [ :ecore_thread_global_data_del, [ :string ], :eina_bool ],
         # EAPI void *ecore_thread_global_data_wait(const char *key, double seconds);
         [ :ecore_thread_global_data_wait, [ :string, :double ], :void_p ],
-        # EAPI double ecore_time_get(void);
-        [ :ecore_time_get, [  ], :double ],
-        # EAPI double ecore_time_unix_get(void);
-        [ :ecore_time_unix_get, [  ], :double ],
-        # EAPI double ecore_loop_time_get(void);
-        [ :ecore_loop_time_get, [  ], :double ],
-        # EAPI Ecore_Timer *ecore_timer_add(double in, Ecore_Task_Cb func, const void *data);
-        [ :ecore_timer_add, [ :double, :ecore_task_cb, :void_p ], :ecore_timer_p ],
-        # EAPI Ecore_Timer *ecore_timer_loop_add(double in, Ecore_Task_Cb func, const void *data);
-        [ :ecore_timer_loop_add, [ :double, :ecore_task_cb, :void_p ], :ecore_timer_p ],
-        # EAPI void *ecore_timer_del(Ecore_Timer *timer);
-        [ :ecore_timer_del, [ :ecore_timer_p ], :void_p ],
-        # EAPI void ecore_timer_interval_set(Ecore_Timer *timer, double in);
-        [ :ecore_timer_interval_set, [ :ecore_timer_p, :double ], :void ],
-        # EAPI double ecore_timer_interval_get(Ecore_Timer *timer);
-        [ :ecore_timer_interval_get, [ :ecore_timer_p ], :double ],
-        # EAPI void ecore_timer_freeze(Ecore_Timer *timer);
-        [ :ecore_timer_freeze, [ :ecore_timer_p ], :void ],
-        # EAPI void ecore_timer_thaw(Ecore_Timer *timer);
-        [ :ecore_timer_thaw, [ :ecore_timer_p ], :void ],
-        # EAPI void ecore_timer_delay(Ecore_Timer *timer, double add);
-        [ :ecore_timer_delay, [ :ecore_timer_p, :double ], :void ],
-        # EAPI double ecore_timer_pending_get(Ecore_Timer *timer);
-        [ :ecore_timer_pending_get, [ :ecore_timer_p ], :double ],
-        # EAPI double ecore_timer_precision_get(void);
-        [ :ecore_timer_precision_get, [  ], :double ],
-        # EAPI void ecore_timer_precision_set(double precision);
-        [ :ecore_timer_precision_set, [ :double ], :void ],
-        # EAPI char *ecore_timer_dump(void);
-        [ :ecore_timer_dump, [  ], :string ],
-        # EAPI Ecore_Animator *ecore_animator_add(Ecore_Task_Cb func, const void *data);
-        [ :ecore_animator_add, [ :ecore_task_cb, :void_p ], :ecore_animator_p ],
-        # EAPI Ecore_Animator *ecore_animator_timeline_add(double runtime, Ecore_Timeline_Cb func, const void *data);
-        [ :ecore_animator_timeline_add, [ :double, :ecore_timeline_cb, :void_p ], :ecore_animator_p ],
-        # EAPI void *ecore_animator_del(Ecore_Animator *animator);
-        [ :ecore_animator_del, [ :ecore_animator_p ], :void_p ],
-        # EAPI void ecore_animator_freeze(Ecore_Animator *animator);
-        [ :ecore_animator_freeze, [ :ecore_animator_p ], :void ],
-        # EAPI void ecore_animator_thaw(Ecore_Animator *animator);
-        [ :ecore_animator_thaw, [ :ecore_animator_p ], :void ],
-        # EAPI void ecore_animator_frametime_set(double frametime);
-        [ :ecore_animator_frametime_set, [ :double ], :void ],
-        # EAPI double ecore_animator_frametime_get(void);
-        [ :ecore_animator_frametime_get, [  ], :double ],
-        # EAPI double ecore_animator_pos_map(double pos, Ecore_Pos_Map map, double v1, double v2);
-        [ :ecore_animator_pos_map, [ :double, :ecore_pos_map, :double, :double ], :double ],
-        # EAPI void ecore_animator_source_set(Ecore_Animator_Source source);
-        [ :ecore_animator_source_set, [ :ecore_animator_source ], :void ],
-        # EAPI Ecore_Animator_Source ecore_animator_source_get(void);
-        [ :ecore_animator_source_get, [  ], :ecore_animator_source ],
-        # EAPI void ecore_animator_custom_source_tick_begin_callback_set(Ecore_Cb func, const void *data);
-        [ :ecore_animator_custom_source_tick_begin_callback_set, [ :ecore_cb, :void_p ], :void ],
-        # EAPI void ecore_animator_custom_source_tick_end_callback_set(Ecore_Cb func, const void *data);
-        [ :ecore_animator_custom_source_tick_end_callback_set, [ :ecore_cb, :void_p ], :void ],
-        # EAPI void ecore_animator_custom_tick(void);
-        [ :ecore_animator_custom_tick, [  ], :void ],
-        # EAPI void ecore_poller_poll_interval_set(Ecore_Poller_Type type, double poll_time);
-        [ :ecore_poller_poll_interval_set, [ :ecore_poller_type, :double ], :void ],
-        # EAPI double ecore_poller_poll_interval_get(Ecore_Poller_Type type);
-        [ :ecore_poller_poll_interval_get, [ :ecore_poller_type ], :double ],
-        # EAPI Eina_Bool ecore_poller_poller_interval_set(Ecore_Poller *poller, int interval);
-        [ :ecore_poller_poller_interval_set, [ :ecore_poller_p, :int ], :eina_bool ],
-        # EAPI int ecore_poller_poller_interval_get(Ecore_Poller *poller);
-        [ :ecore_poller_poller_interval_get, [ :ecore_poller_p ], :int ],
-        # EAPI Ecore_Poller *ecore_poller_add(Ecore_Poller_Type type, int interval, Ecore_Task_Cb func, const void *data);
-        [ :ecore_poller_add, [ :ecore_poller_type, :int, :ecore_task_cb, :void_p ], :ecore_poller_p ],
-        # EAPI void *ecore_poller_del(Ecore_Poller *poller);
-        [ :ecore_poller_del, [ :ecore_poller_p ], :void_p ],
+        # EAPI Ecore_Pipe *ecore_pipe_add(Ecore_Pipe_Cb handler, const void *data);
+        [ :ecore_pipe_add, [ :ecore_pipe_cb, :void_p ], :ecore_pipe_p ],
+        # EAPI void *ecore_pipe_del(Ecore_Pipe *p);
+        [ :ecore_pipe_del, [ :ecore_pipe_p ], :void_p ],
+        # EAPI Eina_Bool ecore_pipe_write(Ecore_Pipe *p, const void *buffer, unsigned int nbytes);
+        [ :ecore_pipe_write, [ :ecore_pipe_p, :void_p, :uint ], :eina_bool ],
+        # EAPI void ecore_pipe_write_close(Ecore_Pipe *p);
+        [ :ecore_pipe_write_close, [ :ecore_pipe_p ], :void ],
+        # EAPI void ecore_pipe_read_close(Ecore_Pipe *p);
+        [ :ecore_pipe_read_close, [ :ecore_pipe_p ], :void ],
+        # EAPI void ecore_pipe_thaw(Ecore_Pipe *p);
+        [ :ecore_pipe_thaw, [ :ecore_pipe_p ], :void ],
+        # EAPI void ecore_pipe_freeze(Ecore_Pipe *p);
+        [ :ecore_pipe_freeze, [ :ecore_pipe_p ], :void ],
+        # EAPI int ecore_pipe_wait(Ecore_Pipe *p, int message_count, double wait);
+        [ :ecore_pipe_wait, [ :ecore_pipe_p, :int, :double ], :int ],
         # EAPI Ecore_Job *ecore_job_add(Ecore_Cb func, const void *data);
         [ :ecore_job_add, [ :ecore_cb, :void_p ], :ecore_job_p ],
         # EAPI void *ecore_job_del(Ecore_Job *job);
         [ :ecore_job_del, [ :ecore_job_p ], :void_p ],
+        # EAPI void ecore_app_args_set(int argc, const char **argv);
+        [ :ecore_app_args_set, [ :int, :string_array ], :void ],
+        # EAPI void ecore_app_args_get(int *argc, char ***argv);
+        [ :ecore_app_args_get, [ :int_p, :string_array_p ], :void ],
+        # EAPI void ecore_app_restart(void);
+        [ :ecore_app_restart, [  ], :void ],
+        # EAPI void ecore_throttle_adjust(double amount );
+        [ :ecore_throttle_adjust, [ :double ], :void ],
+        # EAPI double ecore_throttle_get(void);
+        [ :ecore_throttle_get, [  ], :double ],
         ]
         #
         attach_fcts fcts
