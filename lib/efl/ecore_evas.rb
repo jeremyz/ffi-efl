@@ -33,7 +33,7 @@ module Efl
                 yield self if block_given?
             end
             def self.release p
-                Native.ecore_evas_free p unless p.nil?
+                Native.ecore_evas_free p
             end
             def free p=nil
                 @ptr.autorelease=false
