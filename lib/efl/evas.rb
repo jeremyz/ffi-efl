@@ -71,7 +71,7 @@ module Efl
                 yield self if block_given?
             end
             def self.release p
-                Native.evas_free p unless p.nil?
+                Native.evas_free p
             end
             def free
                 @ptr.autorelease=false if @ptr.is_a? FFI::AutoPointer
@@ -94,35 +94,35 @@ module Efl
                 Evas::REvasBox.new Native.method(:evas_object_box_add), @ptr, &block
             end
             def output_size_get
-                x = FFI::MemoryPointer.new :int
-                y = FFI::MemoryPointer.new :int
-                Native.evas_output_size_get @ptr, x, y
-                [ x.read_int, y.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                Native.evas_output_size_get @ptr, @ri0, @ri1
+                [ @ri0.read_int, @ri1.read_int ]
             end
             alias :output_size :output_size_get
             alias :size :output_size_get
             def output_viewport_get
-                x = FFI::MemoryPointer.new :int
-                y = FFI::MemoryPointer.new :int
-                w = FFI::MemoryPointer.new :int
-                h = FFI::MemoryPointer.new :int
-                Native.evas_output_viewport_get @ptr, x, y, w, h
-                [ x.read_int, y.read_int, w.read_int, h.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                @ri2 ||= FFI::MemoryPointer.new :int
+                @ri3 ||= FFI::MemoryPointer.new :int
+                Native.evas_output_viewport_get @ptr, @ri0, @ri1, @ri2, @ri3
+                [ @ri0.read_int, @ri1.read_int, @ri2.read_int, @ri3.read_int ]
             end
             alias :output_viewport :output_viewport_get
             alias :viewport :output_viewport_get
             def pointer_output_xy_get
-                x = FFI::MemoryPointer.new :int
-                y = FFI::MemoryPointer.new :int
-                Native.evas_pointer_output_xy_get @ptr, x, y
-                [ x.read_int, y.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                Native.evas_pointer_output_xy_get @ptr, @ri0, @ri1
+                [ @ri0.read_int, @ri1.read_int ]
             end
             alias :pointer_output :pointer_output_xy_get
             def pointer_canvas_xy_get
-                x = FFI::MemoryPointer.new :int
-                y = FFI::MemoryPointer.new :int
-                Native.evas_pointer_canvas_xy_get @ptr, x, y
-                [ x.read_int, y.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                Native.evas_pointer_canvas_xy_get @ptr, @ri0, @ri1
+                [ @ri0.read_int, @ri1.read_int ]
             end
             alias :pointer_canvas :pointer_canvas_xy_get
         end
@@ -147,6 +147,13 @@ module Efl
             end
             def self.release p
                 Native.evas_object_del p unless p.nil?
+                @ri0.free if @ri0
+                @ri1.free if @ri1
+                @ri2.free if @ri2
+                @ri3.free if @ri3
+                @rd0.free if @rd0
+                @rd1.free if @rd1
+                @rs0.free if @rs0
             end
             def free
                 @ptr.autorelease=false if @ptr.is_a? FFI::AutoPointer
@@ -165,12 +172,12 @@ module Efl
                 Native.evas_object_type_get @ptr
             end
             def geometry_get
-                x = FFI::MemoryPointer.new :int
-                y = FFI::MemoryPointer.new :int
-                w = FFI::MemoryPointer.new :int
-                h = FFI::MemoryPointer.new :int
-                Native.evas_object_geometry_get @ptr, x, y, w, h
-                [ x.read_int, y.read_int, w.read_int, h.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                @ri2 ||= FFI::MemoryPointer.new :int
+                @ri3 ||= FFI::MemoryPointer.new :int
+                Native.evas_object_geometry_get @ptr, @ri0, @ri1, @ri2, @ri3
+                [ @ri0.read_int, @ri1.read_int, @ri2.read_int, @ri3.read_int ]
             end
             alias :geometry :geometry_get
             def center_get
@@ -190,12 +197,12 @@ module Efl
                 Native.evas_object_resize @ptr, *wh
             end
             def color_get
-                r = FFI::MemoryPointer.new :int
-                g = FFI::MemoryPointer.new :int
-                b = FFI::MemoryPointer.new :int
-                a = FFI::MemoryPointer.new :int
-                Native.evas_object_color_get @ptr, r, g, b, a
-                [ r.read_int, g.read_int, b.read_int, a.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                @ri2 ||= FFI::MemoryPointer.new :int
+                @ri3 ||= FFI::MemoryPointer.new :int
+                Native.evas_object_color_get @ptr, @ri0, @ri1, @ri2, @ri3
+                [ @ri0.read_int, @ri1.read_int, @ri2.read_int, @ri3.read_int ]
             end
             alias :color :color_get
             def evas_get
@@ -211,32 +218,32 @@ module Efl
             end
             alias :below :below_get
             def size_hint_min_get
-                w = FFI::MemoryPointer.new :int
-                h = FFI::MemoryPointer.new :int
-                Native.evas_object_size_hint_min_get @ptr, w, h
-                [ w.read_int, h.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                Native.evas_object_size_hint_min_get @ptr, @ri0, @ri1
+                [ @ri0.read_int, @ri1.read_int ]
             end
             alias :size_hint_min :size_hint_min_get
             def size_hint_max_get
-                w = FFI::MemoryPointer.new :int
-                h = FFI::MemoryPointer.new :int
-                Native.evas_object_size_hint_max_get @ptr, w, h
-                [ w.read_int, h.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                Native.evas_object_size_hint_max_get @ptr, @ri0, @ri1
+                [ @ri0.read_int, @ri1.read_int ]
             end
             alias :size_hint_max :size_hint_max_get
             def size_hint_request_get
-                w = FFI::MemoryPointer.new :int
-                h = FFI::MemoryPointer.new :int
-                Native.evas_object_size_hint_request_get @ptr, w, h
-                [ w.read_int, h.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                Native.evas_object_size_hint_request_get @ptr, @ri0, @ri1
+                [ @ri0.read_int, @ri1.read_int ]
             end
             alias :size_hint_request :size_hint_request_get
             def size_hint_aspect_get
-                a = FFI::MemoryPointer.new :int
-                w = FFI::MemoryPointer.new :int
-                h = FFI::MemoryPointer.new :int
-                Native.evas_object_size_hint_aspect_get @ptr, a, w, h
-                [ Native.enum_type(:evas_aspect_control)[a.read_int], w.read_int, h.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                @ri2 ||= FFI::MemoryPointer.new :int
+                Native.evas_object_size_hint_aspect_get @ptr, @ri0, @ri1, @ri2
+                [ Native.enum_type(:evas_aspect_control)[@ri0.read_int], @ri1.read_int, @ri2.read_int ]
             end
             alias :size_hint_aspect :size_hint_aspect_get
             def size_hint_align_set_fill
@@ -244,10 +251,10 @@ module Efl
             end
             alias :size_hint_align_fill :size_hint_align_set_fill
             def size_hint_align_get
-                w = FFI::MemoryPointer.new :double
-                h = FFI::MemoryPointer.new :double
-                Native.evas_object_size_hint_align_get @ptr, w, h
-                [ w.read_double, h.read_double ]
+                @rd0 ||= FFI::MemoryPointer.new :double
+                @rd1 ||= FFI::MemoryPointer.new :double
+                Native.evas_object_size_hint_align_get @ptr, @rd0, @rd1
+                [ @rd0.read_double, @rd1.read_double ]
             end
             alias :size_hint_align :size_hint_align_get
             def size_hint_weight_set_expand
@@ -255,19 +262,19 @@ module Efl
             end
             alias :size_hint_weight_expand :size_hint_weight_set_expand
             def size_hint_weight_get
-                w = FFI::MemoryPointer.new :double
-                h = FFI::MemoryPointer.new :double
-                Native.evas_object_size_hint_weight_get @ptr, w, h
-                [ w.read_double, h.read_double ]
+                @rd0 ||= FFI::MemoryPointer.new :double
+                @rd1 ||= FFI::MemoryPointer.new :double
+                Native.evas_object_size_hint_weight_get @ptr, @rd0, @rd1
+                [ @rd0.read_double, @rd1.read_double ]
             end
             alias :size_hint_weight :size_hint_weight_get
             def size_hint_padding_get
-                l = FFI::MemoryPointer.new :int
-                r = FFI::MemoryPointer.new :int
-                t = FFI::MemoryPointer.new :int
-                b = FFI::MemoryPointer.new :int
-                Native.evas_object_size_hint_padding_get @ptr, l, r, t, b
-                [ l.read_int, r.read_int, t.read_int, b.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                @ri2 ||= FFI::MemoryPointer.new :int
+                @ri3 ||= FFI::MemoryPointer.new :int
+                Native.evas_object_size_hint_padding_get @ptr, @ri0, @ri1, @ri2, @ri3
+                [ @ri0.read_int, @ri1.read_int, @ri2.read_int, @ri3.read_int ]
             end
             alias :size_hint_padding :size_hint_padding_get
             def data_get k
@@ -287,12 +294,12 @@ module Efl
             search_prefixes 'evas_object_line_'
             #
             def line_xy_get
-                x1 = FFI::MemoryPointer.new :int
-                y1 = FFI::MemoryPointer.new :int
-                x2 = FFI::MemoryPointer.new :int
-                y2 = FFI::MemoryPointer.new :int
-                Native.evas_object_line_xy_get @ptr, x1, y1, x2, y2
-                [ x1.read_int, y1.read_int, x2.read_int, y2.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                @ri2 ||= FFI::MemoryPointer.new :int
+                @ri3 ||= FFI::MemoryPointer.new :int
+                Native.evas_object_line_xy_get @ptr, @ri0, @ri1, @ri2, @ri3
+                [ @ri0.read_int, @ri1.read_int, @ri2.read_int, @ri3.read_int ]
             end
         end
         #
@@ -311,73 +318,73 @@ module Efl
             search_prefixes 'evas_object_text_'
             #
             def font_get
-                f = FFI::MemoryPointer.new :string
-                s = FFI::MemoryPointer.new :int
-                Native.evas_object_text_font_get @ptr, f, s
-                [ f.read_pointer.read_string, s.read_int ]
+                @rs0 ||= FFI::MemoryPointer.new :string
+                @ri0 ||= FFI::MemoryPointer.new :int
+                Native.evas_object_text_font_get @ptr, @rs0, @ri0
+                [ @rs0.read_pointer.read_string, @ri0.read_int ]
             end
             alias :font :font_get
             def char_pos_get pos
-                cx = FFI::MemoryPointer.new :int
-                cy = FFI::MemoryPointer.new :int
-                cw = FFI::MemoryPointer.new :int
-                ch = FFI::MemoryPointer.new :int
-                Native.evas_object_text_char_pos_get @ptr, pos, cx, cy, cw, ch
-                return [ cx.read_int, cy.read_int, cw.read_int, ch.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                @ri2 ||= FFI::MemoryPointer.new :int
+                @ri3 ||= FFI::MemoryPointer.new :int
+                Native.evas_object_text_char_pos_get @ptr, pos, @ri0, @ri1, @ri2, @ri3
+                return [ @ri0.read_int, @ri1.read_int, @ri2.read_int, @ri3.read_int ]
             end
             alias :char_pos :char_pos_get
             def char_coords_get x, y
-                cx = FFI::MemoryPointer.new :int
-                cy = FFI::MemoryPointer.new :int
-                cw = FFI::MemoryPointer.new :int
-                ch = FFI::MemoryPointer.new :int
-                r = Native.evas_object_text_char_coords_get @ptr, x, y, cx, cy, cw, ch
-                return [ r, cx.read_int, cy.read_int, cw.read_int, ch.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                @ri2 ||= FFI::MemoryPointer.new :int
+                @ri3 ||= FFI::MemoryPointer.new :int
+                r = Native.evas_object_text_char_coords_get @ptr, x, y, @ri0, @ri1, @ri2, @ri3
+                return [ r, @ri0.read_int, @ri1.read_int, @ri2.read_int, @ri3.read_int ]
             end
             alias :char_coords :char_coords_get
             def style_pad_get
-                l = FFI::MemoryPointer.new :int
-                r = FFI::MemoryPointer.new :int
-                t = FFI::MemoryPointer.new :int
-                b = FFI::MemoryPointer.new :int
-                Native.evas_object_text_shadow_color_get @ptr, l, r, t, b
-                return [ l.read_int, r.read_int, t.read_int, b.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                @ri2 ||= FFI::MemoryPointer.new :int
+                @ri3 ||= FFI::MemoryPointer.new :int
+                Native.evas_object_text_shadow_color_get @ptr, @ri0, @ri1, @ri2, @ri3
+                return [ @ri0.read_int, @ri1.read_int, @ri2.read_int, @ri3.read_int ]
             end
             alias :style_pad :style_pad_get
             def shadow_color_get
-                r = FFI::MemoryPointer.new :int
-                g = FFI::MemoryPointer.new :int
-                b = FFI::MemoryPointer.new :int
-                a = FFI::MemoryPointer.new :int
-                Native.evas_object_text_shadow_color_get @ptr, r, g, b, a
-                return [ r.read_int, g.read_int, b.read_int, a.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                @ri2 ||= FFI::MemoryPointer.new :int
+                @ri3 ||= FFI::MemoryPointer.new :int
+                Native.evas_object_text_shadow_color_get @ptr, @ri0, @ri1, @ri2, @ri3
+                return [ @ri0.read_int, @ri1.read_int, @ri2.ead_int, @ri3.ead_int ]
             end
             alias :shadow_color :shadow_color_get
             def glow_color_get
-                r = FFI::MemoryPointer.new :int
-                g = FFI::MemoryPointer.new :int
-                b = FFI::MemoryPointer.new :int
-                a = FFI::MemoryPointer.new :int
-                Native.evas_object_text_glow_color_get @ptr, r, g, b, a
-                return [ r.read_int, g.read_int, b.read_int, a.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                @ri2 ||= FFI::MemoryPointer.new :int
+                @ri3 ||= FFI::MemoryPointer.new :int
+                Native.evas_object_text_glow_color_get @ptr, @ri0, @ri1, @ri2, @ri3
+                return [ @ri0.read_int, @ri1.read_int, @ri2.ead_int, @ri3.ead_int ]
             end
             alias :glow_color :glow_color_get
             def glow2_color_get
-                r = FFI::MemoryPointer.new :int
-                g = FFI::MemoryPointer.new :int
-                b = FFI::MemoryPointer.new :int
-                a = FFI::MemoryPointer.new :int
-                Native.evas_object_text_glow2_color_get @ptr, r, g, b, a
-                return [ r.read_int, g.read_int, b.read_int, a.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                @ri2 ||= FFI::MemoryPointer.new :int
+                @ri3 ||= FFI::MemoryPointer.new :int
+                Native.evas_object_text_glow2_color_get @ptr, @ri0, @ri1, @ri2, @ri3
+                return [ @ri0.read_int, @ri1.read_int, @ri2.ead_int, @ri3.ead_int ]
             end
             alias :glow2_color :glow2_color_get
             def outline_color_get
-                r = FFI::MemoryPointer.new :int
-                g = FFI::MemoryPointer.new :int
-                b = FFI::MemoryPointer.new :int
-                a = FFI::MemoryPointer.new :int
-                Native.evas_object_text_outline_color_get @ptr, r, g, b, a
-                return [ r.read_int, g.read_int, b.read_int, a.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                @ri2 ||= FFI::MemoryPointer.new :int
+                @ri3 ||= FFI::MemoryPointer.new :int
+                Native.evas_object_text_outline_color_get @ptr, @ri0, @ri1, @ri2, @ri3
+                return [ @ri0.read_int, @ri1.read_int, @ri2.read_int, @ri3.read_int ]
             end
             alias :outline_color :outline_color_get
         end
@@ -391,17 +398,17 @@ module Efl
             end
             alias :children :children_get
             def align_get
-                h = FFI::MemoryPointer.new :double
-                v = FFI::MemoryPointer.new :double
-                Native.evas_object_box_align_get @ptr, h, v
-                [ h.read_double, v.read_double ]
+                @rd0 ||= FFI::MemoryPointer.new :double
+                @rd1 ||= FFI::MemoryPointer.new :double
+                Native.evas_object_box_align_get @ptr, @rd0, @rd1
+                [ @rd0.read_double, @rd1.read_double ]
             end
             alias :align :align_get
             def padding_get
-                h = FFI::MemoryPointer.new :int
-                v = FFI::MemoryPointer.new :int
-                Native.evas_object_box_padding_get @ptr, h, v
-                [ h.read_int, v.read_int ]
+                @ri0 ||= FFI::MemoryPointer.new :int
+                @ri1 ||= FFI::MemoryPointer.new :int
+                Native.evas_object_box_padding_get @ptr, @ri0, @ri1
+                [ @ri0.read_int, @ri1.read_int ]
             end
             alias :padding :padding_get
         end
