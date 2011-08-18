@@ -58,6 +58,10 @@ module Efl
             #
             search_prefixes 'elm_object_'
             #
+            def smart_callback_add event_str, cb, data=FFI::MemoryPointer::NULL
+                Native.evas_object_smart_callback_add @ptr, event_str, cb, data
+            end
+            #
             def text_set label
                 Native.elm_object_text_part_set @ptr, nil, label
             end
@@ -91,9 +95,6 @@ module Efl
             def initialize parent, title, type=:elm_win_basic, &block
                 super Native.method(:elm_win_add), parent, title, type, &block
             end
-            def smart_callback_add event_str, cb, data=FFI::MemoryPointer::NULL
-                Native.evas_object_smart_callback_add @ptr, event_str, cb, data
-            end
             def inwin_add
                 ElmInWin.new @ptr
             end
@@ -113,6 +114,13 @@ module Efl
             def initialize parent, &block
                 super Native.method(:elm_win_inwin_add), parent, &block
             end
+        end
+        #
+        class ElmFrame < ElmObject
+            #
+            include Helper
+            search_prefixes 'elm_frame_'
+            constructor :elm_frame_add
         end
         #
         class ElmBg < ElmObject
@@ -176,6 +184,22 @@ module Efl
                 Efl::EinaList::REinaList.new Native.elm_box_children_get @ptr
             end
             alias :children :children_get
+        end
+        #
+        class ElmToggle < ElmObject
+            #
+            include Helper
+            constructor :elm_toggle_add
+            search_prefixes 'elm_toggle_'
+            #
+        end
+        #
+        class ElmIndex < ElmObject
+            #
+            include Helper
+            constructor :elm_index_add
+            search_prefixes 'elm_index_'
+            #
         end
         #
         class ElmList < ElmObject
