@@ -22,7 +22,7 @@ class MyWin < Elm::ElmWin
         end
         resize_object_add @bg
         @lb = Elm::ElmLabel.new(self) do |lb|
-            lb.label = "Hello World!"
+            lb.text_set "Hello World!"
             lb.size_hint_align_fill
             lb.size_hint_weight_expand
         end
