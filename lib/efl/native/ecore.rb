@@ -184,8 +184,12 @@ module Efl
         [ :ecore_main_loop_quit, [  ], :void ],
         # EAPI void ecore_main_loop_thread_safe_call_async(Ecore_Cb callback, void *data);
         [ :ecore_main_loop_thread_safe_call_async, [ :ecore_cb, :void_p ], :void ],
-        # EAPI void *ecore_main_loop_thread_safe_call_sync(Ecore_Cb callback, void *data);
-        [ :ecore_main_loop_thread_safe_call_sync, [ :ecore_cb, :void_p ], :void_p ],
+        # EAPI void *ecore_main_loop_thread_safe_call_sync(Ecore_Data_Cb callback, void *data);
+        [ :ecore_main_loop_thread_safe_call_sync, [ :ecore_data_cb, :void_p ], :void_p ],
+        # EAPI Eina_Bool ecore_thread_main_loop_begin(void);
+        [ :ecore_thread_main_loop_begin, [  ], :eina_bool ],
+        # EAPI void ecore_thread_main_loop_end(void);
+        [ :ecore_thread_main_loop_end, [  ], :void ],
         # EAPI Ecore_Event_Handler *ecore_event_handler_add(int type, Ecore_Event_Handler_Cb func, const void *data);
         [ :ecore_event_handler_add, [ :int, :ecore_event_handler_cb, :void_p ], :ecore_event_handler_p ],
         # EAPI void *ecore_event_handler_del(Ecore_Event_Handler *event_handler);

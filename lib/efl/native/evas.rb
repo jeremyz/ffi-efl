@@ -92,6 +92,8 @@ module Efl
         # typedef struct _Evas_Version Evas_Version;
         typedef :pointer, :evas_version
         typedef :pointer, :evas_version_p
+        # typedef short Evas_Callback_Priority;
+        typedef :short, :evas_callback_priority
         # typedef struct _Evas_Coord_Rectangle Evas_Coord_Rectangle;
         typedef :pointer, :evas_coord_rectangle
         # typedef struct _Evas_Point Evas_Point;
@@ -348,6 +350,8 @@ module Efl
         [ :evas_sync, [ :evas_p ], :void ],
         # EAPI void evas_event_callback_add (Evas *e, Evas_Callback_Type type, Evas_Event_Cb func, const void *data);
         [ :evas_event_callback_add, [ :evas_p, :evas_callback_type, :evas_event_cb, :void_p ], :void ],
+        # EAPI void evas_event_callback_priority_add(Evas *e, Evas_Callback_Type type, Evas_Callback_Priority priority, Evas_Event_Cb func, const void *data);
+        [ :evas_event_callback_priority_add, [ :evas_p, :evas_callback_type, :short, :evas_event_cb, :void_p ], :void ],
         # EAPI void *evas_event_callback_del (Evas *e, Evas_Callback_Type type, Evas_Event_Cb func);
         [ :evas_event_callback_del, [ :evas_p, :evas_callback_type, :evas_event_cb ], :void_p ],
         # EAPI void *evas_event_callback_del_full (Evas *e, Evas_Callback_Type type, Evas_Event_Cb func, const void *data);
@@ -488,6 +492,8 @@ module Efl
         [ :evas_object_below_get, [ :evas_object_p ], :evas_object_p ],
         # EAPI void evas_object_event_callback_add (Evas_Object *obj, Evas_Callback_Type type, Evas_Object_Event_Cb func, const void *data);
         [ :evas_object_event_callback_add, [ :evas_object_p, :evas_callback_type, :evas_object_event_cb, :void_p ], :void ],
+        # EAPI void evas_object_event_callback_priority_add(Evas_Object *obj, Evas_Callback_Type type, Evas_Callback_Priority priority, Evas_Object_Event_Cb func, const void *data);
+        [ :evas_object_event_callback_priority_add, [ :evas_object_p, :evas_callback_type, :short, :evas_object_event_cb, :void_p ], :void ],
         # EAPI void *evas_object_event_callback_del (Evas_Object *obj, Evas_Callback_Type type, Evas_Object_Event_Cb func);
         [ :evas_object_event_callback_del, [ :evas_object_p, :evas_callback_type, :evas_object_event_cb ], :void_p ],
         # EAPI void *evas_object_event_callback_del_full(Evas_Object *obj, Evas_Callback_Type type, Evas_Object_Event_Cb func, const void *data);
@@ -1090,6 +1096,8 @@ module Efl
         [ :evas_object_smart_data_set, [ :evas_object_p, :void_p ], :void ],
         # EAPI void evas_object_smart_callback_add (Evas_Object *obj, const char *event, Evas_Smart_Cb func, const void *data);
         [ :evas_object_smart_callback_add, [ :evas_object_p, :string, :evas_smart_cb, :void_p ], :void ],
+        # EAPI void evas_object_smart_callback_priority_add(Evas_Object *obj, const char *event, Evas_Callback_Priority priority, Evas_Smart_Cb func, const void *data);
+        [ :evas_object_smart_callback_priority_add, [ :evas_object_p, :string, :short, :evas_smart_cb, :void_p ], :void ],
         # EAPI void *evas_object_smart_callback_del (Evas_Object *obj, const char *event, Evas_Smart_Cb func);
         [ :evas_object_smart_callback_del, [ :evas_object_p, :string, :evas_smart_cb ], :void_p ],
         # EAPI void evas_object_smart_callback_call (Evas_Object *obj, const char *event, void *event_info);
