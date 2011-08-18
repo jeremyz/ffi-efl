@@ -54,9 +54,35 @@ module Efl
             end
         end
         #
-        class ElmWin < Efl::Evas::REvasObject
+        class ElmObject < Efl::Evas::REvasObject
             #
-            search_prefixes 'elm_win_', 'elm_object_'
+            search_prefixes 'elm_object_'
+            #
+            def text_set label
+                Native.elm_object_text_part_set @ptr, nil, label
+            end
+            #
+            def text_get
+                Native.elm_object_text_part_get @ptr, nil
+            end
+            #
+            def content_set content
+                Native.elm_object_content_part_set @ptr, nil, content
+            end
+            #
+            def content_get
+                Native.elm_object_content_part_get @ptr, nil
+            end
+            #
+            def content_unset
+                Native.elm_object_content_part_unset @ptr, nil
+            end
+            #
+        end
+        #
+        class ElmWin < ElmObject
+            #
+            search_prefixes 'elm_win_'
             #
             def initialize parent, title, type=:elm_win_basic, &block
                 super Native.method(:elm_win_add), parent, title, type, &block
@@ -76,20 +102,20 @@ module Efl
             alias :screen_position :screen_position_get
         end
         #
-        class ElmInWin < Efl::Evas::REvasObject
+        class ElmInWin < ElmObject
             #
-            search_prefixes 'elm_win_inwin_', 'elm_win_', 'elm_object_'
+            search_prefixes 'elm_win_inwin_', 'elm_win_'
             #
             def initialize parent, &block
                 super Native.method(:elm_win_inwin_add), parent, &block
             end
         end
         #
-        class ElmBg < Efl::Evas::REvasObject
+        class ElmBg < ElmObject
             #
             include Helper
             constructor :elm_bg_add
-            search_prefixes 'elm_bg_', 'elm_object_'
+            search_prefixes 'elm_bg_'
             #
             def file_get
                 f = FFI::MemoryPointer.new :pointer
@@ -108,11 +134,11 @@ module Efl
             alias :color :color_get
         end
         #
-        class ElmLayout < Efl::Evas::REvasObject
+        class ElmLayout < ElmObject
             #
             include Helper
             constructor :elm_layout_add
-            search_prefixes 'elm_layout_', 'elm_object_'
+            search_prefixes 'elm_layout_'
             #
             def edje_get &block
                 Efl::Edje::REdje.new Native.method(:elm_layout_edje_get), @ptr, &block
@@ -120,11 +146,11 @@ module Efl
             alias :edje :edje_get
         end
         #
-        class ElmBox < Efl::Evas::REvasObject
+        class ElmBox < ElmObject
             #
             include Helper
             constructor :elm_box_add
-            search_prefixes 'elm_box_', 'elm_object_'
+            search_prefixes 'elm_box_'
             #
             def padding_get
                 x = FFI::MemoryPointer.new :int
@@ -148,20 +174,20 @@ module Efl
             alias :children :children_get
         end
         #
-        class ElmList < Efl::Evas::REvasObject
+        class ElmList < ElmObject
             #
             include Helper
             constructor :elm_list_add
-            search_prefixes 'elm_list_', 'elm_object_'
+            search_prefixes 'elm_list_'
             #
             def item_append label, left_icon=nil, right_icon=nil, cb=nil, data=nil
                 ElmListItem.new Native::elm_list_item_append @ptr, label, left_icon, right_icon, cb, data
             end
         end
         #
-        class ElmListItem < Efl::Evas::REvasObject
+        class ElmListItem < ElmObject
             #
-            search_prefixes 'elm_list_item_', 'elm_object'
+            search_prefixes 'elm_list_item_'
             #
             def data_get
                 Native::elm_list_item_data_get @ptr
@@ -169,11 +195,11 @@ module Efl
             alias :data :data_get
         end
         #
-        class ElmIcon < Efl::Evas::REvasObject
+        class ElmIcon < ElmObject
             #
             include Helper
             constructor :elm_icon_add
-            search_prefixes 'elm_icon_', 'elm_object_'
+            search_prefixes 'elm_icon_'
             #
             def scale_set args
                 Native.elm_icon_scale_set @ptr, *args
@@ -181,35 +207,35 @@ module Efl
             alias :scale= :scale_set
         end
         #
-        class ElmLabel < Efl::Evas::REvasObject
+        class ElmLabel < ElmObject
             #
             include Helper
             constructor :elm_label_add
-            search_prefixes 'elm_label_', 'elm_object_'
+            search_prefixes 'elm_label_'
             #
         end
         #
-        class ElmPager < Efl::Evas::REvasObject
+        class ElmPager < ElmObject
             #
             include Helper
             constructor :elm_pager_add
-            search_prefixes 'elm_pager_', 'elm_object_'
+            search_prefixes 'elm_pager_'
             #
         end
         #
-        class ElmPanel < Efl::Evas::REvasObject
+        class ElmPanel < ElmObject
             #
             include Helper
             constructor :elm_panel_add
-            search_prefixes 'elm_panel_', 'elm_object'
+            search_prefixes 'elm_panel_'
             #
         end
         #
-        class ElmDiskSelector < Efl::Evas::REvasObject
+        class ElmDiskSelector < ElmObject
             #
             include Helper
             constructor :elm_diskselector_add
-            search_prefixes 'elm_diskselector_', 'elm_object'
+            search_prefixes 'elm_diskselector_'
             #
             def item_selected_set it, b
                 Native::elm_diskselector_item_selected_set it, b
@@ -217,9 +243,9 @@ module Efl
             alias :item_selected= :item_selected_set
         end
         #
-        class ElmDiskSelectorItem < Efl::Evas::REvasObject
+        class ElmDiskSelectorItem < ElmObject
             #
-            search_prefixes 'elm_diskselector_item_', 'elm_object'
+            search_prefixes 'elm_diskselector_item_'
             #
             def data_get
                 Native::elm_diskselector_item_data_get @ptr
@@ -227,27 +253,27 @@ module Efl
             alias :data :data_get
         end
         #
-        class ElmNotify < Efl::Evas::REvasObject
+        class ElmNotify < ElmObject
             #
             include Helper
             constructor :elm_notify_add
-            search_prefixes 'elm_notify_', 'elm_object'
+            search_prefixes 'elm_notify_'
             #
         end
         #
-        class ElmEntry < Efl::Evas::REvasObject
+        class ElmEntry < ElmObject
             #
             include Helper
             constructor :elm_entry_add
-            search_prefixes 'elm_entry_', 'elm_object'
+            search_prefixes 'elm_entry_'
             #
         end
         #
-        class ElmFlipSelector < Efl::Evas::REvasObject
+        class ElmFlipSelector < ElmObject
             #
             include Helper
             constructor :elm_flipselector_add
-            search_prefixes 'elm_flipselector_', 'elm_object'
+            search_prefixes 'elm_flipselector_'
             #
             def item_append label, cb, data
                 ElmFlipSelectorItem.new Native::elm_flipselector_item_append @ptr, label, cb, data
@@ -259,50 +285,50 @@ module Efl
             alias :selected_item :selected_item_get
         end
         #
-        class ElmFlipSelectorItem < Efl::Evas::REvasObject
+        class ElmFlipSelectorItem < ElmObject
             #
-            search_prefixes 'elm_flipselector_item_', 'elm_object'
+            search_prefixes 'elm_flipselector_item_'
             #
         end
         #
-        class ElmHoversel < Efl::Evas::REvasObject
+        class ElmHoversel < ElmObject
             #
             include Helper
             constructor :elm_hoversel_add
-            search_prefixes 'elm_hoversel_', 'elm_object'
+            search_prefixes 'elm_hoversel_'
             #
             def item_add label, icon_file=nil, icon_type=:elm_icon_none, cb=nil, data=nil
                 ElmHoverselItem.new Native::elm_hoversel_item_add @ptr, label, icon_file, icon_type, cb, data
             end
         end
         #
-        class ElmHoverselItem < Efl::Evas::REvasObject
+        class ElmHoverselItem < ElmObject
             #
-            search_prefixes 'elm_hoversel_item_', 'elm_object'
+            search_prefixes 'elm_hoversel_item_'
             #
         end
         #
-        class ElmHover < Efl::Evas::REvasObject
+        class ElmHover < ElmObject
             #
             include Helper
             constructor :elm_hover_add
-            search_prefixes 'elm_hover_', 'elm_object'
+            search_prefixes 'elm_hover_'
             #
         end
         #
-        class ElmButton < Efl::Evas::REvasObject
+        class ElmButton < ElmObject
             #
             include Helper
             constructor :elm_button_add
-            search_prefixes 'elm_button_', 'elm_object'
+            search_prefixes 'elm_button_'
             #
         end
         #
-        class ElmGenlist < Efl::Evas::REvasObject
+        class ElmGenlist < ElmObject
             #
             include Helper
             constructor :elm_genlist_add
-            search_prefixes 'elm_genlist_', 'elm_object'
+            search_prefixes 'elm_genlist_'
             #
         end
         #
