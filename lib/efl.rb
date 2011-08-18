@@ -4,7 +4,7 @@
 #
 module Efl
     #
-    VERSION = '0.0.7'
+    VERSION = '0.0.8'
     #
     PACKAGE_BIN_DIR = File.join `pkg-config --variable=exec_prefix ecore`, 'bin'
     PACKAGE_LIB_DIR = File.join `pkg-config --variable=exec_prefix ecore`, 'lib'
