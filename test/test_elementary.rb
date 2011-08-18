@@ -1,6 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
+require 'efl/elementary'
 require 'efl'
 #
 include Efl;
@@ -201,7 +202,7 @@ class TestWin < Elm::ElmWin
             it = @li.item_append l, nil, nil, method(:fake)
             if l[0]!=ch
                 ch = l[0]
-                @idx.item_append ch, it
+                @idx.item_append ch.to_s, it
             end
         end
         @idx.item_go 0
