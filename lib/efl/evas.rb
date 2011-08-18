@@ -138,7 +138,7 @@ module Efl
                     when FFI::Pointer
                         a
                     when Method
-                        FFI::AutoPointer.new a.call(*args), REvasObject.method(:release)
+                        a.call(*args)
                     else
                         raise ArgumentError.new "wrong argument #{a.class.name}"
                     end
