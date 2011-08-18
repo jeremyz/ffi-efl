@@ -9,12 +9,12 @@ require 'efl/ecore_getopt'
 #
 describe Efl::EcoreGetopt do
     #
-    after(:all) {
+    after(:all) do
         Efl::Ecore.shutdown
-    }
-    before(:all) {
+    end
+    before(:all) do
         Efl::Ecore.init
-    }
+    end
     #
     before(:each) do
         #

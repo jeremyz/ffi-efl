@@ -7,18 +7,22 @@ describe Efl::EcoreInput do
     #
     before(:all) do
         EcoreInput = Efl::EcoreInput
+        @init = EcoreInput.init
+    end
+    after(:all) do
+        EcoreInput.shutdown
     end
     #
     it "should init" do
-        EcoreInput.init.should == 1
-        EcoreInput.init.should == 2
-        EcoreInput.init.should == 3
+        EcoreInput.init.should == @init+1
+        EcoreInput.init.should == @init+2
+        EcoreInput.init.should == @init+3
     end
     #
     it "should shutdown" do
-        EcoreInput.shutdown.should == 2
-        EcoreInput.shutdown.should == 1
-        EcoreInput.shutdown.should == 0
+        EcoreInput.shutdown.should == @init+2
+        EcoreInput.shutdown.should == @init+1
+        EcoreInput.shutdown.should == @init
     end
     #
 end

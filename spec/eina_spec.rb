@@ -4,17 +4,17 @@
 require 'efl/eina'
 #
 describe "Efl::Eina #{Efl::Eina.version.full}" do
-    before(:all) {
-        @i = Efl::Eina.init
-    }
-    after(:all) {
+    before(:all) do
+        @init = Efl::Eina.init
+    end
+    after(:all) do
         Efl::Eina.shutdown
-    }
+    end
     #
     it "should init" do
-        Efl::Eina.init.should == @i+1
-        Efl::Eina.init.should == @i+2
-        Efl::Eina.init.should == @i+3
+        Efl::Eina.init.should == @init+1
+        Efl::Eina.init.should == @init+2
+        Efl::Eina.init.should == @init+3
     end
     #
     it "should be main thread" do
@@ -29,9 +29,9 @@ describe "Efl::Eina #{Efl::Eina.version.full}" do
     end
     #
     it "should shutdown" do
-        Efl::Eina.shutdown.should == @i+2
-        Efl::Eina.shutdown.should == @i+1
-        Efl::Eina.shutdown.should == @i+0
+        Efl::Eina.shutdown.should == @init+2
+        Efl::Eina.shutdown.should == @init+1
+        Efl::Eina.shutdown.should == @init
     end
     #
 end

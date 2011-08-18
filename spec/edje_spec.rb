@@ -23,22 +23,24 @@ require './spec/helper'
 #
 describe "Efl::Edje #{Efl::Edje.version.full}" do
     #
-    before(:all) {
+    before(:all) do
         Edje = Efl::Edje
-        Edje.init.should == 1
-    }
-    after(:all) {
-        Edje.shutdown == 0
-    }
+        @init = Edje.init
+    end
+    after(:all) do
+        Edje.shutdown
+    end
     #
     it "should init" do
-        Edje.init.should == 2
-        Edje.init.should == 3
+        Edje.init.should == @init+1
+        Edje.init.should == @init+2
+        Edje.init.should == @init+3
     end
     #
     it "should shutdown" do
-        Edje.shutdown.should == 2
-        Edje.shutdown.should == 1
+        Edje.shutdown.should == @init+2
+        Edje.shutdown.should == @init+1
+        Edje.shutdown.should == @init
     end
     #
     it "frametime get/set " do
@@ -105,7 +107,7 @@ describe "Efl::Edje #{Efl::Edje.version.full}" do
         after(:all) do
             @e.free
             @pixels.free
-            Efl::Evas.shutdown.should==0
+            Efl::Evas.shutdown
         end
         #
         it "scale get/set " do

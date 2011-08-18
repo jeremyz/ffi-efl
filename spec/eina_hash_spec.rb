@@ -6,17 +6,17 @@ require 'efl/eina_hash'
 #
 describe Efl::EinaHash do
     #
-    before(:all) {
+    before(:all) do
         REinaHash = Efl::EinaHash::REinaHash
-        Efl::Eina.init.should == 1
+        Efl::Eina.init
         @d0 = FFI::MemoryPointer.from_string "D0"
         @d1 = FFI::MemoryPointer.from_string "D1"
         @d2 = FFI::MemoryPointer.from_string "D2"
         @d3 = FFI::MemoryPointer.from_string "D3"
-    }
-    after(:all) {
-        Efl::Eina.shutdown.should == 0
-    }
+    end
+    after(:all) do
+        Efl::Eina.shutdown
+    end
     #
     it "should append prepend and fetch" do
         h = REinaHash.new

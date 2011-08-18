@@ -8,23 +8,25 @@ require './spec/helper'
 #
 describe "Efl::Evas #{Efl::Evas.version.full}" do
     #
-    before(:all) {
+    before(:all) do
         Evas = Efl::Evas
         Native = Efl::Native unless Kernel.const_defined? 'Native'
-        Evas.init.should == 1
-    }
-    after(:all) {
+        @init = Evas.init
+    end
+    after(:all) do
         Evas.shutdown.should == 0
-    }
+    end
     #
     it "should init" do
-        Evas.init.should == 2
-        Evas.init.should == 3
+        Evas.init.should == @init+1
+        Evas.init.should == @init+2
+        Evas.init.should == @init+3
     end
     #
     it "should shutdown" do
-        Evas.shutdown.should == 2
-        Evas.shutdown.should == 1
+        Evas.shutdown.should == @init+2
+        Evas.shutdown.should == @init+1
+        Evas.shutdown.should == @init
     end
     #
     it "evas alloc error enum is ok" do

@@ -6,13 +6,13 @@ require 'efl/eina_log'
 require './spec/helper'
 #
 describe Efl::EinaLog do
-    before(:all) {
+    before(:all) do
         Efl::Eina.init
         EinaLog = Efl::EinaLog
-    }
-    after(:all) {
+    end
+    after(:all) do
         Efl::Eina.shutdown
-    }
+    end
     #
     it "level set/get" do
         EinaLog.level_set 2

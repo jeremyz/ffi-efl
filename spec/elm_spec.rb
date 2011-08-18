@@ -6,13 +6,24 @@ require './spec/helper'
 #
 describe "Efl::Elm #{Efl::Elm.version.full}" do
     #
-    before(:all) {
+    before(:all) do
         Elm = Efl::Elm
-        Elm.init.should == 1
-    }
-    after(:all) {
-        Elm.shutdown.should == 0
-    }
+        @init = Elm.init
+    end
+    after(:all) do
+        Elm.shutdown
+    end
+    it "should init" do
+        Elm.init.should == @init+1
+        Elm.init.should == @init+2
+        Elm.init.should == @init+3
+    end
+    #
+    it "should shutdown" do
+        Elm.shutdown.should == @init+2
+        Elm.shutdown.should == @init+1
+        Elm.shutdown.should == @init
+    end
     #
     describe Efl::Elm::ElmWin do
         before(:each) {

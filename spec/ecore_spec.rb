@@ -22,22 +22,22 @@ describe "Efl::Ecore #{Efl::Ecore.version.full}" do
         OK = FFI::MemoryPointer.from_string "ok"
         KO = FFI::MemoryPointer.from_string "ko"
         NONE = FFI::MemoryPointer.from_string "none"
+        @init = Ecore.init
     end
-    before(:each) {
-        Ecore.init==1
-    }
-    after(:each) {
-        Ecore.shutdown==0
-    }
+    after(:all) do
+        Ecore.shutdown
+    end
     #
     it "should init" do
-        Ecore.init.should == 2
-        Ecore.init.should == 3
+        Ecore.init.should == @init+1
+        Ecore.init.should == @init+2
+        Ecore.init.should == @init+3
     end
     #
     it "should shutdown" do
-        Ecore.shutdown.should == 2
-        Ecore.shutdown.should == 1
+        Ecore.shutdown.should == @init+2
+        Ecore.shutdown.should == @init+1
+        Ecore.shutdown.should == @init
     end
     #
     it "should run a single iteration of the mainloop" do
