@@ -61,18 +61,22 @@ module Efl
             def text_set label
                 Native.elm_object_text_part_set @ptr, nil, label
             end
+            alias :text= :text_set
             #
             def text_get
                 Native.elm_object_text_part_get @ptr, nil
             end
+            alias :text :text_get
             #
             def content_set content
                 Native.elm_object_content_part_set @ptr, nil, content
             end
+            alias :content= :content_set
             #
             def content_get
                 Native.elm_object_content_part_get @ptr, nil
             end
+            alias :content :content_get
             #
             def content_unset
                 Native.elm_object_content_part_unset @ptr, nil
