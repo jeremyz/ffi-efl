@@ -4,7 +4,7 @@
 #
 module Efl
     #
-    VERSION = '0.0.6'
+    VERSION = '0.0.7'
     #
     autoload :EcoreEvas,    './lib/efl/ecore_evas.rb'
     autoload :EcoreGetopt,  './lib/efl/ecore_getopt.rb'
