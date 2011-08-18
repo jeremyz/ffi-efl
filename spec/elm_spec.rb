@@ -257,13 +257,6 @@ describe "Efl::Elm #{Efl::Elm.version.full}" do
             @win.free
         }
         #
-        it "label set/get" do
-            @lb.label_set "label1"
-            @lb.label_get.should == "label1"
-            @lb.label= "label2"
-            @lb.label.should == "label2"
-        end
-        #
         it "line_wrap set/get" do
             @lb.line_wrap_set :elm_wrap_char
             @lb.line_wrap_get.should == :elm_wrap_char
