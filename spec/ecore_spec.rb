@@ -60,6 +60,7 @@ describe "Efl::Ecore #{Efl::Ecore.version.full}" do
         ecore_evt = Ecore.event_add Ecore::EVENT_SIGNAL_USER, evt, EVENT_FREE_CB, NONE
         ecore_evt.null?.should be_false
         Ecore.main_loop_begin   # process event
+        Ecore.event_handler_del(evt_handler).address.should == OK.address
     end
     #
     it "should be able to get and set event handler data" do
@@ -73,6 +74,7 @@ describe "Efl::Ecore #{Efl::Ecore.version.full}" do
         ecore_evt = Ecore.event_add Ecore::EVENT_SIGNAL_USER, evt, EVENT_FREE_CB, NONE
         ecore_evt.null?.should be_false
         Ecore.main_loop_begin   # process event
+        Ecore.event_handler_del(evt_handler).address.should == OK.address
     end
     #
     it "should be able to create new event type" do
@@ -111,7 +113,7 @@ describe "Efl::Ecore #{Efl::Ecore.version.full}" do
             loop_data.read_string.should == "loop_data"
         end
         filter = Ecore.event_filter_add start_cb, filter_cb, end_cb, OK
-        Ecore.event_handler_add Ecore::EVENT_SIGNAL_USER, USER_SIGNAL_CB, OK
+        evt_handler = Ecore.event_handler_add Ecore::EVENT_SIGNAL_USER, USER_SIGNAL_CB, OK
         e1 = FFI::MemoryPointer.new(:int)
         e1.write_int 69
         evt1 = Ecore.event_add Ecore::EVENT_SIGNAL_USER, e1, event_free_cb, KO
@@ -120,6 +122,12 @@ describe "Efl::Ecore #{Efl::Ecore.version.full}" do
         evt2 = Ecore.event_add Ecore::EVENT_SIGNAL_USER, e2, EVENT_FREE_CB, NONE
         Ecore.event_filter_del(filter).address.should == OK.address
         evt2 = Ecore.event_add Ecore::EVENT_SIGNAL_USER, e2, EVENT_FREE_CB, NONE
+        Ecore.event_handler_del(evt_handler).address.should == OK.address
+        Ecore.main_loop_iterate
+        Ecore.main_loop_iterate
+        Ecore.main_loop_iterate
+        e1.free
+        e2.free
     end
     #
     describe Efl::Ecore::REcorePipe do
