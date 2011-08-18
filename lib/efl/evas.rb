@@ -357,7 +357,7 @@ module Efl
                 @ri2 ||= FFI::MemoryPointer.new :int
                 @ri3 ||= FFI::MemoryPointer.new :int
                 Native.evas_object_text_shadow_color_get @ptr, @ri0, @ri1, @ri2, @ri3
-                return [ @ri0.read_int, @ri1.read_int, @ri2.ead_int, @ri3.ead_int ]
+                return [ @ri0.read_int, @ri1.read_int, @ri2.read_int, @ri3.read_int ]
             end
             alias :shadow_color :shadow_color_get
             def glow_color_get
@@ -366,7 +366,7 @@ module Efl
                 @ri2 ||= FFI::MemoryPointer.new :int
                 @ri3 ||= FFI::MemoryPointer.new :int
                 Native.evas_object_text_glow_color_get @ptr, @ri0, @ri1, @ri2, @ri3
-                return [ @ri0.read_int, @ri1.read_int, @ri2.ead_int, @ri3.ead_int ]
+                return [ @ri0.read_int, @ri1.read_int, @ri2.read_int, @ri3.read_int ]
             end
             alias :glow_color :glow_color_get
             def glow2_color_get
@@ -375,7 +375,7 @@ module Efl
                 @ri2 ||= FFI::MemoryPointer.new :int
                 @ri3 ||= FFI::MemoryPointer.new :int
                 Native.evas_object_text_glow2_color_get @ptr, @ri0, @ri1, @ri2, @ri3
-                return [ @ri0.read_int, @ri1.read_int, @ri2.ead_int, @ri3.ead_int ]
+                return [ @ri0.read_int, @ri1.read_int, @ri2.read_int, @ri3.read_int ]
             end
             alias :glow2_color :glow2_color_get
             def outline_color_get
