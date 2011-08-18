@@ -23,7 +23,7 @@ libraries = [
     [ 'Ecore_Evas.h',   'EcoreEvas',    'ecore_evas',   'ecore_evas',   'ecore_evas.rb' ],
 #    [ 'Ecore_Fb.h',     'EcoreFb',      'ecore',        'ecore',        'ecore/ecore_fb.rb' ],
 #    [ 'Ecore_File.h',   'EcoreFile',    'ecore',        'ecore',        'ecore/ecore_file.rb' ],
-    [ 'EMap.h',         'EMap',          'emap',          'emap',    'emap.rb' ],
+    [ 'EMap.h',         'EMap',         'emap',         'emap',         'emap.rb' ],
     [ 'Elementary.h',   'Elm',          'elm',          'libelementary-ver-pre-svn-09.so.0',    'elementary.rb' ],
 ]
 #
