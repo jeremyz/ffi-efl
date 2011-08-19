@@ -86,42 +86,13 @@ module Efl
                 Native.elm_object_content_part_unset @ptr, nil
             end
             #
+            def parent_widget_get
+                ElmObject.new Native.elm_object_parent_widget_get @ptr
+            end
+            alias :parent_widget :parent_widget_get
         end
         #
-        class ElmWin < ElmObject
-            #
-            search_prefixes 'elm_win_'
-            #
-            def initialize parent, title, type=:elm_win_basic, &block
-                super Native.method(:elm_win_add), parent, title, type, &block
-            end
-            def inwin_add
-                ElmInWin.new @ptr
-            end
-            def screen_position_get
-                x = FFI::MemoryPointer.new :int
-                y = FFI::MemoryPointer.new :int
-                Native.elm_win_screen_position_get @ptr, x, y
-                [ x.read_int, y.read_int ]
-            end
-            alias :screen_position :screen_position_get
-        end
-        #
-        class ElmInWin < ElmObject
-            #
-            search_prefixes 'elm_win_inwin_', 'elm_win_'
-            #
-            def initialize parent, &block
-                super Native.method(:elm_win_inwin_add), parent, &block
-            end
-        end
-        #
-        class ElmFrame < ElmObject
-            #
-            include Helper
-            search_prefixes 'elm_frame_'
-            constructor :elm_frame_add
-        end
+        ####################################################################################
         #
         class ElmBg < ElmObject
             #
@@ -144,18 +115,6 @@ module Efl
                 [ r.read_int, g.read_int, b.read_int ]
             end
             alias :color :color_get
-        end
-        #
-        class ElmLayout < ElmObject
-            #
-            include Helper
-            constructor :elm_layout_add
-            search_prefixes 'elm_layout_'
-            #
-            def edje_get &block
-                Efl::Edje::REdje.new Native.method(:elm_layout_edje_get), @ptr, &block
-            end
-            alias :edje :edje_get
         end
         #
         class ElmBox < ElmObject
@@ -186,76 +145,19 @@ module Efl
             alias :children :children_get
         end
         #
-        class ElmToggle < ElmObject
+        class ElmButton < ElmObject
             #
             include Helper
-            constructor :elm_toggle_add
-            search_prefixes 'elm_toggle_'
+            constructor :elm_button_add
+            search_prefixes 'elm_button_'
             #
         end
         #
-        class ElmIndex < ElmObject
+        class ElmCheck < ElmObject
             #
             include Helper
-            constructor :elm_index_add
-            search_prefixes 'elm_index_'
-            #
-        end
-        #
-        class ElmList < ElmObject
-            #
-            include Helper
-            constructor :elm_list_add
-            search_prefixes 'elm_list_'
-            #
-            def item_append label, left_icon=nil, right_icon=nil, cb=nil, data=nil
-                ElmListItem.new Native::elm_list_item_append @ptr, label, left_icon, right_icon, cb, data
-            end
-        end
-        #
-        class ElmListItem < ElmObject
-            #
-            search_prefixes 'elm_list_item_'
-            #
-            def data_get
-                Native::elm_list_item_data_get @ptr
-            end
-            alias :data :data_get
-        end
-        #
-        class ElmIcon < ElmObject
-            #
-            include Helper
-            constructor :elm_icon_add
-            search_prefixes 'elm_icon_'
-            #
-            def scale_set args
-                Native.elm_icon_scale_set @ptr, *args
-            end
-            alias :scale= :scale_set
-        end
-        #
-        class ElmLabel < ElmObject
-            #
-            include Helper
-            constructor :elm_label_add
-            search_prefixes 'elm_label_'
-            #
-        end
-        #
-        class ElmPager < ElmObject
-            #
-            include Helper
-            constructor :elm_pager_add
-            search_prefixes 'elm_pager_'
-            #
-        end
-        #
-        class ElmPanel < ElmObject
-            #
-            include Helper
-            constructor :elm_panel_add
-            search_prefixes 'elm_panel_'
+            constructor :elm_check_add
+            search_prefixes 'elm_check_'
             #
         end
         #
@@ -279,14 +181,6 @@ module Efl
                 Native::elm_diskselector_item_data_get @ptr
             end
             alias :data :data_get
-        end
-        #
-        class ElmNotify < ElmObject
-            #
-            include Helper
-            constructor :elm_notify_add
-            search_prefixes 'elm_notify_'
-            #
         end
         #
         class ElmEntry < ElmObject
@@ -319,6 +213,29 @@ module Efl
             #
         end
         #
+        class ElmFrame < ElmObject
+            #
+            include Helper
+            search_prefixes 'elm_frame_'
+            constructor :elm_frame_add
+        end
+        #
+        class ElmGenlist < ElmObject
+            #
+            include Helper
+            constructor :elm_genlist_add
+            search_prefixes 'elm_genlist_'
+            #
+        end
+        #
+        class ElmHover < ElmObject
+            #
+            include Helper
+            constructor :elm_hover_add
+            search_prefixes 'elm_hover_'
+            #
+        end
+        #
         class ElmHoversel < ElmObject
             #
             include Helper
@@ -336,28 +253,141 @@ module Efl
             #
         end
         #
-        class ElmHover < ElmObject
+        class ElmIcon < ElmObject
             #
             include Helper
-            constructor :elm_hover_add
-            search_prefixes 'elm_hover_'
+            constructor :elm_icon_add
+            search_prefixes 'elm_icon_'
+            #
+            def scale_set args
+                Native.elm_icon_scale_set @ptr, *args
+            end
+            alias :scale= :scale_set
+        end
+        #
+        class ElmIndex < ElmObject
+            #
+            include Helper
+            constructor :elm_index_add
+            search_prefixes 'elm_index_'
             #
         end
         #
-        class ElmButton < ElmObject
+        class ElmInWin < ElmObject
+            #
+            search_prefixes 'elm_win_inwin_', 'elm_win_'
+            #
+            def initialize parent, &block
+                super Native.method(:elm_win_inwin_add), parent, &block
+            end
+        end
+        #
+        class ElmLabel < ElmObject
             #
             include Helper
-            constructor :elm_button_add
-            search_prefixes 'elm_button_'
+            constructor :elm_label_add
+            search_prefixes 'elm_label_'
             #
         end
         #
-        class ElmGenlist < ElmObject
+        class ElmLayout < ElmObject
             #
             include Helper
-            constructor :elm_genlist_add
-            search_prefixes 'elm_genlist_'
+            constructor :elm_layout_add
+            search_prefixes 'elm_layout_'
             #
+            def edje_get &block
+                Efl::Edje::REdje.new Native.method(:elm_layout_edje_get), @ptr, &block
+            end
+            alias :edje :edje_get
+        end
+        #
+        class ElmList < ElmObject
+            #
+            include Helper
+            constructor :elm_list_add
+            search_prefixes 'elm_list_'
+            #
+            def item_append label, left_icon=nil, right_icon=nil, cb=nil, data=nil
+                ElmListItem.new Native::elm_list_item_append @ptr, label, left_icon, right_icon, cb, data
+            end
+        end
+        #
+        class ElmListItem < ElmObject
+            #
+            search_prefixes 'elm_list_item_'
+            #
+            def data_get
+                Native::elm_list_item_data_get @ptr
+            end
+            alias :data :data_get
+        end
+        #
+        class ElmNotify < ElmObject
+            #
+            include Helper
+            constructor :elm_notify_add
+            search_prefixes 'elm_notify_'
+            #
+        end
+        #
+        class ElmPager < ElmObject
+            #
+            include Helper
+            constructor :elm_pager_add
+            search_prefixes 'elm_pager_'
+            #
+        end
+        #
+        class ElmPanel < ElmObject
+            #
+            include Helper
+            constructor :elm_panel_add
+            search_prefixes 'elm_panel_'
+            #
+        end
+        #
+        class ElmRadio < ElmObject
+            #
+            include Helper
+            constructor :elm_radio_add
+            search_prefixes 'elm_radio_'
+            #
+        end
+        #
+        class ElmSpinner < ElmObject
+            #
+            include Helper
+            constructor :elm_spinner_add
+            search_prefixes 'elm_spinner_'
+            #
+        end
+        #
+        class ElmToggle < ElmObject
+            #
+            include Helper
+            constructor :elm_toggle_add
+            search_prefixes 'elm_toggle_'
+            #
+        end
+        #
+        class ElmWin < ElmObject
+            #
+            search_prefixes 'elm_win_'
+            #
+            def initialize parent, title, type=:elm_win_basic, &block
+                super Native.method(:elm_win_add), parent, title, type, &block
+            end
+            def inwin_add
+                ElmInWin.new @ptr
+            end
+            def screen_position_get
+                x = FFI::MemoryPointer.new :int
+                y = FFI::MemoryPointer.new :int
+                Native.elm_win_screen_position_get @ptr, x, y
+                [ x.read_int, y.read_int ]
+            end
+            alias :screen_position :screen_position_get
         end
         #
     end
