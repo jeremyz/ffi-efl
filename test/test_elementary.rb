@@ -2,7 +2,12 @@
 # -*- coding: UTF-8 -*-
 #
 require 'efl/elementary'
+require 'efl/edje'
 require 'efl'
+#
+Dir.glob( File.join File.dirname(__FILE__), 'tests', '*.rb').each do |f|
+    load f
+end
 #
 include Efl;
 #
@@ -189,7 +194,6 @@ class TestWin < Elm::ElmWin
             li.size_hint_weight_expand
             li.size_hint_align_set_fill
             @bx0.pack_end li
-            li.show
         end
         @idx = Elm::ElmIndex.new self do |idx|
             idx.smart_callback_add 'delay,changed', method(:index_changed)
@@ -198,8 +202,16 @@ class TestWin < Elm::ElmWin
             idx.show
         end
         ch = nil
-        TESTS.each do |l,m|
-            it = @li.item_append l, nil, nil, method(:fake)
+        TESTS.sort.each do |l,m|
+            icon = nil
+            if Tests.respond_to? m
+                # TODO dosen't work ?????
+                icon = Elm::ElmIcon.new self
+                icon.file = "#{Efl::PACKAGE_DATA_DIR}/elementary/images/icon_00.png", nil
+                icon.scale = true, true
+            end
+            it = @li.item_append l, nil, icon, method(:try_test), FFI::MemoryPointer.from_string(m.to_s)
+            it.del_cb_set method(:free_list_item)
             if l[0]!=ch
                 ch = l[0]
                 @idx.item_append ch.to_s, it
@@ -207,10 +219,16 @@ class TestWin < Elm::ElmWin
         end
         @idx.item_go 0
         @li.go
+        @li.show
     end
     #
-    def fake data, evas_obj, event_info
-        puts 'FAKE'
+    def try_test data, evas_obj, event_info
+        fct = data.read_string
+        begin
+            Tests.send fct
+        rescue NoMethodError
+            puts "#{fct} not implemeneted yet"
+        end
     end
     #
     def tg_changed data, evas_obj, event_info
@@ -219,6 +237,11 @@ class TestWin < Elm::ElmWin
     #
     def index_changed data, evas_obj, event_info
         Native.elm_list_item_show event_info
+    end
+    #
+    def free_list_item data, evas_obj, event_info
+        # free FFI::MemoryPointer.from_string m.to_s
+        data.free
     end
     #
     def on_delete data, evas_object, event_info
@@ -234,9 +257,10 @@ end
 #
 Elm.init
 #
+#Native.elm_app_compile_bin_dir_set PACKAGE_BIN_DIR
+#Native.elm_app_compile_lib_dir_set PACKAGE_LIB_DIR
+#Native.elm_app_compile_data_dir_set PACKAGE_DATA_DIR
 Native.elm_app_info_set elm_main, 'elementary', 'images/logo.png'
-Native.elm_app_compile_bin_dir_set PACKAGE_BIN_DIR
-Native.elm_app_compile_data_dir_set PACKAGE_DATA_DIR
 #
 Elm.run
 Elm.shutdown
