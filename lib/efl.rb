@@ -6,9 +6,9 @@ module Efl
     #
     VERSION = '0.0.8'
     #
-    PACKAGE_BIN_DIR = File.join `pkg-config --variable=exec_prefix ecore`, 'bin'
-    PACKAGE_LIB_DIR = File.join `pkg-config --variable=exec_prefix ecore`, 'lib'
-    PACKAGE_DATA_DIR = File.join `pkg-config --variable=exec_prefix ecore`, 'share'
+    PACKAGE_BIN_DIR = File.join `pkg-config --variable=exec_prefix ecore`.strip, 'bin'
+    PACKAGE_LIB_DIR = File.join `pkg-config --variable=exec_prefix ecore`.strip, 'lib'
+    PACKAGE_DATA_DIR = File.join `pkg-config --variable=exec_prefix ecore`.strip, 'share'
     #
     autoload :EcoreEvas,    './lib/efl/ecore_evas.rb'
     autoload :EcoreGetopt,  './lib/efl/ecore_getopt.rb'
