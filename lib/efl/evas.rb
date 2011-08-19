@@ -261,6 +261,10 @@ module Efl
                 Native.evas_object_size_hint_weight_set @ptr, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND
             end
             alias :size_hint_weight_expand :size_hint_weight_set_expand
+            def size_hint_weight_set_expand_fill
+                Native.evas_object_size_hint_weight_set @ptr, EVAS_HINT_EXPAND, EVAS_HINT_FILL
+            end
+            alias :size_hint_weight_expand_fill :size_hint_weight_set_expand_fill
             def size_hint_weight_get
                 @rd0 ||= FFI::MemoryPointer.new :double
                 @rd1 ||= FFI::MemoryPointer.new :double
