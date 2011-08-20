@@ -87,7 +87,7 @@ module Efl
         # typedef enum _Elm_List_Mode {...} Elm_List_Mode;
         enum :elm_list_mode, [ :elm_list_compress, 0, :elm_list_scroll, :elm_list_limit, :elm_list_expand, :elm_list_last ]
         # typedef enum _Elm_Actionslider_Pos {...} Elm_Actionslider_Pos;
-        enum :elm_actionslider_pos, [ :elm_actionslider_none, 0, :elm_actionslider_left, 1, :elm_actionslider_center, 1, :elm_actionslider_right, 1, :elm_actionslider_all
+        enum :elm_actionslider_pos, [ :elm_actionslider_none, 0, :elm_actionslider_left, 1, :elm_actionslider_center, 2, :elm_actionslider_right, 4, :elm_actionslider_all, 7
             ]
         # typedef enum _Elm_Genlist_Item_Flags {...} Elm_Genlist_Item_Flags;
         enum :elm_genlist_item_flags, [ :elm_genlist_item_none, 0, :elm_genlist_item_subitems, :elm_genlist_item_group ]
