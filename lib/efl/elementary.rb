@@ -96,10 +96,66 @@ module Efl
         #
         class ElmActionSlider < ElmObject
             #
+            @as_pos = Native.enum_type :elm_actionslider_pos
+            class << self
+                attr_reader :as_pos
+            end
+            #
             include Helper
             constructor :elm_actionslider_add
             search_prefixes 'elm_actionslider_'
             #
+            def texts_set l=nil, c=nil, r=nil
+                l,c,r = *l if l.is_a? Array
+                Native.elm_object_text_part_set @ptr, "left", l
+                Native.elm_object_text_part_set @ptr, "center", c
+                Native.elm_object_text_part_set @ptr, "right", r
+            end
+            alias :texts= :texts_set
+            def indicator_set str
+                p = self.class.as_pos
+                v = (
+                     case str
+                     when 'l'
+                         p[:elm_actionslider_left]
+                     when 'c'
+                         p[:elm_actionslider_center]
+                     when 'r'
+                         p[:elm_actionslider_right]
+                     else
+                         p[:elm_actionslider_none]
+                     end
+                    )
+                Native.elm_actionslider_indicator_pos_set @ptr, v
+            end
+            alias :indicator= :indicator_set
+            def enabled_set str
+                p = self.class.as_pos
+                v = p[:elm_actionslider_none]
+                v |= p[:elm_actionslider_left] if str=~/l/
+                v |= p[:elm_actionslider_center] if str=~/c/
+                v |= p[:elm_actionslider_right] if str=~/r/
+                v |= p[:elm_actionslider_all] if str=~/a/
+                Native.elm_actionslider_enabled_pos_set @ptr, v
+            end
+            alias :enabled= :enabled_set
+            def magnet_set str
+                p = self.class.as_pos
+                v = p[:elm_actionslider_none]
+                v |= p[:elm_actionslider_left] if str=~/l/
+                v |= p[:elm_actionslider_center] if str=~/c/
+                v |= p[:elm_actionslider_right] if str=~/r/
+                v |= p[:elm_actionslider_all] if str=~/a/
+                Native.elm_actionslider_magnet_pos_set @ptr, v
+            end
+            alias :magnet= :magnet_set
+            #
+            def setup t=[], i='l', m='a', e='a'
+                texts_set *t
+                indicator_set i
+                magnet_set m
+                enabled_set e
+            end
         end
         #
         class ElmBg < ElmObject
