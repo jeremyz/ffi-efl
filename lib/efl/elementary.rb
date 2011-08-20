@@ -94,6 +94,14 @@ module Efl
         #
         ####################################################################################
         #
+        class ElmActionSlider < ElmObject
+            #
+            include Helper
+            constructor :elm_actionslider_add
+            search_prefixes 'elm_actionslider_'
+            #
+        end
+        #
         class ElmBg < ElmObject
             #
             include Helper
