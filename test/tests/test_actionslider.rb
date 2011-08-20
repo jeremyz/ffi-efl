@@ -24,6 +24,7 @@ module Tests
                 bx.show
             end
             as_pos = Native.enum_type :elm_actionslider_pos
+            # standards calls
             as = Elm::ElmActionSlider.new self do |as|
                 as.size_hint_weight_set Evas::EVAS_HINT_EXPAND, 0
                 as.size_hint_align_set Evas::EVAS_HINT_FILL, 0
@@ -38,43 +39,38 @@ module Tests
                 as.show
             end
             @bx.pack_end as
+            # use xxx_set helpers
             as = Elm::ElmActionSlider.new self do |as|
                 as.size_hint_weight_set Evas::EVAS_HINT_EXPAND, 0
                 as.size_hint_align_set Evas::EVAS_HINT_FILL, 0
-                as.text_part = "left", "Snooze"
-                as.text_part = "center", nil
-                as.text_part = "right", "Stop"
-                as.indicator_pos = :elm_actionslider_center
-                as.magnet_pos = :elm_actionslider_center
-                as.enabled_pos = as_pos[:elm_actionslider_left]|as_pos[:elm_actionslider_right]
+                as.texts_set "Snooze", nil, "Stop"
+                as.indicator_set 'c'
+                as.magnet_set 'c'
+                as.enabled_set 'lr'
                 as.smart_callback_add "selected", method(:cb_pos_selected)
                 as.show
             end
             @bx.pack_end as
+            # use xxx = helpers
             as = Elm::ElmActionSlider.new self do |as|
                 as.size_hint_weight_set Evas::EVAS_HINT_EXPAND, 0
                 as.size_hint_align_set Evas::EVAS_HINT_FILL, 0
                 as.style = "bar"
-                as.text_part = "left", nil
-                as.text_part = "center", "Accept"
-                as.text_part = "right", "Reject"
-                as.indicator_pos = :elm_actionslider_left
-                as.magnet_pos = as_pos[:elm_actionslider_center]|as_pos[:elm_actionslider_right]
-                as.enabled_pos = as_pos[:elm_actionslider_center]|as_pos[:elm_actionslider_right]
+                as.texts = nil, "Accept", "Reject"
+                as.indicator = 'l'
+                as.magnet = 'cr'
+                as.enabled = 'cr'
                 as.smart_callback_add "selected", method(:cb_pos_selected)
                 as.show
             end
             @bx.pack_end as
+            # use setup
             as = Elm::ElmActionSlider.new self do |as|
                 as.size_hint_weight_set Evas::EVAS_HINT_EXPAND, 0
                 as.size_hint_align_set Evas::EVAS_HINT_FILL, 0
                 as.style = "bar"
                 as.text = "Go"
-                as.text_part = "left", nil
-                as.text_part = "center", "Accept"
-                as.text_part = "right", "Reject"
-                as.indicator_pos = :elm_actionslider_left
-                as.magnet_pos = :elm_actionslider_left
+                as.setup [nil, "Accept", "Reject"], 'l', 'l', 'a'
                 as.smart_callback_add "selected", method(:cb_pos_selected)
                 as.smart_callback_add "pos_changed", method(:cb_position_change_magnetic)
                 as.show
@@ -84,11 +80,7 @@ module Tests
                 as.size_hint_weight_set Evas::EVAS_HINT_EXPAND, 0
                 as.size_hint_align_set Evas::EVAS_HINT_FILL, 0
                 as.text = "Go"
-                as.text_part = "left", "Left"
-                as.text_part = "center", "Center"
-                as.text_part = "right", "Right"
-                as.indicator_pos = :elm_actionslider_left
-                as.magnet_pos = :elm_actionslider_all
+                as.setup ["Left", "Center", "right"], 'l', 'a'
                 as.smart_callback_add "selected", method(:cb_pos_selected)
                 as.show
             end
@@ -97,11 +89,7 @@ module Tests
                 as.size_hint_weight_set Evas::EVAS_HINT_EXPAND, 0
                 as.size_hint_align_set Evas::EVAS_HINT_FILL, 0
                 as.text = "Go"
-                as.text_part = "left", "Enable"
-                as.text_part = "center", "Magnet"
-                as.text_part = "right", "Disable"
-                as.indicator_pos = :elm_actionslider_center
-                as.magnet_pos = :elm_actionslider_center
+                as.setup ["Enable", "Magnet", "Disable"], 'c', 'c'
                 as.smart_callback_add "selected", method(:cb_pos_selected)
                 as.smart_callback_add "pos_changed", method(:cb_magnet_enable_disable)
                 as.show
