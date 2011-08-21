@@ -5,6 +5,12 @@ require 'efl/elementary'
 require 'efl/edje'
 require 'efl'
 #
+PREFIX=`pkg-config --variable=prefix ecore`.strip
+if PREFIX.empty?
+    puts "unable to determine Efl::PREFIX using pkg-config, images will not be available"
+end
+PACKAGE_DATA_DIR = File.join PREFIX, 'share', 'elementary'
+
 Dir.glob( File.join File.dirname(__FILE__), 'tests', '*.rb').each do |f|
     load f
 end
@@ -207,7 +213,7 @@ class TestWin < Elm::ElmWin
             if Tests.respond_to? m
                 # TODO dosen't work ?????
                 icon = Elm::ElmIcon.new self
-                icon.file = "#{Efl::PACKAGE_DATA_DIR}/elementary/images/icon_00.png", nil
+                icon.file = "#{PACKAGE_DATA_DIR}/images/icon_00.png", nil
                 icon.scale = true, true
             end
             it = @li.item_append l, nil, icon, method(:try_test), FFI::MemoryPointer.from_string(m.to_s)
@@ -257,9 +263,6 @@ end
 #
 Elm.init
 #
-#Native.elm_app_compile_bin_dir_set PACKAGE_BIN_DIR
-#Native.elm_app_compile_lib_dir_set PACKAGE_LIB_DIR
-#Native.elm_app_compile_data_dir_set PACKAGE_DATA_DIR
 Native.elm_app_info_set elm_main, 'elementary', 'images/logo.png'
 #
 Elm.run

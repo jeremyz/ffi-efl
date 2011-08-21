@@ -6,14 +6,6 @@ module Efl
     #
     VERSION = '0.0.8'
     #
-    PREFIX=`pkg-config --variable=exec_prefix ecore`.strip
-    if PREFIX.empty?
-        puts "unable to determine Efl::PREFIX using pkg-config"
-    end
-    PACKAGE_BIN_DIR = File.join PREFIX, 'bin'
-    PACKAGE_LIB_DIR = File.join PREFIX, 'lib'
-    PACKAGE_DATA_DIR = File.join PREFIX, 'share'
-    #
     autoload :EcoreEvas,    './lib/efl/ecore_evas.rb'
     autoload :EcoreGetopt,  './lib/efl/ecore_getopt.rb'
     autoload :EcoreInput,   './lib/efl/ecore_input.rb'

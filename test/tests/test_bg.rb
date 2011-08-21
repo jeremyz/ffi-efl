@@ -23,7 +23,7 @@ module Tests
         end
         def image_bg
             @bg = Elm::ElmBg.new self do |bg|
-                bg.file =  "#{Efl::PACKAGE_DATA_DIR}/elementary/images/plant_01.jpg", nil
+                bg.file =  "#{PACKAGE_DATA_DIR}/images/plant_01.jpg", nil
                 bg.size_hint_weight_expand
                 self.resize_object_add bg
                 bg.show
@@ -37,7 +37,7 @@ module Tests
                 bx.show
             end
             @o_bg = Elm::ElmBg.new self do |bg|
-                bg.file =  "#{Efl::PACKAGE_DATA_DIR}/elementary/images/plant_01.jpg", nil
+                bg.file =  "#{PACKAGE_DATA_DIR}/images/plant_01.jpg", nil
                 bg.size_hint_weight_expand
                 bg.size_hint_align_fill
                 @bx.pack_end bg
@@ -115,7 +115,7 @@ module Tests
         def cb_overlay_changed data, evas_obj, event_info
             if Elm::ElmCheck.new(evas_obj).state
                 over = @o_bg.parent_widget.evas.edje_object_add
-                over.file = File.join(Efl::PACKAGE_DATA_DIR,'elementary/objects/test.edj'), "bg_overlay"
+                over.file = "#{PACKAGE_DATA_DIR}/objects/test.edj", "bg_overlay"
                 @o_bg.overlay = over
             else
                 @o_bg.overlay = FFI::Pointer::NULL
