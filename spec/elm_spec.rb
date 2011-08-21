@@ -187,15 +187,12 @@ describe "Efl::Elm #{Efl::Elm.version.full}" do
                 @iwin.activate
                 @iwin.content_set o1
                 @iwin.content.should == o1.to_ptr
-                @iwin.content?.should == o1.to_ptr
                 @iwin.content_get.should === o1.to_ptr
                 @iwin.content= o2
                 @iwin.content.should === o2.to_ptr
-                @iwin.content?.should === o2.to_ptr
                 @iwin.content_get.should === o2.to_ptr
                 @iwin.content_unset
                 @iwin.content.should == FFI::Pointer::NULL
-                @iwin.content?.should == FFI::Pointer::NULL
                 @iwin.content_get.should == FFI::Pointer::NULL
                 o1.free
                 o2.free

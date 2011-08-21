@@ -158,6 +158,20 @@ module Efl
             end
         end
         #
+        class ElmAnchorBlock < ElmObject
+            #
+            include Helper
+            constructor :elm_anchorblock_add
+            search_prefixes 'elm_anchorblock_'
+        end
+        #
+        class ElmAnchorView < ElmObject
+            #
+            include Helper
+            constructor :elm_anchorview_add
+            search_prefixes 'elm_anchorview_'
+        end
+        #
         class ElmBg < ElmObject
             #
             include Helper
@@ -209,6 +223,13 @@ module Efl
             alias :children :children_get
         end
         #
+        class ElmBubble < ElmObject
+            #
+            include Helper
+            constructor :elm_bubble_add
+            search_prefixes 'elm_bubble_'
+        end
+        #
         class ElmButton < ElmObject
             #
             include Helper
@@ -217,11 +238,34 @@ module Efl
             #
         end
         #
+        class ElmCalendar < ElmObject
+            #
+            include Helper
+            constructor :elm_calendar_add
+            search_prefixes 'elm_calendar_'
+            #
+        end
+        #
         class ElmCheck < ElmObject
             #
             include Helper
             constructor :elm_check_add
             search_prefixes 'elm_check_'
+            #
+        end
+        #
+        class ElmClock < ElmObject
+            #
+            include Helper
+            constructor :elm_clock_add
+            search_prefixes 'elm_clock_'
+        end
+        #
+        class ElmColorSelector < ElmObject
+            #
+            include Helper
+            constructor :elm_colorselector_add
+            search_prefixes 'elm_colorselector_'
             #
         end
         #
@@ -255,6 +299,34 @@ module Efl
             #
         end
         #
+        class ElmFileSelector < ElmObject
+            #
+            include Helper
+            constructor :elm_fileselector_add
+            search_prefixes 'elm_fileselector_'
+        end
+        #
+        class ElmFileSelectorButton < ElmObject
+            #
+            include Helper
+            constructor :elm_fileselector_button_add
+            search_prefixes 'elm_fileselector_button_'
+        end
+        #
+        class ElmFileSelectorENtry < ElmObject
+            #
+            include Helper
+            constructor :elm_fileselector_entry_add
+            search_prefixes 'elm_fileselector_entry_'
+        end
+        #
+        class ElmFlip < ElmObject
+            #
+            include Helper
+            constructor :elm_flip_add
+            search_prefixes 'elm_flip_'
+        end
+        #
         class ElmFlipSelector < ElmObject
             #
             include Helper
@@ -280,15 +352,45 @@ module Efl
         class ElmFrame < ElmObject
             #
             include Helper
-            search_prefixes 'elm_frame_'
             constructor :elm_frame_add
+            search_prefixes 'elm_frame_'
         end
         #
-        class ElmGenlist < ElmObject
+        class ElmGenGrid < ElmObject
+            #
+            include Helper
+            constructor :elm_gengrid_add
+            search_prefixes 'elm_gengrid_'
+        end
+        #
+        class ElmGenList < ElmObject
             #
             include Helper
             constructor :elm_genlist_add
             search_prefixes 'elm_genlist_'
+            #
+        end
+        #
+        class ElmGestureLayer < ElmObject
+            #
+            include Helper
+            constructor :elm_gesture_layer_add
+            search_prefixes 'elm_gesture_layer_'
+        end
+        #
+        class ElmGlView < ElmObject
+            #
+            include Helper
+            constructor :elm_glview_add
+            search_prefixes 'elm_glview_'
+            #
+        end
+        #
+        class ElmGrid < ElmObject
+            #
+            include Helper
+            constructor :elm_grid_add
+            search_prefixes 'elm_grid_'
             #
         end
         #
@@ -300,7 +402,7 @@ module Efl
             #
         end
         #
-        class ElmHoversel < ElmObject
+        class ElmHoverSel < ElmObject
             #
             include Helper
             constructor :elm_hoversel_add
@@ -311,7 +413,7 @@ module Efl
             end
         end
         #
-        class ElmHoverselItem < ElmObject
+        class ElmHoverSelItem < ElmObject
             #
             search_prefixes 'elm_hoversel_item_'
             #
@@ -329,6 +431,14 @@ module Efl
             alias :scale= :scale_set
         end
         #
+        class ElmImage < ElmObject
+            #
+            include Helper
+            constructor :elm_image_add
+            search_prefixes 'elm_image_'
+            #
+        end
+        #
         class ElmIndex < ElmObject
             #
             include Helper
@@ -343,6 +453,20 @@ module Efl
             #
             def initialize parent, &block
                 super Native.method(:elm_win_inwin_add), parent, &block
+            end
+            #
+            def content_set content
+                Native.elm_win_inwin_content_set @ptr, content
+            end
+            alias :content= :content_set
+            #
+            def content_get
+                Native.elm_win_inwin_content_get @ptr
+            end
+            alias :content :content_get
+            #
+            def content_unset
+                Native.elm_win_inwin_content_unset @ptr
             end
         end
         #
@@ -387,6 +511,38 @@ module Efl
             alias :data :data_get
         end
         #
+        class ElmMenu < ElmObject
+            #
+            include Helper
+            constructor :elm_menu_add
+            search_prefixes 'elm_menu_'
+            #
+        end
+        #
+        class ElmMenuItem < ElmObject
+            #
+            include Helper
+            constructor :elm_menu_item_add
+            search_prefixes 'elm_menu_item_'
+            #
+        end
+        #
+        class ElmMenuItemSeparator < ElmObject
+            #
+            include Helper
+            constructor :elm_menu_item_separator_add
+            search_prefixes 'elm_menu_item_separator_'
+            #
+        end
+        #
+        class ElmNaviFrame < ElmObject
+            #
+            include Helper
+            constructor :elm_naviframe_add
+            search_prefixes 'elm_naviframe_'
+            #
+        end
+        #
         class ElmNotify < ElmObject
             #
             include Helper
@@ -409,6 +565,57 @@ module Efl
             constructor :elm_panel_add
             search_prefixes 'elm_panel_'
             #
+            #
+            def content_set content
+                Native.elm_panel_content_set @ptr, content
+            end
+            alias :content= :content_set
+            #
+            def content_get
+                Native.elm_panel_content_get @ptr
+            end
+            alias :content :content_get
+            #
+            def content_unset
+                Native.elm_panel_content_unset @ptr
+            end
+        end
+        #
+        class ElmPanes < ElmObject
+            #
+            include Helper
+            constructor :elm_panes_add
+            search_prefixes 'elm_panes_'
+            #
+        end
+        #
+        class ElmPlayer < ElmObject
+            #
+            include Helper
+            constructor :elm_player_add
+            search_prefixes 'elm_player_'
+            #
+        end
+        #
+        class ElmPhoto < ElmObject
+            #
+            include Helper
+            constructor :elm_photo_add
+            search_prefixes 'elm_photo_'
+        end
+        #
+        class ElmPhotoCam < ElmObject
+            #
+            include Helper
+            constructor :elm_photocam_add
+            search_prefixes 'elm_photocam_'
+        end
+        #
+        class ElmProgressBar < ElmObject
+            #
+            include Helper
+            constructor :elm_progressbar_add
+            search_prefixes 'elm_progressbar_'
         end
         #
         class ElmRadio < ElmObject
@@ -416,6 +623,38 @@ module Efl
             include Helper
             constructor :elm_radio_add
             search_prefixes 'elm_radio_'
+            #
+        end
+        #
+        class ElmScroller < ElmObject
+            #
+            include Helper
+            constructor :elm_scroller_add
+            search_prefixes 'elm_scroller_'
+            #
+        end
+        #
+        class ElmSeparator < ElmObject
+            #
+            include Helper
+            constructor :elm_separator_add
+            search_prefixes 'elm_separator_'
+            #
+        end
+        #
+        class ElmSlider < ElmObject
+            #
+            include Helper
+            constructor :elm_slider_add
+            search_prefixes 'elm_slider_'
+            #
+        end
+        #
+        class ElmSlideshow < ElmObject
+            #
+            include Helper
+            constructor :elm_slideshow_add
+            search_prefixes 'elm_slideshow_'
             #
         end
         #
@@ -427,12 +666,40 @@ module Efl
             #
         end
         #
+        class ElmTable < ElmObject
+            #
+            include Helper
+            constructor :elm_table_add
+            search_prefixes 'elm_table_'
+        end
+        #
+        class ElmThumb < ElmObject
+            #
+            include Helper
+            constructor :elm_thumb_add
+            search_prefixes 'elm_thumb_'
+        end
+        #
         class ElmToggle < ElmObject
             #
             include Helper
             constructor :elm_toggle_add
             search_prefixes 'elm_toggle_'
             #
+        end
+        #
+        class ElmToolbar < ElmObject
+            #
+            include Helper
+            constructor :elm_toolbar_add
+            search_prefixes 'elm_toolbar_'
+        end
+        #
+        class ElmVideo < ElmObject
+            #
+            include Helper
+            constructor :elm_video_add
+            search_prefixes 'elm_video_'
         end
         #
         class ElmWin < ElmObject
