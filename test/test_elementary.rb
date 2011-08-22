@@ -162,7 +162,7 @@ class TestWin < Elm::ElmWin
     #
     def initialize name, title
         super FFI::MemoryPointer::NULL, name
-        title = title
+        self.title = title
         feed
         smart_callback_add 'delete,request', method(:on_delete)
     end
@@ -211,10 +211,9 @@ class TestWin < Elm::ElmWin
         TESTS.sort.each do |l,m|
             icon = nil
             if Tests.respond_to? m
-                # TODO dosen't work ?????
                 icon = Elm::ElmIcon.new self
                 icon.file = "#{PACKAGE_DATA_DIR}/images/icon_00.png", nil
-                icon.scale = true, true
+                icon.size_hint_min = 20,20
             end
             it = @li.item_append l, nil, icon, method(:try_test), FFI::MemoryPointer.from_string(m.to_s)
             it.del_cb_set method(:free_list_item)
@@ -256,7 +255,7 @@ class TestWin < Elm::ElmWin
 end
 #
 def elm_main
-    win = TestWin.new 'test_elementare', 'Elementary Tests'
+    win = TestWin.new 'test_elementary', 'Elementary Tests'
     win.evas_object_resize 320, 480
     win.show
 end
