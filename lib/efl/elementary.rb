@@ -72,17 +72,17 @@ module Efl
             end
             alias :text :text_get
             #
-            def content_set content
+            def obj_content_set content
                 Native.elm_object_content_part_set @ptr, nil, content
             end
-            alias :content= :content_set
+            alias :obj_content= :obj_content_set
             #
-            def content_get
+            def obj_content_get
                 Native.elm_object_content_part_get @ptr, nil
             end
-            alias :content :content_get
+            alias :obj_content :obj_content_get
             #
-            def content_unset
+            def obj_content_unset
                 Native.elm_object_content_part_unset @ptr, nil
             end
             #
@@ -455,19 +455,6 @@ module Efl
                 super Native.method(:elm_win_inwin_add), parent, &block
             end
             #
-            def content_set content
-                Native.elm_win_inwin_content_set @ptr, content
-            end
-            alias :content= :content_set
-            #
-            def content_get
-                Native.elm_win_inwin_content_get @ptr
-            end
-            alias :content :content_get
-            #
-            def content_unset
-                Native.elm_win_inwin_content_unset @ptr
-            end
         end
         #
         class ElmLabel < ElmObject
@@ -565,20 +552,6 @@ module Efl
             constructor :elm_panel_add
             search_prefixes 'elm_panel_'
             #
-            #
-            def content_set content
-                Native.elm_panel_content_set @ptr, content
-            end
-            alias :content= :content_set
-            #
-            def content_get
-                Native.elm_panel_content_get @ptr
-            end
-            alias :content :content_get
-            #
-            def content_unset
-                Native.elm_panel_content_unset @ptr
-            end
         end
         #
         class ElmPanes < ElmObject
