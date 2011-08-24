@@ -466,6 +466,10 @@ module Efl
         [ :elm_object_item_text_part_set, [ :elm_object_item_p, :string, :string ], :void ],
         # EAPI const char *elm_object_item_text_part_get(const Elm_Object_Item *it, const char *part);
         [ :elm_object_item_text_part_get, [ :elm_object_item_p, :string ], :string ],
+        # EAPI void elm_object_access_info_set(Evas_Object *obj, const char *txt);
+        [ :elm_object_access_info_set, [ :evas_object_p, :string ], :void ],
+        # EAPI void elm_object_item_access_info_set(Elm_Object_Item *it, const char *txt);
+        [ :elm_object_item_access_info_set, [ :elm_object_item_p, :string ], :void ],
         # EAPI void elm_all_flush(void);
         [ :elm_all_flush, [  ], :void ],
         # EAPI int elm_cache_flush_interval_get(void);
@@ -2123,8 +2127,8 @@ module Efl
         [ :elm_list_item_end_get, [ :elm_list_item_p ], :evas_object_p ],
         # EAPI void elm_list_item_end_set(Elm_List_Item *item, Evas_Object *end);
         [ :elm_list_item_end_set, [ :elm_list_item_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_list_item_base_get(const Elm_List_Item *item);
-        [ :elm_list_item_base_get, [ :elm_list_item_p ], :evas_object_p ],
+        # EAPI Evas_Object *elm_list_item_object_get(const Elm_List_Item *item);
+        [ :elm_list_item_object_get, [ :elm_list_item_p ], :evas_object_p ],
         # EAPI const char *elm_list_item_label_get(const Elm_List_Item *item);
         [ :elm_list_item_label_get, [ :elm_list_item_p ], :string ],
         # EAPI void elm_list_item_label_set(Elm_List_Item *item, const char *text);
