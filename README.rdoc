@@ -34,7 +34,7 @@ A ruby-ffi binding to efl libraries (Enlightenment Foundation Libraries).
         end
         w.resize_object_add bg
         lb = Efl::Elm::ElmLabel.new w do |lb|
-            lb.label_set "Hello World!"
+            lb.text = "Hello World!"
             lb.size_hint_weight_set 1.0, 1.0
         end
         lb.show
