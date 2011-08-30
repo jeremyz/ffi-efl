@@ -39,6 +39,9 @@ module Efl
         typedef :pointer, :elm_text_format_p
         # typedef enum _Elm_Wrap_Type {...} Elm_Wrap_Type;
         enum :elm_wrap_type, [ :elm_wrap_none, 0, :elm_wrap_char, :elm_wrap_word, :elm_wrap_mixed, :elm_wrap_last ]
+        # typedef enum {...} Elm_Input_Panel_Layout;
+        enum :elm_input_panel_layout, [ :elm_input_panel_layout_normal, :elm_input_panel_layout_number, :elm_input_panel_layout_email, :elm_input_panel_layout_url,
+            :elm_input_panel_layout_phonenumber, :elm_input_panel_layout_ip, :elm_input_panel_layout_month, :elm_input_panel_layout_numberonly, :elm_input_panel_layout_invalid ]
         # typedef enum _Elm_Win_Type {...} Elm_Win_Type;
         enum :elm_win_type, [ :elm_win_basic, :elm_win_dialog_basic, :elm_win_desktop, :elm_win_dock, :m, :elm_win_toolbar, :elm_win_menu, :elm_win_utility,
             :elm_win_splash, :elm_win_dropdown_menu, :elm_win_popup_menu, :elm_win_tooltip, :t, :elm_win_notification, :elm_win_combo, :elm_win_dnd, :elm_win_inlined_image, :t, :e,
@@ -120,7 +123,8 @@ module Efl
         # typedef enum _Elm_Calendar_Mark_Repeat {...} Elm_Calendar_Mark_Repeat;
         enum :elm_calendar_mark_repeat, [ :elm_calendar_unique, :elm_calendar_daily, :elm_calendar_weekly, :elm_calendar_monthly, :elm_calendar_annually ]
         # typedef enum _Elm_Ctxpopup_Direction {...} Elm_Ctxpopup_Direction;
-        enum :elm_ctxpopup_direction, [ :elm_ctxpopup_direction_down, :elm_ctxpopup_direction_right, :elm_ctxpopup_direction_left, :elm_ctxpopup_direction_up ]
+        enum :elm_ctxpopup_direction, [ :elm_ctxpopup_direction_down, :elm_ctxpopup_direction_right, :elm_ctxpopup_direction_left, :elm_ctxpopup_direction_up,
+            :elm_ctxpopup_direction_dont_know ]
         typedef :pointer, :elm_ctxpopup_direction_p
         # typedef enum {...} Elm_Transit_Tween_Mode;
         enum :elm_transit_tween_mode, [ :elm_transit_tween_mode_linear, :elm_transit_tween_mode_sinusoidal, :elm_transit_tween_mode_decelerate,
@@ -518,6 +522,14 @@ module Efl
         [ :elm_object_scale_set, [ :evas_object_p, :double ], :void ],
         # EAPI double elm_object_scale_get(const Evas_Object *obj);
         [ :elm_object_scale_get, [ :evas_object_p ], :double ],
+        # EAPI Eina_Bool elm_password_show_last_get(void);
+        [ :elm_password_show_last_get, [  ], :eina_bool ],
+        # EAPI void elm_password_show_last_set(Eina_Bool password_show_last);
+        [ :elm_password_show_last_set, [ :eina_bool ], :void ],
+        # EAPI double elm_password_show_last_timeout_get(void);
+        [ :elm_password_show_last_timeout_get, [  ], :double ],
+        # EAPI void elm_password_show_last_timeout_set(double password_show_last_timeout);
+        [ :elm_password_show_last_timeout_set, [ :double ], :void ],
         # EAPI Eina_Bool elm_mirrored_get(void);
         [ :elm_mirrored_get, [  ], :eina_bool ],
         # EAPI void elm_mirrored_set(Eina_Bool mirrored);
@@ -1675,6 +1687,10 @@ module Efl
         [ :elm_entry_filter_limit_size, [ :void_p, :evas_object_p, :string_array ], :void ],
         # EAPI void elm_entry_filter_accept_set(void *data, Evas_Object *entry, char **text);
         [ :elm_entry_filter_accept_set, [ :void_p, :evas_object_p, :string_array ], :void ],
+        # EAPI void elm_entry_input_panel_layout_set(Evas_Object *obj, Elm_Input_Panel_Layout layout);
+        [ :elm_entry_input_panel_layout_set, [ :evas_object_p, :elm_input_panel_layout ], :void ],
+        # EAPI Elm_Input_Panel_Layout elm_entry_input_panel_layout_get(Evas_Object *obj);
+        [ :elm_entry_input_panel_layout_get, [ :evas_object_p ], :elm_input_panel_layout ],
         # EAPI Evas_Object *elm_anchorview_add(Evas_Object *parent);
         [ :elm_anchorview_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_anchorview_hover_parent_set(Evas_Object *obj, Evas_Object *parent);
@@ -3117,6 +3133,8 @@ module Efl
         # EAPI void elm_ctxpopup_direction_priority_get(Evas_Object *obj, Elm_Ctxpopup_Direction *first, Elm_Ctxpopup_Direction *second, Elm_Ctxpopup_Direction *third, Elm_Ctxpopup_Direction *fourth);
         [ :elm_ctxpopup_direction_priority_get, [ :evas_object_p, :elm_ctxpopup_direction_p, :elm_ctxpopup_direction_p, :elm_ctxpopup_direction_p,
             :elm_ctxpopup_direction_p ], :void ],
+        # EAPI Elm_Ctxpopup_Direction elm_ctxpopup_direction_get(const Evas_Object *obj);
+        [ :elm_ctxpopup_direction_get, [ :evas_object_p ], :elm_ctxpopup_direction ],
         # EAPI Elm_Transit *elm_transit_add(void);
         [ :elm_transit_add, [  ], :elm_transit_p ],
         # EAPI void elm_transit_del(Elm_Transit *transit);
@@ -3283,6 +3301,12 @@ module Efl
         [ :elm_factory_content_set, [ :evas_object_p, :evas_object_p ], :void ],
         # EAPI Evas_Object *elm_factory_content_get(const Evas_Object *obj);
         [ :elm_factory_content_get, [ :evas_object_p ], :evas_object_p ],
+        # EAPI void elm_factory_maxmin_mode_set(Evas_Object *obj, Eina_Bool enabled);
+        [ :elm_factory_maxmin_mode_set, [ :evas_object_p, :eina_bool ], :void ],
+        # EAPI Eina_Bool elm_factory_maxmin_mode_get(const Evas_Object *obj);
+        [ :elm_factory_maxmin_mode_get, [ :evas_object_p ], :eina_bool ],
+        # EAPI void elm_factory_maxmin_reset_set(Evas_Object *obj);
+        [ :elm_factory_maxmin_reset_set, [ :evas_object_p ], :void ],
         # EAPI Evas_Object *elm_video_add(Evas_Object *parent);
         [ :elm_video_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_video_file_set(Evas_Object *video, const char *filename);

@@ -42,7 +42,7 @@ module Efl
         enum :evas_font_hinting_flags, [ :evas_font_hinting_none, :evas_font_hinting_auto, :evas_font_hinting_bytecode ]
         # typedef enum _Evas_Colorspace {...} Evas_Colorspace;
         enum :evas_colorspace, [ :evas_colorspace_argb8888, :evas_colorspace_ycbcr422p601_pl, :evas_colorspace_ycbcr422p709_pl, :evas_colorspace_rgb565_a5p,
-            :evas_colorspace_gry8, :evas_colorspace_ycbcr422601_pl ]
+            :evas_colorspace_gry8, :evas_colorspace_ycbcr422601_pl, :evas_colorspace_ycbcr420nv12601_pl, :evas_colorspace_ycbcr420tm12601_pl ]
         # typedef enum _Evas_Object_Table_Homogeneous_Mode {...} Evas_Object_Table_Homogeneous_Mode;
         enum :evas_object_table_homogeneous_mode, [ :evas_object_table_homogeneous_none, 0, :evas_object_table_homogeneous_table, 1, :evas_object_table_homogeneous_item,
             2 ]
@@ -1118,6 +1118,8 @@ module Efl
         [ :evas_object_smart_calculate, [ :evas_object_p ], :void ],
         # EAPI void evas_smart_objects_calculate (Evas *e);
         [ :evas_smart_objects_calculate, [ :evas_p ], :void ],
+        # EAPI int evas_smart_objects_calculate_count_get (const Evas *e);
+        [ :evas_smart_objects_calculate_count_get, [ :evas_p ], :int ],
         # EAPI void evas_object_smart_move_children_relative(Evas_Object *obj, Evas_Coord dx, Evas_Coord dy);
         [ :evas_object_smart_move_children_relative, [ :evas_object_p, :int, :int ], :void ],
         # EAPI Evas_Object *evas_object_smart_clipped_clipper_get (Evas_Object *obj);

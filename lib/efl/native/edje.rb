@@ -71,6 +71,9 @@ module Efl
         enum :edje_external_param_flags, [ :edje_external_param_flags_none, 0, :edje_external_param_flags_get, :edje_external_param_flags_set,
             :edje_external_param_flags_state, :edje_external_param_flags_constructor, :edje_external_param_flags_regular, :edje_external_param_flags_set,
             :edje_external_param_flags_state ]
+        # typedef enum {...} Edje_Input_Panel_Layout;
+        enum :edje_input_panel_layout, [ :edje_input_panel_layout_normal, :edje_input_panel_layout_number, :edje_input_panel_layout_email, :edje_input_panel_layout_url,
+            :edje_input_panel_layout_phonenumber, :edje_input_panel_layout_ip, :edje_input_panel_layout_month, :edje_input_panel_layout_numberonly, :edje_input_panel_layout_invalid ]
         #
         # TYPEDEFS
         # typedef struct _Edje_Version Edje_Version;
@@ -337,6 +340,10 @@ module Efl
         [ :edje_object_part_text_cursor_pos_set, [ :evas_object_p, :string, :edje_cursor, :int ], :void ],
         # EAPI int edje_object_part_text_cursor_pos_get (const Evas_Object *obj, const char *part, Edje_Cursor cur);
         [ :edje_object_part_text_cursor_pos_get, [ :evas_object_p, :string, :edje_cursor ], :int ],
+        # EAPI void edje_object_part_text_input_panel_layout_set (const Evas_Object *obj, const char *part, Edje_Input_Panel_Layout layout);
+        [ :edje_object_part_text_input_panel_layout_set, [ :evas_object_p, :string, :edje_input_panel_layout ], :void ],
+        # EAPI Edje_Input_Panel_Layout edje_object_part_text_input_panel_layout_get (const Evas_Object *obj, const char *part);
+        [ :edje_object_part_text_input_panel_layout_get, [ :evas_object_p, :string ], :edje_input_panel_layout ],
         # EAPI void edje_object_text_insert_filter_callback_add (Evas_Object *obj, const char *part, Edje_Text_Filter_Cb func, void *data);
         [ :edje_object_text_insert_filter_callback_add, [ :evas_object_p, :string, :edje_text_filter_cb, :void_p ], :void ],
         # EAPI void *edje_object_text_insert_filter_callback_del (Evas_Object *obj, const char *part, Edje_Text_Filter_Cb func);
