@@ -19,8 +19,6 @@ module Efl
     #
     module Native
         #
-        extend Efl::FFIHelper
-        #
         ffi_lib 'ecore_input'
         #
         # ENUMS

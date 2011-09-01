@@ -50,8 +50,6 @@ module Efl
     end
     #
     module Native
-        #
-        extend Efl::FFIHelper
 EOF
 FOOTER =<<-EOF
     end

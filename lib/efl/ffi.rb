@@ -6,6 +6,54 @@ require 'ffi'
 module Efl
     #
     module Native
+        #
+        extend FFI::Library
+        #
+        typedef :pointer, :char_p
+        typedef :pointer, :short_p
+        typedef :pointer, :int_p
+        typedef :pointer, :long_p
+        typedef :pointer, :float_p
+        typedef :pointer, :double_p
+        typedef :pointer, :uchar_p
+        typedef :pointer, :ushort_p
+        typedef :pointer, :uint_p
+        typedef :pointer, :ulong_p
+        typedef :pointer, :ufloat_p
+        typedef :pointer, :udouble_p
+        typedef :pointer, :void_p
+        typedef :pointer, :string_array
+        typedef :pointer, :string_array_p
+        typedef :uint_p,  :uintptr_t
+        #
+        typedef :bool,    :eina_bool
+        typedef :pointer, :eina_bool_p
+        typedef :pointer, :eina_list_p
+        typedef :pointer, :eina_hash_p
+        typedef :pointer, :eina_iterator_p
+        typedef :pointer, :eina_accessor_p
+        typedef :pointer, :evas_p
+        typedef :pointer, :evas_object_p
+        typedef :pointer, :evas_object_pp
+        typedef :pointer, :evas_gl_api_p
+        typedef :pointer, :ecore_getopt_p
+        typedef :pointer, :ecore_getopt_desc_p
+        typedef :pointer, :ecore_getopt_value_p
+        #
+        callback :eina_compare_cb, [ :void_p, :void_p ], :int
+        callback :eina_each_cb, [ :void_p, :void_p, :void_p ], :eina_bool
+        callback :eina_free_cb, [ :void_p ], :void
+        #
+        def self.attach_fcts fcts
+            fcts.each do |func|
+                begin
+                    attach_function(*func)
+                rescue Object => e
+                    puts "Could not attach #{func} #{e.message}"
+                end
+            end
+        end
+        #
         class VersionStruct < FFI::Struct
             layout  :major,     :int,
                     :minor,     :int,
@@ -16,69 +64,6 @@ module Efl
                 [:major,:minor,:micro,:revision].collect { |e| self[e].to_s }.join '.'
             end
         end
-    end
-    #
-    module FFIHelper
-        #
-        def attach_fcts fcts
-            fcts.each do |func|
-                begin
-                    attach_function(*func)
-                rescue Object => e
-                    puts "Could not attach #{func} #{e.message}"
-                end
-            end
-        end
-        #
-        def ffi_typedefs
-            @ffi_typedefs
-        end
-        #
-        def steal_ffitype mod, sym
-            typedef mod.ffi_typedefs[sym], sym
-        end
-        #
-        def self.extended mod
-            #
-            mod.extend FFI::Library
-            #
-            mod.typedef :pointer, :char_p
-            mod.typedef :pointer, :short_p
-            mod.typedef :pointer, :int_p
-            mod.typedef :pointer, :long_p
-            mod.typedef :pointer, :float_p
-            mod.typedef :pointer, :double_p
-            mod.typedef :pointer, :uchar_p
-            mod.typedef :pointer, :ushort_p
-            mod.typedef :pointer, :uint_p
-            mod.typedef :pointer, :ulong_p
-            mod.typedef :pointer, :ufloat_p
-            mod.typedef :pointer, :udouble_p
-            mod.typedef :pointer, :void_p
-            mod.typedef :pointer, :string_array
-            mod.typedef :pointer, :string_array_p
-            mod.typedef :uint_p,  :uintptr_t
-            #
-            mod.typedef :bool,    :eina_bool
-            mod.typedef :pointer, :eina_bool_p
-            mod.typedef :pointer, :eina_list_p
-            mod.typedef :pointer, :eina_hash_p
-            mod.typedef :pointer, :eina_iterator_p
-            mod.typedef :pointer, :eina_accessor_p
-            mod.typedef :pointer, :evas_p
-            mod.typedef :pointer, :evas_object_p
-            mod.typedef :pointer, :evas_object_pp
-            mod.typedef :pointer, :evas_gl_api_p
-            mod.typedef :pointer, :ecore_getopt_p
-            mod.typedef :pointer, :ecore_getopt_desc_p
-            mod.typedef :pointer, :ecore_getopt_value_p
-            #
-            mod.callback :eina_compare_cb, [ :void_p, :void_p ], :int
-            mod.callback :eina_each_cb, [ :void_p, :void_p, :void_p ], :eina_bool
-            mod.callback :eina_free_cb, [ :void_p ], :void
-            #
-        end
-        #
     end
     #
     module ModuleHelper

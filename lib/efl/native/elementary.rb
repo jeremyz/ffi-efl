@@ -20,8 +20,6 @@ module Efl
     #
     module Native
         #
-        extend Efl::FFIHelper
-        #
         ffi_lib 'libelementary-ver-pre-svn-09.so.0'
         #
         # ENUMS
