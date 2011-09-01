@@ -9,6 +9,32 @@ module Efl
         #
         extend FFI::Library
         #
+        def self.attach_fcts fcts
+            fcts.each do |func|
+                begin
+                    attach_function(*func)
+                rescue Object => e
+                    puts "Could not attach #{func} #{e.message}"
+                end
+            end
+        end
+        #
+        class << self
+            alias :ffi_lib_orig :ffi_lib
+            def ffi_lib *names
+                @all_ffi_libs||=[]
+                @all_ffi_libs += ffi_lib_orig(names)
+                @all_ffi_libs.uniq!
+            end
+            def find_variable name
+                @all_ffi_libs.each do |lib|
+                    address = lib.find_variable name
+                    return address if not address.nil?
+                end
+                return nil
+            end
+        end
+        #
         typedef :pointer, :char_p
         typedef :pointer, :short_p
         typedef :pointer, :int_p
@@ -43,16 +69,6 @@ module Efl
         callback :eina_compare_cb, [ :void_p, :void_p ], :int
         callback :eina_each_cb, [ :void_p, :void_p, :void_p ], :eina_bool
         callback :eina_free_cb, [ :void_p ], :void
-        #
-        def self.attach_fcts fcts
-            fcts.each do |func|
-                begin
-                    attach_function(*func)
-                rescue Object => e
-                    puts "Could not attach #{func} #{e.message}"
-                end
-            end
-        end
         #
         class VersionStruct < FFI::Struct
             layout  :major,     :int,
