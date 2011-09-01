@@ -251,6 +251,8 @@ module Efl
         callback :evas_object_image_pixels_get_cb, [ :void_p, :evas_object_p ], :void
         # typedef void (*Evas_Object_Box_Layout) (Evas_Object *o, Evas_Object_Box_Data *priv, void *user_data);
         callback :evas_object_box_layout, [ :evas_object_p, :evas_object_box_data_p, :void_p ], :void
+        # void (*free_data)(void *data)
+        callback :evas_free_data_cb, [ :void_p ], :void
         #
         # VARIABLES
         # EAPI extern Evas_Version *evas_version;
@@ -1131,7 +1133,7 @@ module Efl
         # EAPI const Evas_Object_Box_Api *evas_object_box_smart_class_get (void);
         [ :evas_object_box_smart_class_get, [  ], :evas_object_box_api_p ],
         # EAPI void evas_object_box_layout_set (Evas_Object *o, Evas_Object_Box_Layout cb, const void *data, void (*free_data)(void *data));
-        # FIXME
+        [ :evas_object_box_layout_set, [ :evas_object_p, :evas_object_box_layout, :void_p, :evas_free_data_cb ], :void ],
         # EAPI Evas_Object *evas_object_box_add (Evas *evas);
         [ :evas_object_box_add, [ :evas_p ], :evas_object_p ],
         # EAPI Evas_Object *evas_object_box_add_to (Evas_Object *parent);

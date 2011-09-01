@@ -159,6 +159,7 @@ module Efl
         typedef :pointer, :elm_theme_p
         # typedef struct _Elm_Box_Transition Elm_Box_Transition;
         typedef :pointer, :elm_box_transition
+        typedef :pointer, :elm_box_transition_p
         # typedef struct _Elm_Gengrid_Item_Class Elm_Gengrid_Item_Class;
         typedef :pointer, :elm_gengrid_item_class
         typedef :pointer, :elm_gengrid_item_class_p
@@ -373,6 +374,8 @@ module Efl
         callback :elm_store_item_unfetch_cb, [ :void_p, :elm_store_item_p ], :void
         # typedef void *(*Elm_Store_Item_Mapping_Cb) (void *data, Elm_Store_Item *sti, const char *part);
         callback :elm_store_item_mapping_cb, [ :void_p, :elm_store_item_p, :string ], :void_p
+        # void(*transition_end_cb)(void *data)
+        callback :elm_box_transition_end_cb, [ :void_p ], :void
         #
         # VARIABLES
         # EAPI extern Elm_Version *elm_version;
@@ -1077,11 +1080,11 @@ module Efl
         # EAPI void elm_box_align_get(const Evas_Object *obj, double *horizontal, double *vertical);
         [ :elm_box_align_get, [ :evas_object_p, :double_p, :double_p ], :void ],
         # EAPI void elm_box_layout_set(Evas_Object *obj, Evas_Object_Box_Layout cb, const void *data, void (*free_data)(void *data));
-        # FIXME
+        [ :elm_box_layout_set, [ :evas_object_p, :evas_object_box_layout, :void_p, :evas_free_data_cb ], :void ],
         # EAPI void elm_box_layout_transition(Evas_Object *obj, Evas_Object_Box_Data *priv, void *data);
         [ :elm_box_layout_transition, [ :evas_object_p, :evas_object_box_data_p, :void_p ], :void ],
         # EAPI Elm_Box_Transition *elm_box_transition_new(const double duration, Evas_Object_Box_Layout start_layout, void *start_layout_data, void(*start_layout_free_data)(void *data), Evas_Object_Box_Layout end_layout, void *end_layout_data, void(*end_layout_free_data)(void *data), void(*transition_end_cb)(void *data), void *transition_end_data);
-        # FIXME
+        [ :elm_box_transition_new, [ :double, :evas_object_box_layout, :void_p, :evas_free_data_cb, :evas_object_box_layout, :void_p, :evas_free_data_cb, :elm_box_transition_end_cb, :void_p ], :elm_box_transition_p ],
         # EAPI void elm_box_transition_free(void *data);
         [ :elm_box_transition_free, [ :void_p ], :void ],
         # EAPI Evas_Object *elm_button_add(Evas_Object *parent);
