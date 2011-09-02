@@ -1213,9 +1213,9 @@ module Efl
         [ :elm_scroller_page_relative_set, [ :evas_object_p, :double, :double ], :void ],
         # EAPI void elm_scroller_page_size_set(Evas_Object *obj, Evas_Coord h_pagesize, Evas_Coord v_pagesize);
         [ :elm_scroller_page_size_set, [ :evas_object_p, :int, :int ], :void ],
-        # EAPI void elm_scroller_current_page_get(Evas_Object *obj, int *h_pagenumber, int *v_pagenumber);
+        # EAPI void elm_scroller_current_page_get(const Evas_Object *obj, int *h_pagenumber, int *v_pagenumber);
         [ :elm_scroller_current_page_get, [ :evas_object_p, :int_p, :int_p ], :void ],
-        # EAPI void elm_scroller_last_page_get(Evas_Object *obj, int *h_pagenumber, int *v_pagenumber);
+        # EAPI void elm_scroller_last_page_get(const Evas_Object *obj, int *h_pagenumber, int *v_pagenumber);
         [ :elm_scroller_last_page_get, [ :evas_object_p, :int_p, :int_p ], :void ],
         # EAPI void elm_scroller_page_show(Evas_Object *obj, int h_pagenumber, int v_pagenumber);
         [ :elm_scroller_page_show, [ :evas_object_p, :int, :int ], :void ],
@@ -1754,6 +1754,8 @@ module Efl
         [ :elm_photo_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI Eina_Bool elm_photo_file_set(Evas_Object *obj, const char *file);
         [ :elm_photo_file_set, [ :evas_object_p, :string ], :eina_bool ],
+        # EAPI void elm_photo_thumb_set(const Evas_Object *obj, const char *file, const char *group);
+        [ :elm_photo_thumb_set, [ :evas_object_p, :string, :string ], :void ],
         # EAPI void elm_photo_size_set(Evas_Object *obj, int size);
         [ :elm_photo_size_set, [ :evas_object_p, :int ], :void ],
         # EAPI void elm_photo_fill_inside_set(Evas_Object *obj, Eina_Bool fill);
