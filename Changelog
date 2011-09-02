@@ -1,9 +1,30 @@
-2011-05-xx Jérémy Zurcher <jeremy@asynk.ch>
+2011-09-02 Jérémy Zurcher <jeremy@asynk.ch>
+	* release 0.0.9
+	* implement test_bg, test_actionslider, test_box
+	* Efl::Native eats Efl::FFIHelper
+
+2011-08-18 Jérémy Zurcher <jeremy@asynk.ch>
+	* release 0.0.8
+	* add Efl::Elm::ElmObject base class
+	* quick add classes : ElmFrame, ElmToggle, ElmIndex
+	* start test_elementary.rb
+
+2011-08-18 Jérémy Zurcher <jeremy@asynk.ch>
+	* release 0.0.7
+	* update sed and generation tools
+	* bugfix Autopointer usage in REvas
+	* REvas use instance level pointers for native API parameters
+	* elementary objects constructor helper
+	* elementary objects may wrap callback pointers
+	* quick add classes : ElmDiskSelectorItem, ElmEntry, ElmFlipSelector, ElmFLipSelectorItem, ElmHoversel, ElmHoverselItem, ElmGenlistItemClassStruct, ElmHover, ElmButton, ElmListItem, ElmGenList,
+    * auto complete _set and _get function suffixes
+    * bugfix ecore_getopt
 	* add REinaList#from_a ptrt
 	* add REinaList#to_a ptrt=nil
 	* rework EcoreGetopt
 
 2011-05-11 Jérémy Zurcher <jeremy@asynk.ch>
+	* release 0.0.6
 	* use ditz ass issure tracker
 	* use FFI.attach_variable for EAPI extern ...
 	* Efl::EinaLog module and specs
