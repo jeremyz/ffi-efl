@@ -145,7 +145,7 @@ module Tests
     def self.test_bg_options
         TestBg.new 'bg-options', 'Bg Options', :options_bg
     end
-#
+    #
 end
 #
 # EOF

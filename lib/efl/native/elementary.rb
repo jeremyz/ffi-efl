@@ -3032,6 +3032,8 @@ module Efl
         [ :elm_diskselector_side_label_length_set, [ :evas_object_p, :int ], :void ],
         # EAPI void elm_diskselector_display_item_num_set(Evas_Object *obj, int num);
         [ :elm_diskselector_display_item_num_set, [ :evas_object_p, :int ], :void ],
+        # EAPI int elm_diskselector_display_item_num_get(const Evas_Object *obj);
+        [ :elm_diskselector_display_item_num_get, [ :evas_object_p ], :int ],
         # EAPI void elm_diskselector_bounce_set(Evas_Object *obj, Eina_Bool h_bounce, Eina_Bool v_bounce);
         [ :elm_diskselector_bounce_set, [ :evas_object_p, :eina_bool, :eina_bool ], :void ],
         # EAPI void elm_diskselector_bounce_get(const Evas_Object *obj, Eina_Bool *h_bounce, Eina_Bool *v_bounce);
