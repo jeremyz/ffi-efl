@@ -248,8 +248,12 @@ module Efl
         [ :eet_data_descriptor_encode, [ :eet_data_descriptor_p, :void_p, :int_p ], :void_p ],
         # EAPI void * eet_data_read_cipher(Eet_File *ef, Eet_Data_Descriptor *edd, const char *name, const char *cipher_key);
         [ :eet_data_read_cipher, [ :eet_file_p, :eet_data_descriptor_p, :string, :string ], :void_p ],
+        # EAPI void * eet_data_xattr_cipher_get(const char *filename, 			 const char *attribute, 			 Eet_Data_Descriptor *edd, 			 const char *cipher_key);
+        # FIXME
         # EAPI int eet_data_write_cipher(Eet_File *ef, Eet_Data_Descriptor *edd, const char *name, const char *cipher_key, const void *data, int compress);
         [ :eet_data_write_cipher, [ :eet_file_p, :eet_data_descriptor_p, :string, :string, :void_p, :int ], :int ],
+        # EAPI Eina_Bool eet_data_xattr_cipher_set(const char *filename, 			 const char *attribute, 			 Eet_Data_Descriptor *edd, 			 const char *cipher_key, 			 const void *data, 			 Eina_Xattr_Flags flags);
+        # FIXME
         # EAPI int eet_data_text_dump_cipher(const void *data_in, const char *cipher_key, int size_in, Eet_Dump_Callback dumpfunc, void *dumpdata);
         [ :eet_data_text_dump_cipher, [ :void_p, :string, :int, :eet_dump_callback, :void_p ], :int ],
         # EAPI void * eet_data_text_undump_cipher(const char *text, const char *cipher_key, int textlen, int *size_ret);

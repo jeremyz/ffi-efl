@@ -122,7 +122,7 @@ module Efl
         enum :elm_calendar_mark_repeat, [ :elm_calendar_unique, :elm_calendar_daily, :elm_calendar_weekly, :elm_calendar_monthly, :elm_calendar_annually ]
         # typedef enum _Elm_Ctxpopup_Direction {...} Elm_Ctxpopup_Direction;
         enum :elm_ctxpopup_direction, [ :elm_ctxpopup_direction_down, :elm_ctxpopup_direction_right, :elm_ctxpopup_direction_left, :elm_ctxpopup_direction_up,
-            :elm_ctxpopup_direction_dont_know ]
+            :elm_ctxpopup_direction_unknown ]
         typedef :pointer, :elm_ctxpopup_direction_p
         # typedef enum {...} Elm_Transit_Tween_Mode;
         enum :elm_transit_tween_mode, [ :elm_transit_tween_mode_linear, :elm_transit_tween_mode_sinusoidal, :elm_transit_tween_mode_decelerate,
@@ -475,6 +475,12 @@ module Efl
         [ :elm_object_access_info_set, [ :evas_object_p, :string ], :void ],
         # EAPI void elm_object_item_access_info_set(Elm_Object_Item *it, const char *txt);
         [ :elm_object_item_access_info_set, [ :elm_object_item_p, :string ], :void ],
+        # EAPI void *elm_object_item_data_get(const Elm_Object_Item *it);
+        [ :elm_object_item_data_get, [ :elm_object_item_p ], :void_p ],
+        # EAPI void elm_object_item_data_set(Elm_Object_Item *it, void *data);
+        [ :elm_object_item_data_set, [ :elm_object_item_p, :void_p ], :void ],
+        # EAPI void elm_object_item_signal_emit(Elm_Object_Item *it, const char *emission, const char *source);
+        [ :elm_object_item_signal_emit, [ :elm_object_item_p, :string, :string ], :void ],
         # EAPI void elm_all_flush(void);
         [ :elm_all_flush, [  ], :void ],
         # EAPI int elm_cache_flush_interval_get(void);
@@ -785,6 +791,8 @@ module Efl
         [ :elm_object_theme_set, [ :evas_object_p, :elm_theme_p ], :void ],
         # EAPI Elm_Theme *elm_object_theme_get(const Evas_Object *obj);
         [ :elm_object_theme_get, [ :evas_object_p ], :elm_theme_p ],
+        # EAPI const char *elm_theme_data_get(Elm_Theme *th, const char *key);
+        [ :elm_theme_data_get, [ :elm_theme_p, :string ], :string ],
         # EAPI Evas_Object *elm_win_add(Evas_Object *parent, const char *name, Elm_Win_Type type);
         [ :elm_win_add, [ :evas_object_p, :string, :elm_win_type ], :evas_object_p ],
         # EAPI void elm_win_resize_object_add(Evas_Object *obj, Evas_Object *subobj);
@@ -937,7 +945,7 @@ module Efl
         [ :elm_icon_memfile_set, [ :evas_object_p, :void_p, :ulong, :string, :string ], :eina_bool ],
         # EAPI void elm_icon_file_get(const Evas_Object *obj, const char **file, const char **group);
         [ :elm_icon_file_get, [ :evas_object_p, :string_array, :string_array ], :void ],
-        # EAPI void elm_icon_thumb_set(const Evas_Object *obj, const char *file, const char *group);
+        # EAPI void elm_icon_thumb_set(Evas_Object *obj, const char *file, const char *group);
         [ :elm_icon_thumb_set, [ :evas_object_p, :string, :string ], :void ],
         # EAPI Eina_Bool elm_icon_standard_set(Evas_Object *obj, const char *name);
         [ :elm_icon_standard_set, [ :evas_object_p, :string ], :eina_bool ],
@@ -1311,6 +1319,10 @@ module Efl
         [ :elm_gengrid_item_size_set, [ :evas_object_p, :int, :int ], :void ],
         # EAPI void elm_gengrid_item_size_get(const Evas_Object *obj, Evas_Coord *w, Evas_Coord *h);
         [ :elm_gengrid_item_size_get, [ :evas_object_p, :int_p, :int_p ], :void ],
+        # EAPI void elm_gengrid_group_item_size_set(Evas_Object *obj, Evas_Coord w, Evas_Coord h);
+        [ :elm_gengrid_group_item_size_set, [ :evas_object_p, :int, :int ], :void ],
+        # EAPI void elm_gengrid_group_item_size_get(const Evas_Object *obj, Evas_Coord *w, Evas_Coord *h);
+        [ :elm_gengrid_group_item_size_get, [ :evas_object_p, :int_p, :int_p ], :void ],
         # EAPI void elm_gengrid_align_set(Evas_Object *obj, double align_x, double align_y);
         [ :elm_gengrid_align_set, [ :evas_object_p, :double, :double ], :void ],
         # EAPI void elm_gengrid_align_get(const Evas_Object *obj, double *align_x, double *align_y);
@@ -1354,6 +1366,14 @@ module Efl
         [ :elm_gengrid_page_relative_get, [ :evas_object_p, :double_p, :double_p ], :void ],
         # EAPI void elm_gengrid_page_size_set(Evas_Object *obj, Evas_Coord h_pagesize, Evas_Coord v_pagesize);
         [ :elm_gengrid_page_size_set, [ :evas_object_p, :int, :int ], :void ],
+        # EAPI void elm_gengrid_current_page_get(const Evas_Object *obj, int *h_pagenumber, int *v_pagenumber);
+        [ :elm_gengrid_current_page_get, [ :evas_object_p, :int_p, :int_p ], :void ],
+        # EAPI void elm_gengrid_last_page_get(const Evas_Object *obj, int *h_pagenumber, int *v_pagenumber);
+        [ :elm_gengrid_last_page_get, [ :evas_object_p, :int_p, :int_p ], :void ],
+        # EAPI void elm_gengrid_page_show(const Evas_Object *obj, int h_pagenumber, int v_pagenumber);
+        [ :elm_gengrid_page_show, [ :evas_object_p, :int, :int ], :void ],
+        # EAPI void elm_gengrid_page_bring_in(const Evas_Object *obj, int h_pagenumber, int v_pagenumber);
+        [ :elm_gengrid_page_bring_in, [ :evas_object_p, :int, :int ], :void ],
         # EAPI void elm_gengrid_horizontal_set(Evas_Object *obj, Eina_Bool setting);
         [ :elm_gengrid_horizontal_set, [ :evas_object_p, :eina_bool ], :void ],
         # EAPI Eina_Bool elm_gengrid_horizontal_get(const Evas_Object *obj);
@@ -3360,18 +3380,12 @@ module Efl
         [ :elm_naviframe_item_push, [ :evas_object_p, :string, :evas_object_p, :evas_object_p, :evas_object_p, :string ], :elm_object_item_p ],
         # EAPI Evas_Object *elm_naviframe_item_pop(Evas_Object *obj);
         [ :elm_naviframe_item_pop, [ :evas_object_p ], :evas_object_p ],
+        # EAPI void elm_naviframe_item_pop_to(Elm_Object_Item *it);
+        [ :elm_naviframe_item_pop_to, [ :elm_object_item_p ], :void ],
         # EAPI void elm_naviframe_content_preserve_on_pop_set(Evas_Object *obj, Eina_Bool preserve);
         [ :elm_naviframe_content_preserve_on_pop_set, [ :evas_object_p, :eina_bool ], :void ],
         # EAPI Eina_Bool elm_naviframe_content_preserve_on_pop_get(const Evas_Object *obj);
         [ :elm_naviframe_content_preserve_on_pop_get, [ :evas_object_p ], :eina_bool ],
-        # EAPI void elm_naviframe_item_title_label_set(Elm_Object_Item *it, const char *label);
-        [ :elm_naviframe_item_title_label_set, [ :elm_object_item_p, :string ], :void ],
-        # EAPI const char *elm_naviframe_item_title_label_get(const Elm_Object_Item *it);
-        [ :elm_naviframe_item_title_label_get, [ :elm_object_item_p ], :string ],
-        # EAPI void elm_naviframe_item_subtitle_label_set(Elm_Object_Item *it, const char *label);
-        [ :elm_naviframe_item_subtitle_label_set, [ :elm_object_item_p, :string ], :void ],
-        # EAPI const char *elm_naviframe_item_subtitle_label_get(const Elm_Object_Item *it);
-        [ :elm_naviframe_item_subtitle_label_get, [ :elm_object_item_p ], :string ],
         # EAPI Elm_Object_Item *elm_naviframe_top_item_get(const Evas_Object *obj);
         [ :elm_naviframe_top_item_get, [ :evas_object_p ], :elm_object_item_p ],
         # EAPI Elm_Object_Item *elm_naviframe_bottom_item_get(const Evas_Object *obj);
