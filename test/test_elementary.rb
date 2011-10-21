@@ -188,7 +188,8 @@ class TestWin < Elm::ElmWin
             @fr.content = lb
             lb.show
         end
-        Elm::ElmToggle.new self do |tg|
+        Elm::ElmCheck.new self do |tg|
+            tg.style = 'toggle'
             tg.text = 'UI-Mirroring:'
             tg.state = Native.elm_mirrored_get
             tg.smart_callback_add 'changed', method(:tg_changed)
@@ -237,7 +238,7 @@ class TestWin < Elm::ElmWin
     end
     #
     def tg_changed data, evas_obj, event_info
-        Native.elm_mirrored_set Native.elm_toggle_state_get evas_obj
+        Native.elm_mirrored_set Native.elm_check_state_get evas_obj
     end
     #
     def index_changed data, evas_obj, event_info

@@ -653,14 +653,6 @@ module Efl
             search_prefixes 'elm_thumb_'
         end
         #
-        class ElmToggle < ElmObject
-            #
-            include Helper
-            constructor :elm_toggle_add
-            search_prefixes 'elm_toggle_'
-            #
-        end
-        #
         class ElmToolbar < ElmObject
             #
             include Helper
