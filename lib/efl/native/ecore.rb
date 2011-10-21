@@ -182,41 +182,41 @@ module Efl
         [ :ecore_main_loop_quit, [  ], :void ],
         # EAPI void ecore_main_loop_thread_safe_call_async(Ecore_Cb callback, void *data);
         [ :ecore_main_loop_thread_safe_call_async, [ :ecore_cb, :void_p ], :void ],
-        # EAPI void *ecore_main_loop_thread_safe_call_sync(Ecore_Data_Cb callback, void *data);
+        # EAPI void * ecore_main_loop_thread_safe_call_sync(Ecore_Data_Cb callback, void *data);
         [ :ecore_main_loop_thread_safe_call_sync, [ :ecore_data_cb, :void_p ], :void_p ],
         # EAPI int ecore_thread_main_loop_begin(void);
         [ :ecore_thread_main_loop_begin, [  ], :int ],
         # EAPI int ecore_thread_main_loop_end(void);
         [ :ecore_thread_main_loop_end, [  ], :int ],
-        # EAPI Ecore_Event_Handler *ecore_event_handler_add(int type, Ecore_Event_Handler_Cb func, const void *data);
+        # EAPI Ecore_Event_Handler * ecore_event_handler_add(int type, Ecore_Event_Handler_Cb func, const void *data);
         [ :ecore_event_handler_add, [ :int, :ecore_event_handler_cb, :void_p ], :ecore_event_handler_p ],
-        # EAPI void *ecore_event_handler_del(Ecore_Event_Handler *event_handler);
+        # EAPI void * ecore_event_handler_del(Ecore_Event_Handler *event_handler);
         [ :ecore_event_handler_del, [ :ecore_event_handler_p ], :void_p ],
-        # EAPI Ecore_Event *ecore_event_add(int type, void *ev, Ecore_End_Cb func_free, void *data);
+        # EAPI Ecore_Event * ecore_event_add(int type, void *ev, Ecore_End_Cb func_free, void *data);
         [ :ecore_event_add, [ :int, :void_p, :ecore_end_cb, :void_p ], :ecore_event_p ],
-        # EAPI void *ecore_event_del(Ecore_Event *event);
+        # EAPI void * ecore_event_del(Ecore_Event *event);
         [ :ecore_event_del, [ :ecore_event_p ], :void_p ],
-        # EAPI void *ecore_event_handler_data_get(Ecore_Event_Handler *eh);
+        # EAPI void * ecore_event_handler_data_get(Ecore_Event_Handler *eh);
         [ :ecore_event_handler_data_get, [ :ecore_event_handler_p ], :void_p ],
-        # EAPI void *ecore_event_handler_data_set(Ecore_Event_Handler *eh, const void *data);
+        # EAPI void * ecore_event_handler_data_set(Ecore_Event_Handler *eh, const void *data);
         [ :ecore_event_handler_data_set, [ :ecore_event_handler_p, :void_p ], :void_p ],
         # EAPI int ecore_event_type_new(void);
         [ :ecore_event_type_new, [  ], :int ],
-        # EAPI Ecore_Event_Filter *ecore_event_filter_add(Ecore_Data_Cb func_start, Ecore_Filter_Cb func_filter, Ecore_End_Cb func_end, const void *data);
+        # EAPI Ecore_Event_Filter * ecore_event_filter_add(Ecore_Data_Cb func_start, Ecore_Filter_Cb func_filter, Ecore_End_Cb func_end, const void *data);
         [ :ecore_event_filter_add, [ :ecore_data_cb, :ecore_filter_cb, :ecore_end_cb, :void_p ], :ecore_event_filter_p ],
-        # EAPI void *ecore_event_filter_del(Ecore_Event_Filter *ef);
+        # EAPI void * ecore_event_filter_del(Ecore_Event_Filter *ef);
         [ :ecore_event_filter_del, [ :ecore_event_filter_p ], :void_p ],
         # EAPI int ecore_event_current_type_get(void);
         [ :ecore_event_current_type_get, [  ], :int ],
-        # EAPI void *ecore_event_current_event_get(void);
+        # EAPI void * ecore_event_current_event_get(void);
         [ :ecore_event_current_event_get, [  ], :void_p ],
         # EAPI void ecore_exe_run_priority_set(int pri);
         [ :ecore_exe_run_priority_set, [ :int ], :void ],
         # EAPI int ecore_exe_run_priority_get(void);
         [ :ecore_exe_run_priority_get, [  ], :int ],
-        # EAPI Ecore_Exe *ecore_exe_run(const char *exe_cmd, const void *data);
+        # EAPI Ecore_Exe * ecore_exe_run(const char *exe_cmd, const void *data);
         [ :ecore_exe_run, [ :string, :void_p ], :ecore_exe_p ],
-        # EAPI Ecore_Exe *ecore_exe_pipe_run(const char *exe_cmd, Ecore_Exe_Flags flags, const void *data);
+        # EAPI Ecore_Exe * ecore_exe_pipe_run(const char *exe_cmd, Ecore_Exe_Flags flags, const void *data);
         [ :ecore_exe_pipe_run, [ :string, :ecore_exe_flags, :void_p ], :ecore_exe_p ],
         # EAPI void ecore_exe_callback_pre_free_set(Ecore_Exe *exe, Ecore_Exe_Cb func);
         [ :ecore_exe_callback_pre_free_set, [ :ecore_exe_p, :ecore_exe_cb ], :void ],
@@ -226,23 +226,23 @@ module Efl
         [ :ecore_exe_close_stdin, [ :ecore_exe_p ], :void ],
         # EAPI void ecore_exe_auto_limits_set(Ecore_Exe *exe, int start_bytes, int end_bytes, int start_lines, int end_lines);
         [ :ecore_exe_auto_limits_set, [ :ecore_exe_p, :int, :int, :int, :int ], :void ],
-        # EAPI Ecore_Exe_Event_Data *ecore_exe_event_data_get(Ecore_Exe *exe, Ecore_Exe_Flags flags);
+        # EAPI Ecore_Exe_Event_Data * ecore_exe_event_data_get(Ecore_Exe *exe, Ecore_Exe_Flags flags);
         [ :ecore_exe_event_data_get, [ :ecore_exe_p, :ecore_exe_flags ], :ecore_exe_event_data_p ],
         # EAPI void ecore_exe_event_data_free(Ecore_Exe_Event_Data *data);
         [ :ecore_exe_event_data_free, [ :ecore_exe_event_data_p ], :void ],
-        # EAPI void *ecore_exe_free(Ecore_Exe *exe);
+        # EAPI void * ecore_exe_free(Ecore_Exe *exe);
         [ :ecore_exe_free, [ :ecore_exe_p ], :void_p ],
         # EAPI pid_t ecore_exe_pid_get(const Ecore_Exe *exe);
         [ :ecore_exe_pid_get, [ :ecore_exe_p ], :ulong ],
         # EAPI void ecore_exe_tag_set(Ecore_Exe *exe, const char *tag);
         [ :ecore_exe_tag_set, [ :ecore_exe_p, :string ], :void ],
-        # EAPI const char *ecore_exe_tag_get(const Ecore_Exe *exe);
+        # EAPI const char * ecore_exe_tag_get(const Ecore_Exe *exe);
         [ :ecore_exe_tag_get, [ :ecore_exe_p ], :string ],
-        # EAPI const char *ecore_exe_cmd_get(const Ecore_Exe *exe);
+        # EAPI const char * ecore_exe_cmd_get(const Ecore_Exe *exe);
         [ :ecore_exe_cmd_get, [ :ecore_exe_p ], :string ],
-        # EAPI void *ecore_exe_data_get(const Ecore_Exe *exe);
+        # EAPI void * ecore_exe_data_get(const Ecore_Exe *exe);
         [ :ecore_exe_data_get, [ :ecore_exe_p ], :void_p ],
-        # EAPI void *ecore_exe_data_set(Ecore_Exe *exe, void *data);
+        # EAPI void * ecore_exe_data_set(Ecore_Exe *exe, void *data);
         [ :ecore_exe_data_set, [ :ecore_exe_p, :void_p ], :void_p ],
         # EAPI Ecore_Exe_Flags ecore_exe_flags_get(const Ecore_Exe *exe);
         [ :ecore_exe_flags_get, [ :ecore_exe_p ], :ecore_exe_flags ],
@@ -262,11 +262,11 @@ module Efl
         [ :ecore_exe_signal, [ :ecore_exe_p, :int ], :void ],
         # EAPI void ecore_exe_hup(Ecore_Exe *exe);
         [ :ecore_exe_hup, [ :ecore_exe_p ], :void ],
-        # EAPI Ecore_Fd_Handler *ecore_main_fd_handler_add(int fd, Ecore_Fd_Handler_Flags flags, Ecore_Fd_Cb func, const void *data, Ecore_Fd_Cb buf_func, const void *buf_data);
+        # EAPI Ecore_Fd_Handler * ecore_main_fd_handler_add(int fd, Ecore_Fd_Handler_Flags flags, Ecore_Fd_Cb func, const void *data, Ecore_Fd_Cb buf_func, const void *buf_data);
         [ :ecore_main_fd_handler_add, [ :int, :ecore_fd_handler_flags, :ecore_fd_cb, :void_p, :ecore_fd_cb, :void_p ], :ecore_fd_handler_p ],
         # EAPI void ecore_main_fd_handler_prepare_callback_set(Ecore_Fd_Handler *fd_handler, Ecore_Fd_Prep_Cb func, const void *data);
         [ :ecore_main_fd_handler_prepare_callback_set, [ :ecore_fd_handler_p, :ecore_fd_prep_cb, :void_p ], :void ],
-        # EAPI void *ecore_main_fd_handler_del(Ecore_Fd_Handler *fd_handler);
+        # EAPI void * ecore_main_fd_handler_del(Ecore_Fd_Handler *fd_handler);
         [ :ecore_main_fd_handler_del, [ :ecore_fd_handler_p ], :void_p ],
         # EAPI int ecore_main_fd_handler_fd_get(Ecore_Fd_Handler *fd_handler);
         [ :ecore_main_fd_handler_fd_get, [ :ecore_fd_handler_p ], :int ],
@@ -274,9 +274,9 @@ module Efl
         [ :ecore_main_fd_handler_active_get, [ :ecore_fd_handler_p, :ecore_fd_handler_flags ], :eina_bool ],
         # EAPI void ecore_main_fd_handler_active_set(Ecore_Fd_Handler *fd_handler, Ecore_Fd_Handler_Flags flags);
         [ :ecore_main_fd_handler_active_set, [ :ecore_fd_handler_p, :ecore_fd_handler_flags ], :void ],
-        # EAPI Ecore_Win32_Handler *ecore_main_win32_handler_add(void *h, Ecore_Win32_Handle_Cb func, const void *data);
+        # EAPI Ecore_Win32_Handler * ecore_main_win32_handler_add(void *h, Ecore_Win32_Handle_Cb func, const void *data);
         [ :ecore_main_win32_handler_add, [ :void_p, :ecore_win32_handle_cb, :void_p ], :ecore_win32_handler_p ],
-        # EAPI void *ecore_main_win32_handler_del(Ecore_Win32_Handler *win32_handler);
+        # EAPI void * ecore_main_win32_handler_del(Ecore_Win32_Handler *win32_handler);
         [ :ecore_main_win32_handler_del, [ :ecore_win32_handler_p ], :void_p ],
         # EAPI void ecore_poller_poll_interval_set(Ecore_Poller_Type type, double poll_time);
         [ :ecore_poller_poll_interval_set, [ :ecore_poller_type, :double ], :void ],
@@ -286,15 +286,15 @@ module Efl
         [ :ecore_poller_poller_interval_set, [ :ecore_poller_p, :int ], :eina_bool ],
         # EAPI int ecore_poller_poller_interval_get(Ecore_Poller *poller);
         [ :ecore_poller_poller_interval_get, [ :ecore_poller_p ], :int ],
-        # EAPI Ecore_Poller *ecore_poller_add(Ecore_Poller_Type type, int interval, Ecore_Task_Cb func, const void *data);
+        # EAPI Ecore_Poller * ecore_poller_add(Ecore_Poller_Type type, int interval, Ecore_Task_Cb func, const void *data);
         [ :ecore_poller_add, [ :ecore_poller_type, :int, :ecore_task_cb, :void_p ], :ecore_poller_p ],
         # EAPI void *ecore_poller_del(Ecore_Poller *poller);
         [ :ecore_poller_del, [ :ecore_poller_p ], :void_p ],
         # EAPI Ecore_Animator *ecore_animator_add(Ecore_Task_Cb func, const void *data);
         [ :ecore_animator_add, [ :ecore_task_cb, :void_p ], :ecore_animator_p ],
-        # EAPI Ecore_Animator *ecore_animator_timeline_add(double runtime, Ecore_Timeline_Cb func, const void *data);
+        # EAPI Ecore_Animator * ecore_animator_timeline_add(double runtime, Ecore_Timeline_Cb func, const void *data);
         [ :ecore_animator_timeline_add, [ :double, :ecore_timeline_cb, :void_p ], :ecore_animator_p ],
-        # EAPI void *ecore_animator_del(Ecore_Animator *animator);
+        # EAPI void * ecore_animator_del(Ecore_Animator *animator);
         [ :ecore_animator_del, [ :ecore_animator_p ], :void_p ],
         # EAPI void ecore_animator_freeze(Ecore_Animator *animator);
         [ :ecore_animator_freeze, [ :ecore_animator_p ], :void ],
@@ -322,11 +322,11 @@ module Efl
         [ :ecore_time_unix_get, [  ], :double ],
         # EAPI double ecore_loop_time_get(void);
         [ :ecore_loop_time_get, [  ], :double ],
-        # EAPI Ecore_Timer *ecore_timer_add(double in, Ecore_Task_Cb func, const void *data);
+        # EAPI Ecore_Timer * ecore_timer_add(double in, Ecore_Task_Cb func, const void *data);
         [ :ecore_timer_add, [ :double, :ecore_task_cb, :void_p ], :ecore_timer_p ],
-        # EAPI Ecore_Timer *ecore_timer_loop_add(double in, Ecore_Task_Cb func, const void *data);
+        # EAPI Ecore_Timer * ecore_timer_loop_add(double in, Ecore_Task_Cb func, const void *data);
         [ :ecore_timer_loop_add, [ :double, :ecore_task_cb, :void_p ], :ecore_timer_p ],
-        # EAPI void *ecore_timer_del(Ecore_Timer *timer);
+        # EAPI void * ecore_timer_del(Ecore_Timer *timer);
         [ :ecore_timer_del, [ :ecore_timer_p ], :void_p ],
         # EAPI void ecore_timer_interval_set(Ecore_Timer *timer, double in);
         [ :ecore_timer_interval_set, [ :ecore_timer_p, :double ], :void ],
@@ -344,25 +344,25 @@ module Efl
         [ :ecore_timer_precision_get, [  ], :double ],
         # EAPI void ecore_timer_precision_set(double precision);
         [ :ecore_timer_precision_set, [ :double ], :void ],
-        # EAPI char *ecore_timer_dump(void);
+        # EAPI char * ecore_timer_dump(void);
         [ :ecore_timer_dump, [  ], :string ],
-        # EAPI Ecore_Idler *ecore_idler_add(Ecore_Task_Cb func, const void *data);
+        # EAPI Ecore_Idler * ecore_idler_add(Ecore_Task_Cb func, const void *data);
         [ :ecore_idler_add, [ :ecore_task_cb, :void_p ], :ecore_idler_p ],
-        # EAPI void *ecore_idler_del(Ecore_Idler *idler);
+        # EAPI void * ecore_idler_del(Ecore_Idler *idler);
         [ :ecore_idler_del, [ :ecore_idler_p ], :void_p ],
-        # EAPI Ecore_Idle_Enterer *ecore_idle_enterer_add(Ecore_Task_Cb func, const void *data);
+        # EAPI Ecore_Idle_Enterer * ecore_idle_enterer_add(Ecore_Task_Cb func, const void *data);
         [ :ecore_idle_enterer_add, [ :ecore_task_cb, :void_p ], :ecore_idle_enterer_p ],
-        # EAPI Ecore_Idle_Enterer *ecore_idle_enterer_before_add(Ecore_Task_Cb func, const void *data);
+        # EAPI Ecore_Idle_Enterer * ecore_idle_enterer_before_add(Ecore_Task_Cb func, const void *data);
         [ :ecore_idle_enterer_before_add, [ :ecore_task_cb, :void_p ], :ecore_idle_enterer_p ],
-        # EAPI void *ecore_idle_enterer_del(Ecore_Idle_Enterer *idle_enterer);
+        # EAPI void * ecore_idle_enterer_del(Ecore_Idle_Enterer *idle_enterer);
         [ :ecore_idle_enterer_del, [ :ecore_idle_enterer_p ], :void_p ],
-        # EAPI Ecore_Idle_Exiter *ecore_idle_exiter_add(Ecore_Task_Cb func, const void *data);
+        # EAPI Ecore_Idle_Exiter * ecore_idle_exiter_add(Ecore_Task_Cb func, const void *data);
         [ :ecore_idle_exiter_add, [ :ecore_task_cb, :void_p ], :ecore_idle_exiter_p ],
-        # EAPI void *ecore_idle_exiter_del(Ecore_Idle_Exiter *idle_exiter);
+        # EAPI void * ecore_idle_exiter_del(Ecore_Idle_Exiter *idle_exiter);
         [ :ecore_idle_exiter_del, [ :ecore_idle_exiter_p ], :void_p ],
-        # EAPI Ecore_Thread *ecore_thread_run(Ecore_Thread_Cb func_blocking, Ecore_Thread_Cb func_end, Ecore_Thread_Cb func_cancel, const void *data);
+        # EAPI Ecore_Thread * ecore_thread_run(Ecore_Thread_Cb func_blocking, Ecore_Thread_Cb func_end, Ecore_Thread_Cb func_cancel, const void *data);
         [ :ecore_thread_run, [ :ecore_thread_cb, :ecore_thread_cb, :ecore_thread_cb, :void_p ], :ecore_thread_p ],
-        # EAPI Ecore_Thread *ecore_thread_feedback_run(Ecore_Thread_Cb func_heavy, Ecore_Thread_Notify_Cb func_notify, Ecore_Thread_Cb func_end, Ecore_Thread_Cb func_cancel, const void *data, Eina_Bool try_no_queue);
+        # EAPI Ecore_Thread * ecore_thread_feedback_run(Ecore_Thread_Cb func_heavy, Ecore_Thread_Notify_Cb func_notify, Ecore_Thread_Cb func_end, Ecore_Thread_Cb func_cancel, const void *data, Eina_Bool try_no_queue);
         [ :ecore_thread_feedback_run, [ :ecore_thread_cb, :ecore_thread_notify_cb, :ecore_thread_cb, :ecore_thread_cb, :void_p, :eina_bool ], :ecore_thread_p ],
         # EAPI Eina_Bool ecore_thread_cancel(Ecore_Thread *thread);
         [ :ecore_thread_cancel, [ :ecore_thread_p ], :eina_bool ],
@@ -390,25 +390,25 @@ module Efl
         [ :ecore_thread_available_get, [  ], :int ],
         # EAPI Eina_Bool ecore_thread_local_data_add(Ecore_Thread *thread, const char *key, void *value, Eina_Free_Cb cb, Eina_Bool direct);
         [ :ecore_thread_local_data_add, [ :ecore_thread_p, :string, :void_p, :eina_free_cb, :eina_bool ], :eina_bool ],
-        # EAPI void *ecore_thread_local_data_set(Ecore_Thread *thread, const char *key, void *value, Eina_Free_Cb cb);
+        # EAPI void * ecore_thread_local_data_set(Ecore_Thread *thread, const char *key, void *value, Eina_Free_Cb cb);
         [ :ecore_thread_local_data_set, [ :ecore_thread_p, :string, :void_p, :eina_free_cb ], :void_p ],
-        # EAPI void *ecore_thread_local_data_find(Ecore_Thread *thread, const char *key);
+        # EAPI void * ecore_thread_local_data_find(Ecore_Thread *thread, const char *key);
         [ :ecore_thread_local_data_find, [ :ecore_thread_p, :string ], :void_p ],
         # EAPI Eina_Bool ecore_thread_local_data_del(Ecore_Thread *thread, const char *key);
         [ :ecore_thread_local_data_del, [ :ecore_thread_p, :string ], :eina_bool ],
         # EAPI Eina_Bool ecore_thread_global_data_add(const char *key, void *value, Eina_Free_Cb cb, Eina_Bool direct);
         [ :ecore_thread_global_data_add, [ :string, :void_p, :eina_free_cb, :eina_bool ], :eina_bool ],
-        # EAPI void *ecore_thread_global_data_set(const char *key, void *value, Eina_Free_Cb cb);
+        # EAPI void * ecore_thread_global_data_set(const char *key, void *value, Eina_Free_Cb cb);
         [ :ecore_thread_global_data_set, [ :string, :void_p, :eina_free_cb ], :void_p ],
-        # EAPI void *ecore_thread_global_data_find(const char *key);
+        # EAPI void * ecore_thread_global_data_find(const char *key);
         [ :ecore_thread_global_data_find, [ :string ], :void_p ],
         # EAPI Eina_Bool ecore_thread_global_data_del(const char *key);
         [ :ecore_thread_global_data_del, [ :string ], :eina_bool ],
-        # EAPI void *ecore_thread_global_data_wait(const char *key, double seconds);
+        # EAPI void * ecore_thread_global_data_wait(const char *key, double seconds);
         [ :ecore_thread_global_data_wait, [ :string, :double ], :void_p ],
-        # EAPI Ecore_Pipe *ecore_pipe_add(Ecore_Pipe_Cb handler, const void *data);
+        # EAPI Ecore_Pipe * ecore_pipe_add(Ecore_Pipe_Cb handler, const void *data);
         [ :ecore_pipe_add, [ :ecore_pipe_cb, :void_p ], :ecore_pipe_p ],
-        # EAPI void *ecore_pipe_del(Ecore_Pipe *p);
+        # EAPI void * ecore_pipe_del(Ecore_Pipe *p);
         [ :ecore_pipe_del, [ :ecore_pipe_p ], :void_p ],
         # EAPI Eina_Bool ecore_pipe_write(Ecore_Pipe *p, const void *buffer, unsigned int nbytes);
         [ :ecore_pipe_write, [ :ecore_pipe_p, :void_p, :uint ], :eina_bool ],
@@ -422,9 +422,9 @@ module Efl
         [ :ecore_pipe_freeze, [ :ecore_pipe_p ], :void ],
         # EAPI int ecore_pipe_wait(Ecore_Pipe *p, int message_count, double wait);
         [ :ecore_pipe_wait, [ :ecore_pipe_p, :int, :double ], :int ],
-        # EAPI Ecore_Job *ecore_job_add(Ecore_Cb func, const void *data);
+        # EAPI Ecore_Job * ecore_job_add(Ecore_Cb func, const void *data);
         [ :ecore_job_add, [ :ecore_cb, :void_p ], :ecore_job_p ],
-        # EAPI void *ecore_job_del(Ecore_Job *job);
+        # EAPI void * ecore_job_del(Ecore_Job *job);
         [ :ecore_job_del, [ :ecore_job_p ], :void_p ],
         # EAPI void ecore_app_args_set(int argc, const char **argv);
         [ :ecore_app_args_set, [ :int, :string_array ], :void ],
@@ -432,7 +432,7 @@ module Efl
         [ :ecore_app_args_get, [ :int_p, :string_array_p ], :void ],
         # EAPI void ecore_app_restart(void);
         [ :ecore_app_restart, [  ], :void ],
-        # EAPI void ecore_throttle_adjust(double amount );
+        # EAPI void ecore_throttle_adjust(double amount);
         [ :ecore_throttle_adjust, [ :double ], :void ],
         # EAPI double ecore_throttle_get(void);
         [ :ecore_throttle_get, [  ], :double ],
