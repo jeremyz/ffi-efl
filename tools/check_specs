@@ -1,0 +1,23 @@
+#! /bin/bash
+#
+RESET="\033[0m"
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+#
+abspath=$(readlink -f $0)
+parentdir=${abspath%/*/*}
+#
+function each () {
+    echo $($RUBY --version)
+    for spec in $parentdir/spec/e*.rb; do
+        $RUBY -I $parentdir/lib -S rspec --color $spec
+    done
+}
+#
+RUBY=/usr/bin/ruby
+time each
+echo
+RUBY=/opt/ruby1.8/bin/ruby
+time each
+echo
+#
