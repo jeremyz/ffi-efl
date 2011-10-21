@@ -45,7 +45,7 @@ module Efl
         class << self
             def init *args
                 a = args.select { |e| e.is_a? String }
-                return Native.elm_init 0, FFI::MemoryPointer::NULL if a.length==0
+                a.insert 0, __FILE__ if a.length==0
                 ptr = FFI::MemoryPointer.new :pointer, a.length
                 a.each_with_index do |s,i|
                     ptr[i].write_pointer FFI::MemoryPointer.from_string(s)
