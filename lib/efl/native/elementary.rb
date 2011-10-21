@@ -166,8 +166,9 @@ module Efl
         typedef :pointer, :elm_theme_p
         # typedef struct _Elm_Box_Transition Elm_Box_Transition;
         typedef :pointer, :elm_box_transition
+        typedef :pointer, :elm_box_transition_p
         # typedef struct Elm_Gen_Item Elm_Gen_Item;
-        typedef :elm_gen_item, :elm_gen_item
+        typedef :pointer, :elm_gen_item
         # typedef struct _Elm_Gen_Item_Class Elm_Gen_Item_Class;
         typedef :pointer, :elm_gen_item_class
         # typedef struct _Elm_Gen_Item_Class_Func Elm_Gen_Item_Class_Func;
@@ -1885,8 +1886,6 @@ module Efl
         [ :elm_web_bg_color_set, [ :evas_object_p, :int, :int, :int, :int ], :void ],
         # EAPI void elm_web_bg_color_get(const Evas_Object *obj, int *r, int *g, int *b, int *a);
         [ :elm_web_bg_color_get, [ :evas_object_p, :int_p, :int_p, :int_p, :int_p ], :void ],
-        # EAPI char *elm_view_selection_get(const Evas_Object *obj);
-        [ :elm_view_selection_get, [ :evas_object_p ], :string ],
         # EAPI void elm_web_popup_selected_set(Evas_Object *obj, int index);
         [ :elm_web_popup_selected_set, [ :evas_object_p, :int ], :void ],
         # EAPI Eina_Bool elm_web_popup_destroy(Evas_Object *obj);
