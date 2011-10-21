@@ -3,6 +3,9 @@
 #
 require 'efl/ffi'
 require 'efl/native/evas'
+require 'efl/native/edje'
+require 'efl/native/emap'
+require 'efl/native/eina_list'
 #
 module Efl
     #
@@ -406,8 +409,6 @@ module Efl
         #
         # FUNCTIONS
         fcts = [
-        # EAPI int elm_main(int argc, char **argv)
-        [ :elm_main, [ :int, :string_array ], :int ],
         # EAPI int elm_init(int argc, char **argv);
         [ :elm_init, [ :int, :string_array ], :int ],
         # EAPI int elm_shutdown(void);
@@ -1871,8 +1872,6 @@ module Efl
         [ :elm_web_bg_color_set, [ :evas_object_p, :int, :int, :int, :int ], :void ],
         # EAPI void elm_web_bg_color_get(const Evas_Object *obj, int *r, int *g, int *b, int *a);
         [ :elm_web_bg_color_get, [ :evas_object_p, :int_p, :int_p, :int_p, :int_p ], :void ],
-        # EAPI char *elm_view_selection_get(const Evas_Object *obj);
-        [ :elm_view_selection_get, [ :evas_object_p ], :string ],
         # EAPI void elm_web_popup_selected_set(Evas_Object *obj, int index);
         [ :elm_web_popup_selected_set, [ :evas_object_p, :int ], :void ],
         # EAPI Eina_Bool elm_web_popup_destroy(Evas_Object *obj);
