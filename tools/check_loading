@@ -1,0 +1,33 @@
+#! /bin/bash
+#
+RESET="\033[0m"
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+#
+abspath=$(readlink -f $0)
+parentdir=${abspath%/*/*}
+#
+function run () {
+    echo -n "    ${1##*/}"
+    $RUBY -I $parentdir/lib $1 2>/dev/null && echo -e "$GREEN OK$RESET" || echo -e "$RED KO$RESET"
+}
+#
+function each () {
+    echo $($RUBY --version)
+    echo "  lib/efl/native/*.rb"
+    for native in $parentdir/lib/efl/native/*.rb; do
+        run $native
+    done
+    echo "  lib/efl/*.rb"
+    for wrapper in $parentdir/lib/efl/e*.rb; do
+        run $wrapper
+    done
+}
+#
+RUBY=/usr/bin/ruby
+time each
+echo
+RUBY=/opt/ruby1.8/bin/ruby
+time each
+echo
+#

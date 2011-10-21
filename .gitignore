@@ -1,6 +1,5 @@
 tools/api*
 tools/*diff
 git*
-check*
 .ditz-config
 html
