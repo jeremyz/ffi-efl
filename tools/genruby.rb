@@ -9,6 +9,7 @@ libraries = [
     # HEADER            MODUE NAME      FCT PREFIX      LIB             OUTPUT
     [ 'eina_types.h',   'Eina',         'eina',         'eina',         'eina_types.rb' ],
     [ 'eina_main.h',    'Eina',         'eina',         'eina',         'eina.rb' ],
+    [ 'eina_xattr.h',   'EinaXattr',    'eina_xattr',   'eina',         'eina_xattr.rb' ],
     [ 'eina_log.h',     'EinaLog',      'eina_log',     'eina',         'eina_log.rb' ],
     [ 'eina_list.h',    'EinaList',     'eina_list',    'eina',         'eina_list.rb' ],
     [ 'eina_hash.h',    'EinaHash',     'eina_hash',    'eina',         'eina_hash.rb' ],
@@ -68,6 +69,7 @@ TYPES = {
     'pid_t' => ':ulong',
     'time_t' => ':ulong',
     'size_t' => ':ulong',
+    'ssize_t' => ':long',
     'double' => ':double',
     'long int' => ':long',
     'long long' => ':long_long',
@@ -80,6 +82,7 @@ TYPES = {
     'short *' => ':short_p',
     'float *' => ':float_p',
     'size_t *' => ':ulong_p',
+    'ssize_t *' => ':long_p',
     'double *' => ':double_p',
     'unsigned int *' => ':uint_p',
     'unsigned char *' => ':uchar_p',

@@ -25,6 +25,7 @@ fi
 #
 for header in \
     "${INCLUDE}/eina-1/eina/eina_types.h" \
+    "${INCLUDE}/eina-1/eina/eina_xattr.h" \
     "${INCLUDE}/eina-1/eina/eina_main.h" \
     "${INCLUDE}/eina-1/eina/eina_log.h" \
     "${INCLUDE}/eina-1/eina/eina_list.h" \
