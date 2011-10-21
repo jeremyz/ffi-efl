@@ -1,14 +1,22 @@
+# drop if don't start with typedef
+/^\s*typedef/ ! b
+# read one line typedef (struct)? (word*)? (*)? word;
 s/^\s*typedef\s+(struct\s+)?((\w+\**\s+)*)(\w+)\s*;.*$/typedef \1 \2 \4;/
 t finish
+# read multi line
 s/^\s*typedef\s+(struct.*[^;].*)/typedef \1/
-T
-h
-:loop
-n
+# leave if substitution fails, or copy pattern to hold space
+T; h
+:loop; n
+# read till } is reached
 /^\s*\}/ ! b loop
+# take care of the last } word;
 s/^\s*\}\s*(\w+)\s*;.*$/\1;/
+# append pattern to hold space, then swap
 H;x
-s/\n/ /g
 :finish
+# remove \n
+s/\n/ /g
+# replace multi spaces with one ...
 s/ {2,}/ /g
 p

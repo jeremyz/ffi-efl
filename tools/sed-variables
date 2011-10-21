@@ -1,1 +1,2 @@
-s/(EAPI\s+extern\s+\w+\s+\*?\w+\s*;).*$/\1/p
+# variable should be EAPI extern word word;;
+s/^\s*(EAPI\s+extern\s+\w+\s+\*?\w+\s*;).*$/\1/p

@@ -1,11 +1,20 @@
+# drop if don't start with typedef
+/^\s*typedef/ ! b
+# one line typedef xxx (...); we are done
 s/^\s*typedef\s+(.*)(\(\*?\w+\))?\s*(\(.*\));.*$/typedef \1 \2 \3;/
 t finish
+# if ends with ,
 s/^\s*typedef\s+(.*)(\(\*?\w+\))?\s*(\(.*,)/typedef \1 \2 \3/
+# drop if substitution fail, copy pattern to  hold space
 T;h
 :loop;n
+# append each parameters
 /,$/ { H; b loop }
-/;$/ { H;x}
+# when ; reached, append a swap hold space to pattern space
+/;.*$/ { H;x}
 :finish
+# drop \n
 s/\n//g
+# replace multi spaces with one
 s/ {2,}/ /g
 p
