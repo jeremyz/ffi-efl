@@ -27,7 +27,7 @@ module Efl
             :ecore_evas_engine_opengl_x11, :ecore_evas_engine_software_xcb, :ecore_evas_engine_xrender_xcb, :ecore_evas_engine_software_gdi, :ecore_evas_engine_software_ddraw,
             :ecore_evas_engine_direct3d, :ecore_evas_engine_opengl_glew, :ecore_evas_engine_cocoa, :ecore_evas_engine_software_sdl, :ecore_evas_engine_directfb,
             :ecore_evas_engine_software_fb, :ecore_evas_engine_software_8_x11, :ecore_evas_engine_software_16_x11, :ecore_evas_engine_software_16_ddraw,
-            :ecore_evas_engine_software_16_wince, :ecore_evas_engine_opengl_sdl ]
+            :ecore_evas_engine_software_16_wince, :ecore_evas_engine_opengl_sdl, :ecore_evas_engine_ews ]
         # typedef enum _Ecore_Evas_Avoid_Damage_Type {...} Ecore_Evas_Avoid_Damage_Type;
         enum :ecore_evas_avoid_damage_type, [ :ecore_evas_avoid_damage_none, 0, :ecore_evas_avoid_damage_expose, 1, :ecore_evas_avoid_damage_built_in, 2 ]
         # typedef enum _Ecore_Evas_Object_Associate_Flags {...} Ecore_Evas_Object_Associate_Flags;
@@ -55,6 +55,40 @@ module Efl
         callback :ecore_evas_event_cb, [:ecore_evas_p], :void
         #
         # VARIABLES
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_MANAGER_CHANGE;
+        attach_variable :ECORE_EVAS_EWS_EVENT_MANAGER_CHANGE, :int
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_ADD;
+        attach_variable :ECORE_EVAS_EWS_EVENT_ADD, :int
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_DEL;
+        attach_variable :ECORE_EVAS_EWS_EVENT_DEL, :int
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_RESIZE;
+        attach_variable :ECORE_EVAS_EWS_EVENT_RESIZE, :int
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_MOVE;
+        attach_variable :ECORE_EVAS_EWS_EVENT_MOVE, :int
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_SHOW;
+        attach_variable :ECORE_EVAS_EWS_EVENT_SHOW, :int
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_HIDE;
+        attach_variable :ECORE_EVAS_EWS_EVENT_HIDE, :int
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_FOCUS;
+        attach_variable :ECORE_EVAS_EWS_EVENT_FOCUS, :int
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_UNFOCUS;
+        attach_variable :ECORE_EVAS_EWS_EVENT_UNFOCUS, :int
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_RAISE;
+        attach_variable :ECORE_EVAS_EWS_EVENT_RAISE, :int
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_LOWER;
+        attach_variable :ECORE_EVAS_EWS_EVENT_LOWER, :int
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_ACTIVATE;
+        attach_variable :ECORE_EVAS_EWS_EVENT_ACTIVATE, :int
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_ICONIFIED_CHANGE;
+        attach_variable :ECORE_EVAS_EWS_EVENT_ICONIFIED_CHANGE, :int
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_MAXIMIZED_CHANGE;
+        attach_variable :ECORE_EVAS_EWS_EVENT_MAXIMIZED_CHANGE, :int
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_LAYER_CHANGE;
+        attach_variable :ECORE_EVAS_EWS_EVENT_LAYER_CHANGE, :int
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_FULLSCREEN_CHANGE;
+        attach_variable :ECORE_EVAS_EWS_EVENT_FULLSCREEN_CHANGE, :int
+        # EAPI extern int ECORE_EVAS_EWS_EVENT_CONFIG_CHANGE;
+        attach_variable :ECORE_EVAS_EWS_EVENT_CONFIG_CHANGE, :int
         #
         # FUNCTIONS
         fcts = [
@@ -208,6 +242,12 @@ module Efl
         # FIXME
         # EAPI const void *ecore_evas_buffer_pixels_get(Ecore_Evas *ee);
         [ :ecore_evas_buffer_pixels_get, [ :ecore_evas_p ], :void_p ],
+        # EAPI Ecore_Evas *ecore_evas_ews_new(int x, int y, int w, int h);
+        [ :ecore_evas_ews_new, [ :int, :int, :int, :int ], :ecore_evas_p ],
+        # EAPI Evas_Object *ecore_evas_ews_backing_store_get(const Ecore_Evas *ee);
+        [ :ecore_evas_ews_backing_store_get, [ :ecore_evas_p ], :evas_object_p ],
+        # EAPI void ecore_evas_ews_delete_request(Ecore_Evas *ee);
+        [ :ecore_evas_ews_delete_request, [ :ecore_evas_p ], :void ],
         # EAPI Evas_Object *ecore_evas_object_image_new(Ecore_Evas *ee_target);
         [ :ecore_evas_object_image_new, [ :ecore_evas_p ], :evas_object_p ],
         # EAPI Ecore_Evas *ecore_evas_object_ecore_evas_get(Evas_Object *obj);
@@ -376,6 +416,24 @@ module Efl
         [ :ecore_evas_x11_shape_input_reset, [ :ecore_evas_p ], :void ],
         # EAPI void ecore_evas_x11_shape_input_apply(Ecore_Evas *ee);
         [ :ecore_evas_x11_shape_input_apply, [ :ecore_evas_p ], :void ],
+        # EAPI Eina_Bool ecore_evas_ews_engine_set(const char *engine, const char *options);
+        [ :ecore_evas_ews_engine_set, [ :string, :string ], :eina_bool ],
+        # EAPI Eina_Bool ecore_evas_ews_setup(int x, int y, int w, int h);
+        [ :ecore_evas_ews_setup, [ :int, :int, :int, :int ], :eina_bool ],
+        # EAPI Ecore_Evas *ecore_evas_ews_ecore_evas_get(void);
+        [ :ecore_evas_ews_ecore_evas_get, [  ], :ecore_evas_p ],
+        # EAPI Evas *ecore_evas_ews_evas_get(void);
+        [ :ecore_evas_ews_evas_get, [  ], :evas_p ],
+        # EAPI Evas_Object *ecore_evas_ews_background_get(void);
+        [ :ecore_evas_ews_background_get, [  ], :evas_object_p ],
+        # EAPI void ecore_evas_ews_background_set(Evas_Object *o);
+        [ :ecore_evas_ews_background_set, [ :evas_object_p ], :void ],
+        # EAPI const Eina_List *ecore_evas_ews_children_get(void);
+        [ :ecore_evas_ews_children_get, [  ], :eina_list_p ],
+        # EAPI void ecore_evas_ews_manager_set(const void *manager);
+        [ :ecore_evas_ews_manager_set, [ :void_p ], :void ],
+        # EAPI const void *ecore_evas_ews_manager_get(void);
+        [ :ecore_evas_ews_manager_get, [  ], :void_p ],
         ]
         if RUBY_PLATFORM =~ /darwin/
             # EAPI Ecore_Evas *ecore_evas_cocoa_new(const char* name, int w, int h);

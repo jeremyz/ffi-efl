@@ -222,8 +222,8 @@ module Efl
         [ :eet_data_descriptor_stream_new, [ :eet_data_descriptor_class_p ], :eet_data_descriptor_p ],
         # EAPI Eet_Data_Descriptor * eet_data_descriptor_file_new(const Eet_Data_Descriptor_Class *eddc);
         [ :eet_data_descriptor_file_new, [ :eet_data_descriptor_class_p ], :eet_data_descriptor_p ],
-        # EAPI Eina_Bool eet_eina_stream_data_descriptor_class_set(Eet_Data_Descriptor_Class *eddc, unsigned int		 eddc_size, const char *name, int size);
-        # FIXME
+        # EAPI Eina_Bool eet_eina_stream_data_descriptor_class_set(Eet_Data_Descriptor_Class *eddc, unsigned int eddc_size, const char *name, int size);
+        [ :eet_eina_stream_data_descriptor_class_set, [ :eet_data_descriptor_class_p, :uint, :string, :int ], :eina_bool ],
         # EAPI Eina_Bool eet_eina_file_data_descriptor_class_set(Eet_Data_Descriptor_Class *eddc, unsigned int eddc_size, const char *name, int size);
         [ :eet_eina_file_data_descriptor_class_set, [ :eet_data_descriptor_class_p, :uint, :string, :int ], :eina_bool ],
         # EAPI void eet_data_descriptor_free(Eet_Data_Descriptor *edd);
@@ -248,12 +248,12 @@ module Efl
         [ :eet_data_descriptor_encode, [ :eet_data_descriptor_p, :void_p, :int_p ], :void_p ],
         # EAPI void * eet_data_read_cipher(Eet_File *ef, Eet_Data_Descriptor *edd, const char *name, const char *cipher_key);
         [ :eet_data_read_cipher, [ :eet_file_p, :eet_data_descriptor_p, :string, :string ], :void_p ],
-        # EAPI void * eet_data_xattr_cipher_get(const char *filename, 			 const char *attribute, 			 Eet_Data_Descriptor *edd, 			 const char *cipher_key);
-        # FIXME
+        # EAPI void * eet_data_xattr_cipher_get(const char *filename, const char *attribute, Eet_Data_Descriptor *edd, const char *cipher_key);
+        [ :eet_data_xattr_cipher_get, [ :string, :string, :eet_data_descriptor_p, :string ], :void_p ],
         # EAPI int eet_data_write_cipher(Eet_File *ef, Eet_Data_Descriptor *edd, const char *name, const char *cipher_key, const void *data, int compress);
         [ :eet_data_write_cipher, [ :eet_file_p, :eet_data_descriptor_p, :string, :string, :void_p, :int ], :int ],
-        # EAPI Eina_Bool eet_data_xattr_cipher_set(const char *filename, 			 const char *attribute, 			 Eet_Data_Descriptor *edd, 			 const char *cipher_key, 			 const void *data, 			 Eina_Xattr_Flags flags);
-        # FIXME
+        # EAPI Eina_Bool eet_data_xattr_cipher_set(const char *filename, const char *attribute, Eet_Data_Descriptor *edd, const char *cipher_key, const void *data, Eina_Xattr_Flags flags);
+        [ :eet_data_xattr_cipher_set, [ :string, :string, :eet_data_descriptor_p, :string, :void_p, :eina_xattr_flags ], :eina_bool ],
         # EAPI int eet_data_text_dump_cipher(const void *data_in, const char *cipher_key, int size_in, Eet_Dump_Callback dumpfunc, void *dumpdata);
         [ :eet_data_text_dump_cipher, [ :void_p, :string, :int, :eet_dump_callback, :void_p ], :int ],
         # EAPI void * eet_data_text_undump_cipher(const char *text, const char *cipher_key, int textlen, int *size_ret);

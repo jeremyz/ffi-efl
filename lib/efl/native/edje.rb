@@ -77,6 +77,8 @@ module Efl
         # typedef struct _Edje_Version Edje_Version;
         typedef :pointer, :edje_version
         typedef :pointer, :edje_version_p
+        # typedef struct _Edje_Entry_Change_Info Edje_Entry_Change_Info;
+        typedef :pointer, :edje_entry_change_info
         # typedef struct _Edje_Message_String Edje_Message_String;
         typedef :pointer, :edje_message_string
         # typedef struct _Edje_Message_Int Edje_Message_Int;
@@ -229,6 +231,8 @@ module Efl
         [ :edje_object_signal_callback_del_full, [ :evas_object_p, :string, :string, :edje_signal_cb, :void_p ], :void_p ],
         # EAPI void edje_object_signal_emit (Evas_Object *obj, const char *emission, const char *source);
         [ :edje_object_signal_emit, [ :evas_object_p, :string, :string ], :void ],
+        # EAPI void * edje_object_signal_callback_extra_data_get(void);
+        [ :edje_object_signal_callback_extra_data_get, [  ], :void_p ],
         # EAPI void edje_object_play_set (Evas_Object *obj, Eina_Bool play);
         [ :edje_object_play_set, [ :evas_object_p, :eina_bool ], :void ],
         # EAPI Eina_Bool edje_object_play_get (const Evas_Object *obj);

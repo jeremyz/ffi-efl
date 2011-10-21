@@ -136,6 +136,9 @@ module Efl
         # typedef struct _Evas_Native_Surface Evas_Native_Surface;
         typedef :pointer, :evas_native_surface
         typedef :pointer, :evas_native_surface_p
+        # typedef struct _Evas_Video_Surface Evas_Video_Surface;
+        typedef :pointer, :evas_video_surface
+        typedef :pointer, :evas_video_surface_p
         # typedef unsigned long long Evas_Modifier_Mask;
         typedef :ulong_long, :evas_modifier_mask
         # typedef int Evas_Coord;
@@ -213,6 +216,10 @@ module Efl
         typedef :pointer, :evas_cserve_config_p
         #
         # CALLBACKS
+        # typedef void (*Evas_Video_Cb) (void *data, Evas_Object *obj, const Evas_Video_Surface *surface);
+        callback :evas_video_cb, [ :void_p, :evas_object_p, :evas_video_surface_p ], :void
+        # typedef void (*Evas_Video_Coord_Cb) (void *data, Evas_Object *obj, const Evas_Video_Surface *surface, Evas_Coord a, Evas_Coord b);
+        callback :evas_video_coord_cb, [ :void_p, :evas_object_p, :evas_video_surface_p, :int, :int ], :void
         # typedef void (*Evas_Smart_Cb) (void *data, Evas_Object *obj, void *event_info);
         callback :evas_smart_cb, [ :void_p, :evas_object_p, :void_p ], :void
         # typedef void (*Evas_Event_Cb) (void *data, Evas *e, void *event_info);
@@ -798,6 +805,10 @@ module Efl
         [ :evas_object_image_native_surface_set, [ :evas_object_p, :evas_native_surface_p ], :void ],
         # EAPI Evas_Native_Surface *evas_object_image_native_surface_get (const Evas_Object *obj);
         [ :evas_object_image_native_surface_get, [ :evas_object_p ], :evas_native_surface_p ],
+        # EAPI void evas_object_image_video_surface_set (Evas_Object *obj, Evas_Video_Surface *surf);
+        [ :evas_object_image_video_surface_set, [ :evas_object_p, :evas_video_surface_p ], :void ],
+        # EAPI const Evas_Video_Surface *evas_object_image_video_surface_get (const Evas_Object *obj);
+        [ :evas_object_image_video_surface_get, [ :evas_object_p ], :evas_video_surface_p ],
         # EAPI void evas_object_image_scale_hint_set (Evas_Object *obj, Evas_Image_Scale_Hint hint);
         [ :evas_object_image_scale_hint_set, [ :evas_object_p, :evas_image_scale_hint ], :void ],
         # EAPI Evas_Image_Scale_Hint evas_object_image_scale_hint_get (const Evas_Object *obj);
