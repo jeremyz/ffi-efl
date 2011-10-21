@@ -5,7 +5,7 @@ require 'efl/eina'
 require 'efl/eina_log'
 require './spec/helper'
 #
-describe Efl::EinaLog do
+describe 'Efl::EinaLog' do
     before(:all) do
         Efl::Eina.init
         EinaLog = Efl::EinaLog

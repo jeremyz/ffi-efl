@@ -4,7 +4,7 @@
 require 'efl'
 require 'efl/eina_hash'
 #
-describe Efl::EinaHash do
+describe 'Efl::EinaHash' do
     #
     before(:all) do
         REinaHash = Efl::EinaHash::REinaHash

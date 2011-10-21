@@ -7,7 +7,7 @@ require 'efl/eina_list'
 require 'efl/eina_rectangle'
 require 'efl/ecore_getopt'
 #
-describe Efl::EcoreGetopt do
+describe 'Efl::EcoreGetopt' do
     #
     after(:all) do
         Efl::Ecore.shutdown

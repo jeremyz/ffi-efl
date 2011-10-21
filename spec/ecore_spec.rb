@@ -130,7 +130,7 @@ describe "Efl::Ecore #{Efl::Ecore.version.full}" do
         e2.free
     end
     #
-    describe Efl::Ecore::REcorePipe do
+    describe 'Efl::Ecore::REcorePipe' do
     #
         it 'should write and read data from pipe' do
             data = FFI::MemoryPointer.from_string("none")

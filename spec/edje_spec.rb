@@ -94,7 +94,7 @@ describe "Efl::Edje #{Efl::Edje.version.full}" do
     # TODO edje_color_class*
     # TODO edje_text_class*
     #
-    describe Efl::Edje::REdje do
+    describe 'Efl::Edje::REdje' do
         before(:all) do
             Efl::Evas.init
             realize_evas

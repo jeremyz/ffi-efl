@@ -3,7 +3,7 @@
 #
 require 'efl/ecore_input'
 #
-describe Efl::EcoreInput do
+describe 'Efl::EcoreInput' do
     #
     before(:all) do
         EcoreInput = Efl::EcoreInput

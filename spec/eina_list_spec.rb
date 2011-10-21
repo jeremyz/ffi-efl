@@ -4,7 +4,7 @@
 require 'efl/eina'
 require 'efl/eina_list'
 #
-describe Efl::EinaList do
+describe 'Efl::EinaList' do
     #
     before(:all) do
         REinaList = Efl::EinaList::REinaList

@@ -25,7 +25,7 @@ describe "Efl::Elm #{Efl::Elm.version.full}" do
         Elm.shutdown.should == @init
     end
     #
-    describe Efl::Elm::ElmWin do
+    describe 'Efl::Elm::ElmWin' do
         before(:each) {
             realize_win
         }
@@ -179,7 +179,7 @@ describe "Efl::Elm #{Efl::Elm.version.full}" do
         # TODO EAPI void elm_win_illume_command_send(Evas_Object *obj, Elm_Illume_Command command, void *params);;
         # TODO EAPI Ecore_X_Window elm_win_xwindow_get(const Evas_Object *obj);
         #
-        describe Efl::Elm::ElmInWin do
+        describe 'Efl::Elm::ElmInWin' do
             it "activate, content set/get/unset" do
                 @iwin = @win.inwin_add
                 o1 = @win.evas.object_rectangle_add
@@ -200,7 +200,7 @@ describe "Efl::Elm #{Efl::Elm.version.full}" do
         end
     end
     #
-    describe Efl::Elm::ElmBg do
+    describe 'Efl::Elm::ElmBg' do
         before(:all) {
             realize_win
         }
@@ -242,7 +242,7 @@ describe "Efl::Elm #{Efl::Elm.version.full}" do
         end
     end
     #
-    describe Efl::Elm::ElmLabel do
+    describe 'Efl::Elm::ElmLabel' do
         #
         before(:all) {
             realize_win
@@ -292,7 +292,7 @@ describe "Efl::Elm #{Efl::Elm.version.full}" do
         end
     end
     #
-    describe Efl::Elm::ElmPager do
+    describe 'Efl::Elm::ElmPager' do
         #
         before(:all) {
             realize_win
@@ -323,7 +323,7 @@ describe "Efl::Elm #{Efl::Elm.version.full}" do
         end
     end
     #
-    describe Efl::Elm::ElmPanel do
+    describe 'Efl::Elm::ElmPanel' do
         #
         before(:all) {
             realize_win

@@ -5,7 +5,7 @@ require 'efl/eina_list'
 require 'efl/ecore_evas'
 require './spec/helper'
 #
-describe Efl::EcoreEvas do
+describe 'Efl::EcoreEvas' do
     #
     before(:all) do
         EcoreEvas = Efl::EcoreEvas
