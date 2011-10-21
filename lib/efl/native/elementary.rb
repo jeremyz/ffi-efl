@@ -166,15 +166,20 @@ module Efl
         typedef :pointer, :elm_theme_p
         # typedef struct _Elm_Box_Transition Elm_Box_Transition;
         typedef :pointer, :elm_box_transition
-        typedef :pointer, :elm_box_transition_p
+        # typedef struct Elm_Gen_Item Elm_Gen_Item;
+        typedef :elm_gen_item, :elm_gen_item
+        # typedef struct _Elm_Gen_Item_Class Elm_Gen_Item_Class;
+        typedef :pointer, :elm_gen_item_class
+        # typedef struct _Elm_Gen_Item_Class_Func Elm_Gen_Item_Class_Func;
+        typedef :pointer, :elm_gen_item_class_func
         # typedef struct _Elm_Gengrid_Item_Class Elm_Gengrid_Item_Class;
         typedef :pointer, :elm_gengrid_item_class
         typedef :pointer, :elm_gengrid_item_class_p
-        # typedef struct _Elm_Gengrid_Item_Class_Func Elm_Gengrid_Item_Class_Func;
-        typedef :pointer, :elm_gengrid_item_class_func
         # typedef struct _Elm_Gengrid_Item Elm_Gengrid_Item;
         typedef :pointer, :elm_gengrid_item
         typedef :pointer, :elm_gengrid_item_p
+        # typedef struct _Elm_Gengrid_Item_Class_Func Elm_Gengrid_Item_Class_Func;
+        typedef :pointer, :elm_gengrid_item_class_func
         # typedef struct _Elm_Entry_Anchor_Info Elm_Entry_Anchor_Info;
         typedef :pointer, :elm_entry_anchor_info
         # typedef struct _Elm_Entry_Filter_Limit_Size Elm_Entry_Filter_Limit_Size;
@@ -314,6 +319,14 @@ module Efl
         callback :elm_event_cb, [ :void_p, :evas_object_p, :evas_object_p, :evas_callback_type, :void_p ], :eina_bool
         # typedef void (*Elm_GLView_Func_Cb) (Evas_Object *obj);
         callback :elm_glview_func_cb, [ :evas_object_p ], :void
+        # typedef char *(*Elm_Gen_Item_Label_Get_Cb) (void *data, Evas_Object *obj, const char *part);
+        callback :elm_gen_item_label_get_cb, [ :void_p, :evas_object_p, :string ], :string
+        # typedef Evas_Object *(*Elm_Gen_Item_Icon_Get_Cb) (void *data, Evas_Object *obj, const char *part);
+        callback :elm_gen_item_icon_get_cb, [ :void_p, :evas_object_p, :string ], :evas_object_p
+        # typedef Eina_Bool (*Elm_Gen_Item_State_Get_Cb) (void *data, Evas_Object *obj, const char *part);
+        callback :elm_gen_item_state_get_cb, [ :void_p, :evas_object_p, :string ], :eina_bool
+        # typedef void (*Elm_Gen_Item_Del_Cb) (void *data, Evas_Object *obj);
+        callback :elm_gen_item_del_cb, [ :void_p, :evas_object_p ], :void
         # typedef char *(*Elm_Gengrid_Item_Label_Get_Cb) (void *data, Evas_Object *obj, const char *part);
         callback :elm_gengrid_item_label_get_cb, [ :void_p, :evas_object_p, :string ], :string
         # typedef Evas_Object *(*Elm_Gengrid_Item_Icon_Get_Cb) (void *data, Evas_Object *obj, const char *part);
@@ -1872,6 +1885,8 @@ module Efl
         [ :elm_web_bg_color_set, [ :evas_object_p, :int, :int, :int, :int ], :void ],
         # EAPI void elm_web_bg_color_get(const Evas_Object *obj, int *r, int *g, int *b, int *a);
         [ :elm_web_bg_color_get, [ :evas_object_p, :int_p, :int_p, :int_p, :int_p ], :void ],
+        # EAPI char *elm_view_selection_get(const Evas_Object *obj);
+        [ :elm_view_selection_get, [ :evas_object_p ], :string ],
         # EAPI void elm_web_popup_selected_set(Evas_Object *obj, int index);
         [ :elm_web_popup_selected_set, [ :evas_object_p, :int ], :void ],
         # EAPI Eina_Bool elm_web_popup_destroy(Evas_Object *obj);

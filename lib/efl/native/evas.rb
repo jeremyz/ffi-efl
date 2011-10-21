@@ -415,6 +415,8 @@ module Efl
         [ :evas_image_cache_set, [ :evas_p, :int ], :void ],
         # EAPI int evas_image_cache_get (const Evas *e);
         [ :evas_image_cache_get, [ :evas_p ], :int ],
+        # EAPI Eina_Bool evas_image_max_size_get (const Evas *e, int *maxw, int *maxh);
+        [ :evas_image_max_size_get, [ :evas_p, :int_p, :int_p ], :eina_bool ],
         # EAPI void evas_font_hinting_set (Evas *e, Evas_Font_Hinting_Flags hinting);
         [ :evas_font_hinting_set, [ :evas_p, :evas_font_hinting_flags ], :void ],
         # EAPI Evas_Font_Hinting_Flags evas_font_hinting_get (const Evas *e);
