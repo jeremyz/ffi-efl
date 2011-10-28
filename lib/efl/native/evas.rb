@@ -36,6 +36,8 @@ module Efl
         enum :evas_button_flags, [ :evas_button_none, 0, :evas_button_double_click, :evas_button_triple_click ]
         # typedef enum _Evas_Event_Flags {...} Evas_Event_Flags;
         enum :evas_event_flags, [ :evas_event_flag_none, 0, :evas_event_flag_on_hold, :evas_event_flag_on_scroll ]
+        # typedef enum _Evas_Touch_Point_State {...} Evas_Touch_Point_State;
+        enum :evas_touch_point_state, [ :evas_touch_point_down, :evas_touch_point_up, :evas_touch_point_move, :evas_touch_point_still, :evas_touch_point_cancel ]
         # typedef enum _Evas_Font_Hinting_Flags {...} Evas_Font_Hinting_Flags;
         enum :evas_font_hinting_flags, [ :evas_font_hinting_none, :evas_font_hinting_auto, :evas_font_hinting_bytecode ]
         # typedef enum _Evas_Colorspace {...} Evas_Colorspace;
@@ -519,6 +521,10 @@ module Efl
         [ :evas_object_propagate_events_set, [ :evas_object_p, :eina_bool ], :void ],
         # EAPI Eina_Bool evas_object_propagate_events_get (const Evas_Object *obj);
         [ :evas_object_propagate_events_get, [ :evas_object_p ], :eina_bool ],
+        # EAPI void evas_object_freeze_events_set(Evas_Object *obj, Eina_Bool freeze);
+        [ :evas_object_freeze_events_set, [ :evas_object_p, :eina_bool ], :void ],
+        # EAPI Eina_Bool evas_object_freeze_events_get(const Evas_Object *obj);
+        [ :evas_object_freeze_events_get, [ :evas_object_p ], :eina_bool ],
         # EAPI void evas_object_map_enable_set (Evas_Object *obj, Eina_Bool enabled);
         [ :evas_object_map_enable_set, [ :evas_object_p, :eina_bool ], :void ],
         # EAPI Eina_Bool evas_object_map_enable_get (const Evas_Object *obj);
@@ -1339,6 +1345,14 @@ module Efl
         [ :evas_object_key_grab, [ :evas_object_p, :string, :ulong_long, :ulong_long, :eina_bool ], :eina_bool ],
         # EAPI void evas_object_key_ungrab (Evas_Object *obj, const char *keyname, Evas_Modifier_Mask modifiers, Evas_Modifier_Mask not_modifiers);
         [ :evas_object_key_ungrab, [ :evas_object_p, :string, :ulong_long, :ulong_long ], :void ],
+        # EAPI unsigned int evas_touch_point_list_count(Evas *e);
+        [ :evas_touch_point_list_count, [ :evas_p ], :uint ],
+        # EAPI void evas_touch_point_list_nth_xy_get(Evas *e, unsigned int n, Evas_Coord *x, Evas_Coord *y);
+        [ :evas_touch_point_list_nth_xy_get, [ :evas_p, :uint, :int_p, :int_p ], :void ],
+        # EAPI int evas_touch_point_list_nth_id_get(Evas *e, unsigned int n);
+        [ :evas_touch_point_list_nth_id_get, [ :evas_p, :uint ], :int ],
+        # EAPI Evas_Touch_Point_State evas_touch_point_list_nth_state_get(Evas *e, unsigned int n);
+        [ :evas_touch_point_list_nth_state_get, [ :evas_p, :uint ], :evas_touch_point_state ],
         ]
         #
         attach_fcts fcts

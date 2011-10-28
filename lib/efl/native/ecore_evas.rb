@@ -380,6 +380,10 @@ module Efl
         [ :ecore_evas_manual_render_set, [ :ecore_evas_p, :eina_bool ], :void ],
         # EAPI Eina_Bool ecore_evas_manual_render_get(const Ecore_Evas *ee);
         [ :ecore_evas_manual_render_get, [ :ecore_evas_p ], :eina_bool ],
+        # EAPI void ecore_evas_input_event_register(Ecore_Evas *ee);
+        [ :ecore_evas_input_event_register, [ :ecore_evas_p ], :void ],
+        # EAPI void ecore_evas_input_event_unregister(Ecore_Evas *ee);
+        [ :ecore_evas_input_event_unregister, [ :ecore_evas_p ], :void ],
         # EAPI void ecore_evas_manual_render(Ecore_Evas *ee);
         [ :ecore_evas_manual_render, [ :ecore_evas_p ], :void ],
         # EAPI void ecore_evas_comp_sync_set(Ecore_Evas *ee, Eina_Bool do_sync);
