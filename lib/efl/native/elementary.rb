@@ -171,6 +171,7 @@ module Efl
         typedef :pointer, :elm_box_transition_p
         # typedef struct Elm_Gen_Item Elm_Gen_Item;
         typedef :pointer, :elm_gen_item
+        typedef :elm_gen_item, :elm_gen_item
         typedef :pointer, :elm_gen_item_p
         # typedef struct _Elm_Gen_Item_Class Elm_Gen_Item_Class;
         typedef :pointer, :elm_gen_item_class
@@ -984,12 +985,6 @@ module Efl
         [ :elm_bg_color_set, [ :evas_object_p, :int, :int, :int ], :void ],
         # EAPI void elm_bg_color_get(const Evas_Object *obj, int *r, int *g, int *b);
         [ :elm_bg_color_get, [ :evas_object_p, :int_p, :int_p, :int_p ], :void ],
-        # EAPI void elm_bg_overlay_set(Evas_Object *obj, Evas_Object *overlay);
-        [ :elm_bg_overlay_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_bg_overlay_get(const Evas_Object *obj);
-        [ :elm_bg_overlay_get, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_bg_overlay_unset(Evas_Object *obj);
-        [ :elm_bg_overlay_unset, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_bg_load_size_set(Evas_Object *obj, Evas_Coord w, Evas_Coord h);
         [ :elm_bg_load_size_set, [ :evas_object_p, :int, :int ], :void ],
         # EAPI Evas_Object *elm_icon_add(Evas_Object *parent);
@@ -1244,12 +1239,6 @@ module Efl
         [ :elm_fileselector_entry_selected_get, [ :evas_object_p ], :string ],
         # EAPI Evas_Object *elm_scroller_add(Evas_Object *parent);
         [ :elm_scroller_add, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_scroller_content_set(Evas_Object *obj, Evas_Object *child);
-        [ :elm_scroller_content_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_scroller_content_get(const Evas_Object *obj);
-        [ :elm_scroller_content_get, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_scroller_content_unset(Evas_Object *obj);
-        [ :elm_scroller_content_unset, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_scroller_custom_widget_base_theme_set(Evas_Object *obj, const char *widget, const char *base);
         [ :elm_scroller_custom_widget_base_theme_set, [ :evas_object_p, :string, :string ], :void ],
         # EAPI void elm_scroller_content_min_limit(Evas_Object *obj, Eina_Bool w, Eina_Bool h);
@@ -1324,12 +1313,6 @@ module Efl
         [ :elm_label_slide_duration_get, [ :evas_object_p ], :double ],
         # EAPI Evas_Object *elm_frame_add(Evas_Object *parent);
         [ :elm_frame_add, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_frame_content_set(Evas_Object *obj, Evas_Object *content);
-        [ :elm_frame_content_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_frame_content_get(const Evas_Object *obj);
-        [ :elm_frame_content_get, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_frame_content_unset(Evas_Object *obj);
-        [ :elm_frame_content_unset, [ :evas_object_p ], :evas_object_p ],
         # EAPI Evas_Object *elm_table_add(Evas_Object *parent);
         [ :elm_table_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_table_homogeneous_set(Evas_Object *obj, Eina_Bool homogeneous);
@@ -1559,12 +1542,6 @@ module Efl
         [ :elm_layout_part_cursor_engine_only_get, [ :evas_object_p, :string ], :eina_bool ],
         # EAPI Evas_Object *elm_notify_add(Evas_Object *parent);
         [ :elm_notify_add, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_notify_content_set(Evas_Object *obj, Evas_Object *content);
-        [ :elm_notify_content_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_notify_content_unset(Evas_Object *obj);
-        [ :elm_notify_content_unset, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_notify_content_get(const Evas_Object *obj);
-        [ :elm_notify_content_get, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_notify_parent_set(Evas_Object *obj, Evas_Object *parent);
         [ :elm_notify_parent_set, [ :evas_object_p, :evas_object_p ], :void ],
         # EAPI Evas_Object *elm_notify_parent_get(const Evas_Object *obj);
@@ -2356,18 +2333,6 @@ module Efl
         [ :elm_list_item_cursor_engine_only_get, [ :elm_list_item_p ], :eina_bool ],
         # EAPI Evas_Object *elm_slider_add(Evas_Object *parent);
         [ :elm_slider_add, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_slider_icon_set(Evas_Object *obj, Evas_Object *icon);
-        [ :elm_slider_icon_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_slider_icon_unset(Evas_Object *obj);
-        [ :elm_slider_icon_unset, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_slider_icon_get(const Evas_Object *obj);
-        [ :elm_slider_icon_get, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_slider_end_set(Evas_Object *obj, Evas_Object *end);
-        [ :elm_slider_end_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_slider_end_unset(Evas_Object *obj);
-        [ :elm_slider_end_unset, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_slider_end_get(const Evas_Object *obj);
-        [ :elm_slider_end_get, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_slider_span_size_set(Evas_Object *obj, Evas_Coord size);
         [ :elm_slider_span_size_set, [ :evas_object_p, :int ], :void ],
         # EAPI Evas_Coord elm_slider_span_size_get(const Evas_Object *obj);
@@ -2572,12 +2537,6 @@ module Efl
         [ :elm_genlist_reorder_mode_get, [ :evas_object_p ], :eina_bool ],
         # EAPI Evas_Object *elm_check_add(Evas_Object *parent);
         [ :elm_check_add, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_check_icon_set(Evas_Object *obj, Evas_Object *icon);
-        [ :elm_check_icon_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_check_icon_get(const Evas_Object *obj);
-        [ :elm_check_icon_get, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_check_icon_unset(Evas_Object *obj);
-        [ :elm_check_icon_unset, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_check_state_set(Evas_Object *obj, Eina_Bool state);
         [ :elm_check_state_set, [ :evas_object_p, :eina_bool ], :void ],
         # EAPI Eina_Bool elm_check_state_get(const Evas_Object *obj);
@@ -2586,12 +2545,6 @@ module Efl
         [ :elm_check_state_pointer_set, [ :evas_object_p, :eina_bool_p ], :void ],
         # EAPI Evas_Object *elm_radio_add(Evas_Object *parent);
         [ :elm_radio_add, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_radio_icon_set(Evas_Object *obj, Evas_Object *icon);
-        [ :elm_radio_icon_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_radio_icon_get(const Evas_Object *obj);
-        [ :elm_radio_icon_get, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_radio_icon_unset(Evas_Object *obj);
-        [ :elm_radio_icon_unset, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_radio_group_add(Evas_Object *obj, Evas_Object *group);
         [ :elm_radio_group_add, [ :evas_object_p, :evas_object_p ], :void ],
         # EAPI void elm_radio_state_value_set(Evas_Object *obj, int value);
@@ -2714,12 +2667,6 @@ module Efl
         [ :elm_progressbar_value_set, [ :evas_object_p, :double ], :void ],
         # EAPI double elm_progressbar_value_get(const Evas_Object *obj);
         [ :elm_progressbar_value_get, [ :evas_object_p ], :double ],
-        # EAPI void elm_progressbar_icon_set(Evas_Object *obj, Evas_Object *icon);
-        [ :elm_progressbar_icon_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_progressbar_icon_get(const Evas_Object *obj);
-        [ :elm_progressbar_icon_get, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_progressbar_icon_unset(Evas_Object *obj);
-        [ :elm_progressbar_icon_unset, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_progressbar_span_size_set(Evas_Object *obj, Evas_Coord size);
         [ :elm_progressbar_span_size_set, [ :evas_object_p, :int ], :void ],
         # EAPI Evas_Coord elm_progressbar_span_size_get(const Evas_Object *obj);
@@ -2996,12 +2943,6 @@ module Efl
         [ :elm_panel_orient_set, [ :evas_object_p, :elm_panel_orient ], :void ],
         # EAPI Elm_Panel_Orient elm_panel_orient_get(const Evas_Object *obj);
         [ :elm_panel_orient_get, [ :evas_object_p ], :elm_panel_orient ],
-        # EAPI void elm_panel_content_set(Evas_Object *obj, Evas_Object *content);
-        [ :elm_panel_content_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_panel_content_get(const Evas_Object *obj);
-        [ :elm_panel_content_get, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_panel_content_unset(Evas_Object *obj);
-        [ :elm_panel_content_unset, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_panel_hidden_set(Evas_Object *obj, Eina_Bool hidden);
         [ :elm_panel_hidden_set, [ :evas_object_p, :eina_bool ], :void ],
         # EAPI Eina_Bool elm_panel_hidden_get(const Evas_Object *obj);
@@ -3010,16 +2951,6 @@ module Efl
         [ :elm_panel_toggle, [ :evas_object_p ], :void ],
         # EAPI Evas_Object *elm_panes_add(Evas_Object *parent);
         [ :elm_panes_add, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_panes_content_left_set(Evas_Object *obj, Evas_Object *content);
-        [ :elm_panes_content_left_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI void elm_panes_content_right_set(Evas_Object *obj, Evas_Object *content);
-        [ :elm_panes_content_right_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_panes_content_left_get(const Evas_Object *obj);
-        [ :elm_panes_content_left_get, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_panes_content_right_get(const Evas_Object *obj);
-        [ :elm_panes_content_right_get, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_panes_content_left_unset(Evas_Object *obj);
-        [ :elm_panes_content_left_unset, [ :evas_object_p ], :evas_object_p ],
         # EAPI Evas_Object *elm_panes_content_right_unset(Evas_Object *obj);
         [ :elm_panes_content_right_unset, [ :evas_object_p ], :evas_object_p ],
         # EAPI double elm_panes_content_left_size_get(const Evas_Object *obj);
@@ -3068,22 +2999,10 @@ module Efl
         [ :elm_flip_interacton_direction_hitsize_get, [ :evas_object_p, :elm_flip_direction ], :double ],
         # EAPI Evas_Object *elm_conformant_add(Evas_Object *parent);
         [ :elm_conformant_add, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_conformant_content_set(Evas_Object *obj, Evas_Object *content);
-        [ :elm_conformant_content_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_conformant_content_get(const Evas_Object *obj);
-        [ :elm_conformant_content_get, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_conformant_content_unset(Evas_Object *obj);
-        [ :elm_conformant_content_unset, [ :evas_object_p ], :evas_object_p ],
         # EAPI Evas_Object *elm_conformant_content_area_get(const Evas_Object *obj);
         [ :elm_conformant_content_area_get, [ :evas_object_p ], :evas_object_p ],
         # EAPI Evas_Object *elm_mapbuf_add(Evas_Object *parent);
         [ :elm_mapbuf_add, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_mapbuf_content_set(Evas_Object *obj, Evas_Object *content);
-        [ :elm_mapbuf_content_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_mapbuf_content_get(const Evas_Object *obj);
-        [ :elm_mapbuf_content_get, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_mapbuf_content_unset(Evas_Object *obj);
-        [ :elm_mapbuf_content_unset, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_mapbuf_enabled_set(Evas_Object *obj, Eina_Bool enabled);
         [ :elm_mapbuf_enabled_set, [ :evas_object_p, :eina_bool ], :void ],
         # EAPI Eina_Bool elm_mapbuf_enabled_get(const Evas_Object *obj);
@@ -3448,10 +3367,6 @@ module Efl
         [ :elm_grid_pack_get, [ :evas_object_p, :int_p, :int_p, :int_p, :int_p ], :void ],
         # EAPI Evas_Object *elm_factory_add(Evas_Object *parent);
         [ :elm_factory_add, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_factory_content_set(Evas_Object *obj, Evas_Object *content);
-        [ :elm_factory_content_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_factory_content_get(const Evas_Object *obj);
-        [ :elm_factory_content_get, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_factory_maxmin_mode_set(Evas_Object *obj, Eina_Bool enabled);
         [ :elm_factory_maxmin_mode_set, [ :evas_object_p, :eina_bool ], :void ],
         # EAPI Eina_Bool elm_factory_maxmin_mode_get(const Evas_Object *obj);
@@ -3460,8 +3375,6 @@ module Efl
         [ :elm_factory_maxmin_reset_set, [ :evas_object_p ], :void ],
         # EAPI Evas_Object *elm_player_add(Evas_Object *parent);
         [ :elm_player_add, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_player_video_set(Evas_Object *player, Evas_Object *video);
-        [ :elm_player_video_set, [ :evas_object_p, :evas_object_p ], :void ],
         # EAPI Evas_Object *elm_video_add(Evas_Object *parent);
         [ :elm_video_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_video_file_set(Evas_Object *video, const char *filename);

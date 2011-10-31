@@ -118,6 +118,8 @@ module Efl
         [ :ecore_evas_transparent_get, [ :ecore_evas_p ], :eina_bool ],
         # EAPI void ecore_evas_geometry_get(const Ecore_Evas *ee, int *x, int *y, int *w, int *h);
         [ :ecore_evas_geometry_get, [ :ecore_evas_p, :int_p, :int_p, :int_p, :int_p ], :void ],
+        # EAPI void ecore_evas_request_geometry_get(const Ecore_Evas *ee, int *x, int *y, int *w, int *h);
+        [ :ecore_evas_request_geometry_get, [ :ecore_evas_p, :int_p, :int_p, :int_p, :int_p ], :void ],
         # EAPI void ecore_evas_focus_set(Ecore_Evas *ee, Eina_Bool on);
         [ :ecore_evas_focus_set, [ :ecore_evas_p, :eina_bool ], :void ],
         # EAPI Eina_Bool ecore_evas_focus_get(const Ecore_Evas *ee);

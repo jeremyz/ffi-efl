@@ -50,7 +50,8 @@ module Efl
         # typedef enum _Edje_Tween_Mode {...} Edje_Tween_Mode;
         enum :edje_tween_mode, [ :edje_tween_mode_none, 0, :edje_tween_mode_linear, 1, :edje_tween_mode_sinusoidal, 2, :edje_tween_mode_accelerate, 3,
             :edje_tween_mode_decelerate, 4, :edje_tween_mode_accelerate_factor, 5, :edje_tween_mode_decelerate_factor, 6, :edje_tween_mode_sinusoidal_factor, 7,
-            :edje_tween_mode_divisor_interp, 8, :edje_tween_mode_bounce, 9, :edje_tween_mode_spring, 10, :edje_tween_mode_last, 11 ]
+            :edje_tween_mode_divisor_interp, 8, :edje_tween_mode_bounce, 9, :edje_tween_mode_spring, 10, :edje_tween_mode_last, 11,
+            :edje_tween_mode_mask, 0xff, :edje_tween_mode_opt_from_current, 0x1<<31]
         # typedef enum _Edje_Cursor {...} Edje_Cursor;
         enum :edje_cursor, [ :edje_cursor_main, :edje_cursor_selection_begin, :edje_cursor_selection_end, :edje_cursor_preedit_start, :edje_cursor_preedit_end,
             :edje_cursor_user, :edje_cursor_user_extra ]
