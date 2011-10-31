@@ -168,6 +168,7 @@ module Efl
         typedef :pointer, :elm_theme_p
         # typedef struct _Elm_Box_Transition Elm_Box_Transition;
         typedef :pointer, :elm_box_transition
+        typedef :pointer, :elm_box_transition_p
         # typedef struct Elm_Gen_Item Elm_Gen_Item;
         typedef :pointer, :elm_gen_item
         typedef :pointer, :elm_gen_item_p
