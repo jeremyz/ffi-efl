@@ -72,17 +72,17 @@ module Efl
             end
             alias :text :text_get
             #
-            def obj_content_set content
+            def content_set content
                 Native.elm_object_content_part_set @ptr, nil, content
             end
-            alias :obj_content= :obj_content_set
+            alias :content= :content_set
             #
-            def obj_content_get
+            def content_get
                 Native.elm_object_content_part_get @ptr, nil
             end
-            alias :obj_content :obj_content_get
+            alias :content :content_get
             #
-            def obj_content_unset
+            def content_unset
                 Native.elm_object_content_part_unset @ptr, nil
             end
             #
