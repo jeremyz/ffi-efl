@@ -99,6 +99,7 @@ TYPES = {
     # Efl BASE TYPES
     'Eina_Bool' => ':eina_bool',
     'Eina_Bool *' => ':eina_bool_p',
+    'Eina_Inlist *' => ':pointer',
     'Eina_Iterator' => ':eina_iterator',
     'Eina_Iterator *' => ':eina_iterator_p',
     'Eina_Accessor' => ':eina_accessor',
