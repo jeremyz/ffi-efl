@@ -25,9 +25,9 @@ module Efl
         # typedef enum _Ecore_Evas_Engine_Type {...} Ecore_Evas_Engine_Type;
         enum :ecore_evas_engine_type, [ :ecore_evas_engine_software_buffer, :ecore_evas_engine_software_xlib, :ecore_evas_engine_xrender_x11,
             :ecore_evas_engine_opengl_x11, :ecore_evas_engine_software_xcb, :ecore_evas_engine_xrender_xcb, :ecore_evas_engine_software_gdi, :ecore_evas_engine_software_ddraw,
-            :ecore_evas_engine_direct3d, :ecore_evas_engine_opengl_glew, :ecore_evas_engine_cocoa, :ecore_evas_engine_software_sdl, :ecore_evas_engine_directfb,
+            :ecore_evas_engine_direct3d, :ecore_evas_engine_opengl_glew, :ecore_evas_engine_opengl_cocoa, :ecore_evas_engine_software_sdl, :ecore_evas_engine_directfb,
             :ecore_evas_engine_software_fb, :ecore_evas_engine_software_8_x11, :ecore_evas_engine_software_16_x11, :ecore_evas_engine_software_16_ddraw,
-            :ecore_evas_engine_software_16_wince, :ecore_evas_engine_opengl_sdl, :ecore_evas_engine_ews ]
+            :ecore_evas_engine_software_16_wince, :ecore_evas_engine_opengl_sdl, :ecore_evas_engine_ews, :ecore_evas_engine_psl1ght ]
         # typedef enum _Ecore_Evas_Avoid_Damage_Type {...} Ecore_Evas_Avoid_Damage_Type;
         enum :ecore_evas_avoid_damage_type, [ :ecore_evas_avoid_damage_none, 0, :ecore_evas_avoid_damage_expose, 1, :ecore_evas_avoid_damage_built_in, 2 ]
         # typedef enum _Ecore_Evas_Object_Associate_Flags {...} Ecore_Evas_Object_Associate_Flags;
@@ -46,6 +46,8 @@ module Efl
         # typedef struct _Ecore_WinCE_Window Ecore_WinCE_Window;
         typedef :pointer, :ecore_wince_window
         typedef :pointer, :ecore_wince_window_p
+        # typedef struct _Ecore_Cocoa_Window Ecore_Cocoa_Window;
+        typedef :pointer, :ecore_cocoa_window
         # typedef struct _Ecore_Evas Ecore_Evas;
         typedef :pointer, :ecore_evas
         typedef :pointer, :ecore_evas_p

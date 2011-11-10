@@ -46,7 +46,8 @@ module Efl
         # typedef enum _Edje_Action_Type {...} Edje_Action_Type;
         enum :edje_action_type, [ :edje_action_type_none, 0, :edje_action_type_state_set, 1, :edje_action_type_action_stop, 2, :edje_action_type_signal_emit, 3,
             :edje_action_type_drag_val_set, 4, :edje_action_type_drag_val_step, 5, :edje_action_type_drag_val_page, 6, :edje_action_type_script, 7, :edje_action_type_focus_set, 8,
-            :edje_action_type_reserved00, 9, :edje_action_type_focus_object, 10, :edje_action_type_param_copy, 11, :edje_action_type_param_set, 12, :edje_action_type_last, 13 ]
+            :edje_action_type_reserved00, 9, :edje_action_type_focus_object, 10, :edje_action_type_param_copy, 11, :edje_action_type_param_set, 12, :edje_action_type_sound_sample,
+            13, :edje_action_type_sound_tone, 14, :edje_action_type_last, 15 ]
         # typedef enum _Edje_Tween_Mode {...} Edje_Tween_Mode;
         enum :edje_tween_mode, [ :edje_tween_mode_none, 0, :edje_tween_mode_linear, 1, :edje_tween_mode_sinusoidal, 2, :edje_tween_mode_accelerate, 3,
             :edje_tween_mode_decelerate, 4, :edje_tween_mode_accelerate_factor, 5, :edje_tween_mode_decelerate_factor, 6, :edje_tween_mode_sinusoidal_factor, 7,

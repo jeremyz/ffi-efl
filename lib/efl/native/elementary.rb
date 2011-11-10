@@ -65,12 +65,6 @@ module Efl
         # typedef enum _Elm_Image_Orient {...} Elm_Image_Orient;
         enum :elm_image_orient, [ :elm_image_orient_none, :elm_image_rotate_90_cw, :elm_image_rotate_180_cw, :elm_image_rotate_90_ccw, :elm_image_flip_horizontal,
             :elm_image_flip_vertical, :elm_image_flip_transpose, :elm_image_flip_transverse ]
-        # typedef enum _Elm_GLView_Mode {...} Elm_GLView_Mode;
-        enum :elm_glview_mode, [ :elm_glview_alpha, 1, :elm_glview_depth, 2, :elm_glview_stencil, 4 ]
-        # typedef enum _Elm_GLView_Resize_Policy {...} Elm_GLView_Resize_Policy;
-        enum :elm_glview_resize_policy, [ :elm_glview_resize_policy_recreate, 1, :elm_glview_resize_policy_scale, 2 ]
-        # typedef enum _Elm_GLView_Render_Policy {...} Elm_GLView_Render_Policy;
-        enum :elm_glview_render_policy, [ :elm_glview_render_policy_on_demand, 1, :elm_glview_render_policy_always, 2 ]
         # typedef enum _Elm_Scroller_Policy {...} Elm_Scroller_Policy;
         enum :elm_scroller_policy, [ :elm_scroller_policy_auto, 0, :elm_scroller_policy_on, :elm_scroller_policy_off, :elm_scroller_policy_last ]
         typedef :pointer, :elm_scroller_policy_p
@@ -93,7 +87,8 @@ module Efl
         # typedef enum _Elm_Web_Zoom_Mode {...} Elm_Web_Zoom_Mode;
         enum :elm_web_zoom_mode, [ :elm_web_zoom_mode_manual, 0, :elm_web_zoom_mode_auto_fit, :elm_web_zoom_mode_auto_fill, :elm_web_zoom_mode_last ]
         # typedef enum _Elm_Toolbar_Shrink_Mode {...} Elm_Toolbar_Shrink_Mode;
-        enum :elm_toolbar_shrink_mode, [ :elm_toolbar_shrink_none, :elm_toolbar_shrink_hide, :elm_toolbar_shrink_scroll, :elm_toolbar_shrink_menu ]
+        enum :elm_toolbar_shrink_mode, [ :elm_toolbar_shrink_none, :elm_toolbar_shrink_hide, :elm_toolbar_shrink_scroll, :elm_toolbar_shrink_menu,
+            :elm_toolbar_shrink_last ]
         # typedef enum _Elm_List_Mode {...} Elm_List_Mode;
         enum :elm_list_mode, [ :elm_list_compress, 0, :elm_list_scroll, :elm_list_limit, :elm_list_expand, :elm_list_last ]
         # typedef enum _Elm_Actionslider_Pos {...} Elm_Actionslider_Pos;
@@ -322,8 +317,6 @@ module Efl
         callback :elm_tooltip_item_content_cb, [ :void_p, :evas_object_p, :evas_object_p, :void_p ], :evas_object_p
         # typedef Eina_Bool (*Elm_Event_Cb) (void *data, Evas_Object *obj, Evas_Object *src, Evas_Callback_Type type, void *event_info);
         callback :elm_event_cb, [ :void_p, :evas_object_p, :evas_object_p, :evas_callback_type, :void_p ], :eina_bool
-        # typedef void (*Elm_GLView_Func_Cb) (Evas_Object *obj);
-        callback :elm_glview_func_cb, [ :evas_object_p ], :void
         # typedef char *(*Elm_Gen_Item_Label_Get_Cb) (void *data, Evas_Object *obj, const char *part);
         callback :elm_gen_item_label_get_cb, [ :void_p, :evas_object_p, :string ], :string
         # typedef Evas_Object *(*Elm_Gen_Item_Content_Get_Cb) (void *data, Evas_Object *obj, const char *part);
@@ -1079,30 +1072,6 @@ module Efl
         [ :elm_image_aspect_ratio_retained_set, [ :evas_object_p, :eina_bool ], :void ],
         # EAPI Eina_Bool elm_image_aspect_ratio_retained_get(const Evas_Object *obj);
         [ :elm_image_aspect_ratio_retained_get, [ :evas_object_p ], :eina_bool ],
-        # EAPI Evas_Object *elm_glview_add(Evas_Object *parent);
-        [ :elm_glview_add, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_glview_size_set(Evas_Object *obj, Evas_Coord width, Evas_Coord height);
-        [ :elm_glview_size_set, [ :evas_object_p, :int, :int ], :void ],
-        # EAPI void elm_glview_size_get(const Evas_Object *obj, Evas_Coord *width, Evas_Coord *height);
-        [ :elm_glview_size_get, [ :evas_object_p, :int_p, :int_p ], :void ],
-        # EAPI Evas_GL_API *elm_glview_gl_api_get(const Evas_Object *obj);
-        [ :elm_glview_gl_api_get, [ :evas_object_p ], :evas_gl_api_p ],
-        # EAPI Eina_Bool elm_glview_mode_set(Evas_Object *obj, Elm_GLView_Mode mode);
-        [ :elm_glview_mode_set, [ :evas_object_p, :elm_glview_mode ], :eina_bool ],
-        # EAPI Eina_Bool elm_glview_resize_policy_set(Evas_Object *obj, Elm_GLView_Resize_Policy policy);
-        [ :elm_glview_resize_policy_set, [ :evas_object_p, :elm_glview_resize_policy ], :eina_bool ],
-        # EAPI Eina_Bool elm_glview_render_policy_set(Evas_Object *obj, Elm_GLView_Render_Policy policy);
-        [ :elm_glview_render_policy_set, [ :evas_object_p, :elm_glview_render_policy ], :eina_bool ],
-        # EAPI void elm_glview_init_func_set(Evas_Object *obj, Elm_GLView_Func_Cb func);
-        [ :elm_glview_init_func_set, [ :evas_object_p, :elm_glview_func_cb ], :void ],
-        # EAPI void elm_glview_del_func_set(Evas_Object *obj, Elm_GLView_Func_Cb func);
-        [ :elm_glview_del_func_set, [ :evas_object_p, :elm_glview_func_cb ], :void ],
-        # EAPI void elm_glview_resize_func_set(Evas_Object *obj, Elm_GLView_Func_Cb func);
-        [ :elm_glview_resize_func_set, [ :evas_object_p, :elm_glview_func_cb ], :void ],
-        # EAPI void elm_glview_render_func_set(Evas_Object *obj, Elm_GLView_Func_Cb func);
-        [ :elm_glview_render_func_set, [ :evas_object_p, :elm_glview_func_cb ], :void ],
-        # EAPI void elm_glview_changed_set(Evas_Object *obj);
-        [ :elm_glview_changed_set, [ :evas_object_p ], :void ],
         # EAPI Evas_Object *elm_box_add(Evas_Object *parent);
         [ :elm_box_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_box_horizontal_set(Evas_Object *obj, Eina_Bool horizontal);
@@ -1770,18 +1739,6 @@ module Efl
         # FIXME
         # EAPI Evas_Object *elm_bubble_add(Evas_Object *parent);
         [ :elm_bubble_add, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_bubble_content_set(Evas_Object *obj, Evas_Object *content);
-        [ :elm_bubble_content_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_bubble_content_get(const Evas_Object *obj);
-        [ :elm_bubble_content_get, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_bubble_content_unset(Evas_Object *obj);
-        [ :elm_bubble_content_unset, [ :evas_object_p ], :evas_object_p ],
-        # EAPI void elm_bubble_icon_set(Evas_Object *obj, Evas_Object *icon);
-        [ :elm_bubble_icon_set, [ :evas_object_p, :evas_object_p ], :void ],
-        # EAPI Evas_Object *elm_bubble_icon_get(const Evas_Object *obj);
-        [ :elm_bubble_icon_get, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_bubble_icon_unset(Evas_Object *obj);
-        [ :elm_bubble_icon_unset, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_bubble_corner_set(Evas_Object *obj, const char *corner);
         [ :elm_bubble_corner_set, [ :evas_object_p, :string ], :void ],
         # EAPI const char *elm_bubble_corner_get(const Evas_Object *obj);
@@ -2105,10 +2062,10 @@ module Efl
         [ :elm_toolbar_item_cursor_engine_only_set, [ :elm_toolbar_item_p, :eina_bool ], :void ],
         # EAPI Eina_Bool elm_toolbar_item_cursor_engine_only_get(const Elm_Toolbar_Item *item);
         [ :elm_toolbar_item_cursor_engine_only_get, [ :elm_toolbar_item_p ], :eina_bool ],
-        # EAPI void elm_toolbar_orientation_set(Evas_Object *obj, Eina_Bool vertical);
-        [ :elm_toolbar_orientation_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool elm_toolbar_orientation_get(Evas_Object *obj);
-        [ :elm_toolbar_orientation_get, [ :evas_object_p ], :eina_bool ],
+        # EAPI void elm_toolbar_horizontal_set(Evas_Object *obj, Eina_Bool horizontal);
+        [ :elm_toolbar_horizontal_set, [ :evas_object_p, :eina_bool ], :void ],
+        # EAPI Eina_Bool elm_toolbar_horizontal_get(const Evas_Object *obj);
+        [ :elm_toolbar_horizontal_get, [ :evas_object_p ], :eina_bool ],
         # EAPI double elm_tooltip_delay_get(void);
         [ :elm_tooltip_delay_get, [  ], :double ],
         # EAPI Eina_Bool elm_tooltip_delay_set(double delay);
@@ -2951,8 +2908,6 @@ module Efl
         [ :elm_panel_toggle, [ :evas_object_p ], :void ],
         # EAPI Evas_Object *elm_panes_add(Evas_Object *parent);
         [ :elm_panes_add, [ :evas_object_p ], :evas_object_p ],
-        # EAPI Evas_Object *elm_panes_content_right_unset(Evas_Object *obj);
-        [ :elm_panes_content_right_unset, [ :evas_object_p ], :evas_object_p ],
         # EAPI double elm_panes_content_left_size_get(const Evas_Object *obj);
         [ :elm_panes_content_left_size_get, [ :evas_object_p ], :double ],
         # EAPI void elm_panes_content_left_size_set(Evas_Object *obj, double size);
@@ -3381,7 +3336,7 @@ module Efl
         [ :elm_video_file_set, [ :evas_object_p, :string ], :void ],
         # EAPI void elm_video_uri_set(Evas_Object *video, const char *uri);
         [ :elm_video_uri_set, [ :evas_object_p, :string ], :void ],
-        # EAPI Evas_Object *elm_video_emotion_get(Evas_Object *video);
+        # EAPI Evas_Object *elm_video_emotion_get(const Evas_Object *video);
         [ :elm_video_emotion_get, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_video_play(Evas_Object *video);
         [ :elm_video_play, [ :evas_object_p ], :void ],
@@ -3389,34 +3344,38 @@ module Efl
         [ :elm_video_pause, [ :evas_object_p ], :void ],
         # EAPI void elm_video_stop(Evas_Object *video);
         [ :elm_video_stop, [ :evas_object_p ], :void ],
-        # EAPI Eina_Bool elm_video_is_playing(Evas_Object *video);
+        # EAPI Eina_Bool elm_video_is_playing(const Evas_Object *video);
         [ :elm_video_is_playing, [ :evas_object_p ], :eina_bool ],
-        # EAPI Eina_Bool elm_video_is_seekable(Evas_Object *video);
+        # EAPI Eina_Bool elm_video_is_seekable(const Evas_Object *video);
         [ :elm_video_is_seekable, [ :evas_object_p ], :eina_bool ],
-        # EAPI Eina_Bool elm_video_audio_mute_get(Evas_Object *video);
+        # EAPI Eina_Bool elm_video_audio_mute_get(const Evas_Object *video);
         [ :elm_video_audio_mute_get, [ :evas_object_p ], :eina_bool ],
         # EAPI void elm_video_audio_mute_set(Evas_Object *video, Eina_Bool mute);
         [ :elm_video_audio_mute_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI double elm_video_audio_level_get(Evas_Object *video);
+        # EAPI double elm_video_audio_level_get(const Evas_Object *video);
         [ :elm_video_audio_level_get, [ :evas_object_p ], :double ],
         # EAPI void elm_video_audio_level_set(Evas_Object *video, double volume);
         [ :elm_video_audio_level_set, [ :evas_object_p, :double ], :void ],
-        # EAPI double elm_video_play_position_get(Evas_Object *video);
+        # EAPI double elm_video_play_position_get(const Evas_Object *video);
         [ :elm_video_play_position_get, [ :evas_object_p ], :double ],
         # EAPI void elm_video_play_position_set(Evas_Object *video, double position);
         [ :elm_video_play_position_set, [ :evas_object_p, :double ], :void ],
-        # EAPI double elm_video_play_length_get(Evas_Object *video);
+        # EAPI double elm_video_play_length_get(const Evas_Object *video);
         [ :elm_video_play_length_get, [ :evas_object_p ], :double ],
         # EAPI void elm_video_remember_position_set(Evas_Object *video, Eina_Bool remember);
         [ :elm_video_remember_position_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool elm_video_remember_position_get(Evas_Object *video);
+        # EAPI Eina_Bool elm_video_remember_position_get(const Evas_Object *video);
         [ :elm_video_remember_position_get, [ :evas_object_p ], :eina_bool ],
-        # EAPI const char *elm_video_title_get(Evas_Object *video);
+        # EAPI const char *elm_video_title_get(const Evas_Object *video);
         [ :elm_video_title_get, [ :evas_object_p ], :string ],
         # EAPI Evas_Object *elm_naviframe_add(Evas_Object *parent);
         [ :elm_naviframe_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI Elm_Object_Item *elm_naviframe_item_push(Evas_Object *obj, const char *title_label, Evas_Object *prev_btn, Evas_Object *next_btn, Evas_Object *content, const char *item_style);
         [ :elm_naviframe_item_push, [ :evas_object_p, :string, :evas_object_p, :evas_object_p, :evas_object_p, :string ], :elm_object_item_p ],
+        # EAPI Elm_Object_Item *elm_naviframe_item_insert_before(Elm_Object_Item *before, const char *title_label, Evas_Object *prev_btn, Evas_Object *next_btn, Evas_Object *content, const char *item_style);
+        [ :elm_naviframe_item_insert_before, [ :elm_object_item_p, :string, :evas_object_p, :evas_object_p, :evas_object_p, :string ], :elm_object_item_p ],
+        # EAPI Elm_Object_Item *elm_naviframe_item_insert_after(Elm_Object_Item *after, const char *title_label, Evas_Object *prev_btn, Evas_Object *next_btn, Evas_Object *content, const char *item_style);
+        [ :elm_naviframe_item_insert_after, [ :elm_object_item_p, :string, :evas_object_p, :evas_object_p, :evas_object_p, :string ], :elm_object_item_p ],
         # EAPI Evas_Object *elm_naviframe_item_pop(Evas_Object *obj);
         [ :elm_naviframe_item_pop, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_naviframe_item_pop_to(Elm_Object_Item *it);
@@ -3443,8 +3402,10 @@ module Efl
         [ :elm_naviframe_item_title_visible_get, [ :elm_object_item_p ], :eina_bool ],
         # EAPI void elm_naviframe_prev_btn_auto_pushed_set(Evas_Object *obj, Eina_Bool auto_pushed);
         [ :elm_naviframe_prev_btn_auto_pushed_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool elm_naviframe_prev_btn_auto_pushed_get(const Evas_Object *obj);;
+        # EAPI Eina_Bool elm_naviframe_prev_btn_auto_pushed_get(const Evas_Object *obj);
         [ :elm_naviframe_prev_btn_auto_pushed_get, [ :evas_object_p ], :eina_bool ],
+        # EAPI Eina_Inlist *elm_naviframe_items_get(const Evas_Object *obj);
+        [ :elm_naviframe_items_get, [ :evas_object_p ], :pointer ],
         ]
         #
         attach_fcts fcts
