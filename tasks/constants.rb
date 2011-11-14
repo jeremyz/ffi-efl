@@ -27,19 +27,19 @@ if USE_RAKE_COMPILER
     ENV['RUBY_CC_VERSION'] = '1.8.7:1.9.2'
 end
 
-LIBEXT = case Config::CONFIG['host_os'].downcase
+LIBEXT = case RbConfig::CONFIG['host_os'].downcase
     when /darwin/
         "dylib"
     when /mswin|mingw/
         "dll"
     else
-        Config::CONFIG['DLEXT']
+        RbConfig::CONFIG['DLEXT']
     end
 
-CPU = case Config::CONFIG['host_cpu'].downcase
+CPU = case RbConfig::CONFIG['host_cpu'].downcase
     when /i[3456]86/
         # Darwin always reports i686, even when running in 64bit mode
-        if Config::CONFIG['host_os'] =~ /darwin/ && 0xfee1deadbeef.is_a?(Fixnum)
+        if RbConfig::CONFIG['host_os'] =~ /darwin/ && 0xfee1deadbeef.is_a?(Fixnum)
             "x86_64"
         else
         "i386"
@@ -51,10 +51,10 @@ CPU = case Config::CONFIG['host_cpu'].downcase
     when /ppc|powerpc/
         "powerpc"
     else
-        Config::CONFIG['host_cpu']
+        RbConfig::CONFIG['host_cpu']
     end
 
-OS = case Config::CONFIG['host_os'].downcase
+OS = case RbConfig::CONFIG['host_os'].downcase
     when /linux/
         "linux"
     when /darwin/
@@ -68,12 +68,12 @@ OS = case Config::CONFIG['host_os'].downcase
     when /mswin|mingw/
         "win32"
     else
-        Config::CONFIG['host_os'].downcase
+        RbConfig::CONFIG['host_os'].downcase
     end
 
-CC=ENV['CC'] || Config::CONFIG['CC'] || "gcc"
+CC=ENV['CC'] || RbConfig::CONFIG['CC'] || "gcc"
 
-GMAKE = Config::CONFIG['host_os'].downcase =~ /bsd|solaris/ ? "gmake" : "make"
+GMAKE = RbConfig::CONFIG['host_os'].downcase =~ /bsd|solaris/ ? "gmake" : "make"
 
 
 DIFF = if WIN32 then 'diff.exe'
