@@ -407,7 +407,7 @@ module Efl
         [ :evas_event_feed_key_up, [ :evas_p, :string, :string, :string, :string, :uint, :void_p ], :void ],
         # EAPI void evas_event_feed_hold (Evas *e, int hold, unsigned int timestamp, const void *data);
         [ :evas_event_feed_hold, [ :evas_p, :int, :uint, :void_p ], :void ],
-        # EAPI void evas_event_refeed_event (Evas *e, void *event_copy, Evas_Callback_Type event_type);;
+        # EAPI void evas_event_refeed_event (Evas *e, void *event_copy, Evas_Callback_Type event_type);
         [ :evas_event_refeed_event, [ :evas_p, :void_p, :evas_callback_type ], :void ],
         # EAPI void evas_image_cache_flush (Evas *e);
         [ :evas_image_cache_flush, [ :evas_p ], :void ],
