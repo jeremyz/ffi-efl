@@ -161,6 +161,8 @@ module Efl
         [ :eet_delete, [ :eet_file_p, :string ], :int ],
         # EAPI Eina_Bool eet_alias(Eet_File *ef, const char *name, const char *destination, int compress);
         [ :eet_alias, [ :eet_file_p, :string, :string, :int ], :eina_bool ],
+        # EAPI const char * eet_file_get(Eet_File *ef);
+        [ :eet_file_get, [ :eet_file_p ], :string ],
         # EAPI const char * eet_alias_get(Eet_File *ef, const char *name);
         [ :eet_alias_get, [ :eet_file_p, :string ], :string ],
         # EAPI char ** eet_list(Eet_File *ef, const char *glob, int *count_ret);
