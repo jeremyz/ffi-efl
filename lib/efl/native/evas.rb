@@ -31,7 +31,7 @@ module Efl
             :evas_callback_key_up, :evas_callback_focus_in, :evas_callback_focus_out, :evas_callback_show, :evas_callback_hide, :evas_callback_move, :evas_callback_resize,
             :evas_callback_restack, :evas_callback_del, :evas_callback_hold, :evas_callback_changed_size_hints, :evas_callback_image_preloaded, :evas_callback_canvas_focus_in,
             :evas_callback_canvas_focus_out, :evas_callback_render_flush_pre, :evas_callback_render_flush_post, :evas_callback_canvas_object_focus_in,
-            :evas_callback_canvas_object_focus_out, :evas_callback_image_unloaded, :evas_callback_last ]
+            :evas_callback_canvas_object_focus_out, :evas_callback_image_unloaded, :evas_callback_render_pre, :evas_callback_render_post, :evas_callback_last ]
         # typedef enum _Evas_Button_Flags {...} Evas_Button_Flags;
         enum :evas_button_flags, [ :evas_button_none, 0, :evas_button_double_click, :evas_button_triple_click ]
         # typedef enum _Evas_Event_Flags {...} Evas_Event_Flags;
@@ -339,6 +339,10 @@ module Efl
         [ :evas_output_viewport_set, [ :evas_p, :int, :int, :int, :int ], :void ],
         # EAPI void evas_output_viewport_get (const Evas *e, Evas_Coord *x, Evas_Coord *y, Evas_Coord *w, Evas_Coord *h);
         [ :evas_output_viewport_get, [ :evas_p, :int_p, :int_p, :int_p, :int_p ], :void ],
+        # EAPI void evas_output_framespace_set (Evas *e, Evas_Coord x, Evas_Coord y, Evas_Coord w, Evas_Coord h);
+        [ :evas_output_framespace_set, [ :evas_p, :int, :int, :int, :int ], :void ],
+        # EAPI void evas_output_framespace_get (const Evas *e, Evas_Coord *x, Evas_Coord *y, Evas_Coord *w, Evas_Coord *h);
+        [ :evas_output_framespace_get, [ :evas_p, :int_p, :int_p, :int_p, :int_p ], :void ],
         # EAPI Evas_Coord evas_coord_screen_x_to_world (const Evas *e, int x);
         [ :evas_coord_screen_x_to_world, [ :evas_p, :int ], :int ],
         # EAPI Evas_Coord evas_coord_screen_y_to_world (const Evas *e, int y);
@@ -371,6 +375,10 @@ module Efl
         [ :evas_post_event_callback_remove, [ :evas_p, :evas_object_event_post_cb ], :void ],
         # EAPI void evas_post_event_callback_remove_full (Evas *e, Evas_Object_Event_Post_Cb func, const void *data);
         [ :evas_post_event_callback_remove_full, [ :evas_p, :evas_object_event_post_cb, :void_p ], :void ],
+        # EAPI void evas_event_default_flags_set (Evas *e, Evas_Event_Flags flags);
+        [ :evas_event_default_flags_set, [ :evas_p, :evas_event_flags ], :void ],
+        # EAPI Evas_Event_Flags evas_event_default_flags_get (const Evas *e);
+        [ :evas_event_default_flags_get, [ :evas_p ], :evas_event_flags ],
         # EAPI void evas_event_freeze (Evas *e);
         [ :evas_event_freeze, [ :evas_p ], :void ],
         # EAPI void evas_event_thaw (Evas *e);
@@ -809,6 +817,8 @@ module Efl
         [ :evas_object_image_colorspace_set, [ :evas_object_p, :evas_colorspace ], :void ],
         # EAPI Evas_Colorspace evas_object_image_colorspace_get (const Evas_Object *obj);
         [ :evas_object_image_colorspace_get, [ :evas_object_p ], :evas_colorspace ],
+        # EAPI Eina_Bool evas_object_image_region_support_get (const Evas_Object *obj);
+        [ :evas_object_image_region_support_get, [ :evas_object_p ], :eina_bool ],
         # EAPI void evas_object_image_native_surface_set (Evas_Object *obj, Evas_Native_Surface *surf);
         [ :evas_object_image_native_surface_set, [ :evas_object_p, :evas_native_surface_p ], :void ],
         # EAPI Evas_Native_Surface *evas_object_image_native_surface_get (const Evas_Object *obj);
@@ -919,6 +929,10 @@ module Efl
         [ :evas_textblock_string_escape_get, [ :string, :int_p ], :string ],
         # EAPI const char *evas_textblock_escape_string_range_get(const char *escape_start, const char *escape_end);
         [ :evas_textblock_escape_string_range_get, [ :string, :string ], :string ],
+        # EAPI char *evas_textblock_text_markup_to_utf8(const Evas_Object *obj, const char *text);
+        [ :evas_textblock_text_markup_to_utf8, [ :evas_object_p, :string ], :string ],
+        # EAPI char *evas_textblock_text_utf8_to_markup(const Evas_Object *obj, const char *text);
+        [ :evas_textblock_text_utf8_to_markup, [ :evas_object_p, :string ], :string ],
         # EAPI Evas_Textblock_Style *evas_textblock_style_new(void);
         [ :evas_textblock_style_new, [  ], :evas_textblock_style_p ],
         # EAPI void evas_textblock_style_free(Evas_Textblock_Style *ts);
@@ -997,6 +1011,10 @@ module Efl
         [ :evas_textblock_cursor_char_next, [ :evas_textblock_cursor_p ], :eina_bool ],
         # EAPI Eina_Bool evas_textblock_cursor_char_prev(Evas_Textblock_Cursor *cur);
         [ :evas_textblock_cursor_char_prev, [ :evas_textblock_cursor_p ], :eina_bool ],
+        # EAPI Eina_Bool evas_textblock_cursor_word_start(Evas_Textblock_Cursor *cur);
+        [ :evas_textblock_cursor_word_start, [ :evas_textblock_cursor_p ], :eina_bool ],
+        # EAPI Eina_Bool evas_textblock_cursor_word_end(Evas_Textblock_Cursor *cur);
+        [ :evas_textblock_cursor_word_end, [ :evas_textblock_cursor_p ], :eina_bool ],
         # EAPI void evas_textblock_cursor_paragraph_char_first(Evas_Textblock_Cursor *cur);
         [ :evas_textblock_cursor_paragraph_char_first, [ :evas_textblock_cursor_p ], :void ],
         # EAPI void evas_textblock_cursor_paragraph_char_last(Evas_Textblock_Cursor *cur);
@@ -1031,6 +1049,8 @@ module Efl
         [ :evas_textblock_cursor_paragraph_text_get, [ :evas_textblock_cursor_p ], :string ],
         # EAPI int evas_textblock_cursor_paragraph_text_length_get(const Evas_Textblock_Cursor *cur);
         [ :evas_textblock_cursor_paragraph_text_length_get, [ :evas_textblock_cursor_p ], :int ],
+        # EAPI Eina_Bool evas_textblock_cursor_visible_range_get(Evas_Textblock_Cursor *start, Evas_Textblock_Cursor *end);
+        [ :evas_textblock_cursor_visible_range_get, [ :evas_textblock_cursor_p, :evas_textblock_cursor_p ], :eina_bool ],
         # EAPI Eina_List * evas_textblock_cursor_range_formats_get(const Evas_Textblock_Cursor *cur1, const Evas_Textblock_Cursor *cur2);
         [ :evas_textblock_cursor_range_formats_get, [ :evas_textblock_cursor_p, :evas_textblock_cursor_p ], :eina_list_p ],
         # EAPI char *evas_textblock_cursor_range_text_get(const Evas_Textblock_Cursor *cur1, const Evas_Textblock_Cursor *cur2, Evas_Textblock_Text_Type format);

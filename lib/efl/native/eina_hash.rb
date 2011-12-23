@@ -104,7 +104,7 @@ module Efl
         [ :eina_hash_iterator_data_new, [ :eina_hash_p ], :eina_iterator_p ],
         # EAPI Eina_Iterator *eina_hash_iterator_tuple_new(const Eina_Hash *hash);
         [ :eina_hash_iterator_tuple_new, [ :eina_hash_p ], :eina_iterator_p ],
-        # EAPI void eina_hash_foreach(const Eina_Hash *hash, Eina_Hash_Foreach cb, const void *fdata);
+        # EAPI void eina_hash_foreach(const Eina_Hash *hash, Eina_Hash_Foreach func, const void *fdata);
         [ :eina_hash_foreach, [ :eina_hash_p, :eina_hash_foreach, :void_p ], :void ],
         # EAPI int eina_hash_superfast(const char *key, int len);
         [ :eina_hash_superfast, [ :string, :int ], :int ],

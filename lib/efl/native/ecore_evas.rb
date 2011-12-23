@@ -91,6 +91,10 @@ module Efl
         attach_variable :ECORE_EVAS_EWS_EVENT_FULLSCREEN_CHANGE, :int
         # EAPI extern int ECORE_EVAS_EWS_EVENT_CONFIG_CHANGE;
         attach_variable :ECORE_EVAS_EWS_EVENT_CONFIG_CHANGE, :int
+        # EAPI extern int ECORE_EVAS_EXTN_CLIENT_ADD;
+        attach_variable :ECORE_EVAS_EXTN_CLIENT_ADD, :int
+        # EAPI extern int ECORE_EVAS_EXTN_CLIENT_DEL;
+        attach_variable :ECORE_EVAS_EXTN_CLIENT_DEL, :int
         #
         # FUNCTIONS
         fcts = [
@@ -442,6 +446,14 @@ module Efl
         [ :ecore_evas_ews_manager_set, [ :void_p ], :void ],
         # EAPI const void *ecore_evas_ews_manager_get(void);
         [ :ecore_evas_ews_manager_get, [  ], :void_p ],
+        # EAPI Evas_Object *ecore_evas_extn_socket_new(Ecore_Evas *ee_target, const char *svcname, int svcnum, Eina_Bool svcsys);
+        [ :ecore_evas_extn_socket_new, [ :ecore_evas_p, :string, :int, :eina_bool ], :evas_object_p ],
+        # EAPI void ecore_evas_extn_socket_object_data_lock(Evas_Object *obj);
+        [ :ecore_evas_extn_socket_object_data_lock, [ :evas_object_p ], :void ],
+        # EAPI void ecore_evas_extn_socket_object_data_unlock(Evas_Object *obj);
+        [ :ecore_evas_extn_socket_object_data_unlock, [ :evas_object_p ], :void ],
+        # EAPI Ecore_Evas *ecore_evas_extn_plug_new(const char *svcname, int svcnum, Eina_Bool svcsys);
+        [ :ecore_evas_extn_plug_new, [ :string, :int, :eina_bool ], :ecore_evas_p ],
         ]
         if RUBY_PLATFORM =~ /darwin/
             # EAPI Ecore_Evas *ecore_evas_cocoa_new(const char* name, int w, int h);
