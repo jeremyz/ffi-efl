@@ -231,15 +231,6 @@ describe "Efl::Elm #{Efl::Elm.version.full}" do
             @bg.class.superclass.instance_method(:color).bind(@bg).call.should == [200,255,100,150]
         end
         #
-        it "overlay get/set unset" do
-            r = @win.evas.object_rectangle_add
-            @bg.overlay_get.should==FFI::Pointer::NULL
-            @bg.overlay_set r
-            @bg.overlay_get.should == r.to_ptr
-            @bg.overlay_unset.should == r.to_ptr
-            @bg.overlay_get.should == FFI::Pointer::NULL
-            r.free
-        end
     end
     #
     describe 'Efl::Elm::ElmLabel' do
