@@ -10,6 +10,7 @@ parentdir=${abspath%/*/*}
 function each () {
     echo $($RUBY --version)
     for spec in $parentdir/spec/e*.rb; do
+        echo "*** SPEC $spec :"
         $RUBY -I $parentdir/lib -S rspec --color $spec
     done
 }
