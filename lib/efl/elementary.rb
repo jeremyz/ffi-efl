@@ -63,27 +63,27 @@ module Efl
             end
             #
             def text_set label
-                Native.elm_object_text_part_set @ptr, nil, label
+                Native.elm_object_part_text_set @ptr, nil, label
             end
             alias :text= :text_set
             #
             def text_get
-                Native.elm_object_text_part_get @ptr, nil
+                Native.elm_object_part_text_get @ptr, nil
             end
             alias :text :text_get
             #
             def content_set content
-                Native.elm_object_content_part_set @ptr, nil, content
+                Native.elm_object_part_content_set @ptr, nil, content
             end
             alias :content= :content_set
             #
             def content_get
-                Native.elm_object_content_part_get @ptr, nil
+                Native.elm_object_part_content_get @ptr, nil
             end
             alias :content :content_get
             #
             def content_unset
-                Native.elm_object_content_part_unset @ptr, nil
+                Native.elm_object_part_content_unset @ptr, nil
             end
             #
             def parent_widget_get
@@ -107,9 +107,9 @@ module Efl
             #
             def texts_set l=nil, c=nil, r=nil
                 l,c,r = *l if l.is_a? Array
-                Native.elm_object_text_part_set @ptr, "left", l
-                Native.elm_object_text_part_set @ptr, "center", c
-                Native.elm_object_text_part_set @ptr, "right", r
+                Native.elm_object_part_text_set @ptr, "left", l
+                Native.elm_object_part_text_set @ptr, "center", c
+                Native.elm_object_part_text_set @ptr, "right", r
             end
             alias :texts= :texts_set
             def indicator_set str
