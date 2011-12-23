@@ -268,9 +268,6 @@ module Efl
         typedef :pointer, :elm_map_name_p
         # typedef struct _Elm_Map_Track Elm_Map_Track;
         typedef :pointer, :elm_map_track
-        # typedef struct _Elm_Flipselector_Item Elm_Flipselector_Item;
-        typedef :pointer, :elm_flipselector_item
-        typedef :pointer, :elm_flipselector_item_p
         # typedef struct _Elm_Calendar_Mark Elm_Calendar_Mark;
         typedef :pointer, :elm_calendar_mark
         typedef :pointer, :elm_calendar_mark_p
@@ -1831,6 +1828,8 @@ module Efl
         [ :elm_web_bg_color_set, [ :evas_object_p, :int, :int, :int, :int ], :void ],
         # EAPI void elm_web_bg_color_get(const Evas_Object *obj, int *r, int *g, int *b, int *a);
         [ :elm_web_bg_color_get, [ :evas_object_p, :int_p, :int_p, :int_p, :int_p ], :void ],
+        # EAPI char *elm_view_selection_get(const Evas_Object *obj);
+        [ :elm_view_selection_get, [ :evas_object_p ], :string ],
         # EAPI void elm_web_popup_selected_set(Evas_Object *obj, int index);
         [ :elm_web_popup_selected_set, [ :evas_object_p, :int ], :void ],
         # EAPI Eina_Bool elm_web_popup_destroy(Evas_Object *obj);
