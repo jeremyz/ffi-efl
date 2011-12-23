@@ -28,9 +28,9 @@ module Tests
             as = Elm::ElmActionSlider.new self do |as|
                 as.size_hint_weight_set Evas::EVAS_HINT_EXPAND, 0
                 as.size_hint_align_set Evas::EVAS_HINT_FILL, 0
-                as.text_part = "left", "Snooze"
-                as.text_part = "center", nil
-                as.text_part = "right", "Stop"
+                as.part_text = "left", "Snooze"
+                as.part_text = "center", nil
+                as.part_text = "right", "Stop"
                 as.indicator_pos = :elm_actionslider_right
                 as.magnet_pos = :elm_actionslider_right
                 as.enabled_pos = as_pos[:elm_actionslider_left]|as_pos[:elm_actionslider_right]

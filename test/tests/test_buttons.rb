@@ -27,7 +27,7 @@ module Tests
             end
             bt = Efl::Elm::ElmButton.new self
             bt.text = txt unless txt.nil?
-            bt.icon = ico if ico
+            bt.content = ico if ico
             bt.smart_callback_add "clicked", method(:bt_clicked_cb)
             bt.smart_callback_add "unpressed", method(:bt_unpressed_cb)
             @bx.pack_end bt

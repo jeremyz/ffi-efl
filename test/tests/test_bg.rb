@@ -116,9 +116,9 @@ module Tests
             if Elm::ElmCheck.new(evas_obj).state
                 over = @o_bg.parent_widget.evas.edje_object_add
                 over.file = "#{PACKAGE_DATA_DIR}/objects/test.edj", "bg_overlay"
-                @o_bg.overlay = over
+                @o_bg.content = over
             else
-                @o_bg.overlay = FFI::Pointer::NULL
+                @o_bg.content = FFI::Pointer::NULL
             end
         end
         def cb_color_changed data, evas_obj, event_info
