@@ -144,6 +144,7 @@ describe "Efl::Ecore #{Efl::Ecore.version.full}" do
             Ecore.main_loop_iterate
             pipe.read_close
             pipe.write_close
+            pipe.del    # without this, pipe is freed by autopointer, but after Ecore.shutdown then SIGSEV
         end
         it "manual destructor should not raise FFI::AutoPointer error" do
             data = FFI::MemoryPointer.from_string("none")
