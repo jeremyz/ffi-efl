@@ -1756,8 +1756,6 @@ module Efl
         [ :elm_entry_autocapital_type_get, [ :evas_object_p ], :elm_autocapital_type ],
         # EAPI void elm_entry_input_panel_enabled_set(Evas_Object *obj, Eina_Bool enabled);
         [ :elm_entry_input_panel_enabled_set, [ :evas_object_p, :eina_bool ], :void ],
-        # EAPI Eina_Bool elm_entry_input_panel_enabled_get(Evas_Object *obj);
-        [ :elm_entry_input_panel_enabled_get, [ :evas_object_p ], :eina_bool ],
         # EAPI Evas_Object *elm_anchorview_add(Evas_Object *parent);
         [ :elm_anchorview_add, [ :evas_object_p ], :evas_object_p ],
         # EAPI void elm_anchorview_hover_parent_set(Evas_Object *obj, Evas_Object *parent);
@@ -1882,8 +1880,6 @@ module Efl
         [ :elm_web_bg_color_set, [ :evas_object_p, :int, :int, :int, :int ], :void ],
         # EAPI void elm_web_bg_color_get(const Evas_Object *obj, int *r, int *g, int *b, int *a);
         [ :elm_web_bg_color_get, [ :evas_object_p, :int_p, :int_p, :int_p, :int_p ], :void ],
-        # EAPI char *elm_view_selection_get(const Evas_Object *obj);
-        [ :elm_view_selection_get, [ :evas_object_p ], :string ],
         # EAPI void elm_web_popup_selected_set(Evas_Object *obj, int index);
         [ :elm_web_popup_selected_set, [ :evas_object_p, :int ], :void ],
         # EAPI Eina_Bool elm_web_popup_destroy(Evas_Object *obj);
