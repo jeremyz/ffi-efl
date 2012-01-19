@@ -112,6 +112,36 @@ module Efl
         module_function :find_function
     end
     #
+    module MethResolver
+        def self.resolve mod, meth, prefix
+            meth_s = meth.to_s
+            if meth_s =~/^(.*)=$/
+                meth_s = $1+'_set'
+                args_s = '*args[0]'
+            elsif meth_s =~/^(.*)\?$/
+                meth_s = $1+'_get'
+                args_s = '*args'
+            else
+                args_s = '*args'
+            end
+            sym = (
+                if Efl::Native.respond_to? prefix+meth_s
+                    prefix+meth_s
+                elsif Efl::Native.respond_to? meth_s
+                    meth_s
+                elsif Efl::Native.respond_to? prefix+meth_s+'_get'
+                    prefix+meth_s+'_get'
+                elsif Efl::Native.respond_to? meth_s+'_get'
+                    meth_s+'_get'
+                else
+                    raise NameError.new "#{mod.name}.#{meth_s} (#{meth})"
+                end
+            )
+            mod.module_eval "def self.#{meth} *args, &block; r=Efl::Native.#{sym}(#{args_s}); yield r if block_given?; r; end"
+            sym
+        end
+    end
+    #
     module ClassHelper
         def to_a; [self] end
         def to_ary; [self] end
