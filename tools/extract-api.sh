@@ -55,7 +55,7 @@ for header in \
     #
     for what in functions enums types callbacks variables; do
         F=$FILE-$what
-        cat $header | sed -r -n -f $P/sed-$what > $NEXT/$F
+        sed -r -n -f "$P/sed-$what" $header > $NEXT/$F
         if [ -f $PREV/$F ]; then
             diff -u0 $PREV/$F $NEXT/$F > $P/$F-diff
             N=$(cat $P/$F-diff | wc -l)
