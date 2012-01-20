@@ -34,7 +34,7 @@ HEADER =<<-EOF
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ffi'
+require 'efl'
 #
 module Efl
     #
@@ -42,10 +42,9 @@ module Efl
         #
         FCT_PREFIX = 'MY_FCT_PREFIX_'
         #
-        def self.method_missing m, *args, &block
-            sym, args_s = ModuleHelper.find_function m, FCT_PREFIX
-            self.module_eval "def self.\#{m} *args, &block; r=Efl::Native.\#{sym}(\#{args_s}); yield r if block_given?; r; end"
-            self.send m, *args, &block
+        def self.method_missing meth, *args, &block
+            sym = Efl::MethodResolver self, meth, FCT_PREFIX
+            self.send sym, *args, &block
         end
         #
     end
@@ -97,46 +96,39 @@ TYPES = {
     'struct timeval *' => ':pointer',
     'struct sockaddr *' => ':pointer',
     # Efl BASE TYPES
-    'Eina_Bool' => ':eina_bool',
-    'Eina_Bool *' => ':eina_bool_p',
-    'Eina_Inlist *' => ':pointer',
-    'Eina_Iterator' => ':eina_iterator',
-    'Eina_Iterator *' => ':eina_iterator_p',
-    'Eina_Accessor' => ':eina_accessor',
-    'Eina_Accessor *' => ':eina_accessor_p',
-    'Evas_GL_API *' => ':evas_gl_api_p',
+    'Eina_Bool' => ':uchar',
+#    'Eina_Bool *' => ':pointer',
+#    'Eina_Inlist *' => ':pointer',
+#    'Eina_Iterator' => ':eina_iterator',
+#    'Eina_Iterator *' => ':eina_iterator_p',
+#    'Eina_Accessor' => ':eina_accessor',
+#    'Eina_Accessor *' => ':eina_accessor_p',
+#    'Evas_GL_API *' => ':evas_gl_api_p',
 }
 #
 TYPES_USAGE = {}
 #
-def set_type t, v, cb=false
-    return 'bool' if t =~/Eina_Bool/
-    v = v.downcase.sub(/(const|struct|enum|union) /,' ').strip
-    if not TYPES[t].nil?
-        puts "type already exists >#{t}< #{v}"
+def set_type t, sym
+    if TYPES[t].nil?
+        TYPES[t]=':'+sym.downcase
+        puts "  define type : #{t} => :#{sym.downcase}"
+    else
+        puts "ERROR set type #{t} => #{sym}"
         exit 1
     end
-    r = TYPES[v]
-    v = r[1..-1] if not r.nil?
-    TYPES[t]=':'+v
-    if cb
-        TYPES[t+' *']=':'+v
-    else
-        TYPES[t+' *']=':'+v+'_p'
-        TYPES[t+' **']=':'+v+'_pp'
-        TYPES[t+' ***']=':'+v+'_ppp'
-    end
-    v
 end
 #
 def get_type t
     k = t.gsub(/(const|enum|union)/, '').strip
-    k.sub!(/\*/,' *') if k=~/\w+\*/
+#    k.sub!(/\*/,' *') if k=~/\w+\*/
+#    puts "search for #{k}"
+    return ':pointer' if k=~ /\*/
     r = TYPES[k]
     if r.nil?
         puts "unknown type >#{k}< #{t}"
         exit 1
     end
+#    puts "found #{r}"
     TYPES_USAGE[k]||=true
     r
 end
@@ -150,7 +142,7 @@ def get_type_from_arg arg, l
     end
     k = arg.gsub(/const/,'').gsub(/\s{2,}/,' ').strip
     if k=~/(.*?)(\w+)$/
-        return get_type $1
+        return get_type $1.strip
     end
     # try with unchanged argument string
     t = get_type k
@@ -170,19 +162,17 @@ def gen_enums path, indent
     open(path+'-enums','r').readlines.each do |l|
         l.strip!
         if not l=~/(typedef enum(?: \w+)?) \{([-A-Z0-9_=, ]+)\} (\w+);/
+            puts "FIXME : #{l}\n#{indent}# FIXME"
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
-        typedef = $1
-        values = $2
-        typename = $3
+        typedef = $1.strip
+        values = $2.strip
+        typename = $3.strip
         v = set_type typename, typename
         args = values.split(',').collect { |cst| ':'+cst.strip.downcase }.join(', ').gsub(/=/,',').gsub(/ ,/,',')
         r << indent+"# #{typedef} {...} #{typename};"
         r << wrap_text( indent+"enum :#{v}, [ #{args} ]", indent+' '*4 )
-        r << [ typename+' *', indent+"typedef :pointer, :#{v}_p" ]
-        r << [ typename+' **', indent+"typedef :pointer, :#{v}_pp" ]
-        r << [ typename+' ***', indent+"typedef :pointer, :#{v}_ppp" ]
     end
     r
 end
@@ -192,22 +182,25 @@ def gen_typedefs path, indent
     open(path+'-types','r').readlines.each do |l|
         l.strip!
         if l=~/typedef (struct|enum|union) _\w+ (\w+);/
-            t = $2
+            t = $2.strip
             v = 'pointer'
-            set_type t, t
         elsif l =~/typedef\s+((?:\w+\**\s)+)(\w+);/
-            t = $2
-            v = $1
-            v = set_type t, v
+            t = $2.strip
+            v = $1.strip
+            if TYPES[t].nil?
+                if TYPES.values.include? ':'+v
+                    set_type t, v
+                else
+                    puts "\nFIXME #{t} #{v} HOOo"
+                    exit 1
+                end
+            end
         else
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
         r << indent+"# #{l}"
         r << indent+"typedef :#{v}, :#{t.downcase}"
-        r << [ t+' *', indent+"typedef :pointer, :#{t.downcase}_p" ]
-        r << [ t+' **', indent+"typedef :pointer, :#{t.downcase}_pp" ]
-        r << [ t+' ***', indent+"typedef :pointer, :#{t.downcase}_ppp" ]
     end
     r
 end
@@ -217,15 +210,16 @@ def gen_callbacks path, indent
     open(path+'-callbacks','r').readlines.each do |l|
         l.strip!
         if not l=~/^\s*typedef\s+(.*)((?:\(\*?\w+\)| \*?\w+))\s*\((.*)\);/
+            puts "# #{l}\n#{indent}# FIXME"
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
-        ret = $1
+        ret = $1.strip
         name = $2.strip
         args = $3.split(',').collect { |arg| get_type_from_arg arg, l }.join ', '
         k = name.sub(/\(/,'').sub(/\)/,'').sub(/\*/,'')
         t = name.downcase.sub(/\(/,'').sub(/\)/,'').sub(/\*/,'')
-        t = set_type k, t, true
+        t = set_type k, t
         r << indent+"# #{l}"
         r << wrap_text(indent+"callback :#{t}, [ #{args} ], #{get_type ret}", indent+' '*4 )
     end
@@ -240,8 +234,8 @@ def gen_variables path, indent
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
-        var = $2
-        t = $1
+        var = $2.strip
+        t = $1.strip
         r << indent+"# #{l}"
         r << wrap_text(indent+"attach_variable :#{var}, #{get_type t}", indent+' '*4)
     end
@@ -257,8 +251,8 @@ def gen_functions path, indent
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
-        ret = $1
-        func = $2.downcase
+        ret = $1.strip
+        func = $2.strip.downcase
         args = $3.split(',').collect { |arg| get_type_from_arg arg, l }.join ', '
         r << indent+"# #{l}"
         r << wrap_text(indent+"[ :#{func}, [ #{args} ], #{get_type ret} ],", indent+' '*4)
@@ -273,18 +267,19 @@ libraries.collect do |header,module_name,fct_prefix,lib, output|
     base = File.join path, 'api', header
     output = File.join lib_path, output
     Dir.mkdir File.dirname(output) unless File.exists? File.dirname(output)
-    printf "%-60s", "parse #{base}-*"
+    puts "parse #{base}-*"
     r = [lib, output, module_name, fct_prefix ]
-    print "enums, "
+    puts " enums..."
     r << gen_enums(base, INDENT)
-    print "typedefs, "
+    puts " typedefs..."
     r << gen_typedefs(base, INDENT)
-    print "callbacks, "
+    puts " callbacks..."
     r << gen_callbacks(base, INDENT)
-    print "variables, "
+    puts " variables..."
     r << gen_variables(base, INDENT)
-    puts "functions."
+    puts " functions..."
     r << gen_functions(base, INDENT)
+    puts "done"
     r
 end.each do |lib, output, module_name, fct_prefix, enums, typedefs, callbacks, variables, functions|
     printf "%-60s", "generate #{output}"
