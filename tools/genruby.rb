@@ -69,6 +69,7 @@ TYPES = {
     'time_t' => ':ulong',
     'size_t' => ':ulong',
     'ssize_t' => ':long',
+    'uintptr_t' => ':uintptr_t',
     'double' => ':double',
     'long int' => ':long',
     'long long' => ':long_long',
@@ -95,15 +96,6 @@ TYPES = {
     'struct tm *' => ':pointer',
     'struct timeval *' => ':pointer',
     'struct sockaddr *' => ':pointer',
-    # Efl BASE TYPES
-    'Eina_Bool' => ':uchar',
-#    'Eina_Bool *' => ':pointer',
-#    'Eina_Inlist *' => ':pointer',
-#    'Eina_Iterator' => ':eina_iterator',
-#    'Eina_Iterator *' => ':eina_iterator_p',
-#    'Eina_Accessor' => ':eina_accessor',
-#    'Eina_Accessor *' => ':eina_accessor_p',
-#    'Evas_GL_API *' => ':evas_gl_api_p',
 }
 #
 TYPES_USAGE = {}
@@ -120,16 +112,12 @@ end
 #
 def get_type t
     k = t.gsub(/(const|enum|union)/, '').strip
-#    k.sub!(/\*/,' *') if k=~/\w+\*/
-#    puts "search for #{k}"
-    return ':pointer' if k=~ /\*/
     r = TYPES[k]
     if r.nil?
+        return ':pointer' if k=~ /\*/
         puts "unknown type >#{k}< #{t}"
         exit 1
     end
-#    puts "found #{r}"
-    TYPES_USAGE[k]||=true
     r
 end
 #
@@ -161,7 +149,7 @@ def gen_enums path, indent
     r = []
     open(path+'-enums','r').readlines.each do |l|
         l.strip!
-        if not l=~/(typedef enum(?: \w+)?) \{([-A-Z0-9_=, ]+)\} (\w+);/
+        if not l=~/(typedef enum(?: \w+)?) \{([-A-Z0-9_=, ]+)\} (\w+)/
             puts "FIXME : #{l}\n#{indent}# FIXME"
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
@@ -181,17 +169,19 @@ def gen_typedefs path, indent
     r = []
     open(path+'-types','r').readlines.each do |l|
         l.strip!
-        if l=~/typedef (struct|enum|union) _\w+ (\w+);/
+        if l=~/typedef (struct|enum|union) _?\w+ (\w+);/
             t = $2.strip
             v = 'pointer'
         elsif l =~/typedef\s+((?:\w+\**\s)+)(\w+);/
             t = $2.strip
             v = $1.strip
             if TYPES[t].nil?
-                if TYPES.values.include? ':'+v
+                if not TYPES[v].nil?
+                    set_type t, TYPES[v]
+                elsif TYPES.values.include? ':'+v
                     set_type t, v
                 else
-                    puts "\nFIXME #{t} #{v} HOOo"
+                    puts "\nFIXME gen_typedefs : >#{t}< >#{v}<"
                     exit 1
                 end
             end
@@ -231,6 +221,7 @@ def gen_variables path, indent
     open(path+'-variables','r').readlines.each do |l|
         l.strip!
         if not l=~ /EAPI\s+extern\s+(\w+\s+\*?)(\w+)/
+            puts "# #{l}\n#{indent}# FIXME"
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
@@ -248,6 +239,7 @@ def gen_functions path, indent
     open(path+'-functions','r').readlines.each do |l|
         l.strip!
         if not l=~ /EAPI ([a-zA-Z0-9_\* ]+?)(\w+) ?\(([a-zA-Z0-9_ \*,\.]+)\)( *[A-Z]{2,})?/
+            puts "# #{l}\n#{indent}# FIXME"
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
@@ -288,10 +280,10 @@ end.each do |lib, output, module_name, fct_prefix, enums, typedefs, callbacks, v
         f << "#{INDENT}#\n#{INDENT}ffi_lib '#{lib}'"
         f << "\n#{INDENT}#\n#{INDENT}# ENUMS"
         print "enums, "
-        f << "\n"+enums.collect { |t| ( t.is_a?(Array) ? ( TYPES_USAGE[t[0]] ? t[1] : nil ) : t ) }.compact.join("\n") unless enums.empty?
+        f << "\n"+enums.collect { |t| ( t.is_a?(Array) ? t[1] : t ) }.compact.join("\n") unless enums.empty?
         f << "\n#{INDENT}#\n#{INDENT}# TYPEDEFS"
         print "typedefs, "
-        f << "\n"+typedefs.collect { |t| ( t.is_a?(Array) ? ( TYPES_USAGE[t[0]] ? t[1] : nil ) : t ) }.compact.join("\n") unless typedefs.empty?
+        f << "\n"+typedefs.collect { |t| ( t.is_a?(Array) ? t[1]  : t ) }.compact.join("\n") unless typedefs.empty?
         f << "\n#{INDENT}#\n#{INDENT}# CALLBACKS"
         print "callbacks, "
         f << "\n"+callbacks.join("\n") unless callbacks.empty?
