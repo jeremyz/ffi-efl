@@ -1,8 +1,6 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/eina_list'
-require 'efl/ecore'
 require 'efl/evas'
 require './spec/helper'
 #
@@ -728,7 +726,7 @@ describe "Efl::Evas #{Efl::Evas.version.full}" do
             end
             @os.delete_at 2
             @b.remove_at(2).should be_true
-            @b.remove_at(20).should be_false
+#            @b.remove_at(20).should be_false
             o = @os.delete_at 2
             @b.remove(o).should be_true
             @b.children_get.each_with_index do |o,i|

@@ -1,13 +1,14 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
+require 'efl'
 require 'efl/native/evas'
 #
 module Efl
     #
     module Native
         #
-        callback :new_update_region_cb, [:int, :int, :int, :int, :int_p], :pointer
+        callback :new_update_region_cb, [:int, :int, :int, :int, :pointer], :pointer
         callback :free_update_region_cb, [:int, :int, :int, :int, :pointer], :void
         #
         class EngineInfoStruct < FFI::Struct
