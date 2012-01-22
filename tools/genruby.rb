@@ -41,7 +41,7 @@ module Efl
     #
     module MNAME
         #
-        FCT_PREFIX = 'MY_FCT_PREFIX_'
+        FCT_PREFIX = 'MY_FCT_PREFIX_' unless const_defined? :FCT_PREFIX
         #
         def self.method_missing meth, *args, &block
             sym = Efl::MethodResolver.resolve self, meth, FCT_PREFIX
