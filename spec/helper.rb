@@ -1,10 +1,6 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/eina'
-require 'efl/evas'
-require 'efl/ecore'
-#
 def realize_evas
     width = 300
     height = 200
