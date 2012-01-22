@@ -1,18 +1,17 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ffi'
+require 'efl/native'
 #
 module Efl
     #
     module EinaList
         #
-        FCT_PREFIX = 'eina_list_'
+        FCT_PREFIX = 'eina_list_' unless const_defined? :FCT_PREFIX
         #
-        def self.method_missing m, *args, &block
-            sym, args_s = ModuleHelper.find_function m, FCT_PREFIX
-            self.module_eval "def self.#{m} *args, &block; r=Efl::Native.#{sym}(#{args_s}); yield r if block_given?; r; end"
-            self.send m, *args, &block
+        def self.method_missing meth, *args, &block
+            sym = Efl::MethodResolver.resolve self, meth, FCT_PREFIX
+            self.send sym, *args, &block
         end
         #
     end
@@ -26,8 +25,6 @@ module Efl
         # TYPEDEFS
         # typedef struct _Eina_List Eina_List;
         typedef :pointer, :eina_list
-        typedef :pointer, :eina_list_p
-        typedef :pointer, :eina_list_pp
         # typedef struct _Eina_List_Accounting Eina_List_Accounting;
         typedef :pointer, :eina_list_accounting
         #
@@ -38,71 +35,71 @@ module Efl
         # FUNCTIONS
         fcts = [
         # EAPI Eina_List *eina_list_append(Eina_List *list, const void *data);
-        [ :eina_list_append, [ :eina_list_p, :void_p ], :eina_list_p ],
+        [ :eina_list_append, [ :pointer, :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_prepend(Eina_List *list, const void *data);
-        [ :eina_list_prepend, [ :eina_list_p, :void_p ], :eina_list_p ],
+        [ :eina_list_prepend, [ :pointer, :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_append_relative(Eina_List *list, const void *data, const void *relative);
-        [ :eina_list_append_relative, [ :eina_list_p, :void_p, :void_p ], :eina_list_p ],
+        [ :eina_list_append_relative, [ :pointer, :pointer, :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_append_relative_list(Eina_List *list, const void *data, Eina_List *relative);
-        [ :eina_list_append_relative_list, [ :eina_list_p, :void_p, :eina_list_p ], :eina_list_p ],
+        [ :eina_list_append_relative_list, [ :pointer, :pointer, :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_prepend_relative(Eina_List *list, const void *data, const void *relative);
-        [ :eina_list_prepend_relative, [ :eina_list_p, :void_p, :void_p ], :eina_list_p ],
+        [ :eina_list_prepend_relative, [ :pointer, :pointer, :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_prepend_relative_list(Eina_List *list, const void *data, Eina_List *relative);
-        [ :eina_list_prepend_relative_list, [ :eina_list_p, :void_p, :eina_list_p ], :eina_list_p ],
+        [ :eina_list_prepend_relative_list, [ :pointer, :pointer, :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_sorted_insert(Eina_List *list, Eina_Compare_Cb func, const void *data);
-        [ :eina_list_sorted_insert, [ :eina_list_p, :eina_compare_cb, :void_p ], :eina_list_p ],
+        [ :eina_list_sorted_insert, [ :pointer, :eina_compare_cb, :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_remove(Eina_List *list, const void *data);
-        [ :eina_list_remove, [ :eina_list_p, :void_p ], :eina_list_p ],
+        [ :eina_list_remove, [ :pointer, :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_remove_list(Eina_List *list, Eina_List *remove_list);
-        [ :eina_list_remove_list, [ :eina_list_p, :eina_list_p ], :eina_list_p ],
+        [ :eina_list_remove_list, [ :pointer, :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_promote_list(Eina_List *list, Eina_List *move_list);
-        [ :eina_list_promote_list, [ :eina_list_p, :eina_list_p ], :eina_list_p ],
+        [ :eina_list_promote_list, [ :pointer, :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_demote_list(Eina_List *list, Eina_List *move_list);
-        [ :eina_list_demote_list, [ :eina_list_p, :eina_list_p ], :eina_list_p ],
+        [ :eina_list_demote_list, [ :pointer, :pointer ], :pointer ],
         # EAPI void *eina_list_data_find(const Eina_List *list, const void *data);
-        [ :eina_list_data_find, [ :eina_list_p, :void_p ], :void_p ],
+        [ :eina_list_data_find, [ :pointer, :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_data_find_list(const Eina_List *list, const void *data);
-        [ :eina_list_data_find_list, [ :eina_list_p, :void_p ], :eina_list_p ],
+        [ :eina_list_data_find_list, [ :pointer, :pointer ], :pointer ],
         # EAPI Eina_Bool eina_list_move(Eina_List **to, Eina_List **from, void *data);
-        [ :eina_list_move, [ :eina_list_pp, :eina_list_pp, :void_p ], :eina_bool ],
+        [ :eina_list_move, [ :pointer, :pointer, :pointer ], :eina_bool ],
         # EAPI Eina_Bool eina_list_move_list(Eina_List **to, Eina_List **from, Eina_List *data);
-        [ :eina_list_move_list, [ :eina_list_pp, :eina_list_pp, :eina_list_p ], :eina_bool ],
+        [ :eina_list_move_list, [ :pointer, :pointer, :pointer ], :eina_bool ],
         # EAPI Eina_List *eina_list_free(Eina_List *list);
-        [ :eina_list_free, [ :eina_list_p ], :eina_list_p ],
+        [ :eina_list_free, [ :pointer ], :pointer ],
         # EAPI void *eina_list_nth(const Eina_List *list, unsigned int n);
-        [ :eina_list_nth, [ :eina_list_p, :uint ], :void_p ],
+        [ :eina_list_nth, [ :pointer, :uint ], :pointer ],
         # EAPI Eina_List *eina_list_nth_list(const Eina_List *list, unsigned int n);
-        [ :eina_list_nth_list, [ :eina_list_p, :uint ], :eina_list_p ],
+        [ :eina_list_nth_list, [ :pointer, :uint ], :pointer ],
         # EAPI Eina_List *eina_list_reverse(Eina_List *list);
-        [ :eina_list_reverse, [ :eina_list_p ], :eina_list_p ],
+        [ :eina_list_reverse, [ :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_reverse_clone(const Eina_List *list);
-        [ :eina_list_reverse_clone, [ :eina_list_p ], :eina_list_p ],
+        [ :eina_list_reverse_clone, [ :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_clone(const Eina_List *list);
-        [ :eina_list_clone, [ :eina_list_p ], :eina_list_p ],
+        [ :eina_list_clone, [ :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_sort(Eina_List *list, unsigned int size, Eina_Compare_Cb func);
-        [ :eina_list_sort, [ :eina_list_p, :uint, :eina_compare_cb ], :eina_list_p ],
+        [ :eina_list_sort, [ :pointer, :uint, :eina_compare_cb ], :pointer ],
         # EAPI Eina_List *eina_list_merge(Eina_List *left, Eina_List *right);
-        [ :eina_list_merge, [ :eina_list_p, :eina_list_p ], :eina_list_p ],
+        [ :eina_list_merge, [ :pointer, :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_sorted_merge(Eina_List *left, Eina_List *right, Eina_Compare_Cb func);
-        [ :eina_list_sorted_merge, [ :eina_list_p, :eina_list_p, :eina_compare_cb ], :eina_list_p ],
+        [ :eina_list_sorted_merge, [ :pointer, :pointer, :eina_compare_cb ], :pointer ],
         # EAPI Eina_List *eina_list_split_list(Eina_List *list, Eina_List *relative, Eina_List **right);
-        [ :eina_list_split_list, [ :eina_list_p, :eina_list_p, :eina_list_pp ], :eina_list_p ],
+        [ :eina_list_split_list, [ :pointer, :pointer, :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_search_sorted_near_list(const Eina_List *list, Eina_Compare_Cb func, const void *data, int *result_cmp);
-        [ :eina_list_search_sorted_near_list, [ :eina_list_p, :eina_compare_cb, :void_p, :int_p ], :eina_list_p ],
+        [ :eina_list_search_sorted_near_list, [ :pointer, :eina_compare_cb, :pointer, :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_search_sorted_list(const Eina_List *list, Eina_Compare_Cb func, const void *data);
-        [ :eina_list_search_sorted_list, [ :eina_list_p, :eina_compare_cb, :void_p ], :eina_list_p ],
+        [ :eina_list_search_sorted_list, [ :pointer, :eina_compare_cb, :pointer ], :pointer ],
         # EAPI void *eina_list_search_sorted(const Eina_List *list, Eina_Compare_Cb func, const void *data);
-        [ :eina_list_search_sorted, [ :eina_list_p, :eina_compare_cb, :void_p ], :void_p ],
+        [ :eina_list_search_sorted, [ :pointer, :eina_compare_cb, :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_search_unsorted_list(const Eina_List *list, Eina_Compare_Cb func, const void *data);
-        [ :eina_list_search_unsorted_list, [ :eina_list_p, :eina_compare_cb, :void_p ], :eina_list_p ],
+        [ :eina_list_search_unsorted_list, [ :pointer, :eina_compare_cb, :pointer ], :pointer ],
         # EAPI void *eina_list_search_unsorted(const Eina_List *list, Eina_Compare_Cb func, const void *data);
-        [ :eina_list_search_unsorted, [ :eina_list_p, :eina_compare_cb, :void_p ], :void_p ],
+        [ :eina_list_search_unsorted, [ :pointer, :eina_compare_cb, :pointer ], :pointer ],
         # EAPI Eina_Iterator *eina_list_iterator_new(const Eina_List *list);
-        [ :eina_list_iterator_new, [ :eina_list_p ], :eina_iterator_p ],
+        [ :eina_list_iterator_new, [ :pointer ], :pointer ],
         # EAPI Eina_Iterator *eina_list_iterator_reversed_new(const Eina_List *list);
-        [ :eina_list_iterator_reversed_new, [ :eina_list_p ], :eina_iterator_p ],
+        [ :eina_list_iterator_reversed_new, [ :pointer ], :pointer ],
         # EAPI Eina_Accessor *eina_list_accessor_new(const Eina_List *list);
-        [ :eina_list_accessor_new, [ :eina_list_p ], :eina_accessor_p ],
+        [ :eina_list_accessor_new, [ :pointer ], :pointer ],
         ]
         #
         attach_fcts fcts

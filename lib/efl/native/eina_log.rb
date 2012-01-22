@@ -1,18 +1,17 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ffi'
+require 'efl/native'
 #
 module Efl
     #
     module EinaLog
         #
-        FCT_PREFIX = 'eina_log_'
+        FCT_PREFIX = 'eina_log_' unless const_defined? :FCT_PREFIX
         #
-        def self.method_missing m, *args, &block
-            sym, args_s = ModuleHelper.find_function m, FCT_PREFIX
-            self.module_eval "def self.#{m} *args, &block; r=Efl::Native.#{sym}(#{args_s}); yield r if block_given?; r; end"
-            self.send m, *args, &block
+        def self.method_missing meth, *args, &block
+            sym = Efl::MethodResolver.resolve self, meth, FCT_PREFIX
+            self.send sym, *args, &block
         end
         #
     end
@@ -23,17 +22,16 @@ module Efl
         #
         # ENUMS
         # typedef enum _Eina_Log_Level {...} Eina_Log_Level;
-        enum :eina_log_level, [ :eina_log_level_critical, :eina_log_level_err, :eina_log_level_warn, :eina_log_level_info, :eina_log_level_dbg, :eina_log_levels,
-            :eina_log_level_unknown ]
+        enum :eina_log_level, [ :eina_log_level_critical, :eina_log_level_err, :eina_log_level_warn, :eina_log_level_info, :eina_log_level_dbg,
+            :eina_log_levels, :eina_log_level_unknown ]
         #
         # TYPEDEFS
         # typedef struct _Eina_Log_Domain Eina_Log_Domain;
         typedef :pointer, :eina_log_domain
-        typedef :pointer, :eina_log_domain_p
         #
         # CALLBACKS
         # typedef void (*Eina_Log_Print_Cb) (const Eina_Log_Domain *d, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, void *data, va_list args);
-        callback :eina_log_print_cb, [ :eina_log_domain_p, :eina_log_level, :string, :string, :int, :string, :void_p, :pointer ], :void
+        callback :eina_log_print_cb, [ :pointer, :eina_log_level, :string, :string, :int, :string, :pointer, :pointer ], :void
         #
         # VARIABLES
         # EAPI extern int EINA_LOG_DOMAIN_GLOBAL;
@@ -44,7 +42,7 @@ module Efl
         # EAPI void eina_log_threads_enable(void);
         [ :eina_log_threads_enable, [  ], :void ],
         # EAPI void eina_log_print_cb_set(Eina_Log_Print_Cb cb, void *data);
-        [ :eina_log_print_cb_set, [ :eina_log_print_cb, :void_p ], :void ],
+        [ :eina_log_print_cb_set, [ :eina_log_print_cb, :pointer ], :void ],
         # EAPI void eina_log_level_set(int level);
         [ :eina_log_level_set, [ :int ], :void ],
         # EAPI int eina_log_level_get(void);
@@ -86,11 +84,11 @@ module Efl
         # EAPI void eina_log_vprint(int domain, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, va_list args);
         [ :eina_log_vprint, [ :int, :eina_log_level, :string, :string, :int, :string, :pointer ], :void ],
         # EAPI void eina_log_print_cb_stdout(const Eina_Log_Domain *d, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, void *data, va_list args);
-        [ :eina_log_print_cb_stdout, [ :eina_log_domain_p, :eina_log_level, :string, :string, :int, :string, :void_p, :pointer ], :void ],
+        [ :eina_log_print_cb_stdout, [ :pointer, :eina_log_level, :string, :string, :int, :string, :pointer, :pointer ], :void ],
         # EAPI void eina_log_print_cb_stderr(const Eina_Log_Domain *d, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, void *data, va_list args);
-        [ :eina_log_print_cb_stderr, [ :eina_log_domain_p, :eina_log_level, :string, :string, :int, :string, :void_p, :pointer ], :void ],
+        [ :eina_log_print_cb_stderr, [ :pointer, :eina_log_level, :string, :string, :int, :string, :pointer, :pointer ], :void ],
         # EAPI void eina_log_print_cb_file(const Eina_Log_Domain *d, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, void *data, va_list args);
-        [ :eina_log_print_cb_file, [ :eina_log_domain_p, :eina_log_level, :string, :string, :int, :string, :void_p, :pointer ], :void ],
+        [ :eina_log_print_cb_file, [ :pointer, :eina_log_level, :string, :string, :int, :string, :pointer, :pointer ], :void ],
         ]
         #
         attach_fcts fcts
