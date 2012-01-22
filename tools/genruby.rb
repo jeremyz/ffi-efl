@@ -92,7 +92,7 @@ TYPES_USAGE = {}
 #
 def set_type t, sym
     if TYPES[t].nil?
-        v = ( TYPES[sym].nil? ? ':'+sym.downcase : TYPES[sym][1..-1] )
+        v = ( TYPES[sym].nil? ? ':'+sym.downcase : TYPES[sym] )
         TYPES[t] = v
         puts "  define type : #{t} => #{v}"
         return v
