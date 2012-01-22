@@ -1,7 +1,6 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/eina'
 require 'efl/eina_list'
 #
 describe 'Efl::EinaList' do

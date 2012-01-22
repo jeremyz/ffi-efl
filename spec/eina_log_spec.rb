@@ -1,7 +1,6 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/eina'
 require 'efl/eina_log'
 require './spec/helper'
 #
