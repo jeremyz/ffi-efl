@@ -1,7 +1,7 @@
 # drop if don't start with (typedef)? enum
 /^\s*(typedef\s)?\s*enum/ ! b
 #
-s/^\s*(typedef\s)?\s*(enum(\s+\w+)?).*$/typedef \2 { /
+s/^\s*(typedef\s)?\s*(enum(\s+\w+)?).*$/\1\2 { /
 # drop if substitution fail, copy pattern to  hold space
 T;h
 :attrs;n
