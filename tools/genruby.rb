@@ -29,12 +29,13 @@ libraries = [
 ]
 #
 INDENT=' '*8
+WRAP_LEN=150
 #
 HEADER =<<-EOF
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl'
+require 'efl/native'
 #
 module Efl
     #
@@ -43,7 +44,7 @@ module Efl
         FCT_PREFIX = 'MY_FCT_PREFIX_'
         #
         def self.method_missing meth, *args, &block
-            sym = Efl::MethodResolver self, meth, FCT_PREFIX
+            sym = Efl::MethodResolver.resolve self, meth, FCT_PREFIX
             self.send sym, *args, &block
         end
         #
@@ -69,7 +70,7 @@ TYPES = {
     'time_t' => ':ulong',
     'size_t' => ':ulong',
     'ssize_t' => ':long',
-    'uintptr_t' => ':uintptr_t',
+    'uintptr_t' => ':pointer',
     'double' => ':double',
     'long int' => ':long',
     'long long' => ':long_long',
@@ -77,35 +78,27 @@ TYPES = {
     'unsigned char' => ':uchar',
     'unsigned short' => ':ushort',
     'unsigned long long' => ':ulong_long',
-    'int *' => ':int_p',
-    'void *' => ':void_p',
-    'short *' => ':short_p',
-    'float *' => ':float_p',
-    'size_t *' => ':ulong_p',
-    'ssize_t *' => ':long_p',
-    'double *' => ':double_p',
-    'unsigned int *' => ':uint_p',
-    'unsigned char *' => ':uchar_p',
-    'unsigned short *' => ':ushort_p',
     'char *' => ':string',                                              # FIXME ?!?!
-    'char **' => ':string_array',                                       # FIXME ?!?!
-    'char ***' => ':string_array_p',                                    # FIXME ?!?!
     'fd_set *' => ':pointer',
     'FILE *' => ':pointer',
     'va_list' => ':pointer',                                            # FIXME ?!?!
     'struct tm *' => ':pointer',
     'struct timeval *' => ':pointer',
     'struct sockaddr *' => ':pointer',
+    'Eina_Bool' => ':bool'
 }
 #
 TYPES_USAGE = {}
 #
 def set_type t, sym
     if TYPES[t].nil?
-        TYPES[t]=':'+sym.downcase
-        puts "  define type : #{t} => :#{sym.downcase}"
+        v = ( TYPES[sym].nil? ? ':'+sym.downcase : TYPES[sym][1..-1] )
+        TYPES[t] = v
+        puts "  define type : #{t} => #{v}"
+        return v
     else
-        puts "ERROR set type #{t} => #{sym}"
+        return TYPES['Eina_Bool'] if t=='Eina_Bool'
+        puts "ERROR type #{t} => #{sym} alredy exists!"
         exit 1
     end
 end
@@ -142,14 +135,14 @@ def get_type_from_arg arg, l
 end
 #
 def wrap_text txt, indent
-    txt.gsub( /(.{1,#{170}})(?: +|$\n?)|(.{1,#{170}})/,"\\1\\2\n#{indent}").sub(/\n\s+$/,'')
+    txt.gsub( /(.{1,#{150}})(?: +|$\n?)|(.{1,#{150}})/,"\\1\\2\n#{indent}").sub(/\n\s+$/,'')
 end
 #
 def gen_enums path, indent
     r = []
     open(path+'-enums','r').readlines.each do |l|
         l.strip!
-        if not l=~/(typedef enum(?: \w+)?) \{([-A-Z0-9_=, ]+)\} (\w+)/
+        if not l=~/((?:typedef )?enum(?: \w+)?) \{([-A-Z0-9_=, ]+)\} (\w+)/
             puts "FIXME : #{l}\n#{indent}# FIXME"
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
@@ -157,10 +150,10 @@ def gen_enums path, indent
         typedef = $1.strip
         values = $2.strip
         typename = $3.strip
-        v = set_type typename, typename
+        tsym = set_type typename, typename
         args = values.split(',').collect { |cst| ':'+cst.strip.downcase }.join(', ').gsub(/=/,',').gsub(/ ,/,',')
         r << indent+"# #{typedef} {...} #{typename};"
-        r << wrap_text( indent+"enum :#{v}, [ #{args} ]", indent+' '*4 )
+        r << wrap_text( indent+"enum #{tsym}, [ #{args} ]", indent+' '*4 )
     end
     r
 end
@@ -169,28 +162,22 @@ def gen_typedefs path, indent
     r = []
     open(path+'-types','r').readlines.each do |l|
         l.strip!
-        if l=~/typedef (struct|enum|union) _?\w+ (\w+);/
+        if l=~/typedef (struct|union) _?\w+ (\w+);/
             t = $2.strip
-            v = 'pointer'
+            sym = 'pointer'
+        elsif l=~/typedef enum/
+            # nothing todo
+            next
         elsif l =~/typedef\s+((?:\w+\**\s)+)(\w+);/
             t = $2.strip
-            v = $1.strip
-            if TYPES[t].nil?
-                if not TYPES[v].nil?
-                    set_type t, TYPES[v]
-                elsif TYPES.values.include? ':'+v
-                    set_type t, v
-                else
-                    puts "\nFIXME gen_typedefs : >#{t}< >#{v}<"
-                    exit 1
-                end
-            end
+            sym = $1.strip
         else
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
+        tsym = set_type t, sym
         r << indent+"# #{l}"
-        r << indent+"typedef :#{v}, :#{t.downcase}"
+        r << indent+"typedef #{tsym}, :#{t.downcase}"
     end
     r
 end
@@ -207,11 +194,11 @@ def gen_callbacks path, indent
         ret = $1.strip
         name = $2.strip
         args = $3.split(',').collect { |arg| get_type_from_arg arg, l }.join ', '
-        k = name.sub(/\(/,'').sub(/\)/,'').sub(/\*/,'')
-        t = name.downcase.sub(/\(/,'').sub(/\)/,'').sub(/\*/,'')
-        t = set_type k, t
+        t = name.sub(/\(/,'').sub(/\)/,'').sub(/\*/,'')
+        sym = ( t.downcase=~/_cb$/ ? t : t+'_cb' )
+        tsym = set_type t, sym
         r << indent+"# #{l}"
-        r << wrap_text(indent+"callback :#{t}, [ #{args} ], #{get_type ret}", indent+' '*4 )
+        r << wrap_text(indent+"callback #{tsym}, [ #{args} ], #{get_type ret}", indent+' '*4 )
     end
     r
 end
