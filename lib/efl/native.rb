@@ -9,6 +9,8 @@ module Efl
         #
         extend FFI::Library
         #
+        typedef :bool, :eina_bool
+        #
         def self.attach_fcts fcts
             fcts.each do |func|
                 begin

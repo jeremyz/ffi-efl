@@ -85,7 +85,7 @@ TYPES = {
     'struct tm *' => ':pointer',
     'struct timeval *' => ':pointer',
     'struct sockaddr *' => ':pointer',
-    'Eina_Bool' => ':bool'
+    'Eina_Bool' => ':eina_bool'
 }
 #
 TYPES_USAGE = {}
