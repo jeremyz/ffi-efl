@@ -6,14 +6,14 @@ lib_path = File.join path, '..', 'lib', 'efl', 'native'
 #
 # header, module name, fct prefix, lib
 libraries = [
-    # HEADER            MODUE NAME      FCT PREFIX      LIB             OUTPUT
+    # HEADER            MODUE NAME      FCT PREFIX      LIB             OUTPUT              REQUIRES
     [ 'eina_types.h',   'Eina',         'eina',         'eina',         'eina_types.rb' ],
     [ 'eina_main.h',    'Eina',         'eina',         'eina',         'eina.rb' ],
     [ 'eina_xattr.h',   'EinaXattr',    'eina_xattr',   'eina',         'eina_xattr.rb' ],
     [ 'eina_log.h',     'EinaLog',      'eina_log',     'eina',         'eina_log.rb' ],
     [ 'eina_list.h',    'EinaList',     'eina_list',    'eina',         'eina_list.rb' ],
     [ 'eina_hash.h',    'EinaHash',     'eina_hash',    'eina',         'eina_hash.rb' ],
-    [ 'Eet.h',          'Eet',          'eet',          'eet',          'eet.rb' ],
+    [ 'Eet.h',          'Eet',          'eet',          'eet',          'eet.rb',           ['efl/native/eina_xattr'] ],
     [ 'Evas.h',         'Evas',         'evas',         'evas',         'evas.rb' ],
 #    [ 'Evas_GL.h',      'EvasGl',       'evas_gl',      'evas',         'evas/evas_gl.rb' ],
     [ 'Edje.h',         'Edje',         'edje',         'edje',         'edje.rb' ],
@@ -35,7 +35,7 @@ HEADER =<<-EOF
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/native'
+require 'efl/native'REQUIRES
 #
 module Efl
     #
@@ -242,12 +242,12 @@ end
 #
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #
-libraries.collect do |header,module_name,fct_prefix,lib, output|
+libraries.collect do |header,module_name,fct_prefix,lib, output, requires|
     base = File.join path, 'api', header
     output = File.join lib_path, output
     Dir.mkdir File.dirname(output) unless File.exists? File.dirname(output)
     puts "parse #{base}-*"
-    r = [lib, output, module_name, fct_prefix ]
+    r = [lib, output, module_name, fct_prefix, requires ]
     puts " enums..."
     r << gen_enums(base, INDENT)
     puts " typedefs..."
@@ -260,10 +260,11 @@ libraries.collect do |header,module_name,fct_prefix,lib, output|
     r << gen_functions(base, INDENT)
     puts "done"
     r
-end.each do |lib, output, module_name, fct_prefix, enums, typedefs, callbacks, variables, functions|
+end.each do |lib, output, module_name, fct_prefix, requires, enums, typedefs, callbacks, variables, functions|
     printf "%-60s", "generate #{output}"
     open(output,'w:utf-8') do |f|
-        f << HEADER.gsub(/MNAME/,module_name).sub(/MY_FCT_PREFIX/,fct_prefix)
+        reqs = ( requires.nil? ? '' : requires.inject('') {|s,e| s+="\nrequire '#{e}'"})
+        f << HEADER.gsub(/MNAME/,module_name).sub(/MY_FCT_PREFIX/,fct_prefix).sub(/REQUIRES/,reqs)
         f << "#{INDENT}#\n#{INDENT}ffi_lib '#{lib}'"
         f << "\n#{INDENT}#\n#{INDENT}# ENUMS"
         print "enums, "
