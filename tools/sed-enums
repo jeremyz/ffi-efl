@@ -8,7 +8,7 @@ T;h
 # read again if {
 /^\s*\{/ b attrs
 # append each item
-s/^\s*([A-Z0-9_]+)(\s*=\s*-?[0-9]+)?.*$/\1\2, /
+s/^\s*([A-Z0-9_]+)(\s*=\s*[^,\/]+)?.*$/\1\2, /
 # goto next if subsitution fails, append pattern, loop
 T next;H;b attrs
 :next
