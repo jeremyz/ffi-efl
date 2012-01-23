@@ -22,7 +22,8 @@ module Efl
         #
         # ENUMS
         # typedef enum _Evas_BiDi_Direction {...} Evas_BiDi_Direction;
-        enum :evas_bidi_direction, [ :evas_bidi_direction_natural, :evas_bidi_direction_neutral, :evas_bidi_direction_ltr, :evas_bidi_direction_rtl ]
+        enum :evas_bidi_direction, [ :evas_bidi_direction_natural, :evas_bidi_direction_neutral, evas_bidi_direction_natural,
+            :evas_bidi_direction_ltr, :evas_bidi_direction_rtl ]
         # typedef enum _Evas_Callback_Type {...} Evas_Callback_Type;
         enum :evas_callback_type, [ :evas_callback_mouse_in, :evas_callback_mouse_out, :evas_callback_mouse_down, :evas_callback_mouse_up,
             :evas_callback_mouse_move, :evas_callback_mouse_wheel, :evas_callback_multi_down, :evas_callback_multi_up, :evas_callback_multi_move,
@@ -32,9 +33,9 @@ module Efl
             :evas_callback_render_flush_pre, :evas_callback_render_flush_post, :evas_callback_canvas_object_focus_in, :evas_callback_canvas_object_focus_out,
             :evas_callback_image_unloaded, :evas_callback_render_pre, :evas_callback_render_post, :evas_callback_last ]
         # typedef enum _Evas_Button_Flags {...} Evas_Button_Flags;
-        enum :evas_button_flags, [ :evas_button_none, 0, :evas_button_double_click, :evas_button_triple_click ]
+        enum :evas_button_flags, [ :evas_button_none, 0, :evas_button_double_click, (1 << 0), :evas_button_triple_click, (1 << 1) ]
         # typedef enum _Evas_Event_Flags {...} Evas_Event_Flags;
-        enum :evas_event_flags, [ :evas_event_flag_none, 0, :evas_event_flag_on_hold, :evas_event_flag_on_scroll ]
+        enum :evas_event_flags, [ :evas_event_flag_none, 0, :evas_event_flag_on_hold, (1 << 0), :evas_event_flag_on_scroll, (1 << 1) ]
         # typedef enum _Evas_Touch_Point_State {...} Evas_Touch_Point_State;
         enum :evas_touch_point_state, [ :evas_touch_point_down, :evas_touch_point_up, :evas_touch_point_move, :evas_touch_point_still,
             :evas_touch_point_cancel ]
@@ -84,10 +85,10 @@ module Efl
         # typedef enum _Evas_Text_Style_Type {...} Evas_Text_Style_Type;
         enum :evas_text_style_type, [ :evas_text_style_plain, :evas_text_style_shadow, :evas_text_style_outline, :evas_text_style_soft_outline,
             :evas_text_style_glow, :evas_text_style_outline_shadow, :evas_text_style_far_shadow, :evas_text_style_outline_soft_shadow,
-            :evas_text_style_soft_shadow, :evas_text_style_far_soft_shadow, :evas_text_style_shadow_direction_bottom_right,
-            :evas_text_style_shadow_direction_bottom, :evas_text_style_shadow_direction_bottom_left, :evas_text_style_shadow_direction_left,
-            :evas_text_style_shadow_direction_top_left, :evas_text_style_shadow_direction_top, :evas_text_style_shadow_direction_top_right,
-            :evas_text_style_shadow_direction_right ]
+            :evas_text_style_soft_shadow, :evas_text_style_far_soft_shadow, :evas_text_style_shadow_direction_bottom_right, (0x0 << 4),
+            :evas_text_style_shadow_direction_bottom, (0x1 << 4), :evas_text_style_shadow_direction_bottom_left, (0x2 << 4),
+            :evas_text_style_shadow_direction_left, (0x3 << 4), :evas_text_style_shadow_direction_top_left, (0x4 << 4), :evas_text_style_shadow_direction_top,
+            (0x5 << 4), :evas_text_style_shadow_direction_top_right, (0x6 << 4), :evas_text_style_shadow_direction_right, (0x7 << 4) ]
         # typedef enum _Evas_Textblock_Text_Type {...} Evas_Textblock_Text_Type;
         enum :evas_textblock_text_type, [ :evas_textblock_text_raw, :evas_textblock_text_plain, :evas_textblock_text_markup ]
         # typedef enum _Evas_Textblock_Cursor_Type {...} Evas_Textblock_Cursor_Type;
