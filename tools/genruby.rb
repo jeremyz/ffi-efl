@@ -174,7 +174,7 @@ def gen_enums path, indent
                     i=v.to_i+1
                 end
             end
-            args = syms.inject(''){|r,s| r+=":#{s.strip.downcase}, #{h[s]}, " }
+            args = syms.inject(''){|r,s| r+=":#{s.strip.downcase}, #{h[s]}, " }.sub(/, $/,'')
         end
         r << indent+"# #{typedef} {...} #{typename};"
         r << wrap_text( indent+"enum #{tsym}, [ #{args} ]", indent+' '*4 )
