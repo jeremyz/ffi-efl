@@ -27,6 +27,13 @@ describe "Efl::Evas #{Efl::Evas.version.full}" do
         Evas.shutdown.should == @init
     end
     #
+    it "evas_bidi_direction should be correct" do
+        Efl::Native.enum_value(:evas_bidi_direction_natural).should == 0
+        Efl::Native.enum_value(:evas_bidi_direction_neutral).should == 0
+        Efl::Native.enum_value(:evas_bidi_direction_ltr).should == 1
+        Efl::Native.enum_value(:evas_bidi_direction_rtl).should == 2
+    end
+    #
     it "evas alloc error enum is ok" do
         Native.enum_value(:evas_alloc_error_none).should == 0
         Native.enum_value(:evas_alloc_error_fatal).should == 1
@@ -632,7 +639,7 @@ describe "Efl::Evas #{Efl::Evas.version.full}" do
             @t.horiz_advance_get.should > 0
             @t.vert_advance_get.should > 0
             @t.inset_get.should > 0
-            @t.direction_get.should == :evas_bidi_direction_neutral
+            @t.direction_get.should == :evas_bidi_direction_ltr
             @t.style_pad_get.length.should == 4
             @t.ascent.should > 0
             @t.descent.should > 0
@@ -641,7 +648,7 @@ describe "Efl::Evas #{Efl::Evas.version.full}" do
             @t.horiz_advance.should > 0
             @t.vert_advance.should > 0
             @t.inset.should > 0
-            @t.direction.should == :evas_bidi_direction_neutral
+            @t.direction.should == :evas_bidi_direction_ltr
             @t.style_pad.length.should == 4
         end
         #
@@ -726,7 +733,7 @@ describe "Efl::Evas #{Efl::Evas.version.full}" do
             end
             @os.delete_at 2
             @b.remove_at(2).should be_true
-#            @b.remove_at(20).should be_false
+            @b.remove_at(20).should be_false
             o = @os.delete_at 2
             @b.remove(o).should be_true
             @b.children_get.each_with_index do |o,i|

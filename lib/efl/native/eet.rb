@@ -29,7 +29,7 @@ module Efl
             :eet_error_invalid_signature, :eet_error_not_signed, :eet_error_not_implemented, :eet_error_prng_not_seeded, :eet_error_encrypt_failed,
             :eet_error_decrypt_failed ]
         # typedef enum _Eet_File_Mode {...} Eet_File_Mode;
-        enum :eet_file_mode, [ :eet_file_mode_invalid, -1, :eet_file_mode_read, :eet_file_mode_write, :eet_file_mode_read_write ]
+        enum :eet_file_mode, [ :eet_file_mode_invalid, -1, :eet_file_mode_read, 0, :eet_file_mode_write, 1, :eet_file_mode_read_write, 2 ]
         #
         # TYPEDEFS
         # typedef struct _Eet_Version Eet_Version;
