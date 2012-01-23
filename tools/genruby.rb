@@ -166,9 +166,12 @@ def gen_enums path, indent
                 sym=':'+s.downcase
                 if h.has_key? v
                     h[s]=h[v]
-                else
+                elsif v.nil?
                     h[s]=i
                     i+=1
+                else
+                    h[s]=v
+                    i=v.to_i+1
                 end
             end
             args = syms.inject(''){|r,s| r+=":#{s.strip.downcase}, #{h[s]}, " }
