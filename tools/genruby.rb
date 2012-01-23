@@ -142,7 +142,7 @@ def gen_enums path, indent
     r = []
     open(path+'-enums','r').readlines.each do |l|
         l.strip!
-        if not l=~/((?:typedef )?enum(?: \w+)?) \{([-A-Z0-9_=, ]+)\} (\w+)/
+        if not l=~/((?:typedef )?enum(?: \w+)?) \{(.*)\} (\w+)/
             puts "FIXME : #{l}\n#{indent}# FIXME"
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
