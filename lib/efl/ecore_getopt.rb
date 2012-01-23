@@ -1,6 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
+require 'efl'
 require 'efl/native/ecore_getopt'
 #
 module Efl
@@ -9,16 +10,16 @@ module Efl
         #
         class EcoreGetoptValue < FFI::Union
             layout  :strp,          :pointer,
-                    :boolp,         :eina_bool_p,
-                    :shortp,        :short_p,
-                    :intp,          :int_p,
-                    :longp,         :long_p,
-                    :ushortp,       :ushort_p,
-                    :uintp,         :uint_p,
-                    :ulongp,        :ulong_p,
-                    :doublep,       :double_p,
-                    :listp,         :eina_list_p,
-                    :ptrp,          :void_p
+                    :boolp,         :pointer,
+                    :shortp,        :pointer,
+                    :intp,          :pointer,
+                    :longp,         :pointer,
+                    :ushortp,       :pointer,
+                    :uintp,         :pointer,
+                    :ulongp,        :pointer,
+                    :doublep,       :pointer,
+                    :listp,         :pointer,
+                    :ptrp,          :pointer
 
             def value_ptr idx
                 Native::EcoreGetoptValue.new to_ptr+(idx*Native::EcoreGetoptValue.size)
@@ -43,7 +44,7 @@ module Efl
                     :def,           EcoreGetoptDescStoreDef
         end
         #
-        callback :ecore_getopt_desc_cb, [:ecore_getopt_p, :ecore_getopt_desc_p, :string, :pointer, :ecore_getopt_value_p ], :eina_bool
+        callback :ecore_getopt_desc_cb, [:pointer, :pointer, :string, :pointer, :pointer ], :eina_bool
         #
         class EcoreGetoptDescCallback < FFI::Struct
             layout  :func,          :ecore_getopt_desc_cb,

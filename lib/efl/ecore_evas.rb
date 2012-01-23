@@ -1,6 +1,8 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
+require 'efl'
+require 'efl/evas'
 require 'efl/native/ecore_evas'
 #
 module Efl

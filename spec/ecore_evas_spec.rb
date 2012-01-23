@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 #
 require 'efl/eina_list'
+require 'efl/ecore'
 require 'efl/ecore_evas'
 require './spec/helper'
 #
@@ -29,7 +30,6 @@ describe 'Efl::EcoreEvas' do
         EcoreEvas.engines_free EcoreEvas.engines_get
         l = EcoreEvas.engines_list
         r = l.inject("\t") do |s,e| s+=e.read_string+' ' end
-        puts r
         EcoreEvas.engines_free l
     end
     #
@@ -82,23 +82,34 @@ describe 'Efl::EcoreEvas' do
         it "move, resize move_resize and geometry_get  (and check association)" do
             @e.geometry_get.should == [10,10,100,120]
             @bg.geometry_get.should == [0,0,100,120]
-            @e.move 20, 20
+            @e.move 50, 50
             ecore_loop 3
             g = @e.geometry_get
-            g.delete_at 1
-            g.should == [20,100,120]
+            g[0].should >=50
+            g[0].should <=60
+            g[1].should >=60
+            g[1].should <=80
+            g.delete_at 0
+            g.delete_at 0
+            g.should == [100,120]
             @bg.geometry_get.should == [0,0,100,120]
             @e.resize 200,150
             ecore_loop 3
             g = @e.geometry_get
-            g.delete_at 1
-            g.should == [20,200,150]
+            g.delete_at 0
+            g.delete_at 0
+            g.should == [200,150]
             @bg.geometry_get.should == [0,0,200,150]
             @e.move_resize 10, 0, 130, 100
             ecore_loop 3
             g = @e.geometry_get
-            g.delete_at 1
-            g.should == [10,130,100]
+            g[0].should >=10
+            g[0].should <=20
+            g[1].should >=20
+            g[1].should <=30
+            g.delete_at 0
+            g.delete_at 0
+            g.should == [130,100]
             @bg.geometry_get.should == [0,0,130,100]
             g = @e.geometry_get
         end
@@ -203,8 +214,6 @@ describe 'Efl::EcoreEvas' do
             bool_check @e, 'override'
         end
         #
-        # FIXME maximized
-        # ecore/src/lib/ecore_evas/ecore_evas.c => ecore_evas_maximized_set => IFC => return
         it "maximized set/get " do
             bool_check @e, 'maximized', 5
         end
