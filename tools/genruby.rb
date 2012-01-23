@@ -151,7 +151,28 @@ def gen_enums path, indent
         values = $2.strip
         typename = $3.strip
         tsym = set_type typename, typename
-        args = values.split(',').collect { |cst| ':'+cst.strip.downcase }.join(', ').gsub(/=/,',').gsub(/ ,/,',')
+        syms, vals = [], []
+        values.split(',').each do |define|
+            s,v = define.gsub(/ /,'').split(/=/)
+            syms << s
+            vals << v
+        end
+        if vals.count(nil) == vals.length
+            args = syms.collect{ |sym| ':'+sym.strip.downcase }.join(', ')
+        else
+            i=0
+            h={}
+            syms.zip(vals) do |s,v|
+                sym=':'+s.downcase
+                if h.has_key? v
+                    h[s]=h[v]
+                else
+                    h[s]=i
+                    i+=1
+                end
+            end
+            args = syms.inject(''){|r,s| r+=":#{s.strip.downcase}, #{h[s]}, " }
+        end
         r << indent+"# #{typedef} {...} #{typename};"
         r << wrap_text( indent+"enum #{tsym}, [ #{args} ]", indent+' '*4 )
     end
