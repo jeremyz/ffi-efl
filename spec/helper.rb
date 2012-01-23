@@ -1,6 +1,10 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
+require 'efl/eina_log'
+Efl::Eina.init
+Efl::EinaLog.level_set :eina_log_level_critical
+#
 def realize_evas
     width = 300
     height = 200
