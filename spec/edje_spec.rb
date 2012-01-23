@@ -17,7 +17,6 @@ else
 end
 #
 require 'efl/eina_list'
-require 'efl/evas'
 require 'efl/edje'
 require './spec/helper'
 #
