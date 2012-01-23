@@ -20,6 +20,16 @@ describe 'Efl::EinaLog' do
         EinaLog.level.should == 3
     end
     #
+    it "eina_log_level enum should be well defined" do
+        Efl::Native.enum_value(:eina_log_level_critical).should == 0
+        Efl::Native.enum_value(:eina_log_level_err).should == 1
+        Efl::Native.enum_value(:eina_log_level_warn).should == 2
+        Efl::Native.enum_value(:eina_log_level_info).should == 3
+        Efl::Native.enum_value(:eina_log_level_dbg).should == 4
+        Efl::Native.enum_value(:eina_log_levels).should == 5
+        Efl::Native.enum_value(:eina_log_level_unknown).should == (-2147483647-1)
+    end
+    #
     it "color_disable set/get" do
         bool_check EinaLog, 'color_disable'
     end

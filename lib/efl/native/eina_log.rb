@@ -23,7 +23,7 @@ module Efl
         # ENUMS
         # typedef enum _Eina_Log_Level {...} Eina_Log_Level;
         enum :eina_log_level, [ :eina_log_level_critical, :eina_log_level_err, :eina_log_level_warn, :eina_log_level_info, :eina_log_level_dbg,
-            :eina_log_levels, :eina_log_level_unknown ]
+            :eina_log_levels, :eina_log_level_unknown, (-2147483647 - 1) ]
         #
         # TYPEDEFS
         # typedef struct _Eina_Log_Domain Eina_Log_Domain;
