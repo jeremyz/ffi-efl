@@ -74,7 +74,8 @@ module Efl
             :edje_external_param_type_bool, :edje_external_param_type_choice, :edje_external_param_type_max ]
         # typedef enum _Edje_External_Param_Flags {...} Edje_External_Param_Flags;
         enum :edje_external_param_flags, [ :edje_external_param_flags_none, 0, :edje_external_param_flags_get, (1<<0), :edje_external_param_flags_set,
-            (1<<1), :edje_external_param_flags_state, (1<<2), :edje_external_param_flags_constructor, (1<<3), :edje_external_param_flags_regular, (7) ]
+            (1<<1), :edje_external_param_flags_state, (1<<2), :edje_external_param_flags_constructor, (1<<3), :edje_external_param_flags_regular,
+            (1<<0)|(1<<1)|(1<<2) ]
         # typedef enum _Edje_Input_Panel_Layout {...} Edje_Input_Panel_Layout;
         enum :edje_input_panel_layout, [ :edje_input_panel_layout_normal, :edje_input_panel_layout_number, :edje_input_panel_layout_email,
             :edje_input_panel_layout_url, :edje_input_panel_layout_phonenumber, :edje_input_panel_layout_ip, :edje_input_panel_layout_month,
@@ -283,6 +284,10 @@ module Efl
         [ :edje_object_part_text_set, [ :pointer, :string, :string ], :eina_bool ],
         # EAPI const char *edje_object_part_text_get (const Evas_Object *obj, const char *part);
         [ :edje_object_part_text_get, [ :pointer, :string ], :string ],
+        # EAPI void edje_object_part_text_style_user_set(Evas_Object *obj, const char *part, const char *style);
+        [ :edje_object_part_text_style_user_set, [ :pointer, :string, :string ], :void ],
+        # EAPI const char *edje_object_part_text_style_user_get(Evas_Object *obj, const char *part);
+        [ :edje_object_part_text_style_user_get, [ :pointer, :string ], :string ],
         # EAPI Eina_Bool edje_object_part_text_unescaped_set (Evas_Object *obj, const char *part, const char *text_to_escape);
         [ :edje_object_part_text_unescaped_set, [ :pointer, :string, :string ], :eina_bool ],
         # EAPI char *edje_object_part_text_unescaped_get (const Evas_Object *obj, const char *part);
