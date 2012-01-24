@@ -7,9 +7,9 @@ T;h
 :attrs;n
 # read again if {
 /^\s*\{/ b attrs
-# append each item
-s/^\s*([A-Z0-9_]+)(\s*=\s*[^,\/]+)?.*$/\1\2, /
-# goto next if subsitution fails, append pattern, loop
+# append each item finished by , or \/
+s/^\s*([A-Z0-9_]+)(\s*=\s*[^,\/]+)?\s*([,|\)])?[\/]?.*$/\1\2\3 /
+# goto next if subsitution fails, append pattern, loop to attrs
 T next;H;b attrs
 :next
 # try again if } not found
@@ -29,4 +29,5 @@ H;x
 s/\n//g
 # replace multi spaces with one
 s/ {2,}/ /g
-s/, }/ }/p
+s/, }/ }/
+p
