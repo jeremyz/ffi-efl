@@ -928,6 +928,10 @@ module Efl
         [ :evas_object_textblock_style_set, [ :pointer, :pointer ], :void ],
         # EAPI const Evas_Textblock_Style *evas_object_textblock_style_get(const Evas_Object *obj);
         [ :evas_object_textblock_style_get, [ :pointer ], :pointer ],
+        # EAPI void evas_object_textblock_style_user_set(Evas_Object *obj, Evas_Textblock_Style *ts);
+        [ :evas_object_textblock_style_user_set, [ :pointer, :pointer ], :void ],
+        # EAPI const Evas_Textblock_Style *evas_object_textblock_style_user_get(const Evas_Object *obj);
+        [ :evas_object_textblock_style_user_get, [ :pointer ], :pointer ],
         # EAPI void evas_object_textblock_replace_char_set(Evas_Object *obj, const char *ch);
         [ :evas_object_textblock_replace_char_set, [ :pointer, :string ], :void ],
         # EAPI const char *evas_object_textblock_replace_char_get(Evas_Object *obj);

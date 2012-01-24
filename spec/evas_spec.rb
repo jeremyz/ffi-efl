@@ -27,7 +27,7 @@ describe "Efl::Evas #{Efl::Evas.version.full}" do
         Evas.shutdown.should == @init
     end
     #
-    it "evas_bidi_direction should be correct" do
+    it "enum evas_bidi_direction should be correct" do
         Efl::Native.enum_value(:evas_bidi_direction_natural).should == 0
         Efl::Native.enum_value(:evas_bidi_direction_neutral).should == 0
         Efl::Native.enum_value(:evas_bidi_direction_ltr).should == 1
