@@ -81,6 +81,12 @@ module Efl
             :edje_input_panel_layout_url, :edje_input_panel_layout_phonenumber, :edje_input_panel_layout_ip, :edje_input_panel_layout_month,
             :edje_input_panel_layout_numberonly, :edje_input_panel_layout_invalid, :edje_input_panel_layout_hex, :edje_input_panel_layout_terminal,
             :edje_input_panel_layout_password ]
+        # typedef enum _Edje_Input_Panel_Lang {...} Edje_Input_Panel_Lang;
+        enum :edje_input_panel_lang, [ :edje_input_panel_lang_automatic, :edje_input_panel_lang_alphabet ]
+        # typedef enum _Edje_Input_Panel_Return_Key_Type {...} Edje_Input_Panel_Return_Key_Type;
+        enum :edje_input_panel_return_key_type, [ :edje_input_panel_return_key_type_default, :edje_input_panel_return_key_type_done,
+            :edje_input_panel_return_key_type_go, :edje_input_panel_return_key_type_join, :edje_input_panel_return_key_type_login,
+            :edje_input_panel_return_key_type_next, :edje_input_panel_return_key_type_search, :edje_input_panel_return_key_type_send ]
         #
         # TYPEDEFS
         # typedef struct _Edje_Version Edje_Version;
@@ -127,6 +133,8 @@ module Efl
         callback :edje_message_handler_cb, [ :pointer, :pointer, :edje_message_type, :int, :pointer ], :void
         # typedef void (*Edje_Text_Filter_Cb) (void *data, Evas_Object *obj, const char *part, Edje_Text_Filter_Type type, char **text);
         callback :edje_text_filter_cb, [ :pointer, :pointer, :string, :edje_text_filter_type, :pointer ], :void
+        # typedef void (*Edje_Markup_Filter_Cb) (void *data, Evas_Object *obj, const char *part, char **text);
+        callback :edje_markup_filter_cb, [ :pointer, :pointer, :string, :pointer ], :void
         # typedef Evas_Object *(*Edje_Item_Provider_Cb) (void *data, Evas_Object *obj, const char *part, const char *item);
         callback :edje_item_provider_cb, [ :pointer, :pointer, :string, :string ], :pointer
         #
@@ -350,24 +358,56 @@ module Efl
         [ :edje_object_part_text_cursor_pos_set, [ :pointer, :string, :edje_cursor, :int ], :void ],
         # EAPI int edje_object_part_text_cursor_pos_get (const Evas_Object *obj, const char *part, Edje_Cursor cur);
         [ :edje_object_part_text_cursor_pos_get, [ :pointer, :string, :edje_cursor ], :int ],
-        # EAPI void edje_object_part_text_input_panel_layout_set (const Evas_Object *obj, const char *part, Edje_Input_Panel_Layout layout);
+        # EAPI void edje_object_part_text_imf_context_reset (const Evas_Object *obj, const char *part);
+        [ :edje_object_part_text_imf_context_reset, [ :pointer, :string ], :void ],
+        # EAPI void edje_object_part_text_input_panel_layout_set (Evas_Object *obj, const char *part, Edje_Input_Panel_Layout layout);
         [ :edje_object_part_text_input_panel_layout_set, [ :pointer, :string, :edje_input_panel_layout ], :void ],
         # EAPI Edje_Input_Panel_Layout edje_object_part_text_input_panel_layout_get (const Evas_Object *obj, const char *part);
         [ :edje_object_part_text_input_panel_layout_get, [ :pointer, :string ], :edje_input_panel_layout ],
-        # EAPI void edje_object_part_text_autocapital_type_set (const Evas_Object *obj, const char *part, Edje_Text_Autocapital_Type autocapital_type);
+        # EAPI void edje_object_part_text_autocapital_type_set (Evas_Object *obj, const char *part, Edje_Text_Autocapital_Type autocapital_type);
         [ :edje_object_part_text_autocapital_type_set, [ :pointer, :string, :edje_text_autocapital_type ], :void ],
         # EAPI Edje_Text_Autocapital_Type edje_object_part_text_autocapital_type_get (const Evas_Object *obj, const char *part);
         [ :edje_object_part_text_autocapital_type_get, [ :pointer, :string ], :edje_text_autocapital_type ],
-        # EAPI void edje_object_part_text_input_panel_enabled_set (const Evas_Object *obj, const char *part, Eina_Bool enabled);
+        # EAPI void edje_object_part_text_prediction_allow_set (Evas_Object *obj, const char *part, Eina_Bool prediction);
+        [ :edje_object_part_text_prediction_allow_set, [ :pointer, :string, :eina_bool ], :void ],
+        # EAPI Eina_Bool edje_object_part_text_prediction_allow_get (const Evas_Object *obj, const char *part);
+        [ :edje_object_part_text_prediction_allow_get, [ :pointer, :string ], :eina_bool ],
+        # EAPI void edje_object_part_text_input_panel_enabled_set (Evas_Object *obj, const char *part, Eina_Bool enabled);
         [ :edje_object_part_text_input_panel_enabled_set, [ :pointer, :string, :eina_bool ], :void ],
         # EAPI Eina_Bool edje_object_part_text_input_panel_enabled_get (const Evas_Object *obj, const char *part);
         [ :edje_object_part_text_input_panel_enabled_get, [ :pointer, :string ], :eina_bool ],
+        # EAPI void edje_object_part_text_input_panel_show(const Evas_Object *obj, const char *part);
+        [ :edje_object_part_text_input_panel_show, [ :pointer, :string ], :void ],
+        # EAPI void edje_object_part_text_input_panel_hide(const Evas_Object *obj, const char *part);
+        [ :edje_object_part_text_input_panel_hide, [ :pointer, :string ], :void ],
+        # EAPI void edje_object_part_text_input_panel_language_set(Evas_Object *obj, const char *part, Edje_Input_Panel_Lang lang);
+        [ :edje_object_part_text_input_panel_language_set, [ :pointer, :string, :edje_input_panel_lang ], :void ],
+        # EAPI Edje_Input_Panel_Lang edje_object_part_text_input_panel_language_get(const Evas_Object *obj, const char *part);
+        [ :edje_object_part_text_input_panel_language_get, [ :pointer, :string ], :edje_input_panel_lang ],
+        # EAPI void edje_object_part_text_input_panel_imdata_set(Evas_Object *obj, const char *part, const void *data, int len);
+        [ :edje_object_part_text_input_panel_imdata_set, [ :pointer, :string, :pointer, :int ], :void ],
+        # EAPI void edje_object_part_text_input_panel_imdata_get(const Evas_Object *obj, const char *part, void *data, int *len);
+        [ :edje_object_part_text_input_panel_imdata_get, [ :pointer, :string, :pointer, :pointer ], :void ],
+        # EAPI void edje_object_part_text_input_panel_return_key_type_set(Evas_Object *obj, const char *part, Edje_Input_Panel_Return_Key_Type return_key_type);
+        [ :edje_object_part_text_input_panel_return_key_type_set, [ :pointer, :string, :edje_input_panel_return_key_type ], :void ],
+        # EAPI Edje_Input_Panel_Return_Key_Type edje_object_part_text_input_panel_return_key_type_get(const Evas_Object *obj, const char *part);
+        [ :edje_object_part_text_input_panel_return_key_type_get, [ :pointer, :string ], :edje_input_panel_return_key_type ],
+        # EAPI void edje_object_part_text_input_panel_return_key_disabled_set(Evas_Object *obj, const char *part, Eina_Bool disabled);
+        [ :edje_object_part_text_input_panel_return_key_disabled_set, [ :pointer, :string, :eina_bool ], :void ],
+        # EAPI Eina_Bool edje_object_part_text_input_panel_return_key_disabled_get(const Evas_Object *obj, const char *part);
+        [ :edje_object_part_text_input_panel_return_key_disabled_get, [ :pointer, :string ], :eina_bool ],
         # EAPI void edje_object_text_insert_filter_callback_add (Evas_Object *obj, const char *part, Edje_Text_Filter_Cb func, void *data);
         [ :edje_object_text_insert_filter_callback_add, [ :pointer, :string, :edje_text_filter_cb, :pointer ], :void ],
         # EAPI void *edje_object_text_insert_filter_callback_del (Evas_Object *obj, const char *part, Edje_Text_Filter_Cb func);
         [ :edje_object_text_insert_filter_callback_del, [ :pointer, :string, :edje_text_filter_cb ], :pointer ],
         # EAPI void *edje_object_text_insert_filter_callback_del_full (Evas_Object *obj, const char *part, Edje_Text_Filter_Cb func, void *data);
         [ :edje_object_text_insert_filter_callback_del_full, [ :pointer, :string, :edje_text_filter_cb, :pointer ], :pointer ],
+        # EAPI void edje_object_markup_filter_callback_add(Evas_Object *obj, const char *part, Edje_Markup_Filter_Cb func, void *data);
+        [ :edje_object_markup_filter_callback_add, [ :pointer, :string, :edje_markup_filter_cb, :pointer ], :void ],
+        # EAPI void *edje_object_markup_filter_callback_del(Evas_Object *obj, const char *part, Edje_Markup_Filter_Cb func);
+        [ :edje_object_markup_filter_callback_del, [ :pointer, :string, :edje_markup_filter_cb ], :pointer ],
+        # EAPI void *edje_object_markup_filter_callback_del_full(Evas_Object *obj, const char *part, Edje_Markup_Filter_Cb func, void *data);
+        [ :edje_object_markup_filter_callback_del_full, [ :pointer, :string, :edje_markup_filter_cb, :pointer ], :pointer ],
         # EAPI Eina_Bool edje_object_part_swallow (Evas_Object *obj, const char *part, Evas_Object *obj_swallow);
         [ :edje_object_part_swallow, [ :pointer, :string, :pointer ], :eina_bool ],
         # EAPI void edje_object_part_unswallow (Evas_Object *obj, Evas_Object *obj_swallow);
