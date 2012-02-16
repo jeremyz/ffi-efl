@@ -249,6 +249,8 @@ module Efl
         [ :ecore_evas_wayland_resize, [ :pointer, :int ], :void ],
         # EAPI void ecore_evas_wayland_drag_start(Ecore_Evas *ee, Ecore_Evas *drag_ee, void *source);
         [ :ecore_evas_wayland_drag_start, [ :pointer, :pointer, :pointer ], :void ],
+        # EAPI void ecore_evas_wayland_pointer_set(Ecore_Evas *ee, int hot_x, int hot_y);
+        [ :ecore_evas_wayland_pointer_set, [ :pointer, :int, :int ], :void ],
         # EAPI Ecore_Evas *ecore_evas_buffer_new(int w, int h);
         [ :ecore_evas_buffer_new, [ :int, :int ], :pointer ],
         # EAPI Ecore_Evas *ecore_evas_buffer_allocfunc_new(int w, int h, void *(*alloc_func) (void *data, int size), void (*free_func) (void *data, void *pix), const void *data);
