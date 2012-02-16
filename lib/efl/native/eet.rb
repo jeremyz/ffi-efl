@@ -141,6 +141,8 @@ module Efl
         [ :eet_dictionary_get, [ :pointer ], :pointer ],
         # EAPI int eet_dictionary_string_check(Eet_Dictionary *ed, const char *string);
         [ :eet_dictionary_string_check, [ :pointer, :string ], :int ],
+        # EAPI int eet_dictionary_count(const Eet_Dictionary *ed);
+        [ :eet_dictionary_count, [ :pointer ], :int ],
         # EAPI void * eet_read(Eet_File *ef, const char *name, int *size_ret);
         [ :eet_read, [ :pointer, :string, :pointer ], :pointer ],
         # EAPI const void * eet_read_direct(Eet_File *ef, const char *name, int *size_ret);
