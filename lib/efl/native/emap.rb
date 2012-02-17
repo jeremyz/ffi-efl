@@ -37,11 +37,11 @@ module Efl
         # FUNCTIONS
         fcts = [
         # EAPI int emap_init();
-        [ :emap_init, [ ], :int ],
+        [ :emap_init, [  ], :int ],
         # EAPI int emap_shutdown();
-        [ :emap_shutdown, [ ], :int ],
+        [ :emap_shutdown, [  ], :int ],
         # EAPI EMap_Route *emap_route_new();
-        [ :emap_route_new, [ ], :pointer ],
+        [ :emap_route_new, [  ], :pointer ],
         # EAPI void emap_route_node_add(EMap_Route *route, EMap_Route_Node *node);
         [ :emap_route_node_add, [ :pointer, :pointer ], :void ],
         # EAPI void emap_route_free(EMap_Route *route);
@@ -55,7 +55,7 @@ module Efl
         # EAPI double emap_route_distance_get(EMap_Route *route);
         [ :emap_route_distance_get, [ :pointer ], :double ],
         # EAPI EMap_Route_Node *emap_route_node_new();
-        [ :emap_route_node_new, [ ], :pointer ],
+        [ :emap_route_node_new, [  ], :pointer ],
         # EAPI void emap_route_node_lon_set(EMap_Route_Node *node, double lon);
         [ :emap_route_node_lon_set, [ :pointer, :double ], :void ],
         # EAPI void emap_route_node_lat_set(EMap_Route_Node *node, double lat);
