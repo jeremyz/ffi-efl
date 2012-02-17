@@ -256,7 +256,7 @@ def gen_functions path, indent
     r << indent+"fcts = ["
     open(path+'-functions','r').readlines.each do |l|
         l.strip!
-        if not l=~ /EAPI ([a-zA-Z0-9_\* ]+?)(\w+) ?\(([a-zA-Z0-9_ \*,\.]+)\)( *[A-Z]{2,})?/
+        if not l=~ /EAPI ([a-zA-Z0-9_\* ]+?)(\w+) ?\(([a-zA-Z0-9_ \*,\.]*)\)( *[A-Z]{2,})?/
             puts "# #{l}\n#{indent}# FIXME"
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
