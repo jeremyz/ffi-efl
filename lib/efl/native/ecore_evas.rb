@@ -50,8 +50,8 @@ module Efl
         typedef :pointer, :ecore_evas
         #
         # CALLBACKS
-        # void (*func) (Ecore_Evas *ee)
-        callback :ecore_evas_cb, [ :pointer ], :void
+        # typedef void (*Ecore_Evas_Event_Cb) (Ecore_Evas *ee);
+        callback :ecore_evas_event_cb, [ :pointer ], :void
         #
         # VARIABLES
         # EAPI extern int ECORE_EVAS_EWS_EVENT_MANAGER_CHANGE;
@@ -311,36 +311,36 @@ module Efl
         [ :ecore_evas_data_get, [ :pointer, :string ], :pointer ],
         # EAPI void ecore_evas_data_set(Ecore_Evas *ee, const char *key, const void *data);
         [ :ecore_evas_data_set, [ :pointer, :string, :pointer ], :void ],
-        # EAPI void ecore_evas_callback_resize_set(Ecore_Evas *ee, void (*func) (Ecore_Evas *ee));
-        [ :ecore_evas_callback_resize_set, [:pointer, :ecore_evas_cb], :void ],
-        # EAPI void ecore_evas_callback_move_set(Ecore_Evas *ee, void (*func) (Ecore_Evas *ee));
-        [ :ecore_evas_callback_move_set, [ :pointer, :ecore_evas_cb ], :void ],
-        # EAPI void ecore_evas_callback_show_set(Ecore_Evas *ee, void (*func) (Ecore_Evas *ee));
-        [ :ecore_evas_callback_show_set, [ :pointer, :ecore_evas_cb ], :void ],
-        # EAPI void ecore_evas_callback_hide_set(Ecore_Evas *ee, void (*func) (Ecore_Evas *ee));
-        [ :ecore_evas_callback_hide_set, [ :pointer, :ecore_evas_cb ], :void ],
-        # EAPI void ecore_evas_callback_delete_request_set(Ecore_Evas *ee, void (*func) (Ecore_Evas *ee));
-        [ :ecore_evas_callback_delete_request_set, [ :pointer, :ecore_evas_cb ], :void ],
-        # EAPI void ecore_evas_callback_destroy_set(Ecore_Evas *ee, void (*func) (Ecore_Evas *ee));
-        [ :ecore_evas_callback_destroy_set, [ :pointer, :ecore_evas_cb ], :void ],
-        # EAPI void ecore_evas_callback_focus_in_set(Ecore_Evas *ee, void (*func) (Ecore_Evas *ee));
-        [ :ecore_evas_callback_focus_in_set, [ :pointer, :ecore_evas_cb ], :void ],
-        # EAPI void ecore_evas_callback_focus_out_set(Ecore_Evas *ee, void (*func) (Ecore_Evas *ee));
-        [ :ecore_evas_callback_focus_out_set, [ :pointer, :ecore_evas_cb ], :void ],
-        # EAPI void ecore_evas_callback_sticky_set(Ecore_Evas *ee, void (*func) (Ecore_Evas *ee));
-        [ :ecore_evas_callback_sticky_set, [ :pointer, :ecore_evas_cb ], :void ],
-        # EAPI void ecore_evas_callback_unsticky_set(Ecore_Evas *ee, void (*func) (Ecore_Evas *ee));
-        [ :ecore_evas_callback_unsticky_set, [ :pointer, :ecore_evas_cb ], :void ],
-        # EAPI void ecore_evas_callback_mouse_in_set(Ecore_Evas *ee, void (*func) (Ecore_Evas *ee));
-        [ :ecore_evas_callback_mouse_in_set, [ :pointer, :ecore_evas_cb ], :void ],
-        # EAPI void ecore_evas_callback_mouse_out_set(Ecore_Evas *ee, void (*func) (Ecore_Evas *ee));
-        [ :ecore_evas_callback_mouse_out_set, [ :pointer, :ecore_evas_cb ], :void ],
-        # EAPI void ecore_evas_callback_pre_render_set(Ecore_Evas *ee, void (*func) (Ecore_Evas *ee));
-        [ :ecore_evas_callback_pre_render_set, [ :pointer, :ecore_evas_cb ], :void ],
-        # EAPI void ecore_evas_callback_post_render_set(Ecore_Evas *ee, void (*func) (Ecore_Evas *ee));
-        [ :ecore_evas_callback_post_render_set, [ :pointer, :ecore_evas_cb ], :void ],
-        # EAPI void ecore_evas_callback_pre_free_set(Ecore_Evas *ee, void (*func) (Ecore_Evas *ee));
-        [ :ecore_evas_callback_pre_free_set, [ :pointer, :ecore_evas_cb ], :void ],
+        # EAPI void ecore_evas_callback_resize_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
+        [ :ecore_evas_callback_resize_set, [ :pointer, :ecore_evas_event_cb ], :void ],
+        # EAPI void ecore_evas_callback_move_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
+        [ :ecore_evas_callback_move_set, [ :pointer, :ecore_evas_event_cb ], :void ],
+        # EAPI void ecore_evas_callback_show_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
+        [ :ecore_evas_callback_show_set, [ :pointer, :ecore_evas_event_cb ], :void ],
+        # EAPI void ecore_evas_callback_hide_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
+        [ :ecore_evas_callback_hide_set, [ :pointer, :ecore_evas_event_cb ], :void ],
+        # EAPI void ecore_evas_callback_delete_request_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
+        [ :ecore_evas_callback_delete_request_set, [ :pointer, :ecore_evas_event_cb ], :void ],
+        # EAPI void ecore_evas_callback_destroy_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
+        [ :ecore_evas_callback_destroy_set, [ :pointer, :ecore_evas_event_cb ], :void ],
+        # EAPI void ecore_evas_callback_focus_in_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
+        [ :ecore_evas_callback_focus_in_set, [ :pointer, :ecore_evas_event_cb ], :void ],
+        # EAPI void ecore_evas_callback_focus_out_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
+        [ :ecore_evas_callback_focus_out_set, [ :pointer, :ecore_evas_event_cb ], :void ],
+        # EAPI void ecore_evas_callback_sticky_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
+        [ :ecore_evas_callback_sticky_set, [ :pointer, :ecore_evas_event_cb ], :void ],
+        # EAPI void ecore_evas_callback_unsticky_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
+        [ :ecore_evas_callback_unsticky_set, [ :pointer, :ecore_evas_event_cb ], :void ],
+        # EAPI void ecore_evas_callback_mouse_in_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
+        [ :ecore_evas_callback_mouse_in_set, [ :pointer, :ecore_evas_event_cb ], :void ],
+        # EAPI void ecore_evas_callback_mouse_out_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
+        [ :ecore_evas_callback_mouse_out_set, [ :pointer, :ecore_evas_event_cb ], :void ],
+        # EAPI void ecore_evas_callback_pre_render_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
+        [ :ecore_evas_callback_pre_render_set, [ :pointer, :ecore_evas_event_cb ], :void ],
+        # EAPI void ecore_evas_callback_post_render_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
+        [ :ecore_evas_callback_post_render_set, [ :pointer, :ecore_evas_event_cb ], :void ],
+        # EAPI void ecore_evas_callback_pre_free_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
+        [ :ecore_evas_callback_pre_free_set, [ :pointer, :ecore_evas_event_cb ], :void ],
         # EAPI Evas *ecore_evas_get(const Ecore_Evas *ee);
         [ :ecore_evas_get, [ :pointer ], :pointer ],
         # EAPI void ecore_evas_managed_move(Ecore_Evas *ee, int x, int y);
