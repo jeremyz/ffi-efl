@@ -76,7 +76,7 @@ module Efl
         [ :eina_list_reverse_clone, [ :pointer ], :pointer ],
         # EAPI Eina_List *eina_list_clone(const Eina_List *list);
         [ :eina_list_clone, [ :pointer ], :pointer ],
-        # EAPI Eina_List *eina_list_sort(Eina_List *list, unsigned int size, Eina_Compare_Cb func);
+        # EAPI Eina_List *eina_list_sort(Eina_List *list, unsigned int limit, Eina_Compare_Cb func);
         [ :eina_list_sort, [ :pointer, :uint, :eina_compare_cb ], :pointer ],
         # EAPI Eina_List *eina_list_merge(Eina_List *left, Eina_List *right);
         [ :eina_list_merge, [ :pointer, :pointer ], :pointer ],
