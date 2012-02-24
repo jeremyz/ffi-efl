@@ -24,13 +24,13 @@ module Efl
         #
         # TYPEDEFS
         # typedef unsigned char Eina_Bool;
-        typedef :eina_bool, :eina_bool
+        typedef :bool, :eina_bool
         #
         # CALLBACKS
         # typedef int (*Eina_Compare_Cb) (const void *data1, const void *data2);
         callback :eina_compare_cb, [ :pointer, :pointer ], :int
         # typedef Eina_Bool (*Eina_Each_Cb) (const void *container, void *data, void *fdata);
-        callback :eina_each_cb, [ :pointer, :pointer, :pointer ], :eina_bool
+        callback :eina_each_cb, [ :pointer, :pointer, :pointer ], :bool
         # typedef void (*Eina_Free_Cb) (void *data);
         callback :eina_free_cb, [ :pointer ], :void
         #
