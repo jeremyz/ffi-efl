@@ -73,7 +73,7 @@ module Efl
         # EAPI unsigned int ecore_event_modifier_mask(Ecore_Event_Modifier modifier);
         [ :ecore_event_modifier_mask, [ :ecore_event_modifier ], :uint ],
         # EAPI Ecore_Event_Modifier ecore_event_update_modifier(const char *key, Ecore_Event_Modifiers *modifiers, int inc);
-        [ :ecore_event_update_modifier, [ :string, :pointer, :int ], :ecore_event_modifier ],
+        [ :ecore_event_update_modifier, [ :string, :ecore_event_modifiers, :int ], :ecore_event_modifier ],
         ]
         #
         attach_fcts fcts
