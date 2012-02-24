@@ -39,6 +39,7 @@ module Efl
         def to_a; [self] end
         def to_ary; [self] end
         def to_s; Object.instance_method(:to_s).bind(self).call+' ['+self.to_ptr.to_s+']' end
+        alias :to_str :to_s
         def to_ptr; @ptr; end
         def === o; @ptr === o.to_ptr; end
         def null?; @ptr.null?; end
