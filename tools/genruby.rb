@@ -171,8 +171,6 @@ def gen_enums path, indent
                     i+=1
                 elsif v=~/\|/
                     els = v.gsub(/[\(\)]/,'').split(/\|/)
-                    puts h.inspect
-                    puts els.inspect
                     v = els.inject('') { |s,e| s+="#{h[e]}|" }[0..-2]
                     h[s]=v
                     i=eval(v).to_i+1
