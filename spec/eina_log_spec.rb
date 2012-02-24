@@ -69,12 +69,5 @@ describe 'Efl::EinaLog' do
         EinaLog.main_thread_check.should be_true
         EinaLog.threads_enable
     end
-    # EAPI void eina_log_threads_enable(void);
-    # EAPI void eina_log_print_cb_set(Eina_Log_Print_Cb cb, void *data);
     #
-    # EAPI void eina_log_print(int domain, Eina_Log_Level level, const char *file, const char *function, int line, const char *fmt, ...);
-    # EAPI void eina_log_vprint(int domain, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, va_list args);
-    # EAPI void eina_log_print_cb_stdout(const Eina_Log_Domain *d, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, void *data, va_list args);
-    # EAPI void eina_log_print_cb_stderr(const Eina_Log_Domain *d, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, void *data, va_list args);
-    # EAPI void eina_log_print_cb_file(const Eina_Log_Domain *d, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, void *data, va_list args);
 end
