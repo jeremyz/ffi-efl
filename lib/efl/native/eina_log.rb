@@ -31,7 +31,7 @@ module Efl
         #
         # CALLBACKS
         # typedef void (*Eina_Log_Print_Cb) (const Eina_Log_Domain *d, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, void *data, va_list args);
-        callback :eina_log_print_cb, [ :pointer, :eina_log_level, :string, :string, :int, :string, :pointer, :pointer ], :void
+        callback :eina_log_print_cb, [ :eina_log_domain, :eina_log_level, :string, :string, :int, :string, :pointer, :pointer ], :void
         #
         # VARIABLES
         # EAPI extern int EINA_LOG_DOMAIN_GLOBAL;
@@ -48,23 +48,23 @@ module Efl
         # EAPI int eina_log_level_get(void);
         [ :eina_log_level_get, [  ], :int ],
         # EAPI Eina_Bool eina_log_main_thread_check(void);
-        [ :eina_log_main_thread_check, [  ], :eina_bool ],
+        [ :eina_log_main_thread_check, [  ], :bool ],
         # EAPI void eina_log_color_disable_set(Eina_Bool disabled);
-        [ :eina_log_color_disable_set, [ :eina_bool ], :void ],
+        [ :eina_log_color_disable_set, [ :bool ], :void ],
         # EAPI Eina_Bool eina_log_color_disable_get(void);
-        [ :eina_log_color_disable_get, [  ], :eina_bool ],
+        [ :eina_log_color_disable_get, [  ], :bool ],
         # EAPI void eina_log_file_disable_set(Eina_Bool disabled);
-        [ :eina_log_file_disable_set, [ :eina_bool ], :void ],
+        [ :eina_log_file_disable_set, [ :bool ], :void ],
         # EAPI Eina_Bool eina_log_file_disable_get(void);
-        [ :eina_log_file_disable_get, [  ], :eina_bool ],
+        [ :eina_log_file_disable_get, [  ], :bool ],
         # EAPI void eina_log_function_disable_set(Eina_Bool disabled);
-        [ :eina_log_function_disable_set, [ :eina_bool ], :void ],
+        [ :eina_log_function_disable_set, [ :bool ], :void ],
         # EAPI Eina_Bool eina_log_function_disable_get(void);
-        [ :eina_log_function_disable_get, [  ], :eina_bool ],
+        [ :eina_log_function_disable_get, [  ], :bool ],
         # EAPI void eina_log_abort_on_critical_set(Eina_Bool abort_on_critical);
-        [ :eina_log_abort_on_critical_set, [ :eina_bool ], :void ],
+        [ :eina_log_abort_on_critical_set, [ :bool ], :void ],
         # EAPI Eina_Bool eina_log_abort_on_critical_get(void);
-        [ :eina_log_abort_on_critical_get, [  ], :eina_bool ],
+        [ :eina_log_abort_on_critical_get, [  ], :bool ],
         # EAPI void eina_log_abort_on_critical_level_set(int critical_level);
         [ :eina_log_abort_on_critical_level_set, [ :int ], :void ],
         # EAPI int eina_log_abort_on_critical_level_get(void);
@@ -84,11 +84,11 @@ module Efl
         # EAPI void eina_log_vprint(int domain, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, va_list args);
         [ :eina_log_vprint, [ :int, :eina_log_level, :string, :string, :int, :string, :pointer ], :void ],
         # EAPI void eina_log_print_cb_stdout(const Eina_Log_Domain *d, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, void *data, va_list args);
-        [ :eina_log_print_cb_stdout, [ :pointer, :eina_log_level, :string, :string, :int, :string, :pointer, :pointer ], :void ],
+        [ :eina_log_print_cb_stdout, [ :eina_log_domain, :eina_log_level, :string, :string, :int, :string, :pointer, :pointer ], :void ],
         # EAPI void eina_log_print_cb_stderr(const Eina_Log_Domain *d, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, void *data, va_list args);
-        [ :eina_log_print_cb_stderr, [ :pointer, :eina_log_level, :string, :string, :int, :string, :pointer, :pointer ], :void ],
+        [ :eina_log_print_cb_stderr, [ :eina_log_domain, :eina_log_level, :string, :string, :int, :string, :pointer, :pointer ], :void ],
         # EAPI void eina_log_print_cb_file(const Eina_Log_Domain *d, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, void *data, va_list args);
-        [ :eina_log_print_cb_file, [ :pointer, :eina_log_level, :string, :string, :int, :string, :pointer, :pointer ], :void ],
+        [ :eina_log_print_cb_file, [ :eina_log_domain, :eina_log_level, :string, :string, :int, :string, :pointer, :pointer ], :void ],
         ]
         #
         attach_fcts fcts
