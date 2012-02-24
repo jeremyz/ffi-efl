@@ -1,7 +1,6 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-#require 'efl'
 require 'efl/eina'
 require 'efl/native/eina_log'
 #
@@ -45,6 +44,9 @@ module Efl
         def self._log lvl, msg
             file, line, func = caller[1].split ':'
             Native.eina_log_print Native.EINA_LOG_DOMAIN_GLOBAL, lvl, file, func, line.to_i, msg
+        end
+        class << self
+            private :_log
         end
         #
         def self.log_crit msg
