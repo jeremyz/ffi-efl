@@ -85,20 +85,21 @@ TYPES = {
     'struct tm *' => ':pointer',
     'struct timeval *' => ':pointer',
     'struct sockaddr *' => ':pointer',
-    'Eina_Bool' => ':eina_bool'
+}
+ETYPES = {
+    'Eina_Bool' => ':bool'
 }
 #
-TYPES_USAGE = {}
-#
 def set_type t, sym
-    if TYPES[t].nil?
+    return ETYPES['Eina_Bool'] if t=='Eina_Bool'
+    if ETYPES[t].nil?
+#        v = ( ETYPES[sym].nil? ? ( TYPES[sym].nil? ? ':'+sym.downcase : TYPES[sym] ) : ETYPES[sym] )
         v = ( TYPES[sym].nil? ? ':'+sym.downcase : TYPES[sym] )
-        TYPES[t] = v
-        puts "  define type : #{t} => #{v}"
+        ETYPES[t] = v
+        printf "\033[0;35m%40s\033[0m => \033[0;36m%s\033[0m\n",t,v
         return v
     else
-        return TYPES['Eina_Bool'] if t=='Eina_Bool'
-        puts "ERROR type #{t} => #{sym} alredy exists!"
+        printf "\033[0;31mERROR type #{t} => #{sym} alredy exists!\033[0m\n"
         exit 1
     end
 end
@@ -106,12 +107,17 @@ end
 def get_type t
     k = t.gsub(/(const|enum|union)/, '').strip
     r = TYPES[k]
-    if r.nil?
-        return ':pointer' if k=~ /\*/
-        puts "unknown type >#{k}< #{t}"
+    return r unless r.nil?
+    r = ETYPES[k]
+    return r unless r.nil?
+    if not k=~ /\*/
+        printf "\033[0;31munknown type >#{k}< #{t}\033[0m\n"
         exit 1
     end
-    r
+    k = k.gsub(/[ \*]*/, '').strip
+    r = ETYPES[k]
+    return ':'+k.downcase if r==':pointer'
+    ':pointer'
 end
 #
 def get_type_from_arg arg, l
