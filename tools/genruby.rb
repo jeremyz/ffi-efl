@@ -134,7 +134,7 @@ def get_type_from_arg arg, l
     # try with unchanged argument string
     t = get_type k
     if t.nil?
-        puts "wrong arg >#{k}< #{arg} (#{l})"
+        printf "\033[0;31mwrong arg >#{k}< #{arg} (#{l})\033[0m\n"
         exit 1
     end
     t
@@ -149,7 +149,7 @@ def gen_enums path, indent
     open(path+'-enums','r').readlines.each do |l|
         l.strip!
         if not l=~/((?:typedef )?enum(?: \w+)?) \{(.*)\} (\w+)/
-            puts "FIXME : #{l}\n#{indent}# FIXME"
+            printf "\033[0;31mFIXME : #{l}\n#{indent}# FIXME\033[0m\n"
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
@@ -222,7 +222,7 @@ def gen_callbacks path, indent
     open(path+'-callbacks','r').readlines.each do |l|
         l.strip!
         if not l=~/^\s*typedef\s+(.*)((?:\(\*?\w+\)| \*?\w+))\s*\((.*)\);/
-            puts "# #{l}\n#{indent}# FIXME"
+            printf "\033[0;31m# #{l}\n#{indent}# FIXME\033[0m\n"
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
@@ -243,7 +243,7 @@ def gen_variables path, indent
     open(path+'-variables','r').readlines.each do |l|
         l.strip!
         if not l=~ /EAPI\s+extern\s+(\w+\s+\*?)(\w+)/
-            puts "# #{l}\n#{indent}# FIXME"
+            printf "\033[0;31m# #{l}\n#{indent}# FIXME\033[0m\n"
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
@@ -261,7 +261,7 @@ def gen_functions path, indent
     open(path+'-functions','r').readlines.each do |l|
         l.strip!
         if not l=~ /EAPI ([a-zA-Z0-9_\* ]+?)(\w+) ?\(([a-zA-Z0-9_ \*,\.]*)\)( *[A-Z]{2,})?/
-            puts "# #{l}\n#{indent}# FIXME"
+            printf "\033[0;31m# #{l}\n#{indent}# FIXME\033[0m\n"
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
         end
@@ -281,22 +281,22 @@ libraries.collect do |header,module_name,fct_prefix,lib, output, requires|
     base = File.join path, 'api', header
     output = File.join lib_path, output
     Dir.mkdir File.dirname(output) unless File.exists? File.dirname(output)
-    puts "parse #{base}-*"
+    printf "\033[1;33mparse \033[0;32m%s-*\033[0;0m\n",base
     r = [lib, output, module_name, fct_prefix, requires ]
-    puts " enums..."
+    printf " \033[0;33menums...\033[0;0m\n"
     r << gen_enums(base, INDENT)
-    puts " typedefs..."
+    printf " \033[0;33mtypedefs...\033[0;0m\n"
     r << gen_typedefs(base, INDENT)
-    puts " callbacks..."
+    printf " \033[0;33mcallbacks...\033[0;0m\n"
     r << gen_callbacks(base, INDENT)
-    puts " variables..."
+    printf " \033[0;33mvariables...\033[0;0m\n"
     r << gen_variables(base, INDENT)
-    puts " functions..."
+    printf " \033[0;33mfunctions...\033[0;0m\n"
     r << gen_functions(base, INDENT)
-    puts "done"
+    printf "\033[1;33mdone\033[0;0m\n"
     r
 end.each do |lib, output, module_name, fct_prefix, requires, enums, typedefs, callbacks, variables, functions|
-    printf "%-60s", "generate #{output}"
+    printf "\033[1;33mgenerate\033[0;0m %-50s\033[0;0m",output
     open(output,'w:utf-8') do |f|
         reqs = ( requires.nil? ? '' : requires.inject('') {|s,e| s+="\nrequire '#{e}'"})
         f << HEADER.gsub(/MNAME/,module_name).sub(/MY_FCT_PREFIX/,fct_prefix).sub(/REQUIRES/,reqs)
