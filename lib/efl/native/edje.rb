@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 #
 require 'efl/native'
+require 'efl/native/evas'
 #
 module Efl
     #
@@ -126,21 +127,21 @@ module Efl
         #
         # CALLBACKS
         # typedef void (*Edje_Signal_Cb) (void *data, Evas_Object *obj, const char *emission, const char *source);
-        callback :edje_signal_cb, [ :pointer, :pointer, :string, :string ], :void
+        callback :edje_signal_cb, [ :pointer, :evas_object, :string, :string ], :void
         # typedef void (*Edje_Text_Change_Cb) (void *data, Evas_Object *obj, const char *part);
-        callback :edje_text_change_cb, [ :pointer, :pointer, :string ], :void
+        callback :edje_text_change_cb, [ :pointer, :evas_object, :string ], :void
         # typedef void (*Edje_Message_Handler_Cb) (void *data, Evas_Object *obj, Edje_Message_Type type, int id, void *msg);
-        callback :edje_message_handler_cb, [ :pointer, :pointer, :edje_message_type, :int, :pointer ], :void
+        callback :edje_message_handler_cb, [ :pointer, :evas_object, :edje_message_type, :int, :pointer ], :void
         # typedef void (*Edje_Text_Filter_Cb) (void *data, Evas_Object *obj, const char *part, Edje_Text_Filter_Type type, char **text);
-        callback :edje_text_filter_cb, [ :pointer, :pointer, :string, :edje_text_filter_type, :pointer ], :void
+        callback :edje_text_filter_cb, [ :pointer, :evas_object, :string, :edje_text_filter_type, :pointer ], :void
         # typedef void (*Edje_Markup_Filter_Cb) (void *data, Evas_Object *obj, const char *part, char **text);
-        callback :edje_markup_filter_cb, [ :pointer, :pointer, :string, :pointer ], :void
+        callback :edje_markup_filter_cb, [ :pointer, :evas_object, :string, :pointer ], :void
         # typedef Evas_Object *(*Edje_Item_Provider_Cb) (void *data, Evas_Object *obj, const char *part, const char *item);
-        callback :edje_item_provider_cb, [ :pointer, :pointer, :string, :string ], :pointer
+        callback :edje_item_provider_cb, [ :pointer, :evas_object, :string, :string ], :evas_object
         #
         # VARIABLES
         # EAPI extern Edje_Version *edje_version;
-        attach_variable :edje_version, :pointer
+        attach_variable :edje_version, :edje_version
         #
         # FUNCTIONS
         fcts = [
@@ -167,23 +168,23 @@ module Efl
         # EAPI double edje_scale_get (void);
         [ :edje_scale_get, [  ], :double ],
         # EAPI void edje_password_show_last_set(Eina_Bool password_show_last);
-        [ :edje_password_show_last_set, [ :eina_bool ], :void ],
+        [ :edje_password_show_last_set, [ :bool ], :void ],
         # EAPI void edje_password_show_last_timeout_set(double password_show_last_timeout);
         [ :edje_password_show_last_timeout_set, [ :double ], :void ],
         # EAPI Eina_Bool edje_object_scale_set (Evas_Object *obj, double scale);
-        [ :edje_object_scale_set, [ :pointer, :double ], :eina_bool ],
+        [ :edje_object_scale_set, [ :evas_object, :double ], :bool ],
         # EAPI double edje_object_scale_get (const Evas_Object *obj);
-        [ :edje_object_scale_get, [ :pointer ], :double ],
+        [ :edje_object_scale_get, [ :evas_object ], :double ],
         # EAPI void edje_object_mirrored_set (Evas_Object *obj, Eina_Bool rtl);
-        [ :edje_object_mirrored_set, [ :pointer, :eina_bool ], :void ],
+        [ :edje_object_mirrored_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool edje_object_mirrored_get (const Evas_Object *obj);
-        [ :edje_object_mirrored_get, [ :pointer ], :eina_bool ],
+        [ :edje_object_mirrored_get, [ :evas_object ], :bool ],
         # EAPI Eina_List *edje_file_collection_list (const char *file);
-        [ :edje_file_collection_list, [ :string ], :pointer ],
+        [ :edje_file_collection_list, [ :string ], :eina_list ],
         # EAPI void edje_file_collection_list_free (Eina_List *lst);
-        [ :edje_file_collection_list_free, [ :pointer ], :void ],
+        [ :edje_file_collection_list_free, [ :eina_list ], :void ],
         # EAPI Eina_Bool edje_file_group_exists (const char *file, const char *glob);
-        [ :edje_file_group_exists, [ :string, :string ], :eina_bool ],
+        [ :edje_file_group_exists, [ :string, :string ], :bool ],
         # EAPI char *edje_file_data_get (const char *file, const char *key);
         [ :edje_file_data_get, [ :string, :string ], :string ],
         # EAPI void edje_file_cache_set (int count);
@@ -199,337 +200,337 @@ module Efl
         # EAPI void edje_collection_cache_flush (void);
         [ :edje_collection_cache_flush, [  ], :void ],
         # EAPI Eina_Bool edje_color_class_set (const char *color_class, int r, int g, int b, int a, int r2, int g2, int b2, int a2, int r3, int g3, int b3, int a3);
-        [ :edje_color_class_set, [ :string, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int ], :eina_bool ],
+        [ :edje_color_class_set, [ :string, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int ], :bool ],
         # EAPI Eina_Bool edje_color_class_get (const char *color_class, int *r, int *g, int *b, int *a, int *r2, int *g2, int *b2, int *a2, int *r3, int *g3, int *b3, int *a3);
         [ :edje_color_class_get, [ :string, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer,
-            :pointer, :pointer ], :eina_bool ],
+            :pointer, :pointer ], :bool ],
         # EAPI void edje_color_class_del (const char *color_class);
         [ :edje_color_class_del, [ :string ], :void ],
         # EAPI Eina_List *edje_color_class_list (void);
-        [ :edje_color_class_list, [  ], :pointer ],
+        [ :edje_color_class_list, [  ], :eina_list ],
         # EAPI Eina_Bool edje_text_class_set (const char *text_class, const char *font, Evas_Font_Size size);
-        [ :edje_text_class_set, [ :string, :string, :int ], :eina_bool ],
+        [ :edje_text_class_set, [ :string, :string, :int ], :bool ],
         # EAPI void edje_text_class_del (const char *text_class);
         [ :edje_text_class_del, [ :string ], :void ],
         # EAPI Eina_List *edje_text_class_list (void);
-        [ :edje_text_class_list, [  ], :pointer ],
+        [ :edje_text_class_list, [  ], :eina_list ],
         # EAPI void edje_extern_object_min_size_set (Evas_Object *obj, Evas_Coord minw, Evas_Coord minh);
-        [ :edje_extern_object_min_size_set, [ :pointer, :int, :int ], :void ],
+        [ :edje_extern_object_min_size_set, [ :evas_object, :int, :int ], :void ],
         # EAPI void edje_extern_object_max_size_set (Evas_Object *obj, Evas_Coord maxw, Evas_Coord maxh);
-        [ :edje_extern_object_max_size_set, [ :pointer, :int, :int ], :void ],
+        [ :edje_extern_object_max_size_set, [ :evas_object, :int, :int ], :void ],
         # EAPI void edje_extern_object_aspect_set (Evas_Object *obj, Edje_Aspect_Control aspect, Evas_Coord aw, Evas_Coord ah);
-        [ :edje_extern_object_aspect_set, [ :pointer, :edje_aspect_control, :int, :int ], :void ],
+        [ :edje_extern_object_aspect_set, [ :evas_object, :edje_aspect_control, :int, :int ], :void ],
         # EAPI void edje_box_layout_register (const char *name, Evas_Object_Box_Layout func, void *(*layout_data_get)(void *), void (*layout_data_free)(void *), void (*free_data)(void *), void *data);
         # FIXME
         # EAPI Evas_Object *edje_object_add (Evas *evas);
-        [ :edje_object_add, [ :pointer ], :pointer ],
+        [ :edje_object_add, [ :evas ], :evas_object ],
         # EAPI const char *edje_object_data_get (const Evas_Object *obj, const char *key);
-        [ :edje_object_data_get, [ :pointer, :string ], :string ],
+        [ :edje_object_data_get, [ :evas_object, :string ], :string ],
         # EAPI Eina_Bool edje_object_file_set (Evas_Object *obj, const char *file, const char *group);
-        [ :edje_object_file_set, [ :pointer, :string, :string ], :eina_bool ],
+        [ :edje_object_file_set, [ :evas_object, :string, :string ], :bool ],
         # EAPI void edje_object_file_get (const Evas_Object *obj, const char **file, const char **group);
-        [ :edje_object_file_get, [ :pointer, :pointer, :pointer ], :void ],
+        [ :edje_object_file_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI Edje_Load_Error edje_object_load_error_get (const Evas_Object *obj);
-        [ :edje_object_load_error_get, [ :pointer ], :edje_load_error ],
+        [ :edje_object_load_error_get, [ :evas_object ], :edje_load_error ],
         # EAPI const char *edje_load_error_str (Edje_Load_Error error);
         [ :edje_load_error_str, [ :edje_load_error ], :string ],
         # EAPI Eina_Bool edje_object_preload (Evas_Object *obj, Eina_Bool cancel);
-        [ :edje_object_preload, [ :pointer, :eina_bool ], :eina_bool ],
+        [ :edje_object_preload, [ :evas_object, :bool ], :bool ],
         # EAPI void edje_object_signal_callback_add (Evas_Object *obj, const char *emission, const char *source, Edje_Signal_Cb func, void *data);
-        [ :edje_object_signal_callback_add, [ :pointer, :string, :string, :edje_signal_cb, :pointer ], :void ],
+        [ :edje_object_signal_callback_add, [ :evas_object, :string, :string, :edje_signal_cb, :pointer ], :void ],
         # EAPI void *edje_object_signal_callback_del (Evas_Object *obj, const char *emission, const char *source, Edje_Signal_Cb func);
-        [ :edje_object_signal_callback_del, [ :pointer, :string, :string, :edje_signal_cb ], :pointer ],
+        [ :edje_object_signal_callback_del, [ :evas_object, :string, :string, :edje_signal_cb ], :pointer ],
         # EAPI void *edje_object_signal_callback_del_full(Evas_Object *obj, const char *emission, const char *source, Edje_Signal_Cb func, void *data);
-        [ :edje_object_signal_callback_del_full, [ :pointer, :string, :string, :edje_signal_cb, :pointer ], :pointer ],
+        [ :edje_object_signal_callback_del_full, [ :evas_object, :string, :string, :edje_signal_cb, :pointer ], :pointer ],
         # EAPI void edje_object_signal_emit (Evas_Object *obj, const char *emission, const char *source);
-        [ :edje_object_signal_emit, [ :pointer, :string, :string ], :void ],
+        [ :edje_object_signal_emit, [ :evas_object, :string, :string ], :void ],
         # EAPI void * edje_object_signal_callback_extra_data_get(void);
         [ :edje_object_signal_callback_extra_data_get, [  ], :pointer ],
         # EAPI void edje_object_play_set (Evas_Object *obj, Eina_Bool play);
-        [ :edje_object_play_set, [ :pointer, :eina_bool ], :void ],
+        [ :edje_object_play_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool edje_object_play_get (const Evas_Object *obj);
-        [ :edje_object_play_get, [ :pointer ], :eina_bool ],
+        [ :edje_object_play_get, [ :evas_object ], :bool ],
         # EAPI void edje_object_animation_set (Evas_Object *obj, Eina_Bool on);
-        [ :edje_object_animation_set, [ :pointer, :eina_bool ], :void ],
+        [ :edje_object_animation_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool edje_object_animation_get (const Evas_Object *obj);
-        [ :edje_object_animation_get, [ :pointer ], :eina_bool ],
+        [ :edje_object_animation_get, [ :evas_object ], :bool ],
         # EAPI int edje_object_freeze (Evas_Object *obj);
-        [ :edje_object_freeze, [ :pointer ], :int ],
+        [ :edje_object_freeze, [ :evas_object ], :int ],
         # EAPI int edje_object_thaw (Evas_Object *obj);
-        [ :edje_object_thaw, [ :pointer ], :int ],
+        [ :edje_object_thaw, [ :evas_object ], :int ],
         # EAPI Eina_Bool edje_object_color_class_set (Evas_Object *obj, const char *color_class, int r, int g, int b, int a, int r2, int g2, int b2, int a2, int r3, int g3, int b3, int a3);
-        [ :edje_object_color_class_set, [ :pointer, :string, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int ], :eina_bool ],
+        [ :edje_object_color_class_set, [ :evas_object, :string, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int, :int ], :bool ],
         # EAPI Eina_Bool edje_object_color_class_get (const Evas_Object *o, const char *color_class, int *r, int *g, int *b, int *a, int *r2, int *g2, int *b2, int *a2, int *r3, int *g3, int *b3, int *a3);
-        [ :edje_object_color_class_get, [ :pointer, :string, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer,
-            :pointer, :pointer, :pointer ], :eina_bool ],
+        [ :edje_object_color_class_get, [ :evas_object, :string, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer,
+            :pointer, :pointer, :pointer, :pointer ], :bool ],
         # EAPI void edje_object_color_class_del (Evas_Object *obj, const char *color_class);
-        [ :edje_object_color_class_del, [ :pointer, :string ], :void ],
+        [ :edje_object_color_class_del, [ :evas_object, :string ], :void ],
         # EAPI Eina_Bool edje_object_text_class_set (Evas_Object *obj, const char *text_class, const char *font, Evas_Font_Size size);
-        [ :edje_object_text_class_set, [ :pointer, :string, :string, :int ], :eina_bool ],
+        [ :edje_object_text_class_set, [ :evas_object, :string, :string, :int ], :bool ],
         # EAPI void edje_object_size_min_get (const Evas_Object *obj, Evas_Coord *minw, Evas_Coord *minh);
-        [ :edje_object_size_min_get, [ :pointer, :pointer, :pointer ], :void ],
+        [ :edje_object_size_min_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void edje_object_size_max_get (const Evas_Object *obj, Evas_Coord *maxw, Evas_Coord *maxh);
-        [ :edje_object_size_max_get, [ :pointer, :pointer, :pointer ], :void ],
+        [ :edje_object_size_max_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void edje_object_calc_force (Evas_Object *obj);
-        [ :edje_object_calc_force, [ :pointer ], :void ],
+        [ :edje_object_calc_force, [ :evas_object ], :void ],
         # EAPI void edje_object_size_min_calc (Evas_Object *obj, Evas_Coord *minw, Evas_Coord *minh);
-        [ :edje_object_size_min_calc, [ :pointer, :pointer, :pointer ], :void ],
+        [ :edje_object_size_min_calc, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI Eina_Bool edje_object_parts_extends_calc (Evas_Object *obj, Evas_Coord *x, Evas_Coord *y, Evas_Coord *w, Evas_Coord *h);
-        [ :edje_object_parts_extends_calc, [ :pointer, :pointer, :pointer, :pointer, :pointer ], :eina_bool ],
+        [ :edje_object_parts_extends_calc, [ :evas_object, :pointer, :pointer, :pointer, :pointer ], :bool ],
         # EAPI void edje_object_size_min_restricted_calc(Evas_Object *obj, Evas_Coord *minw, Evas_Coord *minh, Evas_Coord restrictedw, Evas_Coord restrictedh);
-        [ :edje_object_size_min_restricted_calc, [ :pointer, :pointer, :pointer, :int, :int ], :void ],
+        [ :edje_object_size_min_restricted_calc, [ :evas_object, :pointer, :pointer, :int, :int ], :void ],
         # EAPI Eina_Bool edje_object_part_exists (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_exists, [ :pointer, :string ], :eina_bool ],
+        [ :edje_object_part_exists, [ :evas_object, :string ], :bool ],
         # EAPI const Evas_Object *edje_object_part_object_get (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_object_get, [ :pointer, :string ], :pointer ],
+        [ :edje_object_part_object_get, [ :evas_object, :string ], :evas_object ],
         # EAPI Eina_Bool edje_object_part_geometry_get (const Evas_Object *obj, const char *part, Evas_Coord *x, Evas_Coord *y, Evas_Coord *w, Evas_Coord *h);
-        [ :edje_object_part_geometry_get, [ :pointer, :string, :pointer, :pointer, :pointer, :pointer ], :eina_bool ],
+        [ :edje_object_part_geometry_get, [ :evas_object, :string, :pointer, :pointer, :pointer, :pointer ], :bool ],
         # EAPI void edje_object_item_provider_set (Evas_Object *obj, Edje_Item_Provider_Cb func, void *data);
-        [ :edje_object_item_provider_set, [ :pointer, :edje_item_provider_cb, :pointer ], :void ],
+        [ :edje_object_item_provider_set, [ :evas_object, :edje_item_provider_cb, :pointer ], :void ],
         # EAPI void edje_object_text_change_cb_set (Evas_Object *obj, Edje_Text_Change_Cb func, void *data);
-        [ :edje_object_text_change_cb_set, [ :pointer, :edje_text_change_cb, :pointer ], :void ],
+        [ :edje_object_text_change_cb_set, [ :evas_object, :edje_text_change_cb, :pointer ], :void ],
         # EAPI Eina_Bool edje_object_part_text_set (Evas_Object *obj, const char *part, const char *text);
-        [ :edje_object_part_text_set, [ :pointer, :string, :string ], :eina_bool ],
+        [ :edje_object_part_text_set, [ :evas_object, :string, :string ], :bool ],
         # EAPI const char *edje_object_part_text_get (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_get, [ :pointer, :string ], :string ],
+        [ :edje_object_part_text_get, [ :evas_object, :string ], :string ],
         # EAPI void edje_object_part_text_style_user_set(Evas_Object *obj, const char *part, const char *style);
-        [ :edje_object_part_text_style_user_set, [ :pointer, :string, :string ], :void ],
+        [ :edje_object_part_text_style_user_set, [ :evas_object, :string, :string ], :void ],
         # EAPI const char *edje_object_part_text_style_user_get(Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_style_user_get, [ :pointer, :string ], :string ],
+        [ :edje_object_part_text_style_user_get, [ :evas_object, :string ], :string ],
         # EAPI Eina_Bool edje_object_part_text_unescaped_set (Evas_Object *obj, const char *part, const char *text_to_escape);
-        [ :edje_object_part_text_unescaped_set, [ :pointer, :string, :string ], :eina_bool ],
+        [ :edje_object_part_text_unescaped_set, [ :evas_object, :string, :string ], :bool ],
         # EAPI char *edje_object_part_text_unescaped_get (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_unescaped_get, [ :pointer, :string ], :string ],
+        [ :edje_object_part_text_unescaped_get, [ :evas_object, :string ], :string ],
         # EAPI const char *edje_object_part_text_selection_get (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_selection_get, [ :pointer, :string ], :string ],
+        [ :edje_object_part_text_selection_get, [ :evas_object, :string ], :string ],
         # EAPI void edje_object_part_text_select_none (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_select_none, [ :pointer, :string ], :void ],
+        [ :edje_object_part_text_select_none, [ :evas_object, :string ], :void ],
         # EAPI void edje_object_part_text_select_all (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_select_all, [ :pointer, :string ], :void ],
+        [ :edje_object_part_text_select_all, [ :evas_object, :string ], :void ],
         # EAPI void edje_object_part_text_insert (Evas_Object *obj, const char *part, const char *text);
-        [ :edje_object_part_text_insert, [ :pointer, :string, :string ], :void ],
+        [ :edje_object_part_text_insert, [ :evas_object, :string, :string ], :void ],
         # EAPI void edje_object_part_text_append(Evas_Object *obj, const char *part, const char *text);
-        [ :edje_object_part_text_append, [ :pointer, :string, :string ], :void ],
+        [ :edje_object_part_text_append, [ :evas_object, :string, :string ], :void ],
         # EAPI const Eina_List *edje_object_part_text_anchor_list_get (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_anchor_list_get, [ :pointer, :string ], :pointer ],
+        [ :edje_object_part_text_anchor_list_get, [ :evas_object, :string ], :eina_list ],
         # EAPI const Eina_List *edje_object_part_text_anchor_geometry_get (const Evas_Object *obj, const char *part, const char *anchor);
-        [ :edje_object_part_text_anchor_geometry_get, [ :pointer, :string, :string ], :pointer ],
+        [ :edje_object_part_text_anchor_geometry_get, [ :evas_object, :string, :string ], :eina_list ],
         # EAPI const Eina_List *edje_object_part_text_item_list_get (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_item_list_get, [ :pointer, :string ], :pointer ],
+        [ :edje_object_part_text_item_list_get, [ :evas_object, :string ], :eina_list ],
         # EAPI Eina_Bool edje_object_part_text_item_geometry_get (const Evas_Object *obj, const char *part, const char *item, Evas_Coord *cx, Evas_Coord *cy, Evas_Coord *cw, Evas_Coord *ch);
-        [ :edje_object_part_text_item_geometry_get, [ :pointer, :string, :string, :pointer, :pointer, :pointer, :pointer ], :eina_bool ],
+        [ :edje_object_part_text_item_geometry_get, [ :evas_object, :string, :string, :pointer, :pointer, :pointer, :pointer ], :bool ],
         # EAPI void edje_object_part_text_cursor_geometry_get (const Evas_Object *obj, const char *part, Evas_Coord *x, Evas_Coord *y, Evas_Coord *w, Evas_Coord *h);
-        [ :edje_object_part_text_cursor_geometry_get, [ :pointer, :string, :pointer, :pointer, :pointer, :pointer ], :void ],
+        [ :edje_object_part_text_cursor_geometry_get, [ :evas_object, :string, :pointer, :pointer, :pointer, :pointer ], :void ],
         # EAPI void edje_object_part_text_select_allow_set (const Evas_Object *obj, const char *part, Eina_Bool allow);
-        [ :edje_object_part_text_select_allow_set, [ :pointer, :string, :eina_bool ], :void ],
+        [ :edje_object_part_text_select_allow_set, [ :evas_object, :string, :bool ], :void ],
         # EAPI void edje_object_part_text_select_abort (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_select_abort, [ :pointer, :string ], :void ],
+        [ :edje_object_part_text_select_abort, [ :evas_object, :string ], :void ],
         # EAPI void edje_object_part_text_select_begin (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_select_begin, [ :pointer, :string ], :void ],
+        [ :edje_object_part_text_select_begin, [ :evas_object, :string ], :void ],
         # EAPI void edje_object_part_text_select_extend (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_select_extend, [ :pointer, :string ], :void ],
+        [ :edje_object_part_text_select_extend, [ :evas_object, :string ], :void ],
         # EAPI Eina_Bool edje_object_part_text_cursor_next (Evas_Object *obj, const char *part, Edje_Cursor cur);
-        [ :edje_object_part_text_cursor_next, [ :pointer, :string, :edje_cursor ], :eina_bool ],
+        [ :edje_object_part_text_cursor_next, [ :evas_object, :string, :edje_cursor ], :bool ],
         # EAPI Eina_Bool edje_object_part_text_cursor_prev (Evas_Object *obj, const char *part, Edje_Cursor cur);
-        [ :edje_object_part_text_cursor_prev, [ :pointer, :string, :edje_cursor ], :eina_bool ],
+        [ :edje_object_part_text_cursor_prev, [ :evas_object, :string, :edje_cursor ], :bool ],
         # EAPI Eina_Bool edje_object_part_text_cursor_up (Evas_Object *obj, const char *part, Edje_Cursor cur);
-        [ :edje_object_part_text_cursor_up, [ :pointer, :string, :edje_cursor ], :eina_bool ],
+        [ :edje_object_part_text_cursor_up, [ :evas_object, :string, :edje_cursor ], :bool ],
         # EAPI Eina_Bool edje_object_part_text_cursor_down (Evas_Object *obj, const char *part, Edje_Cursor cur);
-        [ :edje_object_part_text_cursor_down, [ :pointer, :string, :edje_cursor ], :eina_bool ],
+        [ :edje_object_part_text_cursor_down, [ :evas_object, :string, :edje_cursor ], :bool ],
         # EAPI void edje_object_part_text_cursor_begin_set (Evas_Object *obj, const char *part, Edje_Cursor cur);
-        [ :edje_object_part_text_cursor_begin_set, [ :pointer, :string, :edje_cursor ], :void ],
+        [ :edje_object_part_text_cursor_begin_set, [ :evas_object, :string, :edje_cursor ], :void ],
         # EAPI void edje_object_part_text_cursor_end_set (Evas_Object *obj, const char *part, Edje_Cursor cur);
-        [ :edje_object_part_text_cursor_end_set, [ :pointer, :string, :edje_cursor ], :void ],
+        [ :edje_object_part_text_cursor_end_set, [ :evas_object, :string, :edje_cursor ], :void ],
         # EAPI void edje_object_part_text_cursor_copy (Evas_Object *obj, const char *part, Edje_Cursor src, Edje_Cursor dst);
-        [ :edje_object_part_text_cursor_copy, [ :pointer, :string, :edje_cursor, :edje_cursor ], :void ],
+        [ :edje_object_part_text_cursor_copy, [ :evas_object, :string, :edje_cursor, :edje_cursor ], :void ],
         # EAPI void edje_object_part_text_cursor_line_begin_set (Evas_Object *obj, const char *part, Edje_Cursor cur);
-        [ :edje_object_part_text_cursor_line_begin_set, [ :pointer, :string, :edje_cursor ], :void ],
+        [ :edje_object_part_text_cursor_line_begin_set, [ :evas_object, :string, :edje_cursor ], :void ],
         # EAPI void edje_object_part_text_cursor_line_end_set (Evas_Object *obj, const char *part, Edje_Cursor cur);
-        [ :edje_object_part_text_cursor_line_end_set, [ :pointer, :string, :edje_cursor ], :void ],
+        [ :edje_object_part_text_cursor_line_end_set, [ :evas_object, :string, :edje_cursor ], :void ],
         # EAPI Eina_Bool edje_object_part_text_cursor_coord_set (Evas_Object *obj, const char *part, Edje_Cursor cur, Evas_Coord x, Evas_Coord y);
-        [ :edje_object_part_text_cursor_coord_set, [ :pointer, :string, :edje_cursor, :int, :int ], :eina_bool ],
+        [ :edje_object_part_text_cursor_coord_set, [ :evas_object, :string, :edje_cursor, :int, :int ], :bool ],
         # EAPI Eina_Bool edje_object_part_text_cursor_is_format_get (const Evas_Object *obj, const char *part, Edje_Cursor cur);
-        [ :edje_object_part_text_cursor_is_format_get, [ :pointer, :string, :edje_cursor ], :eina_bool ],
+        [ :edje_object_part_text_cursor_is_format_get, [ :evas_object, :string, :edje_cursor ], :bool ],
         # EAPI Eina_Bool edje_object_part_text_cursor_is_visible_format_get(const Evas_Object *obj, const char *part, Edje_Cursor cur);
-        [ :edje_object_part_text_cursor_is_visible_format_get, [ :pointer, :string, :edje_cursor ], :eina_bool ],
+        [ :edje_object_part_text_cursor_is_visible_format_get, [ :evas_object, :string, :edje_cursor ], :bool ],
         # EAPI char *edje_object_part_text_cursor_content_get (const Evas_Object *obj, const char *part, Edje_Cursor cur);
-        [ :edje_object_part_text_cursor_content_get, [ :pointer, :string, :edje_cursor ], :string ],
+        [ :edje_object_part_text_cursor_content_get, [ :evas_object, :string, :edje_cursor ], :string ],
         # EAPI void edje_object_part_text_cursor_pos_set (Evas_Object *obj, const char *part, Edje_Cursor cur, int pos);
-        [ :edje_object_part_text_cursor_pos_set, [ :pointer, :string, :edje_cursor, :int ], :void ],
+        [ :edje_object_part_text_cursor_pos_set, [ :evas_object, :string, :edje_cursor, :int ], :void ],
         # EAPI int edje_object_part_text_cursor_pos_get (const Evas_Object *obj, const char *part, Edje_Cursor cur);
-        [ :edje_object_part_text_cursor_pos_get, [ :pointer, :string, :edje_cursor ], :int ],
+        [ :edje_object_part_text_cursor_pos_get, [ :evas_object, :string, :edje_cursor ], :int ],
         # EAPI void edje_object_part_text_imf_context_reset (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_imf_context_reset, [ :pointer, :string ], :void ],
+        [ :edje_object_part_text_imf_context_reset, [ :evas_object, :string ], :void ],
         # EAPI void *edje_object_part_text_imf_context_get (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_imf_context_get, [ :pointer, :string ], :pointer ],
+        [ :edje_object_part_text_imf_context_get, [ :evas_object, :string ], :pointer ],
         # EAPI void edje_object_part_text_input_panel_layout_set (Evas_Object *obj, const char *part, Edje_Input_Panel_Layout layout);
-        [ :edje_object_part_text_input_panel_layout_set, [ :pointer, :string, :edje_input_panel_layout ], :void ],
+        [ :edje_object_part_text_input_panel_layout_set, [ :evas_object, :string, :edje_input_panel_layout ], :void ],
         # EAPI Edje_Input_Panel_Layout edje_object_part_text_input_panel_layout_get (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_input_panel_layout_get, [ :pointer, :string ], :edje_input_panel_layout ],
+        [ :edje_object_part_text_input_panel_layout_get, [ :evas_object, :string ], :edje_input_panel_layout ],
         # EAPI void edje_object_part_text_autocapital_type_set (Evas_Object *obj, const char *part, Edje_Text_Autocapital_Type autocapital_type);
-        [ :edje_object_part_text_autocapital_type_set, [ :pointer, :string, :edje_text_autocapital_type ], :void ],
+        [ :edje_object_part_text_autocapital_type_set, [ :evas_object, :string, :edje_text_autocapital_type ], :void ],
         # EAPI Edje_Text_Autocapital_Type edje_object_part_text_autocapital_type_get (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_autocapital_type_get, [ :pointer, :string ], :edje_text_autocapital_type ],
+        [ :edje_object_part_text_autocapital_type_get, [ :evas_object, :string ], :edje_text_autocapital_type ],
         # EAPI void edje_object_part_text_prediction_allow_set (Evas_Object *obj, const char *part, Eina_Bool prediction);
-        [ :edje_object_part_text_prediction_allow_set, [ :pointer, :string, :eina_bool ], :void ],
+        [ :edje_object_part_text_prediction_allow_set, [ :evas_object, :string, :bool ], :void ],
         # EAPI Eina_Bool edje_object_part_text_prediction_allow_get (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_prediction_allow_get, [ :pointer, :string ], :eina_bool ],
+        [ :edje_object_part_text_prediction_allow_get, [ :evas_object, :string ], :bool ],
         # EAPI void edje_object_part_text_input_panel_enabled_set (Evas_Object *obj, const char *part, Eina_Bool enabled);
-        [ :edje_object_part_text_input_panel_enabled_set, [ :pointer, :string, :eina_bool ], :void ],
+        [ :edje_object_part_text_input_panel_enabled_set, [ :evas_object, :string, :bool ], :void ],
         # EAPI Eina_Bool edje_object_part_text_input_panel_enabled_get (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_input_panel_enabled_get, [ :pointer, :string ], :eina_bool ],
+        [ :edje_object_part_text_input_panel_enabled_get, [ :evas_object, :string ], :bool ],
         # EAPI void edje_object_part_text_input_panel_show(const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_input_panel_show, [ :pointer, :string ], :void ],
+        [ :edje_object_part_text_input_panel_show, [ :evas_object, :string ], :void ],
         # EAPI void edje_object_part_text_input_panel_hide(const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_input_panel_hide, [ :pointer, :string ], :void ],
+        [ :edje_object_part_text_input_panel_hide, [ :evas_object, :string ], :void ],
         # EAPI void edje_object_part_text_input_panel_language_set(Evas_Object *obj, const char *part, Edje_Input_Panel_Lang lang);
-        [ :edje_object_part_text_input_panel_language_set, [ :pointer, :string, :edje_input_panel_lang ], :void ],
+        [ :edje_object_part_text_input_panel_language_set, [ :evas_object, :string, :edje_input_panel_lang ], :void ],
         # EAPI Edje_Input_Panel_Lang edje_object_part_text_input_panel_language_get(const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_input_panel_language_get, [ :pointer, :string ], :edje_input_panel_lang ],
+        [ :edje_object_part_text_input_panel_language_get, [ :evas_object, :string ], :edje_input_panel_lang ],
         # EAPI void edje_object_part_text_input_panel_imdata_set(Evas_Object *obj, const char *part, const void *data, int len);
-        [ :edje_object_part_text_input_panel_imdata_set, [ :pointer, :string, :pointer, :int ], :void ],
+        [ :edje_object_part_text_input_panel_imdata_set, [ :evas_object, :string, :pointer, :int ], :void ],
         # EAPI void edje_object_part_text_input_panel_imdata_get(const Evas_Object *obj, const char *part, void *data, int *len);
-        [ :edje_object_part_text_input_panel_imdata_get, [ :pointer, :string, :pointer, :pointer ], :void ],
+        [ :edje_object_part_text_input_panel_imdata_get, [ :evas_object, :string, :pointer, :pointer ], :void ],
         # EAPI void edje_object_part_text_input_panel_return_key_type_set(Evas_Object *obj, const char *part, Edje_Input_Panel_Return_Key_Type return_key_type);
-        [ :edje_object_part_text_input_panel_return_key_type_set, [ :pointer, :string, :edje_input_panel_return_key_type ], :void ],
+        [ :edje_object_part_text_input_panel_return_key_type_set, [ :evas_object, :string, :edje_input_panel_return_key_type ], :void ],
         # EAPI Edje_Input_Panel_Return_Key_Type edje_object_part_text_input_panel_return_key_type_get(const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_input_panel_return_key_type_get, [ :pointer, :string ], :edje_input_panel_return_key_type ],
+        [ :edje_object_part_text_input_panel_return_key_type_get, [ :evas_object, :string ], :edje_input_panel_return_key_type ],
         # EAPI void edje_object_part_text_input_panel_return_key_disabled_set(Evas_Object *obj, const char *part, Eina_Bool disabled);
-        [ :edje_object_part_text_input_panel_return_key_disabled_set, [ :pointer, :string, :eina_bool ], :void ],
+        [ :edje_object_part_text_input_panel_return_key_disabled_set, [ :evas_object, :string, :bool ], :void ],
         # EAPI Eina_Bool edje_object_part_text_input_panel_return_key_disabled_get(const Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_input_panel_return_key_disabled_get, [ :pointer, :string ], :eina_bool ],
+        [ :edje_object_part_text_input_panel_return_key_disabled_get, [ :evas_object, :string ], :bool ],
         # EAPI void edje_object_text_insert_filter_callback_add (Evas_Object *obj, const char *part, Edje_Text_Filter_Cb func, void *data);
-        [ :edje_object_text_insert_filter_callback_add, [ :pointer, :string, :edje_text_filter_cb, :pointer ], :void ],
+        [ :edje_object_text_insert_filter_callback_add, [ :evas_object, :string, :edje_text_filter_cb, :pointer ], :void ],
         # EAPI void *edje_object_text_insert_filter_callback_del (Evas_Object *obj, const char *part, Edje_Text_Filter_Cb func);
-        [ :edje_object_text_insert_filter_callback_del, [ :pointer, :string, :edje_text_filter_cb ], :pointer ],
+        [ :edje_object_text_insert_filter_callback_del, [ :evas_object, :string, :edje_text_filter_cb ], :pointer ],
         # EAPI void *edje_object_text_insert_filter_callback_del_full (Evas_Object *obj, const char *part, Edje_Text_Filter_Cb func, void *data);
-        [ :edje_object_text_insert_filter_callback_del_full, [ :pointer, :string, :edje_text_filter_cb, :pointer ], :pointer ],
+        [ :edje_object_text_insert_filter_callback_del_full, [ :evas_object, :string, :edje_text_filter_cb, :pointer ], :pointer ],
         # EAPI void edje_object_text_markup_filter_callback_add(Evas_Object *obj, const char *part, Edje_Markup_Filter_Cb func, void *data);
-        [ :edje_object_text_markup_filter_callback_add, [ :pointer, :string, :edje_markup_filter_cb, :pointer ], :void ],
+        [ :edje_object_text_markup_filter_callback_add, [ :evas_object, :string, :edje_markup_filter_cb, :pointer ], :void ],
         # EAPI void *edje_object_text_markup_filter_callback_del(Evas_Object *obj, const char *part, Edje_Markup_Filter_Cb func);
-        [ :edje_object_text_markup_filter_callback_del, [ :pointer, :string, :edje_markup_filter_cb ], :pointer ],
+        [ :edje_object_text_markup_filter_callback_del, [ :evas_object, :string, :edje_markup_filter_cb ], :pointer ],
         # EAPI void *edje_object_text_markup_filter_callback_del_full(Evas_Object *obj, const char *part, Edje_Markup_Filter_Cb func, void *data);
-        [ :edje_object_text_markup_filter_callback_del_full, [ :pointer, :string, :edje_markup_filter_cb, :pointer ], :pointer ],
+        [ :edje_object_text_markup_filter_callback_del_full, [ :evas_object, :string, :edje_markup_filter_cb, :pointer ], :pointer ],
         # EAPI Eina_Bool edje_object_part_swallow (Evas_Object *obj, const char *part, Evas_Object *obj_swallow);
-        [ :edje_object_part_swallow, [ :pointer, :string, :pointer ], :eina_bool ],
+        [ :edje_object_part_swallow, [ :evas_object, :string, :evas_object ], :bool ],
         # EAPI void edje_object_part_unswallow (Evas_Object *obj, Evas_Object *obj_swallow);
-        [ :edje_object_part_unswallow, [ :pointer, :pointer ], :void ],
+        [ :edje_object_part_unswallow, [ :evas_object, :evas_object ], :void ],
         # EAPI Evas_Object *edje_object_part_swallow_get (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_swallow_get, [ :pointer, :string ], :pointer ],
+        [ :edje_object_part_swallow_get, [ :evas_object, :string ], :evas_object ],
         # EAPI const char *edje_object_part_state_get (const Evas_Object *obj, const char *part, double *val_ret);
-        [ :edje_object_part_state_get, [ :pointer, :string, :pointer ], :string ],
+        [ :edje_object_part_state_get, [ :evas_object, :string, :pointer ], :string ],
         # EAPI Edje_Drag_Dir edje_object_part_drag_dir_get (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_drag_dir_get, [ :pointer, :string ], :edje_drag_dir ],
+        [ :edje_object_part_drag_dir_get, [ :evas_object, :string ], :edje_drag_dir ],
         # EAPI Eina_Bool edje_object_part_drag_value_set (Evas_Object *obj, const char *part, double dx, double dy);
-        [ :edje_object_part_drag_value_set, [ :pointer, :string, :double, :double ], :eina_bool ],
+        [ :edje_object_part_drag_value_set, [ :evas_object, :string, :double, :double ], :bool ],
         # EAPI Eina_Bool edje_object_part_drag_value_get (const Evas_Object *obj, const char *part, double *dx, double *dy);
-        [ :edje_object_part_drag_value_get, [ :pointer, :string, :pointer, :pointer ], :eina_bool ],
+        [ :edje_object_part_drag_value_get, [ :evas_object, :string, :pointer, :pointer ], :bool ],
         # EAPI Eina_Bool edje_object_part_drag_size_set (Evas_Object *obj, const char *part, double dw, double dh);
-        [ :edje_object_part_drag_size_set, [ :pointer, :string, :double, :double ], :eina_bool ],
+        [ :edje_object_part_drag_size_set, [ :evas_object, :string, :double, :double ], :bool ],
         # EAPI Eina_Bool edje_object_part_drag_size_get (const Evas_Object *obj, const char *part, double *dw, double *dh);
-        [ :edje_object_part_drag_size_get, [ :pointer, :string, :pointer, :pointer ], :eina_bool ],
+        [ :edje_object_part_drag_size_get, [ :evas_object, :string, :pointer, :pointer ], :bool ],
         # EAPI Eina_Bool edje_object_part_drag_step_set (Evas_Object *obj, const char *part, double dx, double dy);
-        [ :edje_object_part_drag_step_set, [ :pointer, :string, :double, :double ], :eina_bool ],
+        [ :edje_object_part_drag_step_set, [ :evas_object, :string, :double, :double ], :bool ],
         # EAPI Eina_Bool edje_object_part_drag_step_get (const Evas_Object *obj, const char *part, double *dx, double *dy);
-        [ :edje_object_part_drag_step_get, [ :pointer, :string, :pointer, :pointer ], :eina_bool ],
+        [ :edje_object_part_drag_step_get, [ :evas_object, :string, :pointer, :pointer ], :bool ],
         # EAPI Eina_Bool edje_object_part_drag_page_set (Evas_Object *obj, const char *part, double dx, double dy);
-        [ :edje_object_part_drag_page_set, [ :pointer, :string, :double, :double ], :eina_bool ],
+        [ :edje_object_part_drag_page_set, [ :evas_object, :string, :double, :double ], :bool ],
         # EAPI Eina_Bool edje_object_part_drag_page_get (const Evas_Object *obj, const char *part, double *dx, double *dy);
-        [ :edje_object_part_drag_page_get, [ :pointer, :string, :pointer, :pointer ], :eina_bool ],
+        [ :edje_object_part_drag_page_get, [ :evas_object, :string, :pointer, :pointer ], :bool ],
         # EAPI Eina_Bool edje_object_part_drag_step (Evas_Object *obj, const char *part, double dx, double dy);
-        [ :edje_object_part_drag_step, [ :pointer, :string, :double, :double ], :eina_bool ],
+        [ :edje_object_part_drag_step, [ :evas_object, :string, :double, :double ], :bool ],
         # EAPI Eina_Bool edje_object_part_drag_page (Evas_Object *obj, const char *part, double dx, double dy);
-        [ :edje_object_part_drag_page, [ :pointer, :string, :double, :double ], :eina_bool ],
+        [ :edje_object_part_drag_page, [ :evas_object, :string, :double, :double ], :bool ],
         # EAPI Evas_Object *edje_object_part_external_object_get (const Evas_Object *obj, const char *part);
-        [ :edje_object_part_external_object_get, [ :pointer, :string ], :pointer ],
+        [ :edje_object_part_external_object_get, [ :evas_object, :string ], :evas_object ],
         # EAPI Eina_Bool edje_object_part_external_param_set (Evas_Object *obj, const char *part, const Edje_External_Param *param);
-        [ :edje_object_part_external_param_set, [ :pointer, :string, :pointer ], :eina_bool ],
+        [ :edje_object_part_external_param_set, [ :evas_object, :string, :edje_external_param ], :bool ],
         # EAPI Eina_Bool edje_object_part_external_param_get (const Evas_Object *obj, const char *part, Edje_External_Param *param);
-        [ :edje_object_part_external_param_get, [ :pointer, :string, :pointer ], :eina_bool ],
+        [ :edje_object_part_external_param_get, [ :evas_object, :string, :edje_external_param ], :bool ],
         # EAPI Evas_Object *edje_object_part_external_content_get (const Evas_Object *obj, const char *part, const char *content);
-        [ :edje_object_part_external_content_get, [ :pointer, :string, :string ], :pointer ],
+        [ :edje_object_part_external_content_get, [ :evas_object, :string, :string ], :evas_object ],
         # EAPI Edje_External_Param_Type edje_object_part_external_param_type_get (const Evas_Object *obj, const char *part, const char *param);
-        [ :edje_object_part_external_param_type_get, [ :pointer, :string, :string ], :edje_external_param_type ],
+        [ :edje_object_part_external_param_type_get, [ :evas_object, :string, :string ], :edje_external_param_type ],
         # EAPI Eina_Bool edje_object_part_box_append (Evas_Object *obj, const char *part, Evas_Object *child);
-        [ :edje_object_part_box_append, [ :pointer, :string, :pointer ], :eina_bool ],
+        [ :edje_object_part_box_append, [ :evas_object, :string, :evas_object ], :bool ],
         # EAPI Eina_Bool edje_object_part_box_prepend (Evas_Object *obj, const char *part, Evas_Object *child);
-        [ :edje_object_part_box_prepend, [ :pointer, :string, :pointer ], :eina_bool ],
+        [ :edje_object_part_box_prepend, [ :evas_object, :string, :evas_object ], :bool ],
         # EAPI Eina_Bool edje_object_part_box_insert_before (Evas_Object *obj, const char *part, Evas_Object *child, const Evas_Object *reference);
-        [ :edje_object_part_box_insert_before, [ :pointer, :string, :pointer, :pointer ], :eina_bool ],
+        [ :edje_object_part_box_insert_before, [ :evas_object, :string, :evas_object, :evas_object ], :bool ],
         # EAPI Eina_Bool edje_object_part_box_insert_at (Evas_Object *obj, const char *part, Evas_Object *child, unsigned int pos);
-        [ :edje_object_part_box_insert_at, [ :pointer, :string, :pointer, :uint ], :eina_bool ],
+        [ :edje_object_part_box_insert_at, [ :evas_object, :string, :evas_object, :uint ], :bool ],
         # EAPI Evas_Object *edje_object_part_box_remove (Evas_Object *obj, const char *part, Evas_Object *child);
-        [ :edje_object_part_box_remove, [ :pointer, :string, :pointer ], :pointer ],
+        [ :edje_object_part_box_remove, [ :evas_object, :string, :evas_object ], :evas_object ],
         # EAPI Evas_Object *edje_object_part_box_remove_at (Evas_Object *obj, const char *part, unsigned int pos);
-        [ :edje_object_part_box_remove_at, [ :pointer, :string, :uint ], :pointer ],
+        [ :edje_object_part_box_remove_at, [ :evas_object, :string, :uint ], :evas_object ],
         # EAPI Eina_Bool edje_object_part_box_remove_all (Evas_Object *obj, const char *part, Eina_Bool clear);
-        [ :edje_object_part_box_remove_all, [ :pointer, :string, :eina_bool ], :eina_bool ],
+        [ :edje_object_part_box_remove_all, [ :evas_object, :string, :bool ], :bool ],
         # EAPI Evas_Object *edje_object_part_table_child_get (Evas_Object *obj, const char *part, unsigned int col, unsigned int row);
-        [ :edje_object_part_table_child_get, [ :pointer, :string, :uint, :uint ], :pointer ],
+        [ :edje_object_part_table_child_get, [ :evas_object, :string, :uint, :uint ], :evas_object ],
         # EAPI Eina_Bool edje_object_part_table_pack (Evas_Object *obj, const char *part, Evas_Object *child_obj, unsigned short col, unsigned short row, unsigned short colspan, unsigned short rowspan);
-        [ :edje_object_part_table_pack, [ :pointer, :string, :pointer, :ushort, :ushort, :ushort, :ushort ], :eina_bool ],
+        [ :edje_object_part_table_pack, [ :evas_object, :string, :evas_object, :ushort, :ushort, :ushort, :ushort ], :bool ],
         # EAPI Eina_Bool edje_object_part_table_unpack (Evas_Object *obj, const char *part, Evas_Object *child_obj);
-        [ :edje_object_part_table_unpack, [ :pointer, :string, :pointer ], :eina_bool ],
+        [ :edje_object_part_table_unpack, [ :evas_object, :string, :evas_object ], :bool ],
         # EAPI Eina_Bool edje_object_part_table_col_row_size_get (const Evas_Object *obj, const char *part, int *cols, int *rows);
-        [ :edje_object_part_table_col_row_size_get, [ :pointer, :string, :pointer, :pointer ], :eina_bool ],
+        [ :edje_object_part_table_col_row_size_get, [ :evas_object, :string, :pointer, :pointer ], :bool ],
         # EAPI Eina_Bool edje_object_part_table_clear (Evas_Object *obj, const char *part, Eina_Bool clear);
-        [ :edje_object_part_table_clear, [ :pointer, :string, :eina_bool ], :eina_bool ],
+        [ :edje_object_part_table_clear, [ :evas_object, :string, :bool ], :bool ],
         # EAPI void edje_object_message_send (Evas_Object *obj, Edje_Message_Type type, int id, void *msg);
-        [ :edje_object_message_send, [ :pointer, :edje_message_type, :int, :pointer ], :void ],
+        [ :edje_object_message_send, [ :evas_object, :edje_message_type, :int, :pointer ], :void ],
         # EAPI void edje_object_message_handler_set (Evas_Object *obj, Edje_Message_Handler_Cb func, void *data);
-        [ :edje_object_message_handler_set, [ :pointer, :edje_message_handler_cb, :pointer ], :void ],
+        [ :edje_object_message_handler_set, [ :evas_object, :edje_message_handler_cb, :pointer ], :void ],
         # EAPI void edje_object_message_signal_process (Evas_Object *obj);
-        [ :edje_object_message_signal_process, [ :pointer ], :void ],
+        [ :edje_object_message_signal_process, [ :evas_object ], :void ],
         # EAPI void edje_message_signal_process (void);
         [ :edje_message_signal_process, [  ], :void ],
         # EAPI Eina_Bool edje_external_type_register (const char *type_name, const Edje_External_Type *type_info);
-        [ :edje_external_type_register, [ :string, :pointer ], :eina_bool ],
+        [ :edje_external_type_register, [ :string, :edje_external_type ], :bool ],
         # EAPI Eina_Bool edje_external_type_unregister (const char *type_name);
-        [ :edje_external_type_unregister, [ :string ], :eina_bool ],
+        [ :edje_external_type_unregister, [ :string ], :bool ],
         # EAPI void edje_external_type_array_register (const Edje_External_Type_Info *array);
-        [ :edje_external_type_array_register, [ :pointer ], :void ],
+        [ :edje_external_type_array_register, [ :edje_external_type_info ], :void ],
         # EAPI void edje_external_type_array_unregister (const Edje_External_Type_Info *array);
-        [ :edje_external_type_array_unregister, [ :pointer ], :void ],
+        [ :edje_external_type_array_unregister, [ :edje_external_type_info ], :void ],
         # EAPI unsigned int edje_external_type_abi_version_get (void);
         [ :edje_external_type_abi_version_get, [  ], :uint ],
         # EAPI Eina_Iterator *edje_external_iterator_get (void);
         [ :edje_external_iterator_get, [  ], :pointer ],
         # EAPI Edje_External_Param *edje_external_param_find (const Eina_List *params, const char *key);
-        [ :edje_external_param_find, [ :pointer, :string ], :pointer ],
+        [ :edje_external_param_find, [ :eina_list, :string ], :edje_external_param ],
         # EAPI Eina_Bool edje_external_param_int_get (const Eina_List *params, const char *key, int *ret);
-        [ :edje_external_param_int_get, [ :pointer, :string, :pointer ], :eina_bool ],
+        [ :edje_external_param_int_get, [ :eina_list, :string, :pointer ], :bool ],
         # EAPI Eina_Bool edje_external_param_double_get (const Eina_List *params, const char *key, double *ret);
-        [ :edje_external_param_double_get, [ :pointer, :string, :pointer ], :eina_bool ],
+        [ :edje_external_param_double_get, [ :eina_list, :string, :pointer ], :bool ],
         # EAPI Eina_Bool edje_external_param_string_get (const Eina_List *params, const char *key, const char **ret);
-        [ :edje_external_param_string_get, [ :pointer, :string, :pointer ], :eina_bool ],
+        [ :edje_external_param_string_get, [ :eina_list, :string, :pointer ], :bool ],
         # EAPI Eina_Bool edje_external_param_bool_get (const Eina_List *params, const char *key, Eina_Bool *ret);
-        [ :edje_external_param_bool_get, [ :pointer, :string, :pointer ], :eina_bool ],
+        [ :edje_external_param_bool_get, [ :eina_list, :string, :pointer ], :bool ],
         # EAPI Eina_Bool edje_external_param_choice_get (const Eina_List *params, const char *key, const char **ret);
-        [ :edje_external_param_choice_get, [ :pointer, :string, :pointer ], :eina_bool ],
+        [ :edje_external_param_choice_get, [ :eina_list, :string, :pointer ], :bool ],
         # EAPI const Edje_External_Param_Info *edje_external_param_info_get (const char *type_name);
-        [ :edje_external_param_info_get, [ :string ], :pointer ],
+        [ :edje_external_param_info_get, [ :string ], :edje_external_param_info ],
         # EAPI const Edje_External_Type *edje_external_type_get (const char *type_name);
-        [ :edje_external_type_get, [ :string ], :pointer ],
+        [ :edje_external_type_get, [ :string ], :edje_external_type ],
         # EAPI Eina_Bool edje_module_load (const char *module);
-        [ :edje_module_load, [ :string ], :eina_bool ],
+        [ :edje_module_load, [ :string ], :bool ],
         # EAPI const Eina_List *edje_available_modules_get (void);
-        [ :edje_available_modules_get, [  ], :pointer ],
+        [ :edje_available_modules_get, [  ], :eina_list ],
         # EAPI Edje_Perspective *edje_perspective_new (Evas *e);
-        [ :edje_perspective_new, [ :pointer ], :pointer ],
+        [ :edje_perspective_new, [ :evas ], :edje_perspective ],
         # EAPI void edje_perspective_free (Edje_Perspective *ps);
-        [ :edje_perspective_free, [ :pointer ], :void ],
+        [ :edje_perspective_free, [ :edje_perspective ], :void ],
         # EAPI void edje_perspective_set (Edje_Perspective *ps, Evas_Coord px, Evas_Coord py, Evas_Coord z0, Evas_Coord foc);
-        [ :edje_perspective_set, [ :pointer, :int, :int, :int, :int ], :void ],
+        [ :edje_perspective_set, [ :edje_perspective, :int, :int, :int, :int ], :void ],
         # EAPI void edje_perspective_global_set (Edje_Perspective *ps, Eina_Bool global);
-        [ :edje_perspective_global_set, [ :pointer, :eina_bool ], :void ],
+        [ :edje_perspective_global_set, [ :edje_perspective, :bool ], :void ],
         # EAPI Eina_Bool edje_perspective_global_get (const Edje_Perspective *ps);
-        [ :edje_perspective_global_get, [ :pointer ], :eina_bool ],
+        [ :edje_perspective_global_get, [ :edje_perspective ], :bool ],
         # EAPI const Edje_Perspective *edje_evas_global_perspective_get(const Evas *e);
-        [ :edje_evas_global_perspective_get, [ :pointer ], :pointer ],
+        [ :edje_evas_global_perspective_get, [ :evas ], :edje_perspective ],
         # EAPI void edje_object_perspective_set (Evas_Object *obj, Edje_Perspective *ps);
-        [ :edje_object_perspective_set, [ :pointer, :pointer ], :void ],
+        [ :edje_object_perspective_set, [ :evas_object, :edje_perspective ], :void ],
         # EAPI const Edje_Perspective *edje_object_perspective_get (const Evas_Object *obj);
-        [ :edje_object_perspective_get, [ :pointer ], :pointer ],
+        [ :edje_object_perspective_get, [ :evas_object ], :edje_perspective ],
         ]
         #
         attach_fcts fcts
