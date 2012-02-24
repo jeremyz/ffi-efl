@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 #
 require 'efl/native'
+require 'efl/native/eina_list'
 #
 module Efl
     #
@@ -51,17 +52,17 @@ module Efl
         # FUNCTIONS
         fcts = [
         # EAPI void ecore_getopt_help(FILE *fp, const Ecore_Getopt *info);
-        [ :ecore_getopt_help, [ :pointer, :pointer ], :void ],
+        [ :ecore_getopt_help, [ :pointer, :ecore_getopt ], :void ],
         # EAPI Eina_Bool ecore_getopt_parser_has_duplicates(const Ecore_Getopt *parser);
-        [ :ecore_getopt_parser_has_duplicates, [ :pointer ], :eina_bool ],
+        [ :ecore_getopt_parser_has_duplicates, [ :ecore_getopt ], :bool ],
         # EAPI int ecore_getopt_parse(const Ecore_Getopt *parser, Ecore_Getopt_Value *values, int argc, char **argv);
-        [ :ecore_getopt_parse, [ :pointer, :pointer, :int, :pointer ], :int ],
+        [ :ecore_getopt_parse, [ :ecore_getopt, :ecore_getopt_value, :int, :pointer ], :int ],
         # EAPI Eina_List *ecore_getopt_list_free(Eina_List *list);
-        [ :ecore_getopt_list_free, [ :pointer ], :pointer ],
+        [ :ecore_getopt_list_free, [ :eina_list ], :eina_list ],
         # EAPI Eina_Bool ecore_getopt_callback_geometry_parse(const Ecore_Getopt *parser, const Ecore_Getopt_Desc *desc, const char *str, void *data, Ecore_Getopt_Value *storage);
-        [ :ecore_getopt_callback_geometry_parse, [ :pointer, :pointer, :string, :pointer, :pointer ], :eina_bool ],
+        [ :ecore_getopt_callback_geometry_parse, [ :ecore_getopt, :ecore_getopt_desc, :string, :pointer, :ecore_getopt_value ], :bool ],
         # EAPI Eina_Bool ecore_getopt_callback_size_parse(const Ecore_Getopt *parser, const Ecore_Getopt_Desc *desc, const char *str, void *data, Ecore_Getopt_Value *storage);
-        [ :ecore_getopt_callback_size_parse, [ :pointer, :pointer, :string, :pointer, :pointer ], :eina_bool ],
+        [ :ecore_getopt_callback_size_parse, [ :ecore_getopt, :ecore_getopt_desc, :string, :pointer, :ecore_getopt_value ], :bool ],
         ]
         #
         attach_fcts fcts
