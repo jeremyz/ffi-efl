@@ -360,6 +360,8 @@ module Efl
         [ :edje_object_part_text_cursor_pos_get, [ :pointer, :string, :edje_cursor ], :int ],
         # EAPI void edje_object_part_text_imf_context_reset (const Evas_Object *obj, const char *part);
         [ :edje_object_part_text_imf_context_reset, [ :pointer, :string ], :void ],
+        # EAPI void *edje_object_part_text_imf_context_get (const Evas_Object *obj, const char *part);
+        [ :edje_object_part_text_imf_context_get, [ :pointer, :string ], :pointer ],
         # EAPI void edje_object_part_text_input_panel_layout_set (Evas_Object *obj, const char *part, Edje_Input_Panel_Layout layout);
         [ :edje_object_part_text_input_panel_layout_set, [ :pointer, :string, :edje_input_panel_layout ], :void ],
         # EAPI Edje_Input_Panel_Layout edje_object_part_text_input_panel_layout_get (const Evas_Object *obj, const char *part);
@@ -402,12 +404,12 @@ module Efl
         [ :edje_object_text_insert_filter_callback_del, [ :pointer, :string, :edje_text_filter_cb ], :pointer ],
         # EAPI void *edje_object_text_insert_filter_callback_del_full (Evas_Object *obj, const char *part, Edje_Text_Filter_Cb func, void *data);
         [ :edje_object_text_insert_filter_callback_del_full, [ :pointer, :string, :edje_text_filter_cb, :pointer ], :pointer ],
-        # EAPI void edje_object_markup_filter_callback_add(Evas_Object *obj, const char *part, Edje_Markup_Filter_Cb func, void *data);
-        [ :edje_object_markup_filter_callback_add, [ :pointer, :string, :edje_markup_filter_cb, :pointer ], :void ],
-        # EAPI void *edje_object_markup_filter_callback_del(Evas_Object *obj, const char *part, Edje_Markup_Filter_Cb func);
-        [ :edje_object_markup_filter_callback_del, [ :pointer, :string, :edje_markup_filter_cb ], :pointer ],
-        # EAPI void *edje_object_markup_filter_callback_del_full(Evas_Object *obj, const char *part, Edje_Markup_Filter_Cb func, void *data);
-        [ :edje_object_markup_filter_callback_del_full, [ :pointer, :string, :edje_markup_filter_cb, :pointer ], :pointer ],
+        # EAPI void edje_object_text_markup_filter_callback_add(Evas_Object *obj, const char *part, Edje_Markup_Filter_Cb func, void *data);
+        [ :edje_object_text_markup_filter_callback_add, [ :pointer, :string, :edje_markup_filter_cb, :pointer ], :void ],
+        # EAPI void *edje_object_text_markup_filter_callback_del(Evas_Object *obj, const char *part, Edje_Markup_Filter_Cb func);
+        [ :edje_object_text_markup_filter_callback_del, [ :pointer, :string, :edje_markup_filter_cb ], :pointer ],
+        # EAPI void *edje_object_text_markup_filter_callback_del_full(Evas_Object *obj, const char *part, Edje_Markup_Filter_Cb func, void *data);
+        [ :edje_object_text_markup_filter_callback_del_full, [ :pointer, :string, :edje_markup_filter_cb, :pointer ], :pointer ],
         # EAPI Eina_Bool edje_object_part_swallow (Evas_Object *obj, const char *part, Evas_Object *obj_swallow);
         [ :edje_object_part_swallow, [ :pointer, :string, :pointer ], :eina_bool ],
         # EAPI void edje_object_part_unswallow (Evas_Object *obj, Evas_Object *obj_swallow);

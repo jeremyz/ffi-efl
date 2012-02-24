@@ -980,6 +980,8 @@ module Efl
         [ :evas_textblock_node_format_prev_get, [ :pointer ], :pointer ],
         # EAPI void evas_textblock_node_format_remove_pair(Evas_Object *obj, Evas_Object_Textblock_Node_Format *n);
         [ :evas_textblock_node_format_remove_pair, [ :pointer, :pointer ], :void ],
+        # EAPI void evas_textblock_cursor_set_at_format(Evas_Textblock_Cursor *cur, const Evas_Object_Textblock_Node_Format *n);
+        [ :evas_textblock_cursor_set_at_format, [ :pointer, :pointer ], :void ],
         # EAPI const Evas_Object_Textblock_Node_Format *evas_textblock_cursor_format_get(const Evas_Textblock_Cursor *cur);
         [ :evas_textblock_cursor_format_get, [ :pointer ], :pointer ],
         # EAPI const char *evas_textblock_node_format_text_get(const Evas_Object_Textblock_Node_Format *fnode);

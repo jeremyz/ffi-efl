@@ -299,6 +299,8 @@ module Efl
         [ :ecore_evas_software_wince_gdi_new, [ :pointer, :int, :int, :int, :int ], :pointer ],
         # EAPI Ecore_WinCE_Window *ecore_evas_software_wince_window_get(const Ecore_Evas *ee);
         [ :ecore_evas_software_wince_window_get, [ :pointer ], :pointer ],
+        # EAPI Ecore_Evas *ecore_evas_cocoa_new(Ecore_Cocoa_Window *parent, 				 int x, 				 int y, 				 int w, 				 int h);
+        # FIXME
         # EAPI Ecore_Evas *ecore_evas_psl1ght_new(const char* name, int w, int h);
         [ :ecore_evas_psl1ght_new, [ :pointer, :int, :int ], :pointer ],
         # EAPI const char *ecore_evas_engine_name_get(const Ecore_Evas *ee);
@@ -472,10 +474,6 @@ module Efl
         # EAPI Eina_Bool ecore_evas_extn_plug_connect(Evas_Object *obj, const char *svcname, int svcnum, Eina_Bool svcsys);
         [ :ecore_evas_extn_plug_connect, [ :pointer, :string, :int, :eina_bool ], :eina_bool ],
         ]
-        if RUBY_PLATFORM =~ /darwin/
-            # EAPI Ecore_Evas *ecore_evas_cocoa_new(Ecore_Cocoa_Window *parent, int x, int y, int w, int h);
-            fcts << [ :ecore_evas_cocoa_new, [ :string, :int, :int ], :ecore_evas_p ]
-        end
         #
         attach_fcts fcts
         #
