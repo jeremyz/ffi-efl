@@ -3,6 +3,7 @@
 #
 require 'efl/native'
 require 'efl/native/eina_xattr'
+require 'efl/native/eina_list'
 #
 module Efl
     #
@@ -87,7 +88,7 @@ module Efl
         # typedef const char * (*Eet_Descriptor_Type_Get_Callback) (const void *data, Eina_Bool *unknow);
         callback :eet_descriptor_type_get_callback_cb, [ :pointer, :pointer ], :string
         # typedef Eina_Bool (*Eet_Descriptor_Type_Set_Callback) (const char *type, void *data, Eina_Bool unknow);
-        callback :eet_descriptor_type_set_callback_cb, [ :string, :pointer, :eina_bool ], :eina_bool
+        callback :eet_descriptor_type_set_callback_cb, [ :string, :pointer, :bool ], :bool
         # typedef void * (*Eet_Descriptor_Array_Alloc_Callback) (size_t size);
         callback :eet_descriptor_array_alloc_callback_cb, [ :ulong ], :pointer
         # typedef void (*Eet_Descriptor_Array_Free_Callback) (void *mem);
@@ -99,7 +100,7 @@ module Efl
         # typedef void (*Eet_Node_Walk_Struct_Add_Callback) (void *parent, const char *name, void *child, void *user_data);
         callback :eet_node_walk_struct_add_callback_cb, [ :pointer, :string, :pointer, :pointer ], :void
         # typedef void * (*Eet_Node_Walk_Array_Callback) (Eina_Bool variable, const char *name, int count, void *user_data);
-        callback :eet_node_walk_array_callback_cb, [ :eina_bool, :string, :int, :pointer ], :pointer
+        callback :eet_node_walk_array_callback_cb, [ :bool, :string, :int, :pointer ], :pointer
         # typedef void (*Eet_Node_Walk_Insert_Callback) (void *array, int index, void *child, void *user_data);
         callback :eet_node_walk_insert_callback_cb, [ :pointer, :int, :pointer, :pointer ], :void
         # typedef void * (*Eet_Node_Walk_List_Callback) (const char *name, void *user_data);
@@ -109,15 +110,15 @@ module Efl
         # typedef void * (*Eet_Node_Walk_Hash_Callback) (void *parent, const char *name, const char *key, void *value, void *user_data);
         callback :eet_node_walk_hash_callback_cb, [ :pointer, :string, :string, :pointer, :pointer ], :pointer
         # typedef void * (*Eet_Node_Walk_Simple_Callback) (int type, Eet_Node_Data *data, void *user_data);
-        callback :eet_node_walk_simple_callback_cb, [ :int, :pointer, :pointer ], :pointer
+        callback :eet_node_walk_simple_callback_cb, [ :int, :eet_node_data, :pointer ], :pointer
         # typedef Eina_Bool Eet_Read_Cb (const void *eet_data, size_t size, void *user_data);
-        callback :eet_read_cb, [ :pointer, :ulong, :pointer ], :eina_bool
+        callback :eet_read_cb, [ :pointer, :ulong, :pointer ], :bool
         # typedef Eina_Bool Eet_Write_Cb (const void *data, size_t size, void *user_data);
-        callback :eet_write_cb, [ :pointer, :ulong, :pointer ], :eina_bool
+        callback :eet_write_cb, [ :pointer, :ulong, :pointer ], :bool
         #
         # VARIABLES
         # EAPI extern Eet_Version *eet_version;
-        attach_variable :eet_version, :pointer
+        attach_variable :eet_version, :eet_version
         #
         # FUNCTIONS
         fcts = [
@@ -128,52 +129,52 @@ module Efl
         # EAPI void eet_clearcache(void);
         [ :eet_clearcache, [  ], :void ],
         # EAPI Eet_File * eet_open(const char *file, Eet_File_Mode mode);
-        [ :eet_open, [ :string, :eet_file_mode ], :pointer ],
+        [ :eet_open, [ :string, :eet_file_mode ], :eet_file ],
         # EAPI Eet_File * eet_memopen_read(const void *data, size_t size);
-        [ :eet_memopen_read, [ :pointer, :ulong ], :pointer ],
+        [ :eet_memopen_read, [ :pointer, :ulong ], :eet_file ],
         # EAPI Eet_File_Mode eet_mode_get(Eet_File *ef);
-        [ :eet_mode_get, [ :pointer ], :eet_file_mode ],
+        [ :eet_mode_get, [ :eet_file ], :eet_file_mode ],
         # EAPI Eet_Error eet_close(Eet_File *ef);
-        [ :eet_close, [ :pointer ], :eet_error ],
+        [ :eet_close, [ :eet_file ], :eet_error ],
         # EAPI Eet_Error eet_sync(Eet_File *ef);
-        [ :eet_sync, [ :pointer ], :eet_error ],
+        [ :eet_sync, [ :eet_file ], :eet_error ],
         # EAPI Eet_Dictionary * eet_dictionary_get(Eet_File *ef);
-        [ :eet_dictionary_get, [ :pointer ], :pointer ],
+        [ :eet_dictionary_get, [ :eet_file ], :eet_dictionary ],
         # EAPI int eet_dictionary_string_check(Eet_Dictionary *ed, const char *string);
-        [ :eet_dictionary_string_check, [ :pointer, :string ], :int ],
+        [ :eet_dictionary_string_check, [ :eet_dictionary, :string ], :int ],
         # EAPI int eet_dictionary_count(const Eet_Dictionary *ed);
-        [ :eet_dictionary_count, [ :pointer ], :int ],
+        [ :eet_dictionary_count, [ :eet_dictionary ], :int ],
         # EAPI void * eet_read(Eet_File *ef, const char *name, int *size_ret);
-        [ :eet_read, [ :pointer, :string, :pointer ], :pointer ],
+        [ :eet_read, [ :eet_file, :string, :pointer ], :pointer ],
         # EAPI const void * eet_read_direct(Eet_File *ef, const char *name, int *size_ret);
-        [ :eet_read_direct, [ :pointer, :string, :pointer ], :pointer ],
+        [ :eet_read_direct, [ :eet_file, :string, :pointer ], :pointer ],
         # EAPI int eet_write(Eet_File *ef, const char *name, const void *data, int size, int compress);
-        [ :eet_write, [ :pointer, :string, :pointer, :int, :int ], :int ],
+        [ :eet_write, [ :eet_file, :string, :pointer, :int, :int ], :int ],
         # EAPI int eet_delete(Eet_File *ef, const char *name);
-        [ :eet_delete, [ :pointer, :string ], :int ],
+        [ :eet_delete, [ :eet_file, :string ], :int ],
         # EAPI Eina_Bool eet_alias(Eet_File *ef, const char *name, const char *destination, int compress);
-        [ :eet_alias, [ :pointer, :string, :string, :int ], :eina_bool ],
+        [ :eet_alias, [ :eet_file, :string, :string, :int ], :bool ],
         # EAPI const char * eet_file_get(Eet_File *ef);
-        [ :eet_file_get, [ :pointer ], :string ],
+        [ :eet_file_get, [ :eet_file ], :string ],
         # EAPI const char * eet_alias_get(Eet_File *ef, const char *name);
-        [ :eet_alias_get, [ :pointer, :string ], :string ],
+        [ :eet_alias_get, [ :eet_file, :string ], :string ],
         # EAPI char ** eet_list(Eet_File *ef, const char *glob, int *count_ret);
-        [ :eet_list, [ :pointer, :string, :pointer ], :pointer ],
+        [ :eet_list, [ :eet_file, :string, :pointer ], :pointer ],
         # EAPI int eet_num_entries(Eet_File *ef);
-        [ :eet_num_entries, [ :pointer ], :int ],
+        [ :eet_num_entries, [ :eet_file ], :int ],
         # EAPI void * eet_read_cipher(Eet_File *ef, const char *name, int *size_ret, const char *cipher_key);
-        [ :eet_read_cipher, [ :pointer, :string, :pointer, :string ], :pointer ],
+        [ :eet_read_cipher, [ :eet_file, :string, :pointer, :string ], :pointer ],
         # EAPI int eet_write_cipher(Eet_File *ef, const char *name, const void *data, int size, int compress, const char *cipher_key);
-        [ :eet_write_cipher, [ :pointer, :string, :pointer, :int, :int, :string ], :int ],
+        [ :eet_write_cipher, [ :eet_file, :string, :pointer, :int, :int, :string ], :int ],
         # EAPI int eet_data_image_header_read(Eet_File *ef, const char *name, unsigned int *w, unsigned int *h, int *alpha, int *compress, int *quality, int *lossy);
-        [ :eet_data_image_header_read, [ :pointer, :string, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer ], :int ],
+        [ :eet_data_image_header_read, [ :eet_file, :string, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer ], :int ],
         # EAPI void * eet_data_image_read(Eet_File *ef, const char *name, unsigned int *w, unsigned int *h, int *alpha, int *compress, int *quality, int *lossy);
-        [ :eet_data_image_read, [ :pointer, :string, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer ], :pointer ],
+        [ :eet_data_image_read, [ :eet_file, :string, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer ], :pointer ],
         # EAPI int eet_data_image_read_to_surface(Eet_File *ef, const char *name, unsigned int src_x, unsigned int src_y, unsigned int *d, unsigned int w, unsigned int h, unsigned int row_stride, int *alpha, int *compress, int *quality, int *lossy);
-        [ :eet_data_image_read_to_surface, [ :pointer, :string, :uint, :uint, :pointer, :uint, :uint, :uint, :pointer, :pointer, :pointer, :pointer ],
-            :int ],
+        [ :eet_data_image_read_to_surface, [ :eet_file, :string, :uint, :uint, :pointer, :uint, :uint, :uint, :pointer, :pointer, :pointer, :pointer
+            ], :int ],
         # EAPI int eet_data_image_write(Eet_File *ef, const char *name, const void *data, unsigned int w, unsigned int h, int alpha, int compress, int quality, int lossy);
-        [ :eet_data_image_write, [ :pointer, :string, :pointer, :uint, :uint, :int, :int, :int, :int ], :int ],
+        [ :eet_data_image_write, [ :eet_file, :string, :pointer, :uint, :uint, :int, :int, :int, :int ], :int ],
         # EAPI int eet_data_image_header_decode(const void *data, int size, unsigned int *w, unsigned int *h, int *alpha, int *compress, int *quality, int *lossy);
         [ :eet_data_image_header_decode, [ :pointer, :int, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer ], :int ],
         # EAPI void * eet_data_image_decode(const void *data, int size, unsigned int *w, unsigned int *h, int *alpha, int *compress, int *quality, int *lossy);
@@ -184,14 +185,14 @@ module Efl
         # EAPI void * eet_data_image_encode(const void *data, int *size_ret, unsigned int w, unsigned int h, int alpha, int compress, int quality, int lossy);
         [ :eet_data_image_encode, [ :pointer, :pointer, :uint, :uint, :int, :int, :int, :int ], :pointer ],
         # EAPI int eet_data_image_header_read_cipher(Eet_File *ef, const char *name, const char *cipher_key, unsigned int *w, unsigned int *h, int *alpha, int *compress, int *quality, int *lossy);
-        [ :eet_data_image_header_read_cipher, [ :pointer, :string, :string, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer ], :int ],
+        [ :eet_data_image_header_read_cipher, [ :eet_file, :string, :string, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer ], :int ],
         # EAPI void * eet_data_image_read_cipher(Eet_File *ef, const char *name, const char *cipher_key, unsigned int *w, unsigned int *h, int *alpha, int *compress, int *quality, int *lossy);
-        [ :eet_data_image_read_cipher, [ :pointer, :string, :string, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer ], :pointer ],
+        [ :eet_data_image_read_cipher, [ :eet_file, :string, :string, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer ], :pointer ],
         # EAPI int eet_data_image_read_to_surface_cipher(Eet_File *ef, const char *name, const char *cipher_key, unsigned int src_x, unsigned int src_y, unsigned int *d, unsigned int w, unsigned int h, unsigned int row_stride, int *alpha, int *compress, int *quality, int *lossy);
-        [ :eet_data_image_read_to_surface_cipher, [ :pointer, :string, :string, :uint, :uint, :pointer, :uint, :uint, :uint, :pointer, :pointer,
+        [ :eet_data_image_read_to_surface_cipher, [ :eet_file, :string, :string, :uint, :uint, :pointer, :uint, :uint, :uint, :pointer, :pointer,
             :pointer, :pointer ], :int ],
         # EAPI int eet_data_image_write_cipher(Eet_File *ef, const char *name, const char *cipher_key, const void *data, unsigned int w, unsigned int h, int alpha, int compress, int quality, int lossy);
-        [ :eet_data_image_write_cipher, [ :pointer, :string, :string, :pointer, :uint, :uint, :int, :int, :int, :int ], :int ],
+        [ :eet_data_image_write_cipher, [ :eet_file, :string, :string, :pointer, :uint, :uint, :int, :int, :int, :int ], :int ],
         # EAPI int eet_data_image_header_decode_cipher(const void *data, const char *cipher_key, int size, unsigned int *w, unsigned int *h, int *alpha, int *compress, int *quality, int *lossy);
         [ :eet_data_image_header_decode_cipher, [ :pointer, :string, :int, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer ], :int ],
         # EAPI void * eet_data_image_decode_cipher(const void *data, const char *cipher_key, int size, unsigned int *w, unsigned int *h, int *alpha, int *compress, int *quality, int *lossy);
@@ -202,147 +203,147 @@ module Efl
         # EAPI void * eet_data_image_encode_cipher(const void *data, const char *cipher_key, unsigned int w, unsigned int h, int alpha, int compress, int quality, int lossy, int *size_ret);
         [ :eet_data_image_encode_cipher, [ :pointer, :string, :uint, :uint, :int, :int, :int, :int, :pointer ], :pointer ],
         # EAPI Eet_Key * eet_identity_open(const char *certificate_file, const char *private_key_file, Eet_Key_Password_Callback cb);
-        [ :eet_identity_open, [ :string, :string, :eet_key_password_callback_cb ], :pointer ],
+        [ :eet_identity_open, [ :string, :string, :eet_key_password_callback_cb ], :eet_key ],
         # EAPI void eet_identity_close(Eet_Key *key);
-        [ :eet_identity_close, [ :pointer ], :void ],
+        [ :eet_identity_close, [ :eet_key ], :void ],
         # EAPI Eet_Error eet_identity_set(Eet_File *ef, Eet_Key *key);
-        [ :eet_identity_set, [ :pointer, :pointer ], :eet_error ],
+        [ :eet_identity_set, [ :eet_file, :eet_key ], :eet_error ],
         # EAPI void eet_identity_print(Eet_Key *key, FILE *out);
-        [ :eet_identity_print, [ :pointer, :pointer ], :void ],
+        [ :eet_identity_print, [ :eet_key, :pointer ], :void ],
         # EAPI const void * eet_identity_x509(Eet_File *ef, int *der_length);
-        [ :eet_identity_x509, [ :pointer, :pointer ], :pointer ],
+        [ :eet_identity_x509, [ :eet_file, :pointer ], :pointer ],
         # EAPI const void * eet_identity_signature(Eet_File *ef, int *signature_length);
-        [ :eet_identity_signature, [ :pointer, :pointer ], :pointer ],
+        [ :eet_identity_signature, [ :eet_file, :pointer ], :pointer ],
         # EAPI const void * eet_identity_sha1(Eet_File *ef, int *sha1_length);
-        [ :eet_identity_sha1, [ :pointer, :pointer ], :pointer ],
+        [ :eet_identity_sha1, [ :eet_file, :pointer ], :pointer ],
         # EAPI void eet_identity_certificate_print(const unsigned char *certificate, int der_length, FILE *out);
         [ :eet_identity_certificate_print, [ :pointer, :int, :pointer ], :void ],
         # EAPI Eet_Data_Descriptor * eet_data_descriptor_stream_new(const Eet_Data_Descriptor_Class *eddc);
-        [ :eet_data_descriptor_stream_new, [ :pointer ], :pointer ],
+        [ :eet_data_descriptor_stream_new, [ :eet_data_descriptor_class ], :eet_data_descriptor ],
         # EAPI Eet_Data_Descriptor * eet_data_descriptor_file_new(const Eet_Data_Descriptor_Class *eddc);
-        [ :eet_data_descriptor_file_new, [ :pointer ], :pointer ],
+        [ :eet_data_descriptor_file_new, [ :eet_data_descriptor_class ], :eet_data_descriptor ],
         # EAPI Eina_Bool eet_eina_stream_data_descriptor_class_set(Eet_Data_Descriptor_Class *eddc, unsigned int eddc_size, const char *name, int size);
-        [ :eet_eina_stream_data_descriptor_class_set, [ :pointer, :uint, :string, :int ], :eina_bool ],
+        [ :eet_eina_stream_data_descriptor_class_set, [ :eet_data_descriptor_class, :uint, :string, :int ], :bool ],
         # EAPI Eina_Bool eet_eina_file_data_descriptor_class_set(Eet_Data_Descriptor_Class *eddc, unsigned int eddc_size, const char *name, int size);
-        [ :eet_eina_file_data_descriptor_class_set, [ :pointer, :uint, :string, :int ], :eina_bool ],
+        [ :eet_eina_file_data_descriptor_class_set, [ :eet_data_descriptor_class, :uint, :string, :int ], :bool ],
         # EAPI void eet_data_descriptor_free(Eet_Data_Descriptor *edd);
-        [ :eet_data_descriptor_free, [ :pointer ], :void ],
+        [ :eet_data_descriptor_free, [ :eet_data_descriptor ], :void ],
         # EAPI void eet_data_descriptor_element_add(Eet_Data_Descriptor *edd, const char *name, int type, int group_type, int offset, /* int count_offset, */
         # FIXME
         # EAPI void * eet_data_read(Eet_File *ef, Eet_Data_Descriptor *edd, const char *name);
-        [ :eet_data_read, [ :pointer, :pointer, :string ], :pointer ],
+        [ :eet_data_read, [ :eet_file, :eet_data_descriptor, :string ], :pointer ],
         # EAPI int eet_data_write(Eet_File *ef, Eet_Data_Descriptor *edd, const char *name, const void *data, int compress);
-        [ :eet_data_write, [ :pointer, :pointer, :string, :pointer, :int ], :int ],
+        [ :eet_data_write, [ :eet_file, :eet_data_descriptor, :string, :pointer, :int ], :int ],
         # EAPI int eet_data_text_dump(const void *data_in, int size_in, Eet_Dump_Callback dumpfunc, void *dumpdata);
         [ :eet_data_text_dump, [ :pointer, :int, :eet_dump_callback_cb, :pointer ], :int ],
         # EAPI void * eet_data_text_undump(const char *text, int textlen, int *size_ret);
         [ :eet_data_text_undump, [ :string, :int, :pointer ], :pointer ],
         # EAPI int eet_data_dump(Eet_File *ef, const char *name, Eet_Dump_Callback dumpfunc, void *dumpdata);
-        [ :eet_data_dump, [ :pointer, :string, :eet_dump_callback_cb, :pointer ], :int ],
+        [ :eet_data_dump, [ :eet_file, :string, :eet_dump_callback_cb, :pointer ], :int ],
         # EAPI int eet_data_undump(Eet_File *ef, const char *name, const char *text, int textlen, int compress);
-        [ :eet_data_undump, [ :pointer, :string, :string, :int, :int ], :int ],
+        [ :eet_data_undump, [ :eet_file, :string, :string, :int, :int ], :int ],
         # EAPI void * eet_data_descriptor_decode(Eet_Data_Descriptor *edd, const void *data_in, int size_in);
-        [ :eet_data_descriptor_decode, [ :pointer, :pointer, :int ], :pointer ],
+        [ :eet_data_descriptor_decode, [ :eet_data_descriptor, :pointer, :int ], :pointer ],
         # EAPI void * eet_data_descriptor_encode(Eet_Data_Descriptor *edd, const void *data_in, int *size_ret);
-        [ :eet_data_descriptor_encode, [ :pointer, :pointer, :pointer ], :pointer ],
+        [ :eet_data_descriptor_encode, [ :eet_data_descriptor, :pointer, :pointer ], :pointer ],
         # EAPI void * eet_data_read_cipher(Eet_File *ef, Eet_Data_Descriptor *edd, const char *name, const char *cipher_key);
-        [ :eet_data_read_cipher, [ :pointer, :pointer, :string, :string ], :pointer ],
+        [ :eet_data_read_cipher, [ :eet_file, :eet_data_descriptor, :string, :string ], :pointer ],
         # EAPI void * eet_data_xattr_cipher_get(const char *filename, const char *attribute, Eet_Data_Descriptor *edd, const char *cipher_key);
-        [ :eet_data_xattr_cipher_get, [ :string, :string, :pointer, :string ], :pointer ],
+        [ :eet_data_xattr_cipher_get, [ :string, :string, :eet_data_descriptor, :string ], :pointer ],
         # EAPI int eet_data_write_cipher(Eet_File *ef, Eet_Data_Descriptor *edd, const char *name, const char *cipher_key, const void *data, int compress);
-        [ :eet_data_write_cipher, [ :pointer, :pointer, :string, :string, :pointer, :int ], :int ],
+        [ :eet_data_write_cipher, [ :eet_file, :eet_data_descriptor, :string, :string, :pointer, :int ], :int ],
         # EAPI Eina_Bool eet_data_xattr_cipher_set(const char *filename, const char *attribute, Eet_Data_Descriptor *edd, const char *cipher_key, const void *data, Eina_Xattr_Flags flags);
-        [ :eet_data_xattr_cipher_set, [ :string, :string, :pointer, :string, :pointer, :eina_xattr_flags ], :eina_bool ],
+        [ :eet_data_xattr_cipher_set, [ :string, :string, :eet_data_descriptor, :string, :pointer, :eina_xattr_flags ], :bool ],
         # EAPI int eet_data_text_dump_cipher(const void *data_in, const char *cipher_key, int size_in, Eet_Dump_Callback dumpfunc, void *dumpdata);
         [ :eet_data_text_dump_cipher, [ :pointer, :string, :int, :eet_dump_callback_cb, :pointer ], :int ],
         # EAPI void * eet_data_text_undump_cipher(const char *text, const char *cipher_key, int textlen, int *size_ret);
         [ :eet_data_text_undump_cipher, [ :string, :string, :int, :pointer ], :pointer ],
         # EAPI int eet_data_dump_cipher(Eet_File *ef, const char *name, const char *cipher_key, Eet_Dump_Callback dumpfunc, void *dumpdata);
-        [ :eet_data_dump_cipher, [ :pointer, :string, :string, :eet_dump_callback_cb, :pointer ], :int ],
+        [ :eet_data_dump_cipher, [ :eet_file, :string, :string, :eet_dump_callback_cb, :pointer ], :int ],
         # EAPI int eet_data_undump_cipher(Eet_File *ef, const char *name, const char *cipher_key, const char *text, int textlen, int compress);
-        [ :eet_data_undump_cipher, [ :pointer, :string, :string, :string, :int, :int ], :int ],
+        [ :eet_data_undump_cipher, [ :eet_file, :string, :string, :string, :int, :int ], :int ],
         # EAPI void * eet_data_descriptor_decode_cipher(Eet_Data_Descriptor *edd, const void *data_in, const char *cipher_key, int size_in);
-        [ :eet_data_descriptor_decode_cipher, [ :pointer, :pointer, :string, :int ], :pointer ],
+        [ :eet_data_descriptor_decode_cipher, [ :eet_data_descriptor, :pointer, :string, :int ], :pointer ],
         # EAPI void * eet_data_descriptor_encode_cipher(Eet_Data_Descriptor *edd, const void *data_in, const char *cipher_key, int *size_ret);
-        [ :eet_data_descriptor_encode_cipher, [ :pointer, :pointer, :string, :pointer ], :pointer ],
+        [ :eet_data_descriptor_encode_cipher, [ :eet_data_descriptor, :pointer, :string, :pointer ], :pointer ],
         # EAPI Eet_Node * eet_node_char_new(const char *name, char c);
-        [ :eet_node_char_new, [ :string, :char ], :pointer ],
+        [ :eet_node_char_new, [ :string, :char ], :eet_node ],
         # EAPI Eet_Node * eet_node_short_new(const char *name, short s);
-        [ :eet_node_short_new, [ :string, :short ], :pointer ],
+        [ :eet_node_short_new, [ :string, :short ], :eet_node ],
         # EAPI Eet_Node * eet_node_int_new(const char *name, int i);
-        [ :eet_node_int_new, [ :string, :int ], :pointer ],
+        [ :eet_node_int_new, [ :string, :int ], :eet_node ],
         # EAPI Eet_Node * eet_node_long_long_new(const char *name, long long l);
-        [ :eet_node_long_long_new, [ :string, :long_long ], :pointer ],
+        [ :eet_node_long_long_new, [ :string, :long_long ], :eet_node ],
         # EAPI Eet_Node * eet_node_float_new(const char *name, float f);
-        [ :eet_node_float_new, [ :string, :float ], :pointer ],
+        [ :eet_node_float_new, [ :string, :float ], :eet_node ],
         # EAPI Eet_Node * eet_node_double_new(const char *name, double d);
-        [ :eet_node_double_new, [ :string, :double ], :pointer ],
+        [ :eet_node_double_new, [ :string, :double ], :eet_node ],
         # EAPI Eet_Node * eet_node_unsigned_char_new(const char *name, unsigned char uc);
-        [ :eet_node_unsigned_char_new, [ :string, :uchar ], :pointer ],
+        [ :eet_node_unsigned_char_new, [ :string, :uchar ], :eet_node ],
         # EAPI Eet_Node * eet_node_unsigned_short_new(const char *name, unsigned short us);
-        [ :eet_node_unsigned_short_new, [ :string, :ushort ], :pointer ],
+        [ :eet_node_unsigned_short_new, [ :string, :ushort ], :eet_node ],
         # EAPI Eet_Node * eet_node_unsigned_int_new(const char *name, unsigned int ui);
-        [ :eet_node_unsigned_int_new, [ :string, :uint ], :pointer ],
+        [ :eet_node_unsigned_int_new, [ :string, :uint ], :eet_node ],
         # EAPI Eet_Node * eet_node_unsigned_long_long_new(const char *name, unsigned long long l);
-        [ :eet_node_unsigned_long_long_new, [ :string, :ulong_long ], :pointer ],
+        [ :eet_node_unsigned_long_long_new, [ :string, :ulong_long ], :eet_node ],
         # EAPI Eet_Node * eet_node_string_new(const char *name, const char *str);
-        [ :eet_node_string_new, [ :string, :string ], :pointer ],
+        [ :eet_node_string_new, [ :string, :string ], :eet_node ],
         # EAPI Eet_Node * eet_node_inlined_string_new(const char *name, const char *str);
-        [ :eet_node_inlined_string_new, [ :string, :string ], :pointer ],
+        [ :eet_node_inlined_string_new, [ :string, :string ], :eet_node ],
         # EAPI Eet_Node * eet_node_null_new(const char *name);
-        [ :eet_node_null_new, [ :string ], :pointer ],
+        [ :eet_node_null_new, [ :string ], :eet_node ],
         # EAPI Eet_Node * eet_node_list_new(const char *name, Eina_List *nodes);
-        [ :eet_node_list_new, [ :string, :pointer ], :pointer ],
+        [ :eet_node_list_new, [ :string, :eina_list ], :eet_node ],
         # EAPI Eet_Node * eet_node_array_new(const char *name, int count, Eina_List *nodes);
-        [ :eet_node_array_new, [ :string, :int, :pointer ], :pointer ],
+        [ :eet_node_array_new, [ :string, :int, :eina_list ], :eet_node ],
         # EAPI Eet_Node * eet_node_var_array_new(const char *name, Eina_List *nodes);
-        [ :eet_node_var_array_new, [ :string, :pointer ], :pointer ],
+        [ :eet_node_var_array_new, [ :string, :eina_list ], :eet_node ],
         # EAPI Eet_Node * eet_node_hash_new(const char *name, const char *key, Eet_Node *node);
-        [ :eet_node_hash_new, [ :string, :string, :pointer ], :pointer ],
+        [ :eet_node_hash_new, [ :string, :string, :eet_node ], :eet_node ],
         # EAPI Eet_Node * eet_node_struct_new(const char *name, Eina_List *nodes);
-        [ :eet_node_struct_new, [ :string, :pointer ], :pointer ],
+        [ :eet_node_struct_new, [ :string, :eina_list ], :eet_node ],
         # EAPI Eet_Node * eet_node_struct_child_new(const char *parent, Eet_Node *child);
-        [ :eet_node_struct_child_new, [ :string, :pointer ], :pointer ],
+        [ :eet_node_struct_child_new, [ :string, :eet_node ], :eet_node ],
         # EAPI Eet_Node * eet_node_children_get(Eet_Node *node);
-        [ :eet_node_children_get, [ :pointer ], :pointer ],
+        [ :eet_node_children_get, [ :eet_node ], :eet_node ],
         # EAPI Eet_Node * eet_node_next_get(Eet_Node *node);
-        [ :eet_node_next_get, [ :pointer ], :pointer ],
+        [ :eet_node_next_get, [ :eet_node ], :eet_node ],
         # EAPI Eet_Node * eet_node_parent_get(Eet_Node *node);
-        [ :eet_node_parent_get, [ :pointer ], :pointer ],
+        [ :eet_node_parent_get, [ :eet_node ], :eet_node ],
         # EAPI void eet_node_list_append(Eet_Node *parent, const char *name, Eet_Node *child);
-        [ :eet_node_list_append, [ :pointer, :string, :pointer ], :void ],
+        [ :eet_node_list_append, [ :eet_node, :string, :eet_node ], :void ],
         # EAPI void eet_node_struct_append(Eet_Node *parent, const char *name, Eet_Node *child);
-        [ :eet_node_struct_append, [ :pointer, :string, :pointer ], :void ],
+        [ :eet_node_struct_append, [ :eet_node, :string, :eet_node ], :void ],
         # EAPI void eet_node_hash_add(Eet_Node *parent, const char *name, const char *key, Eet_Node *child);
-        [ :eet_node_hash_add, [ :pointer, :string, :string, :pointer ], :void ],
+        [ :eet_node_hash_add, [ :eet_node, :string, :string, :eet_node ], :void ],
         # EAPI void eet_node_dump(Eet_Node *n, int dumplevel, Eet_Dump_Callback dumpfunc, void *dumpdata);
-        [ :eet_node_dump, [ :pointer, :int, :eet_dump_callback_cb, :pointer ], :void ],
+        [ :eet_node_dump, [ :eet_node, :int, :eet_dump_callback_cb, :pointer ], :void ],
         # EAPI int eet_node_type_get(Eet_Node *node);
-        [ :eet_node_type_get, [ :pointer ], :int ],
+        [ :eet_node_type_get, [ :eet_node ], :int ],
         # EAPI Eet_Node_Data * eet_node_value_get(Eet_Node *node);
-        [ :eet_node_value_get, [ :pointer ], :pointer ],
+        [ :eet_node_value_get, [ :eet_node ], :eet_node_data ],
         # EAPI void eet_node_del(Eet_Node *n);
-        [ :eet_node_del, [ :pointer ], :void ],
+        [ :eet_node_del, [ :eet_node ], :void ],
         # EAPI void * eet_data_node_encode_cipher(Eet_Node *node, const char *cipher_key, int *size_ret);
-        [ :eet_data_node_encode_cipher, [ :pointer, :string, :pointer ], :pointer ],
+        [ :eet_data_node_encode_cipher, [ :eet_node, :string, :pointer ], :pointer ],
         # EAPI Eet_Node * eet_data_node_decode_cipher(const void *data_in, const char *cipher_key, int size_in);
-        [ :eet_data_node_decode_cipher, [ :pointer, :string, :int ], :pointer ],
+        [ :eet_data_node_decode_cipher, [ :pointer, :string, :int ], :eet_node ],
         # EAPI Eet_Node * eet_data_node_read_cipher(Eet_File *ef, const char *name, const char *cipher_key);
-        [ :eet_data_node_read_cipher, [ :pointer, :string, :string ], :pointer ],
+        [ :eet_data_node_read_cipher, [ :eet_file, :string, :string ], :eet_node ],
         # EAPI int eet_data_node_write_cipher(Eet_File *ef, const char *name, const char *cipher_key, Eet_Node *node, int compress);
-        [ :eet_data_node_write_cipher, [ :pointer, :string, :string, :pointer, :int ], :int ],
+        [ :eet_data_node_write_cipher, [ :eet_file, :string, :string, :eet_node, :int ], :int ],
         # EAPI void * eet_node_walk(void *parent, const char *name, Eet_Node *root, Eet_Node_Walk *cb, void *user_data);
-        [ :eet_node_walk, [ :pointer, :string, :pointer, :pointer, :pointer ], :pointer ],
+        [ :eet_node_walk, [ :pointer, :string, :eet_node, :eet_node_walk, :pointer ], :pointer ],
         # EAPI Eet_Connection * eet_connection_new(Eet_Read_Cb *eet_read_cb, Eet_Write_Cb *eet_write_cb, const void *user_data);
-        [ :eet_connection_new, [ :pointer, :pointer, :pointer ], :pointer ],
+        [ :eet_connection_new, [ :pointer, :pointer, :pointer ], :eet_connection ],
         # EAPI int eet_connection_received(Eet_Connection *conn, const void *data, size_t size);
-        [ :eet_connection_received, [ :pointer, :pointer, :ulong ], :int ],
+        [ :eet_connection_received, [ :eet_connection, :pointer, :ulong ], :int ],
         # EAPI Eina_Bool eet_connection_send(Eet_Connection *conn, Eet_Data_Descriptor *edd, const void *data_in, const char *cipher_key);
-        [ :eet_connection_send, [ :pointer, :pointer, :pointer, :string ], :eina_bool ],
+        [ :eet_connection_send, [ :eet_connection, :eet_data_descriptor, :pointer, :string ], :bool ],
         # EAPI Eina_Bool eet_connection_node_send(Eet_Connection *conn, Eet_Node *node, const char *cipher_key);
-        [ :eet_connection_node_send, [ :pointer, :pointer, :string ], :eina_bool ],
+        [ :eet_connection_node_send, [ :eet_connection, :eet_node, :string ], :bool ],
         # EAPI void * eet_connection_close(Eet_Connection *conn, Eina_Bool *on_going);
-        [ :eet_connection_close, [ :pointer, :pointer ], :pointer ],
+        [ :eet_connection_close, [ :eet_connection, :pointer ], :pointer ],
         ]
         #
         attach_fcts fcts
