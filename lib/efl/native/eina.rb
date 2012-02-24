@@ -30,7 +30,7 @@ module Efl
         #
         # VARIABLES
         # EAPI extern Eina_Version *eina_version;
-        attach_variable :eina_version, :pointer
+        attach_variable :eina_version, :eina_version
         #
         # FUNCTIONS
         fcts = [
@@ -43,7 +43,7 @@ module Efl
         # EAPI int eina_threads_shutdown(void);
         [ :eina_threads_shutdown, [  ], :int ],
         # EAPI Eina_Bool eina_main_loop_is(void);
-        [ :eina_main_loop_is, [  ], :eina_bool ],
+        [ :eina_main_loop_is, [  ], :bool ],
         # EAPI void eina_main_loop_define(void);
         [ :eina_main_loop_define, [  ], :void ],
         ]
