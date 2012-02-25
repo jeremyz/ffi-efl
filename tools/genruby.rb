@@ -321,7 +321,7 @@ libs << {
 }
 libs << {
     :lib=>'emap', :header=>'EMap.h',
-    :modname=>'EMap', :prefix=>'emap', :outfile=>'emap.rb',
+    :modname=>'Emap', :prefix=>'emap', :outfile=>'emap.rb',
     :requires=>['efl/native/eina_list']
 }
 libs << {
