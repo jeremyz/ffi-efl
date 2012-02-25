@@ -31,10 +31,6 @@ module Efl
         # typedef struct emap_route_node EMap_Route_Node;
         typedef :pointer, :emap_route_node
         #
-        # CALLBACKS
-        #
-        # VARIABLES
-        #
         # FUNCTIONS
         fcts = [
         # EAPI int emap_init();

@@ -20,8 +20,6 @@ module Efl
         #
         ffi_lib 'eina'
         #
-        # ENUMS
-        #
         # TYPEDEFS
         # typedef struct _Eina_Hash Eina_Hash;
         typedef :pointer, :eina_hash
@@ -37,8 +35,6 @@ module Efl
         callback :eina_key_hash_cb, [ :pointer, :int ], :int
         # typedef Eina_Bool (*Eina_Hash_Foreach) (const Eina_Hash *hash, const void *key, void *data, void *fdata);
         callback :eina_hash_foreach_cb, [ :eina_hash, :pointer, :pointer, :pointer ], :bool
-        #
-        # VARIABLES
         #
         # FUNCTIONS
         fcts = [

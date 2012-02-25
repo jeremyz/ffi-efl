@@ -20,8 +20,6 @@ module Efl
         #
         ffi_lib 'eina'
         #
-        # ENUMS
-        #
         # TYPEDEFS
         # typedef unsigned char Eina_Bool;
         typedef :bool, :eina_bool
@@ -33,8 +31,6 @@ module Efl
         callback :eina_each_cb, [ :pointer, :pointer, :pointer ], :bool
         # typedef void (*Eina_Free_Cb) (void *data);
         callback :eina_free_cb, [ :pointer ], :void
-        #
-        # VARIABLES
         #
         # FUNCTIONS
         fcts = [

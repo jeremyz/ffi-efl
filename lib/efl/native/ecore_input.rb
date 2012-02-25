@@ -44,8 +44,6 @@ module Efl
         # typedef struct _Ecore_Event_Modifiers Ecore_Event_Modifiers;
         typedef :pointer, :ecore_event_modifiers
         #
-        # CALLBACKS
-        #
         # VARIABLES
         # EAPI extern int ECORE_EVENT_KEY_DOWN;
         attach_variable :ECORE_EVENT_KEY_DOWN, :int

@@ -20,13 +20,9 @@ module Efl
         #
         ffi_lib 'eina'
         #
-        # ENUMS
-        #
         # TYPEDEFS
         # typedef struct _Eina_Version Eina_Version;
         typedef :pointer, :eina_version
-        #
-        # CALLBACKS
         #
         # VARIABLES
         # EAPI extern Eina_Version *eina_version;

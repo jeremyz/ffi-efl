@@ -45,10 +45,6 @@ module Efl
         # typedef struct _Ecore_Getopt Ecore_Getopt;
         typedef :pointer, :ecore_getopt
         #
-        # CALLBACKS
-        #
-        # VARIABLES
-        #
         # FUNCTIONS
         fcts = [
         # EAPI void ecore_getopt_help(FILE *fp, const Ecore_Getopt *info);

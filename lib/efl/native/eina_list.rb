@@ -20,17 +20,11 @@ module Efl
         #
         ffi_lib 'eina'
         #
-        # ENUMS
-        #
         # TYPEDEFS
         # typedef struct _Eina_List Eina_List;
         typedef :pointer, :eina_list
         # typedef struct _Eina_List_Accounting Eina_List_Accounting;
         typedef :pointer, :eina_list_accounting
-        #
-        # CALLBACKS
-        #
-        # VARIABLES
         #
         # FUNCTIONS
         fcts = [

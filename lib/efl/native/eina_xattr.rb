@@ -28,10 +28,6 @@ module Efl
         # typedef struct _Eina_Xattr Eina_Xattr;
         typedef :pointer, :eina_xattr
         #
-        # CALLBACKS
-        #
-        # VARIABLES
-        #
         # FUNCTIONS
         fcts = [
         # EAPI Eina_Iterator *eina_xattr_ls(const char *file);
