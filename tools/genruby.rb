@@ -1,94 +1,9 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-path = File.dirname __FILE__
-lib_path = File.join path, '..', 'lib', 'efl', 'native'
-#
-# header, module name, fct prefix, lib
-libraries = [
-    # HEADER            MODUE NAME      FCT PREFIX      LIB             OUTPUT              REQUIRES
-    [ 'eina_types.h',   'Eina',         'eina',         'eina',         'eina_types.rb' ],
-    [ 'eina_main.h',    'Eina',         'eina',         'eina',         'eina.rb' ],
-    [ 'eina_xattr.h',   'EinaXattr',    'eina_xattr',   'eina',         'eina_xattr.rb' ],
-    [ 'eina_log.h',     'EinaLog',      'eina_log',     'eina',         'eina_log.rb' ],
-    [ 'eina_list.h',    'EinaList',     'eina_list',    'eina',         'eina_list.rb' ],
-    [ 'eina_hash.h',    'EinaHash',     'eina_hash',    'eina',         'eina_hash.rb' ],
-    [ 'Eet.h',          'Eet',          'eet',          'eet',          'eet.rb',           ['efl/native/eina_xattr','efl/native/eina_list']],
-    [ 'Evas.h',         'Evas',         'evas',         'evas',         'evas.rb',          ['efl/native/eina_list']],
-#    [ 'Evas_GL.h',      'EvasGl',       'evas_gl',      'evas',         'evas/evas_gl.rb' ],
-    [ 'Edje.h',         'Edje',         'edje',         'edje',         'edje.rb',          ['efl/native/evas']],
-    [ 'Ecore.h',        'Ecore',        'ecore',        'ecore',        'ecore.rb' ],
-#    [ 'Ecore_Con.h',    'EcoreCon',     'ecore_con',    'ecore',        'ecore/ecore_con.rb' ],
-    [ 'Ecore_Input.h',  'EcoreInput',   'ecore_event',  'ecore_input',  'ecore_input.rb' ],
-    [ 'Ecore_Getopt.h', 'EcoreGetopt',  'ecore_getopt', 'ecore',        'ecore_getopt.rb',  ['efl/native/eina_list'] ],
-    [ 'Ecore_Evas.h',   'EcoreEvas',    'ecore_evas',   'ecore_evas',   'ecore_evas.rb',    ['efl/native/ecore_getopt','efl/native/evas'] ],
-#    [ 'Ecore_Fb.h',     'EcoreFb',      'ecore',        'ecore',        'ecore/ecore_fb.rb' ],
-#    [ 'Ecore_File.h',   'EcoreFile',    'ecore',        'ecore',        'ecore/ecore_file.rb' ],
-    [ 'EMap.h',         'EMap',         'emap',         'emap',         'emap.rb',  ['efl/native/eina_list']],
-    [ 'Elementary.h',   'Elm',          'elm',          'libelementary-ver-pre-svn-09.so.0',    'elementary.rb' ],
-]
 #
 INDENT=' '*8
 WRAP_LEN=150
-#
-HEADER =<<-EOF
-#! /usr/bin/env ruby
-# -*- coding: UTF-8 -*-
-#
-require 'efl/native'REQUIRES
-#
-module Efl
-    #
-    module MNAME
-        #
-        FCT_PREFIX = 'MY_FCT_PREFIX_' unless const_defined? :FCT_PREFIX
-        #
-        def self.method_missing meth, *args, &block
-            sym = Efl::MethodResolver.resolve self, meth, FCT_PREFIX
-            self.send sym, *args, &block
-        end
-        #
-    end
-    #
-    module Native
-EOF
-FOOTER =<<-EOF
-    end
-end
-#
-# EOF
-EOF
-#
-TYPES = {
-    'int' => ':int',
-    'char' => ':char',
-    'void' => ':void',
-    'long' => ':long',
-    'short' => ':short',
-    'float' => ':float',
-    'pid_t' => ':ulong',
-    'time_t' => ':ulong',
-    'size_t' => ':ulong',
-    'ssize_t' => ':long',
-    'uintptr_t' => ':pointer',
-    'double' => ':double',
-    'long int' => ':long',
-    'long long' => ':long_long',
-    'unsigned int' => ':uint',
-    'unsigned char' => ':uchar',
-    'unsigned short' => ':ushort',
-    'unsigned long long' => ':ulong_long',
-    'char *' => ':string',                                              # FIXME ?!?!
-    'fd_set *' => ':pointer',
-    'FILE *' => ':pointer',
-    'va_list' => ':pointer',                                            # FIXME ?!?!
-    'struct tm *' => ':pointer',
-    'struct timeval *' => ':pointer',
-    'struct sockaddr *' => ':pointer',
-}
-ETYPES = {
-    'Eina_Bool' => ':bool'
-}
 #
 def set_type t, sym
     return ETYPES['Eina_Bool'] if t=='Eina_Bool'
@@ -275,47 +190,185 @@ def gen_functions path, indent
     r
 end
 #
+HEADER =<<-EOF
+#! /usr/bin/env ruby
+# -*- coding: UTF-8 -*-
+#
+require 'efl/native'REQUIRES
+#
+module Efl
+    #
+    module MNAME
+        #
+        FCT_PREFIX = 'MY_FCT_PREFIX_' unless const_defined? :FCT_PREFIX
+        #
+        def self.method_missing meth, *args, &block
+            sym = Efl::MethodResolver.resolve self, meth, FCT_PREFIX
+            self.send sym, *args, &block
+        end
+        #
+    end
+    #
+    module Native
+EOF
+#
+FOOTER =<<-EOF
+    end
+end
+#
+# EOF
+EOF
+#
+TYPES = {
+    'int' => ':int',
+    'char' => ':char',
+    'void' => ':void',
+    'long' => ':long',
+    'short' => ':short',
+    'float' => ':float',
+    'pid_t' => ':ulong',
+    'time_t' => ':ulong',
+    'size_t' => ':ulong',
+    'ssize_t' => ':long',
+    'uintptr_t' => ':pointer',
+    'double' => ':double',
+    'long int' => ':long',
+    'long long' => ':long_long',
+    'unsigned int' => ':uint',
+    'unsigned char' => ':uchar',
+    'unsigned short' => ':ushort',
+    'unsigned long long' => ':ulong_long',
+    'char *' => ':string',                                              # FIXME ?!?!
+    'fd_set *' => ':pointer',
+    'FILE *' => ':pointer',
+    'va_list' => ':pointer',                                            # FIXME ?!?!
+    'struct tm *' => ':pointer',
+    'struct timeval *' => ':pointer',
+    'struct sockaddr *' => ':pointer',
+}
+ETYPES = {
+    'Eina_Bool' => ':bool'
+}
+#
+path = File.dirname __FILE__
+lib_path = File.join path, '..', 'lib', 'efl', 'native'
+#
+libs = []
+libs << {
+    :lib=>'eina', :header=>'eina_types.h',
+    :modname=>'Eina', :prefix=>'eina', :outfile=>'eina_types.rb',
+    :requires=>[]
+}
+libs << {
+    :lib=>'eina', :header=>'eina_main.h',
+    :modname=>'Eina', :prefix=>'eina', :outfile=>'eina.rb',
+    :requires=>[]
+}
+libs << {
+    :lib=>'eina', :header=>'eina_xattr.h',
+    :modname=>'EinaXattr', :prefix=>'eina_xattr', :outfile=>'eina_xattr.rb',
+    :requires=>[]
+}
+libs << {
+    :lib=>'eina', :header=>'eina_log.h',
+    :modname=>'EinaLog', :prefix=>'eina_log', :outfile=>'eina_log.rb',
+    :requires=>[]
+}
+libs << {
+    :lib=>'eina', :header=>'eina_list.h',
+    :modname=>'EinaList', :prefix=>'eina_list', :outfile=>'eina_list.rb',
+    :requires=>[]
+}
+libs << {
+    :lib=>'eina', :header=>'eina_hash.h',
+    :modname=>'EinaHash', :prefix=>'eina_hash', :outfile=>'eina_hash.rb',
+    :requires=>[]
+}
+libs << {
+    :lib=>'eet', :header=>'Eet.h',
+    :modname=>'Eet', :prefix=>'eet', :outfile=>'eet.rb',
+    :requires=>['efl/native/eina_xattr','efl/native/eina_list']
+}
+libs << {
+    :lib=>'evas', :header=>'Evas.h',
+    :modname=>'Evas', :prefix=>'evas', :outfile=>'evas.rb',
+    :requires=>['efl/native/eina_list']
+}
+libs << {
+    :lib=>'edje', :header=>'Edje.h',
+    :modname=>'Edje', :prefix=>'edje', :outfile=>'edje.rb',
+    :requires=>['efl/native/evas']
+}
+libs << {
+    :lib=>'ecore', :header=>'Ecore.h',
+    :modname=>'Ecore', :prefix=>'ecore', :outfile=>'ecore.rb',
+    :requires=>[]
+}
+libs << {
+    :lib=>'ecore_input', :header=>'Ecore_Input.h',
+    :modname=>'EcoreInput', :prefix=>'ecore_event', :outfile=>'ecore_input.rb',
+    :requires=>[]
+}
+libs << {
+    :lib=>'ecore', :header=>'Ecore_Getopt.h',
+    :modname=>'EcoreGetopt', :prefix=>'ecore_getopt', :outfile=>'ecore_getopt.rb',
+    :requires=>['efl/native/eina_list']
+}
+libs << {
+    :lib=>'ecore_evas', :header=>'Ecore_Evas.h',
+    :modname=>'EcoreEvas', :prefix=>'ecore_evas', :outfile=>'ecore_evas.rb',
+    :requires=>['efl/native/ecore_getopt','efl/native/evas']
+}
+libs << {
+    :lib=>'emap', :header=>'EMap.h',
+    :modname=>'EMap', :prefix=>'emap', :outfile=>'emap.rb',
+    :requires=>['efl/native/eina_list']
+}
+libs << {
+    :lib=>'elementary',:header=>'Elementary.h',
+    :modname=>'Elm', :prefix=>'elm', :outfile=>'elementary.rb',
+    :requires=>[]
+}
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #
-libraries.collect do |header,module_name,fct_prefix,lib, output, requires|
-    base = File.join path, 'api', header
-    output = File.join lib_path, output
-    Dir.mkdir File.dirname(output) unless File.exists? File.dirname(output)
+libs.each do |lib|
+    base = File.join path, 'api', lib[:header]
     printf "\033[1;33mparse \033[0;32m%s-*\033[0;0m\n",base
-    r = [lib, output, module_name, fct_prefix, requires ]
     printf " \033[0;33menums...\033[0;0m\n"
-    r << gen_enums(base, INDENT)
+    lib[:enums]=gen_enums(base, INDENT)
     printf " \033[0;33mtypedefs...\033[0;0m\n"
-    r << gen_typedefs(base, INDENT)
+    lib[:typedefs]=gen_typedefs(base, INDENT)
     printf " \033[0;33mcallbacks...\033[0;0m\n"
-    r << gen_callbacks(base, INDENT)
+    lib[:callbacks]=gen_callbacks(base, INDENT)
     printf " \033[0;33mvariables...\033[0;0m\n"
-    r << gen_variables(base, INDENT)
+    lib[:variables]=gen_variables(base, INDENT)
     printf " \033[0;33mfunctions...\033[0;0m\n"
-    r << gen_functions(base, INDENT)
+    lib[:functions]=gen_functions(base, INDENT)
     printf "\033[1;33mdone\033[0;0m\n"
-    r
-end.each do |lib, output, module_name, fct_prefix, requires, enums, typedefs, callbacks, variables, functions|
-    printf "\033[1;33mgenerate\033[0;0m %-50s\033[0;0m",output
-    open(output,'w:utf-8') do |f|
-        reqs = ( requires.nil? ? '' : requires.inject('') {|s,e| s+="\nrequire '#{e}'"})
-        f << HEADER.gsub(/MNAME/,module_name).sub(/MY_FCT_PREFIX/,fct_prefix).sub(/REQUIRES/,reqs)
-        f << "#{INDENT}#\n#{INDENT}ffi_lib '#{lib}'"
+end
+libs.each do |lib|
+    printf "\033[1;33mgenerate\033[0;0m %-50s\033[0;0m",lib[:outpath]
+    outpath = File.join lib_path
+    Dir.mkdir File.dirname(outpath) unless File.exists? File.dirname(outpath)
+    open(File.join(outpath,lib[:outfile]),'w:utf-8') do |f|
+        reqs = ( lib[:requires].nil? ? '' : lib[:requires].inject('') {|s,e| s+="\nrequire '#{e}'"})
+        f << HEADER.gsub(/MNAME/,lib[:modname]).sub(/MY_FCT_PREFIX/,lib[:prefix]).sub(/REQUIRES/,reqs)
+        f << "#{INDENT}#\n#{INDENT}ffi_lib '#{lib[:lib]}'"
         f << "\n#{INDENT}#\n#{INDENT}# ENUMS"
         print "enums, "
-        f << "\n"+enums.collect { |t| ( t.is_a?(Array) ? t[1] : t ) }.compact.join("\n") unless enums.empty?
+        f << "\n"+lib[:enums].collect { |t| ( t.is_a?(Array) ? t[1] : t ) }.compact.join("\n") unless lib[:enums].empty?
         f << "\n#{INDENT}#\n#{INDENT}# TYPEDEFS"
         print "typedefs, "
-        f << "\n"+typedefs.collect { |t| ( t.is_a?(Array) ? t[1]  : t ) }.compact.join("\n") unless typedefs.empty?
+        f << "\n"+lib[:typedefs].collect { |t| ( t.is_a?(Array) ? t[1]  : t ) }.compact.join("\n") unless lib[:typedefs].empty?
         f << "\n#{INDENT}#\n#{INDENT}# CALLBACKS"
         print "callbacks, "
-        f << "\n"+callbacks.join("\n") unless callbacks.empty?
+        f << "\n"+lib[:callbacks].join("\n") unless lib[:callbacks].empty?
         f << "\n#{INDENT}#\n#{INDENT}# VARIABLES"
         print "variables, "
-        f << "\n"+variables.join("\n") unless variables.empty?
+        f << "\n"+lib[:variables].join("\n") unless lib[:variables].empty?
         f << "\n#{INDENT}#\n#{INDENT}# FUNCTIONS"
         puts "functions."
-        f << "\n"+functions.join("\n") unless functions.empty?
+        f << "\n"+lib[:functions].join("\n") unless lib[:functions].empty?
         f << "\n#{INDENT}#\n#{INDENT}attach_fcts fcts\n#{INDENT}#\n"
         f << FOOTER
     end
