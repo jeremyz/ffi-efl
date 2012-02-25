@@ -354,21 +354,31 @@ libs.each do |lib|
         reqs = ( lib[:requires].nil? ? '' : lib[:requires].inject('') {|s,e| s+="\nrequire '#{e}'"})
         f << HEADER.gsub(/MNAME/,lib[:modname]).sub(/MY_FCT_PREFIX/,lib[:prefix]).sub(/REQUIRES/,reqs)
         f << "#{INDENT}#\n#{INDENT}ffi_lib '#{lib[:lib]}'"
-        f << "\n#{INDENT}#\n#{INDENT}# ENUMS"
         print "enums, "
-        f << "\n"+lib[:enums].collect { |t| ( t.is_a?(Array) ? t[1] : t ) }.compact.join("\n") unless lib[:enums].empty?
-        f << "\n#{INDENT}#\n#{INDENT}# TYPEDEFS"
+        if not lib[:enums].empty?
+            f << "\n#{INDENT}#\n#{INDENT}# ENUMS"
+            f << "\n"+lib[:enums].collect { |t| ( t.is_a?(Array) ? t[1] : t ) }.compact.join("\n")
+        end
         print "typedefs, "
-        f << "\n"+lib[:typedefs].collect { |t| ( t.is_a?(Array) ? t[1]  : t ) }.compact.join("\n") unless lib[:typedefs].empty?
-        f << "\n#{INDENT}#\n#{INDENT}# CALLBACKS"
+        if not lib[:typedefs].empty?
+            f << "\n#{INDENT}#\n#{INDENT}# TYPEDEFS"
+            f << "\n"+lib[:typedefs].collect { |t| ( t.is_a?(Array) ? t[1]  : t ) }.compact.join("\n")
+        end
         print "callbacks, "
-        f << "\n"+lib[:callbacks].join("\n") unless lib[:callbacks].empty?
-        f << "\n#{INDENT}#\n#{INDENT}# VARIABLES"
+        if not lib[:callbacks].empty?
+            f << "\n#{INDENT}#\n#{INDENT}# CALLBACKS"
+            f << "\n"+lib[:callbacks].join("\n")
+        end
         print "variables, "
-        f << "\n"+lib[:variables].join("\n") unless lib[:variables].empty?
-        f << "\n#{INDENT}#\n#{INDENT}# FUNCTIONS"
+        if not lib[:variables].empty?
+            f << "\n#{INDENT}#\n#{INDENT}# VARIABLES"
+            f << "\n"+lib[:variables].join("\n")
+        end
         puts "functions."
-        f << "\n"+lib[:functions].join("\n") unless lib[:functions].empty?
+        if not lib[:functions].empty?
+            f << "\n#{INDENT}#\n#{INDENT}# FUNCTIONS"
+            f << "\n"+lib[:functions].join("\n")
+        end
         f << "\n#{INDENT}#\n#{INDENT}attach_fcts fcts\n#{INDENT}#\n"
         f << FOOTER
     end
