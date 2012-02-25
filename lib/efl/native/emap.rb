@@ -6,7 +6,7 @@ require 'efl/native/eina_list'
 #
 module Efl
     #
-    module EMap
+    module Emap
         #
         FCT_PREFIX = 'emap_' unless const_defined? :FCT_PREFIX
         #
