@@ -351,9 +351,10 @@ libs.each do |lib|
 end
 libs.each do |lib|
     printf "\033[1;33mgenerate\033[0;0m %-50s\033[0;0m",lib[:outpath]
-    outpath = File.join lib_path
-    Dir.mkdir File.dirname(outpath) unless File.exists? File.dirname(outpath)
-    open(File.join(outpath,lib[:outfile]),'w:utf-8') do |f|
+    outpath = File.join lib_path, lib[:outfile]
+    outdir = File.dirname outpath
+    Dir.mkdir outdir unless File.exists? outdir
+    open(File.join(outpath),'w:utf-8') do |f|
         reqs = ( lib[:requires].nil? ? '' : lib[:requires].inject('') {|s,e| s+="\nrequire '#{e}'"})
         f << HEADER.gsub(/MNAME/,lib[:modname]).sub(/MY_FCT_PREFIX/,lib[:prefix]).sub(/REQUIRES/,reqs)
         f << "#{INDENT}#\n#{INDENT}ffi_lib '#{lib[:lib]}'"
