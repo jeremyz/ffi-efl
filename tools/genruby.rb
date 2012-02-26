@@ -330,12 +330,12 @@ libs << {
 libs << {
     :lib=>'elementary-ver-pre-svn-09.so.0',:header=>'Elementary.h',
     :modname=>'Elm', :prefix=>'elm', :outfile=>'elementary.rb',
-    :requires=>['efl/native/evas'], :constants=>[]
+    :requires=>['efl/native/elm/elm_general','efl/native/elm/elm_tooltip'], :constants=>[]
 }
 libs << {
     :lib=>'elementary-ver-pre-svn-09.so.0',:header=>'elm_general.h',
     :modname=>'Elm', :prefix=>'elm', :outfile=>'elm/elm_general.rb',
-    :requires=>['efl/native/elementary'], :constants=>[]
+    :requires=>['efl/native/evas','efl/native/elementary'], :constants=>[]
 }
 libs << {
     :lib=>'elementary-ver-pre-svn-09.so.0',:header=>'elm_tooltip.h',
@@ -345,7 +345,7 @@ libs << {
 libs << {
     :lib=>'elementary-ver-pre-svn-09.so.0',:header=>'elm_object_item.h',
     :modname=>'Elm', :prefix=>'elm_object_item', :outfile=>'elm/elm_object_item.rb',
-    :requires=>['efl/native/elementary','efl/native/elm/elm_general','efl/native/elm/elm_tooltip'], :constants=>[]
+    :requires=>['efl/native/elementary'], :constants=>[]
 }
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #

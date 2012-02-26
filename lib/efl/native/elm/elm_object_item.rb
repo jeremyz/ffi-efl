@@ -3,8 +3,6 @@
 #
 require 'efl/native'
 require 'efl/native/elementary'
-require 'efl/native/elm/elm_general'
-require 'efl/native/elm/elm_tooltip'
 #
 module Efl
     #

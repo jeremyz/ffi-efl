@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 #
 require 'efl/native'
+require 'efl/native/evas'
 require 'efl/native/elementary'
 #
 module Efl

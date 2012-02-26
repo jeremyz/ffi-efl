@@ -2,7 +2,8 @@
 # -*- coding: UTF-8 -*-
 #
 require 'efl/native'
-require 'efl/native/evas'
+require 'efl/native/elm/elm_general'
+require 'efl/native/elm/elm_tooltip'
 #
 module Efl
     #
