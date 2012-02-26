@@ -342,6 +342,11 @@ libs << {
     :modname=>'Elm', :prefix=>'elm', :outfile=>'elm/elm_tooltip.rb',
     :requires=>['efl/native/elementary'], :constants=>[]
 }
+libs << {
+    :lib=>'elementary-ver-pre-svn-09.so.0',:header=>'elm_object_item.h',
+    :modname=>'Elm', :prefix=>'elm_object_item', :outfile=>'elm/elm_object_item.rb',
+    :requires=>['efl/native/elementary','efl/native/elm/elm_general','efl/native/elm/elm_tooltip'], :constants=>[]
+}
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #
 libs.each do |lib|
