@@ -328,9 +328,10 @@ libs << {
     :requires=>['efl/native/eina_list'], :constants=>[]
 }
 libs << {
-    :lib=>'elementary',:header=>'Elementary.h',
+    :lib=>'elementary-ver-pre-svn-09.so.0',:header=>'Elementary.h',
     :modname=>'Elm', :prefix=>'elm', :outfile=>'elementary.rb',
-    :requires=>[]
+    :requires=>['efl/native/evas'], :constants=>[]
+}
 }
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #
