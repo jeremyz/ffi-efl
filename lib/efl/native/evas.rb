@@ -21,6 +21,10 @@ module Efl
         #
         ffi_lib 'evas'
         #
+        # CONSTANTS
+        EVAS_LAYER_MIN=-32768
+        EVAS_LAYER_MAX=32767
+        #
         # ENUMS
         # typedef enum _Evas_BiDi_Direction {...} Evas_BiDi_Direction;
         enum :evas_bidi_direction, [ :evas_bidi_direction_natural, 0, :evas_bidi_direction_neutral, 0, :evas_bidi_direction_ltr, 1,
