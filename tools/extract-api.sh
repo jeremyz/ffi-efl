@@ -42,6 +42,8 @@ for header in \
     "${INCLUDE}/ecore-1/Ecore_Fb.h" \
     "${INCLUDE}/ecore-1/Ecore_File.h" \
     "${INCLUDE}/EMap.h" \
+    "${INCLUDE}/elementary-0/elm_general.h" \
+    "${INCLUDE}/elementary-0/elm_tooltip.h" \
     "${INCLUDE}/elementary-0/Elementary.h" \
     ; do
     #
