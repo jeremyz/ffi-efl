@@ -249,6 +249,9 @@ TYPES = {
 ETYPES = {
     'Eina_Bool' => ':bool'
 }
+# Evas.h
+EVAS_LAYER_MIN=-32768
+EVAS_LAYER_MAX=32767
 #
 path = File.dirname __FILE__
 lib_path = File.join path, '..', 'lib', 'efl', 'native'
@@ -257,72 +260,72 @@ libs = []
 libs << {
     :lib=>'eina', :header=>'eina_types.h',
     :modname=>'Eina', :prefix=>'eina', :outfile=>'eina_types.rb',
-    :requires=>[]
+    :requires=>[], :constants=>[]
 }
 libs << {
     :lib=>'eina', :header=>'eina_main.h',
     :modname=>'Eina', :prefix=>'eina', :outfile=>'eina.rb',
-    :requires=>[]
+    :requires=>[], :constants=>[]
 }
 libs << {
     :lib=>'eina', :header=>'eina_xattr.h',
     :modname=>'EinaXattr', :prefix=>'eina_xattr', :outfile=>'eina_xattr.rb',
-    :requires=>[]
+    :requires=>[], :constants=>[]
 }
 libs << {
     :lib=>'eina', :header=>'eina_log.h',
     :modname=>'EinaLog', :prefix=>'eina_log', :outfile=>'eina_log.rb',
-    :requires=>[]
+    :requires=>[], :constants=>[]
 }
 libs << {
     :lib=>'eina', :header=>'eina_list.h',
     :modname=>'EinaList', :prefix=>'eina_list', :outfile=>'eina_list.rb',
-    :requires=>[]
+    :requires=>[], :constants=>[]
 }
 libs << {
     :lib=>'eina', :header=>'eina_hash.h',
     :modname=>'EinaHash', :prefix=>'eina_hash', :outfile=>'eina_hash.rb',
-    :requires=>[]
+    :requires=>[], :constants=>[]
 }
 libs << {
     :lib=>'eet', :header=>'Eet.h',
     :modname=>'Eet', :prefix=>'eet', :outfile=>'eet.rb',
-    :requires=>['efl/native/eina_xattr','efl/native/eina_list']
+    :requires=>['efl/native/eina_xattr','efl/native/eina_list'], :constants=>[]
 }
 libs << {
     :lib=>'evas', :header=>'Evas.h',
     :modname=>'Evas', :prefix=>'evas', :outfile=>'evas.rb',
-    :requires=>['efl/native/eina_list']
+    :requires=>['efl/native/eina_list'], :constants=>['EVAS_LAYER_MIN','EVAS_LAYER_MAX']
 }
 libs << {
     :lib=>'edje', :header=>'Edje.h',
     :modname=>'Edje', :prefix=>'edje', :outfile=>'edje.rb',
-    :requires=>['efl/native/evas']
+    :requires=>['efl/native/evas'], :constants=>[]
 }
 libs << {
     :lib=>'ecore', :header=>'Ecore.h',
     :modname=>'Ecore', :prefix=>'ecore', :outfile=>'ecore.rb',
-    :requires=>[]
+    :requires=>[], :constants=>[]
 }
 libs << {
     :lib=>'ecore_input', :header=>'Ecore_Input.h',
     :modname=>'EcoreInput', :prefix=>'ecore_event', :outfile=>'ecore_input.rb',
-    :requires=>[]
+    :requires=>[], :constants=>[]
 }
 libs << {
     :lib=>'ecore', :header=>'Ecore_Getopt.h',
     :modname=>'EcoreGetopt', :prefix=>'ecore_getopt', :outfile=>'ecore_getopt.rb',
-    :requires=>['efl/native/eina_list']
+    :requires=>['efl/native/eina_list'], :constants=>[]
 }
 libs << {
     :lib=>'ecore_evas', :header=>'Ecore_Evas.h',
     :modname=>'EcoreEvas', :prefix=>'ecore_evas', :outfile=>'ecore_evas.rb',
-    :requires=>['efl/native/ecore_getopt','efl/native/evas']
+    :requires=>['efl/native/ecore_getopt','efl/native/evas'], :constants=>[]
 }
 libs << {
     :lib=>'emap', :header=>'EMap.h',
     :modname=>'Emap', :prefix=>'emap', :outfile=>'emap.rb',
-    :requires=>['efl/native/eina_list']
+    :requires=>['efl/native/eina_list'], :constants=>[]
 }
 libs << {
     :lib=>'elementary',:header=>'Elementary.h',
@@ -354,6 +357,10 @@ libs.each do |lib|
         reqs = ( lib[:requires].nil? ? '' : lib[:requires].inject('') {|s,e| s+="\nrequire '#{e}'"})
         f << HEADER.gsub(/MNAME/,lib[:modname]).sub(/MY_FCT_PREFIX/,lib[:prefix]).sub(/REQUIRES/,reqs)
         f << "#{INDENT}#\n#{INDENT}ffi_lib '#{lib[:lib]}'"
+        if not lib[:constants].empty?
+            f << "\n#{INDENT}#\n#{INDENT}# CONSTANTS"
+            f << "\n"+lib[:constants].collect { |cst| INDENT+cst+"="+eval(cst).to_s}.compact.join("\n")
+        end
         print "enums, "
         if not lib[:enums].empty?
             f << "\n#{INDENT}#\n#{INDENT}# ENUMS"
