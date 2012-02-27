@@ -22,7 +22,7 @@ function each () {
         run $native
     done
     echo "  lib/efl/*.rb"
-    for wrapper in $(find $parentdir/lib/efl/ -name e*.rb | sort); do
+    for wrapper in $(find $parentdir/lib/efl/ -name e*.rb | grep -v native | sort); do
         run $wrapper
     done
 }
