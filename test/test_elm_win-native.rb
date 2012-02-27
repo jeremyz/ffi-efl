@@ -1,12 +1,14 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/native'        # requires efl/native/* which populates Efl::Native
-require 'efl/elementary'    # for Efl::Elm.init convenience
+require 'efl/native/elm/elm_win'
+require 'efl/native/elm/elm_bg'
+require 'efl/native/elm/elm_label'
+require 'efl/native/elm/elm_object'
 #
 include Efl::Native
 #
-Efl::Elm.init
+elm_init 0, FFI::MemoryPointer::NULL
 #
 win_del = Proc.new { |data,evas_object,event_info|
     elm_exit();
