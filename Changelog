@@ -1,5 +1,9 @@
 2012-01-xx Jérémy Zurcher <jeremy@asynk.ch>
-	* do not create type specific pointers, use pointer
+	* remove usage of autoload
+	* efl.rb holds objects and method_missing helper code
+	* native.rb only helps for ffi mapping
+	* follow new elementary header split
+	* object constructors use instance_eval instead of yield
 
 2011-09-02 Jérémy Zurcher <jeremy@asynk.ch>
 	* release 0.0.9
