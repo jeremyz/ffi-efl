@@ -11,7 +11,7 @@ class MyWin < Elm::ElmWin
     #
     def initialize name, title, &block
         super FFI::MemoryPointer::NULL, name, &block
-        title = title
+        title_set title
         feed
         smart_callback_add "delete,request", method(:on_delete), FFI::MemoryPointer.from_string("my data")
     end
