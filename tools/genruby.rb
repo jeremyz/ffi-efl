@@ -450,6 +450,11 @@ libs << {
     :modname=>'ElmLayout', :prefix=>'elm_layout', :outfile=>'elm/elm_layout.rb',
     :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
+libs << {
+    :lib=>ELM_LIB,:header=>'elm_cursor.h',
+    :modname=>'ElmCursor', :prefix=>'elm_cursor', :outfile=>'elm/elm_cursor.rb',
+    :requires=>["#{NATIVE}/elementary"], :constants=>[]
+}
 #
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #
