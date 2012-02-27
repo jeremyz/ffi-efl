@@ -20,7 +20,7 @@ function each () {
         run $native
     done
     echo "  lib/efl/*.rb"
-    for wrapper in $parentdir/lib/efl/e*.rb; do
+    for wrapper in $(find $parentdir/lib/efl/ -name e*.rb); do
         run $wrapper
     done
 }
