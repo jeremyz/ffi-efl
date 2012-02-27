@@ -329,7 +329,21 @@ libs << {
     :modname=>'Emap', :prefix=>'emap', :outfile=>'emap.rb',
     :requires=>["#{NATIVE}/eina_list"], :constants=>[]
 }
+#
 ELM_LIB='elementary-ver-pre-svn-09.so.0'
+#
+def elm_h header, modname, reqs=nil
+    {
+        :lib=>ELM_LIB,
+        :header=>header,
+        :modname=>modname,
+        :prefix=>header.sub(/\.h/,'').sub(/elc_/,'elm_'),
+        :outfile=>'elm/'+header.sub(/\.h/,'.rb').sub(/elc_/,'elm_'),
+        :requires=> reqs||["#{NATIVE}/elementary"],
+        :constants=>[]
+    }
+end
+#
 libs << {
     :lib=>ELM_LIB,:header=>'Elementary.h',
     :modname=>'Elm', :prefix=>'elm', :outfile=>'elementary.rb',
@@ -345,182 +359,93 @@ libs << {
     :modname=>'ElmTooltip', :prefix=>'elm', :outfile=>'elm/elm_tooltip.rb',
     :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_object_item.h',
-    :modname=>'ElmObjectItem', :prefix=>'elm_object_item', :outfile=>'elm/elm_object_item.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_icon.h',
-    :modname=>'ElmIcon', :prefix=>'elm_icon', :outfile=>'elm/elm_icon.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_scroller.h',
-    :modname=>'ElmScroller', :prefix=>'elm_scroller', :outfile=>'elm/elm_scroller.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_entry.h',
-    :modname=>'ElmEntry', :prefix=>'elm_entry', :outfile=>'elm/elm_entry.rb',
-    :requires=>["#{NATIVE}/edje","#{NATIVE}/elementary","#{NATIVE}/elm/elm_icon","#{NATIVE}/elm/elm_scroller"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_list.h',
-    :modname=>'ElmList', :prefix=>'elm_list', :outfile=>'elm/elm_list.rb',
-    :requires=>["#{NATIVE}/elementary","#{NATIVE}/elm/elm_scroller"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_win.h',
-    :modname=>'ElmWin', :prefix=>'elm_win', :outfile=>'elm/elm_win.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_bg.h',
-    :modname=>'ElmBg', :prefix=>'elm_bg', :outfile=>'elm/elm_bg.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_label.h',
-    :modname=>'ElmLabel', :prefix=>'elm_label', :outfile=>'elm/elm_label.rb',
-    :requires=>["#{NATIVE}/elementary","#{NATIVE}/elm/elm_entry"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_object.h',
-    :modname=>'ElmObject', :prefix=>'elm_object', :outfile=>'elm/elm_object.rb',
-    :requires=>["#{NATIVE}/edje","#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_box.h',
-    :modname=>'ElmBox', :prefix=>'elm_box', :outfile=>'elm/elm_box.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_button.h',
-    :modname=>'ElmButton', :prefix=>'elm_button', :outfile=>'elm/elm_button.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_frame.h',
-    :modname=>'ElmFrame', :prefix=>'elm_frame', :outfile=>'elm/elm_frame.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_panel.h',
-    :modname=>'ElmPanel', :prefix=>'elm_panel', :outfile=>'elm/elm_panel.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_image.h',
-    :modname=>'ElmImage', :prefix=>'elm_image', :outfile=>'elm/elm_image.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_grid.h',
-    :modname=>'ElmGrid', :prefix=>'elm_grid', :outfile=>'elm/elm_grid.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_menu.h',
-    :modname=>'ElmMenu', :prefix=>'elm_menu', :outfile=>'elm/elm_menu.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_check.h',
-    :modname=>'ElmCheck', :prefix=>'elm_check', :outfile=>'elm/elm_check.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_clock.h',
-    :modname=>'ElmClock', :prefix=>'elm_clock', :outfile=>'elm/elm_clock.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_calendar.h',
-    :modname=>'ElmCalendar', :prefix=>'elm_calendar', :outfile=>'elm/elm_calendar.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_bubble.h',
-    :modname=>'ElmBubble', :prefix=>'elm_bubble', :outfile=>'elm/elm_bubble.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_layout.h',
-    :modname=>'ElmLayout', :prefix=>'elm_layout', :outfile=>'elm/elm_layout.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_cursor.h',
-    :modname=>'ElmCursor', :prefix=>'elm_cursor', :outfile=>'elm/elm_cursor.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_notify.h',
-    :modname=>'ElmNotify', :prefix=>'elm_notify', :outfile=>'elm/elm_notify.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_flip.h',
-    :modname=>'ElmFlip', :prefix=>'elm_flip', :outfile=>'elm/elm_flip.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_flipselector.h',
-    :modname=>'ElmFlipSelector', :prefix=>'elm_flipselector', :outfile=>'elm/elm_flipselector.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_diskselector.h',
-    :modname=>'ElmDiskSelector', :prefix=>'elm_diskselector', :outfile=>'elm/elm_diskselector.rb',
-    :requires=>["#{NATIVE}/elementary","#{NATIVE}/elm/elm_scroller"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_hover.h',
-    :modname=>'ElmHover', :prefix=>'elm_hover', :outfile=>'elm/elm_hover.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elc_hoversel.h',
-    :modname=>'ElmHoverSel', :prefix=>'elm_hoversel', :outfile=>'elm/elm_hoversel.rb',
-    :requires=>["#{NATIVE}/elementary","#{NATIVE}/elm/elm_icon"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_colorselector.h',
-    :modname=>'ElmColorSelector', :prefix=>'elm_colorselector', :outfile=>'elm/elm_colorselector.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elc_fileselector.h',
-    :modname=>'ElmFileSelector', :prefix=>'elm_fileselector', :outfile=>'elm/elm_fileselector.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elc_fileselector_entry.h',
-    :modname=>'ElmFileSelectorEntry', :prefix=>'elm_fileselector_entry', :outfile=>'elm/elm_fileselector_entry.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elc_fileselector_button.h',
-    :modname=>'ElmFileSelectorButton', :prefix=>'elm_fileselector_button', :outfile=>'elm/elm_fileselector_button.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_spinner.h',
-    :modname=>'ElmSpinner', :prefix=>'elm_spinner', :outfile=>'elm/elm_spinner.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_slider.h',
-    :modname=>'ElmSlider', :prefix=>'elm_slider', :outfile=>'elm/elm_slider.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_panes.h',
-    :modname=>'ElmPanes', :prefix=>'elm_panes', :outfile=>'elm/elm_panes.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
-#
+libs << elm_h('elm_object_item.h', 'ElmObjectItem')
+libs << elm_h('elm_object.h', 'ElmObject', ["#{NATIVE}/edje","#{NATIVE}/elementary"])
+libs << elm_h('elm_icon.h', 'ElmIcon')
+libs << elm_h('elm_scroller.h', 'ElmScroller')
+libs << elm_h('elm_entry.h', 'ElmEntry', ["#{NATIVE}/edje","#{NATIVE}/elementary","#{NATIVE}/elm/elm_icon","#{NATIVE}/elm/elm_scroller"])
+libs << elm_h('elm_list.h', 'ElmList', ["#{NATIVE}/elementary","#{NATIVE}/elm/elm_scroller"])
+#libs << elm_h('elc_anchorblock.h', 'ElmX')
+#libs << elm_h('elc_anchorview.h', 'ElmX')
+#libs << elm_h('elc_ctxpopup.h', 'ElmX')
+libs << elm_h('elc_fileselector_button.h', 'ElmFileSelectorButton')
+libs << elm_h('elc_fileselector_entry.h', 'ElmFileSelectorEntry')
+libs << elm_h('elc_fileselector.h', 'ElmFileSelector')
+libs << elm_h('elc_hoversel.h', 'ElmHoverSel', ["#{NATIVE}/elementary","#{NATIVE}/elm/elm_icon"])
+#libs << elm_h('elc_multibuttonentry.h', 'ElmX')
+#libs << elm_h('elc_naviframe.h', 'ElmX')
+#libs << elm_h('elm_actionslider.h', 'ElmX')
+#libs << elm_h('elm_app.h', 'ElmX')
+#libs << elm_h('elm_authors.h', 'ElmX')
+libs << elm_h('elm_bg.h', 'ElmBg')
+libs << elm_h('elm_box.h', 'ElmBox')
+libs << elm_h('elm_bubble.h', 'ElmBubble')
+libs << elm_h('elm_button.h', 'ElmButton')
+#libs << elm_h('elm_cache.h', 'ElmX')
+libs << elm_h('elm_calendar.h', 'ElmCalendar')
+libs << elm_h('elm_check.h', 'ElmCheck')
+libs << elm_h('elm_clock.h', 'ElmClock')
+#libs << elm_h('elm_cnp.h', 'ElmX')
+libs << elm_h('elm_colorselector.h', 'ElmColorSelector')
+#libs << elm_h('elm_config.h', 'ElmX')
+#libs << elm_h('elm_conform.h', 'ElmX')
+libs << elm_h('elm_cursor.h', 'ElmCursor')
+#libs << elm_h('elm_debug.h', 'ElmX')
+libs << elm_h('elm_diskselector.h', 'ElmDiskSelector', ["#{NATIVE}/elementary","#{NATIVE}/elm/elm_scroller"])
+#libs << elm_h('elm_engine.h', 'ElmX')
+#libs << elm_h('elm_factory.h', 'ElmX')
+#libs << elm_h('elm_finger.h', 'ElmX')
+libs << elm_h('elm_flip.h', 'ElmFlip')
+libs << elm_h('elm_flipselector.h', 'ElmFlipSelector')
+#libs << elm_h('elm_focus.h', 'ElmX')
+#libs << elm_h('elm_fonts.h', 'ElmX')
+libs << elm_h('elm_frame.h', 'ElmFrame')
+#libs << elm_h('elm_gengrid.h', 'ElmX')
+#libs << elm_h('elm_genlist.h', 'ElmX')
+#libs << elm_h('elm_gesture_layer.h', 'ElmX')
+#libs << elm_h('elm_getting_started.h', 'ElmX')
+#libs << elm_h('elm_glview.h', 'ElmX')
+libs << elm_h('elm_grid.h', 'ElmGrid')
+libs << elm_h('elm_hover.h', 'ElmHover')
+libs << elm_h('elm_image.h', 'ElmImage')
+#libs << elm_h('elm_index.h', 'ElmX')
+#libs << elm_h('elm_intro.h', 'ElmX')
+libs << elm_h('elm_label.h', 'ElmLabel', ["#{NATIVE}/elementary","#{NATIVE}/elm/elm_entry"])
+libs << elm_h('elm_layout.h', 'ElmLayout')
+#libs << elm_h('elm_mapbuf.h', 'ElmX')
+#libs << elm_h('elm_map.h', 'ElmX')
+libs << elm_h('elm_menu.h', 'ElmMenu')
+#libs << elm_h('elm_mirroring.h', 'ElmX')
+#libs << elm_h('elm_need.h', 'ElmX')
+libs << elm_h('elm_notify.h', 'ElmNotify')
+#libs << elm_h('elm_pager.h', 'ElmX')
+libs << elm_h('elm_panel.h', 'ElmPanel')
+libs << elm_h('elm_panes.h', 'ElmPanes')
+#libs << elm_h('elm_password.h', 'ElmX')
+#libs << elm_h('elm_photocam.h', 'ElmX')
+#libs << elm_h('elm_photo.h', 'ElmX')
+#libs << elm_h('elm_plug.h', 'ElmX')
+#libs << elm_h('elm_progressbar.h', 'ElmX')
+#libs << elm_h('elm_radio.h', 'ElmX')
+#libs << elm_h('elm_route.h', 'ElmX')
+#libs << elm_h('elm_scale.h', 'ElmX')
+#libs << elm_h('elm_scroll.h', 'ElmX')
+#libs << elm_h('elm_segment_control.h', 'ElmX')
+#libs << elm_h('elm_separator.h', 'ElmX')
+libs << elm_h('elm_slider.h', 'ElmSlider')
+#libs << elm_h('elm_slideshow.h', 'ElmX')
+libs << elm_h('elm_spinner.h', 'ElmSpinner')
+#libs << elm_h('elm_store.h', 'ElmX')
+#libs << elm_h('elm_table.h', 'ElmX')
+#libs << elm_h('elm_theme.h', 'ElmX')
+#libs << elm_h('elm_thumb.h', 'ElmX')
+#libs << elm_h('elm_toolbar.h', 'ElmX')
+#libs << elm_h('elm_transit.h', 'ElmX')
+#libs << elm_h('elm_video.h', 'ElmX')
+#libs << elm_h('elm_web.h', 'ElmX')
+#libs << elm_h('elm_widget.h', 'ElmX')
+libs << elm_h('elm_win.h', 'ElmWin')
+
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #
 libs.each do |lib|
@@ -543,7 +468,7 @@ libs.each do |lib|
     outpath = File.join lib_path, lib[:outfile]
     outdir = File.dirname outpath
     Dir.mkdir outdir unless File.exists? outdir
-    open(File.join(outpath),'w:utf-8') do |f|
+    File.open(File.join(outpath),'w:utf-8') do |f|
         reqs = ( lib[:requires].nil? ? '' : lib[:requires].inject('') {|s,e| s+="\nrequire '#{e}'"})
         f << HEADER.gsub(/MNAME/,lib[:modname]).sub(/MY_FCT_PREFIX/,lib[:prefix]).sub(/REQUIRES/,reqs)
         f << "#{INDENT}#\n#{INDENT}ffi_lib '#{lib[:lib]}'"
