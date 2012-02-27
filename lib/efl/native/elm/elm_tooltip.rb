@@ -29,10 +29,6 @@ module Efl
         #
         # FUNCTIONS
         fcts = [
-        # EAPI double elm_tooltip_delay_get(void);
-        [ :elm_tooltip_delay_get, [  ], :double ],
-        # EAPI Eina_Bool elm_tooltip_delay_set(double delay);
-        [ :elm_tooltip_delay_set, [ :double ], :bool ],
         # EAPI void elm_object_tooltip_show(Evas_Object *obj);
         [ :elm_object_tooltip_show, [ :evas_object ], :void ],
         # EAPI void elm_object_tooltip_hide(Evas_Object *obj);

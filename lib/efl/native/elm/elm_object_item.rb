@@ -83,10 +83,6 @@ module Efl
         [ :elm_object_item_cursor_engine_only_set, [ :elm_object_item, :bool ], :void ],
         # EAPI Eina_Bool elm_object_item_cursor_engine_only_get(const Elm_Object_Item *it);
         [ :elm_object_item_cursor_engine_only_get, [ :elm_object_item ], :bool ],
-        # EAPI void elm_object_item_smart_callback_add(Elm_Object_Item *it, const char *event, Elm_Object_Item_Smart_Cb func, const void *data);
-        [ :elm_object_item_smart_callback_add, [ :elm_object_item, :string, :elm_object_item_smart_cb, :pointer ], :void ],
-        # EAPI void *elm_object_item_smart_callback_del(Elm_Object_Item *it, const char *event, Elm_Object_Item_Smart_Cb func);
-        [ :elm_object_item_smart_callback_del, [ :elm_object_item, :string, :elm_object_item_smart_cb ], :pointer ],
         ]
         #
         attach_fcts fcts
