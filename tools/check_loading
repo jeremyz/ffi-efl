@@ -7,6 +7,8 @@ GREEN="\033[0;32m"
 abspath=$(readlink -f $0)
 parentdir=${abspath%/*/*}
 #
+rm /tmp/ffi-efl-* 2>/dev/null
+#
 function run () {
     echo -n "    ${1##*/}"
     outf=/tmp/ffi-efl-${1##*/}
