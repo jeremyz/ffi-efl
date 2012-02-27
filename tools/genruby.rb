@@ -481,6 +481,11 @@ libs << {
     :requires=>["#{NATIVE}/elementary","#{NATIVE}/elm/elm_scroller"], :constants=>[]
 }
 libs << {
+    :lib=>ELM_LIB,:header=>'elc_hoversel.h',
+    :modname=>'ElmHoverSel', :prefix=>'elm_hoversel', :outfile=>'elm/elm_hoversel.rb',
+    :requires=>["#{NATIVE}/elementary","#{NATIVE}/elm/elm_icon"], :constants=>[]
+}
+libs << {
     :lib=>ELM_LIB,:header=>'elm_colorselector.h',
     :modname=>'ElmColorSelector', :prefix=>'elm_colorselector', :outfile=>'elm/elm_colorselector.rb',
     :requires=>["#{NATIVE}/elementary","#{NATIVE}/elm/elm_scroller"], :constants=>[]
