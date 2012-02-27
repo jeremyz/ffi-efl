@@ -410,6 +410,11 @@ libs << {
     :modname=>'ElmPanel', :prefix=>'elm_panel', :outfile=>'elm/elm_panel.rb',
     :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
+libs << {
+    :lib=>ELM_LIB,:header=>'elm_image.h',
+    :modname=>'ElmImage', :prefix=>'elm_image', :outfile=>'elm/elm_image.rb',
+    :requires=>["#{NATIVE}/elementary"], :constants=>[]
+}
 #
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #
