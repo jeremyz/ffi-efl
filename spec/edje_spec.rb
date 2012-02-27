@@ -17,7 +17,6 @@ else
 end
 #
 require 'efl/eina_list'
-require 'efl/evas'
 require 'efl/edje'
 require './spec/helper'
 #
@@ -41,6 +40,14 @@ describe "Efl::Edje #{Efl::Edje.version.full}" do
         Edje.shutdown.should == @init+2
         Edje.shutdown.should == @init+1
         Edje.shutdown.should == @init
+    end
+    #
+    it "enum edje_external_param_flags should be correct" do
+        [ :edje_external_param_flags_none, :edje_external_param_flags_get,
+            :edje_external_param_flags_set, :edje_external_param_flags_state,
+            :edje_external_param_flags_constructor, :edje_external_param_flags_regular ].zip([0,1,2,4,8,7]) do |s,v|
+            Efl::Native.enum_value(s).should == v
+        end
     end
     #
     it "frametime get/set " do

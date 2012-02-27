@@ -1,18 +1,17 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ffi'
+require 'efl/native'
 #
 module Efl
     #
     module EcoreInput
         #
-        FCT_PREFIX = 'ecore_event_'
+        FCT_PREFIX = 'ecore_event_' unless const_defined? :FCT_PREFIX
         #
-        def self.method_missing m, *args, &block
-            sym, args_s = ModuleHelper.find_function m, FCT_PREFIX
-            self.module_eval "def self.#{m} *args, &block; r=Efl::Native.#{sym}(#{args_s}); yield r if block_given?; r; end"
-            self.send m, *args, &block
+        def self.method_missing meth, *args, &block
+            sym = Efl::MethodResolver.resolve self, meth, FCT_PREFIX
+            self.send sym, *args, &block
         end
         #
     end
@@ -31,7 +30,7 @@ module Efl
         #
         # TYPEDEFS
         # typedef uintptr_t Ecore_Window;
-        typedef :uintptr_t, :ecore_window
+        typedef :pointer, :ecore_window
         # typedef struct _Ecore_Event_Key Ecore_Event_Key;
         typedef :pointer, :ecore_event_key
         # typedef struct _Ecore_Event_Mouse_Button Ecore_Event_Mouse_Button;
@@ -44,9 +43,6 @@ module Efl
         typedef :pointer, :ecore_event_mouse_io
         # typedef struct _Ecore_Event_Modifiers Ecore_Event_Modifiers;
         typedef :pointer, :ecore_event_modifiers
-        typedef :pointer, :ecore_event_modifiers_p
-        #
-        # CALLBACKS
         #
         # VARIABLES
         # EAPI extern int ECORE_EVENT_KEY_DOWN;
@@ -75,7 +71,7 @@ module Efl
         # EAPI unsigned int ecore_event_modifier_mask(Ecore_Event_Modifier modifier);
         [ :ecore_event_modifier_mask, [ :ecore_event_modifier ], :uint ],
         # EAPI Ecore_Event_Modifier ecore_event_update_modifier(const char *key, Ecore_Event_Modifiers *modifiers, int inc);
-        [ :ecore_event_update_modifier, [ :string, :ecore_event_modifiers_p, :int ], :ecore_event_modifier ],
+        [ :ecore_event_update_modifier, [ :string, :ecore_event_modifiers, :int ], :ecore_event_modifier ],
         ]
         #
         attach_fcts fcts

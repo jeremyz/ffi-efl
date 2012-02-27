@@ -1,6 +1,8 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
+require 'efl'
+require 'efl/evas'
 require 'efl/native/ecore_evas'
 #
 module Efl
@@ -17,7 +19,7 @@ module Efl
         class REcoreEvas
             include Efl::ClassHelper
             search_prefixes 'ecore_evas_'
-            def initialize o=nil
+            def initialize o=nil, &block
                 @ptr = (
                     case o
                     when NilClass
@@ -30,7 +32,7 @@ module Efl
                         raise ArgumentError.new "wrong argument #{o.class.name}"
                     end
                 )
-                yield self if block_given?
+                instance_eval &block if block
             end
             def self.release p
                 Native.ecore_evas_free p

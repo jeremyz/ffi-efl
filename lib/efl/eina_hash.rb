@@ -1,6 +1,7 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
+require 'efl/eina'
 require 'efl/native/eina_hash'
 #
 module Efl

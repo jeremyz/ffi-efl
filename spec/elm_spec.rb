@@ -1,7 +1,8 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/elementary'
+require 'efl/ecore'
+require 'efl/elementary_all'
 require './spec/helper'
 #
 describe "Efl::Elm #{Efl::Elm.version.full}" do
@@ -80,10 +81,6 @@ describe "Efl::Elm #{Efl::Elm.version.full}" do
         #
         it "fullscreen set/get" do
             bool_check @win, 'fullscreen', 4
-        end
-        # FIXME depends on issue: ecore-2
-        it "maximized set/get" do
-            bool_check @win, 'maximized', 3
         end
         #
         it "iconified set/get" do
@@ -176,28 +173,7 @@ describe "Efl::Elm #{Efl::Elm.version.full}" do
             o2 = @win.inlined_image_object
             o1.should === o2
         end
-        # TODO EAPI void elm_win_illume_command_send(Evas_Object *obj, Elm_Illume_Command command, void *params);;
-        # TODO EAPI Ecore_X_Window elm_win_xwindow_get(const Evas_Object *obj);
         #
-        describe 'Efl::Elm::ElmInWin' do
-            it "activate, content set/get/unset" do
-                @iwin = @win.inwin_add
-                o1 = @win.evas.object_rectangle_add
-                o2 = @win.evas.object_rectangle_add
-                @iwin.activate
-                @iwin.content_set o1
-                @iwin.content.should == o1.to_ptr
-                @iwin.content_get.should === o1.to_ptr
-                @iwin.content= o2
-                @iwin.content.should === o2.to_ptr
-                @iwin.content_get.should === o2.to_ptr
-                @iwin.content_unset
-                @iwin.content.should == FFI::Pointer::NULL
-                @iwin.content_get.should == FFI::Pointer::NULL
-                o1.free
-                o2.free
-            end
-        end
     end
     #
     describe 'Efl::Elm::ElmBg' do
@@ -228,7 +204,7 @@ describe "Efl::Elm #{Efl::Elm.version.full}" do
             @bg.color_get.should == [12,24,36]
             @bg.color= 2,4,8
             @bg.color.should == [2,4,8]
-            @bg.class.superclass.instance_method(:color).bind(@bg).call.should == [200,255,100,150]
+#            @bg.class.superclass.instance_method(:color_get).bind(@bg).call.should == [200,255,100,150]
         end
         #
     end
@@ -283,82 +259,5 @@ describe "Efl::Elm #{Efl::Elm.version.full}" do
         end
     end
     #
-    describe 'Efl::Elm::ElmPager' do
-        #
-        before(:all) {
-            realize_win
-            @p = Elm::ElmPager.new @win
-            @os = []
-            0.upto(3) do
-                @os << @win.evas.object_rectangle_add
-            end
-        }
-        after(:all) {
-            @p.free
-            @bg.free
-            @win.free
-        }
-        #
-        it "content push pop promote bottom_get top_get" do
-            @os.each do |o|
-                @p.content_push o
-            end
-            @p.content_top_get.should == @os[-1].to_ptr
-            @p.content_bottom_get.should == @os[0].to_ptr
-            @p.content_pop
-            @p.content_top_get.should == @os[-2].to_ptr
-            @p.content_bottom_get.should == @os[0].to_ptr
-            @p.content_promote @os[0]
-            @p.content_top_get.should == @os[0].to_ptr
-            @p.content_bottom_get.should == @os[1].to_ptr
-        end
-    end
-    #
-    describe 'Efl::Elm::ElmPanel' do
-        #
-        before(:all) {
-            realize_win
-            @p = Elm::ElmPanel.new @win
-            @os = []
-        }
-        after(:all) {
-            @p.free
-            @bg.free
-            @win.free
-        }
-        #
-        it "orient set/get" do
-            @p.orient_set :elm_panel_orient_bottom
-            @p.orient_get.should == :elm_panel_orient_bottom
-            @p.orient= :elm_panel_orient_top
-            @p.orient.should == :elm_panel_orient_top
-        end
-        #
-        it "content set/get/unset" do
-            o = @win.evas.object_rectangle_add
-            @p.content_set o
-            @p.content_get.should == o.to_ptr
-            @p.content_unset.should == o.to_ptr
-            o.free
-            o = @win.evas.object_rectangle_add
-            @p.content= o
-            @p.content.should == o.to_ptr
-            @p.content_unset.should == o.to_ptr
-            o.free
-        end
-        #
-        it "hidden set/get toggle" do
-            @p.hidden_set true
-            @p.hidden_get.should be_true
-            @p.hidden=false
-            @p.hidden.should be_false
-            @p.toggle
-            @p.hidden_get.should be_true
-            @p.hidden.should be_true
-            @p.toggle
-            @p.hidden_get.should be_false
-            @p.hidden.should be_false
-        end
-    end
 end
 

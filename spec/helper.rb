@@ -1,18 +1,19 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/eina'
-require 'efl/evas'
-require 'efl/ecore'
+require 'efl/eina_log'
+Efl::Eina.init
+Efl::EinaLog.level_set :eina_log_level_critical
 #
 def realize_evas
     width = 300
     height = 200
     @pixels = FFI::MemoryPointer.new :int, width*height
-    @e = Efl::Evas::REvas.new
-    @e.output_method_set Efl::Evas::render_method_lookup("buffer")
-    @e.output_viewport_set 0, 0, width, height
-    @e.output_size_set width, height
+    @e = Efl::Evas::REvas.new do
+        output_method_set Efl::Evas::render_method_lookup("buffer")
+        output_viewport_set 0, 0, width, height
+        output_size_set width, height
+    end
     einfo = Efl::Native::EngineInfoBufferStruct.new @e.engine_info
     einfo[:info][:depth_type] = Efl::Evas::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
     einfo[:info][:dest_buffer] = @pixels
@@ -58,15 +59,15 @@ def char_check t, fct, delay=nil
 end
 #
 def realize_win
-    @win = Elm::ElmWin.new(nil, 'TEST') do |w|
-        w.title= 'spec win'
-        w.move 100, 100
-        w.resize 100, 100
+    @win = Elm::ElmWin.new(nil, 'TEST') do
+        title= 'spec win'
+        move 100, 100
+        resize 100, 100
     end
-    @bg = Elm::ElmBg.new(@win) do |bg|
-        bg.size_hint_weight_set 1.0, 1.0
-        bg.evas_object_color_set 200,255,100,150
-        bg.show
+    @bg = Elm::ElmBg.new(@win) do
+        size_hint_weight_set 1.0, 1.0
+        evas_object_color_set 200,255,100,150
+        show
     end
     @win.show
 end

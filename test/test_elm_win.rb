@@ -1,32 +1,33 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/elementary'
+require 'efl/elm/elm_win'
+require 'efl/elm/elm_bg'
+require 'efl/elm/elm_label'
 #
 include Efl
 #
 class MyWin < Elm::ElmWin
     #
-    def initialize name, title
-        super FFI::MemoryPointer::NULL, name
+    def initialize name, title, &block
+        super FFI::MemoryPointer::NULL, name, &block
         title = title
         feed
         smart_callback_add "delete,request", method(:on_delete), FFI::MemoryPointer.from_string("my data")
     end
     def feed
-        @bg = Elm::ElmBg.new(self) do |bg|
-#            bg.color = 200,255,100
-            bg.size_hint_weight_expand
-            bg.evas_object_color = 200,255,100,150
-            bg.show
+        @bg = Elm::ElmBg.new(self) do
+            size_hint_weight_expand
+            evas_object_color_set 200,255,100,150
+            show
         end
         resize_object_add @bg
-        @lb = Elm::ElmLabel.new(self) do |lb|
-            lb.text = "Hello World!"
-            lb.size_hint_align_fill
-            lb.size_hint_weight_expand
+        @lb = Elm::ElmLabel.new(self) do
+            text_set "Hello World!"
+            size_hint_align_fill
+            size_hint_weight_expand
+            show
         end
-        @lb.show
         resize_object_add @lb
     end
     def on_delete data, evas_object, event_info
@@ -37,11 +38,11 @@ end
 #
 Elm.init
 #
-win = MyWin.new "App name", "Window Title" do |w|
-    w.alpha = true
-    w.move 300, 300
-    w.resize 200, 100
-    w.show
+win = MyWin.new "App name", "Window Title" do
+    alpha_set true
+    resize 200, 100
+    center_set 600, 300
+    show
 end
 #
 Elm.run

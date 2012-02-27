@@ -9,17 +9,18 @@ parentdir=${abspath%/*/*}
 #
 function run () {
     echo -n "    ${1##*/}"
-    $RUBY -I $parentdir/lib $1 2>/dev/null && echo -e "$GREEN OK$RESET" || echo -e "$RED KO$RESET"
+    outf=/tmp/ffi-efl-${1##*/}
+    $RUBY -I $parentdir/lib $1 2>>$outf && rm $outf && echo -e "$GREEN OK$RESET" || echo -e "$RED KO$RESET"
 }
 #
 function each () {
     echo $($RUBY --version)
     echo "  lib/efl/native/*.rb"
-    for native in $parentdir/lib/efl/native/*.rb; do
+    for native in $(find $parentdir/lib/efl/native/ -name *.rb); do
         run $native
     done
     echo "  lib/efl/*.rb"
-    for wrapper in $parentdir/lib/efl/e*.rb; do
+    for wrapper in $(find $parentdir/lib/efl/ -name e*.rb); do
         run $wrapper
     done
 }

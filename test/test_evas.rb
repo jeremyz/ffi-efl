@@ -59,19 +59,19 @@ h = 240
 #
 canvas, pixels = create_canvas w, h
 #
-bg = canvas.object_rectangle_add do |b|
-    b.color = 255, 255, 255, 255
-    b.move 0, 0
-    b.resize w, h
+bg = canvas.object_rectangle_add do
+    color_set 255, 255, 255, 255
+    move 0, 0
+    resize w, h
 end
 bg.show
 #
 draw_scene canvas
 #
-r1 = canvas.object_rectangle_add do |r|
-    r.color = 255, 0, 0, 255
-    r.move 10, 10
-    r.resize 100, 100
+r1 = canvas.object_rectangle_add do
+    color_set 0, 0, 0, 255
+    move 10, 10
+    resize 100, 100
 end
 r1.show
 #
@@ -82,10 +82,10 @@ r2 = canvas.object_rectangle_add do |r|
 end
 r2.show
 #
-r3 = canvas.object_rectangle_add do |r|
-    r.color = 0, 128, 0, 255
-    r.move 60, 60
-    r.resize 50, 50
+r3 = canvas.object_rectangle_add do
+    color_set 0, 128, 0, 255
+    move 60, 60
+    resize 50, 50
 end
 r3.show
 #

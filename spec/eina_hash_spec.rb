@@ -1,7 +1,6 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl'
 require 'efl/eina_hash'
 #
 describe 'Efl::EinaHash' do

@@ -43,6 +43,31 @@ for header in \
     "${INCLUDE}/ecore-1/Ecore_File.h" \
     "${INCLUDE}/EMap.h" \
     "${INCLUDE}/elementary-0/Elementary.h" \
+    "${INCLUDE}/elementary-0/elm_general.h" \
+    "${INCLUDE}/elementary-0/elm_tooltip.h" \
+    "${INCLUDE}/elementary-0/elm_object_item.h" \
+    "${INCLUDE}/elementary-0/elm_icon.h" \
+    "${INCLUDE}/elementary-0/elm_scroller.h" \
+    "${INCLUDE}/elementary-0/elm_entry.h" \
+    "${INCLUDE}/elementary-0/elm_list.h" \
+    "${INCLUDE}/elementary-0/elm_win.h" \
+    "${INCLUDE}/elementary-0/elm_bg.h" \
+    "${INCLUDE}/elementary-0/elm_label.h" \
+    "${INCLUDE}/elementary-0/elm_object.h" \
+    "${INCLUDE}/elementary-0/elm_box.h" \
+    "${INCLUDE}/elementary-0/elm_button.h" \
+    "${INCLUDE}/elementary-0/elm_frame.h" \
+    "${INCLUDE}/elementary-0/elm_panel.h" \
+    "${INCLUDE}/elementary-0/elm_image.h" \
+    "${INCLUDE}/elementary-0/elm_grid.h" \
+    "${INCLUDE}/elementary-0/elm_menu.h" \
+    "${INCLUDE}/elementary-0/elm_check.h" \
+    "${INCLUDE}/elementary-0/elm_clock.h" \
+    "${INCLUDE}/elementary-0/elm_calendar.h" \
+    "${INCLUDE}/elementary-0/elm_bubble.h" \
+    "${INCLUDE}/elementary-0/elm_layout.h" \
+    "${INCLUDE}/elementary-0/elm_cursor.h" \
+    "${INCLUDE}/elementary-0/elm_notify.h" \
     ; do
     #
     if [ ! -e "$header" ]; then

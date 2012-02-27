@@ -1,7 +1,6 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/eina'
 require 'efl/eina_log'
 require './spec/helper'
 #
@@ -19,6 +18,16 @@ describe 'Efl::EinaLog' do
         EinaLog.level_get.should == 2
         EinaLog.level = 3
         EinaLog.level.should == 3
+    end
+    #
+    it "eina_log_level enum should be well defined" do
+        Efl::Native.enum_value(:eina_log_level_critical).should == 0
+        Efl::Native.enum_value(:eina_log_level_err).should == 1
+        Efl::Native.enum_value(:eina_log_level_warn).should == 2
+        Efl::Native.enum_value(:eina_log_level_info).should == 3
+        Efl::Native.enum_value(:eina_log_level_dbg).should == 4
+        Efl::Native.enum_value(:eina_log_levels).should == 5
+        Efl::Native.enum_value(:eina_log_level_unknown).should == (-2147483647-1)
     end
     #
     it "color_disable set/get" do
@@ -60,12 +69,5 @@ describe 'Efl::EinaLog' do
         EinaLog.main_thread_check.should be_true
         EinaLog.threads_enable
     end
-    # EAPI void eina_log_threads_enable(void);
-    # EAPI void eina_log_print_cb_set(Eina_Log_Print_Cb cb, void *data);
     #
-    # EAPI void eina_log_print(int domain, Eina_Log_Level level, const char *file, const char *function, int line, const char *fmt, ...);
-    # EAPI void eina_log_vprint(int domain, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, va_list args);
-    # EAPI void eina_log_print_cb_stdout(const Eina_Log_Domain *d, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, void *data, va_list args);
-    # EAPI void eina_log_print_cb_stderr(const Eina_Log_Domain *d, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, void *data, va_list args);
-    # EAPI void eina_log_print_cb_file(const Eina_Log_Domain *d, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, void *data, va_list args);
 end

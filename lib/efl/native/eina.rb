@@ -1,18 +1,17 @@
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/ffi'
+require 'efl/native'
 #
 module Efl
     #
     module Eina
         #
-        FCT_PREFIX = 'eina_'
+        FCT_PREFIX = 'eina_' unless const_defined? :FCT_PREFIX
         #
-        def self.method_missing m, *args, &block
-            sym, args_s = ModuleHelper.find_function m, FCT_PREFIX
-            self.module_eval "def self.#{m} *args, &block; r=Efl::Native.#{sym}(#{args_s}); yield r if block_given?; r; end"
-            self.send m, *args, &block
+        def self.method_missing meth, *args, &block
+            sym = Efl::MethodResolver.resolve self, meth, FCT_PREFIX
+            self.send sym, *args, &block
         end
         #
     end
@@ -21,18 +20,13 @@ module Efl
         #
         ffi_lib 'eina'
         #
-        # ENUMS
-        #
         # TYPEDEFS
         # typedef struct _Eina_Version Eina_Version;
         typedef :pointer, :eina_version
-        typedef :pointer, :eina_version_p
-        #
-        # CALLBACKS
         #
         # VARIABLES
         # EAPI extern Eina_Version *eina_version;
-        attach_variable :eina_version, :eina_version_p
+        attach_variable :eina_version, :eina_version
         #
         # FUNCTIONS
         fcts = [
@@ -45,7 +39,7 @@ module Efl
         # EAPI int eina_threads_shutdown(void);
         [ :eina_threads_shutdown, [  ], :int ],
         # EAPI Eina_Bool eina_main_loop_is(void);
-        [ :eina_main_loop_is, [  ], :eina_bool ],
+        [ :eina_main_loop_is, [  ], :bool ],
         # EAPI void eina_main_loop_define(void);
         [ :eina_main_loop_define, [  ], :void ],
         ]
