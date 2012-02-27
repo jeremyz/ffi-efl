@@ -56,6 +56,7 @@ for header in \
     "${INCLUDE}/elementary-0/elm_object.h" \
     "${INCLUDE}/elementary-0/elm_box.h" \
     "${INCLUDE}/elementary-0/elm_button.h" \
+    "${INCLUDE}/elementary-0/elm_frame.h" \
     ; do
     #
     if [ ! -e "$header" ]; then
