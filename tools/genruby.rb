@@ -360,6 +360,11 @@ libs << {
     :modname=>'ElmScroller', :prefix=>'elm_scroller', :outfile=>'elm/elm_scroller.rb',
     :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
+libs << {
+    :lib=>ELM_LIB,:header=>'elm_entry.h',
+    :modname=>'ElmEntry', :prefix=>'elm_entry', :outfile=>'elm/elm_entry.rb',
+    :requires=>["#{NATIVE}/elementary"], :constants=>[]
+}
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #
 libs.each do |lib|
