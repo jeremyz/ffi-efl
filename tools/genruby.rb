@@ -445,6 +445,11 @@ libs << {
     :modname=>'ElmBubble', :prefix=>'elm_bubble', :outfile=>'elm/elm_bubble.rb',
     :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
+libs << {
+    :lib=>ELM_LIB,:header=>'elm_layout.h',
+    :modname=>'ElmLayout', :prefix=>'elm_layout', :outfile=>'elm/elm_layout.rb',
+    :requires=>["#{NATIVE}/elementary"], :constants=>[]
+}
 #
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #

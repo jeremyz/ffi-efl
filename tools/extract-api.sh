@@ -65,6 +65,7 @@ for header in \
     "${INCLUDE}/elementary-0/elm_clock.h" \
     "${INCLUDE}/elementary-0/elm_calendar.h" \
     "${INCLUDE}/elementary-0/elm_bubble.h" \
+    "${INCLUDE}/elementary-0/elm_layout.h" \
     ; do
     #
     if [ ! -e "$header" ]; then
