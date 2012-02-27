@@ -465,6 +465,11 @@ libs << {
     :modname=>'ElmFlip', :prefix=>'elm_flip', :outfile=>'elm/elm_flip.rb',
     :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
+libs << {
+    :lib=>ELM_LIB,:header=>'elm_flipselector.h',
+    :modname=>'ElmFlipSelector', :prefix=>'elm_flipselector', :outfile=>'elm/elm_flipselector.rb',
+    :requires=>["#{NATIVE}/elementary"], :constants=>[]
+}
 #
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #

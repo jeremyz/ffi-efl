@@ -69,6 +69,7 @@ for header in \
     "${INCLUDE}/elementary-0/elm_cursor.h" \
     "${INCLUDE}/elementary-0/elm_notify.h" \
     "${INCLUDE}/elementary-0/elm_flip.h" \
+    "${INCLUDE}/elementary-0/elm_flipselector.h" \
     ; do
     #
     if [ ! -e "$header" ]; then
