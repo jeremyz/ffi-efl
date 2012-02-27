@@ -72,6 +72,7 @@ for header in \
     "${INCLUDE}/elementary-0/elm_flipselector.h" \
     "${INCLUDE}/elementary-0/elm_diskselector.h" \
     "${INCLUDE}/elementary-0/elm_hover.h" \
+    "${INCLUDE}/elementary-0/elm_colorselector.h" \
     ; do
     #
     if [ ! -e "$header" ]; then
