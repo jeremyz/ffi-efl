@@ -190,11 +190,13 @@ def gen_functions path, indent
     r
 end
 #
+NATIVE='efl/native'
+#
 HEADER =<<-EOF
 #! /usr/bin/env ruby
 # -*- coding: UTF-8 -*-
 #
-require 'efl/native'REQUIRES
+require '#{NATIVE}'REQUIRES
 #
 module Efl
     #
@@ -290,17 +292,17 @@ libs << {
 libs << {
     :lib=>'eet', :header=>'Eet.h',
     :modname=>'Eet', :prefix=>'eet', :outfile=>'eet.rb',
-    :requires=>['efl/native/eina_xattr','efl/native/eina_list'], :constants=>[]
+    :requires=>["#{NATIVE}/eina_xattr","#{NATIVE}/eina_list"], :constants=>[]
 }
 libs << {
     :lib=>'evas', :header=>'Evas.h',
     :modname=>'Evas', :prefix=>'evas', :outfile=>'evas.rb',
-    :requires=>['efl/native/eina_list'], :constants=>['EVAS_LAYER_MIN','EVAS_LAYER_MAX']
+    :requires=>["#{NATIVE}/eina_list"], :constants=>['EVAS_LAYER_MIN','EVAS_LAYER_MAX']
 }
 libs << {
     :lib=>'edje', :header=>'Edje.h',
     :modname=>'Edje', :prefix=>'edje', :outfile=>'edje.rb',
-    :requires=>['efl/native/evas'], :constants=>[]
+    :requires=>["#{NATIVE}/evas"], :constants=>[]
 }
 libs << {
     :lib=>'ecore', :header=>'Ecore.h',
@@ -315,37 +317,38 @@ libs << {
 libs << {
     :lib=>'ecore', :header=>'Ecore_Getopt.h',
     :modname=>'EcoreGetopt', :prefix=>'ecore_getopt', :outfile=>'ecore_getopt.rb',
-    :requires=>['efl/native/eina_list'], :constants=>[]
+    :requires=>["#{NATIVE}/eina_list"], :constants=>[]
 }
 libs << {
     :lib=>'ecore_evas', :header=>'Ecore_Evas.h',
     :modname=>'EcoreEvas', :prefix=>'ecore_evas', :outfile=>'ecore_evas.rb',
-    :requires=>['efl/native/ecore_getopt','efl/native/evas'], :constants=>[]
+    :requires=>["#{NATIVE}/ecore_getopt","#{NATIVE}/evas"], :constants=>[]
 }
 libs << {
     :lib=>'emap', :header=>'EMap.h',
     :modname=>'Emap', :prefix=>'emap', :outfile=>'emap.rb',
-    :requires=>['efl/native/eina_list'], :constants=>[]
+    :requires=>["#{NATIVE}/eina_list"], :constants=>[]
 }
+ELM_LIB='elementary-ver-pre-svn-09.so.0'
 libs << {
-    :lib=>'elementary-ver-pre-svn-09.so.0',:header=>'Elementary.h',
+    :lib=>ELM_LIB,:header=>'Elementary.h',
     :modname=>'Elm', :prefix=>'elm', :outfile=>'elementary.rb',
-    :requires=>['efl/native/elm/elm_general','efl/native/elm/elm_tooltip'], :constants=>[]
+    :requires=>["#{NATIVE}/elm/elm_general","#{NATIVE}/elm/elm_tooltip"], :constants=>[]
 }
 libs << {
-    :lib=>'elementary-ver-pre-svn-09.so.0',:header=>'elm_general.h',
+    :lib=>ELM_LIB,:header=>'elm_general.h',
     :modname=>'Elm', :prefix=>'elm', :outfile=>'elm/elm_general.rb',
-    :requires=>['efl/native/evas','efl/native/elementary'], :constants=>[]
+    :requires=>["#{NATIVE}/evas","#{NATIVE}/elementary"], :constants=>[]
 }
 libs << {
-    :lib=>'elementary-ver-pre-svn-09.so.0',:header=>'elm_tooltip.h',
+    :lib=>ELM_LIB,:header=>'elm_tooltip.h',
     :modname=>'Elm', :prefix=>'elm', :outfile=>'elm/elm_tooltip.rb',
-    :requires=>['efl/native/elementary'], :constants=>[]
+    :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
 libs << {
-    :lib=>'elementary-ver-pre-svn-09.so.0',:header=>'elm_object_item.h',
+    :lib=>ELM_LIB,:header=>'elm_object_item.h',
     :modname=>'Elm', :prefix=>'elm_object_item', :outfile=>'elm/elm_object_item.rb',
-    :requires=>['efl/native/elementary'], :constants=>[]
+    :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #
