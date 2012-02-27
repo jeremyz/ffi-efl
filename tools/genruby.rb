@@ -490,6 +490,21 @@ libs << {
     :modname=>'ElmColorSelector', :prefix=>'elm_colorselector', :outfile=>'elm/elm_colorselector.rb',
     :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
+libs << {
+    :lib=>ELM_LIB,:header=>'elc_fileselector.h',
+    :modname=>'ElmFileSelector', :prefix=>'elm_fileselector', :outfile=>'elm/elm_fileselector.rb',
+    :requires=>["#{NATIVE}/elementary"], :constants=>[]
+}
+libs << {
+    :lib=>ELM_LIB,:header=>'elc_fileselector_entry.h',
+    :modname=>'ElmFileSelectorEntry', :prefix=>'elm_fileselector_entry', :outfile=>'elm/elm_fileselector_entry.rb',
+    :requires=>["#{NATIVE}/elementary"], :constants=>[]
+}
+libs << {
+    :lib=>ELM_LIB,:header=>'elc_fileselector_button.h',
+    :modname=>'ElmFileSelectorButton', :prefix=>'elm_fileselector_button', :outfile=>'elm/elm_fileselector_button.rb',
+    :requires=>["#{NATIVE}/elementary"], :constants=>[]
+}
 #
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #
