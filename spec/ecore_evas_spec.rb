@@ -52,16 +52,17 @@ describe 'Efl::EcoreEvas' do
             EcoreEvas.init.should == 2
         end
         before(:each) do
-            @e = EcoreEvas::REcoreEvas.new :engine_name=>"software_x11", :x=>10, :y=>10, :w=>100, :h=>120
+            @e = EcoreEvas::REcoreEvas.new :engine_name=>"software_x11", :x=>10, :y=>10, :w=>100, :h=>120 do
+                move 10, 10
+                show
+            end
             @canvas = @e.evas
-            @bg = @canvas.object_rectangle_add { |o|
-                o.color = 100, 100, 255, 255
-                o.size = @e.size
-            }
-            @bg.show
+            @bg = @canvas.object_rectangle_add do
+                color_set 100, 100, 255, 255
+                show
+            end
+            @bg.size = @e.size
             @e.object_associate @bg, :ecore_evas_object_associate_base
-            @e.move 10, 10
-            @e.show
         end
         after(:each) do
             @e.free

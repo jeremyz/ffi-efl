@@ -9,10 +9,11 @@ def realize_evas
     width = 300
     height = 200
     @pixels = FFI::MemoryPointer.new :int, width*height
-    @e = Efl::Evas::REvas.new
-    @e.output_method_set Efl::Evas::render_method_lookup("buffer")
-    @e.output_viewport_set 0, 0, width, height
-    @e.output_size_set width, height
+    @e = Efl::Evas::REvas.new do
+        output_method_set Efl::Evas::render_method_lookup("buffer")
+        output_viewport_set 0, 0, width, height
+        output_size_set width, height
+    end
     einfo = Efl::Native::EngineInfoBufferStruct.new @e.engine_info
     einfo[:info][:depth_type] = Efl::Evas::EVAS_ENGINE_BUFFER_DEPTH_ARGB32
     einfo[:info][:dest_buffer] = @pixels

@@ -58,7 +58,7 @@ module Efl
             include Efl::ClassHelper
             search_prefixes 'evas_'
             #
-            def initialize o=nil
+            def initialize o=nil, &block
                 @ptr = (
                     case o
                     when NilClass
@@ -69,7 +69,7 @@ module Efl
                         raise ArgumentError.new "wrong argument #{o.class.name}"
                     end
                 )
-                yield self if block_given?
+                instance_eval &block if block
             end
             def self.release p
                 Native.evas_free p
@@ -133,7 +133,7 @@ module Efl
             include Efl::ClassHelper
             search_prefixes 'evas_object_', 'evas_'
             #
-            def initialize a, *args
+            def initialize a, *args, &block
                 @ptr = (
                     case a
                     when FFI::Pointer
@@ -144,7 +144,7 @@ module Efl
                         raise ArgumentError.new "wrong argument #{a.class.name}"
                     end
                 )
-                yield self if block_given?
+                instance_eval &block if block
             end
             def self.release p
                 Native.evas_object_del p unless p.nil?
@@ -161,9 +161,9 @@ module Efl
                 REvasObject.release @ptr
                 @ptr=nil
             end
-            def object_box_add
+            def object_box_add &block
                 o = Evas::REvasBox.new FFI::AutoPointer.new Native.evas_object_box_add_to(@ptr), REvasObject.method(:release)
-                yield o if block_given?
+                o.instance_eval &block if block
                 o
             end
             def evas_name

@@ -73,8 +73,9 @@ describe "Efl::Evas #{Efl::Evas.version.full}" do
         end
         #
         it "should be able to create and destroy evas" do
-            e1 = Evas::REvas.new
-            e1.address.should_not == 0
+            e1 = Evas::REvas.new do
+                address.should_not == 0
+            end
             e2 = Evas::REvas.new e1.to_ptr
             e1.address.should == e2.address
             (e1==e2).should be_false
