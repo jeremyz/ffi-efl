@@ -455,6 +455,11 @@ libs << {
     :modname=>'ElmCursor', :prefix=>'elm_cursor', :outfile=>'elm/elm_cursor.rb',
     :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
+libs << {
+    :lib=>ELM_LIB,:header=>'elm_notify.h',
+    :modname=>'ElmNotify', :prefix=>'elm_notify', :outfile=>'elm/elm_notify.rb',
+    :requires=>["#{NATIVE}/elementary"], :constants=>[]
+}
 #
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #
