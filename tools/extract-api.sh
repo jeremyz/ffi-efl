@@ -77,6 +77,7 @@ for header in \
     "${INCLUDE}/elementary-0/elc_fileselector.h" \
     "${INCLUDE}/elementary-0/elc_fileselector_entry.h" \
     "${INCLUDE}/elementary-0/elc_fileselector_button.h" \
+    "${INCLUDE}/elementary-0/elm_spinner.h" \
     ; do
     #
     if [ ! -e "$header" ]; then
