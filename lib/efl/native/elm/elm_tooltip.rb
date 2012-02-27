@@ -6,7 +6,7 @@ require 'efl/native/elementary'
 #
 module Efl
     #
-    module Elm
+    module ElmTooltip
         #
         FCT_PREFIX = 'elm_' unless const_defined? :FCT_PREFIX
         #

@@ -342,12 +342,12 @@ libs << {
 }
 libs << {
     :lib=>ELM_LIB,:header=>'elm_tooltip.h',
-    :modname=>'Elm', :prefix=>'elm', :outfile=>'elm/elm_tooltip.rb',
+    :modname=>'ElmTooltip', :prefix=>'elm', :outfile=>'elm/elm_tooltip.rb',
     :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
 libs << {
     :lib=>ELM_LIB,:header=>'elm_object_item.h',
-    :modname=>'Elm', :prefix=>'elm_object_item', :outfile=>'elm/elm_object_item.rb',
+    :modname=>'ElmObjectItem', :prefix=>'elm_object_item', :outfile=>'elm/elm_object_item.rb',
     :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
 Dir.mkdir lib_path unless (File.exists? lib_path)
