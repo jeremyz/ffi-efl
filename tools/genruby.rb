@@ -350,6 +350,11 @@ libs << {
     :modname=>'ElmObjectItem', :prefix=>'elm_object_item', :outfile=>'elm/elm_object_item.rb',
     :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
+libs << {
+    :lib=>ELM_LIB,:header=>'elm_icon.h',
+    :modname=>'ElmIcon', :prefix=>'elm_icon', :outfile=>'elm/elm_icon.rb',
+    :requires=>["#{NATIVE}/elementary"], :constants=>[]
+}
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #
 libs.each do |lib|
