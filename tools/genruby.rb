@@ -478,7 +478,7 @@ libs << {
 libs << {
     :lib=>ELM_LIB,:header=>'elm_hover.h',
     :modname=>'ElmHover', :prefix=>'elm_hover', :outfile=>'elm/elm_hover.rb',
-    :requires=>["#{NATIVE}/elementary","#{NATIVE}/elm/elm_scroller"], :constants=>[]
+    :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
 libs << {
     :lib=>ELM_LIB,:header=>'elc_hoversel.h',
@@ -488,7 +488,7 @@ libs << {
 libs << {
     :lib=>ELM_LIB,:header=>'elm_colorselector.h',
     :modname=>'ElmColorSelector', :prefix=>'elm_colorselector', :outfile=>'elm/elm_colorselector.rb',
-    :requires=>["#{NATIVE}/elementary","#{NATIVE}/elm/elm_scroller"], :constants=>[]
+    :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
 #
 Dir.mkdir lib_path unless (File.exists? lib_path)

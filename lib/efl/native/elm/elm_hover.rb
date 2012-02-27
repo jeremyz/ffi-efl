@@ -3,7 +3,6 @@
 #
 require 'efl/native'
 require 'efl/native/elementary'
-require 'efl/native/elm/elm_scroller'
 #
 module Efl
     #
