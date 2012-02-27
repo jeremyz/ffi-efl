@@ -14,6 +14,10 @@ module Efl
             constructor :elm_layout_add
             search_prefixes 'elm_layout_'
             #
+            def edje_get &block
+                Efl::Edje::REdje.new Native.method(:elm_layout_edje_get), @ptr, &block
+            end
+            alias :edje :edje_get
         end
         #
     end
