@@ -59,15 +59,15 @@ def char_check t, fct, delay=nil
 end
 #
 def realize_win
-    @win = Elm::ElmWin.new(nil, 'TEST') do |w|
-        w.title= 'spec win'
-        w.move 100, 100
-        w.resize 100, 100
+    @win = Elm::ElmWin.new(nil, 'TEST') do
+        title= 'spec win'
+        move 100, 100
+        resize 100, 100
     end
-    @bg = Elm::ElmBg.new(@win) do |bg|
-        bg.size_hint_weight_set 1.0, 1.0
-        bg.evas_object_color_set 200,255,100,150
-        bg.show
+    @bg = Elm::ElmBg.new(@win) do
+        size_hint_weight_set 1.0, 1.0
+        evas_object_color_set 200,255,100,150
+        show
     end
     @win.show
 end
