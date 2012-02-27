@@ -214,10 +214,6 @@ describe 'Efl::EcoreEvas' do
             bool_check @e, 'override'
         end
         #
-        it "maximized set/get " do
-            bool_check @e, 'maximized', 5
-        end
-        #
         it "fullscreen set/get " do
             bool_check @e, 'fullscreen', 5
         end
