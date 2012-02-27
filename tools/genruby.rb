@@ -440,6 +440,11 @@ libs << {
     :modname=>'ElmCalendar', :prefix=>'elm_calendar', :outfile=>'elm/elm_calendar.rb',
     :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
+libs << {
+    :lib=>ELM_LIB,:header=>'elm_bubble.h',
+    :modname=>'ElmBubble', :prefix=>'elm_bubble', :outfile=>'elm/elm_bubble.rb',
+    :requires=>["#{NATIVE}/elementary"], :constants=>[]
+}
 #
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #
