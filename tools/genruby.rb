@@ -425,6 +425,11 @@ libs << {
     :modname=>'ElmMenu', :prefix=>'elm_menu', :outfile=>'elm/elm_menu.rb',
     :requires=>["#{NATIVE}/elementary"], :constants=>[]
 }
+libs << {
+    :lib=>ELM_LIB,:header=>'elm_check.h',
+    :modname=>'ElmCheck', :prefix=>'elm_check', :outfile=>'elm/elm_check.rb',
+    :requires=>["#{NATIVE}/elementary"], :constants=>[]
+}
 #
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #
