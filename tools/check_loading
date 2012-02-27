@@ -18,11 +18,11 @@ function run () {
 function each () {
     echo $($RUBY --version)
     echo "  lib/efl/native/*.rb"
-    for native in $(find $parentdir/lib/efl/native/ -name *.rb); do
+    for native in $(find $parentdir/lib/efl/native/ -name *.rb | sort); do
         run $native
     done
     echo "  lib/efl/*.rb"
-    for wrapper in $(find $parentdir/lib/efl/ -name e*.rb); do
+    for wrapper in $(find $parentdir/lib/efl/ -name e*.rb | sort); do
         run $wrapper
     done
 }
