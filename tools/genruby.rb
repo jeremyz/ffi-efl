@@ -363,7 +363,8 @@ libs << {
 libs << {
     :lib=>ELM_LIB,:header=>'elm_entry.h',
     :modname=>'ElmEntry', :prefix=>'elm_entry', :outfile=>'elm/elm_entry.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
+    :requires=>["#{NATIVE}/edje","#{NATIVE}/elementary","#{NATIVE}/elm/elm_icon","#{NATIVE}/elm/elm_scroller"], :constants=>[]
+}
 }
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #

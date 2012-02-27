@@ -2,7 +2,10 @@
 # -*- coding: UTF-8 -*-
 #
 require 'efl/native'
+require 'efl/native/edje'
 require 'efl/native/elementary'
+require 'efl/native/elm/elm_icon'
+require 'efl/native/elm/elm_scroller'
 #
 module Efl
     #
