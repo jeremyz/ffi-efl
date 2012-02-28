@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 #
 require 'efl/elm/elm_object'
+require 'efl/elm/elm_object_item'
 require 'efl/native/elm/elm_diskselector'
 #
 module Efl
