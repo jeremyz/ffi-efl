@@ -6,7 +6,7 @@ require 'efl/native/elementary'
 #
 module Efl
     #
-    module ElmX
+    module ElmTable
         #
         FCT_PREFIX = 'elm_table_' unless const_defined? :FCT_PREFIX
         #

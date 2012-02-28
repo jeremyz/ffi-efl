@@ -7,7 +7,7 @@ require 'efl/native/elm/elm_icon'
 #
 module Efl
     #
-    module ElmX
+    module ElmToolbar
         #
         FCT_PREFIX = 'elm_toolbar_' unless const_defined? :FCT_PREFIX
         #
