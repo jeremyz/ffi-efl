@@ -141,6 +141,30 @@ module Efl
         [ :ecore_evas_fullscreen_set, [ :ecore_evas, :bool ], :void ],
         # EAPI Eina_Bool ecore_evas_fullscreen_get(const Ecore_Evas *ee);
         [ :ecore_evas_fullscreen_get, [ :ecore_evas ], :bool ],
+        # EAPI void ecore_evas_window_group_set(Ecore_Evas *ee, const Ecore_Evas *ee_group);
+        [ :ecore_evas_window_group_set, [ :ecore_evas, :ecore_evas ], :void ],
+        # EAPI const Ecore_Evas *ecore_evas_window_group_get(const Ecore_Evas *ee);
+        [ :ecore_evas_window_group_get, [ :ecore_evas ], :ecore_evas ],
+        # EAPI void ecore_evas_aspect_set(Ecore_Evas *ee, double aspect);
+        [ :ecore_evas_aspect_set, [ :ecore_evas, :double ], :void ],
+        # EAPI double ecore_evas_aspect_get(const Ecore_Evas *ee);
+        [ :ecore_evas_aspect_get, [ :ecore_evas ], :double ],
+        # EAPI void ecore_evas_urgent_set(Ecore_Evas *ee, Eina_Bool urgent);
+        [ :ecore_evas_urgent_set, [ :ecore_evas, :bool ], :void ],
+        # EAPI Eina_Bool ecore_evas_urgent_get(const Ecore_Evas *ee);
+        [ :ecore_evas_urgent_get, [ :ecore_evas ], :bool ],
+        # EAPI void ecore_evas_modal_set(Ecore_Evas *ee, Eina_Bool modal);
+        [ :ecore_evas_modal_set, [ :ecore_evas, :bool ], :void ],
+        # EAPI Eina_Bool ecore_evas_modal_get(const Ecore_Evas *ee);
+        [ :ecore_evas_modal_get, [ :ecore_evas ], :bool ],
+        # EAPI void ecore_evas_demand_attention_set(Ecore_Evas *ee, Eina_Bool demand);
+        [ :ecore_evas_demand_attention_set, [ :ecore_evas, :bool ], :void ],
+        # EAPI Eina_Bool ecore_evas_demand_attention_get(const Ecore_Evas *ee);
+        [ :ecore_evas_demand_attention_get, [ :ecore_evas ], :bool ],
+        # EAPI void ecore_evas_focus_skip_set(Ecore_Evas *ee, Eina_Bool skip);
+        [ :ecore_evas_focus_skip_set, [ :ecore_evas, :bool ], :void ],
+        # EAPI Eina_Bool ecore_evas_focus_skip_get(const Ecore_Evas *ee);
+        [ :ecore_evas_focus_skip_get, [ :ecore_evas ], :bool ],
         # EAPI void ecore_evas_ignore_events_set(Ecore_Evas *ee, Eina_Bool ignore);
         [ :ecore_evas_ignore_events_set, [ :ecore_evas, :bool ], :void ],
         # EAPI Eina_Bool ecore_evas_ignore_events_get(const Ecore_Evas *ee);
@@ -345,6 +369,8 @@ module Efl
         [ :ecore_evas_callback_post_render_set, [ :ecore_evas, :ecore_evas_event_cb ], :void ],
         # EAPI void ecore_evas_callback_pre_free_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
         [ :ecore_evas_callback_pre_free_set, [ :ecore_evas, :ecore_evas_event_cb ], :void ],
+        # EAPI void ecore_evas_callback_state_change_set(Ecore_Evas *ee, Ecore_Evas_Event_Cb func);
+        [ :ecore_evas_callback_state_change_set, [ :ecore_evas, :ecore_evas_event_cb ], :void ],
         # EAPI Evas *ecore_evas_get(const Ecore_Evas *ee);
         [ :ecore_evas_get, [ :ecore_evas ], :evas ],
         # EAPI void ecore_evas_managed_move(Ecore_Evas *ee, int x, int y);
