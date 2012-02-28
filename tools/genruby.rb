@@ -440,7 +440,7 @@ libs << elm_h('elm_thumb.h', 'ElmThumb')
 libs << elm_h('elm_toolbar.h', 'ElmToolbar', ["#{NATIVE}/elementary","#{NATIVE}/elm/elm_icon"])
 libs << elm_h('elm_transit.h', 'ElmTransit')
 libs << elm_h('elm_video.h', 'ElmVideo')
-#libs << elm_h('elm_web.h', 'ElmX')
+libs << elm_h('elm_web.h', 'ElmWeb')
 #libs << elm_h('elm_widget.h', 'ElmX')
 libs << elm_h('elm_win.h', 'ElmWin')
 
