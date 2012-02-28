@@ -397,7 +397,7 @@ libs << elm_h('elm_diskselector.h', 'ElmDiskSelector', ["#{NATIVE}/elementary","
 libs << elm_h('elm_flip.h', 'ElmFlip')
 libs << elm_h('elm_flipselector.h', 'ElmFlipSelector')
 libs << elm_h('elm_focus.h', 'ElmFocus')
-#libs << elm_h('elm_fonts.h', 'ElmFonts')
+libs << elm_h('elm_fonts.h', 'ElmFonts')
 libs << elm_h('elm_frame.h', 'ElmFrame')
 #libs << elm_h('elm_gengrid.h', 'ElmGenGrid')
 #libs << elm_h('elm_genlist.h', 'ElmGenList')
