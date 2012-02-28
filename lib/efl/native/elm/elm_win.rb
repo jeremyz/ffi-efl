@@ -95,6 +95,26 @@ module Efl
         [ :elm_win_iconified_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_win_iconified_get(const Evas_Object *obj);
         [ :elm_win_iconified_get, [ :evas_object ], :bool ],
+        # EAPI void elm_win_withdrawn_set(Evas_Object *obj, Eina_Bool withdrawn);
+        [ :elm_win_withdrawn_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_win_withdrawn_get(const Evas_Object *obj);
+        [ :elm_win_withdrawn_get, [ :evas_object ], :bool ],
+        # EAPI void elm_win_urgent_set(Evas_Object *obj, Eina_Bool urgent);
+        [ :elm_win_urgent_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_win_urgent_get(const Evas_Object *obj);
+        [ :elm_win_urgent_get, [ :evas_object ], :bool ],
+        # EAPI void elm_win_demand_attention_set(Evas_Object *obj, Eina_Bool demand_attention);
+        [ :elm_win_demand_attention_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_win_demand_attention_get(const Evas_Object *obj);
+        [ :elm_win_demand_attention_get, [ :evas_object ], :bool ],
+        # EAPI void elm_win_modal_set(Evas_Object *obj, Eina_Bool modal);
+        [ :elm_win_modal_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_win_modal_get(const Evas_Object *obj);
+        [ :elm_win_modal_get, [ :evas_object ], :bool ],
+        # EAPI void elm_win_aspect_set(Evas_Object *obj, double aspect);
+        [ :elm_win_aspect_set, [ :evas_object, :double ], :void ],
+        # EAPI double elm_win_aspect_get(const Evas_Object *obj);
+        [ :elm_win_aspect_get, [ :evas_object ], :double ],
         # EAPI void elm_win_layer_set(Evas_Object *obj, int layer);
         [ :elm_win_layer_set, [ :evas_object, :int ], :void ],
         # EAPI int elm_win_layer_get(const Evas_Object *obj);
