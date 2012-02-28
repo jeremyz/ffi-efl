@@ -17,7 +17,7 @@ module Efl
             def padding_get
                 x = FFI::MemoryPointer.new :int
                 y = FFI::MemoryPointer.new :int
-                Native::elm_box_padding_get @ptr, x, y
+                Native.elm_box_padding_get @ptr, x, y
                 [ x.read_int, y.read_int ]
             end
             alias :padding :padding_get
@@ -25,7 +25,7 @@ module Efl
             def align_get
                 x = FFI::MemoryPointer.new :float
                 y = FFI::MemoryPointer.new :float
-                Native::elm_box_align_get @ptr, x, y
+                Native.elm_box_align_get @ptr, x, y
                 [ x.read_float, y.read_float ]
             end
             alias :align :padding_get

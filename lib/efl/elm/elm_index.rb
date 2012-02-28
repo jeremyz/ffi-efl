@@ -16,11 +16,11 @@ module Efl
             search_prefixes 'elm_index_'
             #
             def item_selected_get idx
-                ElmObjectItem.new Native::elm_index_item_selected_get @ptr, idx
+                ElmObjectItem.new Native.elm_index_item_selected_get @ptr, idx
             end
             #
             def item_find item
-                ElmObjectItem.new Native::elm_index_item_find @ptr, item
+                ElmObjectItem.new Native.elm_index_item_find @ptr, item
             end
             #
         end

@@ -16,20 +16,20 @@ module Efl
             search_prefixes 'elm_slideshow_'
             #
             def item_add itc, data
-                ElmObjectItem.new Native::elm_slideshow_item_append @ptr, itc, data
+                ElmObjectItem.new Native.elm_slideshow_item_append @ptr, itc, data
             end
             #
             def item_sorted_insert itc, data, fct
-                ElmObjectItem.new Native::elm_slideshow_item_sorted_insert @ptr, itc, data, fct
+                ElmObjectItem.new Native.elm_slideshow_item_sorted_insert @ptr, itc, data, fct
             end
             #
             def item_current_get
-                ElmObjectItem.new Native::elm_slideshow_item_current_get @ptr
+                ElmObjectItem.new Native.elm_slideshow_item_current_get @ptr
             end
             alias :item_current :item_current_get
             #
             def item_nth_get n
-                ElmObjectItem.new Native::elm_slideshow_item_nth_get @ptr, n
+                ElmObjectItem.new Native.elm_slideshow_item_nth_get @ptr, n
             end
             alias :item_nth :item_nth_get
             #

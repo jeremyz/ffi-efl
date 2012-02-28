@@ -11,10 +11,10 @@ module Efl
         class ElmObject
             #
             def tree_dump
-                Native::elm_object_tree_dump @ptr
+                Native.elm_object_tree_dump @ptr
             end
             def tree_dot_dump filepath
-                Native::elm_object_tree_dot_dump @ptr, filepath
+                Native.elm_object_tree_dot_dump @ptr, filepath
             end
             #
         end

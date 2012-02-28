@@ -16,7 +16,7 @@ module Efl
             search_prefixes 'elm_ctxpopup_'
             #
             def item_append label, icon=nil, cb=nil, data=nil
-                ElmObjectItem.new Native::elm_ctxpopup_item_append @ptr, label, icon, cb, data
+                ElmObjectItem.new Native.elm_ctxpopup_item_append @ptr, label, icon, cb, data
             end
             #
         end

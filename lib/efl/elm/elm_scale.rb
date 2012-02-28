@@ -11,12 +11,12 @@ module Efl
         class ElmScale
             #
             def scale_get
-                Native::elm_object_scale_get @ptr
+                Native.elm_object_scale_get @ptr
             end
             alias :scale :scale_get
             #
             def scale_set scale
-                Native::elm_object_scale_set @ptr, scale
+                Native.elm_object_scale_set @ptr, scale
             end
             alias :scale= :scale_set
             #
