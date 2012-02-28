@@ -375,7 +375,7 @@ libs << elm_h('elc_hoversel.h', 'ElmHoverSel', ["#{NATIVE}/elementary","#{NATIVE
 libs << elm_h('elc_multibuttonentry.h', 'ElmMultiButtonEntry')
 libs << elm_h('elc_naviframe.h', 'ElmNaviFrame')
 libs << elm_h('elm_actionslider.h', 'ElmActionSlider')
-#libs << elm_h('elm_app.h', 'ElmApp')
+libs << elm_h('elm_app.h', 'ElmApp')
 libs << elm_h('elm_bg.h', 'ElmBg')
 libs << elm_h('elm_box.h', 'ElmBox')
 libs << elm_h('elm_bubble.h', 'ElmBubble')
