@@ -46,6 +46,7 @@ module Efl
             def item_next it
                 ElmObjectItem.new Native::elm_list_item_next it
             end
+            #
         end
         #
     end
