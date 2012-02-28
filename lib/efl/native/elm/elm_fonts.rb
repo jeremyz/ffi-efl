@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 #
 require 'efl/native'
+require 'efl/native/eina_hash'
 require 'efl/native/elementary'
 #
 module Efl
