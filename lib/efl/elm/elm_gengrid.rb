@@ -15,35 +15,24 @@ module Efl
             constructor :elm_gengrid_add
             search_prefixes 'elm_gengrid_'
             #
-            def item_append itc, data, parent, flags, cb, cbdata
-                ElmObjectItem.new Native.elm_gengrid_item_append @ptr, itc, data, parent, flags, cb, cbdata
+            def item_append gic, data, cb, cbdata
+                ElmObjectItem.new Native.elm_gengrid_item_append @ptr, gic, data, cb, cbdata
             end
             #
-            def item_prepend itc, data, parent, flags, cb, cbdata
-                ElmObjectItem.new Native.elm_gengrid_item_append @ptr, itc, data, parent, flags, cb, cbdata
+            def item_prepend gic, data, cb, cbdata
+                ElmObjectItem.new Native.elm_gengrid_item_append @ptr, gic, data, cb, cbdata
             end
             #
-            def item_insert_before itc, data, parent, before, flags, cb, cbdata
-                ElmObjectItem.new Native.elm_gengrid_item_insert_before @ptr, itc, data, parent, before, flags, cb, cbdata
+            def item_insert_before gic, data, before, cb, cbdata
+                ElmObjectItem.new Native.elm_gengrid_item_insert_before @ptr, gic, data, before, cb, cbdata
             end
             #
-            def item_insert_after itc, data, parent, before, flags, cb, cbdata
-                ElmObjectItem.new Native.elm_gengrid_item_insert_after @ptr, itc, data, parent, before, flags, cb, cbdata
+            def item_insert_after gic, data, before, flags, cb, cbdata
+                ElmObjectItem.new Native.elm_gengrid_item_insert_after @ptr, gic, data, before, cb, cbdata
             end
             #
-            def item_sorted_insert itc, data, parent, flags, cmp, cb, cbdata
-                ElmObjectItem.new Native.elm_gengrid_item_sorted_insert @ptr, itc, data, parent, flags, cmp, cb, cbdata
-            end
-            #
-            def selected_item_get
-                ElmObjectItem.new Native.elm_gengrid_selected_item_get @ptr
-            end
-            alias :selected_item :selected_item_get
-            #
-            def at_xy_item_get x, y
-                @ri0 ||= FFI::MemoryPointer.new :int
-                i = ElmObjectItem.new ElmObjectItem.new Native.elm_gengrid_first_item_get @ptr, x, y, @ri0
-                [ @ri0.read_int, i ]
+            def item_sorted_insert gic, data, cmp, cb, cbdata
+                ElmObjectItem.new Native.elm_gengrid_item_sorted_insert @ptr, gic, data, cmp, cb, cbdata
             end
             #
             def first_item_get
@@ -66,10 +55,10 @@ module Efl
             end
             alias :item_prev :item_prev_get
             #
-            def item_parent_get it
-                ElmObjectItem.new Native.elm_gengrid_item_parent_get it
+            def selected_item_get
+                ElmObjectItem.new Native.elm_gengrid_selected_item_get @ptr
             end
-            alias :item_parent :item_parent_get
+            alias :selected_item :selected_item_get
             #
         end
         #

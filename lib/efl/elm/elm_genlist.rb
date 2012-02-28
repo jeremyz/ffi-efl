@@ -9,7 +9,7 @@ module Efl
     #
     module Elm
         #
-        class ElmList < ElmObject
+        class ElmGenList < ElmObject
             #
             include Helper
             constructor :elm_genlist_add
