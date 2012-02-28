@@ -39,12 +39,12 @@ module Efl
                 ElmObjectItem.new Native::elm_list_selected_item_get @ptr
             end
             #
-            def item_prev
-                ElmObjectItem.new Native::elm_list_item_prev @ptr
+            def item_prev it
+                ElmObjectItem.new Native::elm_list_item_prev it
             end
             #
-            def item_next
-                ElmObjectItem.new Native::elm_list_item_next @ptr
+            def item_next it
+                ElmObjectItem.new Native::elm_list_item_next it
             end
         end
         #
