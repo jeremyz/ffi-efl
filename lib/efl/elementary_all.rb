@@ -8,7 +8,7 @@ require 'efl/elm/elm_object'
 require 'efl/elm/elm_object_item'
 #
 #require 'efl/elm/elm_actionslider'
-#require 'efl/elm/elm_anchorblock'
+require 'efl/elm/elm_anchorblock'
 #require 'efl/elm/elm_anchorview'
 #require 'efl/elm/elm_app'
 #require 'efl/elm/elm_authors'
