@@ -26,18 +26,22 @@ module Efl
             def first_item_get
                 ElmObjectItem.new Native::elm_diskselector_first_item_get @ptr
             end
+            alias :first_item :first_item_get
             #
             def last_item_get
                 ElmObjectItem.new Native::elm_diskselector_last_item_get @ptr
             end
+            alias :last_item :last_item_get
             #
             def item_prev_get it
                 ElmObjectItem.new Native::elm_diskselector_item_prev_get it
             end
+            alias :item_prev :item_prev_get
             #
             def item_next_get it
                 ElmObjectItem.new Native::elm_diskselector_item_next_get it
             end
+            alias :item_next :item_next_get
             #
         end
         #
