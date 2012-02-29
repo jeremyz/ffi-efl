@@ -77,7 +77,6 @@ require 'efl/elm/elm_toolbar'
 require 'efl/elm/elm_transit'
 require 'efl/elm/elm_video'
 require 'efl/elm/elm_web'
-#require 'efl/elm/elm_widget'
 require 'efl/elm/elm_win'
 #
 # EOF
