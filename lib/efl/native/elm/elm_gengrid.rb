@@ -119,8 +119,8 @@ module Efl
         [ :elm_gengrid_item_update, [ :elm_object_item ], :void ],
         # EAPI const Elm_Gengrid_Item_Class *elm_gengrid_item_item_class_get(const Elm_Object_Item *it);
         [ :elm_gengrid_item_item_class_get, [ :elm_object_item ], :elm_gengrid_item_class ],
-        # EAPI void elm_gengrid_item_item_class_set(Elm_Object_Item *it, const Elm_Gengrid_Item_Class *gic);
-        [ :elm_gengrid_item_item_class_set, [ :elm_object_item, :elm_gengrid_item_class ], :void ],
+        # EAPI void elm_gengrid_item_item_class_update(Elm_Object_Item *it, const Elm_Gengrid_Item_Class *gic);
+        [ :elm_gengrid_item_item_class_update, [ :elm_object_item, :elm_gengrid_item_class ], :void ],
         # EAPI void elm_gengrid_item_pos_get(const Elm_Object_Item *it, unsigned int *x, unsigned int *y);
         [ :elm_gengrid_item_pos_get, [ :elm_object_item, :pointer, :pointer ], :void ],
         # EAPI void elm_gengrid_item_selected_set(Elm_Object_Item *it, Eina_Bool selected);

@@ -42,10 +42,10 @@ module Efl
         [ :elm_calendar_min_max_year_set, [ :evas_object, :int, :int ], :void ],
         # EAPI void elm_calendar_min_max_year_get(const Evas_Object *obj, int *min, int *max);
         [ :elm_calendar_min_max_year_get, [ :evas_object, :pointer, :pointer ], :void ],
-        # EAPI void elm_calendar_day_selection_enabled_set(Evas_Object *obj, Eina_Bool enabled);
-        [ :elm_calendar_day_selection_enabled_set, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool elm_calendar_day_selection_enabled_get(const Evas_Object *obj);
-        [ :elm_calendar_day_selection_enabled_get, [ :evas_object ], :bool ],
+        # EAPI void elm_calendar_day_selection_disabled_set(Evas_Object *obj, Eina_Bool disabled);
+        [ :elm_calendar_day_selection_disabled_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_calendar_day_selection_disabled_get(const Evas_Object *obj);
+        [ :elm_calendar_day_selection_disabled_get, [ :evas_object ], :bool ],
         # EAPI void elm_calendar_selected_time_set(Evas_Object *obj, struct tm *selected_time);
         [ :elm_calendar_selected_time_set, [ :evas_object, :pointer ], :void ],
         # EAPI Eina_Bool elm_calendar_selected_time_get(const Evas_Object *obj, struct tm *selected_time);
