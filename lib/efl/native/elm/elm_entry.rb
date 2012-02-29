@@ -222,7 +222,7 @@ module Efl
         [ :elm_entry_input_panel_return_key_disabled_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_entry_input_panel_return_key_disabled_get(const Evas_Object *obj);
         [ :elm_entry_input_panel_return_key_disabled_get, [ :evas_object ], :bool ],
-        # EAPI void elm_entry_input_panel_return_key_autoenabled_set(Evas_Object *obj, Eina_Bool on);
+        # EAPI void elm_entry_input_panel_return_key_autoenabled_set(Evas_Object *obj, Eina_Bool enabled);
         [ :elm_entry_input_panel_return_key_autoenabled_set, [ :evas_object, :bool ], :void ],
         # EAPI void elm_entry_imf_context_reset(Evas_Object *obj);
         [ :elm_entry_imf_context_reset, [ :evas_object ], :void ],

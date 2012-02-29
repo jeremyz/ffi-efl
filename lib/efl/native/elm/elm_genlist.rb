@@ -28,7 +28,7 @@ module Efl
         enum :elm_genlist_item_flags, [ :elm_genlist_item_none, 0, :elm_genlist_item_subitems, (1<<0), :elm_genlist_item_group, (1<<1),
             :elm_genlist_item_max, (1<<2) ]
         # typedef enum {...} Elm_Genlist_Item_Field_Flags;
-        enum :elm_genlist_item_field_flags, [ :elm_genlist_item_field_all, 0, :elm_genlist_item_field_label, (1<<0), :elm_genlist_item_field_content,
+        enum :elm_genlist_item_field_flags, [ :elm_genlist_item_field_all, 0, :elm_genlist_item_field_text, (1<<0), :elm_genlist_item_field_content,
             (1<<1), :elm_genlist_item_field_state, (1<<2) ]
         #
         # TYPEDEFS

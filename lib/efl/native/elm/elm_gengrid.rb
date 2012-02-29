@@ -103,7 +103,7 @@ module Efl
         [ :elm_gengrid_page_show, [ :evas_object, :int, :int ], :void ],
         # EAPI void elm_gengrid_page_bring_in(const Evas_Object *obj, int h_pagenumber, int v_pagenumber);
         [ :elm_gengrid_page_bring_in, [ :evas_object, :int, :int ], :void ],
-        # EAPI void elm_gengrid_horizontal_set(Evas_Object *obj, Eina_Bool setting);
+        # EAPI void elm_gengrid_horizontal_set(Evas_Object *obj, Eina_Bool horizontal);
         [ :elm_gengrid_horizontal_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_gengrid_horizontal_get(const Evas_Object *obj);
         [ :elm_gengrid_horizontal_get, [ :evas_object ], :bool ],
@@ -125,10 +125,12 @@ module Efl
         [ :elm_gengrid_item_pos_get, [ :elm_object_item, :pointer, :pointer ], :void ],
         # EAPI void elm_gengrid_item_selected_set(Elm_Object_Item *it, Eina_Bool selected);
         [ :elm_gengrid_item_selected_set, [ :elm_object_item, :bool ], :void ],
+        # EAPI Elm_Object_Item *elm_gengrid_selected_item_get(const Evas_Object *obj);
+        [ :elm_gengrid_selected_item_get, [ :evas_object ], :elm_object_item ],
+        # EAPI const Eina_List *elm_gengrid_selected_items_get(const Evas_Object *obj);
+        [ :elm_gengrid_selected_items_get, [ :evas_object ], :eina_list ],
         # EAPI Eina_Bool elm_gengrid_item_selected_get(const Elm_Object_Item *it);
         [ :elm_gengrid_item_selected_get, [ :elm_object_item ], :bool ],
-        # EAPI const Evas_Object *elm_gengrid_item_object_get(const Elm_Object_Item *it);
-        [ :elm_gengrid_item_object_get, [ :elm_object_item ], :evas_object ],
         # EAPI void elm_gengrid_item_show(Elm_Object_Item *it);
         [ :elm_gengrid_item_show, [ :elm_object_item ], :void ],
         # EAPI void elm_gengrid_item_bring_in(Elm_Object_Item *it);
@@ -163,10 +165,6 @@ module Efl
         [ :elm_gengrid_item_cursor_engine_only_get, [ :elm_object_item ], :bool ],
         # EAPI void elm_gengrid_clear(Evas_Object *obj);
         [ :elm_gengrid_clear, [ :evas_object ], :void ],
-        # EAPI Elm_Object_Item *elm_gengrid_selected_item_get(const Evas_Object *obj);
-        [ :elm_gengrid_selected_item_get, [ :evas_object ], :elm_object_item ],
-        # EAPI const Eina_List *elm_gengrid_selected_items_get(const Evas_Object *obj);
-        [ :elm_gengrid_selected_items_get, [ :evas_object ], :eina_list ],
         # EAPI void elm_gengrid_filled_set(Evas_Object *obj, Eina_Bool fill);
         [ :elm_gengrid_filled_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_gengrid_filled_get(const Evas_Object *obj);

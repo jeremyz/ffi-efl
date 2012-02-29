@@ -21,14 +21,19 @@ module Efl
         #
         ffi_lib 'elementary-ver-pre-svn-09.so.0'
         #
+        # ENUMS
+        # typedef enum {...} Elm_Bubble_Pos;
+        enum :elm_bubble_pos, [ :elm_bubble_pos_invalid, -1, :elm_bubble_pos_top_left, 0, :elm_bubble_pos_top_right, 1, :elm_bubble_pos_bottom_left,
+            2, :elm_bubble_pos_bottom_right, 3 ]
+        #
         # FUNCTIONS
         fcts = [
         # EAPI Evas_Object *elm_bubble_add(Evas_Object *parent);
         [ :elm_bubble_add, [ :evas_object ], :evas_object ],
-        # EAPI void elm_bubble_corner_set(Evas_Object *obj, const char *corner);
-        [ :elm_bubble_corner_set, [ :evas_object, :string ], :void ],
-        # EAPI const char *elm_bubble_corner_get(const Evas_Object *obj);
-        [ :elm_bubble_corner_get, [ :evas_object ], :string ],
+        # EAPI void elm_bubble_pos_set(Evas_Object *obj, Elm_Bubble_Pos pos);
+        [ :elm_bubble_pos_set, [ :evas_object, :elm_bubble_pos ], :void ],
+        # EAPI Elm_Bubble_Pos elm_bubble_pos_get(const Evas_Object *obj);
+        [ :elm_bubble_pos_get, [ :evas_object ], :elm_bubble_pos ],
         ]
         #
         attach_fcts fcts
