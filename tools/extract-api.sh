@@ -47,8 +47,6 @@ for header in \
     "${INCLUDE}/elementary-0/elm_tooltip.h" \
     "${INCLUDE}/elementary-0/elm_object.h" \
     "${INCLUDE}/elementary-0/elm_object_item.h" \
-    "${INCLUDE}/elementary-0/elc_anchorblock.h" \
-    "${INCLUDE}/elementary-0/elc_anchorview.h" \
     "${INCLUDE}/elementary-0/elc_ctxpopup.h" \
     "${INCLUDE}/elementary-0/elc_fileselector_button.h" \
     "${INCLUDE}/elementary-0/elc_fileselector_entry.h" \
