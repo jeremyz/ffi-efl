@@ -50,6 +50,8 @@ module Efl
         typedef :pointer, :ecore_cocoa_window
         # typedef struct _Ecore_Evas Ecore_Evas;
         typedef :pointer, :ecore_evas
+        # typedef struct _Ecore_Wl_Window Ecore_Wl_Window;
+        typedef :pointer, :ecore_wl_window
         #
         # CALLBACKS
         # typedef void (*Ecore_Evas_Event_Cb) (Ecore_Evas *ee);
@@ -267,16 +269,12 @@ module Efl
         [ :ecore_evas_directfb_new, [ :string, :int, :int, :int, :int, :int ], :ecore_evas ],
         # EAPI Ecore_DirectFB_Window *ecore_evas_directfb_window_get(const Ecore_Evas *ee);
         [ :ecore_evas_directfb_window_get, [ :ecore_evas ], :ecore_directfb_window ],
-        # EAPI Ecore_Evas *ecore_evas_wayland_shm_new(const char *disp_name, int x, int y, int w, int h, int frame);
-        [ :ecore_evas_wayland_shm_new, [ :string, :int, :int, :int, :int, :int ], :ecore_evas ],
-        # EAPI Ecore_Evas *ecore_evas_wayland_egl_new(const char *disp_name, int x, int y, int w, int h, int frame);
-        [ :ecore_evas_wayland_egl_new, [ :string, :int, :int, :int, :int, :int ], :ecore_evas ],
+        # EAPI Ecore_Evas *ecore_evas_wayland_shm_new(const char *disp_name, unsigned int parent, int x, int y, int w, int h, Eina_Bool frame);
+        [ :ecore_evas_wayland_shm_new, [ :string, :uint, :int, :int, :int, :int, :bool ], :ecore_evas ],
+        # EAPI Ecore_Evas *ecore_evas_wayland_egl_new(const char *disp_name, unsigned int parent, int x, int y, int w, int h, Eina_Bool frame);
+        [ :ecore_evas_wayland_egl_new, [ :string, :uint, :int, :int, :int, :int, :bool ], :ecore_evas ],
         # EAPI void ecore_evas_wayland_resize(Ecore_Evas *ee, int location);
         [ :ecore_evas_wayland_resize, [ :ecore_evas, :int ], :void ],
-        # EAPI void ecore_evas_wayland_drag_start(Ecore_Evas *ee, Ecore_Evas *drag_ee, void *source);
-        [ :ecore_evas_wayland_drag_start, [ :ecore_evas, :ecore_evas, :pointer ], :void ],
-        # EAPI void ecore_evas_wayland_pointer_set(Ecore_Evas *ee, int hot_x, int hot_y);
-        [ :ecore_evas_wayland_pointer_set, [ :ecore_evas, :int, :int ], :void ],
         # EAPI Ecore_Evas *ecore_evas_buffer_new(int w, int h);
         [ :ecore_evas_buffer_new, [ :int, :int ], :ecore_evas ],
         # EAPI Ecore_Evas *ecore_evas_buffer_allocfunc_new(int w, int h, void *(*alloc_func) (void *data, int size), void (*free_func) (void *data, void *pix), const void *data);

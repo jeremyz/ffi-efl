@@ -321,6 +321,8 @@ module Efl
         [ :edje_object_part_text_item_geometry_get, [ :evas_object, :string, :string, :pointer, :pointer, :pointer, :pointer ], :bool ],
         # EAPI void edje_object_part_text_cursor_geometry_get (const Evas_Object *obj, const char *part, Evas_Coord *x, Evas_Coord *y, Evas_Coord *w, Evas_Coord *h);
         [ :edje_object_part_text_cursor_geometry_get, [ :evas_object, :string, :pointer, :pointer, :pointer, :pointer ], :void ],
+        # EAPI void edje_object_part_text_user_insert (const Evas_Object *obj, const char *part, const char *text);
+        [ :edje_object_part_text_user_insert, [ :evas_object, :string, :string ], :void ],
         # EAPI void edje_object_part_text_select_allow_set (const Evas_Object *obj, const char *part, Eina_Bool allow);
         [ :edje_object_part_text_select_allow_set, [ :evas_object, :string, :bool ], :void ],
         # EAPI void edje_object_part_text_select_abort (const Evas_Object *obj, const char *part);

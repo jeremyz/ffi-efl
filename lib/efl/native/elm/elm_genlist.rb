@@ -28,7 +28,7 @@ module Efl
         enum :elm_genlist_item_flags, [ :elm_genlist_item_none, 0, :elm_genlist_item_subitems, (1<<0), :elm_genlist_item_group, (1<<1),
             :elm_genlist_item_max, (1<<2) ]
         # typedef enum {...} Elm_Genlist_Item_Field_Flags;
-        enum :elm_genlist_item_field_flags, [ :elm_genlist_item_field_all, 0, :elm_genlist_item_field_label, (1<<0), :elm_genlist_item_field_content,
+        enum :elm_genlist_item_field_flags, [ :elm_genlist_item_field_all, 0, :elm_genlist_item_field_text, (1<<0), :elm_genlist_item_field_content,
             (1<<1), :elm_genlist_item_field_state, (1<<2) ]
         #
         # TYPEDEFS
@@ -69,30 +69,10 @@ module Efl
         [ :elm_genlist_no_select_mode_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_genlist_no_select_mode_get(const Evas_Object *obj);
         [ :elm_genlist_no_select_mode_get, [ :evas_object ], :bool ],
-        # EAPI void elm_genlist_compress_mode_set(Evas_Object *obj, Eina_Bool compress);
-        [ :elm_genlist_compress_mode_set, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool elm_genlist_compress_mode_get(const Evas_Object *obj);
-        [ :elm_genlist_compress_mode_get, [ :evas_object ], :bool ],
-        # EAPI void elm_genlist_height_for_width_mode_set(Evas_Object *obj, Eina_Bool height_for_width);
-        [ :elm_genlist_height_for_width_mode_set, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool elm_genlist_height_for_width_mode_get(const Evas_Object *obj);
-        [ :elm_genlist_height_for_width_mode_get, [ :evas_object ], :bool ],
         # EAPI void elm_genlist_bounce_set(Evas_Object *obj, Eina_Bool h_bounce, Eina_Bool v_bounce);
         [ :elm_genlist_bounce_set, [ :evas_object, :bool, :bool ], :void ],
         # EAPI void elm_genlist_bounce_get(const Evas_Object *obj, Eina_Bool *h_bounce, Eina_Bool *v_bounce);
         [ :elm_genlist_bounce_get, [ :evas_object, :pointer, :pointer ], :void ],
-        # EAPI void elm_genlist_homogeneous_set(Evas_Object *obj, Eina_Bool homogeneous);
-        [ :elm_genlist_homogeneous_set, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool elm_genlist_homogeneous_get(const Evas_Object *obj);
-        [ :elm_genlist_homogeneous_get, [ :evas_object ], :bool ],
-        # EAPI void elm_genlist_block_count_set(Evas_Object *obj, int count);
-        [ :elm_genlist_block_count_set, [ :evas_object, :int ], :void ],
-        # EAPI int elm_genlist_block_count_get(const Evas_Object *obj);
-        [ :elm_genlist_block_count_get, [ :evas_object ], :int ],
-        # EAPI void elm_genlist_longpress_timeout_set(Evas_Object *obj, double timeout);
-        [ :elm_genlist_longpress_timeout_set, [ :evas_object, :double ], :void ],
-        # EAPI double elm_genlist_longpress_timeout_get(const Evas_Object *obj);
-        [ :elm_genlist_longpress_timeout_get, [ :evas_object ], :double ],
         # EAPI Elm_Object_Item *elm_genlist_item_append(Evas_Object *obj, const Elm_Genlist_Item_Class *itc, const void *data, Elm_Object_Item *parent, Elm_Genlist_Item_Flags flags, Evas_Smart_Cb func, const void *func_data);
         [ :elm_genlist_item_append, [ :evas_object, :elm_genlist_item_class, :pointer, :elm_object_item, :elm_genlist_item_flags, :evas_smart_cb,
             :pointer ], :elm_object_item ],
@@ -114,8 +94,6 @@ module Efl
         [ :elm_genlist_selected_items_get, [ :evas_object ], :eina_list ],
         # EAPI Eina_List *elm_genlist_realized_items_get(const Evas_Object *obj);
         [ :elm_genlist_realized_items_get, [ :evas_object ], :eina_list ],
-        # EAPI Elm_Object_Item *elm_genlist_at_xy_item_get(const Evas_Object *obj, Evas_Coord x, Evas_Coord y, int *posret);
-        [ :elm_genlist_at_xy_item_get, [ :evas_object, :int, :int, :pointer ], :elm_object_item ],
         # EAPI Elm_Object_Item *elm_genlist_first_item_get(const Evas_Object *obj);
         [ :elm_genlist_first_item_get, [ :evas_object ], :elm_object_item ],
         # EAPI Elm_Object_Item *elm_genlist_last_item_get(const Evas_Object *obj);
@@ -128,24 +106,10 @@ module Efl
         [ :elm_genlist_item_next_get, [ :elm_object_item ], :elm_object_item ],
         # EAPI Elm_Object_Item *elm_genlist_item_prev_get(const Elm_Object_Item *it);
         [ :elm_genlist_item_prev_get, [ :elm_object_item ], :elm_object_item ],
-        # EAPI Elm_Object_Item *elm_genlist_item_parent_get(const Elm_Object_Item *it);
-        [ :elm_genlist_item_parent_get, [ :elm_object_item ], :elm_object_item ],
-        # EAPI void elm_genlist_item_subitems_clear(Elm_Object_Item *it);
-        [ :elm_genlist_item_subitems_clear, [ :elm_object_item ], :void ],
         # EAPI void elm_genlist_item_selected_set(Elm_Object_Item *it, Eina_Bool selected);
         [ :elm_genlist_item_selected_set, [ :elm_object_item, :bool ], :void ],
         # EAPI Eina_Bool elm_genlist_item_selected_get(const Elm_Object_Item *it);
         [ :elm_genlist_item_selected_get, [ :elm_object_item ], :bool ],
-        # EAPI void elm_genlist_item_expanded_set(Elm_Object_Item *it, Eina_Bool expanded);
-        [ :elm_genlist_item_expanded_set, [ :elm_object_item, :bool ], :void ],
-        # EAPI Eina_Bool elm_genlist_item_expanded_get(const Elm_Object_Item *it);
-        [ :elm_genlist_item_expanded_get, [ :elm_object_item ], :bool ],
-        # EAPI int elm_genlist_item_expanded_depth_get(const Elm_Object_Item *it);
-        [ :elm_genlist_item_expanded_depth_get, [ :elm_object_item ], :int ],
-        # EAPI void elm_genlist_item_display_only_set(Elm_Object_Item *it, Eina_Bool display_only);
-        [ :elm_genlist_item_display_only_set, [ :elm_object_item, :bool ], :void ],
-        # EAPI Eina_Bool elm_genlist_item_display_only_get(const Elm_Object_Item *it);
-        [ :elm_genlist_item_display_only_get, [ :elm_object_item ], :bool ],
         # EAPI void elm_genlist_item_show(Elm_Object_Item *it);
         [ :elm_genlist_item_show, [ :elm_object_item ], :void ],
         # EAPI void elm_genlist_item_bring_in(Elm_Object_Item *it);
@@ -158,20 +122,26 @@ module Efl
         [ :elm_genlist_item_middle_show, [ :elm_object_item ], :void ],
         # EAPI void elm_genlist_item_middle_bring_in(Elm_Object_Item *it);
         [ :elm_genlist_item_middle_bring_in, [ :elm_object_item ], :void ],
-        # EAPI void elm_genlist_item_contents_orphan(Elm_Object_Item *it);
-        [ :elm_genlist_item_contents_orphan, [ :elm_object_item ], :void ],
         # EAPI void elm_genlist_item_update(Elm_Object_Item *it);
         [ :elm_genlist_item_update, [ :elm_object_item ], :void ],
-        # EAPI void elm_genlist_item_promote(Elm_Object_Item *it);
-        [ :elm_genlist_item_promote, [ :elm_object_item ], :void ],
-        # EAPI void elm_genlist_item_demote(Elm_Object_Item *it);
-        [ :elm_genlist_item_demote, [ :elm_object_item ], :void ],
-        # EAPI void elm_genlist_item_fields_update(Elm_Object_Item *it, const char *parts, Elm_Genlist_Item_Field_Flags itf);
-        [ :elm_genlist_item_fields_update, [ :elm_object_item, :string, :elm_genlist_item_field_flags ], :void ],
         # EAPI void elm_genlist_item_item_class_update(Elm_Object_Item *it, const Elm_Genlist_Item_Class *itc);
         [ :elm_genlist_item_item_class_update, [ :elm_object_item, :elm_genlist_item_class ], :void ],
         # EAPI const Elm_Genlist_Item_Class *elm_genlist_item_item_class_get(const Elm_Object_Item *it);
         [ :elm_genlist_item_item_class_get, [ :elm_object_item ], :elm_genlist_item_class ],
+        # EAPI int elm_genlist_item_index_get(const Elm_Object_Item *it);
+        [ :elm_genlist_item_index_get, [ :elm_object_item ], :int ],
+        # EAPI void elm_genlist_realized_items_update(Evas_Object *obj);
+        [ :elm_genlist_realized_items_update, [ :evas_object ], :void ],
+        # EAPI unsigned int elm_genlist_items_count(const Evas_Object *obj);
+        [ :elm_genlist_items_count, [ :evas_object ], :uint ],
+        # EAPI Elm_Genlist_Item_Class *elm_genlist_item_class_new(void);
+        [ :elm_genlist_item_class_new, [  ], :elm_genlist_item_class ],
+        # EAPI void elm_genlist_item_class_free(Elm_Genlist_Item_Class *itc);
+        [ :elm_genlist_item_class_free, [ :elm_genlist_item_class ], :void ],
+        # EAPI void elm_genlist_item_class_ref(Elm_Genlist_Item_Class *itc);
+        [ :elm_genlist_item_class_ref, [ :elm_genlist_item_class ], :void ],
+        # EAPI void elm_genlist_item_class_unref(Elm_Genlist_Item_Class *itc);
+        [ :elm_genlist_item_class_unref, [ :elm_genlist_item_class ], :void ],
         # EAPI void elm_genlist_item_tooltip_text_set(Elm_Object_Item *it, const char *text);
         [ :elm_genlist_item_tooltip_text_set, [ :elm_object_item, :string ], :void ],
         # EAPI void elm_genlist_item_tooltip_content_cb_set(Elm_Object_Item *it, Elm_Tooltip_Item_Content_Cb func, const void *data, Evas_Smart_Cb del_cb);
@@ -200,10 +170,50 @@ module Efl
         [ :elm_genlist_item_cursor_engine_only_set, [ :elm_object_item, :bool ], :void ],
         # EAPI Eina_Bool elm_genlist_item_cursor_engine_only_get(const Elm_Object_Item *it);
         [ :elm_genlist_item_cursor_engine_only_get, [ :elm_object_item ], :bool ],
-        # EAPI int elm_genlist_item_index_get(const Elm_Object_Item *it);
-        [ :elm_genlist_item_index_get, [ :elm_object_item ], :int ],
-        # EAPI void elm_genlist_realized_items_update(Evas_Object *obj);
-        [ :elm_genlist_realized_items_update, [ :evas_object ], :void ],
+        # EAPI void elm_genlist_compress_mode_set(Evas_Object *obj, Eina_Bool compress);
+        [ :elm_genlist_compress_mode_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_genlist_compress_mode_get(const Evas_Object *obj);
+        [ :elm_genlist_compress_mode_get, [ :evas_object ], :bool ],
+        # EAPI void elm_genlist_height_for_width_mode_set(Evas_Object *obj, Eina_Bool height_for_width);
+        [ :elm_genlist_height_for_width_mode_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_genlist_height_for_width_mode_get(const Evas_Object *obj);
+        [ :elm_genlist_height_for_width_mode_get, [ :evas_object ], :bool ],
+        # EAPI void elm_genlist_homogeneous_set(Evas_Object *obj, Eina_Bool homogeneous);
+        [ :elm_genlist_homogeneous_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_genlist_homogeneous_get(const Evas_Object *obj);
+        [ :elm_genlist_homogeneous_get, [ :evas_object ], :bool ],
+        # EAPI void elm_genlist_block_count_set(Evas_Object *obj, int count);
+        [ :elm_genlist_block_count_set, [ :evas_object, :int ], :void ],
+        # EAPI int elm_genlist_block_count_get(const Evas_Object *obj);
+        [ :elm_genlist_block_count_get, [ :evas_object ], :int ],
+        # EAPI void elm_genlist_longpress_timeout_set(Evas_Object *obj, double timeout);
+        [ :elm_genlist_longpress_timeout_set, [ :evas_object, :double ], :void ],
+        # EAPI double elm_genlist_longpress_timeout_get(const Evas_Object *obj);
+        [ :elm_genlist_longpress_timeout_get, [ :evas_object ], :double ],
+        # EAPI Elm_Object_Item *elm_genlist_at_xy_item_get(const Evas_Object *obj, Evas_Coord x, Evas_Coord y, int *posret);
+        [ :elm_genlist_at_xy_item_get, [ :evas_object, :int, :int, :pointer ], :elm_object_item ],
+        # EAPI Elm_Object_Item *elm_genlist_item_parent_get(const Elm_Object_Item *it);
+        [ :elm_genlist_item_parent_get, [ :elm_object_item ], :elm_object_item ],
+        # EAPI void elm_genlist_item_subitems_clear(Elm_Object_Item *it);
+        [ :elm_genlist_item_subitems_clear, [ :elm_object_item ], :void ],
+        # EAPI void elm_genlist_item_expanded_set(Elm_Object_Item *it, Eina_Bool expanded);
+        [ :elm_genlist_item_expanded_set, [ :elm_object_item, :bool ], :void ],
+        # EAPI Eina_Bool elm_genlist_item_expanded_get(const Elm_Object_Item *it);
+        [ :elm_genlist_item_expanded_get, [ :elm_object_item ], :bool ],
+        # EAPI int elm_genlist_item_expanded_depth_get(const Elm_Object_Item *it);
+        [ :elm_genlist_item_expanded_depth_get, [ :elm_object_item ], :int ],
+        # EAPI void elm_genlist_item_display_only_set(Elm_Object_Item *it, Eina_Bool display_only);
+        [ :elm_genlist_item_display_only_set, [ :elm_object_item, :bool ], :void ],
+        # EAPI Eina_Bool elm_genlist_item_display_only_get(const Elm_Object_Item *it);
+        [ :elm_genlist_item_display_only_get, [ :elm_object_item ], :bool ],
+        # EAPI void elm_genlist_item_contents_orphan(Elm_Object_Item *it);
+        [ :elm_genlist_item_contents_orphan, [ :elm_object_item ], :void ],
+        # EAPI void elm_genlist_item_promote(Elm_Object_Item *it);
+        [ :elm_genlist_item_promote, [ :elm_object_item ], :void ],
+        # EAPI void elm_genlist_item_demote(Elm_Object_Item *it);
+        [ :elm_genlist_item_demote, [ :elm_object_item ], :void ],
+        # EAPI void elm_genlist_item_fields_update(Elm_Object_Item *it, const char *parts, Elm_Genlist_Item_Field_Flags itf);
+        [ :elm_genlist_item_fields_update, [ :elm_object_item, :string, :elm_genlist_item_field_flags ], :void ],
         # EAPI void elm_genlist_item_mode_set(Elm_Object_Item *it, const char *mode_type, Eina_Bool mode_set);
         [ :elm_genlist_item_mode_set, [ :elm_object_item, :string, :bool ], :void ],
         # EAPI const char *elm_genlist_mode_type_get(const Evas_Object *obj);
@@ -216,16 +226,6 @@ module Efl
         [ :elm_genlist_reorder_mode_get, [ :evas_object ], :bool ],
         # EAPI Elm_Genlist_Item_Flags elm_genlist_item_flags_get(const Elm_Object_Item *it);
         [ :elm_genlist_item_flags_get, [ :elm_object_item ], :elm_genlist_item_flags ],
-        # EAPI Elm_Genlist_Item_Class *elm_genlist_item_class_new(void);
-        [ :elm_genlist_item_class_new, [  ], :elm_genlist_item_class ],
-        # EAPI void elm_genlist_item_class_free(Elm_Genlist_Item_Class *itc);
-        [ :elm_genlist_item_class_free, [ :elm_genlist_item_class ], :void ],
-        # EAPI void elm_genlist_item_class_ref(Elm_Genlist_Item_Class *itc);
-        [ :elm_genlist_item_class_ref, [ :elm_genlist_item_class ], :void ],
-        # EAPI void elm_genlist_item_class_unref(Elm_Genlist_Item_Class *itc);
-        [ :elm_genlist_item_class_unref, [ :elm_genlist_item_class ], :void ],
-        # EAPI unsigned int elm_genlist_items_count(const Evas_Object *obj);
-        [ :elm_genlist_items_count, [ :evas_object ], :uint ],
         # EAPI void elm_genlist_edit_mode_set(Evas_Object *obj, Eina_Bool edit_mode);
         [ :elm_genlist_edit_mode_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_genlist_edit_mode_get(const Evas_Object *obj);

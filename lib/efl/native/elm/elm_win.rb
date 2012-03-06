@@ -51,6 +51,18 @@ module Efl
         [ :elm_win_title_set, [ :evas_object, :string ], :void ],
         # EAPI const char *elm_win_title_get(const Evas_Object *obj);
         [ :elm_win_title_get, [ :evas_object ], :string ],
+        # EAPI void elm_win_icon_name_set(Evas_Object *obj, const char *icon_name);
+        [ :elm_win_icon_name_set, [ :evas_object, :string ], :void ],
+        # EAPI const char *elm_win_icon_name_get(const Evas_Object *obj);
+        [ :elm_win_icon_name_get, [ :evas_object ], :string ],
+        # EAPI void elm_win_role_set(Evas_Object *obj, const char *role);
+        [ :elm_win_role_set, [ :evas_object, :string ], :void ],
+        # EAPI const char *elm_win_role_get(const Evas_Object *obj);
+        [ :elm_win_role_get, [ :evas_object ], :string ],
+        # EAPI void elm_win_icon_object_set(Evas_Object *obj, Evas_Object *icon);
+        [ :elm_win_icon_object_set, [ :evas_object, :evas_object ], :void ],
+        # EAPI const Evas_Object *elm_win_icon_object_get(const Evas_Object *obj);
+        [ :elm_win_icon_object_get, [ :evas_object ], :evas_object ],
         # EAPI void elm_win_autodel_set(Evas_Object *obj, Eina_Bool autodel);
         [ :elm_win_autodel_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_win_autodel_get(const Evas_Object *obj);

@@ -101,7 +101,6 @@ for header in \
     "${INCLUDE}/elementary-0/elm_mirroring.h" \
     "${INCLUDE}/elementary-0/elm_need.h" \
     "${INCLUDE}/elementary-0/elm_notify.h" \
-    "${INCLUDE}/elementary-0/elm_pager.h" \
     "${INCLUDE}/elementary-0/elm_panel.h" \
     "${INCLUDE}/elementary-0/elm_panes.h" \
     "${INCLUDE}/elementary-0/elm_password.h" \
