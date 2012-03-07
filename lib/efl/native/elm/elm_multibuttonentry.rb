@@ -65,8 +65,8 @@ module Efl
         [ :elm_multibuttonentry_item_filter_append, [ :evas_object, :elm_multibuttonentry_item_filter_cb, :pointer ], :void ],
         # EAPI void elm_multibuttonentry_item_filter_prepend(Evas_Object *obj, Elm_Multibuttonentry_Item_Filter_Cb func, void *data);
         [ :elm_multibuttonentry_item_filter_prepend, [ :evas_object, :elm_multibuttonentry_item_filter_cb, :pointer ], :void ],
-        # EAPI void elm_multibuttonentry_item_filter_del(Evas_Object *obj, Elm_Multibuttonentry_Item_Filter_Cb func, void *data);
-        [ :elm_multibuttonentry_item_filter_del, [ :evas_object, :elm_multibuttonentry_item_filter_cb, :pointer ], :void ],
+        # EAPI void elm_multibuttonentry_item_filter_remove(Evas_Object *obj, Elm_Multibuttonentry_Item_Filter_Cb func, void *data);
+        [ :elm_multibuttonentry_item_filter_remove, [ :evas_object, :elm_multibuttonentry_item_filter_cb, :pointer ], :void ],
         ]
         #
         attach_fcts fcts
