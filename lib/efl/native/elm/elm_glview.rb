@@ -30,10 +30,6 @@ module Efl
         # typedef enum {...} Elm_GLView_Render_Policy;
         enum :elm_glview_render_policy, [ :elm_glview_render_policy_on_demand, 1, :elm_glview_render_policy_always, 2 ]
         #
-        # TYPEDEFS
-        # typedef struct _GLData GLData;
-        typedef :pointer, :gldata
-        #
         # CALLBACKS
         # typedef void (*Elm_GLView_Func_Cb) (Evas_Object *obj);
         callback :elm_glview_func_cb, [ :evas_object ], :void
