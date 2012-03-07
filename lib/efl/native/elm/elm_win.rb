@@ -33,6 +33,9 @@ module Efl
             :elm_win_keyboard_j2me ]
         # typedef enum {...} Elm_Win_Indicator_Mode;
         enum :elm_win_indicator_mode, [ :elm_win_indicator_unknown, :elm_win_indicator_hide, :elm_win_indicator_show ]
+        # typedef enum {...} Elm_Win_Indicator_Opacity_Mode;
+        enum :elm_win_indicator_opacity_mode, [ :elm_win_indicator_opacity_unknown, :elm_win_indicator_opaque, :elm_win_indicator_translucent,
+            :elm_win_indicator_transparent ]
         # typedef enum {...} Elm_Illume_Command;
         enum :elm_illume_command, [ :elm_illume_command_focus_back, :elm_illume_command_focus_forward, :elm_illume_command_focus_home,
             :elm_illume_command_close ]
@@ -191,6 +194,10 @@ module Efl
         [ :elm_win_indicator_mode_set, [ :evas_object, :elm_win_indicator_mode ], :void ],
         # EAPI Elm_Win_Indicator_Mode elm_win_indicator_mode_get(const Evas_Object *obj);
         [ :elm_win_indicator_mode_get, [ :evas_object ], :elm_win_indicator_mode ],
+        # EAPI void elm_win_indicator_opacity_set(Evas_Object *obj, Elm_Win_Indicator_Opacity_Mode mode);
+        [ :elm_win_indicator_opacity_set, [ :evas_object, :elm_win_indicator_opacity_mode ], :void ],
+        # EAPI Elm_Win_Indicator_Opacity_Mode elm_win_indicator_opacity_get(const Evas_Object *obj);
+        [ :elm_win_indicator_opacity_get, [ :evas_object ], :elm_win_indicator_opacity_mode ],
         # EAPI void elm_win_screen_position_get(const Evas_Object *obj, int *x, int *y);
         [ :elm_win_screen_position_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI Eina_Bool elm_win_socket_listen(Evas_Object *obj, const char *svcname, int svcnum, Eina_Bool svcsys);

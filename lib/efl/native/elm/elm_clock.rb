@@ -22,9 +22,10 @@ module Efl
         ffi_lib 'elementary-ver-pre-svn-09.so.0'
         #
         # ENUMS
-        # typedef enum {...} Elm_Clock_Digedit;
-        enum :elm_clock_digedit, [ :elm_clock_none, 0, :elm_clock_hour_decimal, 1<<0, :elm_clock_hour_unit, 1<<1, :elm_clock_min_decimal, 1<<2,
-            :elm_clock_min_unit, 1<<3, :elm_clock_sec_decimal, 1<<4, :elm_clock_sec_unit, 1<<5, :elm_clock_all, (1<<6)-1 ]
+        # typedef enum {...} Elm_Clock_Edit_Mode;
+        enum :elm_clock_edit_mode, [ :elm_clock_edit_default, 0, :elm_clock_edit_hour_decimal, 1<<0, :elm_clock_edit_hour_unit, 1<<1,
+            :elm_clock_edit_min_decimal, 1<<2, :elm_clock_edit_min_unit, 1<<3, :elm_clock_edit_sec_decimal, 1<<4, :elm_clock_edit_sec_unit, 1<<5,
+            :elm_clock_edit_all, (1<<6)-1 ]
         #
         # FUNCTIONS
         fcts = [
@@ -38,10 +39,10 @@ module Efl
         [ :elm_clock_edit_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_clock_edit_get(const Evas_Object *obj);
         [ :elm_clock_edit_get, [ :evas_object ], :bool ],
-        # EAPI void elm_clock_digit_edit_set(Evas_Object *obj, Elm_Clock_Digedit digedit);
-        [ :elm_clock_digit_edit_set, [ :evas_object, :elm_clock_digedit ], :void ],
-        # EAPI Elm_Clock_Digedit elm_clock_digit_edit_get(const Evas_Object *obj);
-        [ :elm_clock_digit_edit_get, [ :evas_object ], :elm_clock_digedit ],
+        # EAPI void elm_clock_edit_mode_set(Evas_Object *obj, Elm_Clock_Edit_Mode digedit);
+        [ :elm_clock_edit_mode_set, [ :evas_object, :elm_clock_edit_mode ], :void ],
+        # EAPI Elm_Clock_Edit_Mode elm_clock_edit_mode_get(const Evas_Object *obj);
+        [ :elm_clock_edit_mode_get, [ :evas_object ], :elm_clock_edit_mode ],
         # EAPI void elm_clock_show_am_pm_set(Evas_Object *obj, Eina_Bool am_pm);
         [ :elm_clock_show_am_pm_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_clock_show_am_pm_get(const Evas_Object *obj);
@@ -50,10 +51,10 @@ module Efl
         [ :elm_clock_show_seconds_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_clock_show_seconds_get(const Evas_Object *obj);
         [ :elm_clock_show_seconds_get, [ :evas_object ], :bool ],
-        # EAPI void elm_clock_interval_set(Evas_Object *obj, double interval);
-        [ :elm_clock_interval_set, [ :evas_object, :double ], :void ],
-        # EAPI double elm_clock_interval_get(const Evas_Object *obj);
-        [ :elm_clock_interval_get, [ :evas_object ], :double ],
+        # EAPI void elm_clock_first_interval_set(Evas_Object *obj, double interval);
+        [ :elm_clock_first_interval_set, [ :evas_object, :double ], :void ],
+        # EAPI double elm_clock_first_interval_get(const Evas_Object *obj);
+        [ :elm_clock_first_interval_get, [ :evas_object ], :double ],
         ]
         #
         attach_fcts fcts

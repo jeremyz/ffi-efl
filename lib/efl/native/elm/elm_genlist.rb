@@ -35,8 +35,8 @@ module Efl
         enum :elm_genlist_item_scrollto_type, [ :elm_genlist_item_scrollto_none, 0, :elm_genlist_item_scrollto_in, (1<<0),
             :elm_genlist_item_scrollto_top, (1<<1), :elm_genlist_item_scrollto_middle, (1<<2) ]
         # typedef enum {...} Elm_Genlist_Item_Move_Effect_Mode;
-        enum :elm_genlist_item_move_effect_mode, [ :elm_genlist_item_move_effect_none, 0, :elm_genlist_item_move_effect_expand, 1,
-            :elm_genlist_item_move_effect_contract, 2 ]
+        enum :elm_genlist_item_move_effect_mode, [ :elm_genlist_tree_effect_none, 0, :elm_genlist_tree_effect_expand, 1,
+            :elm_genlist_tree_effect_contract, 2 ]
         #
         # TYPEDEFS
         # typedef Elm_Gen_Item_Class Elm_Genlist_Item_Class;
@@ -229,10 +229,10 @@ module Efl
         [ :elm_genlist_select_mode_set, [ :evas_object, :elm_object_select_mode_type ], :void ],
         # EAPI Elm_Object_Select_Mode_Type elm_genlist_select_mode_get(const Evas_Object *obj);
         [ :elm_genlist_select_mode_get, [ :evas_object ], :elm_object_select_mode_type ],
-        # EAPI void elm_genlist_hilight_mode_set(Evas_Object *obj, Eina_Bool hilight);
-        [ :elm_genlist_hilight_mode_set, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool elm_genlist_hilight_mode_get(const Evas_Object *obj);
-        [ :elm_genlist_hilight_mode_get, [ :evas_object ], :bool ],
+        # EAPI void elm_genlist_highlight_mode_set(Evas_Object *obj, Eina_Bool highlight);
+        [ :elm_genlist_highlight_mode_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_genlist_highlight_mode_get(const Evas_Object *obj);
+        [ :elm_genlist_highlight_mode_get, [ :evas_object ], :bool ],
         ]
         #
         attach_fcts fcts
