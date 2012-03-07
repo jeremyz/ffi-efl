@@ -55,6 +55,7 @@ for header in \
     "${INCLUDE}/elementary-0/elc_hoversel.h" \
     "${INCLUDE}/elementary-0/elc_multibuttonentry.h" \
     "${INCLUDE}/elementary-0/elc_naviframe.h" \
+    "${INCLUDE}/elementary-0/elc_popup.h" \
     "${INCLUDE}/elementary-0/elm_actionslider.h" \
     "${INCLUDE}/elementary-0/elm_app.h" \
     "${INCLUDE}/elementary-0/elm_authors.h" \
