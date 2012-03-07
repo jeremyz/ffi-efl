@@ -32,9 +32,9 @@ module Efl
         enum :elm_policy_quit, [ :elm_policy_quit_none, 0, :elm_policy_quit_last_window_closed, 1 ]
         # typedef enum {...} Elm_Focus_Direction;
         enum :elm_focus_direction, [ :elm_focus_previous, :elm_focus_next ]
-        # typedef enum {...} Elm_Object_Select_Mode_Type;
-        enum :elm_object_select_mode_type, [ :elm_object_normal_select, 0, :elm_object_always_select, 1, :elm_object_no_select, 2,
-            :elm_object_select_mode_max, 3 ]
+        # typedef enum {...} Elm_Object_Select_Mode;
+        enum :elm_object_select_mode, [ :elm_object_select_mode_default, 0, :elm_object_select_mode_always, 1, :elm_object_select_mode_none, 2,
+            :elm_object_select_mode_display_only, 3, :elm_object_select_mode_max, 4 ]
         #
         # TYPEDEFS
         # typedef struct _Elm_Event_Policy_Changed Elm_Event_Policy_Changed;

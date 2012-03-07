@@ -44,10 +44,10 @@ module Efl
         [ :elm_list_horizontal_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_list_horizontal_get(const Evas_Object *obj);
         [ :elm_list_horizontal_get, [ :evas_object ], :bool ],
-        # EAPI void elm_list_select_mode_set(Evas_Object *obj, Elm_Object_Select_Mode_Type mode);
-        [ :elm_list_select_mode_set, [ :evas_object, :elm_object_select_mode_type ], :void ],
-        # EAPI Elm_Object_Select_Mode_Type elm_list_select_mode_get(const Evas_Object *obj);
-        [ :elm_list_select_mode_get, [ :evas_object ], :elm_object_select_mode_type ],
+        # EAPI void elm_list_select_mode_set(Evas_Object *obj, Elm_Object_Select_Mode mode);
+        [ :elm_list_select_mode_set, [ :evas_object, :elm_object_select_mode ], :void ],
+        # EAPI Elm_Object_Select_Mode elm_list_select_mode_get(const Evas_Object *obj);
+        [ :elm_list_select_mode_get, [ :evas_object ], :elm_object_select_mode ],
         # EAPI void elm_list_bounce_set(Evas_Object *obj, Eina_Bool h_bounce, Eina_Bool v_bounce);
         [ :elm_list_bounce_set, [ :evas_object, :bool, :bool ], :void ],
         # EAPI void elm_list_bounce_get(const Evas_Object *obj, Eina_Bool *h_bounce, Eina_Bool *v_bounce);

@@ -27,10 +27,12 @@ module Efl
         [ :elm_naviframe_add, [ :evas_object ], :evas_object ],
         # EAPI Elm_Object_Item *elm_naviframe_item_push(Evas_Object *obj, const char *title_label, Evas_Object *prev_btn, Evas_Object *next_btn, Evas_Object *content, const char *item_style);
         [ :elm_naviframe_item_push, [ :evas_object, :string, :evas_object, :evas_object, :evas_object, :string ], :elm_object_item ],
-        # EAPI Elm_Object_Item *elm_naviframe_item_insert_before(Elm_Object_Item *before, const char *title_label, Evas_Object *prev_btn, Evas_Object *next_btn, Evas_Object *content, const char *item_style);
-        [ :elm_naviframe_item_insert_before, [ :elm_object_item, :string, :evas_object, :evas_object, :evas_object, :string ], :elm_object_item ],
-        # EAPI Elm_Object_Item *elm_naviframe_item_insert_after(Elm_Object_Item *after, const char *title_label, Evas_Object *prev_btn, Evas_Object *next_btn, Evas_Object *content, const char *item_style);
-        [ :elm_naviframe_item_insert_after, [ :elm_object_item, :string, :evas_object, :evas_object, :evas_object, :string ], :elm_object_item ],
+        # EAPI Elm_Object_Item *elm_naviframe_item_insert_before(Evas_Object *obj, Elm_Object_Item *before, const char *title_label, Evas_Object *prev_btn, Evas_Object *next_btn, Evas_Object *content, const char *item_style);
+        [ :elm_naviframe_item_insert_before, [ :evas_object, :elm_object_item, :string, :evas_object, :evas_object, :evas_object, :string ],
+            :elm_object_item ],
+        # EAPI Elm_Object_Item *elm_naviframe_item_insert_after(Evas_Object *obj, Elm_Object_Item *after, const char *title_label, Evas_Object *prev_btn, Evas_Object *next_btn, Evas_Object *content, const char *item_style);
+        [ :elm_naviframe_item_insert_after, [ :evas_object, :elm_object_item, :string, :evas_object, :evas_object, :evas_object, :string ],
+            :elm_object_item ],
         # EAPI Evas_Object *elm_naviframe_item_pop(Evas_Object *obj);
         [ :elm_naviframe_item_pop, [ :evas_object ], :evas_object ],
         # EAPI void elm_naviframe_item_pop_to(Elm_Object_Item *it);
@@ -63,10 +65,6 @@ module Efl
         [ :elm_naviframe_event_enabled_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_naviframe_event_enabled_get(const Evas_Object *obj);
         [ :elm_naviframe_event_enabled_get, [ :evas_object ], :bool ],
-        # EAPI void elm_naviframe_item_style_default_set(Evas_Object *obj, const char *style);
-        [ :elm_naviframe_item_style_default_set, [ :evas_object, :string ], :void ],
-        # EAPI const char *elm_naviframe_item_style_default_get(const Evas_Object *obj);
-        [ :elm_naviframe_item_style_default_get, [ :evas_object ], :string ],
         # EAPI void elm_naviframe_item_simple_promote(Evas_Object *obj, Evas_Object *content);
         [ :elm_naviframe_item_simple_promote, [ :evas_object, :evas_object ], :void ],
         ]

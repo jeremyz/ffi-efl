@@ -127,10 +127,10 @@ module Efl
         [ :elm_toolbar_horizontal_get, [ :evas_object ], :bool ],
         # EAPI unsigned int elm_toolbar_items_count(const Evas_Object *obj);
         [ :elm_toolbar_items_count, [ :evas_object ], :uint ],
-        # EAPI void elm_toolbar_select_mode_set(Evas_Object *obj, Elm_Object_Select_Mode_Type mode);
-        [ :elm_toolbar_select_mode_set, [ :evas_object, :elm_object_select_mode_type ], :void ],
-        # EAPI Elm_Object_Select_Mode_Type elm_toolbar_select_mode_get(const Evas_Object *obj);
-        [ :elm_toolbar_select_mode_get, [ :evas_object ], :elm_object_select_mode_type ],
+        # EAPI void elm_toolbar_select_mode_set(Evas_Object *obj, Elm_Object_Select_Mode mode);
+        [ :elm_toolbar_select_mode_set, [ :evas_object, :elm_object_select_mode ], :void ],
+        # EAPI Elm_Object_Select_Mode elm_toolbar_select_mode_get(const Evas_Object *obj);
+        [ :elm_toolbar_select_mode_get, [ :evas_object ], :elm_object_select_mode ],
         ]
         #
         attach_fcts fcts

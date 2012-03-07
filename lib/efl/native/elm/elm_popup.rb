@@ -36,19 +36,19 @@ module Efl
         [ :elm_popup_item_append, [ :evas_object, :string, :evas_object, :evas_smart_cb, :pointer ], :elm_object_item ],
         # EAPI void elm_popup_content_text_wrap_type_set(Evas_Object *obj, Elm_Wrap_Type wrap);
         [ :elm_popup_content_text_wrap_type_set, [ :evas_object, :elm_wrap_type ], :void ],
-        # EAPI Elm_Wrap_Type elm_popup_content_text_wrap_type_get(Evas_Object *obj);
+        # EAPI Elm_Wrap_Type elm_popup_content_text_wrap_type_get(const Evas_Object *obj);
         [ :elm_popup_content_text_wrap_type_get, [ :evas_object ], :elm_wrap_type ],
         # EAPI void elm_popup_orient_set(Evas_Object *obj, Elm_Popup_Orient orient);
         [ :elm_popup_orient_set, [ :evas_object, :elm_popup_orient ], :void ],
-        # EAPI Elm_Popup_Orient elm_popup_orient_get(Evas_Object *obj);
+        # EAPI Elm_Popup_Orient elm_popup_orient_get(const Evas_Object *obj);
         [ :elm_popup_orient_get, [ :evas_object ], :elm_popup_orient ],
         # EAPI void elm_popup_timeout_set(Evas_Object *obj, double timeout);
         [ :elm_popup_timeout_set, [ :evas_object, :double ], :void ],
-        # EAPI double elm_popup_timeout_get(Evas_Object *obj);
+        # EAPI double elm_popup_timeout_get(const Evas_Object *obj);
         [ :elm_popup_timeout_get, [ :evas_object ], :double ],
         # EAPI void elm_popup_allow_events_set(Evas_Object *obj, Eina_Bool allow);
         [ :elm_popup_allow_events_set, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool elm_popup_allow_events_get(Evas_Object *obj);
+        # EAPI Eina_Bool elm_popup_allow_events_get(const Evas_Object *obj);
         [ :elm_popup_allow_events_get, [ :evas_object ], :bool ],
         ]
         #

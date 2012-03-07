@@ -27,6 +27,9 @@ module Efl
         # typedef enum {...} Elm_Web_Zoom_Mode;
         enum :elm_web_zoom_mode, [ :elm_web_zoom_mode_manual, 0, :elm_web_zoom_mode_auto_fit, 1, :elm_web_zoom_mode_auto_fill, 2,
             :elm_web_zoom_mode_last, 3 ]
+        # typedef enum {...} Elm_Web_Window_Feature_Flag;
+        enum :elm_web_window_feature_flag, [ :elm_web_window_feature_toolbar, :elm_web_window_feature_statusbar, :elm_web_window_feature_scrollbars,
+            :elm_web_window_feature_menubar, :elm_web_window_feature_locationbar, :elm_web_window_feature_fullscreen ]
         #
         # TYPEDEFS
         # typedef struct _Elm_Web_Frame_Load_Error Elm_Web_Frame_Load_Error;
@@ -120,12 +123,12 @@ module Efl
         [ :elm_web_forward, [ :evas_object ], :bool ],
         # EAPI Eina_Bool elm_web_navigate(Evas_Object *obj, int steps);
         [ :elm_web_navigate, [ :evas_object, :int ], :bool ],
-        # EAPI Eina_Bool elm_web_back_possible(Evas_Object *obj);
-        [ :elm_web_back_possible, [ :evas_object ], :bool ],
-        # EAPI Eina_Bool elm_web_forward_possible(Evas_Object *obj);
-        [ :elm_web_forward_possible, [ :evas_object ], :bool ],
-        # EAPI Eina_Bool elm_web_navigate_possible(Evas_Object *obj, int steps);
-        [ :elm_web_navigate_possible, [ :evas_object, :int ], :bool ],
+        # EAPI Eina_Bool elm_web_back_possible_get(Evas_Object *obj);
+        [ :elm_web_back_possible_get, [ :evas_object ], :bool ],
+        # EAPI Eina_Bool elm_web_forward_possible_get(Evas_Object *obj);
+        [ :elm_web_forward_possible_get, [ :evas_object ], :bool ],
+        # EAPI Eina_Bool elm_web_navigate_possible_get(Evas_Object *obj, int steps);
+        [ :elm_web_navigate_possible_get, [ :evas_object, :int ], :bool ],
         # EAPI Eina_Bool elm_web_history_enabled_get(const Evas_Object *obj);
         [ :elm_web_history_enabled_get, [ :evas_object ], :bool ],
         # EAPI void elm_web_history_enabled_set(Evas_Object *obj, Eina_Bool enabled);
@@ -150,11 +153,10 @@ module Efl
         [ :elm_web_window_features_ref, [ :elm_web_window_features ], :void ],
         # EAPI void elm_web_window_features_unref(Elm_Web_Window_Features *wf);
         [ :elm_web_window_features_unref, [ :elm_web_window_features ], :void ],
-        # EAPI void elm_web_window_features_bool_property_get(const Elm_Web_Window_Features *wf, Eina_Bool *toolbar_visible, Eina_Bool *statusbar_visible, Eina_Bool *scrollbars_visible, Eina_Bool *menubar_visible, Eina_Bool *locationbar_visble, Eina_Bool *fullscreen);
-        [ :elm_web_window_features_bool_property_get, [ :elm_web_window_features, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer ], :void
-            ],
-        # EAPI void elm_web_window_features_int_property_get(const Elm_Web_Window_Features *wf, int *x, int *y, int *w, int *h);
-        [ :elm_web_window_features_int_property_get, [ :elm_web_window_features, :pointer, :pointer, :pointer, :pointer ], :void ],
+        # EAPI Eina_Bool elm_web_window_features_property_get(const Elm_Web_Window_Features *wf, Elm_Web_Window_Feature_Flag flag);
+        [ :elm_web_window_features_property_get, [ :elm_web_window_features, :elm_web_window_feature_flag ], :bool ],
+        # EAPI void elm_web_window_features_region_get(const Elm_Web_Window_Features *wf, Evas_Coord *x, Evas_Coord *y, Evas_Coord *w, Evas_Coord *h);
+        [ :elm_web_window_features_region_get, [ :elm_web_window_features, :pointer, :pointer, :pointer, :pointer ], :void ],
         ]
         #
         attach_fcts fcts
