@@ -34,6 +34,9 @@ module Efl
         enum :elm_map_route_type, [ :elm_map_route_type_motocar, :elm_map_route_type_bicycle, :elm_map_route_type_foot, :elm_map_route_type_last ]
         # typedef enum {...} Elm_Map_Route_Method;
         enum :elm_map_route_method, [ :elm_map_route_method_fastest, :elm_map_route_method_shortest, :elm_map_route_method_last ]
+        # typedef enum _Elm_Map_Overlay_Type {...} Elm_Map_Overlay_Type;
+        enum :elm_map_overlay_type, [ :elm_map_overlay_type_none, 0, :elm_map_overlay_type_default, 1, :elm_map_overlay_type_class, 2,
+            :elm_map_overlay_type_bubble, 3 ]
         # typedef enum {...} Elm_Map_Name_Method;
         enum :elm_map_name_method, [ :elm_map_name_method_search, :elm_map_name_method_reverse, :elm_map_name_method_last ]
         #
@@ -48,36 +51,38 @@ module Efl
         typedef :pointer, :elm_map_route
         # typedef struct _Elm_Map_Name Elm_Map_Name;
         typedef :pointer, :elm_map_name
-        # typedef struct _Elm_Map_Track Elm_Map_Track;
-        typedef :pointer, :elm_map_track
+        # typedef struct _Elm_Map_Overlay Elm_Map_Overlay;
+        typedef :pointer, :elm_map_overlay
         #
         # CALLBACKS
-        # typedef Evas_Object *(*ElmMapMarkerGetFunc) (Evas_Object *obj, Elm_Map_Marker *marker, void *data);
-        callback :elmmapmarkergetfunc_cb, [ :evas_object, :elm_map_marker, :pointer ], :evas_object
-        # typedef void (*ElmMapMarkerDelFunc) (Evas_Object *obj, Elm_Map_Marker *marker, void *data, Evas_Object *o);
-        callback :elmmapmarkerdelfunc_cb, [ :evas_object, :elm_map_marker, :pointer, :evas_object ], :void
-        # typedef Evas_Object *(*ElmMapMarkerIconGetFunc) (Evas_Object *obj, Elm_Map_Marker *marker, void *data);
-        callback :elmmapmarkericongetfunc_cb, [ :evas_object, :elm_map_marker, :pointer ], :evas_object
-        # typedef Evas_Object *(*ElmMapGroupIconGetFunc) (Evas_Object *obj, void *data);
-        callback :elmmapgroupicongetfunc_cb, [ :evas_object, :pointer ], :evas_object
-        # typedef char *(*ElmMapModuleSourceFunc) (void);
-        callback :elmmapmodulesourcefunc_cb, [  ], :string
-        # typedef int (*ElmMapModuleZoomMinFunc) (void);
-        callback :elmmapmodulezoomminfunc_cb, [  ], :int
-        # typedef int (*ElmMapModuleZoomMaxFunc) (void);
-        callback :elmmapmodulezoommaxfunc_cb, [  ], :int
-        # typedef char *(*ElmMapModuleUrlFunc) (Evas_Object *obj, int x, int y, int zoom);
-        callback :elmmapmoduleurlfunc_cb, [ :evas_object, :int, :int, :int ], :string
-        # typedef int (*ElmMapModuleRouteSourceFunc) (void);
-        callback :elmmapmoduleroutesourcefunc_cb, [  ], :int
-        # typedef char *(*ElmMapModuleRouteUrlFunc) (Evas_Object *obj, char *type_name, int method, double flon, double flat, double tlon, double tlat);
-        callback :elmmapmodulerouteurlfunc_cb, [ :evas_object, :string, :int, :double, :double, :double, :double ], :string
-        # typedef char *(*ElmMapModuleNameUrlFunc) (Evas_Object *obj, int method, char *name, double lon, double lat);
-        callback :elmmapmodulenameurlfunc_cb, [ :evas_object, :int, :string, :double, :double ], :string
-        # typedef Eina_Bool (*ElmMapModuleGeoIntoCoordFunc) (const Evas_Object *obj, int zoom, double lon, double lat, int size, int *x, int *y);
-        callback :elmmapmodulegeointocoordfunc_cb, [ :evas_object, :int, :double, :double, :int, :pointer, :pointer ], :bool
-        # typedef Eina_Bool (*ElmMapModuleCoordIntoGeoFunc) (const Evas_Object *obj, int zoom, int x, int y, int size, double *lon, double *lat);
-        callback :elmmapmodulecoordintogeofunc_cb, [ :evas_object, :int, :int, :int, :int, :pointer, :pointer ], :bool
+        # typedef Evas_Object *(*Elm_Map_Marker_Get_Func) (Evas_Object *obj, Elm_Map_Marker *marker, void *data);
+        callback :elm_map_marker_get_func_cb, [ :evas_object, :elm_map_marker, :pointer ], :evas_object
+        # typedef void (*Elm_Map_Marker_Del_Func) (Evas_Object *obj, Elm_Map_Marker *marker, void *data, Evas_Object *o);
+        callback :elm_map_marker_del_func_cb, [ :evas_object, :elm_map_marker, :pointer, :evas_object ], :void
+        # typedef Evas_Object *(*Elm_Map_Marker_Icon_Get_Func) (Evas_Object *obj, Elm_Map_Marker *marker, void *data);
+        callback :elm_map_marker_icon_get_func_cb, [ :evas_object, :elm_map_marker, :pointer ], :evas_object
+        # typedef Evas_Object *(*Elm_Map_Group_Icon_Get_Func) (Evas_Object *obj, void *data);
+        callback :elm_map_group_icon_get_func_cb, [ :evas_object, :pointer ], :evas_object
+        # typedef void (*Elm_Map_Overlay_Get_Cb) (void *data, Evas_Object *map, Elm_Map_Overlay *overlay);
+        callback :elm_map_overlay_get_cb, [ :pointer, :evas_object, :elm_map_overlay ], :void
+        # typedef char *(*Elm_Map_Module_Source_Func) (void);
+        callback :elm_map_module_source_func_cb, [  ], :string
+        # typedef int (*Elm_Map_Module_Zoom_Min_Func) (void);
+        callback :elm_map_module_zoom_min_func_cb, [  ], :int
+        # typedef int (*Elm_Map_Module_Zoom_Max_Func) (void);
+        callback :elm_map_module_zoom_max_func_cb, [  ], :int
+        # typedef char *(*Elm_Map_Module_Url_Func) (Evas_Object *obj, int x, int y, int zoom);
+        callback :elm_map_module_url_func_cb, [ :evas_object, :int, :int, :int ], :string
+        # typedef int (*Elm_Map_Module_Route_Source_Func) (void);
+        callback :elm_map_module_route_source_func_cb, [  ], :int
+        # typedef char *(*Elm_Map_Module_Route_Url_Func) (Evas_Object *obj, char *type_name, int method, double flon, double flat, double tlon, double tlat);
+        callback :elm_map_module_route_url_func_cb, [ :evas_object, :string, :int, :double, :double, :double, :double ], :string
+        # typedef char *(*Elm_Map_Module_Name_Url_Func) (Evas_Object *obj, int method, char *name, double lon, double lat);
+        callback :elm_map_module_name_url_func_cb, [ :evas_object, :int, :string, :double, :double ], :string
+        # typedef Eina_Bool (*Elm_Map_Module_Geo_Into_Coord_Func) (const Evas_Object *obj, int zoom, double lon, double lat, int size, int *x, int *y);
+        callback :elm_map_module_geo_into_coord_func_cb, [ :evas_object, :int, :double, :double, :int, :pointer, :pointer ], :bool
+        # typedef Eina_Bool (*Elm_Map_Module_Coord_Into_Geo_Func) (const Evas_Object *obj, int zoom, int x, int y, int size, double *lon, double *lat);
+        callback :elm_map_module_coord_into_geo_func_cb, [ :evas_object, :int, :int, :int, :int, :pointer, :pointer ], :bool
         #
         # FUNCTIONS
         fcts = [
@@ -141,8 +146,8 @@ module Efl
         [ :elm_map_group_class_new, [ :evas_object ], :elm_map_group_class ],
         # EAPI void elm_map_group_class_style_set(Elm_Map_Group_Class *clas, const char *style);
         [ :elm_map_group_class_style_set, [ :elm_map_group_class, :string ], :void ],
-        # EAPI void elm_map_group_class_icon_cb_set(Elm_Map_Group_Class *clas, ElmMapGroupIconGetFunc icon_get);
-        [ :elm_map_group_class_icon_cb_set, [ :elm_map_group_class, :elmmapgroupicongetfunc_cb ], :void ],
+        # EAPI void elm_map_group_class_icon_cb_set(Elm_Map_Group_Class *clas, Elm_Map_Group_Icon_Get_Func icon_get);
+        [ :elm_map_group_class_icon_cb_set, [ :elm_map_group_class, :elm_map_group_icon_get_func_cb ], :void ],
         # EAPI void elm_map_group_class_data_set(Elm_Map_Group_Class *clas, void *data);
         [ :elm_map_group_class_data_set, [ :elm_map_group_class, :pointer ], :void ],
         # EAPI void elm_map_group_class_zoom_displayed_set(Elm_Map_Group_Class *clas, int zoom);
@@ -155,12 +160,12 @@ module Efl
         [ :elm_map_marker_class_new, [ :evas_object ], :elm_map_marker_class ],
         # EAPI void elm_map_marker_class_style_set(Elm_Map_Marker_Class *clas, const char *style);
         [ :elm_map_marker_class_style_set, [ :elm_map_marker_class, :string ], :void ],
-        # EAPI void elm_map_marker_class_icon_cb_set(Elm_Map_Marker_Class *clas, ElmMapMarkerIconGetFunc icon_get);
-        [ :elm_map_marker_class_icon_cb_set, [ :elm_map_marker_class, :elmmapmarkericongetfunc_cb ], :void ],
-        # EAPI void elm_map_marker_class_get_cb_set(Elm_Map_Marker_Class *clas, ElmMapMarkerGetFunc get);
-        [ :elm_map_marker_class_get_cb_set, [ :elm_map_marker_class, :elmmapmarkergetfunc_cb ], :void ],
-        # EAPI void elm_map_marker_class_del_cb_set(Elm_Map_Marker_Class *clas, ElmMapMarkerDelFunc del);
-        [ :elm_map_marker_class_del_cb_set, [ :elm_map_marker_class, :elmmapmarkerdelfunc_cb ], :void ],
+        # EAPI void elm_map_marker_class_icon_cb_set(Elm_Map_Marker_Class *clas, Elm_Map_Marker_Icon_Get_Func icon_get);
+        [ :elm_map_marker_class_icon_cb_set, [ :elm_map_marker_class, :elm_map_marker_icon_get_func_cb ], :void ],
+        # EAPI void elm_map_marker_class_get_cb_set(Elm_Map_Marker_Class *clas, Elm_Map_Marker_Get_Func get);
+        [ :elm_map_marker_class_get_cb_set, [ :elm_map_marker_class, :elm_map_marker_get_func_cb ], :void ],
+        # EAPI void elm_map_marker_class_del_cb_set(Elm_Map_Marker_Class *clas, Elm_Map_Marker_Del_Func del);
+        [ :elm_map_marker_class_del_cb_set, [ :elm_map_marker_class, :elm_map_marker_del_func_cb ], :void ],
         # EAPI const char **elm_map_source_names_get(const Evas_Object *obj);
         [ :elm_map_source_names_get, [ :evas_object ], :pointer ],
         # EAPI void elm_map_source_name_set(Evas_Object *obj, const char *source_name);
@@ -215,6 +220,66 @@ module Efl
         [ :elm_map_track_add, [ :evas_object, :emap_route ], :evas_object ],
         # EAPI void elm_map_track_remove(Evas_Object *obj, Evas_Object *route);
         [ :elm_map_track_remove, [ :evas_object, :evas_object ], :void ],
+        # EAPI Elm_Map_Overlay * elm_map_overlay_add(Evas_Object *obj, double lon, double lat);
+        [ :elm_map_overlay_add, [ :evas_object, :double, :double ], :elm_map_overlay ],
+        # EAPI void elm_map_overlay_del(Elm_Map_Overlay *overlay);
+        [ :elm_map_overlay_del, [ :elm_map_overlay ], :void ],
+        # EAPI Elm_Map_Overlay_Type elm_map_overlay_type_get(Elm_Map_Overlay *overlay);
+        [ :elm_map_overlay_type_get, [ :elm_map_overlay ], :elm_map_overlay_type ],
+        # EAPI void elm_map_overlay_data_set(Elm_Map_Overlay *overlay, void *data);
+        [ :elm_map_overlay_data_set, [ :elm_map_overlay, :pointer ], :void ],
+        # EAPI void * elm_map_overlay_data_get(const Elm_Map_Overlay *overlay);
+        [ :elm_map_overlay_data_get, [ :elm_map_overlay ], :pointer ],
+        # EAPI void elm_map_overlay_hide_set(Elm_Map_Overlay *overlay, Eina_Bool hide);
+        [ :elm_map_overlay_hide_set, [ :elm_map_overlay, :bool ], :void ],
+        # EAPI Eina_Bool elm_map_overlay_hide_get(const Elm_Map_Overlay *overlay);
+        [ :elm_map_overlay_hide_get, [ :elm_map_overlay ], :bool ],
+        # EAPI void elm_map_overlay_displayed_zoom_min_set(Elm_Map_Overlay *overlay, int zoom);
+        [ :elm_map_overlay_displayed_zoom_min_set, [ :elm_map_overlay, :int ], :void ],
+        # EAPI int elm_map_overlay_displayed_zoom_min_get(const Elm_Map_Overlay *overlay);
+        [ :elm_map_overlay_displayed_zoom_min_get, [ :elm_map_overlay ], :int ],
+        # EAPI void elm_map_overlay_paused_set(Elm_Map_Overlay *overlay, Eina_Bool paused);
+        [ :elm_map_overlay_paused_set, [ :elm_map_overlay, :bool ], :void ],
+        # EAPI Eina_Bool elm_map_overlay_paused_get(const Elm_Map_Overlay *overlay);
+        [ :elm_map_overlay_paused_get, [ :elm_map_overlay ], :bool ],
+        # EAPI void elm_map_overlay_content_set(Elm_Map_Overlay *overlay, Evas_Object *obj);
+        [ :elm_map_overlay_content_set, [ :elm_map_overlay, :evas_object ], :void ],
+        # EAPI const Evas_Object * elm_map_overlay_content_get(const Elm_Map_Overlay *overlay);
+        [ :elm_map_overlay_content_get, [ :elm_map_overlay ], :evas_object ],
+        # EAPI void elm_map_overlay_icon_set(Elm_Map_Overlay *overlay, Evas_Object *icon);
+        [ :elm_map_overlay_icon_set, [ :elm_map_overlay, :evas_object ], :void ],
+        # EAPI const Evas_Object * elm_map_overlay_icon_get(const Elm_Map_Overlay *overlay);
+        [ :elm_map_overlay_icon_get, [ :elm_map_overlay ], :evas_object ],
+        # EAPI void elm_map_overlay_geo_set(Elm_Map_Overlay *overlay, double lon, double lat);
+        [ :elm_map_overlay_geo_set, [ :elm_map_overlay, :double, :double ], :void ],
+        # EAPI void elm_map_overlay_geo_get(const Elm_Map_Overlay *overlay, double *lon, double *lat);
+        [ :elm_map_overlay_geo_get, [ :elm_map_overlay, :pointer, :pointer ], :void ],
+        # EAPI void elm_map_overlay_show(Elm_Map_Overlay *overlay);
+        [ :elm_map_overlay_show, [ :elm_map_overlay ], :void ],
+        # EAPI void elm_map_overlays_show(Eina_List *overlays);
+        [ :elm_map_overlays_show, [ :eina_list ], :void ],
+        # EAPI void elm_map_overlay_get_cb_set(Elm_Map_Overlay *overlay, Elm_Map_Overlay_Get_Cb get_cb, void *data);
+        [ :elm_map_overlay_get_cb_set, [ :elm_map_overlay, :elm_map_overlay_get_cb, :pointer ], :void ],
+        # EAPI Elm_Map_Overlay * elm_map_overlay_class_add(Evas_Object *obj);
+        [ :elm_map_overlay_class_add, [ :evas_object ], :elm_map_overlay ],
+        # EAPI void elm_map_overlay_class_append(Elm_Map_Overlay *clas, Elm_Map_Overlay *overlay);
+        [ :elm_map_overlay_class_append, [ :elm_map_overlay, :elm_map_overlay ], :void ],
+        # EAPI void elm_map_overlay_class_remove(Elm_Map_Overlay *clas, Elm_Map_Overlay *overlay);
+        [ :elm_map_overlay_class_remove, [ :elm_map_overlay, :elm_map_overlay ], :void ],
+        # EAPI
+        # FIXME
+        # EAPI void elm_map_overlay_class_zoom_max_set(Elm_Map_Overlay *clas, int zoom);
+        [ :elm_map_overlay_class_zoom_max_set, [ :elm_map_overlay, :int ], :void ],
+        # EAPI int elm_map_overlay_class_zoom_max_get(const Elm_Map_Overlay *clas);
+        [ :elm_map_overlay_class_zoom_max_get, [ :elm_map_overlay ], :int ],
+        # EAPI Elm_Map_Overlay * elm_map_overlay_bubble_add(Evas_Object *obj);
+        [ :elm_map_overlay_bubble_add, [ :evas_object ], :elm_map_overlay ],
+        # EAPI void elm_map_overlay_bubble_follow(Elm_Map_Overlay *bubble, Elm_Map_Overlay *parent);
+        [ :elm_map_overlay_bubble_follow, [ :elm_map_overlay, :elm_map_overlay ], :void ],
+        # EAPI void elm_map_overlay_bubble_content_append(Elm_Map_Overlay *bubble, Evas_Object *content);
+        [ :elm_map_overlay_bubble_content_append, [ :elm_map_overlay, :evas_object ], :void ],
+        # EAPI void elm_map_overlay_bubble_content_clear(Elm_Map_Overlay *bubble);
+        [ :elm_map_overlay_bubble_content_clear, [ :elm_map_overlay ], :void ],
         ]
         #
         attach_fcts fcts

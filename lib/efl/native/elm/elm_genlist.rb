@@ -24,28 +24,24 @@ module Efl
         ffi_lib 'elementary-ver-pre-svn-09.so.0'
         #
         # ENUMS
-        # typedef enum {...} Elm_Genlist_Item_Flags;
-        enum :elm_genlist_item_flags, [ :elm_genlist_item_none, 0, :elm_genlist_item_subitems, (1<<0), :elm_genlist_item_group, (1<<1),
+        # typedef enum {...} Elm_Genlist_Item_Type;
+        enum :elm_genlist_item_type, [ :elm_genlist_item_none, 0, :elm_genlist_item_subitems, (1<<0), :elm_genlist_item_group, (1<<1),
             :elm_genlist_item_max, (1<<2) ]
-        # typedef enum {...} Elm_Genlist_Item_Field_Flags;
-        enum :elm_genlist_item_field_flags, [ :elm_genlist_item_field_all, 0, :elm_genlist_item_field_text, (1<<0), :elm_genlist_item_field_content,
+        # typedef enum {...} Elm_Genlist_Item_Field_Type;
+        enum :elm_genlist_item_field_type, [ :elm_genlist_item_field_all, 0, :elm_genlist_item_field_text, (1<<0), :elm_genlist_item_field_content,
             (1<<1), :elm_genlist_item_field_state, (1<<2) ]
         #
         # TYPEDEFS
-        # typedef struct _Elm_Genlist_Item_Class Elm_Genlist_Item_Class;
-        typedef :pointer, :elm_genlist_item_class
-        # typedef struct _Elm_Genlist_Item_Class_Func Elm_Genlist_Item_Class_Func;
-        typedef :pointer, :elm_genlist_item_class_func
-        #
-        # CALLBACKS
-        # typedef char *(*Elm_Genlist_Item_Text_Get_Cb) (void *data, Evas_Object *obj, const char *part);
-        callback :elm_genlist_item_text_get_cb, [ :pointer, :evas_object, :string ], :string
-        # typedef Evas_Object *(*Elm_Genlist_Item_Content_Get_Cb) (void *data, Evas_Object *obj, const char *part);
-        callback :elm_genlist_item_content_get_cb, [ :pointer, :evas_object, :string ], :evas_object
-        # typedef Eina_Bool (*Elm_Genlist_Item_State_Get_Cb) (void *data, Evas_Object *obj, const char *part);
-        callback :elm_genlist_item_state_get_cb, [ :pointer, :evas_object, :string ], :bool
-        # typedef void (*Elm_Genlist_Item_Del_Cb) (void *data, Evas_Object *obj);
-        callback :elm_genlist_item_del_cb, [ :pointer, :evas_object ], :void
+        # typedef Elm_Gen_Item_Class Elm_Genlist_Item_Class;
+        typedef :elm_gen_item_class, :elm_genlist_item_class
+        # typedef Elm_Gen_Item_Text_Get_Cb Elm_Genlist_Item_Text_Get_Cb;
+        typedef :elm_gen_item_text_get_cb, :elm_genlist_item_text_get_cb
+        # typedef Elm_Gen_Item_Content_Get_Cb Elm_Genlist_Item_Content_Get_Cb;
+        typedef :elm_gen_item_content_get_cb, :elm_genlist_item_content_get_cb
+        # typedef Elm_Gen_Item_State_Get_Cb Elm_Genlist_Item_State_Get_Cb;
+        typedef :elm_gen_item_state_get_cb, :elm_genlist_item_state_get_cb
+        # typedef Elm_Gen_Item_Del_Cb Elm_Genlist_Item_Del_Cb;
+        typedef :elm_gen_item_del_cb, :elm_genlist_item_del_cb
         #
         # FUNCTIONS
         fcts = [
@@ -73,21 +69,21 @@ module Efl
         [ :elm_genlist_bounce_set, [ :evas_object, :bool, :bool ], :void ],
         # EAPI void elm_genlist_bounce_get(const Evas_Object *obj, Eina_Bool *h_bounce, Eina_Bool *v_bounce);
         [ :elm_genlist_bounce_get, [ :evas_object, :pointer, :pointer ], :void ],
-        # EAPI Elm_Object_Item *elm_genlist_item_append(Evas_Object *obj, const Elm_Genlist_Item_Class *itc, const void *data, Elm_Object_Item *parent, Elm_Genlist_Item_Flags flags, Evas_Smart_Cb func, const void *func_data);
-        [ :elm_genlist_item_append, [ :evas_object, :elm_genlist_item_class, :pointer, :elm_object_item, :elm_genlist_item_flags, :evas_smart_cb,
-            :pointer ], :elm_object_item ],
-        # EAPI Elm_Object_Item *elm_genlist_item_prepend(Evas_Object *obj, const Elm_Genlist_Item_Class *itc, const void *data, Elm_Object_Item *parent, Elm_Genlist_Item_Flags flags, Evas_Smart_Cb func, const void *func_data);
-        [ :elm_genlist_item_prepend, [ :evas_object, :elm_genlist_item_class, :pointer, :elm_object_item, :elm_genlist_item_flags, :evas_smart_cb,
-            :pointer ], :elm_object_item ],
-        # EAPI Elm_Object_Item *elm_genlist_item_insert_before(Evas_Object *obj, const Elm_Genlist_Item_Class *itc, const void *data, Elm_Object_Item *parent, Elm_Object_Item *before, Elm_Genlist_Item_Flags flags, Evas_Smart_Cb func, const void *func_data);
-        [ :elm_genlist_item_insert_before, [ :evas_object, :elm_genlist_item_class, :pointer, :elm_object_item, :elm_object_item,
-            :elm_genlist_item_flags, :evas_smart_cb, :pointer ], :elm_object_item ],
-        # EAPI Elm_Object_Item *elm_genlist_item_insert_after(Evas_Object *obj, const Elm_Genlist_Item_Class *itc, const void *data, Elm_Object_Item *parent, Elm_Object_Item *after, Elm_Genlist_Item_Flags flags, Evas_Smart_Cb func, const void *func_data);
-        [ :elm_genlist_item_insert_after, [ :evas_object, :elm_genlist_item_class, :pointer, :elm_object_item, :elm_object_item,
-            :elm_genlist_item_flags, :evas_smart_cb, :pointer ], :elm_object_item ],
-        # EAPI Elm_Object_Item *elm_genlist_item_sorted_insert(Evas_Object *obj, const Elm_Genlist_Item_Class *itc, const void *data, Elm_Object_Item *parent, Elm_Genlist_Item_Flags flags, Eina_Compare_Cb comp, Evas_Smart_Cb func, const void *func_data);
-        [ :elm_genlist_item_sorted_insert, [ :evas_object, :elm_genlist_item_class, :pointer, :elm_object_item, :elm_genlist_item_flags,
-            :eina_compare_cb, :evas_smart_cb, :pointer ], :elm_object_item ],
+        # EAPI Elm_Object_Item *elm_genlist_item_append(Evas_Object *obj, const Elm_Genlist_Item_Class *itc, const void *data, Elm_Object_Item *parent, Elm_Genlist_Item_Type type, Evas_Smart_Cb func, const void *func_data);
+        [ :elm_genlist_item_append, [ :evas_object, :pointer, :pointer, :elm_object_item, :elm_genlist_item_type, :evas_smart_cb, :pointer ],
+            :elm_object_item ],
+        # EAPI Elm_Object_Item *elm_genlist_item_prepend(Evas_Object *obj, const Elm_Genlist_Item_Class *itc, const void *data, Elm_Object_Item *parent, Elm_Genlist_Item_Type type, Evas_Smart_Cb func, const void *func_data);
+        [ :elm_genlist_item_prepend, [ :evas_object, :pointer, :pointer, :elm_object_item, :elm_genlist_item_type, :evas_smart_cb, :pointer ],
+            :elm_object_item ],
+        # EAPI Elm_Object_Item *elm_genlist_item_insert_before(Evas_Object *obj, const Elm_Genlist_Item_Class *itc, const void *data, Elm_Object_Item *parent, Elm_Object_Item *before, Elm_Genlist_Item_Type type, Evas_Smart_Cb func, const void *func_data);
+        [ :elm_genlist_item_insert_before, [ :evas_object, :pointer, :pointer, :elm_object_item, :elm_object_item, :elm_genlist_item_type,
+            :evas_smart_cb, :pointer ], :elm_object_item ],
+        # EAPI Elm_Object_Item *elm_genlist_item_insert_after(Evas_Object *obj, const Elm_Genlist_Item_Class *itc, const void *data, Elm_Object_Item *parent, Elm_Object_Item *after, Elm_Genlist_Item_Type type, Evas_Smart_Cb func, const void *func_data);
+        [ :elm_genlist_item_insert_after, [ :evas_object, :pointer, :pointer, :elm_object_item, :elm_object_item, :elm_genlist_item_type,
+            :evas_smart_cb, :pointer ], :elm_object_item ],
+        # EAPI Elm_Object_Item *elm_genlist_item_sorted_insert(Evas_Object *obj, const Elm_Genlist_Item_Class *itc, const void *data, Elm_Object_Item *parent, Elm_Genlist_Item_Type type, Eina_Compare_Cb comp, Evas_Smart_Cb func, const void *func_data);
+        [ :elm_genlist_item_sorted_insert, [ :evas_object, :pointer, :pointer, :elm_object_item, :elm_genlist_item_type, :eina_compare_cb,
+            :evas_smart_cb, :pointer ], :elm_object_item ],
         # EAPI Elm_Object_Item *elm_genlist_selected_item_get(const Evas_Object *obj);
         [ :elm_genlist_selected_item_get, [ :evas_object ], :elm_object_item ],
         # EAPI const Eina_List *elm_genlist_selected_items_get(const Evas_Object *obj);
@@ -125,9 +121,9 @@ module Efl
         # EAPI void elm_genlist_item_update(Elm_Object_Item *it);
         [ :elm_genlist_item_update, [ :elm_object_item ], :void ],
         # EAPI void elm_genlist_item_item_class_update(Elm_Object_Item *it, const Elm_Genlist_Item_Class *itc);
-        [ :elm_genlist_item_item_class_update, [ :elm_object_item, :elm_genlist_item_class ], :void ],
+        [ :elm_genlist_item_item_class_update, [ :elm_object_item, :pointer ], :void ],
         # EAPI const Elm_Genlist_Item_Class *elm_genlist_item_item_class_get(const Elm_Object_Item *it);
-        [ :elm_genlist_item_item_class_get, [ :elm_object_item ], :elm_genlist_item_class ],
+        [ :elm_genlist_item_item_class_get, [ :elm_object_item ], :pointer ],
         # EAPI int elm_genlist_item_index_get(const Elm_Object_Item *it);
         [ :elm_genlist_item_index_get, [ :elm_object_item ], :int ],
         # EAPI void elm_genlist_realized_items_update(Evas_Object *obj);
@@ -135,13 +131,13 @@ module Efl
         # EAPI unsigned int elm_genlist_items_count(const Evas_Object *obj);
         [ :elm_genlist_items_count, [ :evas_object ], :uint ],
         # EAPI Elm_Genlist_Item_Class *elm_genlist_item_class_new(void);
-        [ :elm_genlist_item_class_new, [  ], :elm_genlist_item_class ],
+        [ :elm_genlist_item_class_new, [  ], :pointer ],
         # EAPI void elm_genlist_item_class_free(Elm_Genlist_Item_Class *itc);
-        [ :elm_genlist_item_class_free, [ :elm_genlist_item_class ], :void ],
+        [ :elm_genlist_item_class_free, [ :pointer ], :void ],
         # EAPI void elm_genlist_item_class_ref(Elm_Genlist_Item_Class *itc);
-        [ :elm_genlist_item_class_ref, [ :elm_genlist_item_class ], :void ],
+        [ :elm_genlist_item_class_ref, [ :pointer ], :void ],
         # EAPI void elm_genlist_item_class_unref(Elm_Genlist_Item_Class *itc);
-        [ :elm_genlist_item_class_unref, [ :elm_genlist_item_class ], :void ],
+        [ :elm_genlist_item_class_unref, [ :pointer ], :void ],
         # EAPI void elm_genlist_item_tooltip_text_set(Elm_Object_Item *it, const char *text);
         [ :elm_genlist_item_tooltip_text_set, [ :elm_object_item, :string ], :void ],
         # EAPI void elm_genlist_item_tooltip_content_cb_set(Elm_Object_Item *it, Elm_Tooltip_Item_Content_Cb func, const void *data, Evas_Smart_Cb del_cb);
@@ -206,14 +202,14 @@ module Efl
         [ :elm_genlist_item_display_only_set, [ :elm_object_item, :bool ], :void ],
         # EAPI Eina_Bool elm_genlist_item_display_only_get(const Elm_Object_Item *it);
         [ :elm_genlist_item_display_only_get, [ :elm_object_item ], :bool ],
-        # EAPI void elm_genlist_item_contents_orphan(Elm_Object_Item *it);
-        [ :elm_genlist_item_contents_orphan, [ :elm_object_item ], :void ],
+        # EAPI void elm_genlist_item_all_contents_unset(Elm_Object_Item *it, Eina_List **l);
+        [ :elm_genlist_item_all_contents_unset, [ :elm_object_item, :eina_list ], :void ],
         # EAPI void elm_genlist_item_promote(Elm_Object_Item *it);
         [ :elm_genlist_item_promote, [ :elm_object_item ], :void ],
         # EAPI void elm_genlist_item_demote(Elm_Object_Item *it);
         [ :elm_genlist_item_demote, [ :elm_object_item ], :void ],
-        # EAPI void elm_genlist_item_fields_update(Elm_Object_Item *it, const char *parts, Elm_Genlist_Item_Field_Flags itf);
-        [ :elm_genlist_item_fields_update, [ :elm_object_item, :string, :elm_genlist_item_field_flags ], :void ],
+        # EAPI void elm_genlist_item_fields_update(Elm_Object_Item *it, const char *parts, Elm_Genlist_Item_Field_Type itf);
+        [ :elm_genlist_item_fields_update, [ :elm_object_item, :string, :elm_genlist_item_field_type ], :void ],
         # EAPI void elm_genlist_item_mode_set(Elm_Object_Item *it, const char *mode_type, Eina_Bool mode_set);
         [ :elm_genlist_item_mode_set, [ :elm_object_item, :string, :bool ], :void ],
         # EAPI const char *elm_genlist_mode_type_get(const Evas_Object *obj);
@@ -224,12 +220,16 @@ module Efl
         [ :elm_genlist_reorder_mode_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_genlist_reorder_mode_get(const Evas_Object *obj);
         [ :elm_genlist_reorder_mode_get, [ :evas_object ], :bool ],
-        # EAPI Elm_Genlist_Item_Flags elm_genlist_item_flags_get(const Elm_Object_Item *it);
-        [ :elm_genlist_item_flags_get, [ :elm_object_item ], :elm_genlist_item_flags ],
+        # EAPI Elm_Genlist_Item_Type elm_genlist_item_type_get(const Elm_Object_Item *it);
+        [ :elm_genlist_item_type_get, [ :elm_object_item ], :elm_genlist_item_type ],
         # EAPI void elm_genlist_edit_mode_set(Evas_Object *obj, Eina_Bool edit_mode);
         [ :elm_genlist_edit_mode_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_genlist_edit_mode_get(const Evas_Object *obj);
         [ :elm_genlist_edit_mode_get, [ :evas_object ], :bool ],
+        # EAPI void elm_genlist_item_flip_set(Elm_Object_Item *it, Eina_Bool flip);
+        [ :elm_genlist_item_flip_set, [ :elm_object_item, :bool ], :void ],
+        # EAPI Eina_Bool elm_genlist_item_flip_get(const Elm_Object_Item *it);
+        [ :elm_genlist_item_flip_get, [ :elm_object_item ], :bool ],
         ]
         #
         attach_fcts fcts

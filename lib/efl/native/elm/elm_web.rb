@@ -126,10 +126,10 @@ module Efl
         [ :elm_web_forward_possible, [ :evas_object ], :bool ],
         # EAPI Eina_Bool elm_web_navigate_possible(Evas_Object *obj, int steps);
         [ :elm_web_navigate_possible, [ :evas_object, :int ], :bool ],
-        # EAPI Eina_Bool elm_web_history_enable_get(const Evas_Object *obj);
-        [ :elm_web_history_enable_get, [ :evas_object ], :bool ],
-        # EAPI void elm_web_history_enable_set(Evas_Object *obj, Eina_Bool enable);
-        [ :elm_web_history_enable_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_web_history_enabled_get(const Evas_Object *obj);
+        [ :elm_web_history_enabled_get, [ :evas_object ], :bool ],
+        # EAPI void elm_web_history_enabled_set(Evas_Object *obj, Eina_Bool enabled);
+        [ :elm_web_history_enabled_set, [ :evas_object, :bool ], :void ],
         # EAPI void elm_web_zoom_set(Evas_Object *obj, double zoom);
         [ :elm_web_zoom_set, [ :evas_object, :double ], :void ],
         # EAPI double elm_web_zoom_get(const Evas_Object *obj);

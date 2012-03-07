@@ -23,10 +23,6 @@ module Efl
         #
         # FUNCTIONS
         fcts = [
-        # EAPI Evas_Coord elm_finger_size_get(void);
-        [ :elm_finger_size_get, [  ], :int ],
-        # EAPI void elm_finger_size_set(Evas_Coord size);
-        [ :elm_finger_size_set, [ :int ], :void ],
         # EAPI void elm_coords_finger_size_adjust(int times_w, Evas_Coord *w, int times_h, Evas_Coord *h);
         [ :elm_coords_finger_size_adjust, [ :int, :pointer, :int, :pointer ], :void ],
         ]

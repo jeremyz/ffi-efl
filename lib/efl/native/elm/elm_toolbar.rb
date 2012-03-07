@@ -25,7 +25,7 @@ module Efl
         # ENUMS
         # typedef enum {...} Elm_Toolbar_Shrink_Mode;
         enum :elm_toolbar_shrink_mode, [ :elm_toolbar_shrink_none, :elm_toolbar_shrink_hide, :elm_toolbar_shrink_scroll, :elm_toolbar_shrink_menu,
-            :elm_toolbar_shrink_last ]
+            :elm_toolbar_shrink_expand, :elm_toolbar_shrink_last ]
         #
         # TYPEDEFS
         # typedef struct _Elm_Toolbar_Item_State Elm_Toolbar_Item_State;

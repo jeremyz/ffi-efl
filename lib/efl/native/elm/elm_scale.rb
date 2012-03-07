@@ -23,10 +23,6 @@ module Efl
         #
         # FUNCTIONS
         fcts = [
-        # EAPI double elm_scale_get(void);
-        [ :elm_scale_get, [  ], :double ],
-        # EAPI void elm_scale_set(double scale);
-        [ :elm_scale_set, [ :double ], :void ],
         # EAPI void elm_object_scale_set(Evas_Object *obj, double scale);
         [ :elm_object_scale_set, [ :evas_object, :double ], :void ],
         # EAPI double elm_object_scale_get(const Evas_Object *obj);

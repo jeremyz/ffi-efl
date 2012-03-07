@@ -49,6 +49,8 @@ module Efl
         [ :elm_ctxpopup_direction_priority_get, [ :evas_object, :pointer, :pointer, :pointer, :pointer ], :void ],
         # EAPI Elm_Ctxpopup_Direction elm_ctxpopup_direction_get(const Evas_Object *obj);
         [ :elm_ctxpopup_direction_get, [ :evas_object ], :elm_ctxpopup_direction ],
+        # EAPI void elm_ctxpopup_dismiss(Evas_Object *obj);
+        [ :elm_ctxpopup_dismiss, [ :evas_object ], :void ],
         ]
         #
         attach_fcts fcts

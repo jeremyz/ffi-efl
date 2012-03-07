@@ -23,10 +23,6 @@ module Efl
         #
         # FUNCTIONS
         fcts = [
-        # EAPI Eina_Bool elm_mirrored_get(void);
-        [ :elm_mirrored_get, [  ], :bool ],
-        # EAPI void elm_mirrored_set(Eina_Bool mirrored);
-        [ :elm_mirrored_set, [ :bool ], :void ],
         # EAPI Eina_Bool elm_object_mirrored_get(const Evas_Object *obj);
         [ :elm_object_mirrored_get, [ :evas_object ], :bool ],
         # EAPI void elm_object_mirrored_set(Evas_Object *obj, Eina_Bool mirrored);

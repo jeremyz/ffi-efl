@@ -38,8 +38,8 @@ module Efl
         [ :elm_object_access_info_set, [ :evas_object, :string ], :void ],
         # EAPI Evas_Object *elm_object_name_find(const Evas_Object *obj, const char *name, int recurse);
         [ :elm_object_name_find, [ :evas_object, :string, :int ], :evas_object ],
-        # EAPI void elm_object_style_set(Evas_Object *obj, const char *style);
-        [ :elm_object_style_set, [ :evas_object, :string ], :void ],
+        # EAPI Eina_Bool elm_object_style_set(Evas_Object *obj, const char *style);
+        [ :elm_object_style_set, [ :evas_object, :string ], :bool ],
         # EAPI const char *elm_object_style_get(const Evas_Object *obj);
         [ :elm_object_style_get, [ :evas_object ], :string ],
         # EAPI void elm_object_disabled_set(Evas_Object *obj, Eina_Bool disabled);

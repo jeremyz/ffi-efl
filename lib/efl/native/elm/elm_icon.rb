@@ -51,10 +51,10 @@ module Efl
         [ :elm_icon_no_scale_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_icon_no_scale_get(const Evas_Object *obj);
         [ :elm_icon_no_scale_get, [ :evas_object ], :bool ],
-        # EAPI void elm_icon_scale_set(Evas_Object *obj, Eina_Bool scale_up, Eina_Bool scale_down);
-        [ :elm_icon_scale_set, [ :evas_object, :bool, :bool ], :void ],
-        # EAPI void elm_icon_scale_get(const Evas_Object *obj, Eina_Bool *scale_up, Eina_Bool *scale_down);
-        [ :elm_icon_scale_get, [ :evas_object, :pointer, :pointer ], :void ],
+        # EAPI void elm_icon_resizable_set(Evas_Object *obj, Eina_Bool size_up, Eina_Bool size_down);
+        [ :elm_icon_resizable_set, [ :evas_object, :bool, :bool ], :void ],
+        # EAPI void elm_icon_resizable_get(const Evas_Object *obj, Eina_Bool *size_up, Eina_Bool *size_down);
+        [ :elm_icon_resizable_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void elm_icon_size_get(const Evas_Object *obj, int *w, int *h);
         [ :elm_icon_size_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void elm_icon_fill_outside_set(Evas_Object *obj, Eina_Bool fill_outside);
@@ -71,8 +71,8 @@ module Efl
         [ :elm_icon_order_lookup_set, [ :evas_object, :elm_icon_lookup_order ], :void ],
         # EAPI Elm_Icon_Lookup_Order elm_icon_order_lookup_get(const Evas_Object *obj);
         [ :elm_icon_order_lookup_get, [ :evas_object ], :elm_icon_lookup_order ],
-        # EAPI void elm_icon_preload_set(Evas_Object *obj, Eina_Bool disable);
-        [ :elm_icon_preload_set, [ :evas_object, :bool ], :void ],
+        # EAPI void elm_icon_preload_disabled_set(Evas_Object *obj, Eina_Bool disabled);
+        [ :elm_icon_preload_disabled_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_icon_animated_available_get(const Evas_Object *obj);
         [ :elm_icon_animated_available_get, [ :evas_object ], :bool ],
         # EAPI void elm_icon_animated_set(Evas_Object *obj, Eina_Bool animated);

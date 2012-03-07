@@ -22,13 +22,19 @@ module Efl
         ffi_lib 'elementary-ver-pre-svn-09.so.0'
         #
         # ENUMS
-        # typedef enum {...} Elm_Calendar_Mark_Repeat;
-        enum :elm_calendar_mark_repeat, [ :elm_calendar_unique, :elm_calendar_daily, :elm_calendar_weekly, :elm_calendar_monthly,
+        # typedef enum {...} _Elm_Calendar_Mark_Repeat_Type;
+        enum :_elm_calendar_mark_repeat_type, [ :elm_calendar_unique, :elm_calendar_daily, :elm_calendar_weekly, :elm_calendar_monthly,
             :elm_calendar_annually ]
         #
         # TYPEDEFS
+        # typedef _Elm_Calendar_Mark_Repeat_Type Elm_Calendar_Mark_Repeat_Type;
+        typedef :_elm_calendar_mark_repeat_type, :elm_calendar_mark_repeat_type
         # typedef struct _Elm_Calendar_Mark Elm_Calendar_Mark;
         typedef :pointer, :elm_calendar_mark
+        #
+        # CALLBACKS
+        # typedef char * (*Elm_Calendar_Format_Cb) (struct tm *stime);
+        callback :elm_calendar_format_cb, [ :pointer ], :string
         #
         # FUNCTIONS
         fcts = [
@@ -50,10 +56,10 @@ module Efl
         [ :elm_calendar_selected_time_set, [ :evas_object, :pointer ], :void ],
         # EAPI Eina_Bool elm_calendar_selected_time_get(const Evas_Object *obj, struct tm *selected_time);
         [ :elm_calendar_selected_time_get, [ :evas_object, :pointer ], :bool ],
-        # EAPI void elm_calendar_format_function_set(Evas_Object *obj, char *(*format_function)(struct tm *stime));
-        # FIXME
-        # EAPI Elm_Calendar_Mark *elm_calendar_mark_add(Evas_Object *obj, const char *mark_type, struct tm *mark_time, Elm_Calendar_Mark_Repeat repeat);
-        [ :elm_calendar_mark_add, [ :evas_object, :string, :pointer, :elm_calendar_mark_repeat ], :elm_calendar_mark ],
+        # EAPI void elm_calendar_format_function_set(Evas_Object *obj, Elm_Calendar_Format_Cb format_func);
+        [ :elm_calendar_format_function_set, [ :evas_object, :elm_calendar_format_cb ], :void ],
+        # EAPI Elm_Calendar_Mark *elm_calendar_mark_add(Evas_Object *obj, const char *mark_type, struct tm *mark_time, Elm_Calendar_Mark_Repeat_Type repeat);
+        [ :elm_calendar_mark_add, [ :evas_object, :string, :pointer, :_elm_calendar_mark_repeat_type ], :elm_calendar_mark ],
         # EAPI void elm_calendar_mark_del(Elm_Calendar_Mark *mark);
         [ :elm_calendar_mark_del, [ :elm_calendar_mark ], :void ],
         # EAPI void elm_calendar_marks_clear(Evas_Object *obj);

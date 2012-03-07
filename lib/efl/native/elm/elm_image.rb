@@ -44,14 +44,16 @@ module Efl
         [ :elm_image_no_scale_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_image_no_scale_get(const Evas_Object *obj);
         [ :elm_image_no_scale_get, [ :evas_object ], :bool ],
-        # EAPI void elm_image_scale_set(Evas_Object *obj, Eina_Bool scale_up, Eina_Bool scale_down);
-        [ :elm_image_scale_set, [ :evas_object, :bool, :bool ], :void ],
-        # EAPI void elm_image_scale_get(const Evas_Object *obj, Eina_Bool *scale_up, Eina_Bool *scale_down);
-        [ :elm_image_scale_get, [ :evas_object, :pointer, :pointer ], :void ],
+        # EAPI void elm_image_resizable_set(Evas_Object *obj, Eina_Bool size_up, Eina_Bool size_down);
+        [ :elm_image_resizable_set, [ :evas_object, :bool, :bool ], :void ],
+        # EAPI void elm_image_resizable_get(const Evas_Object *obj, Eina_Bool *size_up, Eina_Bool *size_down);
+        [ :elm_image_resizable_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void elm_image_fill_outside_set(Evas_Object *obj, Eina_Bool fill_outside);
         [ :elm_image_fill_outside_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_image_fill_outside_get(const Evas_Object *obj);
         [ :elm_image_fill_outside_get, [ :evas_object ], :bool ],
+        # EAPI void elm_image_preload_disabled_set(Evas_Object *obj, Eina_Bool disabled);
+        [ :elm_image_preload_disabled_set, [ :evas_object, :bool ], :void ],
         # EAPI void elm_image_prescale_set(Evas_Object *obj, int size);
         [ :elm_image_prescale_set, [ :evas_object, :int ], :void ],
         # EAPI int elm_image_prescale_get(const Evas_Object *obj);

@@ -43,10 +43,10 @@ module Efl
         [ :elm_notify_timeout_set, [ :evas_object, :double ], :void ],
         # EAPI double elm_notify_timeout_get(const Evas_Object *obj);
         [ :elm_notify_timeout_get, [ :evas_object ], :double ],
-        # EAPI void elm_notify_repeat_events_set(Evas_Object *obj, Eina_Bool repeat);
-        [ :elm_notify_repeat_events_set, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool elm_notify_repeat_events_get(const Evas_Object *obj);
-        [ :elm_notify_repeat_events_get, [ :evas_object ], :bool ],
+        # EAPI void elm_notify_allow_events_set(Evas_Object *obj, Eina_Bool allow);
+        [ :elm_notify_allow_events_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_notify_allow_events_get(const Evas_Object *obj);
+        [ :elm_notify_allow_events_get, [ :evas_object ], :bool ],
         ]
         #
         attach_fcts fcts

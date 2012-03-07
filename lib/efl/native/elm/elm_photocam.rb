@@ -60,9 +60,9 @@ module Efl
         [ :elm_photocam_bounce_set, [ :evas_object, :bool, :bool ], :void ],
         # EAPI void elm_photocam_bounce_get(const Evas_Object *obj, Eina_Bool *h_bounce, Eina_Bool *v_bounce);
         [ :elm_photocam_bounce_get, [ :evas_object, :pointer, :pointer ], :void ],
-        # EAPI void		 elm_photocam_gesture_set(Evas_Object *obj, Eina_Bool gesture);
+        # EAPI void		 elm_photocam_gesture_enabled_set(Evas_Object *obj, Eina_Bool gesture);
         # FIXME
-        # EAPI Eina_Bool		 elm_photocam_gesture_get(const Evas_Object *obj);
+        # EAPI Eina_Bool		 elm_photocam_gesture_enabled_get(const Evas_Object *obj);
         # FIXME
         ]
         #

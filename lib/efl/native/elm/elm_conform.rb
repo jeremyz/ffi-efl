@@ -25,8 +25,6 @@ module Efl
         fcts = [
         # EAPI Evas_Object *elm_conformant_add(Evas_Object *parent);
         [ :elm_conformant_add, [ :evas_object ], :evas_object ],
-        # EAPI Evas_Object *elm_conformant_content_area_get(const Evas_Object *obj);
-        [ :elm_conformant_content_area_get, [ :evas_object ], :evas_object ],
         ]
         #
         attach_fcts fcts

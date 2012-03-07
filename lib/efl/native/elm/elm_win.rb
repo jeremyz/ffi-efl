@@ -87,10 +87,6 @@ module Efl
         [ :elm_win_alpha_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_win_alpha_get(const Evas_Object *obj);
         [ :elm_win_alpha_get, [ :evas_object ], :bool ],
-        # EAPI void elm_win_transparent_set(Evas_Object *obj, Eina_Bool transparent);
-        [ :elm_win_transparent_set, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool elm_win_transparent_get(const Evas_Object *obj);
-        [ :elm_win_transparent_get, [ :evas_object ], :bool ],
         # EAPI void elm_win_override_set(Evas_Object *obj, Eina_Bool override);
         [ :elm_win_override_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_win_override_get(const Evas_Object *obj);

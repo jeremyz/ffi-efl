@@ -27,8 +27,8 @@ module Efl
         [ :elm_player_add, [ :evas_object ], :evas_object ],
         # EAPI Evas_Object *elm_video_add(Evas_Object *parent);
         [ :elm_video_add, [ :evas_object ], :evas_object ],
-        # EAPI void elm_video_file_set(Evas_Object *video, const char *filename);
-        [ :elm_video_file_set, [ :evas_object, :string ], :void ],
+        # EAPI Eina_Bool elm_video_file_set(Evas_Object *video, const char *filename);
+        [ :elm_video_file_set, [ :evas_object, :string ], :bool ],
         # EAPI Evas_Object *elm_video_emotion_get(const Evas_Object *video);
         [ :elm_video_emotion_get, [ :evas_object ], :evas_object ],
         # EAPI void elm_video_play(Evas_Object *video);

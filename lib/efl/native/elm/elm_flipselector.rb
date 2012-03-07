@@ -49,10 +49,10 @@ module Efl
         [ :elm_flipselector_item_prev_get, [ :elm_object_item ], :elm_object_item ],
         # EAPI Elm_Object_Item *elm_flipselector_item_next_get(const Elm_Object_Item *it);
         [ :elm_flipselector_item_next_get, [ :elm_object_item ], :elm_object_item ],
-        # EAPI void elm_flipselector_interval_set(Evas_Object *obj, double interval);
-        [ :elm_flipselector_interval_set, [ :evas_object, :double ], :void ],
-        # EAPI double elm_flipselector_interval_get(const Evas_Object *obj);
-        [ :elm_flipselector_interval_get, [ :evas_object ], :double ],
+        # EAPI void elm_flipselector_first_interval_set(Evas_Object *obj, double interval);
+        [ :elm_flipselector_first_interval_set, [ :evas_object, :double ], :void ],
+        # EAPI double elm_flipselector_first_interval_get(const Evas_Object *obj);
+        [ :elm_flipselector_first_interval_get, [ :evas_object ], :double ],
         ]
         #
         attach_fcts fcts

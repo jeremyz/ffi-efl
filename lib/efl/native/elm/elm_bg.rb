@@ -23,14 +23,14 @@ module Efl
         #
         # ENUMS
         # typedef enum {...} Elm_Bg_Option;
-        enum :elm_bg_option, [ :elm_bg_option_center, :elm_bg_option_scale, :elm_bg_option_stretch, :elm_bg_option_tile ]
+        enum :elm_bg_option, [ :elm_bg_option_center, :elm_bg_option_scale, :elm_bg_option_stretch, :elm_bg_option_tile, :elm_bg_option_last ]
         #
         # FUNCTIONS
         fcts = [
         # EAPI Evas_Object *elm_bg_add(Evas_Object *parent);
         [ :elm_bg_add, [ :evas_object ], :evas_object ],
-        # EAPI void elm_bg_file_set(Evas_Object *obj, const char *file, const char *group);
-        [ :elm_bg_file_set, [ :evas_object, :string, :string ], :void ],
+        # EAPI Eina_Bool elm_bg_file_set(Evas_Object *obj, const char *file, const char *group);
+        [ :elm_bg_file_set, [ :evas_object, :string, :string ], :bool ],
         # EAPI void elm_bg_file_get(const Evas_Object *obj, const char **file, const char **group);
         [ :elm_bg_file_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void elm_bg_option_set(Evas_Object *obj, Elm_Bg_Option option);

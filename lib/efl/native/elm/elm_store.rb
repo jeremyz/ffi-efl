@@ -29,12 +29,8 @@ module Efl
         # TYPEDEFS
         # typedef struct _Elm_Store Elm_Store;
         typedef :pointer, :elm_store
-        # typedef struct _Elm_Store_Filesystem Elm_Store_Filesystem;
-        typedef :pointer, :elm_store_filesystem
         # typedef struct _Elm_Store_Item Elm_Store_Item;
         typedef :pointer, :elm_store_item
-        # typedef struct _Elm_Store_Item_Filesystem Elm_Store_Item_Filesystem;
-        typedef :pointer, :elm_store_item_filesystem
         # typedef struct _Elm_Store_Item_Info Elm_Store_Item_Info;
         typedef :pointer, :elm_store_item_info
         # typedef struct _Elm_Store_Item_Info_Filesystem Elm_Store_Item_Info_Filesystem;
@@ -51,6 +47,8 @@ module Efl
         typedef :pointer, :elm_store_item_mapping_custom
         #
         # CALLBACKS
+        # typedef struct _Elm_Store_Item_Mapping Elm_Store_Item_Mapping; /**< A basic way of telling Store how to take your return data (string, or something else from your struct) and convert it into something genlist can use */typedef struct _Elm_Store_Item_Mapping_Empty Elm_Store_Item_Mapping_Empty; /**< An empty piece of mapping information. Useful for String labels as they get used directly */
+        # FIXME
         # typedef Eina_Bool (*Elm_Store_Item_List_Cb) (void *data, Elm_Store_Item_Info *info);
         callback :elm_store_item_list_cb, [ :pointer, :elm_store_item_info ], :bool
         # typedef void (*Elm_Store_Item_Fetch_Cb) (void *data, Elm_Store_Item *sti);
@@ -62,10 +60,10 @@ module Efl
         #
         # FUNCTIONS
         fcts = [
-        # EAPI void elm_store_free(Elm_Store *st);
-        [ :elm_store_free, [ :elm_store ], :void ],
         # EAPI Elm_Store *elm_store_filesystem_new(void);
         [ :elm_store_filesystem_new, [  ], :elm_store ],
+        # EAPI void elm_store_free(Elm_Store *st);
+        [ :elm_store_free, [ :elm_store ], :void ],
         # EAPI void elm_store_filesystem_directory_set(Elm_Store *st, const char *dir);
         [ :elm_store_filesystem_directory_set, [ :elm_store, :string ], :void ],
         # EAPI const char *elm_store_filesystem_directory_get(const Elm_Store *st);
@@ -82,12 +80,12 @@ module Efl
         [ :elm_store_list_func_set, [ :elm_store, :elm_store_item_list_cb, :pointer ], :void ],
         # EAPI void elm_store_fetch_func_set(Elm_Store *st, Elm_Store_Item_Fetch_Cb func, const void *data);
         [ :elm_store_fetch_func_set, [ :elm_store, :elm_store_item_fetch_cb, :pointer ], :void ],
+        # EAPI void elm_store_unfetch_func_set(Elm_Store *st, Elm_Store_Item_Unfetch_Cb func, const void *data);
+        [ :elm_store_unfetch_func_set, [ :elm_store, :elm_store_item_unfetch_cb, :pointer ], :void ],
         # EAPI void elm_store_fetch_thread_set(Elm_Store *st, Eina_Bool use_thread);
         [ :elm_store_fetch_thread_set, [ :elm_store, :bool ], :void ],
         # EAPI Eina_Bool elm_store_fetch_thread_get(const Elm_Store *st);
         [ :elm_store_fetch_thread_get, [ :elm_store ], :bool ],
-        # EAPI void elm_store_unfetch_func_set(Elm_Store *st, Elm_Store_Item_Unfetch_Cb func, const void *data);
-        [ :elm_store_unfetch_func_set, [ :elm_store, :elm_store_item_unfetch_cb, :pointer ], :void ],
         # EAPI void elm_store_sorted_set(Elm_Store *st, Eina_Bool sorted);
         [ :elm_store_sorted_set, [ :elm_store, :bool ], :void ],
         # EAPI Eina_Bool elm_store_sorted_get(const Elm_Store *st);

@@ -34,10 +34,6 @@ module Efl
         [ :elm_label_wrap_width_set, [ :evas_object, :int ], :void ],
         # EAPI Evas_Coord elm_label_wrap_width_get(const Evas_Object *obj);
         [ :elm_label_wrap_width_get, [ :evas_object ], :int ],
-        # EAPI void elm_label_wrap_height_set(Evas_Object *obj, Evas_Coord h);
-        [ :elm_label_wrap_height_set, [ :evas_object, :int ], :void ],
-        # EAPI Evas_Coord elm_label_wrap_height_get(const Evas_Object *obj);
-        [ :elm_label_wrap_height_get, [ :evas_object ], :int ],
         # EAPI void elm_label_ellipsis_set(Evas_Object *obj, Eina_Bool ellipsis);
         [ :elm_label_ellipsis_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_label_ellipsis_get(const Evas_Object *obj);

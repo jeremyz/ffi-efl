@@ -63,11 +63,11 @@ module Efl
         [ :elm_box_align_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void elm_box_recalculate(Evas_Object *obj);
         [ :elm_box_recalculate, [ :evas_object ], :void ],
-        # EAPI void elm_box_layout_set(Evas_Object *obj, Evas_Object_Box_Layout cb, const void *data, void (*free_data)(void *data));
-        # FIXME
+        # EAPI void elm_box_layout_set(Evas_Object *obj, Evas_Object_Box_Layout cb, const void *data, Ecore_Cb free_data);
+        [ :elm_box_layout_set, [ :evas_object, :evas_object_box_layout_cb, :pointer, :ecore_cb ], :void ],
         # EAPI void elm_box_layout_transition(Evas_Object *obj, Evas_Object_Box_Data *priv, void *data);
         [ :elm_box_layout_transition, [ :evas_object, :evas_object_box_data, :pointer ], :void ],
-        # EAPI Elm_Box_Transition *elm_box_transition_new(const double duration, Evas_Object_Box_Layout start_layout, void *start_layout_data, void (*start_layout_free_data)(void *data), Evas_Object_Box_Layout end_layout, void *end_layout_data, void (*end_layout_free_data)(void *data), void (*transition_end_cb)(void *data), void *transition_end_data);
+        # EAPI Elm_Box_Transition *elm_box_transition_new(const double duration, Evas_Object_Box_Layout start_layout, void *start_layout_data, void (*start_layout_free_data)(void *data), Evas_Object_Box_Layout end_layout, void *end_layout_data, Ecore_Cb end_layout_free_data, Ecore_Cb transition_end_cb, void *transition_end_data);
         # FIXME
         # EAPI void elm_box_transition_free(void *data);
         [ :elm_box_transition_free, [ :pointer ], :void ],

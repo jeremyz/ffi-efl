@@ -43,10 +43,14 @@ module Efl
         [ :elm_theme_overlay_add, [ :elm_theme, :string ], :void ],
         # EAPI void elm_theme_overlay_del(Elm_Theme *th, const char *item);
         [ :elm_theme_overlay_del, [ :elm_theme, :string ], :void ],
+        # EAPI const Eina_List *elm_theme_overlay_list_get(const Elm_Theme *th);
+        [ :elm_theme_overlay_list_get, [ :elm_theme ], :eina_list ],
         # EAPI void elm_theme_extension_add(Elm_Theme *th, const char *item);
         [ :elm_theme_extension_add, [ :elm_theme, :string ], :void ],
         # EAPI void elm_theme_extension_del(Elm_Theme *th, const char *item);
         [ :elm_theme_extension_del, [ :elm_theme, :string ], :void ],
+        # EAPI const Eina_List *elm_theme_extension_list_get(const Elm_Theme *th);
+        [ :elm_theme_extension_list_get, [ :elm_theme ], :eina_list ],
         # EAPI void elm_theme_set(Elm_Theme *th, const char *theme);
         [ :elm_theme_set, [ :elm_theme, :string ], :void ],
         # EAPI const char *elm_theme_get(Elm_Theme *th);
@@ -59,8 +63,6 @@ module Efl
         [ :elm_theme_flush, [ :elm_theme ], :void ],
         # EAPI void elm_theme_full_flush(void);
         [ :elm_theme_full_flush, [  ], :void ],
-        # EAPI void elm_theme_all_set(const char *theme);
-        [ :elm_theme_all_set, [ :string ], :void ],
         # EAPI Eina_List *elm_theme_name_available_list_new(void);
         [ :elm_theme_name_available_list_new, [  ], :eina_list ],
         # EAPI void elm_theme_name_available_list_free(Eina_List *list);

@@ -43,10 +43,14 @@ module Efl
         enum :elm_input_panel_return_key_type, [ :elm_input_panel_return_key_type_default, :elm_input_panel_return_key_type_done,
             :elm_input_panel_return_key_type_go, :elm_input_panel_return_key_type_join, :elm_input_panel_return_key_type_login,
             :elm_input_panel_return_key_type_next, :elm_input_panel_return_key_type_search, :elm_input_panel_return_key_type_send ]
+        # typedef enum _Elm_Cnp_Mode {...} Elm_Cnp_Mode;
+        enum :elm_cnp_mode, [ :elm_cnp_mode_markup, :elm_cnp_mode_no_image, :elm_cnp_mode_plaintext ]
         #
         # TYPEDEFS
         # typedef struct _Elm_Entry_Anchor_Info Elm_Entry_Anchor_Info;
         typedef :pointer, :elm_entry_anchor_info
+        # typedef struct _Elm_Entry_Anchor_Hover_Info Elm_Entry_Anchor_Hover_Info;
+        typedef :pointer, :elm_entry_anchor_hover_info
         # typedef Edje_Entry_Change_Info Elm_Entry_Change_Info;
         typedef :edje_entry_change_info, :elm_entry_change_info
         # typedef struct _Elm_Entry_Filter_Limit_Size Elm_Entry_Filter_Limit_Size;
@@ -162,8 +166,8 @@ module Efl
         [ :elm_entry_markup_to_utf8, [ :string ], :string ],
         # EAPI char *elm_entry_utf8_to_markup(const char *s);
         [ :elm_entry_utf8_to_markup, [ :string ], :string ],
-        # EAPI void elm_entry_file_set(Evas_Object *obj, const char *file, Elm_Text_Format format);
-        [ :elm_entry_file_set, [ :evas_object, :string, :elm_text_format ], :void ],
+        # EAPI Eina_Bool elm_entry_file_set(Evas_Object *obj, const char *file, Elm_Text_Format format);
+        [ :elm_entry_file_set, [ :evas_object, :string, :elm_text_format ], :bool ],
         # EAPI void elm_entry_file_get(const Evas_Object *obj, const char **file, Elm_Text_Format *format);
         [ :elm_entry_file_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void elm_entry_file_save(Evas_Object *obj);
@@ -172,10 +176,6 @@ module Efl
         [ :elm_entry_autosave_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_entry_autosave_get(const Evas_Object *obj);
         [ :elm_entry_autosave_get, [ :evas_object ], :bool ],
-        # EAPI void elm_entry_cnp_textonly_set(Evas_Object *obj, Eina_Bool textonly);
-        [ :elm_entry_cnp_textonly_set, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool elm_entry_cnp_textonly_get(const Evas_Object *obj);
-        [ :elm_entry_cnp_textonly_get, [ :evas_object ], :bool ],
         # EAPI void elm_entry_scrollable_set(Evas_Object *obj, Eina_Bool scroll);
         [ :elm_entry_scrollable_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_entry_scrollable_get(const Evas_Object *obj);
@@ -234,6 +234,22 @@ module Efl
         [ :elm_entry_filter_limit_size, [ :pointer, :evas_object, :pointer ], :void ],
         # EAPI void elm_entry_filter_accept_set(void *data, Evas_Object *entry, char **text);
         [ :elm_entry_filter_accept_set, [ :pointer, :evas_object, :pointer ], :void ],
+        # EAPI void *elm_entry_imf_context_get(Evas_Object *obj);
+        [ :elm_entry_imf_context_get, [ :evas_object ], :pointer ],
+        # EAPI void elm_entry_cnp_mode_set(Evas_Object *obj, Elm_Cnp_Mode cnp_mode);
+        [ :elm_entry_cnp_mode_set, [ :evas_object, :elm_cnp_mode ], :void ],
+        # EAPI Elm_Cnp_Mode elm_entry_cnp_mode_get(const Evas_Object *obj);
+        [ :elm_entry_cnp_mode_get, [ :evas_object ], :elm_cnp_mode ],
+        # EAPI void elm_entry_anchor_hover_parent_set(Evas_Object *obj, Evas_Object *parent);
+        [ :elm_entry_anchor_hover_parent_set, [ :evas_object, :evas_object ], :void ],
+        # EAPI Evas_Object *elm_entry_anchor_hover_parent_get(const Evas_Object *obj);
+        [ :elm_entry_anchor_hover_parent_get, [ :evas_object ], :evas_object ],
+        # EAPI void elm_entry_anchor_hover_style_set(Evas_Object *obj, const char *style);
+        [ :elm_entry_anchor_hover_style_set, [ :evas_object, :string ], :void ],
+        # EAPI const char *elm_entry_anchor_hover_style_get(const Evas_Object *obj);
+        [ :elm_entry_anchor_hover_style_get, [ :evas_object ], :string ],
+        # EAPI void elm_entry_anchor_hover_end(Evas_Object *obj);
+        [ :elm_entry_anchor_hover_end, [ :evas_object ], :void ],
         ]
         #
         attach_fcts fcts

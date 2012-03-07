@@ -39,12 +39,10 @@ module Efl
         [ :elm_menu_item_object_get, [ :elm_object_item ], :evas_object ],
         # EAPI Elm_Object_Item *elm_menu_item_add(Evas_Object *obj, Elm_Object_Item *parent, const char *icon, const char *label, Evas_Smart_Cb func, const void *data);
         [ :elm_menu_item_add, [ :evas_object, :elm_object_item, :string, :string, :evas_smart_cb, :pointer ], :elm_object_item ],
-        # EAPI Elm_Object_Item *elm_menu_item_add_object(Evas_Object *obj, Elm_Object_Item *parent, Evas_Object *subobj, Evas_Smart_Cb func, const void *data);
-        [ :elm_menu_item_add_object, [ :evas_object, :elm_object_item, :evas_object, :evas_smart_cb, :pointer ], :elm_object_item ],
-        # EAPI void elm_menu_item_object_icon_name_set(Elm_Object_Item *it, const char *icon);
-        [ :elm_menu_item_object_icon_name_set, [ :elm_object_item, :string ], :void ],
-        # EAPI const char *elm_menu_item_object_icon_name_get(const Elm_Object_Item *it);
-        [ :elm_menu_item_object_icon_name_get, [ :elm_object_item ], :string ],
+        # EAPI void elm_menu_item_icon_name_set(Elm_Object_Item *it, const char *icon);
+        [ :elm_menu_item_icon_name_set, [ :elm_object_item, :string ], :void ],
+        # EAPI const char *elm_menu_item_icon_name_get(const Elm_Object_Item *it);
+        [ :elm_menu_item_icon_name_get, [ :elm_object_item ], :string ],
         # EAPI void elm_menu_item_selected_set(Elm_Object_Item *it, Eina_Bool selected);
         [ :elm_menu_item_selected_set, [ :elm_object_item, :bool ], :void ],
         # EAPI Eina_Bool elm_menu_item_selected_get(const Elm_Object_Item *it);

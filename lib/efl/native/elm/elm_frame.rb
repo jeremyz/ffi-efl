@@ -31,10 +31,10 @@ module Efl
         [ :elm_frame_autocollapse_get, [ :evas_object ], :bool ],
         # EAPI void elm_frame_collapse_set(Evas_Object *obj, Eina_Bool collapse);
         [ :elm_frame_collapse_set, [ :evas_object, :bool ], :void ],
-        # EAPI void elm_frame_collapse_go(Evas_Object *obj, Eina_Bool collapse);
-        [ :elm_frame_collapse_go, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_frame_collapse_get(const Evas_Object *obj);
         [ :elm_frame_collapse_get, [ :evas_object ], :bool ],
+        # EAPI void elm_frame_collapse_go(Evas_Object *obj, Eina_Bool collapse);
+        [ :elm_frame_collapse_go, [ :evas_object, :bool ], :void ],
         ]
         #
         attach_fcts fcts

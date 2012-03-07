@@ -41,8 +41,8 @@ module Efl
         [ :elm_slideshow_item_add, [ :evas_object, :elm_slideshow_item_class, :pointer ], :elm_object_item ],
         # EAPI Elm_Object_Item *elm_slideshow_item_sorted_insert(Evas_Object *obj, const Elm_Slideshow_Item_Class *itc, const void *data, Eina_Compare_Cb func);
         [ :elm_slideshow_item_sorted_insert, [ :evas_object, :elm_slideshow_item_class, :pointer, :eina_compare_cb ], :elm_object_item ],
-        # EAPI void elm_slideshow_show(Elm_Object_Item *it);
-        [ :elm_slideshow_show, [ :elm_object_item ], :void ],
+        # EAPI void elm_slideshow_item_show(Elm_Object_Item *it);
+        [ :elm_slideshow_item_show, [ :elm_object_item ], :void ],
         # EAPI void elm_slideshow_next(Evas_Object *obj);
         [ :elm_slideshow_next, [ :evas_object ], :void ],
         # EAPI void elm_slideshow_previous(Evas_Object *obj);
