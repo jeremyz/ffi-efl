@@ -72,6 +72,7 @@ for header in \
     "${INCLUDE}/elementary-0/elm_config.h" \
     "${INCLUDE}/elementary-0/elm_conform.h" \
     "${INCLUDE}/elementary-0/elm_cursor.h" \
+    "${INCLUDE}/elementary-0/elm_datetime.h" \
     "${INCLUDE}/elementary-0/elm_debug.h" \
     "${INCLUDE}/elementary-0/elm_diskselector.h" \
     "${INCLUDE}/elementary-0/elm_entry.h" \
