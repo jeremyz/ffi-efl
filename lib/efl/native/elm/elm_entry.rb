@@ -59,10 +59,10 @@ module Efl
         typedef :pointer, :elm_entry_filter_accept_set
         #
         # CALLBACKS
+        # typedef Evas_Object * (*Elm_Entry_Item_Provider_Cb) (void *data, Evas_Object * entry, const char *item);
+        callback :elm_entry_item_provider_cb, [ :pointer, :evas_object, :string ], :evas_object
         # typedef void (*Elm_Entry_Filter_Cb) (void *data, Evas_Object *entry, char **text);
         callback :elm_entry_filter_cb, [ :pointer, :evas_object, :pointer ], :void
-        # use in elm_entry_item_provider_* : Evas_Object * (*func)(void *data, Evas_Object * entry, const char *item)
-        callback :elm_entry_item_provider_cb, [ :pointer, :evas_object, :string ], :evas_object
         #
         # FUNCTIONS
         fcts = [
@@ -150,11 +150,11 @@ module Efl
         [ :elm_entry_context_menu_disabled_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_entry_context_menu_disabled_get(const Evas_Object *obj);
         [ :elm_entry_context_menu_disabled_get, [ :evas_object ], :bool ],
-        # EAPI void elm_entry_item_provider_append(Evas_Object *obj, Evas_Object * (*func)(void *data, Evas_Object * entry, const char *item), void *data);
+        # EAPI void elm_entry_item_provider_append(Evas_Object *obj, Elm_Entry_Item_Provider_Cb func, void *data);
         [ :elm_entry_item_provider_append, [ :evas_object, :elm_entry_item_provider_cb, :pointer ], :void ],
-        # EAPI void elm_entry_item_provider_prepend(Evas_Object *obj, Evas_Object * (*func)(void *data, Evas_Object * entry, const char *item), void *data);
+        # EAPI void elm_entry_item_provider_prepend(Evas_Object *obj, Elm_Entry_Item_Provider_Cb func, void *data);
         [ :elm_entry_item_provider_prepend, [ :evas_object, :elm_entry_item_provider_cb, :pointer ], :void ],
-        # EAPI void elm_entry_item_provider_remove(Evas_Object *obj, Evas_Object * (*func)(void *data, Evas_Object * entry, const char *item), void *data);
+        # EAPI void elm_entry_item_provider_remove(Evas_Object *obj, Elm_Entry_Item_Provider_Cb func, void *data);
         [ :elm_entry_item_provider_remove, [ :evas_object, :elm_entry_item_provider_cb, :pointer ], :void ],
         # EAPI void elm_entry_markup_filter_append(Evas_Object *obj, Elm_Entry_Filter_Cb func, void *data);
         [ :elm_entry_markup_filter_append, [ :evas_object, :elm_entry_filter_cb, :pointer ], :void ],

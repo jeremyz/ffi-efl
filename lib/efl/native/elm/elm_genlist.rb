@@ -34,6 +34,9 @@ module Efl
         # typedef enum {...} Elm_Genlist_Item_Scrollto_Type;
         enum :elm_genlist_item_scrollto_type, [ :elm_genlist_item_scrollto_none, 0, :elm_genlist_item_scrollto_in, (1<<0),
             :elm_genlist_item_scrollto_top, (1<<1), :elm_genlist_item_scrollto_middle, (1<<2) ]
+        # typedef enum {...} Elm_Genlist_Item_Move_Effect_Mode;
+        enum :elm_genlist_item_move_effect_mode, [ :elm_genlist_item_move_effect_none, 0, :elm_genlist_item_move_effect_expand, 1,
+            :elm_genlist_item_move_effect_contract, 2 ]
         #
         # TYPEDEFS
         # typedef Elm_Gen_Item_Class Elm_Genlist_Item_Class;
@@ -226,6 +229,10 @@ module Efl
         [ :elm_genlist_item_flip_set, [ :elm_object_item, :bool ], :void ],
         # EAPI Eina_Bool elm_genlist_item_flip_get(const Elm_Object_Item *it);
         [ :elm_genlist_item_flip_get, [ :elm_object_item ], :bool ],
+        # EAPI void elm_genlist_tree_effect_enabled_set(Evas_Object *obj, Eina_Bool enabled);
+        [ :elm_genlist_tree_effect_enabled_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_genlist_tree_effect_enabled_get(const Evas_Object *obj);
+        [ :elm_genlist_tree_effect_enabled_get, [ :evas_object ], :bool ],
         ]
         #
         attach_fcts fcts
