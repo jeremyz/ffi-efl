@@ -72,9 +72,7 @@ for header in \
     "${INCLUDE}/elementary-0/elm_cursor.h" \
     "${INCLUDE}/elementary-0/elm_debug.h" \
     "${INCLUDE}/elementary-0/elm_diskselector.h" \
-    "${INCLUDE}/elementary-0/elm_engine.h" \
     "${INCLUDE}/elementary-0/elm_entry.h" \
-    "${INCLUDE}/elementary-0/elm_factory.h" \
     "${INCLUDE}/elementary-0/elm_finger.h" \
     "${INCLUDE}/elementary-0/elm_flip.h" \
     "${INCLUDE}/elementary-0/elm_flipselector.h" \
@@ -103,7 +101,6 @@ for header in \
     "${INCLUDE}/elementary-0/elm_notify.h" \
     "${INCLUDE}/elementary-0/elm_panel.h" \
     "${INCLUDE}/elementary-0/elm_panes.h" \
-    "${INCLUDE}/elementary-0/elm_password.h" \
     "${INCLUDE}/elementary-0/elm_photocam.h" \
     "${INCLUDE}/elementary-0/elm_photo.h" \
     "${INCLUDE}/elementary-0/elm_plug.h" \
