@@ -59,7 +59,7 @@ module Efl
         [ :elm_spinner_base_set, [ :evas_object, :double ], :void ],
         # EAPI double elm_spinner_base_get(const Evas_Object *obj);
         [ :elm_spinner_base_get, [ :evas_object ], :double ],
-        # EAPI void elm_spinner_round_set(Evas_Object *obj, int round);
+        # EAPI void elm_spinner_round_set(Evas_Object *obj, int rnd);
         [ :elm_spinner_round_set, [ :evas_object, :int ], :void ],
         # EAPI int elm_spinner_round_get(const Evas_Object *obj);
         [ :elm_spinner_round_get, [ :evas_object ], :int ],

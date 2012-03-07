@@ -26,7 +26,7 @@ module Efl
         fcts = [
         # EAPI Evas_Object *elm_diskselector_add(Evas_Object *parent);
         [ :elm_diskselector_add, [ :evas_object ], :evas_object ],
-        # EAPI void elm_diskselector_round_set(Evas_Object *obj, Eina_Bool round);
+        # EAPI void elm_diskselector_round_set(Evas_Object *obj, Eina_Bool rnd);
         [ :elm_diskselector_round_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_diskselector_round_get(const Evas_Object *obj);
         [ :elm_diskselector_round_get, [ :evas_object ], :bool ],
