@@ -48,6 +48,7 @@ for header in \
     "${INCLUDE}/elementary-0/elm_object.h" \
     "${INCLUDE}/elementary-0/elm_object_item.h" \
     "${INCLUDE}/elementary-0/elc_ctxpopup.h" \
+    "${INCLUDE}/elementary-0/elc_dayselector.h" \
     "${INCLUDE}/elementary-0/elc_fileselector_button.h" \
     "${INCLUDE}/elementary-0/elc_fileselector_entry.h" \
     "${INCLUDE}/elementary-0/elc_fileselector.h" \
