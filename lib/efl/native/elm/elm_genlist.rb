@@ -31,6 +31,9 @@ module Efl
         # typedef enum {...} Elm_Genlist_Item_Field_Type;
         enum :elm_genlist_item_field_type, [ :elm_genlist_item_field_all, 0, :elm_genlist_item_field_text, (1<<0), :elm_genlist_item_field_content,
             (1<<1), :elm_genlist_item_field_state, (1<<2) ]
+        # typedef enum {...} Elm_Genlist_Item_Scrollto_Type;
+        enum :elm_genlist_item_scrollto_type, [ :elm_genlist_item_scrollto_none, 0, :elm_genlist_item_scrollto_in, (1<<0),
+            :elm_genlist_item_scrollto_top, (1<<1), :elm_genlist_item_scrollto_middle, (1<<2) ]
         #
         # TYPEDEFS
         # typedef Elm_Gen_Item_Class Elm_Genlist_Item_Class;
@@ -107,18 +110,10 @@ module Efl
         [ :elm_genlist_item_selected_set, [ :elm_object_item, :bool ], :void ],
         # EAPI Eina_Bool elm_genlist_item_selected_get(const Elm_Object_Item *it);
         [ :elm_genlist_item_selected_get, [ :elm_object_item ], :bool ],
-        # EAPI void elm_genlist_item_show(Elm_Object_Item *it);
-        [ :elm_genlist_item_show, [ :elm_object_item ], :void ],
-        # EAPI void elm_genlist_item_bring_in(Elm_Object_Item *it);
-        [ :elm_genlist_item_bring_in, [ :elm_object_item ], :void ],
-        # EAPI void elm_genlist_item_top_show(Elm_Object_Item *it);
-        [ :elm_genlist_item_top_show, [ :elm_object_item ], :void ],
-        # EAPI void elm_genlist_item_top_bring_in(Elm_Object_Item *it);
-        [ :elm_genlist_item_top_bring_in, [ :elm_object_item ], :void ],
-        # EAPI void elm_genlist_item_middle_show(Elm_Object_Item *it);
-        [ :elm_genlist_item_middle_show, [ :elm_object_item ], :void ],
-        # EAPI void elm_genlist_item_middle_bring_in(Elm_Object_Item *it);
-        [ :elm_genlist_item_middle_bring_in, [ :elm_object_item ], :void ],
+        # EAPI void elm_genlist_item_show(Elm_Object_Item *it, Elm_Genlist_Item_Scrollto_Type type);
+        [ :elm_genlist_item_show, [ :elm_object_item, :elm_genlist_item_scrollto_type ], :void ],
+        # EAPI void elm_genlist_item_bring_in(Elm_Object_Item *it, Elm_Genlist_Item_Scrollto_Type type);
+        [ :elm_genlist_item_bring_in, [ :elm_object_item, :elm_genlist_item_scrollto_type ], :void ],
         # EAPI void elm_genlist_item_update(Elm_Object_Item *it);
         [ :elm_genlist_item_update, [ :elm_object_item ], :void ],
         # EAPI void elm_genlist_item_item_class_update(Elm_Object_Item *it, const Elm_Genlist_Item_Class *itc);
