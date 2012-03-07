@@ -83,6 +83,7 @@ for header in \
     "${INCLUDE}/elementary-0/elm_fonts.h" \
     "${INCLUDE}/elementary-0/elm_frame.h" \
     "${INCLUDE}/elementary-0/elm_gengrid.h" \
+    "${INCLUDE}/elementary-0/elm_gen.h" \
     "${INCLUDE}/elementary-0/elm_genlist.h" \
     "${INCLUDE}/elementary-0/elm_gesture_layer.h" \
     "${INCLUDE}/elementary-0/elm_getting_started.h" \
