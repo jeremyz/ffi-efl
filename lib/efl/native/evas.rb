@@ -933,10 +933,12 @@ module Efl
         [ :evas_object_textblock_style_set, [ :evas_object, :evas_textblock_style ], :void ],
         # EAPI const Evas_Textblock_Style *evas_object_textblock_style_get(const Evas_Object *obj);
         [ :evas_object_textblock_style_get, [ :evas_object ], :evas_textblock_style ],
-        # EAPI void evas_object_textblock_style_user_set(Evas_Object *obj, Evas_Textblock_Style *ts);
-        [ :evas_object_textblock_style_user_set, [ :evas_object, :evas_textblock_style ], :void ],
-        # EAPI const Evas_Textblock_Style *evas_object_textblock_style_user_get(const Evas_Object *obj);
-        [ :evas_object_textblock_style_user_get, [ :evas_object ], :evas_textblock_style ],
+        # EAPI void evas_object_textblock_style_user_push(Evas_Object *obj, Evas_Textblock_Style *ts);
+        [ :evas_object_textblock_style_user_push, [ :evas_object, :evas_textblock_style ], :void ],
+        # EAPI void evas_object_textblock_style_user_pop(Evas_Object *obj);
+        [ :evas_object_textblock_style_user_pop, [ :evas_object ], :void ],
+        # EAPI const Evas_Textblock_Style *evas_object_textblock_style_user_peek(const Evas_Object *obj);
+        [ :evas_object_textblock_style_user_peek, [ :evas_object ], :evas_textblock_style ],
         # EAPI void evas_object_textblock_replace_char_set(Evas_Object *obj, const char *ch);
         [ :evas_object_textblock_replace_char_set, [ :evas_object, :string ], :void ],
         # EAPI const char *evas_object_textblock_replace_char_get(Evas_Object *obj);

@@ -66,22 +66,6 @@ module Efl
         callback :elm_map_name_cb, [ :pointer, :evas_object, :elm_map_name ], :void
         # typedef void (*Elm_Map_Route_Cb) (void *data, Evas_Object *map, const Elm_Map_Route *route);
         callback :elm_map_route_cb, [ :pointer, :evas_object, :elm_map_route ], :void
-        # typedef char *(*Elm_Map_Module_Source_Name_Func) (void);
-        callback :elm_map_module_source_name_func_cb, [  ], :string
-        # typedef int (*Elm_Map_Module_Tile_Zoom_Min_Func) (void);
-        callback :elm_map_module_tile_zoom_min_func_cb, [  ], :int
-        # typedef int (*Elm_Map_Module_Tile_Zoom_Max_Func) (void);
-        callback :elm_map_module_tile_zoom_max_func_cb, [  ], :int
-        # typedef char *(*Elm_Map_Module_Tile_Url_Func) (Evas_Object *obj, int x, int y, int zoom);
-        callback :elm_map_module_tile_url_func_cb, [ :evas_object, :int, :int, :int ], :string
-        # typedef Eina_Bool (*Elm_Map_Module_Tile_Geo_to_Coord_Func) (const Evas_Object *obj, int zoom, double lon, double lat, int size, int *x, int *y);
-        callback :elm_map_module_tile_geo_to_coord_func_cb, [ :evas_object, :int, :double, :double, :int, :pointer, :pointer ], :bool
-        # typedef Eina_Bool (*Elm_Map_Module_Tile_Coord_to_Geo_Func) (const Evas_Object *obj, int zoom, int x, int y, int size, double *lon, double *lat);
-        callback :elm_map_module_tile_coord_to_geo_func_cb, [ :evas_object, :int, :int, :int, :int, :pointer, :pointer ], :bool
-        # typedef char *(*Elm_Map_Module_Route_Url_Func) (Evas_Object *obj, const char *type_name, int method, double flon, double flat, double tlon, double tlat);
-        callback :elm_map_module_route_url_func_cb, [ :evas_object, :string, :int, :double, :double, :double, :double ], :string
-        # typedef char *(*Elm_Map_Module_Name_Url_Func) (Evas_Object *obj, int method, const char *name, double lon, double lat);
-        callback :elm_map_module_name_url_func_cb, [ :evas_object, :int, :string, :double, :double ], :string
         #
         # FUNCTIONS
         fcts = [
@@ -111,6 +95,8 @@ module Efl
         [ :elm_map_region_show, [ :evas_object, :double, :double ], :void ],
         # EAPI void elm_map_canvas_to_region_convert(const Evas_Object *obj, const Evas_Coord x, const Evas_Coord y, double *lon, double *lat);
         [ :elm_map_canvas_to_region_convert, [ :evas_object, :int, :int, :pointer, :pointer ], :void ],
+        # EAPI void elm_map_region_to_canvas_convert(const Evas_Object *obj, double lon, double lat, Evas_Coord *x, Evas_Coord *y);
+        [ :elm_map_region_to_canvas_convert, [ :evas_object, :double, :double, :pointer, :pointer ], :void ],
         # EAPI void elm_map_paused_set(Evas_Object *obj, Eina_Bool paused);
         [ :elm_map_paused_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_map_paused_get(const Evas_Object *obj);

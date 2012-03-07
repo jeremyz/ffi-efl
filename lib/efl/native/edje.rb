@@ -293,10 +293,12 @@ module Efl
         [ :edje_object_part_text_set, [ :evas_object, :string, :string ], :bool ],
         # EAPI const char *edje_object_part_text_get (const Evas_Object *obj, const char *part);
         [ :edje_object_part_text_get, [ :evas_object, :string ], :string ],
-        # EAPI void edje_object_part_text_style_user_set(Evas_Object *obj, const char *part, const char *style);
-        [ :edje_object_part_text_style_user_set, [ :evas_object, :string, :string ], :void ],
-        # EAPI const char *edje_object_part_text_style_user_get(Evas_Object *obj, const char *part);
-        [ :edje_object_part_text_style_user_get, [ :evas_object, :string ], :string ],
+        # EAPI void edje_object_part_text_style_user_push(Evas_Object *obj, const char *part, const char *style);
+        [ :edje_object_part_text_style_user_push, [ :evas_object, :string, :string ], :void ],
+        # EAPI const char *edje_object_part_text_style_user_peek(const Evas_Object *obj, const char *part);
+        [ :edje_object_part_text_style_user_peek, [ :evas_object, :string ], :string ],
+        # EAPI void edje_object_part_text_style_user_pop(Evas_Object *obj, const char *part);
+        [ :edje_object_part_text_style_user_pop, [ :evas_object, :string ], :void ],
         # EAPI Eina_Bool edje_object_part_text_unescaped_set (Evas_Object *obj, const char *part, const char *text_to_escape);
         [ :edje_object_part_text_unescaped_set, [ :evas_object, :string, :string ], :bool ],
         # EAPI char *edje_object_part_text_unescaped_get (const Evas_Object *obj, const char *part);

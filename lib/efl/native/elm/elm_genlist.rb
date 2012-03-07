@@ -26,7 +26,7 @@ module Efl
         #
         # ENUMS
         # typedef enum {...} Elm_Genlist_Item_Type;
-        enum :elm_genlist_item_type, [ :elm_genlist_item_none, 0, :elm_genlist_item_subitems, (1<<0), :elm_genlist_item_group, (1<<1),
+        enum :elm_genlist_item_type, [ :elm_genlist_item_none, 0, :elm_genlist_item_tree, (1<<0), :elm_genlist_item_group, (1<<1),
             :elm_genlist_item_max, (1<<2) ]
         # typedef enum {...} Elm_Genlist_Item_Field_Type;
         enum :elm_genlist_item_field_type, [ :elm_genlist_item_field_all, 0, :elm_genlist_item_field_text, (1<<0), :elm_genlist_item_field_content,
@@ -64,14 +64,6 @@ module Efl
         [ :elm_genlist_mode_set, [ :evas_object, :elm_list_mode ], :void ],
         # EAPI Elm_List_Mode elm_genlist_mode_get(const Evas_Object *obj);
         [ :elm_genlist_mode_get, [ :evas_object ], :elm_list_mode ],
-        # EAPI void elm_genlist_always_select_mode_set(Evas_Object *obj, Eina_Bool always_select);
-        [ :elm_genlist_always_select_mode_set, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool elm_genlist_always_select_mode_get(const Evas_Object *obj);
-        [ :elm_genlist_always_select_mode_get, [ :evas_object ], :bool ],
-        # EAPI void elm_genlist_no_select_mode_set(Evas_Object *obj, Eina_Bool no_select);
-        [ :elm_genlist_no_select_mode_set, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool elm_genlist_no_select_mode_get(const Evas_Object *obj);
-        [ :elm_genlist_no_select_mode_get, [ :evas_object ], :bool ],
         # EAPI void elm_genlist_bounce_set(Evas_Object *obj, Eina_Bool h_bounce, Eina_Bool v_bounce);
         [ :elm_genlist_bounce_set, [ :evas_object, :bool, :bool ], :void ],
         # EAPI void elm_genlist_bounce_get(const Evas_Object *obj, Eina_Bool *h_bounce, Eina_Bool *v_bounce);
@@ -233,6 +225,14 @@ module Efl
         [ :elm_genlist_tree_effect_enabled_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_genlist_tree_effect_enabled_get(const Evas_Object *obj);
         [ :elm_genlist_tree_effect_enabled_get, [ :evas_object ], :bool ],
+        # EAPI void elm_genlist_select_mode_set(Evas_Object *obj, Elm_Object_Select_Mode_Type mode);
+        [ :elm_genlist_select_mode_set, [ :evas_object, :elm_object_select_mode_type ], :void ],
+        # EAPI Elm_Object_Select_Mode_Type elm_genlist_select_mode_get(const Evas_Object *obj);
+        [ :elm_genlist_select_mode_get, [ :evas_object ], :elm_object_select_mode_type ],
+        # EAPI void elm_genlist_hilight_mode_set(Evas_Object *obj, Eina_Bool hilight);
+        [ :elm_genlist_hilight_mode_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_genlist_hilight_mode_get(const Evas_Object *obj);
+        [ :elm_genlist_hilight_mode_get, [ :evas_object ], :bool ],
         ]
         #
         attach_fcts fcts

@@ -43,14 +43,6 @@ module Efl
         [ :elm_toolbar_icon_order_lookup_set, [ :evas_object, :elm_icon_lookup_order ], :void ],
         # EAPI Elm_Icon_Lookup_Order elm_toolbar_icon_order_lookup_get(const Evas_Object *obj);
         [ :elm_toolbar_icon_order_lookup_get, [ :evas_object ], :elm_icon_lookup_order ],
-        # EAPI void elm_toolbar_always_select_mode_set(Evas_Object *obj, Eina_Bool always_select);
-        [ :elm_toolbar_always_select_mode_set, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool elm_toolbar_always_select_mode_get(const Evas_Object *obj);
-        [ :elm_toolbar_always_select_mode_get, [ :evas_object ], :bool ],
-        # EAPI void elm_toolbar_no_select_mode_set(Evas_Object *obj, Eina_Bool no_select);
-        [ :elm_toolbar_no_select_mode_set, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool elm_toolbar_no_select_mode_get(const Evas_Object *obj);
-        [ :elm_toolbar_no_select_mode_get, [ :evas_object ], :bool ],
         # EAPI Elm_Object_Item *elm_toolbar_item_append(Evas_Object *obj, const char *icon, const char *label, Evas_Smart_Cb func, const void *data);
         [ :elm_toolbar_item_append, [ :evas_object, :string, :string, :evas_smart_cb, :pointer ], :elm_object_item ],
         # EAPI Elm_Object_Item *elm_toolbar_item_prepend(Evas_Object *obj, const char *icon, const char *label, Evas_Smart_Cb func, const void *data);
@@ -135,6 +127,10 @@ module Efl
         [ :elm_toolbar_horizontal_get, [ :evas_object ], :bool ],
         # EAPI unsigned int elm_toolbar_items_count(const Evas_Object *obj);
         [ :elm_toolbar_items_count, [ :evas_object ], :uint ],
+        # EAPI void elm_toolbar_select_mode_set(Evas_Object *obj, Elm_Object_Select_Mode_Type mode);
+        [ :elm_toolbar_select_mode_set, [ :evas_object, :elm_object_select_mode_type ], :void ],
+        # EAPI Elm_Object_Select_Mode_Type elm_toolbar_select_mode_get(const Evas_Object *obj);
+        [ :elm_toolbar_select_mode_get, [ :evas_object ], :elm_object_select_mode_type ],
         ]
         #
         attach_fcts fcts

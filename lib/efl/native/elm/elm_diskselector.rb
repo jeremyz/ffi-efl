@@ -26,14 +26,14 @@ module Efl
         fcts = [
         # EAPI Evas_Object *elm_diskselector_add(Evas_Object *parent);
         [ :elm_diskselector_add, [ :evas_object ], :evas_object ],
-        # EAPI void elm_diskselector_round_set(Evas_Object *obj, Eina_Bool rnd);
-        [ :elm_diskselector_round_set, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool elm_diskselector_round_get(const Evas_Object *obj);
-        [ :elm_diskselector_round_get, [ :evas_object ], :bool ],
-        # EAPI int elm_diskselector_side_label_length_get(const Evas_Object *obj);
-        [ :elm_diskselector_side_label_length_get, [ :evas_object ], :int ],
-        # EAPI void elm_diskselector_side_label_length_set(Evas_Object *obj, int len);
-        [ :elm_diskselector_side_label_length_set, [ :evas_object, :int ], :void ],
+        # EAPI void elm_diskselector_round_enabled_set(Evas_Object *obj, Eina_Bool enabled);
+        [ :elm_diskselector_round_enabled_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_diskselector_round_enabled_get(const Evas_Object *obj);
+        [ :elm_diskselector_round_enabled_get, [ :evas_object ], :bool ],
+        # EAPI int elm_diskselector_side_text_max_length_get(const Evas_Object *obj);
+        [ :elm_diskselector_side_text_max_length_get, [ :evas_object ], :int ],
+        # EAPI void elm_diskselector_side_text_max_length_set(Evas_Object *obj, int len);
+        [ :elm_diskselector_side_text_max_length_set, [ :evas_object, :int ], :void ],
         # EAPI void elm_diskselector_display_item_num_set(Evas_Object *obj, int num);
         [ :elm_diskselector_display_item_num_set, [ :evas_object, :int ], :void ],
         # EAPI int elm_diskselector_display_item_num_get(const Evas_Object *obj);

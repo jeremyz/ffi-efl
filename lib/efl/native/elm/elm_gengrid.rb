@@ -22,6 +22,11 @@ module Efl
         #
         ffi_lib 'elementary-ver-pre-svn-09.so.0'
         #
+        # ENUMS
+        # typedef enum {...} Elm_Gengrid_Item_Scrollto_Type;
+        enum :elm_gengrid_item_scrollto_type, [ :elm_gengrid_item_scrollto_none, 0, :elm_gengrid_item_scrollto_in, (1<<0),
+            :elm_gengrid_item_scrollto_top, (1<<1), :elm_gengrid_item_scrollto_middle, (1<<2) ]
+        #
         # TYPEDEFS
         # typedef Elm_Gen_Item_Class Elm_Gengrid_Item_Class;
         typedef :elm_gen_item_class, :elm_gengrid_item_class
@@ -48,14 +53,6 @@ module Efl
         [ :elm_gengrid_horizontal_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_gengrid_horizontal_get(const Evas_Object *obj);
         [ :elm_gengrid_horizontal_get, [ :evas_object ], :bool ],
-        # EAPI void elm_gengrid_always_select_mode_set(Evas_Object *obj, Eina_Bool always_select);
-        [ :elm_gengrid_always_select_mode_set, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool elm_gengrid_always_select_mode_get(const Evas_Object *obj);
-        [ :elm_gengrid_always_select_mode_get, [ :evas_object ], :bool ],
-        # EAPI void elm_gengrid_no_select_mode_set(Evas_Object *obj, Eina_Bool no_select);
-        [ :elm_gengrid_no_select_mode_set, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool elm_gengrid_no_select_mode_get(const Evas_Object *obj);
-        [ :elm_gengrid_no_select_mode_get, [ :evas_object ], :bool ],
         # EAPI void elm_gengrid_bounce_set(Evas_Object *obj, Eina_Bool h_bounce, Eina_Bool v_bounce);
         [ :elm_gengrid_bounce_set, [ :evas_object, :bool, :bool ], :void ],
         # EAPI void elm_gengrid_bounce_get(const Evas_Object *obj, Eina_Bool *h_bounce, Eina_Bool *v_bounce);
@@ -74,10 +71,18 @@ module Efl
         [ :elm_gengrid_selected_item_get, [ :evas_object ], :elm_object_item ],
         # EAPI const Eina_List *elm_gengrid_selected_items_get(const Evas_Object *obj);
         [ :elm_gengrid_selected_items_get, [ :evas_object ], :eina_list ],
+        # EAPI Eina_List *elm_gengrid_realized_items_get(const Evas_Object *obj);
+        [ :elm_gengrid_realized_items_get, [ :evas_object ], :eina_list ],
+        # EAPI void elm_gengrid_realized_items_update(Evas_Object *obj);
+        [ :elm_gengrid_realized_items_update, [ :evas_object ], :void ],
         # EAPI Elm_Object_Item *elm_gengrid_first_item_get(const Evas_Object *obj);
         [ :elm_gengrid_first_item_get, [ :evas_object ], :elm_object_item ],
         # EAPI Elm_Object_Item *elm_gengrid_last_item_get(const Evas_Object *obj);
         [ :elm_gengrid_last_item_get, [ :evas_object ], :elm_object_item ],
+        # EAPI void elm_gengrid_scroller_policy_set(Evas_Object *obj, Elm_Scroller_Policy policy_h, Elm_Scroller_Policy policy_v);
+        [ :elm_gengrid_scroller_policy_set, [ :evas_object, :elm_scroller_policy, :elm_scroller_policy ], :void ],
+        # EAPI void elm_gengrid_scroller_policy_get(const Evas_Object *obj, Elm_Scroller_Policy *policy_h, Elm_Scroller_Policy *policy_v);
+        [ :elm_gengrid_scroller_policy_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI Elm_Object_Item *elm_gengrid_item_next_get(const Elm_Object_Item *it);
         [ :elm_gengrid_item_next_get, [ :elm_object_item ], :elm_object_item ],
         # EAPI Elm_Object_Item *elm_gengrid_item_prev_get(const Elm_Object_Item *it);
@@ -86,16 +91,20 @@ module Efl
         [ :elm_gengrid_item_selected_set, [ :elm_object_item, :bool ], :void ],
         # EAPI Eina_Bool elm_gengrid_item_selected_get(const Elm_Object_Item *it);
         [ :elm_gengrid_item_selected_get, [ :elm_object_item ], :bool ],
-        # EAPI void elm_gengrid_item_show(Elm_Object_Item *it);
-        [ :elm_gengrid_item_show, [ :elm_object_item ], :void ],
-        # EAPI void elm_gengrid_item_bring_in(Elm_Object_Item *it);
-        [ :elm_gengrid_item_bring_in, [ :elm_object_item ], :void ],
+        # EAPI void elm_gengrid_item_show(Elm_Object_Item *it, Elm_Gengrid_Item_Scrollto_Type type);
+        [ :elm_gengrid_item_show, [ :elm_object_item, :elm_gengrid_item_scrollto_type ], :void ],
+        # EAPI void elm_gengrid_item_bring_in(Elm_Object_Item *it, Elm_Gengrid_Item_Scrollto_Type type);
+        [ :elm_gengrid_item_bring_in, [ :elm_object_item, :elm_gengrid_item_scrollto_type ], :void ],
         # EAPI void elm_gengrid_item_update(Elm_Object_Item *it);
         [ :elm_gengrid_item_update, [ :elm_object_item ], :void ],
         # EAPI void elm_gengrid_item_item_class_update(Elm_Object_Item *it, const Elm_Gengrid_Item_Class *gic);
         [ :elm_gengrid_item_item_class_update, [ :elm_object_item, :pointer ], :void ],
         # EAPI const Elm_Gengrid_Item_Class *elm_gengrid_item_item_class_get(const Elm_Object_Item *it);
         [ :elm_gengrid_item_item_class_get, [ :elm_object_item ], :pointer ],
+        # EAPI int elm_gengrid_item_index_get(const Elm_Object_Item *it);
+        [ :elm_gengrid_item_index_get, [ :elm_object_item ], :int ],
+        # EAPI unsigned int elm_gengrid_items_count(const Evas_Object *obj);
+        [ :elm_gengrid_items_count, [ :evas_object ], :uint ],
         # EAPI Elm_Gengrid_Item_Class *elm_gengrid_item_class_new(void);
         [ :elm_gengrid_item_class_new, [  ], :pointer ],
         # EAPI void elm_gengrid_item_class_free(Elm_Gengrid_Item_Class *itc);
@@ -168,6 +177,14 @@ module Efl
         [ :elm_gengrid_filled_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_gengrid_filled_get(const Evas_Object *obj);
         [ :elm_gengrid_filled_get, [ :evas_object ], :bool ],
+        # EAPI void elm_gengrid_select_mode_set(Evas_Object *obj, Elm_Object_Select_Mode_Type mode);
+        [ :elm_gengrid_select_mode_set, [ :evas_object, :elm_object_select_mode_type ], :void ],
+        # EAPI Elm_Object_Select_Mode_Type elm_gengrid_select_mode_get(const Evas_Object *obj);
+        [ :elm_gengrid_select_mode_get, [ :evas_object ], :elm_object_select_mode_type ],
+        # EAPI void elm_gengrid_hilight_mode_set(Evas_Object *obj, Eina_Bool hilight);
+        [ :elm_gengrid_hilight_mode_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_gengrid_hilight_mode_get(const Evas_Object *obj);
+        [ :elm_gengrid_hilight_mode_get, [ :evas_object ], :bool ],
         ]
         #
         attach_fcts fcts
