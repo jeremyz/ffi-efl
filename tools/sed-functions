@@ -1,3 +1,10 @@
+# eat all comments
+/^\s*\/\*/ {
+  :comment
+  /\*\/\s*$/ { n; b nocomment }
+  n; b comment
+}
+:nocomment
 # drop if don't start with EAPI
 /^\s*EAPI/ ! b
 # drop extern definitions

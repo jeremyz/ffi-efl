@@ -1,2 +1,9 @@
+# eat all comments
+/^\s*\/\*/ {
+  :comment
+  /\*\/\s*$/ { n; b nocomment }
+  n; b comment
+}
+:nocomment
 # variable should be EAPI extern word word;;
 s/^\s*(EAPI\s+extern\s+\w+\s+\*?\w+\s*;).*$/\1/p
