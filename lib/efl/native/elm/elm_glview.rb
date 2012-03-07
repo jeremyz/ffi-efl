@@ -40,8 +40,6 @@ module Efl
         #
         # FUNCTIONS
         fcts = [
-        # EAPI int elm_main(int argc, char **argv)
-        [ :elm_main, [ :int, :pointer ], :int ],
         # EAPI Evas_Object *elm_glview_add(Evas_Object *parent);
         [ :elm_glview_add, [ :evas_object ], :evas_object ],
         # EAPI void elm_glview_size_set(Evas_Object *obj, Evas_Coord w, Evas_Coord h);
