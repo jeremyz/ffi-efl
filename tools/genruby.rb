@@ -377,7 +377,7 @@ libs << elm_h('elc_popup.h', 'ElmPopup', ["#{NATIVE}/elementary","#{NATIVE}/elm/
 libs << elm_h('elm_actionslider.h', 'ElmActionSlider')
 libs << elm_h('elm_app.h', 'ElmApp')
 libs << elm_h('elm_bg.h', 'ElmBg')
-libs << elm_h('elm_box.h', 'ElmBox')
+libs << elm_h('elm_box.h', 'ElmBox', ["#{NATIVE}/ecore","#{NATIVE}/elementary"])
 libs << elm_h('elm_bubble.h', 'ElmBubble')
 libs << elm_h('elm_button.h', 'ElmButton')
 libs << elm_h('elm_cache.h', 'ElmCache')
