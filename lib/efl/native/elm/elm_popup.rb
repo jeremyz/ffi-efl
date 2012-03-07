@@ -3,6 +3,7 @@
 #
 require 'efl/native'
 require 'efl/native/elementary'
+require 'efl/native/elm/elm_entry'
 #
 module Efl
     #
