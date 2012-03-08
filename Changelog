@@ -1,3 +1,7 @@
+2012-03-08 Jérémy Zurcher <jeremy@asynk.ch>
+	* release 0.0.12
+	* elementary API freeze 2012.03.07
+
 2012-02-29 Jérémy Zurcher <jeremy@asynk.ch>
 	* remove usage of autoload
 	* efl.rb holds objects and method_missing helper code
