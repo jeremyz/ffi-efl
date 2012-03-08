@@ -35,6 +35,7 @@ H;x
 # remove \n
 s/\n//g
 # replace multi spaces with one
+s/\t/ /g
 s/ {2,}/ /g
 s/, }/ }/
 p

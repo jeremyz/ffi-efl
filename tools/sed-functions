@@ -15,6 +15,7 @@
 :loop
 /,$/ { N; s/\n/ /; t loop }
 # replace multi spaces with one ...
+s/\t/ /g
 s/ {2,}/ /g
 s/\s+EINA_.*/;/
 s/^\s*EAPI/EAPI/p
