@@ -43,7 +43,7 @@ module Efl
         # EAPI const char **elm_calendar_weekdays_names_get(const Evas_Object *obj);
         [ :elm_calendar_weekdays_names_get, [ :evas_object ], :pointer ],
         # EAPI void elm_calendar_weekdays_names_set(Evas_Object *obj, const char *weekdays[]);
-        # FIXME
+        [ :elm_calendar_weekdays_names_set, [ :evas_object, :pointer ], :void ],
         # EAPI void elm_calendar_min_max_year_set(Evas_Object *obj, int min, int max);
         [ :elm_calendar_min_max_year_set, [ :evas_object, :int, :int ], :void ],
         # EAPI void elm_calendar_min_max_year_get(const Evas_Object *obj, int *min, int *max);

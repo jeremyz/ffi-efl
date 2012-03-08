@@ -81,7 +81,7 @@ module Efl
         # EAPI Eina_Bool elm_quicklaunch_prepare(int argc, char **argv);
         [ :elm_quicklaunch_prepare, [ :int, :pointer ], :bool ],
         # EAPI Eina_Bool elm_quicklaunch_fork(int argc, char **argv, char *cwd, void (postfork_func) (void *data), void *postfork_data);
-        # FIXME
+        [ :elm_quicklaunch_fork, [ :int, :pointer, :string, (callback [:pointer], :void), :pointer], :bool ],
         # EAPI void elm_quicklaunch_cleanup(void);
         [ :elm_quicklaunch_cleanup, [  ], :void ],
         # EAPI int elm_quicklaunch_fallback(int argc, char **argv);

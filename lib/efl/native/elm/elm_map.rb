@@ -163,8 +163,6 @@ module Efl
         [ :elm_map_overlay_class_append, [ :elm_map_overlay, :elm_map_overlay ], :void ],
         # EAPI void elm_map_overlay_class_remove(Elm_Map_Overlay *clas, Elm_Map_Overlay *overlay);
         [ :elm_map_overlay_class_remove, [ :elm_map_overlay, :elm_map_overlay ], :void ],
-        # EAPI
-        # FIXME
         # EAPI void elm_map_overlay_class_zoom_max_set(Elm_Map_Overlay *clas, int zoom);
         [ :elm_map_overlay_class_zoom_max_set, [ :elm_map_overlay, :int ], :void ],
         # EAPI int elm_map_overlay_class_zoom_max_get(const Elm_Map_Overlay *clas);

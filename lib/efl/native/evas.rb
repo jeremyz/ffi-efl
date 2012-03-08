@@ -1176,7 +1176,7 @@ module Efl
         # EAPI const Evas_Object_Box_Api *evas_object_box_smart_class_get (void);
         [ :evas_object_box_smart_class_get, [  ], :evas_object_box_api ],
         # EAPI void evas_object_box_layout_set (Evas_Object *o, Evas_Object_Box_Layout cb, const void *data, void (*free_data)(void *data));
-        # FIXME
+        [ :evas_object_box_layout_set, [ :evas_object, :evas_object_box_layout_cb, (callback [ :pointer ], :void) ], :void ],
         # EAPI Evas_Object *evas_object_box_add (Evas *evas);
         [ :evas_object_box_add, [ :evas ], :evas_object ],
         # EAPI Evas_Object *evas_object_box_add_to (Evas_Object *parent);

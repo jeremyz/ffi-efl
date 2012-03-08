@@ -230,7 +230,8 @@ module Efl
         # EAPI void ecore_evas_gl_x11_extra_event_window_add(Ecore_Evas *ee, Ecore_X_Window win);
         [ :ecore_evas_gl_x11_extra_event_window_add, [ :ecore_evas, :uint ], :void ],
         # EAPI void ecore_evas_gl_x11_pre_post_swap_callback_set(const Ecore_Evas *ee, void *data, void (*pre_cb) (void *data, Evas *e), void (*post_cb) (void *data, Evas *e));
-        # FIXME
+        [ :ecore_evas_gl_x11_pre_post_swap_callback_set, [ :ecore_evas, :pointer, (callback [:pointer, :evas], :void),
+            (callback [:pointer, :evas], :void) ], :void ],
         # EAPI Ecore_Evas *ecore_evas_xrender_x11_new(const char *disp_name, Ecore_X_Window parent, int x, int y, int w, int h);
         [ :ecore_evas_xrender_x11_new, [ :string, :uint, :int, :int, :int, :int ], :ecore_evas ],
         # EAPI Ecore_X_Window ecore_evas_xrender_x11_window_get(const Ecore_Evas *ee);
@@ -278,7 +279,8 @@ module Efl
         # EAPI Ecore_Evas *ecore_evas_buffer_new(int w, int h);
         [ :ecore_evas_buffer_new, [ :int, :int ], :ecore_evas ],
         # EAPI Ecore_Evas *ecore_evas_buffer_allocfunc_new(int w, int h, void *(*alloc_func) (void *data, int size), void (*free_func) (void *data, void *pix), const void *data);
-        # FIXME
+        [ :ecore_evas_buffer_allocfunc_new, [ :int, :int, (callback [:pointer,:int], :pointer), (callback [:pointer,:pointer], :void),
+            :pointer ], :ecore_evas ],
         # EAPI const void *ecore_evas_buffer_pixels_get(Ecore_Evas *ee);
         [ :ecore_evas_buffer_pixels_get, [ :ecore_evas ], :pointer ],
         # EAPI Ecore_Evas *ecore_evas_ews_new(int x, int y, int w, int h);

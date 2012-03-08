@@ -221,7 +221,8 @@ module Efl
         # EAPI void edje_extern_object_aspect_set (Evas_Object *obj, Edje_Aspect_Control aspect, Evas_Coord aw, Evas_Coord ah);
         [ :edje_extern_object_aspect_set, [ :evas_object, :edje_aspect_control, :int, :int ], :void ],
         # EAPI void edje_box_layout_register (const char *name, Evas_Object_Box_Layout func, void *(*layout_data_get)(void *), void (*layout_data_free)(void *), void (*free_data)(void *), void *data);
-        # FIXME
+        [ :edje_box_layout_register, [ :string, :evas_object_box_layout_cb, (callback [:pointer], :pointer), (callback [:pointer], :void),
+            (callback [:pointer], :void), :pointer ], :void ],
         # EAPI Evas_Object *edje_object_add (Evas *evas);
         [ :edje_object_add, [ :evas ], :evas_object ],
         # EAPI const char *edje_object_data_get (const Evas_Object *obj, const char *key);

@@ -47,8 +47,6 @@ module Efl
         typedef :pointer, :elm_store_item_mapping_custom
         #
         # CALLBACKS
-        # typedef struct _Elm_Store_Item_Mapping Elm_Store_Item_Mapping; /**< A basic way of telling Store how to take your return data (string, or something else from your struct) and convert it into something genlist can use */typedef struct _Elm_Store_Item_Mapping_Empty Elm_Store_Item_Mapping_Empty; /**< An empty piece of mapping information. Useful for String labels as they get used directly */
-        # FIXME
         # typedef Eina_Bool (*Elm_Store_Item_List_Cb) (void *data, Elm_Store_Item_Info *info);
         callback :elm_store_item_list_cb, [ :pointer, :elm_store_item_info ], :bool
         # typedef void (*Elm_Store_Item_Fetch_Cb) (void *data, Elm_Store_Item *sti);
