@@ -323,8 +323,8 @@ module Efl
         [ :ecore_evas_software_wince_gdi_new, [ :ecore_wince_window, :int, :int, :int, :int ], :ecore_evas ],
         # EAPI Ecore_WinCE_Window *ecore_evas_software_wince_window_get(const Ecore_Evas *ee);
         [ :ecore_evas_software_wince_window_get, [ :ecore_evas ], :ecore_wince_window ],
-        # EAPI Ecore_Evas *ecore_evas_cocoa_new(Ecore_Cocoa_Window *parent, 				 int x, 				 int y, 				 int w, 				 int h);
-        # FIXME
+        # EAPI Ecore_Evas *ecore_evas_cocoa_new(Ecore_Cocoa_Window *parent, int x, int y, int w, int h);
+        [ :ecore_evas_cocoa_new, [ :ecore_cocoa_window, :int, :int, :int, :int ], :ecore_evas ],
         # EAPI Ecore_Evas *ecore_evas_psl1ght_new(const char* name, int w, int h);
         [ :ecore_evas_psl1ght_new, [ :pointer, :int, :int ], :ecore_evas ],
         # EAPI const char *ecore_evas_engine_name_get(const Ecore_Evas *ee);
