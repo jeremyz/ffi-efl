@@ -186,6 +186,10 @@ module Efl
         [ :elm_gengrid_highlight_mode_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_gengrid_highlight_mode_get(const Evas_Object *obj);
         [ :elm_gengrid_highlight_mode_get, [ :evas_object ], :bool ],
+        # EAPI void elm_gengrid_item_select_mode_set(Elm_Object_Item *it, Elm_Object_Select_Mode mode);
+        [ :elm_gengrid_item_select_mode_set, [ :elm_object_item, :elm_object_select_mode ], :void ],
+        # EAPI Elm_Object_Select_Mode elm_gengrid_item_select_mode_get(const Elm_Object_Item *it);
+        [ :elm_gengrid_item_select_mode_get, [ :elm_object_item ], :elm_object_select_mode ],
         ]
         #
         attach_fcts fcts

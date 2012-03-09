@@ -127,6 +127,8 @@ module Efl
         [ :elm_web_back_possible_get, [ :evas_object ], :bool ],
         # EAPI Eina_Bool elm_web_forward_possible_get(Evas_Object *obj);
         [ :elm_web_forward_possible_get, [ :evas_object ], :bool ],
+        # EAPI Eina_Bool elm_web_navigate_possible_get(Evas_Object *obj, int steps);
+        [ :elm_web_navigate_possible_get, [ :evas_object, :int ], :bool ],
         # EAPI Eina_Bool elm_web_history_enabled_get(const Evas_Object *obj);
         [ :elm_web_history_enabled_get, [ :evas_object ], :bool ],
         # EAPI void elm_web_history_enabled_set(Evas_Object *obj, Eina_Bool enabled);
