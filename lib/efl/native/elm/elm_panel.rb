@@ -39,12 +39,6 @@ module Efl
         [ :elm_panel_hidden_get, [ :evas_object ], :bool ],
         # EAPI void elm_panel_toggle(Evas_Object *obj);
         [ :elm_panel_toggle, [ :evas_object ], :void ],
-        # EAPI void elm_panel_content_set(Evas_Object *obj, Evas_Object *content);
-        [ :elm_panel_content_set, [ :evas_object, :evas_object ], :void ],
-        # EAPI Evas_Object * elm_panel_content_get(const Evas_Object *obj);
-        [ :elm_panel_content_get, [ :evas_object ], :evas_object ],
-        # EAPI Evas_Object * elm_panel_content_unset(Evas_Object *obj);
-        [ :elm_panel_content_unset, [ :evas_object ], :evas_object ],
         ]
         #
         attach_fcts fcts

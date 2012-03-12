@@ -25,6 +25,12 @@ module Efl
         # typedef enum {...} Elm_Colorselector_Mode;
         enum :elm_colorselector_mode, [ :elm_colorselector_palette, 0, :elm_colorselector_components, 1, :elm_colorselector_both, 2 ]
         #
+        # TYPEDEFS
+        # typedef struct _Elm_Color_RGBA Elm_Color_RGBA;
+        typedef :pointer, :elm_color_rgba
+        # typedef struct _Elm_Custom_Palette Elm_Custom_Palette;
+        typedef :pointer, :elm_custom_palette
+        #
         # FUNCTIONS
         fcts = [
         # EAPI Evas_Object *elm_colorselector_add(Evas_Object *parent);
