@@ -188,7 +188,7 @@ module Efl
             alias :center :center_get
             def center_set x, y
                 g = geometry_get
-                move x-(g[2]/2.0), y-(g[3]/2.0)
+                move (x-(g[2]/2.0)).to_i, (y-(g[3]/2.0)).to_i
             end
             alias :center= :center_set
             def size
