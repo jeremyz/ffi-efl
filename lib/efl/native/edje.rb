@@ -270,6 +270,10 @@ module Efl
         [ :edje_object_text_class_set, [ :evas_object, :string, :string, :int ], :bool ],
         # EAPI void edje_object_size_min_get (const Evas_Object *obj, Evas_Coord *minw, Evas_Coord *minh);
         [ :edje_object_size_min_get, [ :evas_object, :pointer, :pointer ], :void ],
+        # EAPI void edje_object_update_hints_set(Evas_Object *obj, Eina_Bool update);
+        [ :edje_object_update_hints_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool edje_object_update_hints_get(Evas_Object *obj);
+        [ :edje_object_update_hints_get, [ :evas_object ], :bool ],
         # EAPI void edje_object_size_max_get (const Evas_Object *obj, Evas_Coord *maxw, Evas_Coord *maxh);
         [ :edje_object_size_max_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void edje_object_calc_force (Evas_Object *obj);
