@@ -95,6 +95,10 @@ module Efl
         [ :elm_list_item_prev, [ :elm_object_item ], :elm_object_item ],
         # EAPI Elm_Object_Item *elm_list_item_next(const Elm_Object_Item *it);
         [ :elm_list_item_next, [ :elm_object_item ], :elm_object_item ],
+        # EAPI Elm_Object_Item *elm_list_first_item_get(const Evas_Object *obj);
+        [ :elm_list_first_item_get, [ :evas_object ], :elm_object_item ],
+        # EAPI Elm_Object_Item *elm_list_last_item_get(const Evas_Object *obj);
+        [ :elm_list_last_item_get, [ :evas_object ], :elm_object_item ],
         ]
         #
         attach_fcts fcts
