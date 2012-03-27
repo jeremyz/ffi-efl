@@ -276,6 +276,12 @@ module Efl
         [ :ecore_evas_wayland_egl_new, [ :string, :uint, :int, :int, :int, :int, :bool ], :ecore_evas ],
         # EAPI void ecore_evas_wayland_resize(Ecore_Evas *ee, int location);
         [ :ecore_evas_wayland_resize, [ :ecore_evas, :int ], :void ],
+        # EAPI void ecore_evas_wayland_pointer_set(Ecore_Evas *ee, int hot_x, int hot_y);
+        [ :ecore_evas_wayland_pointer_set, [ :ecore_evas, :int, :int ], :void ],
+        # EAPI void ecore_evas_wayland_type_set(Ecore_Evas *ee, int type);
+        [ :ecore_evas_wayland_type_set, [ :ecore_evas, :int ], :void ],
+        # EAPI Ecore_Wl_Window *ecore_evas_wayland_window_get(const Ecore_Evas *ee);
+        [ :ecore_evas_wayland_window_get, [ :ecore_evas ], :ecore_wl_window ],
         # EAPI Ecore_Evas *ecore_evas_buffer_new(int w, int h);
         [ :ecore_evas_buffer_new, [ :int, :int ], :ecore_evas ],
         # EAPI Ecore_Evas *ecore_evas_buffer_allocfunc_new(int w, int h, void *(*alloc_func) (void *data, int size), void (*free_func) (void *data, void *pix), const void *data);
