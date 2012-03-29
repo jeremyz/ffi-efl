@@ -461,6 +461,8 @@ module Efl
         [ :evas_object_ref, [ :evas_object ], :void ],
         # EAPI void evas_object_unref (Evas_Object *obj);
         [ :evas_object_unref, [ :evas_object ], :void ],
+        # EAPI int evas_object_ref_get (const Evas_Object *obj);
+        [ :evas_object_ref_get, [ :evas_object ], :int ],
         # EAPI void evas_object_del (Evas_Object *obj);
         [ :evas_object_del, [ :evas_object ], :void ],
         # EAPI void evas_object_move (Evas_Object *obj, Evas_Coord x, Evas_Coord y);
@@ -1213,7 +1215,7 @@ module Efl
         [ :evas_object_box_prepend, [ :evas_object, :evas_object ], :evas_object_box_option ],
         # EAPI Evas_Object_Box_Option *evas_object_box_insert_before (Evas_Object *o, Evas_Object *child, const Evas_Object *reference);
         [ :evas_object_box_insert_before, [ :evas_object, :evas_object, :evas_object ], :evas_object_box_option ],
-        # EAPI Evas_Object_Box_Option *evas_object_box_insert_after (Evas_Object *o, Evas_Object *child, const Evas_Object *referente);
+        # EAPI Evas_Object_Box_Option *evas_object_box_insert_after (Evas_Object *o, Evas_Object *child, const Evas_Object *reference);
         [ :evas_object_box_insert_after, [ :evas_object, :evas_object, :evas_object ], :evas_object_box_option ],
         # EAPI Evas_Object_Box_Option *evas_object_box_insert_at (Evas_Object *o, Evas_Object *child, unsigned int pos);
         [ :evas_object_box_insert_at, [ :evas_object, :evas_object, :uint ], :evas_object_box_option ],
