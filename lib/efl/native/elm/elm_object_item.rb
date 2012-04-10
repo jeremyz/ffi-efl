@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'elementary-ver-pre-svn-09.so.0'
+        ffi_lib 'elementary'
         #
         # CALLBACKS
         # typedef void (*Elm_Object_Item_Smart_Cb) (void *data, Elm_Object_Item *it, void *event_info);

@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'elementary-ver-pre-svn-09.so.0'
+        ffi_lib 'elementary'
         #
         # CALLBACKS
         # typedef Eina_Bool (*Elm_Multibuttonentry_Item_Filter_Cb) (Evas_Object *obj, const char *item_label, void *item_data, void *data);

@@ -20,7 +20,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'elementary-ver-pre-svn-09.so.0'
+        ffi_lib 'elementary'
         #
         # TYPEDEFS
         # typedef struct _Elm_Box_Transition Elm_Box_Transition;

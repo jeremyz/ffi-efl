@@ -330,7 +330,7 @@ libs << {
     :requires=>["#{NATIVE}/eina_list"], :constants=>[]
 }
 #
-ELM_LIB='elementary-ver-pre-svn-09.so.0'
+ELM_LIB='elementary'
 #
 def elm_h header, modname, reqs=nil
     {

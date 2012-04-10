@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'elementary-ver-pre-svn-09.so.0'
+        ffi_lib 'elementary'
         #
         # CALLBACKS
         # typedef Evas_Object *(*Elm_Tooltip_Content_Cb) (void *data, Evas_Object *obj, Evas_Object *tooltip);
