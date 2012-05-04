@@ -276,6 +276,8 @@ module Efl
         [ :ecore_evas_wayland_egl_new, [ :string, :uint, :int, :int, :int, :int, :bool ], :ecore_evas ],
         # EAPI void ecore_evas_wayland_resize(Ecore_Evas *ee, int location);
         [ :ecore_evas_wayland_resize, [ :ecore_evas, :int ], :void ],
+        # EAPI void ecore_evas_wayland_move(Ecore_Evas *ee, int x, int y);
+        [ :ecore_evas_wayland_move, [ :ecore_evas, :int, :int ], :void ],
         # EAPI void ecore_evas_wayland_pointer_set(Ecore_Evas *ee, int hot_x, int hot_y);
         [ :ecore_evas_wayland_pointer_set, [ :ecore_evas, :int, :int ], :void ],
         # EAPI void ecore_evas_wayland_type_set(Ecore_Evas *ee, int type);

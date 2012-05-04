@@ -829,7 +829,7 @@ module Efl
         [ :evas_object_image_alpha_mask_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool evas_object_image_source_set (Evas_Object *obj, Evas_Object *src);
         [ :evas_object_image_source_set, [ :evas_object, :evas_object ], :bool ],
-        # EAPI Evas_Object *evas_object_image_source_get (Evas_Object *obj);
+        # EAPI Evas_Object *evas_object_image_source_get (const Evas_Object *obj);
         [ :evas_object_image_source_get, [ :evas_object ], :evas_object ],
         # EAPI Eina_Bool evas_object_image_source_unset (Evas_Object *obj);
         [ :evas_object_image_source_unset, [ :evas_object ], :bool ],

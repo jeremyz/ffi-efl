@@ -296,6 +296,8 @@ module Efl
         [ :edje_object_text_change_cb_set, [ :evas_object, :edje_text_change_cb, :pointer ], :void ],
         # EAPI Eina_Bool edje_object_part_text_set (Evas_Object *obj, const char *part, const char *text);
         [ :edje_object_part_text_set, [ :evas_object, :string, :string ], :bool ],
+        # EAPI Eina_Bool edje_object_part_text_escaped_set (Evas_Object *obj, const char *part, const char *text);
+        [ :edje_object_part_text_escaped_set, [ :evas_object, :string, :string ], :bool ],
         # EAPI const char *edje_object_part_text_get (const Evas_Object *obj, const char *part);
         [ :edje_object_part_text_get, [ :evas_object, :string ], :string ],
         # EAPI void edje_object_part_text_style_user_push(Evas_Object *obj, const char *part, const char *style);
