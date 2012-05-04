@@ -21,10 +21,6 @@ module Efl
         #
         ffi_lib 'elementary'
         #
-        # CALLBACKS
-        # typedef void (*Elm_Object_Item_Smart_Cb) (void *data, Elm_Object_Item *it, void *event_info);
-        callback :elm_object_item_smart_cb, [ :pointer, :elm_object_item, :pointer ], :void
-        #
         # FUNCTIONS
         fcts = [
         # EAPI Evas_Object *elm_object_item_widget_get(const Elm_Object_Item *it);

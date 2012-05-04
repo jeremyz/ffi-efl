@@ -202,6 +202,8 @@ module Efl
         [ :elm_win_screen_position_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI Eina_Bool elm_win_socket_listen(Evas_Object *obj, const char *svcname, int svcnum, Eina_Bool svcsys);
         [ :elm_win_socket_listen, [ :evas_object, :string, :int, :bool ], :bool ],
+        # EAPI Ecore_X_Window elm_win_xwindow_get(const Evas_Object *obj);
+        [ :elm_win_xwindow_get, [ :evas_object ], :uint ],
         # EAPI Evas_Object *elm_win_inwin_add(Evas_Object *parent);
         [ :elm_win_inwin_add, [ :evas_object ], :evas_object ],
         # EAPI void elm_win_inwin_activate(Evas_Object *obj);
@@ -212,8 +214,6 @@ module Efl
         [ :elm_win_inwin_content_get, [ :evas_object ], :evas_object ],
         # EAPI Evas_Object *elm_win_inwin_content_unset(Evas_Object *obj);
         [ :elm_win_inwin_content_unset, [ :evas_object ], :evas_object ],
-        # EAPI Ecore_X_Window elm_win_xwindow_get(const Evas_Object *obj);
-        [ :elm_win_xwindow_get, [ :evas_object ], :uint ],
         ]
         #
         attach_fcts fcts

@@ -43,7 +43,7 @@ module Efl
         enum :elm_input_panel_return_key_type, [ :elm_input_panel_return_key_type_default, :elm_input_panel_return_key_type_done,
             :elm_input_panel_return_key_type_go, :elm_input_panel_return_key_type_join, :elm_input_panel_return_key_type_login,
             :elm_input_panel_return_key_type_next, :elm_input_panel_return_key_type_search, :elm_input_panel_return_key_type_send ]
-        # typedef enum _Elm_Cnp_Mode {...} Elm_Cnp_Mode;
+        # typedef enum {...} Elm_Cnp_Mode;
         enum :elm_cnp_mode, [ :elm_cnp_mode_markup, :elm_cnp_mode_no_image, :elm_cnp_mode_plaintext ]
         #
         # TYPEDEFS

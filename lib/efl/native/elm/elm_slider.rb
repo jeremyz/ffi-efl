@@ -37,9 +37,9 @@ module Efl
         [ :elm_slider_indicator_format_set, [ :evas_object, :string ], :void ],
         # EAPI const char *elm_slider_indicator_format_get(const Evas_Object *obj);
         [ :elm_slider_indicator_format_get, [ :evas_object ], :string ],
-        # EAPI void elm_slider_indicator_format_function_set(Evas_Object *obj, const char *(*func)(double val), void (*free_func)(const char *str));
+        # EAPI void elm_slider_indicator_format_function_set(Evas_Object *obj, char *(*func)(double val), void (*free_func)(char *str));
         [ :elm_slider_indicator_format_function_set, [ :evas_object, ( callback [:double], :string ), (callback [:string], :void) ], :void ],
-        # EAPI void elm_slider_units_format_function_set(Evas_Object *obj, const char *(*func)(double val), void (*free_func)(const char *str));
+        # EAPI void elm_slider_units_format_function_set(Evas_Object *obj, char *(*func)(double val), void (*free_func)(char *str));
         [ :elm_slider_units_format_function_set, [ :evas_object, (callback [:double], :string), (callback [:string], :void) ], :void ],
         # EAPI void elm_slider_horizontal_set(Evas_Object *obj, Eina_Bool horizontal);
         [ :elm_slider_horizontal_set, [ :evas_object, :bool ], :void ],

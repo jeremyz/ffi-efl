@@ -186,7 +186,7 @@ module Efl
         [ :elm_genlist_item_demote, [ :elm_object_item ], :void ],
         # EAPI void elm_genlist_item_fields_update(Elm_Object_Item *it, const char *parts, Elm_Genlist_Item_Field_Type itf);
         [ :elm_genlist_item_fields_update, [ :elm_object_item, :string, :elm_genlist_item_field_type ], :void ],
-        # EAPI void elm_genlist_item_decorate_mode_set(Elm_Object_Item *it, const char *mode_type, Eina_Bool mode_set);
+        # EAPI void elm_genlist_item_decorate_mode_set(Elm_Object_Item *it, const char *decorate_it_type, Eina_Bool decorate_it_set);
         [ :elm_genlist_item_decorate_mode_set, [ :elm_object_item, :string, :bool ], :void ],
         # EAPI const char *elm_genlist_item_decorate_mode_get(const Elm_Object_Item *it);
         [ :elm_genlist_item_decorate_mode_get, [ :elm_object_item ], :string ],
