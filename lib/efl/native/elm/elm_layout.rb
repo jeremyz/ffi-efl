@@ -29,6 +29,12 @@ module Efl
         [ :elm_layout_file_set, [ :evas_object, :string, :string ], :bool ],
         # EAPI Eina_Bool elm_layout_theme_set(Evas_Object *obj, const char *clas, const char *group, const char *style);
         [ :elm_layout_theme_set, [ :evas_object, :string, :string, :string ], :bool ],
+        # EAPI void elm_layout_signal_emit(Evas_Object *obj, const char *emission, const char *source);
+        [ :elm_layout_signal_emit, [ :evas_object, :string, :string ], :void ],
+        # EAPI void elm_layout_signal_callback_add(Evas_Object *obj, const char *emission, const char *source, Edje_Signal_Cb func, void *data);
+        [ :elm_layout_signal_callback_add, [ :evas_object, :string, :string, :edje_signal_cb, :pointer ], :void ],
+        # EAPI void *elm_layout_signal_callback_del(Evas_Object *obj, const char *emission, const char *source, Edje_Signal_Cb func);
+        [ :elm_layout_signal_callback_del, [ :evas_object, :string, :string, :edje_signal_cb ], :pointer ],
         # EAPI Eina_Bool elm_layout_box_append(Evas_Object *obj, const char *part, Evas_Object *child);
         [ :elm_layout_box_append, [ :evas_object, :string, :evas_object ], :bool ],
         # EAPI Eina_Bool elm_layout_box_prepend(Evas_Object *obj, const char *part, Evas_Object *child);
@@ -67,6 +73,16 @@ module Efl
         [ :elm_layout_part_cursor_engine_only_set, [ :evas_object, :string, :bool ], :bool ],
         # EAPI Eina_Bool elm_layout_part_cursor_engine_only_get(const Evas_Object *obj, const char *part_name);
         [ :elm_layout_part_cursor_engine_only_get, [ :evas_object, :string ], :bool ],
+        # EAPI Eina_Bool elm_layout_content_set(Evas_Object *obj, const char *swallow, Evas_Object *content);
+        [ :elm_layout_content_set, [ :evas_object, :string, :evas_object ], :bool ],
+        # EAPI Evas_Object *elm_layout_content_get(const Evas_Object *obj, const char *swallow);
+        [ :elm_layout_content_get, [ :evas_object, :string ], :evas_object ],
+        # EAPI Evas_Object *elm_layout_content_unset(Evas_Object *obj, const char *swallow);
+        [ :elm_layout_content_unset, [ :evas_object, :string ], :evas_object ],
+        # EAPI Eina_Bool elm_layout_text_set(Evas_Object *obj, const char *part, const char *text);
+        [ :elm_layout_text_set, [ :evas_object, :string, :string ], :bool ],
+        # EAPI const char *elm_layout_text_get(const Evas_Object *obj, const char *part);
+        [ :elm_layout_text_get, [ :evas_object, :string ], :string ],
         ]
         #
         attach_fcts fcts
