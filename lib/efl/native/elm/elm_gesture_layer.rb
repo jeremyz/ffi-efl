@@ -22,11 +22,11 @@ module Efl
         ffi_lib 'elementary'
         #
         # ENUMS
-        # typedef enum {...} Elm_Gesture_Type;
+        # enum _Elm_Gesture_Type {...} Elm_Gesture_Type;
         enum :elm_gesture_type, [ :elm_gesture_first, 0, :elm_gesture_n_taps, 1, :elm_gesture_n_long_taps, 2, :elm_gesture_n_double_taps, 3,
             :elm_gesture_n_triple_taps, 4, :elm_gesture_momentum, 5, :elm_gesture_n_lines, 6, :elm_gesture_n_flicks, 7, :elm_gesture_zoom, 8, :elm_gesture_rotate,
             9, :elm_gesture_last, 10 ]
-        # typedef enum {...} Elm_Gesture_State;
+        # enum _Elm_Gesture_State {...} Elm_Gesture_State;
         enum :elm_gesture_state, [ :elm_gesture_state_undefined, -1, :elm_gesture_state_start, 0, :elm_gesture_state_move, 1, :elm_gesture_state_end,
             2, :elm_gesture_state_abort, 3 ]
         #
