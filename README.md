@@ -1,6 +1,6 @@
 # ffi-efl
     by Jérémy Zurcher
-    (http://asynk.ch)
+    [http://asynk.ch](http://asynk.ch)
 
 ## DESCRIPTION:
 
@@ -67,7 +67,7 @@ For more examples you may look at:
 
 * You need a sane enlightenment foundation libraries installation,
   for this you might like to use [easy_e17.sh](http://omicron.homeip.net/projects/#easy_e17.sh),
-  or my git aware fork (easy_e17.sh)[https://github.com/jeremyz/bin/blob/master/easy_e17.sh]
+  or my git aware fork [easy_e17.sh](https://github.com/jeremyz/bin/blob/master/easy_e17.sh).
 
 ## DOWNLOAD/INSTALL:
 
