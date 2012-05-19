@@ -71,10 +71,6 @@ describe "Efl::Elm #{Efl::Elm.version.full}" do
             bool_check @win, 'alpha'
         end
         #
-        it "transparent set/get" do
-            bool_check @win, 'transparent'
-        end
-        #
         it "override set/get" do
             bool_check @win, 'override'
         end
@@ -233,13 +229,6 @@ describe "Efl::Elm #{Efl::Elm.version.full}" do
             @lb.wrap_width_get.should == 69
             @lb.wrap_width= 666
             @lb.wrap_width.should == 666
-        end
-        #
-        it "wrap_height set/get" do
-            @lb.wrap_height_set 69
-            @lb.wrap_height_get.should == 69
-            @lb.wrap_height= 666
-            @lb.wrap_height.should == 666
         end
         #
         it "ellipsis_set" do
