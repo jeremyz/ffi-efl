@@ -1,6 +1,6 @@
 # ffi-efl
     by Jérémy Zurcher
-    [http://asynk.ch](http://asynk.ch)
+    http://asynk.ch
 
 ## DESCRIPTION:
 
