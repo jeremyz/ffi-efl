@@ -29,6 +29,10 @@ module Efl
             :eet_error_write_error_file_closed, :eet_error_mmap_failed, :eet_error_x509_encoding_failed, :eet_error_signature_failed,
             :eet_error_invalid_signature, :eet_error_not_signed, :eet_error_not_implemented, :eet_error_prng_not_seeded, :eet_error_encrypt_failed,
             :eet_error_decrypt_failed ]
+        # typedef enum _Eet_Compression {...} Eet_Compression;
+        enum :eet_compression, [ :eet_compression_none, 0, :eet_compression_default, 1, :eet_compression_low, 2, :eet_compression_med, 6,
+            :eet_compression_hi, 9, :eet_compression_veryfast, 10, :eet_compression_superfast, 11, :eet_compression_low2, 3, :eet_compression_med1, 4,
+            :eet_compression_med2, 5, :eet_compression_hi1, 7, :eet_compression_hi2, 8 ]
         # typedef enum _Eet_File_Mode {...} Eet_File_Mode;
         enum :eet_file_mode, [ :eet_file_mode_invalid, -1, :eet_file_mode_read, 0, :eet_file_mode_write, 1, :eet_file_mode_read_write, 2 ]
         #
