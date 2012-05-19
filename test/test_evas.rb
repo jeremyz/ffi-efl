@@ -94,7 +94,7 @@ l1.xy = *(r2.center+r3.center)
 l1.show
 #
 p1 = canvas.object_polygon_add do |p|
-    p.color = 100, 128, 0, 100
+    p.color = 100, 128, 0, 130
     p.<< w/2.0,10
     p.<< w-10,h/2.0
     p.<< w/2.0, h-10

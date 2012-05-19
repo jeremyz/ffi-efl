@@ -18,7 +18,7 @@ class MyWin < Elm::ElmWin
     def feed
         @bg = Elm::ElmBg.new(self) do
             size_hint_weight_expand
-            evas_object_color_set 200,255,100,150
+            evas_object_color_set 150,180,100,180
             show
         end
         resize_object_add @bg

@@ -29,7 +29,7 @@ A ruby-ffi binding to [efl](http://www.enlightenment.org/p.php?p=docs&l=en) libr
         def feed
             @bg = Elm::ElmBg.new(self) do
                 size_hint_weight_expand
-                evas_object_color_set 200,255,100,150
+                evas_object_color_set 150,180,100,180
                 show
             end
             resize_object_add @bg
