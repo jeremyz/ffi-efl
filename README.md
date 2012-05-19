@@ -1,16 +1,17 @@
-ffi-efl
+# ffi-efl
     by Jérémy Zurcher
-    http://asynk.ch
+    (http://asynk.ch)
 
-== DESCRIPTION:
+## DESCRIPTION:
 
-A ruby-ffi binding to efl libraries (Enlightenment Foundation Libraries).
+A ruby-ffi binding to [efl](http://www.enlightenment.org/p.php?p=docs&l=en) libraries (Enlightenment Foundation Libraries).
 
-== FEATURES/PROBLEMS:
+## FEATURES/PROBLEMS:
 
 * pretty young project ...
+* binding is complete but lacks ruby code and tests
 
-== SYNOPSIS:
+## SYNOPSIS:
 
     require 'efl/elm/elm_win'
     require 'efl/elm/elm_bg'
@@ -60,14 +61,15 @@ A ruby-ffi binding to efl libraries (Enlightenment Foundation Libraries).
 
 For more examples you may look at:
 
-* the spec/[https://github.com/jeremyz/ffi-efl/tree/master/spec] and test/[https://github.com/jeremyz/ffi-efl/tree/master/test] folders
+* the [spec/](https://github.com/jeremyz/ffi-efl/tree/master/spec) and [test/](https://github.com/jeremyz/ffi-efl/tree/master/test) folders
 
-== REQUIREMENTS:
+## REQUIREMENTS:
 
 * You need a sane enlightenment foundation libraries installation,
-  for this you might like to use easy_e17.sh[http://omicron.homeip.net/projects/#easy_e17.sh].
+  for this you might like to use [easy_e17.sh](http://omicron.homeip.net/projects/#easy_e17.sh),
+  or my git aware fork (easy_e17.sh)[https://github.com/jeremyz/bin/blob/master/easy_e17.sh]
 
-== DOWNLOAD/INSTALL:
+## DOWNLOAD/INSTALL:
 
 From rubygems:
 
@@ -79,7 +81,7 @@ or from the git repository on github:
   cd ffi-efl
   rake gem:install
 
-== RESOURCES:
+## RESOURCES:
 
 You can find this project in a few places:
 
@@ -92,13 +94,13 @@ Gem:
 
 * https://rubygems.org/gems/ffi-efl
 
-== CREDITS:
+## CREDITS:
 
 Special thanks to:
 
 * Lionel Orry
 * The enlightenment team
 
-== LICENSE:
+## LICENSE:
 
-See MIT-LICENSE file.
+[MIT](http://www.opensource.org/licenses/MIT) see [MIT_LICENSE](https://github.com/jeremyz/ffi-efl/blob/master/MIT-LICENSE)
