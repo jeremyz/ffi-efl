@@ -71,6 +71,8 @@ module Efl
         [ :elm_toolbar_item_selected_set, [ :elm_object_item, :bool ], :void ],
         # EAPI Elm_Object_Item *elm_toolbar_selected_item_get(const Evas_Object *obj);
         [ :elm_toolbar_selected_item_get, [ :evas_object ], :elm_object_item ],
+        # EAPI Elm_Object_Item *elm_toolbar_more_item_get(const Evas_Object *obj);
+        [ :elm_toolbar_more_item_get, [ :evas_object ], :elm_object_item ],
         # EAPI void elm_toolbar_item_icon_set(Elm_Object_Item *it, const char *icon);
         [ :elm_toolbar_item_icon_set, [ :elm_object_item, :string ], :void ],
         # EAPI const char *elm_toolbar_item_icon_get(const Elm_Object_Item *it);
@@ -127,6 +129,10 @@ module Efl
         [ :elm_toolbar_horizontal_get, [ :evas_object ], :bool ],
         # EAPI unsigned int elm_toolbar_items_count(const Evas_Object *obj);
         [ :elm_toolbar_items_count, [ :evas_object ], :uint ],
+        # EAPI void elm_toolbar_items_max_set(Evas_Object *obj, unsigned int max);
+        [ :elm_toolbar_items_max_set, [ :evas_object, :uint ], :void ],
+        # EAPI unsigned int elm_toolbar_items_max_get(const Evas_Object *obj);
+        [ :elm_toolbar_items_max_get, [ :evas_object ], :uint ],
         # EAPI void elm_toolbar_select_mode_set(Evas_Object *obj, Elm_Object_Select_Mode mode);
         [ :elm_toolbar_select_mode_set, [ :evas_object, :elm_object_select_mode ], :void ],
         # EAPI Elm_Object_Select_Mode elm_toolbar_select_mode_get(const Evas_Object *obj);

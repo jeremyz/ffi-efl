@@ -68,6 +68,12 @@ module Efl
         fcts = [
         # EAPI Evas_Object *elm_entry_add(Evas_Object *parent);
         [ :elm_entry_add, [ :evas_object ], :evas_object ],
+        # EAPI void elm_entry_text_style_user_push(Evas_Object *obj, const char *style);
+        [ :elm_entry_text_style_user_push, [ :evas_object, :string ], :void ],
+        # EAPI void elm_entry_text_style_user_pop(Evas_Object *obj);
+        [ :elm_entry_text_style_user_pop, [ :evas_object ], :void ],
+        # EAPI const char* elm_entry_text_style_user_peek(const Evas_Object *obj);
+        [ :elm_entry_text_style_user_peek, [ :evas_object ], :pointer ],
         # EAPI void elm_entry_single_line_set(Evas_Object *obj, Eina_Bool single_line);
         [ :elm_entry_single_line_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_entry_single_line_get(const Evas_Object *obj);

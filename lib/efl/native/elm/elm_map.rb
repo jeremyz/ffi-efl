@@ -116,6 +116,8 @@ module Efl
         [ :elm_map_user_agent_get, [ :evas_object ], :string ],
         # EAPI Elm_Map_Overlay * elm_map_overlay_add(Evas_Object *obj, double lon, double lat);
         [ :elm_map_overlay_add, [ :evas_object, :double, :double ], :elm_map_overlay ],
+        # EAPI EAPI Eina_List * elm_map_overlays_get(Evas_Object *obj);
+        [ :elm_map_overlays_get, [ :evas_object ], :pointer ],
         # EAPI void elm_map_overlay_del(Elm_Map_Overlay *overlay);
         [ :elm_map_overlay_del, [ :elm_map_overlay ], :void ],
         # EAPI Elm_Map_Overlay_Type elm_map_overlay_type_get(const Elm_Map_Overlay *overlay);
@@ -136,6 +138,8 @@ module Efl
         [ :elm_map_overlay_paused_set, [ :elm_map_overlay, :bool ], :void ],
         # EAPI Eina_Bool elm_map_overlay_paused_get(const Elm_Map_Overlay *overlay);
         [ :elm_map_overlay_paused_get, [ :elm_map_overlay ], :bool ],
+        # EAPI Eina_Bool elm_map_overlay_visible_get(const Elm_Map_Overlay *overlay);
+        [ :elm_map_overlay_visible_get, [ :elm_map_overlay ], :bool ],
         # EAPI void elm_map_overlay_content_set(Elm_Map_Overlay *overlay, Evas_Object *obj);
         [ :elm_map_overlay_content_set, [ :elm_map_overlay, :evas_object ], :void ],
         # EAPI const Evas_Object * elm_map_overlay_content_get(const Elm_Map_Overlay *overlay);

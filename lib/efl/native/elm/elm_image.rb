@@ -30,6 +30,8 @@ module Efl
         fcts = [
         # EAPI Evas_Object *elm_image_add(Evas_Object *parent);
         [ :elm_image_add, [ :evas_object ], :evas_object ],
+        # EAPI Eina_Bool elm_image_memfile_set(Evas_Object *obj, const void *img, size_t size, const char *format, const char *key);
+        [ :elm_image_memfile_set, [ :evas_object, :pointer, :ulong, :string, :string ], :bool ],
         # EAPI Eina_Bool elm_image_file_set(Evas_Object *obj, const char *file, const char *group);
         [ :elm_image_file_set, [ :evas_object, :string, :string ], :bool ],
         # EAPI void elm_image_file_get(const Evas_Object *obj, const char **file, const char **group);
@@ -72,6 +74,16 @@ module Efl
         [ :elm_image_aspect_fixed_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_image_aspect_fixed_get(const Evas_Object *obj);
         [ :elm_image_aspect_fixed_get, [ :evas_object ], :bool ],
+        # EAPI Eina_Bool elm_image_animated_available_get(const Evas_Object *obj);
+        [ :elm_image_animated_available_get, [ :evas_object ], :bool ],
+        # EAPI void elm_image_animated_set(Evas_Object *obj, Eina_Bool animated);
+        [ :elm_image_animated_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_image_animated_get(const Evas_Object *obj);
+        [ :elm_image_animated_get, [ :evas_object ], :bool ],
+        # EAPI void elm_image_animated_play_set(Evas_Object *obj, Eina_Bool play);
+        [ :elm_image_animated_play_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_image_animated_play_get(const Evas_Object *obj);
+        [ :elm_image_animated_play_get, [ :evas_object ], :bool ],
         ]
         #
         attach_fcts fcts
