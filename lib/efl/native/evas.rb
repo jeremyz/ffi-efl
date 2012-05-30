@@ -1231,17 +1231,17 @@ module Efl
         [ :evas_object_box_accessor_new, [ :evas_object ], :pointer ],
         # EAPI Eina_List *evas_object_box_children_get (const Evas_Object *o);
         [ :evas_object_box_children_get, [ :evas_object ], :eina_list ],
-        # EAPI const char *evas_object_box_option_property_name_get (Evas_Object *o, int property);
+        # EAPI const char *evas_object_box_option_property_name_get (const Evas_Object *o, int property);
         [ :evas_object_box_option_property_name_get, [ :evas_object, :int ], :string ],
-        # EAPI int evas_object_box_option_property_id_get (Evas_Object *o, const char *name);
+        # EAPI int evas_object_box_option_property_id_get (const Evas_Object *o, const char *name);
         [ :evas_object_box_option_property_id_get, [ :evas_object, :string ], :int ],
         # EAPI Eina_Bool evas_object_box_option_property_set (Evas_Object *o, Evas_Object_Box_Option *opt, int property, ...);
         [ :evas_object_box_option_property_set, [ :evas_object, :evas_object_box_option, :int, :varargs ], :bool ],
         # EAPI Eina_Bool evas_object_box_option_property_vset (Evas_Object *o, Evas_Object_Box_Option *opt, int property, va_list args);
         [ :evas_object_box_option_property_vset, [ :evas_object, :evas_object_box_option, :int, :pointer ], :bool ],
-        # EAPI Eina_Bool evas_object_box_option_property_get (Evas_Object *o, Evas_Object_Box_Option *opt, int property, ...);
+        # EAPI Eina_Bool evas_object_box_option_property_get (const Evas_Object *o, Evas_Object_Box_Option *opt, int property, ...);
         [ :evas_object_box_option_property_get, [ :evas_object, :evas_object_box_option, :int, :varargs ], :bool ],
-        # EAPI Eina_Bool evas_object_box_option_property_vget (Evas_Object *o, Evas_Object_Box_Option *opt, int property, va_list args);
+        # EAPI Eina_Bool evas_object_box_option_property_vget (const Evas_Object *o, Evas_Object_Box_Option *opt, int property, va_list args);
         [ :evas_object_box_option_property_vget, [ :evas_object, :evas_object_box_option, :int, :pointer ], :bool ],
         # EAPI Evas_Object *evas_object_table_add (Evas *evas);
         [ :evas_object_table_add, [ :evas ], :evas_object ],
@@ -1263,7 +1263,7 @@ module Efl
         [ :evas_object_table_mirrored_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool evas_object_table_mirrored_get (const Evas_Object *o);
         [ :evas_object_table_mirrored_get, [ :evas_object ], :bool ],
-        # EAPI Eina_Bool evas_object_table_pack_get(Evas_Object *o, Evas_Object *child, unsigned short *col, unsigned short *row, unsigned short *colspan, unsigned short *rowspan);
+        # EAPI Eina_Bool evas_object_table_pack_get(const Evas_Object *o, Evas_Object *child, unsigned short *col, unsigned short *row, unsigned short *colspan, unsigned short *rowspan);
         [ :evas_object_table_pack_get, [ :evas_object, :evas_object, :pointer, :pointer, :pointer, :pointer ], :bool ],
         # EAPI Eina_Bool evas_object_table_pack (Evas_Object *o, Evas_Object *child, unsigned short col, unsigned short row, unsigned short colspan, unsigned short rowspan);
         [ :evas_object_table_pack, [ :evas_object, :evas_object, :ushort, :ushort, :ushort, :ushort ], :bool ],
@@ -1299,7 +1299,7 @@ module Efl
         [ :evas_object_grid_unpack, [ :evas_object, :evas_object ], :bool ],
         # EAPI void evas_object_grid_clear (Evas_Object *o, Eina_Bool clear);
         [ :evas_object_grid_clear, [ :evas_object, :bool ], :void ],
-        # EAPI Eina_Bool evas_object_grid_pack_get (Evas_Object *o, Evas_Object *child, int *x, int *y, int *w, int *h);
+        # EAPI Eina_Bool evas_object_grid_pack_get (const Evas_Object *o, Evas_Object *child, int *x, int *y, int *w, int *h);
         [ :evas_object_grid_pack_get, [ :evas_object, :evas_object, :pointer, :pointer, :pointer, :pointer ], :bool ],
         # EAPI Eina_Iterator *evas_object_grid_iterator_new (const Evas_Object *o);
         [ :evas_object_grid_iterator_new, [ :evas_object ], :pointer ],
