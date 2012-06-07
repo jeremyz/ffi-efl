@@ -232,7 +232,7 @@ module Efl
         [ :eet_eina_file_data_descriptor_class_set, [ :eet_data_descriptor_class, :uint, :string, :int ], :bool ],
         # EAPI void eet_data_descriptor_free(Eet_Data_Descriptor *edd);
         [ :eet_data_descriptor_free, [ :eet_data_descriptor ], :void ],
-        # EAPI void eet_data_descriptor_element_add(Eet_Data_Descriptor *edd, const char *name, int type, int group_type, int offset,
+        # EAPI void eet_data_descriptor_element_add(Eet_Data_Descriptor *edd, const char *name, int type, int group_type, int offset, /* int count_offset, */
         # int count, const char *counter_name, Eet_Data_Descriptor *subtype);
         [ :eet_data_descriptor_element_add, [ :eet_data_descriptor, :string, :int, :int, :int, :int, :string, :eet_data_descriptor ], :void ],
         # EAPI void * eet_data_read(Eet_File *ef, Eet_Data_Descriptor *edd, const char *name);
