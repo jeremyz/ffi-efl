@@ -35,7 +35,7 @@ module Efl
         # typedef enum _Edje_Part_Type {...} Edje_Part_Type;
         enum :edje_part_type, [ :edje_part_type_none, 0, :edje_part_type_rectangle, 1, :edje_part_type_text, 2, :edje_part_type_image, 3,
             :edje_part_type_swallow, 4, :edje_part_type_textblock, 5, :edje_part_type_gradient, 6, :edje_part_type_group, 7, :edje_part_type_box, 8,
-            :edje_part_type_table, 9, :edje_part_type_external, 10, :edje_part_type_proxy, 11, :edje_part_type_last, 12 ]
+            :edje_part_type_table, 9, :edje_part_type_external, 10, :edje_part_type_proxy, 11, :edje_part_type_virtual, 12, :edje_part_type_last, 13 ]
         # typedef enum _Edje_Text_Effect {...} Edje_Text_Effect;
         enum :edje_text_effect, [ :edje_text_effect_none, 0, :edje_text_effect_plain, 1, :edje_text_effect_outline, 2, :edje_text_effect_soft_outline,
             3, :edje_text_effect_shadow, 4, :edje_text_effect_soft_shadow, 5, :edje_text_effect_outline_shadow, 6, :edje_text_effect_outline_soft_shadow, 7,
