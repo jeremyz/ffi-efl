@@ -129,10 +129,10 @@ module Efl
         [ :elm_toolbar_horizontal_get, [ :evas_object ], :bool ],
         # EAPI unsigned int elm_toolbar_items_count(const Evas_Object *obj);
         [ :elm_toolbar_items_count, [ :evas_object ], :uint ],
-        # EAPI void elm_toolbar_items_max_set(Evas_Object *obj, unsigned int max);
-        [ :elm_toolbar_items_max_set, [ :evas_object, :uint ], :void ],
-        # EAPI unsigned int elm_toolbar_items_max_get(const Evas_Object *obj);
-        [ :elm_toolbar_items_max_get, [ :evas_object ], :uint ],
+        # EAPI void elm_toolbar_standard_priority_set(Evas_Object *obj, int priority);
+        [ :elm_toolbar_standard_priority_set, [ :evas_object, :int ], :void ],
+        # EAPI int elm_toolbar_standard_priority_get(const Evas_Object *obj);
+        [ :elm_toolbar_standard_priority_get, [ :evas_object ], :int ],
         # EAPI void elm_toolbar_select_mode_set(Evas_Object *obj, Elm_Object_Select_Mode mode);
         [ :elm_toolbar_select_mode_set, [ :evas_object, :elm_object_select_mode ], :void ],
         # EAPI Elm_Object_Select_Mode elm_toolbar_select_mode_get(const Evas_Object *obj);
