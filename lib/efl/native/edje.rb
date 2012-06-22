@@ -35,7 +35,7 @@ module Efl
         # typedef enum _Edje_Part_Type {...} Edje_Part_Type;
         enum :edje_part_type, [ :edje_part_type_none, 0, :edje_part_type_rectangle, 1, :edje_part_type_text, 2, :edje_part_type_image, 3,
             :edje_part_type_swallow, 4, :edje_part_type_textblock, 5, :edje_part_type_gradient, 6, :edje_part_type_group, 7, :edje_part_type_box, 8,
-            :edje_part_type_table, 9, :edje_part_type_external, 10, :edje_part_type_proxy, 11, :edje_part_type_virtual, 12, :edje_part_type_last, 13 ]
+            :edje_part_type_table, 9, :edje_part_type_external, 10, :edje_part_type_proxy, 11, :edje_part_type_spacer, 12, :edje_part_type_last, 13 ]
         # typedef enum _Edje_Text_Effect {...} Edje_Text_Effect;
         enum :edje_text_effect, [ :edje_text_effect_none, 0, :edje_text_effect_plain, 1, :edje_text_effect_outline, 2, :edje_text_effect_soft_outline,
             3, :edje_text_effect_shadow, 4, :edje_text_effect_soft_shadow, 5, :edje_text_effect_outline_shadow, 6, :edje_text_effect_outline_soft_shadow, 7,
@@ -476,6 +476,8 @@ module Efl
         [ :edje_object_part_box_remove_at, [ :evas_object, :string, :uint ], :evas_object ],
         # EAPI Eina_Bool edje_object_part_box_remove_all (Evas_Object *obj, const char *part, Eina_Bool clear);
         [ :edje_object_part_box_remove_all, [ :evas_object, :string, :bool ], :bool ],
+        # EAPI Eina_List * edje_object_access_part_list_get (const Evas_Object *obj);
+        [ :edje_object_access_part_list_get, [ :evas_object ], :eina_list ],
         # EAPI Evas_Object *edje_object_part_table_child_get (Evas_Object *obj, const char *part, unsigned int col, unsigned int row);
         [ :edje_object_part_table_child_get, [ :evas_object, :string, :uint, :uint ], :evas_object ],
         # EAPI Eina_Bool edje_object_part_table_pack (Evas_Object *obj, const char *part, Evas_Object *child_obj, unsigned short col, unsigned short row, unsigned short colspan, unsigned short rowspan);
