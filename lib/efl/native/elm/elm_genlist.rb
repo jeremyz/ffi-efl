@@ -190,7 +190,7 @@ module Efl
         [ :elm_genlist_item_decorate_mode_set, [ :elm_object_item, :string, :bool ], :void ],
         # EAPI const char *elm_genlist_item_decorate_mode_get(const Elm_Object_Item *it);
         [ :elm_genlist_item_decorate_mode_get, [ :elm_object_item ], :string ],
-        # EAPI const Elm_Object_Item *elm_genlist_decorated_item_get(const Evas_Object *obj);
+        # EAPI Elm_Object_Item *elm_genlist_decorated_item_get(const Evas_Object *obj);
         [ :elm_genlist_decorated_item_get, [ :evas_object ], :elm_object_item ],
         # EAPI void elm_genlist_reorder_mode_set(Evas_Object *obj, Eina_Bool reorder_mode);
         [ :elm_genlist_reorder_mode_set, [ :evas_object, :bool ], :void ],

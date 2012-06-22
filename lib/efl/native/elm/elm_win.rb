@@ -126,6 +126,14 @@ module Efl
         [ :elm_win_aspect_set, [ :evas_object, :double ], :void ],
         # EAPI double elm_win_aspect_get(const Evas_Object *obj);
         [ :elm_win_aspect_get, [ :evas_object ], :double ],
+        # EAPI void elm_win_size_base_set(Evas_Object *obj, int w, int h);
+        [ :elm_win_size_base_set, [ :evas_object, :int, :int ], :void ],
+        # EAPI void elm_win_size_base_get(Evas_Object *obj, int *w, int *h);
+        [ :elm_win_size_base_get, [ :evas_object, :pointer, :pointer ], :void ],
+        # EAPI void elm_win_size_step_set(Evas_Object *obj, int w, int h);
+        [ :elm_win_size_step_set, [ :evas_object, :int, :int ], :void ],
+        # EAPI void elm_win_size_step_get(Evas_Object *obj, int *w, int *h);
+        [ :elm_win_size_step_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void elm_win_layer_set(Evas_Object *obj, int layer);
         [ :elm_win_layer_set, [ :evas_object, :int ], :void ],
         # EAPI int elm_win_layer_get(const Evas_Object *obj);

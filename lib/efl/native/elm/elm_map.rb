@@ -63,6 +63,8 @@ module Efl
         callback :elm_map_group_icon_get_func_cb, [ :evas_object, :pointer ], :evas_object
         # typedef void (*Elm_Map_Overlay_Get_Cb) (void *data, Evas_Object *map, Elm_Map_Overlay *overlay);
         callback :elm_map_overlay_get_cb, [ :pointer, :evas_object, :elm_map_overlay ], :void
+        # typedef void (*Elm_Map_Overlay_Del_Cb) (void *data, Evas_Object *map, Elm_Map_Overlay *overlay);
+        callback :elm_map_overlay_del_cb, [ :pointer, :evas_object, :elm_map_overlay ], :void
         # typedef void (*Elm_Map_Name_Cb) (void *data, Evas_Object *map, Elm_Map_Name *name);
         callback :elm_map_name_cb, [ :pointer, :evas_object, :elm_map_name ], :void
         # typedef void (*Elm_Map_Route_Cb) (void *data, Evas_Object *map, Elm_Map_Route *route);
@@ -162,6 +164,8 @@ module Efl
         [ :elm_map_overlays_show, [ :eina_list ], :void ],
         # EAPI void elm_map_overlay_get_cb_set(Elm_Map_Overlay *overlay, Elm_Map_Overlay_Get_Cb get_cb, void *data);
         [ :elm_map_overlay_get_cb_set, [ :elm_map_overlay, :elm_map_overlay_get_cb, :pointer ], :void ],
+        # EAPI void elm_map_overlay_del_cb_set(Elm_Map_Overlay *overlay, Elm_Map_Overlay_Del_Cb del_cb, void *data);
+        [ :elm_map_overlay_del_cb_set, [ :elm_map_overlay, :elm_map_overlay_del_cb, :pointer ], :void ],
         # EAPI Elm_Map_Overlay * elm_map_overlay_class_add(Evas_Object *obj);
         [ :elm_map_overlay_class_add, [ :evas_object ], :elm_map_overlay ],
         # EAPI void elm_map_overlay_class_append(Elm_Map_Overlay *clas, Elm_Map_Overlay *overlay);

@@ -24,7 +24,7 @@ module Efl
         # ENUMS
         # typedef enum {...} _Elm_Calendar_Mark_Repeat_Type;
         enum :_elm_calendar_mark_repeat_type, [ :elm_calendar_unique, :elm_calendar_daily, :elm_calendar_weekly, :elm_calendar_monthly,
-            :elm_calendar_annually ]
+            :elm_calendar_annually, :elm_calendar_last_day_of_month ]
         # typedef enum {...} _Elm_Calendar_Weekday;
         enum :_elm_calendar_weekday, [ :elm_day_sunday, :elm_day_monday, :elm_day_tuesday, :elm_day_wednesday, :elm_day_thursday, :elm_day_friday,
             :elm_day_saturday, :elm_day_last ]

@@ -43,6 +43,8 @@ module Efl
         [ :elm_progressbar_unit_format_set, [ :evas_object, :string ], :void ],
         # EAPI const char *elm_progressbar_unit_format_get(const Evas_Object *obj);
         [ :elm_progressbar_unit_format_get, [ :evas_object ], :string ],
+        # EAPI void elm_progressbar_unit_format_function_set(Evas_Object *obj, char *(func)(double), void (*free_func) (char *));
+        [ :elm_progressbar_unit_format_function_set, [ :evas_object, ( callback [:double], :string ), (callback [:string], :void) ], :void ],
         # EAPI void elm_progressbar_horizontal_set(Evas_Object *obj, Eina_Bool horizontal);
         [ :elm_progressbar_horizontal_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_progressbar_horizontal_get(const Evas_Object *obj);

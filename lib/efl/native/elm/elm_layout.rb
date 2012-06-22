@@ -3,7 +3,6 @@
 #
 require 'efl/native'
 require 'efl/native/edje'
-require 'efl/native/elementary'
 #
 module Efl
     #
