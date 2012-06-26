@@ -35,6 +35,8 @@ module Efl
         # CALLBACKS
         # typedef Eina_Bool (*Elm_Drop_Cb) (void *data, Evas_Object *obj, Elm_Selection_Data *ev);
         callback :elm_drop_cb, [ :pointer, :evas_object, :elm_selection_data ], :bool
+        # typedef void (*Elm_Selection_Loss_Cb) (void *data, Elm_Sel_Type selection);
+        callback :elm_selection_loss_cb, [ :pointer, :elm_sel_type ], :void
         #
         # FUNCTIONS
         fcts = [
@@ -44,6 +46,8 @@ module Efl
         [ :elm_cnp_selection_get, [ :evas_object, :elm_sel_type, :elm_sel_format, :elm_drop_cb, :pointer ], :bool ],
         # EAPI Eina_Bool elm_object_cnp_selection_clear(Evas_Object *obj, Elm_Sel_Type selection);
         [ :elm_object_cnp_selection_clear, [ :evas_object, :elm_sel_type ], :bool ],
+        # EAPI void elm_cnp_selection_loss_callback_set(Elm_Sel_Type selection, Elm_Selection_Loss_Cb func, const void *data);
+        [ :elm_cnp_selection_loss_callback_set, [ :elm_sel_type, :elm_selection_loss_cb, :pointer ], :void ],
         ]
         #
         attach_fcts fcts
