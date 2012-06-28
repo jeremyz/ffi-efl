@@ -22,7 +22,8 @@ module Efl
         #
         # ENUMS
         # typedef enum _Ecore_Event_Modifier {...} Ecore_Event_Modifier;
-        enum :ecore_event_modifier, [ :ecore_none, :ecore_shift, :ecore_ctrl, :ecore_alt, :ecore_win, :ecore_scroll, :ecore_caps, :ecore_last ]
+        enum :ecore_event_modifier, [ :ecore_none, :ecore_shift, :ecore_ctrl, :ecore_alt, :ecore_win, :ecore_scroll, :ecore_caps, :ecore_mode,
+            :ecore_last ]
         # typedef enum _Ecore_Event_Press {...} Ecore_Event_Press;
         enum :ecore_event_press, [ :ecore_down, :ecore_up ]
         # typedef enum _Ecore_Event_IO {...} Ecore_Event_IO;
