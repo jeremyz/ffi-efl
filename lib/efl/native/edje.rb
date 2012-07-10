@@ -478,7 +478,7 @@ module Efl
         [ :edje_object_part_box_remove_all, [ :evas_object, :string, :bool ], :bool ],
         # EAPI Eina_List * edje_object_access_part_list_get (const Evas_Object *obj);
         [ :edje_object_access_part_list_get, [ :evas_object ], :eina_list ],
-        # EAPI Evas_Object *edje_object_part_table_child_get (Evas_Object *obj, const char *part, unsigned int col, unsigned int row);
+        # EAPI Evas_Object *edje_object_part_table_child_get (const Evas_Object *obj, const char *part, unsigned int col, unsigned int row);
         [ :edje_object_part_table_child_get, [ :evas_object, :string, :uint, :uint ], :evas_object ],
         # EAPI Eina_Bool edje_object_part_table_pack (Evas_Object *obj, const char *part, Evas_Object *child_obj, unsigned short col, unsigned short row, unsigned short colspan, unsigned short rowspan);
         [ :edje_object_part_table_pack, [ :evas_object, :string, :evas_object, :ushort, :ushort, :ushort, :ushort ], :bool ],
