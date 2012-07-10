@@ -50,7 +50,7 @@ for header in \
     "${ELM_INCLUDE_DIR}/elm_object.h" \
     "${ELM_INCLUDE_DIR}/elm_object_item.h" \
     "${ELM_INCLUDE_DIR}/elc_ctxpopup.h" \
-    "${ELM_INCLUDE_DIR}/elc_dayselector.h" \
+    "${ELM_INCLUDE_DIR}/elm_dayselector.h" \
     "${ELM_INCLUDE_DIR}/elc_fileselector_button.h" \
     "${ELM_INCLUDE_DIR}/elc_fileselector_entry.h" \
     "${ELM_INCLUDE_DIR}/elc_fileselector.h" \
