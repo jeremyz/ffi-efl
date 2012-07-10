@@ -181,6 +181,10 @@ module Efl
         [ :ecore_evas_maximized_set, [ :ecore_evas, :bool ], :void ],
         # EAPI Eina_Bool ecore_evas_maximized_get(const Ecore_Evas *ee);
         [ :ecore_evas_maximized_get, [ :ecore_evas ], :bool ],
+        # EAPI void ecore_evas_profiles_set(Ecore_Evas *ee, const char **profiles, unsigned int num_profiles);
+        [ :ecore_evas_profiles_set, [ :ecore_evas, :pointer, :uint ], :void ],
+        # EAPI const char *ecore_evas_profile_get(const Ecore_Evas *ee);
+        [ :ecore_evas_profile_get, [ :ecore_evas ], :string ],
         # EAPI void ecore_evas_move(Ecore_Evas *ee, int x, int y);
         [ :ecore_evas_move, [ :ecore_evas, :int, :int ], :void ],
         # EAPI void ecore_evas_resize(Ecore_Evas *ee, int w, int h);
@@ -447,6 +451,8 @@ module Efl
         [ :ecore_evas_comp_sync_get, [ :ecore_evas ], :bool ],
         # EAPI void ecore_evas_screen_geometry_get(const Ecore_Evas *ee, int *x, int *y, int *w, int *h);
         [ :ecore_evas_screen_geometry_get, [ :ecore_evas, :pointer, :pointer, :pointer, :pointer ], :void ],
+        # EAPI void ecore_evas_screen_dpi_get(const Ecore_Evas *ee, int *xdpi, int *ydpi);
+        [ :ecore_evas_screen_dpi_get, [ :ecore_evas, :pointer, :pointer ], :void ],
         # EAPI void ecore_evas_draw_frame_set(Ecore_Evas *ee, Eina_Bool draw_frame);
         [ :ecore_evas_draw_frame_set, [ :ecore_evas, :bool ], :void ],
         # EAPI Eina_Bool ecore_evas_draw_frame_get(const Ecore_Evas *ee);
