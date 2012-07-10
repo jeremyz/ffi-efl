@@ -312,7 +312,7 @@ libs << {
 libs << {
     :lib=>'ecore_input', :header=>'Ecore_Input.h',
     :modname=>'EcoreInput', :prefix=>'ecore_event', :outfile=>'ecore_input.rb',
-    :requires=>[], :constants=>[]
+    :requires=>["#{NATIVE}/eina_list"], :constants=>[]
 }
 libs << {
     :lib=>'ecore', :header=>'Ecore_Getopt.h',
