@@ -67,6 +67,10 @@ module Efl
         [ :elm_multibuttonentry_item_filter_prepend, [ :evas_object, :elm_multibuttonentry_item_filter_cb, :pointer ], :void ],
         # EAPI void elm_multibuttonentry_item_filter_remove(Evas_Object *obj, Elm_Multibuttonentry_Item_Filter_Cb func, void *data);
         [ :elm_multibuttonentry_item_filter_remove, [ :evas_object, :elm_multibuttonentry_item_filter_cb, :pointer ], :void ],
+        # EAPI void elm_multibuttonentry_editable_set(Evas_Object *obj, Eina_Bool editable);
+        [ :elm_multibuttonentry_editable_set, [ :evas_object, :bool ], :void ],
+        # EAPI Eina_Bool elm_multibuttonentry_editable_get(const Evas_Object *obj);
+        [ :elm_multibuttonentry_editable_get, [ :evas_object ], :bool ],
         ]
         #
         attach_fcts fcts

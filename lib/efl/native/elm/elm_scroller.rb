@@ -30,8 +30,6 @@ module Efl
         fcts = [
         # EAPI Evas_Object *elm_scroller_add(Evas_Object *parent);
         [ :elm_scroller_add, [ :evas_object ], :evas_object ],
-        # EAPI void elm_scroller_custom_widget_base_theme_set(Evas_Object *obj, const char *widget, const char *base);
-        [ :elm_scroller_custom_widget_base_theme_set, [ :evas_object, :string, :string ], :void ],
         # EAPI void elm_scroller_content_min_limit(Evas_Object *obj, Eina_Bool w, Eina_Bool h);
         [ :elm_scroller_content_min_limit, [ :evas_object, :bool, :bool ], :void ],
         # EAPI void elm_scroller_region_show(Evas_Object *obj, Evas_Coord x, Evas_Coord y, Evas_Coord w, Evas_Coord h);

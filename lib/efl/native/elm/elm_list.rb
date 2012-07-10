@@ -48,14 +48,6 @@ module Efl
         [ :elm_list_select_mode_set, [ :evas_object, :elm_object_select_mode ], :void ],
         # EAPI Elm_Object_Select_Mode elm_list_select_mode_get(const Evas_Object *obj);
         [ :elm_list_select_mode_get, [ :evas_object ], :elm_object_select_mode ],
-        # EAPI void elm_list_bounce_set(Evas_Object *obj, Eina_Bool h_bounce, Eina_Bool v_bounce);
-        [ :elm_list_bounce_set, [ :evas_object, :bool, :bool ], :void ],
-        # EAPI void elm_list_bounce_get(const Evas_Object *obj, Eina_Bool *h_bounce, Eina_Bool *v_bounce);
-        [ :elm_list_bounce_get, [ :evas_object, :pointer, :pointer ], :void ],
-        # EAPI void elm_list_scroller_policy_set(Evas_Object *obj, Elm_Scroller_Policy policy_h, Elm_Scroller_Policy policy_v);
-        [ :elm_list_scroller_policy_set, [ :evas_object, :elm_scroller_policy, :elm_scroller_policy ], :void ],
-        # EAPI void elm_list_scroller_policy_get(const Evas_Object *obj, Elm_Scroller_Policy *policy_h, Elm_Scroller_Policy *policy_v);
-        [ :elm_list_scroller_policy_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI Elm_Object_Item *elm_list_item_append(Evas_Object *obj, const char *label, Evas_Object *icon, Evas_Object *end, Evas_Smart_Cb func, const void *data);
         [ :elm_list_item_append, [ :evas_object, :string, :evas_object, :evas_object, :evas_smart_cb, :pointer ], :elm_object_item ],
         # EAPI Elm_Object_Item *elm_list_item_prepend(Evas_Object *obj, const char *label, Evas_Object *icon, Evas_Object *end, Evas_Smart_Cb func, const void *data);

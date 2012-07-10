@@ -37,8 +37,6 @@ module Efl
         [ :elm_icon_standard_set, [ :evas_object, :string ], :bool ],
         # EAPI const char *elm_icon_standard_get(const Evas_Object *obj);
         [ :elm_icon_standard_get, [ :evas_object ], :string ],
-        # EAPI void elm_icon_fill_outside_set(Evas_Object *obj, Eina_Bool fill_outside);
-        [ :elm_icon_fill_outside_set, [ :evas_object, :bool ], :void ],
         # EAPI void elm_icon_order_lookup_set(Evas_Object *obj, Elm_Icon_Lookup_Order order);
         [ :elm_icon_order_lookup_set, [ :evas_object, :elm_icon_lookup_order ], :void ],
         # EAPI Elm_Icon_Lookup_Order elm_icon_order_lookup_get(const Evas_Object *obj);

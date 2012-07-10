@@ -182,6 +182,8 @@ module Efl
         [ :elm_win_screen_constrain_get, [ :evas_object ], :bool ],
         # EAPI void elm_win_screen_size_get(const Evas_Object *obj, int *x, int *y, int *w, int *h);
         [ :elm_win_screen_size_get, [ :evas_object, :pointer, :pointer, :pointer, :pointer ], :void ],
+        # EAPI void elm_win_screen_dpi_get(const Evas_Object *obj, int *xdpi, int *ydpi);
+        [ :elm_win_screen_dpi_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void elm_win_focus_highlight_enabled_set(Evas_Object *obj, Eina_Bool enabled);
         [ :elm_win_focus_highlight_enabled_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_win_focus_highlight_enabled_get(const Evas_Object *obj);

@@ -21,6 +21,10 @@ module Efl
         #
         ffi_lib 'elementary'
         #
+        # ENUMS
+        # typedef enum _Elm_Softcursor_Mode {...} Elm_Softcursor_Mode;
+        enum :elm_softcursor_mode, [ :elm_softcursor_mode_auto, :elm_softcursor_mode_on, :elm_softcursor_mode_off ]
+        #
         # TYPEDEFS
         # typedef struct _Elm_Text_Class Elm_Text_Class;
         typedef :pointer, :elm_text_class
@@ -95,6 +99,10 @@ module Efl
         [ :elm_config_longpress_timeout_get, [  ], :double ],
         # EAPI void elm_config_longpress_timeout_set(double longpress_timeout);
         [ :elm_config_longpress_timeout_set, [ :double ], :void ],
+        # EAPI void elm_config_softcursor_mode_set(Elm_Softcursor_Mode mode);
+        [ :elm_config_softcursor_mode_set, [ :elm_softcursor_mode ], :void ],
+        # EAPI Elm_Softcursor_Mode elm_config_softcursor_mode_get(void);
+        [ :elm_config_softcursor_mode_get, [  ], :elm_softcursor_mode ],
         # EAPI double elm_config_tooltip_delay_get(void);
         [ :elm_config_tooltip_delay_get, [  ], :double ],
         # EAPI void elm_config_tooltip_delay_set(double delay);
@@ -131,6 +139,10 @@ module Efl
         [ :elm_config_font_overlay_list_get, [  ], :eina_list ],
         # EAPI void elm_config_font_overlay_set(const char *text_class, const char *font, Evas_Font_Size size);
         [ :elm_config_font_overlay_set, [ :string, :string, :int ], :void ],
+        # EAPI Eina_Bool elm_config_access_get(void);
+        [ :elm_config_access_get, [  ], :bool ],
+        # EAPI void elm_config_access_set(Eina_Bool is_access);
+        [ :elm_config_access_set, [ :bool ], :void ],
         # EAPI void elm_config_font_overlay_unset(const char *text_class);
         [ :elm_config_font_overlay_unset, [ :string ], :void ],
         # EAPI void elm_config_font_overlay_apply(void);

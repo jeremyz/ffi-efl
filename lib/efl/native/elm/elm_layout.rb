@@ -71,6 +71,10 @@ module Efl
         [ :elm_layout_part_cursor_style_get, [ :evas_object, :string ], :string ],
         # EAPI Eina_Bool elm_layout_part_cursor_engine_only_set(Evas_Object *obj, const char *part_name, Eina_Bool engine_only);
         [ :elm_layout_part_cursor_engine_only_set, [ :evas_object, :string, :bool ], :bool ],
+        # EAPI Eina_Bool elm_layout_edje_object_can_access_set(Evas_Object *obj, Eina_Bool can_access);
+        [ :elm_layout_edje_object_can_access_set, [ :evas_object, :bool ], :bool ],
+        # EAPI Eina_Bool elm_layout_edje_object_can_access_get(Evas_Object *obj);
+        [ :elm_layout_edje_object_can_access_get, [ :evas_object ], :bool ],
         # EAPI Eina_Bool elm_layout_part_cursor_engine_only_get(const Evas_Object *obj, const char *part_name);
         [ :elm_layout_part_cursor_engine_only_get, [ :evas_object, :string ], :bool ],
         # EAPI Eina_Bool elm_layout_content_set(Evas_Object *obj, const char *swallow, Evas_Object *content);
