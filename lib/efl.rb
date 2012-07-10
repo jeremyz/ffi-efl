@@ -3,7 +3,7 @@
 #
 module Efl
     #
-    VERSION = '0.0.13'
+    VERSION = '0.0.14'
     #
     module MethodResolver
         def self.resolve mod, meth, prefix
