@@ -125,6 +125,8 @@ module Efl
         typedef :pointer, :evas_precision_position
         # typedef struct _Evas_Smart_Class Evas_Smart_Class;
         typedef :pointer, :evas_smart_class
+        # typedef struct _Evas_Smart_Interface Evas_Smart_Interface;
+        typedef :pointer, :evas_smart_interface
         # typedef struct _Evas_Smart_Cb_Description Evas_Smart_Cb_Description;
         typedef :pointer, :evas_smart_cb_description
         # typedef struct _Evas_Map Evas_Map;
@@ -1102,7 +1104,7 @@ module Efl
         [ :evas_object_textgrid_font_set, [ :evas_object, :string, :int ], :void ],
         # EAPI void evas_object_textgrid_font_get(const Evas_Object *obj, const char **font_name, Evas_Font_Size *font_size);
         [ :evas_object_textgrid_font_get, [ :evas_object, :pointer, :pointer ], :void ],
-        # EAPI void evas_object_textgrid_cell_size_get(const Evas_Object *obj, int *width, int *height);
+        # EAPI void evas_object_textgrid_cell_size_get(const Evas_Object *obj, Evas_Coord *w, Evas_Coord *h);
         [ :evas_object_textgrid_cell_size_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void evas_object_textgrid_palette_set(Evas_Object *obj, Evas_Textgrid_Palette pal, int idx, int r, int g, int b, int a);
         [ :evas_object_textgrid_palette_set, [ :evas_object, :evas_textgrid_palette, :int, :int, :int, :int, :int ], :void ],
