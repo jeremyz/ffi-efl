@@ -28,6 +28,8 @@ module Efl
         enum :ecore_event_press, [ :ecore_down, :ecore_up ]
         # typedef enum _Ecore_Event_IO {...} Ecore_Event_IO;
         enum :ecore_event_io, [ :ecore_in, :ecore_out ]
+        # typedef enum _Ecore_Compose_State {...} Ecore_Compose_State;
+        enum :ecore_compose_state, [ :ecore_compose_none, :ecore_compose_middle, :ecore_compose_done ]
         #
         # TYPEDEFS
         # typedef uintptr_t Ecore_Window;
@@ -73,6 +75,8 @@ module Efl
         [ :ecore_event_modifier_mask, [ :ecore_event_modifier ], :uint ],
         # EAPI Ecore_Event_Modifier ecore_event_update_modifier(const char *key, Ecore_Event_Modifiers *modifiers, int inc);
         [ :ecore_event_update_modifier, [ :string, :ecore_event_modifiers, :int ], :ecore_event_modifier ],
+        # EAPI Ecore_Compose_State ecore_compose_get(const Eina_List *seq, char **seqstr_ret);
+        [ :ecore_compose_get, [ :eina_list, :pointer ], :ecore_compose_state ],
         ]
         #
         attach_fcts fcts
