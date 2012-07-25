@@ -38,14 +38,6 @@ module Efl
         [ :elm_diskselector_display_item_num_set, [ :evas_object, :int ], :void ],
         # EAPI int elm_diskselector_display_item_num_get(const Evas_Object *obj);
         [ :elm_diskselector_display_item_num_get, [ :evas_object ], :int ],
-        # EAPI void elm_diskselector_bounce_set(Evas_Object *obj, Eina_Bool h_bounce, Eina_Bool v_bounce);
-        [ :elm_diskselector_bounce_set, [ :evas_object, :bool, :bool ], :void ],
-        # EAPI void elm_diskselector_bounce_get(const Evas_Object *obj, Eina_Bool *h_bounce, Eina_Bool *v_bounce);
-        [ :elm_diskselector_bounce_get, [ :evas_object, :pointer, :pointer ], :void ],
-        # EAPI void elm_diskselector_scroller_policy_get(const Evas_Object *obj, Elm_Scroller_Policy *policy_h, Elm_Scroller_Policy *policy_v);
-        [ :elm_diskselector_scroller_policy_get, [ :evas_object, :pointer, :pointer ], :void ],
-        # EAPI void elm_diskselector_scroller_policy_set(Evas_Object *obj, Elm_Scroller_Policy policy_h, Elm_Scroller_Policy policy_v);
-        [ :elm_diskselector_scroller_policy_set, [ :evas_object, :elm_scroller_policy, :elm_scroller_policy ], :void ],
         # EAPI void elm_diskselector_clear(Evas_Object *obj);
         [ :elm_diskselector_clear, [ :evas_object ], :void ],
         # EAPI const Eina_List *elm_diskselector_items_get(const Evas_Object *obj);

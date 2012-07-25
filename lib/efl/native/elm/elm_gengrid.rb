@@ -54,10 +54,6 @@ module Efl
         [ :elm_gengrid_horizontal_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_gengrid_horizontal_get(const Evas_Object *obj);
         [ :elm_gengrid_horizontal_get, [ :evas_object ], :bool ],
-        # EAPI void elm_gengrid_bounce_set(Evas_Object *obj, Eina_Bool h_bounce, Eina_Bool v_bounce);
-        [ :elm_gengrid_bounce_set, [ :evas_object, :bool, :bool ], :void ],
-        # EAPI void elm_gengrid_bounce_get(const Evas_Object *obj, Eina_Bool *h_bounce, Eina_Bool *v_bounce);
-        [ :elm_gengrid_bounce_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI Elm_Object_Item *elm_gengrid_item_append(Evas_Object *obj, const Elm_Gengrid_Item_Class *gic, const void *data, Evas_Smart_Cb func, const void *func_data);
         [ :elm_gengrid_item_append, [ :evas_object, :pointer, :pointer, :evas_smart_cb, :pointer ], :elm_object_item ],
         # EAPI Elm_Object_Item *elm_gengrid_item_prepend(Evas_Object *obj, const Elm_Gengrid_Item_Class *gic, const void *data, Evas_Smart_Cb func, const void *func_data);
@@ -80,10 +76,6 @@ module Efl
         [ :elm_gengrid_first_item_get, [ :evas_object ], :elm_object_item ],
         # EAPI Elm_Object_Item *elm_gengrid_last_item_get(const Evas_Object *obj);
         [ :elm_gengrid_last_item_get, [ :evas_object ], :elm_object_item ],
-        # EAPI void elm_gengrid_scroller_policy_set(Evas_Object *obj, Elm_Scroller_Policy policy_h, Elm_Scroller_Policy policy_v);
-        [ :elm_gengrid_scroller_policy_set, [ :evas_object, :elm_scroller_policy, :elm_scroller_policy ], :void ],
-        # EAPI void elm_gengrid_scroller_policy_get(const Evas_Object *obj, Elm_Scroller_Policy *policy_h, Elm_Scroller_Policy *policy_v);
-        [ :elm_gengrid_scroller_policy_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI Elm_Object_Item *elm_gengrid_item_next_get(const Elm_Object_Item *it);
         [ :elm_gengrid_item_next_get, [ :elm_object_item ], :elm_object_item ],
         # EAPI Elm_Object_Item *elm_gengrid_item_prev_get(const Elm_Object_Item *it);
@@ -158,20 +150,8 @@ module Efl
         [ :elm_gengrid_reorder_mode_set, [ :evas_object, :bool ], :void ],
         # EAPI Eina_Bool elm_gengrid_reorder_mode_get(const Evas_Object *obj);
         [ :elm_gengrid_reorder_mode_get, [ :evas_object ], :bool ],
-        # EAPI void elm_gengrid_page_relative_set(Evas_Object *obj, double h_pagerel, double v_pagerel);
-        [ :elm_gengrid_page_relative_set, [ :evas_object, :double, :double ], :void ],
-        # EAPI void elm_gengrid_page_relative_get(const Evas_Object *obj, double *h_pagerel, double *v_pagerel);
-        [ :elm_gengrid_page_relative_get, [ :evas_object, :pointer, :pointer ], :void ],
-        # EAPI void elm_gengrid_page_size_set(Evas_Object *obj, Evas_Coord h_pagesize, Evas_Coord v_pagesize);
-        [ :elm_gengrid_page_size_set, [ :evas_object, :int, :int ], :void ],
-        # EAPI void elm_gengrid_current_page_get(const Evas_Object *obj, int *h_pagenumber, int *v_pagenumber);
-        [ :elm_gengrid_current_page_get, [ :evas_object, :pointer, :pointer ], :void ],
-        # EAPI void elm_gengrid_last_page_get(const Evas_Object *obj, int *h_pagenumber, int *v_pagenumber);
-        [ :elm_gengrid_last_page_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void elm_gengrid_page_show(const Evas_Object *obj, int h_pagenumber, int v_pagenumber);
         [ :elm_gengrid_page_show, [ :evas_object, :int, :int ], :void ],
-        # EAPI void elm_gengrid_page_bring_in(const Evas_Object *obj, int h_pagenumber, int v_pagenumber);
-        [ :elm_gengrid_page_bring_in, [ :evas_object, :int, :int ], :void ],
         # EAPI void elm_gengrid_item_pos_get(const Elm_Object_Item *it, unsigned int *x, unsigned int *y);
         [ :elm_gengrid_item_pos_get, [ :elm_object_item, :pointer, :pointer ], :void ],
         # EAPI void elm_gengrid_filled_set(Evas_Object *obj, Eina_Bool fill);

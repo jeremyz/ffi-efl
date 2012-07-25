@@ -61,10 +61,6 @@ module Efl
         [ :elm_genlist_mode_set, [ :evas_object, :elm_list_mode ], :void ],
         # EAPI Elm_List_Mode elm_genlist_mode_get(const Evas_Object *obj);
         [ :elm_genlist_mode_get, [ :evas_object ], :elm_list_mode ],
-        # EAPI void elm_genlist_bounce_set(Evas_Object *obj, Eina_Bool h_bounce, Eina_Bool v_bounce);
-        [ :elm_genlist_bounce_set, [ :evas_object, :bool, :bool ], :void ],
-        # EAPI void elm_genlist_bounce_get(const Evas_Object *obj, Eina_Bool *h_bounce, Eina_Bool *v_bounce);
-        [ :elm_genlist_bounce_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI Elm_Object_Item *elm_genlist_item_append(Evas_Object *obj, const Elm_Genlist_Item_Class *itc, const void *data, Elm_Object_Item *parent, Elm_Genlist_Item_Type type, Evas_Smart_Cb func, const void *func_data);
         [ :elm_genlist_item_append, [ :evas_object, :pointer, :pointer, :elm_object_item, :elm_genlist_item_type, :evas_smart_cb, :pointer ],
             :elm_object_item ],
@@ -90,10 +86,6 @@ module Efl
         [ :elm_genlist_first_item_get, [ :evas_object ], :elm_object_item ],
         # EAPI Elm_Object_Item *elm_genlist_last_item_get(const Evas_Object *obj);
         [ :elm_genlist_last_item_get, [ :evas_object ], :elm_object_item ],
-        # EAPI void elm_genlist_scroller_policy_set(Evas_Object *obj, Elm_Scroller_Policy policy_h, Elm_Scroller_Policy policy_v);
-        [ :elm_genlist_scroller_policy_set, [ :evas_object, :elm_scroller_policy, :elm_scroller_policy ], :void ],
-        # EAPI void elm_genlist_scroller_policy_get(const Evas_Object *obj, Elm_Scroller_Policy *policy_h, Elm_Scroller_Policy *policy_v);
-        [ :elm_genlist_scroller_policy_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI Elm_Object_Item *elm_genlist_item_next_get(const Elm_Object_Item *it);
         [ :elm_genlist_item_next_get, [ :elm_object_item ], :elm_object_item ],
         # EAPI Elm_Object_Item *elm_genlist_item_prev_get(const Elm_Object_Item *it);

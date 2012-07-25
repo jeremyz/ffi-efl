@@ -40,6 +40,8 @@ module Efl
         [ :elm_flip_perspective_set, [ :evas_object, :int, :int, :int ], :void ],
         # EAPI void elm_flip_go(Evas_Object *obj, Elm_Flip_Mode mode);
         [ :elm_flip_go, [ :evas_object, :elm_flip_mode ], :void ],
+        # EAPI void elm_flip_go_to(Evas_Object *obj, Eina_Bool front, Elm_Flip_Mode mode);
+        [ :elm_flip_go_to, [ :evas_object, :bool, :elm_flip_mode ], :void ],
         # EAPI void elm_flip_interaction_set(Evas_Object *obj, Elm_Flip_Interaction mode);
         [ :elm_flip_interaction_set, [ :evas_object, :elm_flip_interaction ], :void ],
         # EAPI Elm_Flip_Interaction elm_flip_interaction_get(const Evas_Object *obj);

@@ -48,8 +48,12 @@ module Efl
         [ :elm_scroller_bounce_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void elm_scroller_page_relative_set(Evas_Object *obj, double h_pagerel, double v_pagerel);
         [ :elm_scroller_page_relative_set, [ :evas_object, :double, :double ], :void ],
+        # EAPI void elm_scroller_page_relative_get(const Evas_Object *obj, double *h_pagerel, double *v_pagerel);
+        [ :elm_scroller_page_relative_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void elm_scroller_page_size_set(Evas_Object *obj, Evas_Coord h_pagesize, Evas_Coord v_pagesize);
         [ :elm_scroller_page_size_set, [ :evas_object, :int, :int ], :void ],
+        # EAPI void elm_scroller_page_size_get(const Evas_Object *obj, Evas_Coord *h_pagesize, Evas_Coord *v_pagesize);
+        [ :elm_scroller_page_size_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void elm_scroller_current_page_get(const Evas_Object *obj, int *h_pagenumber, int *v_pagenumber);
         [ :elm_scroller_current_page_get, [ :evas_object, :pointer, :pointer ], :void ],
         # EAPI void elm_scroller_last_page_get(const Evas_Object *obj, int *h_pagenumber, int *v_pagenumber);

@@ -40,6 +40,10 @@ module Efl
         enum :elm_illume_command, [ :elm_illume_command_focus_back, :elm_illume_command_focus_forward, :elm_illume_command_focus_home,
             :elm_illume_command_close ]
         #
+        # TYPEDEFS
+        # typedef struct _Elm_Win_Trap Elm_Win_Trap;
+        typedef :pointer, :elm_win_trap
+        #
         # FUNCTIONS
         fcts = [
         # EAPI Evas_Object *elm_win_add(Evas_Object *parent, const char *name, Elm_Win_Type type);
@@ -216,6 +220,8 @@ module Efl
         [ :elm_win_xwindow_get, [ :evas_object ], :uint ],
         # EAPI Ecore_Wl_Window *elm_win_wl_window_get(const Evas_Object *obj);
         [ :elm_win_wl_window_get, [ :evas_object ], :ecore_wl_window ],
+        # EAPI Eina_Bool elm_win_trap_set(const Elm_Win_Trap *trap);
+        [ :elm_win_trap_set, [ :elm_win_trap ], :bool ],
         ]
         #
         attach_fcts fcts
