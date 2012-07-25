@@ -325,6 +325,21 @@ libs << {
     :requires=>["#{NATIVE}/ecore_getopt","#{NATIVE}/evas"], :constants=>[]
 }
 libs << {
+    :lib=>'ethumb', :header=>'Ethumb.h',
+    :modname=>'Ethumb', :prefix=>'ethumb', :outfile=>'ethumb.rb',
+    :requires=>[], :constants=>[]
+}
+libs << {
+    :lib=>'ethumb_client', :header=>'Ethumb_Client.h',
+    :modname=>'EthumbClient', :prefix=>'ethumb_client', :outfile=>'ethumb_client.rb',
+    :requires=>["#{NATIVE}/ethumb"], :constants=>[]
+}
+libs << {
+    :lib=>'ethumb', :header=>'Ethumb_Plugin.h',
+    :modname=>'EthumbPlugin', :prefix=>'ethumb_plugin', :outfile=>'ethumb_plugin.rb',
+    :requires=>["#{NATIVE}/evas","#{NATIVE}/ecore_evas","#{NATIVE}/ethumb"], :constants=>[]
+}
+libs << {
     :lib=>'emap', :header=>'EMap.h',
     :modname=>'Emap', :prefix=>'emap', :outfile=>'emap.rb',
     :requires=>["#{NATIVE}/eina_list"], :constants=>[]
