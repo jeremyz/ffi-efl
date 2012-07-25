@@ -1,3 +1,17 @@
+2012-XX-YY Jérémy Zurcher <jeremy@asynk.ch>
+	* release 0.0.15
+	* add ethumb ethumb_client and ethumb_plugin
+
+2012-07-10 Jérémy Zurcher <jeremy@asynk.ch>
+	* release 0.0.14
+	* add missing Gemfile and Gemfile.lock files
+	* mostly elementary API updates
+
+2012-05-19 Jérémy Zurcher <jeremy@asynk.ch>
+	* release 0.0.13
+	* now uses bundler http://http://gembundler.com
+	* mostly elementary API updates
+
 2012-03-08 Jérémy Zurcher <jeremy@asynk.ch>
 	* release 0.0.12
 	* elementary API freeze 2012.03.07
