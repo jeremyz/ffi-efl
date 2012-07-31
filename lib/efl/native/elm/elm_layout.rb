@@ -27,6 +27,10 @@ module Efl
         [ :elm_layout_add, [ :evas_object ], :evas_object ],
         # EAPI Eina_Bool elm_layout_file_set(Evas_Object *obj, const char *file, const char *group);
         [ :elm_layout_file_set, [ :evas_object, :string, :string ], :bool ],
+        # EAPI int elm_layout_freeze(Evas_Object *obj);
+        [ :elm_layout_freeze, [ :evas_object ], :int ],
+        # EAPI int elm_layout_thaw(Evas_Object *obj);
+        [ :elm_layout_thaw, [ :evas_object ], :int ],
         # EAPI Eina_Bool elm_layout_theme_set(Evas_Object *obj, const char *clas, const char *group, const char *style);
         [ :elm_layout_theme_set, [ :evas_object, :string, :string, :string ], :bool ],
         # EAPI void elm_layout_signal_emit(Evas_Object *obj, const char *emission, const char *source);
