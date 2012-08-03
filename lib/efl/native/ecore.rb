@@ -239,6 +239,8 @@ module Efl
         [ :ecore_exe_hup, [ :ecore_exe ], :void ],
         # EAPI Ecore_Fd_Handler *ecore_main_fd_handler_add(int fd, Ecore_Fd_Handler_Flags flags, Ecore_Fd_Cb func, const void *data, Ecore_Fd_Cb buf_func, const void *buf_data);
         [ :ecore_main_fd_handler_add, [ :int, :ecore_fd_handler_flags, :ecore_fd_cb, :pointer, :ecore_fd_cb, :pointer ], :ecore_fd_handler ],
+        # EAPI Ecore_Fd_Handler *ecore_main_fd_handler_file_add(int fd, Ecore_Fd_Handler_Flags flags, Ecore_Fd_Cb func, const void *data, Ecore_Fd_Cb buf_func, const void *buf_data);
+        [ :ecore_main_fd_handler_file_add, [ :int, :ecore_fd_handler_flags, :ecore_fd_cb, :pointer, :ecore_fd_cb, :pointer ], :ecore_fd_handler ],
         # EAPI void ecore_main_fd_handler_prepare_callback_set(Ecore_Fd_Handler *fd_handler, Ecore_Fd_Prep_Cb func, const void *data);
         [ :ecore_main_fd_handler_prepare_callback_set, [ :ecore_fd_handler, :ecore_fd_prep_cb, :pointer ], :void ],
         # EAPI void *ecore_main_fd_handler_del(Ecore_Fd_Handler *fd_handler);
