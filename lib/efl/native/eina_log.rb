@@ -89,6 +89,8 @@ module Efl
         [ :eina_log_print_cb_stderr, [ :eina_log_domain, :eina_log_level, :string, :string, :int, :string, :pointer, :pointer ], :void ],
         # EAPI void eina_log_print_cb_file(const Eina_Log_Domain *d, Eina_Log_Level level, const char *file, const char *fnc, int line, const char *fmt, void *data, va_list args);
         [ :eina_log_print_cb_file, [ :eina_log_domain, :eina_log_level, :string, :string, :int, :string, :pointer, :pointer ], :void ],
+        # EAPI void eina_log_console_color_set(FILE *fp, const char *color);
+        [ :eina_log_console_color_set, [ :pointer, :string ], :void ],
         ]
         #
         attach_fcts fcts
