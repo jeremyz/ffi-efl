@@ -142,6 +142,14 @@ module Efl
         [ :elm_win_layer_set, [ :evas_object, :int ], :void ],
         # EAPI int elm_win_layer_get(const Evas_Object *obj);
         [ :elm_win_layer_get, [ :evas_object ], :int ],
+        # EAPI void elm_win_norender_push(Evas_Object *obj);
+        [ :elm_win_norender_push, [ :evas_object ], :void ],
+        # EAPI void elm_win_norender_pop(Evas_Object *obj);
+        [ :elm_win_norender_pop, [ :evas_object ], :void ],
+        # EAPI int elm_win_norender_get(Evas_Object *obj);
+        [ :elm_win_norender_get, [ :evas_object ], :int ],
+        # EAPI void elm_win_render(Evas_Object *obj);
+        [ :elm_win_render, [ :evas_object ], :void ],
         # EAPI void elm_win_rotation_set(Evas_Object *obj, int rotation);
         [ :elm_win_rotation_set, [ :evas_object, :int ], :void ],
         # EAPI void elm_win_rotation_with_resize_set(Evas_Object *obj, int rotation);

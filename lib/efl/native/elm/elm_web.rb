@@ -50,7 +50,7 @@ module Efl
         callback :elm_web_dialog_alert_cb, [ :pointer, :evas_object, :string ], :evas_object
         # typedef Evas_Object *(*Elm_Web_Dialog_Confirm) (void *data, Evas_Object *obj, const char *message, Eina_Bool *ret);
         callback :elm_web_dialog_confirm_cb, [ :pointer, :evas_object, :string, :pointer ], :evas_object
-        # typedef Evas_Object *(*Elm_Web_Dialog_Prompt) (void *data, Evas_Object *obj, const char *message, const char *def_value, char **value, Eina_Bool *ret);
+        # typedef Evas_Object *(*Elm_Web_Dialog_Prompt) (void *data, Evas_Object *obj, const char *message, const char *def_value, const char **value, Eina_Bool *ret);
         callback :elm_web_dialog_prompt_cb, [ :pointer, :evas_object, :string, :string, :pointer, :pointer ], :evas_object
         # typedef Evas_Object *(*Elm_Web_Dialog_File_Selector) (void *data, Evas_Object *obj, Eina_Bool allows_multiple, Eina_List *accept_types, Eina_List **selected, Eina_Bool *ret);
         callback :elm_web_dialog_file_selector_cb, [ :pointer, :evas_object, :bool, :eina_list, :eina_list, :pointer ], :evas_object
@@ -93,7 +93,7 @@ module Efl
         [ :elm_web_bg_color_set, [ :evas_object, :int, :int, :int, :int ], :void ],
         # EAPI void elm_web_bg_color_get(const Evas_Object *obj, int *r, int *g, int *b, int *a);
         [ :elm_web_bg_color_get, [ :evas_object, :pointer, :pointer, :pointer, :pointer ], :void ],
-        # EAPI char *elm_web_selection_get(const Evas_Object *obj);
+        # EAPI const char *elm_web_selection_get(const Evas_Object *obj);
         [ :elm_web_selection_get, [ :evas_object ], :string ],
         # EAPI void elm_web_popup_selected_set(Evas_Object *obj, int index);
         [ :elm_web_popup_selected_set, [ :evas_object, :int ], :void ],

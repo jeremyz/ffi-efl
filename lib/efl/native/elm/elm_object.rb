@@ -24,7 +24,7 @@ module Efl
         #
         # FUNCTIONS
         fcts = [
-        # EAPI void elm_object_part_text_set(Evas_Object *obj, const char *part, const char *label);
+        # EAPI void elm_object_part_text_set(Evas_Object *obj, const char *part, const char *text);
         [ :elm_object_part_text_set, [ :evas_object, :string, :string ], :void ],
         # EAPI const char *elm_object_part_text_get(const Evas_Object *obj, const char *part);
         [ :elm_object_part_text_get, [ :evas_object, :string ], :string ],

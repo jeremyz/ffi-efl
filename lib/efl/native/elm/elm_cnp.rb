@@ -46,8 +46,8 @@ module Efl
         [ :elm_cnp_selection_get, [ :evas_object, :elm_sel_type, :elm_sel_format, :elm_drop_cb, :pointer ], :bool ],
         # EAPI Eina_Bool elm_object_cnp_selection_clear(Evas_Object *obj, Elm_Sel_Type selection);
         [ :elm_object_cnp_selection_clear, [ :evas_object, :elm_sel_type ], :bool ],
-        # EAPI void elm_cnp_selection_loss_callback_set(Elm_Sel_Type selection, Elm_Selection_Loss_Cb func, const void *data);
-        [ :elm_cnp_selection_loss_callback_set, [ :elm_sel_type, :elm_selection_loss_cb, :pointer ], :void ],
+        # EAPI void elm_cnp_selection_loss_callback_set(Evas_Object *obj, Elm_Sel_Type selection, Elm_Selection_Loss_Cb func, const void *data);
+        [ :elm_cnp_selection_loss_callback_set, [ :evas_object, :elm_sel_type, :elm_selection_loss_cb, :pointer ], :void ],
         ]
         #
         attach_fcts fcts
