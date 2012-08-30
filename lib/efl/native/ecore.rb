@@ -155,6 +155,12 @@ module Efl
         [ :ecore_main_loop_begin, [  ], :void ],
         # EAPI void ecore_main_loop_quit(void);
         [ :ecore_main_loop_quit, [  ], :void ],
+        # EAPI Eina_Bool ecore_fork_reset_callback_add(Ecore_Cb func, const void *data);
+        [ :ecore_fork_reset_callback_add, [ :ecore_cb, :pointer ], :bool ],
+        # EAPI Eina_Bool ecore_fork_reset_callback_del(Ecore_Cb func, const void *data);
+        [ :ecore_fork_reset_callback_del, [ :ecore_cb, :pointer ], :bool ],
+        # EAPI void ecore_fork_reset(void);
+        [ :ecore_fork_reset, [  ], :void ],
         # EAPI void ecore_main_loop_thread_safe_call_async(Ecore_Cb callback, void *data);
         [ :ecore_main_loop_thread_safe_call_async, [ :ecore_cb, :pointer ], :void ],
         # EAPI void *ecore_main_loop_thread_safe_call_sync(Ecore_Data_Cb callback, void *data);
