@@ -343,6 +343,8 @@ module Efl
         [ :eet_connection_new, [ :pointer, :pointer, :pointer ], :eet_connection ],
         # EAPI int eet_connection_received(Eet_Connection *conn, const void *data, size_t size);
         [ :eet_connection_received, [ :eet_connection, :pointer, :ulong ], :int ],
+        # EAPI Eina_Bool eet_connection_empty(Eet_Connection *conn);
+        [ :eet_connection_empty, [ :eet_connection ], :bool ],
         # EAPI Eina_Bool eet_connection_send(Eet_Connection *conn, Eet_Data_Descriptor *edd, const void *data_in, const char *cipher_key);
         [ :eet_connection_send, [ :eet_connection, :eet_data_descriptor, :pointer, :string ], :bool ],
         # EAPI Eina_Bool eet_connection_node_send(Eet_Connection *conn, Eet_Node *node, const char *cipher_key);
