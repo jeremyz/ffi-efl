@@ -21,14 +21,24 @@ T next;H;b attrs
 :next
 # try again if } not found
 /^\s*\}/ ! b attrs
-# read enumeration name
+# read enumeration name if any
 s/^\s*}\s*(\w+).*$/ } \1;/
 t finish
 :close
+n
+# eat all comments
+/^\s*\/\*/ {
+  :comment2
+  /\*\/\s*$/ { n; b nocomment2 }
+  n; b comment2
+}
+:nocomment2
+# eat empty lines
+/^\s*$/ b close
 # read the enum typedef
 s/^\s*typedef\s+enum\s+\w+\s+(\w+)\s*;/ } \1/
-# leave if substitution works, or read next line and retry
-t finish;n;b close
+# finish if substitution fail
+T
 :finish
 # append pattern, exchange hold space and pattern space
 H;x
