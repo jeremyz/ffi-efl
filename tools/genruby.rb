@@ -339,11 +339,6 @@ libs << {
     :modname=>'EthumbPlugin', :prefix=>'ethumb_plugin', :outfile=>'ethumb_plugin.rb',
     :requires=>["#{NATIVE}/evas","#{NATIVE}/ecore_evas","#{NATIVE}/ethumb"], :constants=>[]
 }
-libs << {
-    :lib=>'emap', :header=>'EMap.h',
-    :modname=>'Emap', :prefix=>'emap', :outfile=>'emap.rb',
-    :requires=>["#{NATIVE}/eina_list"], :constants=>[]
-}
 #
 ELM_LIB='elementary'
 #
@@ -369,11 +364,7 @@ libs << {
     :modname=>'Elm', :prefix=>'elm', :outfile=>'elm/elm_general.rb',
     :requires=>["#{NATIVE}/evas","#{NATIVE}/elementary"], :constants=>[]
 }
-libs << {
-    :lib=>ELM_LIB,:header=>'elm_tooltip.h',
-    :modname=>'ElmTooltip', :prefix=>'elm', :outfile=>'elm/elm_tooltip.rb',
-    :requires=>["#{NATIVE}/elementary"], :constants=>[]
-}
+libs << elm_h('elm_tooltip.h', 'ElmTooltip')
 libs << elm_h('elm_object_item.h', 'ElmObjectItem')
 libs << elm_h('elm_object.h', 'ElmObject', ["#{NATIVE}/edje","#{NATIVE}/elementary"])
 libs << elm_h('elm_icon.h', 'ElmIcon')
@@ -381,7 +372,6 @@ libs << elm_h('elm_scroller.h', 'ElmScroller')
 libs << elm_h('elm_entry.h', 'ElmEntry', ["#{NATIVE}/edje","#{NATIVE}/elementary","#{NATIVE}/elm/elm_icon","#{NATIVE}/elm/elm_scroller"])
 libs << elm_h('elm_list.h', 'ElmList', ["#{NATIVE}/elementary","#{NATIVE}/elm/elm_scroller"])
 libs << elm_h('elc_ctxpopup.h', 'ElmCtxPopup')
-libs << elm_h('elm_dayselector.h', 'ElmDaySelector')
 libs << elm_h('elc_fileselector_button.h', 'ElmFileSelectorButton')
 libs << elm_h('elc_fileselector_entry.h', 'ElmFileSelectorEntry')
 libs << elm_h('elc_fileselector.h', 'ElmFileSelector')
@@ -405,6 +395,7 @@ libs << elm_h('elm_config.h', 'ElmConfig')
 libs << elm_h('elm_conform.h', 'ElmConform')
 libs << elm_h('elm_cursor.h', 'ElmCursor')
 libs << elm_h('elm_datetime.h', 'ElmDatetime')
+libs << elm_h('elm_dayselector.h', 'ElmDaySelector')
 libs << elm_h('elm_debug.h', 'ElmDebug')
 libs << elm_h('elm_diskselector.h', 'ElmDiskSelector', ["#{NATIVE}/elementary","#{NATIVE}/elm/elm_scroller"])
 libs << elm_h('elm_finger.h', 'ElmFinger')
@@ -421,10 +412,10 @@ libs << elm_h('elm_grid.h', 'ElmGrid')
 libs << elm_h('elm_hover.h', 'ElmHover')
 libs << elm_h('elm_image.h', 'ElmImage')
 libs << elm_h('elm_index.h', 'ElmIndex')
+libs << elm_h('elm_inwin.h', 'ElmInwin')
 libs << elm_h('elm_label.h', 'ElmLabel', ["#{NATIVE}/elementary","#{NATIVE}/elm/elm_entry"])
 libs << elm_h('elm_layout.h', 'ElmLayout', ["#{NATIVE}/edje"])
 libs << elm_h('elm_mapbuf.h', 'ElmMapBuf')
-libs << elm_h('elm_map.h', 'ElmMap', ["#{NATIVE}/emap","#{NATIVE}/elementary"])
 libs << elm_h('elm_menu.h', 'ElmMenu')
 libs << elm_h('elm_mirroring.h', 'ElmMirroring')
 libs << elm_h('elm_need.h', 'ElmNeed')
@@ -436,7 +427,6 @@ libs << elm_h('elm_photo.h', 'ElmPhoto')
 libs << elm_h('elm_plug.h', 'ElmPlug')
 libs << elm_h('elm_progressbar.h', 'ElmProgressBar')
 libs << elm_h('elm_radio.h', 'ElmRadio')
-libs << elm_h('elm_route.h', 'ElmRoute', ["#{NATIVE}/emap","#{NATIVE}/elementary"])
 libs << elm_h('elm_scale.h', 'ElmScale')
 libs << elm_h('elm_scroll.h', 'ElmScroll')
 libs << elm_h('elm_segment_control.h', 'ElmSegmentControl')

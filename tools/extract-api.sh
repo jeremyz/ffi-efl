@@ -46,14 +46,12 @@ for header in \
     "${INCLUDE}/ethumb-1/Ethumb.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Client.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Plugin.h" \
-    "${INCLUDE}/EMap.h" \
     "${ELM_INCLUDE_DIR}/Elementary.h" \
     "${ELM_INCLUDE_DIR}/elm_general.h" \
     "${ELM_INCLUDE_DIR}/elm_tooltip.h" \
     "${ELM_INCLUDE_DIR}/elm_object.h" \
     "${ELM_INCLUDE_DIR}/elm_object_item.h" \
     "${ELM_INCLUDE_DIR}/elc_ctxpopup.h" \
-    "${ELM_INCLUDE_DIR}/elm_dayselector.h" \
     "${ELM_INCLUDE_DIR}/elc_fileselector_button.h" \
     "${ELM_INCLUDE_DIR}/elc_fileselector_entry.h" \
     "${ELM_INCLUDE_DIR}/elc_fileselector.h" \
@@ -78,6 +76,7 @@ for header in \
     "${ELM_INCLUDE_DIR}/elm_conform.h" \
     "${ELM_INCLUDE_DIR}/elm_cursor.h" \
     "${ELM_INCLUDE_DIR}/elm_datetime.h" \
+    "${ELM_INCLUDE_DIR}/elm_dayselector.h" \
     "${ELM_INCLUDE_DIR}/elm_debug.h" \
     "${ELM_INCLUDE_DIR}/elm_diskselector.h" \
     "${ELM_INCLUDE_DIR}/elm_entry.h" \
@@ -98,11 +97,11 @@ for header in \
     "${ELM_INCLUDE_DIR}/elm_image.h" \
     "${ELM_INCLUDE_DIR}/elm_index.h" \
     "${ELM_INCLUDE_DIR}/elm_intro.h" \
+    "${ELM_INCLUDE_DIR}/elm_inwin.h" \
     "${ELM_INCLUDE_DIR}/elm_label.h" \
     "${ELM_INCLUDE_DIR}/elm_layout.h" \
     "${ELM_INCLUDE_DIR}/elm_list.h" \
     "${ELM_INCLUDE_DIR}/elm_mapbuf.h" \
-    "${ELM_INCLUDE_DIR}/elm_map.h" \
     "${ELM_INCLUDE_DIR}/elm_menu.h" \
     "${ELM_INCLUDE_DIR}/elm_mirroring.h" \
     "${ELM_INCLUDE_DIR}/elm_need.h" \
@@ -114,7 +113,6 @@ for header in \
     "${ELM_INCLUDE_DIR}/elm_plug.h" \
     "${ELM_INCLUDE_DIR}/elm_progressbar.h" \
     "${ELM_INCLUDE_DIR}/elm_radio.h" \
-    "${ELM_INCLUDE_DIR}/elm_route.h" \
     "${ELM_INCLUDE_DIR}/elm_scale.h" \
     "${ELM_INCLUDE_DIR}/elm_scroller.h" \
     "${ELM_INCLUDE_DIR}/elm_scroll.h" \
@@ -137,7 +135,9 @@ for header in \
     #
     if [ ! -e "$header" ]; then
         echo "$header not found, we won't generate bindings for this header."
-    continue
+        continue
+    else
+        echo "extracting API from $header"
     fi
     #
     DIR=$(dirname $header)
