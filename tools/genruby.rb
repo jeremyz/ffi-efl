@@ -64,8 +64,12 @@ def gen_enums path, indent
     open(path+'-enums','r').readlines.each do |l|
         l.strip!
         if not l=~/((?:typedef )?enum(?: \w+)?) \{(.*)\} (\w+)/
-            printf "\033[0;31mFIXME : #{l}\n#{indent}# FIXME\033[0m\n"
-            r << indent+"# #{l}\n#{indent}# FIXME"
+            if l=~/((?:typedef )?enum(?: \w+)?) \{/
+                printf "\033[0;31manonymous #{$1}\033[0m\n"
+            else
+                printf "\033[0;31m#{l}\n#{indent}# FIXME\033[0m\n"
+                r << indent+"# #{l}\n#{indent}# FIXME"
+            end
             next
         end
         typedef = $1.strip
