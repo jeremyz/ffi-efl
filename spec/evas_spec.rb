@@ -83,8 +83,7 @@ describe "Efl::Evas #{Efl::Evas.version.full}" do
             e1.free
             e1.free
             e1.to_ptr.should be_nil
-            e2.free
-            e2.free
+            e2.to_ptr.should_not be_nil # it's a reference to a freed object, no good!
             e4 = Evas::REvas.new Native.evas_new
             e4.address.should_not == 0
             e5 = e4.dup
@@ -302,7 +301,6 @@ describe "Efl::Evas #{Efl::Evas.version.full}" do
         end
         after(:all) do
             @e.free
-            @o.free
             @pixels.free
         end
         #
