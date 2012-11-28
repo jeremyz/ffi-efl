@@ -15,9 +15,9 @@ module Efl
             def initialize parent, title, type=:elm_win_basic, &block
                 super Native.method(:elm_win_add), parent, title, type, &block
             end
-#            def inwin_add
-#                ElmInWin.new @ptr
-#            end
+            def inwin_add
+                ElmInWin.new @ptr
+            end
             def screen_position_get
                 x = FFI::MemoryPointer.new :int
                 y = FFI::MemoryPointer.new :int
