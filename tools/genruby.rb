@@ -417,6 +417,7 @@ libs << elm_h('elm_hover.h', 'ElmHover')
 libs << elm_h('elm_image.h', 'ElmImage')
 libs << elm_h('elm_index.h', 'ElmIndex')
 libs << elm_h('elm_inwin.h', 'ElmInwin')
+libs[-1][:prefix] = 'elm_win_inwin'
 libs << elm_h('elm_label.h', 'ElmLabel', ["#{NATIVE}/elementary","#{NATIVE}/elm/elm_entry"])
 libs << elm_h('elm_layout.h', 'ElmLayout', ["#{NATIVE}/edje","#{NATIVE}/elementary"])
 libs << elm_h('elm_mapbuf.h', 'ElmMapBuf')
