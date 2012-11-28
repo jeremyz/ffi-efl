@@ -446,7 +446,7 @@ libs << elm_h('elm_toolbar.h', 'ElmToolbar', ["#{NATIVE}/elementary","#{NATIVE}/
 libs << elm_h('elm_transit.h', 'ElmTransit')
 libs << elm_h('elm_video.h', 'ElmVideo')
 libs << elm_h('elm_web.h', 'ElmWeb')
-libs << elm_h('elm_win.h', 'ElmWin')
+libs << elm_h('elm_win.h', 'ElmWin', ["#{NATIVE}/ecore_evas","#{NATIVE}/elementary"])
 
 Dir.mkdir lib_path unless (File.exists? lib_path)
 #
