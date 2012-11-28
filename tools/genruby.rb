@@ -369,6 +369,7 @@ libs << {
     :requires=>["#{NATIVE}/evas","#{NATIVE}/elementary"], :constants=>[]
 }
 libs << elm_h('elm_tooltip.h', 'ElmTooltip')
+libs[-1][:prefix] = 'elm_object_tooltip'
 libs << elm_h('elm_object_item.h', 'ElmObjectItem')
 libs << elm_h('elm_object.h', 'ElmObject', ["#{NATIVE}/edje","#{NATIVE}/elementary"])
 libs << elm_h('elm_icon.h', 'ElmIcon')

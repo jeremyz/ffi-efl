@@ -8,7 +8,7 @@ module Efl
     #
     module ElmTooltip
         #
-        FCT_PREFIX = 'elm_' unless const_defined? :FCT_PREFIX
+        FCT_PREFIX = 'elm_object_tooltip_' unless const_defined? :FCT_PREFIX
         #
         def self.method_missing meth, *args, &block
             sym = Efl::MethodResolver.resolve self, meth, FCT_PREFIX
