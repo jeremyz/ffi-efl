@@ -243,6 +243,7 @@ TYPES = {
     'unsigned int' => ':uint',
     'unsigned char' => ':uchar',
     'unsigned short' => ':ushort',
+    'unsigned long int' => ':ulong',
     'unsigned long long' => ':ulong_long',
     'char *' => ':string',                                              # FIXME ?!?!
     'fd_set *' => ':pointer',
@@ -291,6 +292,11 @@ libs << {
 libs << {
     :lib=>'eina', :header=>'eina_hash.h',
     :modname=>'EinaHash', :prefix=>'eina_hash', :outfile=>'eina_hash.rb',
+    :requires=>[], :constants=>[]
+}
+libs << {
+    :lib=>'eina', :header=>'eina_file.h',
+    :modname=>'EinaFile', :prefix=>'eina_file', :outfile=>'eina_file.rb',
     :requires=>[], :constants=>[]
 }
 libs << {

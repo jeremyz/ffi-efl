@@ -32,6 +32,7 @@ for header in \
     "${INCLUDE}/eina-1/eina/eina_log.h" \
     "${INCLUDE}/eina-1/eina/eina_list.h" \
     "${INCLUDE}/eina-1/eina/eina_hash.h" \
+    "${INCLUDE}/eina-1/eina/eina_file.h" \
     "${INCLUDE}/eet-1/Eet.h" \
     "${INCLUDE}/edje-1/Edje.h" \
     "${INCLUDE}/evas-1/Evas.h" \
