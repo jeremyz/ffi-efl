@@ -264,97 +264,37 @@ EVAS_LAYER_MAX=32767
 path = File.dirname __FILE__
 lib_path = File.join path, '..', 'lib', 'efl', 'native'
 #
+def efl_h lib, header, modname, prefix=nil, outf=nil, reqs=nil, csts=nil
+    {
+        :lib=>lib,
+        :header=>header,
+        :modname=>modname,
+        :prefix=>prefix||header.downcase.sub(/\.h/,''),
+        :outfile=>outf||header.downcase.sub(/\.h/,'.rb'),
+        :requires=> reqs||[],
+        :constants=>csts||[]
+    }
+end
+#
 libs = []
-libs << {
-    :lib=>'eina', :header=>'eina_types.h',
-    :modname=>'Eina', :prefix=>'eina', :outfile=>'eina_types.rb',
-    :requires=>[], :constants=>[]
-}
-libs << {
-    :lib=>'eina', :header=>'eina_main.h',
-    :modname=>'Eina', :prefix=>'eina', :outfile=>'eina.rb',
-    :requires=>[], :constants=>[]
-}
-libs << {
-    :lib=>'eina', :header=>'eina_xattr.h',
-    :modname=>'EinaXattr', :prefix=>'eina_xattr', :outfile=>'eina_xattr.rb',
-    :requires=>[], :constants=>[]
-}
-libs << {
-    :lib=>'eina', :header=>'eina_log.h',
-    :modname=>'EinaLog', :prefix=>'eina_log', :outfile=>'eina_log.rb',
-    :requires=>[], :constants=>[]
-}
-libs << {
-    :lib=>'eina', :header=>'eina_list.h',
-    :modname=>'EinaList', :prefix=>'eina_list', :outfile=>'eina_list.rb',
-    :requires=>[], :constants=>[]
-}
-libs << {
-    :lib=>'eina', :header=>'eina_hash.h',
-    :modname=>'EinaHash', :prefix=>'eina_hash', :outfile=>'eina_hash.rb',
-    :requires=>[], :constants=>[]
-}
-libs << {
-    :lib=>'eina', :header=>'eina_file.h',
-    :modname=>'EinaFile', :prefix=>'eina_file', :outfile=>'eina_file.rb',
-    :requires=>[], :constants=>[]
-}
-libs << {
-    :lib=>'eet', :header=>'Eet.h',
-    :modname=>'Eet', :prefix=>'eet', :outfile=>'eet.rb',
-    :requires=>["#{NATIVE}/eina_xattr","#{NATIVE}/eina_list"], :constants=>[]
-}
-libs << {
-    :lib=>'evas', :header=>'Evas.h',
-    :modname=>'Evas', :prefix=>'evas', :outfile=>'evas.rb',
-    :requires=>["#{NATIVE}/eina_list"], :constants=>['EVAS_LAYER_MIN','EVAS_LAYER_MAX']
-}
-libs << {
-    :lib=>'ecore', :header=>'Ecore.h',
-    :modname=>'Ecore', :prefix=>'ecore', :outfile=>'ecore.rb',
-    :requires=>[], :constants=>[]
-}
-libs << {
-    :lib=>'ecore_input', :header=>'Ecore_Input.h',
-    :modname=>'EcoreInput', :prefix=>'ecore_event', :outfile=>'ecore_input.rb',
-    :requires=>["#{NATIVE}/eina_list"], :constants=>[]
-}
-libs << {
-    :lib=>'ecore', :header=>'Ecore_Getopt.h',
-    :modname=>'EcoreGetopt', :prefix=>'ecore_getopt', :outfile=>'ecore_getopt.rb',
-    :requires=>["#{NATIVE}/eina_list"], :constants=>[]
-}
-libs << {
-    :lib=>'ecore_evas', :header=>'Ecore_Evas.h',
-    :modname=>'EcoreEvas', :prefix=>'ecore_evas', :outfile=>'ecore_evas.rb',
-    :requires=>["#{NATIVE}/ecore_getopt","#{NATIVE}/evas"], :constants=>[]
-}
-libs << {
-    :lib=>'eio', :header=>'Eio.h',
-    :modname=>'Edje', :prefix=>'eio', :outfile=>'eio.rb',
-    :requires=>["#{NATIVE}/eina_file","#{NATIVE}/eet"], :constants=>[]
-}
-libs << {
-    :lib=>'edje', :header=>'Edje.h',
-    :modname=>'Edje', :prefix=>'edje', :outfile=>'edje.rb',
-    :requires=>["#{NATIVE}/evas"], :constants=>[]
-}
-libs << {
-    :lib=>'ethumb', :header=>'Ethumb.h',
-    :modname=>'Ethumb', :prefix=>'ethumb', :outfile=>'ethumb.rb',
-    :requires=>[], :constants=>[]
-}
-libs << {
-    :lib=>'ethumb_client', :header=>'Ethumb_Client.h',
-    :modname=>'EthumbClient', :prefix=>'ethumb_client', :outfile=>'ethumb_client.rb',
-    :requires=>["#{NATIVE}/ethumb"], :constants=>[]
-}
-libs << {
-    :lib=>'ethumb', :header=>'Ethumb_Plugin.h',
-    :modname=>'EthumbPlugin', :prefix=>'ethumb_plugin', :outfile=>'ethumb_plugin.rb',
-    :requires=>["#{NATIVE}/evas","#{NATIVE}/ecore_evas","#{NATIVE}/ethumb"], :constants=>[]
-}
+libs << efl_h('eina','eina_types.h','Eina','eina')
+libs << efl_h('eina','eina_main.h','Eina','eina','eina.rb')
+libs << efl_h('eina','eina_xattr.h','EinaXattr')
+libs << efl_h('eina','eina_log.h','EinaLog')
+libs << efl_h('eina','eina_list.h','EinaList')
+libs << efl_h('eina','eina_hash.h','EinaHash')
+libs << efl_h('eina','eina_file.h','EinaFile')
+libs << efl_h('eet','Eet.h','Eet',nil,nil,["#{NATIVE}/eina_xattr","#{NATIVE}/eina_list"])
+libs << efl_h('evas','Evas.h','Evas',nil,nil,["#{NATIVE}/eina_list"],['EVAS_LAYER_MIN','EVAS_LAYER_MAX'])
+libs << efl_h('ecore','Ecore.h','Ecore')
+libs << efl_h('ecore_input','Ecore_Input.h','EcoreInput','ecore_event',nil,["#{NATIVE}/eina_list"])
+libs << efl_h('ecore','Ecore_Getopt.h','EcoreGetopt',nil,nil,["#{NATIVE}/eina_list"])
+libs << efl_h('ecore_evas','Ecore_Evas.h','EcoreEvas',nil,nil,["#{NATIVE}/ecore_getopt","#{NATIVE}/evas"])
+libs << efl_h('eio','Eio.h','Eio',nil,nil,["#{NATIVE}/eina_file","#{NATIVE}/eet"])
+libs << efl_h('edje','Edje.h','Edje',nil,nil,["#{NATIVE}/evas"])
+libs << efl_h('ethumb','Ethumb.h','Ethumb')
+libs << efl_h('ethumb_client','Ethumb_Client.h','EthumbClient',nil,nil,["#{NATIVE}/ethumb"])
+libs << efl_h('ethumb','Ethumb_Plugin.h','EthumbPlugin',nil,nil,["#{NATIVE}/evas","#{NATIVE}/ecore_evas","#{NATIVE}/ethumb"])
 #
 ELM_LIB='elementary'
 #
