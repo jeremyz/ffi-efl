@@ -53,6 +53,7 @@ for header in \
     "${INCLUDE}/efreet-1/efreet_menu.h" \
     "${INCLUDE}/efreet-1/efreet_uri.h" \
     "${INCLUDE}/efreet-1/efreet_ini.h" \
+    "${INCLUDE}/efreet-1/efreet_utils.h" \
     "${INCLUDE}/efreet-1/Efreet_Mime.h" \
     "${INCLUDE}/efreet-1/Efreet_Trash.h" \
     "${INCLUDE}/ethumb-1/Ethumb.h" \
