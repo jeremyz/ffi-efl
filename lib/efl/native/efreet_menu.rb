@@ -6,7 +6,7 @@ require 'efl/native/efreet_desktop'
 #
 module Efl
     #
-    module Efreet
+    module EfreetMenu
         #
         FCT_PREFIX = 'efreet_menu_' unless const_defined? :FCT_PREFIX
         #

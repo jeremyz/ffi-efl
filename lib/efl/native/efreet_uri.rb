@@ -5,7 +5,7 @@ require 'efl/native'
 #
 module Efl
     #
-    module Efreet
+    module EfreetUri
         #
         FCT_PREFIX = 'efreet_uri_' unless const_defined? :FCT_PREFIX
         #

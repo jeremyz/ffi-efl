@@ -6,7 +6,7 @@ require 'efl/native/eina_list'
 #
 module Efl
     #
-    module Efreet
+    module EfreetBase
         #
         FCT_PREFIX = 'efreet_base_' unless const_defined? :FCT_PREFIX
         #
