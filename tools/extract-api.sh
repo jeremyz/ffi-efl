@@ -34,7 +34,6 @@ for header in \
     "${INCLUDE}/eina-1/eina/eina_hash.h" \
     "${INCLUDE}/eina-1/eina/eina_file.h" \
     "${INCLUDE}/eet-1/Eet.h" \
-    "${INCLUDE}/edje-1/Edje.h" \
     "${INCLUDE}/evas-1/Evas.h" \
     "${INCLUDE}/evas-1/Evas_GL.h" \
     "${INCLUDE}/ecore-1/Ecore.h" \
@@ -45,6 +44,7 @@ for header in \
     "${INCLUDE}/ecore-1/Ecore_Fb.h" \
     "${INCLUDE}/ecore-1/Ecore_File.h" \
     "${INCLUDE}/eio-1/Eio.h" \
+    "${INCLUDE}/edje-1/Edje.h" \
     "${INCLUDE}/ethumb-1/Ethumb.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Client.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Plugin.h" \

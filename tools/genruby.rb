@@ -311,11 +311,6 @@ libs << {
     :requires=>["#{NATIVE}/eina_list"], :constants=>['EVAS_LAYER_MIN','EVAS_LAYER_MAX']
 }
 libs << {
-    :lib=>'edje', :header=>'Edje.h',
-    :modname=>'Edje', :prefix=>'edje', :outfile=>'edje.rb',
-    :requires=>["#{NATIVE}/evas"], :constants=>[]
-}
-libs << {
     :lib=>'ecore', :header=>'Ecore.h',
     :modname=>'Ecore', :prefix=>'ecore', :outfile=>'ecore.rb',
     :requires=>[], :constants=>[]
@@ -339,6 +334,11 @@ libs << {
     :lib=>'eio', :header=>'Eio.h',
     :modname=>'Edje', :prefix=>'eio', :outfile=>'eio.rb',
     :requires=>["#{NATIVE}/eina_file","#{NATIVE}/eet"], :constants=>[]
+}
+libs << {
+    :lib=>'edje', :header=>'Edje.h',
+    :modname=>'Edje', :prefix=>'edje', :outfile=>'edje.rb',
+    :requires=>["#{NATIVE}/evas"], :constants=>[]
 }
 libs << {
     :lib=>'ethumb', :header=>'Ethumb.h',
