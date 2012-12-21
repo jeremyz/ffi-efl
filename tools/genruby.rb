@@ -300,6 +300,7 @@ libs << efl_h('efreet','efreet_desktop.h','EfreetDesktop','efreet_desktop',nil,[
 libs << efl_h('efreet','efreet_menu.h','EfreetMenu','efreet_menu',nil,["#{NATIVE}/efreet_desktop"])
 libs << efl_h('efreet','efreet_uri.h','EfreetUri','efreet_uri')
 libs << efl_h('efreet_mime','Efreet_Mime.h','EfreetMime')
+libs << efl_h('efreet_trash','Efreet_Trash.h','EfreetTrash',nil,nil,["#{NATIVE}/eina_list","#{NATIVE}/efreet_uri"])
 libs << efl_h('ethumb','Ethumb.h','Ethumb')
 libs << efl_h('ethumb_client','Ethumb_Client.h','EthumbClient',nil,nil,["#{NATIVE}/ethumb"])
 libs << efl_h('ethumb','Ethumb_Plugin.h','EthumbPlugin',nil,nil,["#{NATIVE}/evas","#{NATIVE}/ecore_evas","#{NATIVE}/ethumb"])
