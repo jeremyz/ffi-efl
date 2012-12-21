@@ -294,6 +294,7 @@ libs << efl_h('eio','Eio.h','Eio',nil,nil,["#{NATIVE}/eina_file","#{NATIVE}/eet"
 libs << efl_h('embryo','Embryo.h','Embryo')
 libs << efl_h('edje','Edje.h','Edje',nil,nil,["#{NATIVE}/evas"])
 libs << efl_h('efreet','Efreet.h','Efreet')
+libs << efl_h('efreet','efreet_base.h','Efreet',nil,nil,["#{NATIVE}/eina_list"])
 libs << efl_h('ethumb','Ethumb.h','Ethumb')
 libs << efl_h('ethumb_client','Ethumb_Client.h','EthumbClient',nil,nil,["#{NATIVE}/ethumb"])
 libs << efl_h('ethumb','Ethumb_Plugin.h','EthumbPlugin',nil,nil,["#{NATIVE}/evas","#{NATIVE}/ecore_evas","#{NATIVE}/ethumb"])

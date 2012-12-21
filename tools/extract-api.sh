@@ -47,6 +47,7 @@ for header in \
     "${INCLUDE}/embryo-1/Embryo.h" \
     "${INCLUDE}/edje-1/Edje.h" \
     "${INCLUDE}/efreet-1/Efreet.h" \
+    "${INCLUDE}/efreet-1/efreet_base.h" \
     "${INCLUDE}/ethumb-1/Ethumb.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Client.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Plugin.h" \
