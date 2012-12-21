@@ -291,6 +291,7 @@ libs << efl_h('ecore_input','Ecore_Input.h','EcoreInput','ecore_event',nil,["#{N
 libs << efl_h('ecore','Ecore_Getopt.h','EcoreGetopt',nil,nil,["#{NATIVE}/eina_list"])
 libs << efl_h('ecore_evas','Ecore_Evas.h','EcoreEvas',nil,nil,["#{NATIVE}/ecore_getopt","#{NATIVE}/evas"])
 libs << efl_h('eio','Eio.h','Eio',nil,nil,["#{NATIVE}/eina_file","#{NATIVE}/eet"])
+libs << efl_h('embryo','Embryo.h','Embryo')
 libs << efl_h('edje','Edje.h','Edje',nil,nil,["#{NATIVE}/evas"])
 libs << efl_h('ethumb','Ethumb.h','Ethumb')
 libs << efl_h('ethumb_client','Ethumb_Client.h','EthumbClient',nil,nil,["#{NATIVE}/ethumb"])
