@@ -7,7 +7,7 @@ require 'efl/native/eet'
 #
 module Efl
     #
-    module Edje
+    module Eio
         #
         FCT_PREFIX = 'eio_' unless const_defined? :FCT_PREFIX
         #
