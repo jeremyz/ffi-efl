@@ -232,6 +232,7 @@ TYPES = {
     'long' => ':long',
     'short' => ':short',
     'float' => ':float',
+    'mode_t' => ':int',
     'pid_t' => ':ulong',
     'time_t' => ':ulong',
     'size_t' => ':ulong',
@@ -333,6 +334,11 @@ libs << {
     :lib=>'ecore_evas', :header=>'Ecore_Evas.h',
     :modname=>'EcoreEvas', :prefix=>'ecore_evas', :outfile=>'ecore_evas.rb',
     :requires=>["#{NATIVE}/ecore_getopt","#{NATIVE}/evas"], :constants=>[]
+}
+libs << {
+    :lib=>'eio', :header=>'Eio.h',
+    :modname=>'Edje', :prefix=>'eio', :outfile=>'eio.rb',
+    :requires=>["#{NATIVE}/eina_file","#{NATIVE}/eet"], :constants=>[]
 }
 libs << {
     :lib=>'ethumb', :header=>'Ethumb.h',

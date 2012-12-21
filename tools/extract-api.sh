@@ -44,6 +44,7 @@ for header in \
     "${INCLUDE}/ecore-1/Ecore_Evas.h" \
     "${INCLUDE}/ecore-1/Ecore_Fb.h" \
     "${INCLUDE}/ecore-1/Ecore_File.h" \
+    "${INCLUDE}/eio-1/Eio.h" \
     "${INCLUDE}/ethumb-1/Ethumb.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Client.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Plugin.h" \
