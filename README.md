@@ -4,12 +4,12 @@
 
 ## DESCRIPTION:
 
-A ruby-ffi binding to [efl](http://www.enlightenment.org/p.php?p=docs&l=en) libraries (Enlightenment Foundation Libraries).
+A ruby ffi binding to [efl](http://www.enlightenment.org/p.php?p=docs&l=en) libraries (Enlightenment Foundation Libraries).
 
 ## FEATURES/PROBLEMS:
 
 * pretty young project ...
-* binding is complete but lacks ruby code and tests
+* binding is complete but lacks high level ruby code and tests
 
 ## SYNOPSIS:
 
@@ -61,12 +61,13 @@ A ruby-ffi binding to [efl](http://www.enlightenment.org/p.php?p=docs&l=en) libr
 
 For more examples you may look at:
 
-* the [spec/](https://github.com/jeremyz/ffi-efl/tree/master/spec) and [test/](https://github.com/jeremyz/ffi-efl/tree/master/test) folders
+* the [test/](https://github.com/jeremyz/ffi-efl/tree/master/test) and [spec/](https://github.com/jeremyz/ffi-efl/tree/master/spec) subdirs
 
 ## REQUIREMENTS:
 
 * You need a sane enlightenment foundation libraries installation,
-  for this you might like to use [easy_e17.sh](http://omicron.homeip.net/projects/#easy_e17.sh),
+  for this you might like to use [build_efl_stable.sh](https://github.com/jeremyz/bin/blob/master/build_efl_stable.sh).
+  or the heavy metal [easy_e17.sh](http://omicron.homeip.net/projects/#easy_e17.sh),
   or my git aware fork [easy_e17.sh](https://github.com/jeremyz/bin/blob/master/easy_e17.sh).
 
 ## DOWNLOAD/INSTALL:
@@ -79,7 +80,7 @@ or from the git repository on github:
 
   git clone git://github.com/jeremyz/ffi-efl.git
   cd ffi-efl
-  rake gem:install
+  rake install
 
 ## RESOURCES:
 
@@ -88,7 +89,7 @@ You can find this project in a few places:
 Online repositories:
 
 * https://github.com/jeremyz/ffi-efl
-* http://cgit.asynk.ch/cgi-bin/cgit/ffi-efl/
+* http://cgit.asynk.ch/ffi-efl/
 
 Gem:
 
