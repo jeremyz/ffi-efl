@@ -423,8 +423,8 @@ libs.each do |lib|
     printf "\033[1;33mdone\033[0;0m\n"
 end
 libs.each do |lib|
-    printf "\033[1;33mgenerate\033[0;0m %-50s\033[0;0m",lib[:outpath]
     outpath = File.join lib_path, lib[:outfile]
+    printf "\033[1;33mgenerate\033[0;0m %-50s\033[0;0m",outpath
     outdir = File.dirname outpath
     Dir.mkdir outdir unless File.exists? outdir
     File.open(File.join(outpath),'w:utf-8') do |f|
