@@ -1,6 +1,7 @@
-2012-XX-YY Jérémy Zurcher <jeremy@asynk.ch>
+2012-11-29 Jérémy Zurcher <jeremy@asynk.ch>
 	* release 0.0.15
 	* add ethumb ethumb_client and ethumb_plugin
+	* spec fixes and various API updates
 
 2012-07-10 Jérémy Zurcher <jeremy@asynk.ch>
 	* release 0.0.14
