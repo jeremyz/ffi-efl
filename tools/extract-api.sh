@@ -52,6 +52,7 @@ for header in \
     "${INCLUDE}/efreet-1/efreet_desktop.h" \
     "${INCLUDE}/efreet-1/efreet_menu.h" \
     "${INCLUDE}/efreet-1/efreet_uri.h" \
+    "${INCLUDE}/efreet-1/Efreet_Mime.h" \
     "${INCLUDE}/ethumb-1/Ethumb.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Client.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Plugin.h" \
