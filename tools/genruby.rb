@@ -299,6 +299,7 @@ libs << efl_h('efreet','efreet_icon.h','EfreetIcon','efreet_icon',nil,["#{NATIVE
 libs << efl_h('efreet','efreet_desktop.h','EfreetDesktop','efreet_desktop',nil,["#{NATIVE}/eina_list"])
 libs << efl_h('efreet','efreet_menu.h','EfreetMenu','efreet_menu',nil,["#{NATIVE}/efreet_desktop"])
 libs << efl_h('efreet','efreet_uri.h','EfreetUri','efreet_uri')
+libs << efl_h('efreet','efreet_ini.h','EfreetIni','efreet_ini')
 libs << efl_h('efreet_mime','Efreet_Mime.h','EfreetMime')
 libs << efl_h('efreet_trash','Efreet_Trash.h','EfreetTrash',nil,nil,["#{NATIVE}/eina_list","#{NATIVE}/efreet_uri"])
 libs << efl_h('ethumb','Ethumb.h','Ethumb')
