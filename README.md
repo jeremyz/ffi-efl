@@ -9,7 +9,7 @@ A ruby ffi binding to [efl](http://www.enlightenment.org/p.php?p=docs&l=en) libr
 ## FEATURES/PROBLEMS:
 
 * support ruby 1.9.x NOT 1.8.x
-* support efl 1.7.3, NOT dev branch 1.8.x
+* support efl 1.7.x, NOT dev branch 1.8.x
 * binding is almost complete but lacks high level ruby code and tests
 
 ## SYNOPSIS:
