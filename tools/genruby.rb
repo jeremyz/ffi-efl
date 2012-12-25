@@ -140,7 +140,7 @@ def gen_callbacks path, indent
     r = []
     open(path+'-callbacks','r').readlines.each do |l|
         l.strip!
-        if not l=~/^\s*typedef\s+(.*)((?:\(\*?\w+\)| \*?\w+))\s*\((.*)\);/
+        if not l=~/^\s*typedef\s+(.*)((?:\(\*\s*?\w+\)| \*?\w+))\s*\((.*)\);/
             printf "\033[0;31m# #{l}\n#{indent}# FIXME\033[0m\n"
             r << indent+"# #{l}\n#{indent}# FIXME"
             next
@@ -148,7 +148,7 @@ def gen_callbacks path, indent
         ret = $1.strip
         name = $2.strip
         args = $3.split(',').collect { |arg| get_type_from_arg arg, l }.join ', '
-        t = name.sub(/\(/,'').sub(/\)/,'').sub(/\*/,'')
+        t = name.sub(/^\(\* */,'').sub(/\)$/,'')
         sym = ( t.downcase=~/_cb$/ ? t : t+'_cb' )
         tsym = set_type t, sym
         r << indent+"# #{l}"
