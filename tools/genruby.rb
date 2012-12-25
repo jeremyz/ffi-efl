@@ -253,6 +253,7 @@ TYPES = {
     'struct tm *' => ':pointer',
     'struct timeval *' => ':pointer',
     'struct sockaddr *' => ':pointer',
+    'DBusBusType' => ':int',
 }
 ETYPES = {
     'Eina_Bool' => ':bool'
@@ -303,6 +304,7 @@ libs << efl_h('efreet','efreet_ini.h','EfreetIni','efreet_ini')
 libs << efl_h('efreet','efreet_utils.h','EfreetUtils','efreet_utils',nil,["#{NATIVE}/efreet_desktop"])
 libs << efl_h('efreet_mime','Efreet_Mime.h','EfreetMime')
 libs << efl_h('efreet_trash','Efreet_Trash.h','EfreetTrash',nil,nil,["#{NATIVE}/eina_list","#{NATIVE}/efreet_uri"])
+libs << efl_h('edbus','E_DBus.h','Edbus',nil,'edbus.rb',["#{NATIVE}/eina_list"])
 libs << efl_h('ethumb','Ethumb.h','Ethumb')
 libs << efl_h('ethumb_client','Ethumb_Client.h','EthumbClient',nil,nil,["#{NATIVE}/ethumb"])
 libs << efl_h('ethumb','Ethumb_Plugin.h','EthumbPlugin',nil,nil,["#{NATIVE}/evas","#{NATIVE}/ecore_evas","#{NATIVE}/ethumb"])
