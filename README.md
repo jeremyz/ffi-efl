@@ -68,8 +68,6 @@ For more examples you may look at:
 
 * You need a sane enlightenment foundation libraries installation,
   for this you might like to use [build_efl_stable.sh](https://github.com/jeremyz/bin/blob/master/build_efl_stable.sh).
-  or the heavy metal [easy_e17.sh](http://omicron.homeip.net/projects/#easy_e17.sh),
-  or my git aware fork [easy_e17.sh](https://github.com/jeremyz/bin/blob/master/easy_e17.sh).
 
 ## DOWNLOAD/INSTALL:
 
