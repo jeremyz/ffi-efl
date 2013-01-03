@@ -22,6 +22,17 @@ module Efl
         #
         ffi_lib 'enotify'
         #
+        # ENUMS
+        # typedef enum E_Notification_Urgency {...} E_Notification_Urgency;
+        enum :e_notification_urgency, [ :e_notification_urgency_low, 0, :e_notification_urgency_normal, 1, :e_notification_urgency_critical, 2 ]
+        # typedef enum E_Closed_Action {...} E_Closed_Action;
+        enum :e_notification_closed_action, [ :e_notification_closed_expired, 0, :e_notification_closed_dismissed, 1, :e_notification_closed_requested, 2,
+            :e_notification_closed_undefined, 3 ]
+
+        # typedef enum E_Notification_Hint_Type {...} E_Notification_Hint_Type;
+        enum :e_notification_hint_type, [ :e_notification_hint_urgency, (1 << 0), :e_notification_hint_category, (1 << 1), :e_notification_hint_desktop, (1 << 2),
+            :e_notification_hint_sound_file, (1 << 3), :e_notification_hint_transient, (1 << 4), :e_notification_hint_resident, (1 << 5),
+            :e_notification_hint_action_icons, (1 << 6), :e_notification_hint_suppress_sound, 0x10, :e_notification_hint_xy, 0x20, :e_notification_hint_image_data, 0x40 ]
         # TYPEDEFS
         # typedef struct E_Notification_Image E_Notification_Image;
         typedef :pointer, :e_notification_image
