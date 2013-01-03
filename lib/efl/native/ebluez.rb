@@ -6,7 +6,7 @@ require 'efl/native/edbus'
 #
 module Efl
     #
-    module Edbus
+    module Ebluez
         #
         FCT_PREFIX = 'e_bluez_' unless const_defined? :FCT_PREFIX
         #

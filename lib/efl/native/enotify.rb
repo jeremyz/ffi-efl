@@ -6,7 +6,7 @@ require 'efl/native/edbus'
 #
 module Efl
     #
-    module Edbus
+    module Enotify
         #
         FCT_PREFIX = 'e_notification_' unless const_defined? :FCT_PREFIX
         #
