@@ -246,6 +246,7 @@ TYPES = {
     'unsigned short' => ':ushort',
     'unsigned long int' => ':ulong',
     'unsigned long long' => ':ulong_long',
+    'uint64_t' => ':ulong_long',
     'char *' => ':string',                                              # FIXME ?!?!
     'fd_set *' => ':pointer',
     'FILE *' => ':pointer',
@@ -307,6 +308,7 @@ libs << efl_h('efreet_trash','Efreet_Trash.h','EfreetTrash',nil,nil,["#{NATIVE}/
 libs << efl_h('edbus','E_DBus.h','Edbus',nil,'edbus.rb',["#{NATIVE}/eina_list"])
 libs << efl_h('enotify','E_Notify.h','Enotify','e_notification','enotify.rb',["#{NATIVE}/edbus"])
 libs << efl_h('ebluez','E_Bluez.h','Ebluez','e_bluez','ebluez.rb',["#{NATIVE}/edbus"])
+libs << efl_h('ehal','E_Hal.h','Ehal','e_hal','ehal.rb',["#{NATIVE}/edbus"])
 libs << efl_h('ethumb','Ethumb.h','Ethumb')
 libs << efl_h('ethumb_client','Ethumb_Client.h','EthumbClient',nil,nil,["#{NATIVE}/ethumb"])
 libs << efl_h('ethumb','Ethumb_Plugin.h','EthumbPlugin',nil,nil,["#{NATIVE}/evas","#{NATIVE}/ecore_evas","#{NATIVE}/ethumb"])

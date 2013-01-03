@@ -59,6 +59,7 @@ for header in \
     "${INCLUDE}/e_dbus-1/E_DBus.h" \
     "${INCLUDE}/e_dbus-1/E_Notify.h" \
     "${INCLUDE}/e_dbus-1/E_Bluez.h" \
+    "${INCLUDE}/e_dbus-1/E_Hal.h" \
     "${INCLUDE}/ethumb-1/Ethumb.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Client.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Plugin.h" \
