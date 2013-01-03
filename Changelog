@@ -3,6 +3,8 @@
 	* add enotify native binding
 	* add ebluez native binding
 	* add ehal native binding
+	* add eofono native binding
+	* add eukit native binding
 
 2012-12-21 Jérémy Zurcher <jeremy@asynk.ch>
 	* release 0.0.16
