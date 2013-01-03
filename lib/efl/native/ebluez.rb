@@ -92,9 +92,9 @@ module Efl
         # EAPI E_Bluez_Element * e_bluez_element_get(const char *path);
         [ :e_bluez_element_get, [ :string ], :e_bluez_element ],
         # EAPI void e_bluez_element_listener_add(E_Bluez_Element *element, void (*cb)(void *data, const E_Bluez_Element *element), const void *data, void (*free_data)(void *data));
-        # FIXME
+        [ :e_bluez_element_listener_add, [ :e_bluez_element, (callback [:pointer, :e_bluez_element], :void), :pointer, (callback [:pointer], :void) ], :void ],
         # EAPI void e_bluez_element_listener_del(E_Bluez_Element *element, void (*cb)(void *data, const E_Bluez_Element *element), const void *data);
-        # FIXME
+        [ :e_bluez_element_listener_del, [ :e_bluez_element, (callback [:pointer, :e_bluez_element], :void), :pointer ], :void ],
         # EAPI int e_bluez_element_ref(E_Bluez_Element *element);
         [ :e_bluez_element_ref, [ :e_bluez_element ], :int ],
         # EAPI int e_bluez_element_unref(E_Bluez_Element *element);
