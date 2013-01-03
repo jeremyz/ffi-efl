@@ -57,6 +57,7 @@ for header in \
     "${INCLUDE}/efreet-1/Efreet_Mime.h" \
     "${INCLUDE}/efreet-1/Efreet_Trash.h" \
     "${INCLUDE}/e_dbus-1/E_DBus.h" \
+    "${INCLUDE}/e_dbus-1/E_Notify.h" \
     "${INCLUDE}/ethumb-1/Ethumb.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Client.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Plugin.h" \

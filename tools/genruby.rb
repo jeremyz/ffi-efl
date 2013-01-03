@@ -305,6 +305,7 @@ libs << efl_h('efreet','efreet_utils.h','EfreetUtils','efreet_utils',nil,["#{NAT
 libs << efl_h('efreet_mime','Efreet_Mime.h','EfreetMime')
 libs << efl_h('efreet_trash','Efreet_Trash.h','EfreetTrash',nil,nil,["#{NATIVE}/eina_list","#{NATIVE}/efreet_uri"])
 libs << efl_h('edbus','E_DBus.h','Edbus',nil,'edbus.rb',["#{NATIVE}/eina_list"])
+libs << efl_h('enotify','E_Notify.h','Edbus','e_notification','enotify.rb',["#{NATIVE}/edbus"])
 libs << efl_h('ethumb','Ethumb.h','Ethumb')
 libs << efl_h('ethumb_client','Ethumb_Client.h','EthumbClient',nil,nil,["#{NATIVE}/ethumb"])
 libs << efl_h('ethumb','Ethumb_Plugin.h','EthumbPlugin',nil,nil,["#{NATIVE}/evas","#{NATIVE}/ecore_evas","#{NATIVE}/ethumb"])
