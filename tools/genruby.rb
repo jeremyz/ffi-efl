@@ -257,6 +257,7 @@ TYPES = {
     'struct timeval *' => ':pointer',
     'struct sockaddr *' => ':pointer',
     'DBusBusType' => ':int',
+    'E_Notification_Closed_Reason' => ':e_notification_closed_reason',   # cheating
 }
 ETYPES = {
     'Eina_Bool' => ':bool'
@@ -309,6 +310,7 @@ libs << efl_h('efreet_mime','Efreet_Mime.h','EfreetMime')
 libs << efl_h('efreet_trash','Efreet_Trash.h','EfreetTrash',nil,nil,["#{NATIVE}/eina_list","#{NATIVE}/efreet_uri"])
 libs << efl_h('edbus','E_DBus.h','Edbus',nil,'edbus.rb',["#{NATIVE}/eina_list"])
 libs << efl_h('enotify','E_Notify.h','Enotify','e_notification','enotify.rb',["#{NATIVE}/evas","#{NATIVE}/edbus"])
+libs << efl_h('enotify','E_Notification_Daemon.h','EnotificationDaemon','e_notification_daemon','enotification_daemon.rb',["#{NATIVE}/enotify"])
 libs << efl_h('ebluez','E_Bluez.h','Ebluez','e_bluez','ebluez.rb',["#{NATIVE}/edbus"])
 libs << efl_h('eofono','E_Ofono.h','Eofono','e_ofono','eofono.rb',["#{NATIVE}/edbus"])
 libs << efl_h('eukit','E_Ukit.h','Eukit','e_ukit','eukit.rb',["#{NATIVE}/edbus"])

@@ -58,6 +58,7 @@ for header in \
     "${INCLUDE}/efreet-1/Efreet_Trash.h" \
     "${INCLUDE}/e_dbus-1/E_DBus.h" \
     "${INCLUDE}/e_dbus-1/E_Notify.h" \
+    "${INCLUDE}/e_dbus-1/E_Notification_Daemon.h" \
     "${INCLUDE}/e_dbus-1/E_Bluez.h" \
     "${INCLUDE}/e_dbus-1/E_Hal.h" \
     "${INCLUDE}/e_dbus-1/E_Ofono.h" \
