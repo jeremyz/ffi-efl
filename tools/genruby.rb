@@ -318,7 +318,7 @@ libs << efl_h('econnman0_7x','E_Connman.h','EConnman','e_connman','econnman.rb',
 libs << efl_h('eeze','Eeze.h','Eeze',nil,nil,["#{NATIVE}/eina_list"])
 libs << efl_h('eeze','Eeze_Disk.h','EezeDisk')
 libs << efl_h('eeze','Eeze_Net.h','EezeNet',nil,nil,["#{NATIVE}/eina_list"])
-libs << efl_h('emotion','Emotion.h','Emotion')#,nil,nil,["#{NATIVE}/eina_list"])
+libs << efl_h('emotion','Emotion.h','Emotion',nil,nil,["#{NATIVE}/evas"])
 libs << efl_h('ethumb','Ethumb.h','Ethumb')
 libs << efl_h('ethumb_client','Ethumb_Client.h','EthumbClient',nil,nil,["#{NATIVE}/ethumb"])
 libs << efl_h('ethumb','Ethumb_Plugin.h','EthumbPlugin',nil,nil,["#{NATIVE}/evas","#{NATIVE}/ecore_evas","#{NATIVE}/ethumb"])
