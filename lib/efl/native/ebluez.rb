@@ -115,7 +115,7 @@ module Efl
         [ :e_bluez_element_property_dict_set_full, [ :e_bluez_element, :string, :string, :int, :pointer, :e_dbus_method_return_cb, :pointer ], :bool
             ],
         # EAPI void e_bluez_element_properties_list(const E_Bluez_Element *element, Eina_Bool (*cb)(void *data, const E_Bluez_Element *element, const char *name, int type, const void *value), const void *data);
-        # FIXME
+        [ :e_bluez_element_properties_list, [ :e_bluez_element, (callback [:pointer, :e_bluez_element, :string, :int, :pointer], :bool), :pointer ], :void ],
         # EAPI Eina_Bool e_bluez_element_property_type_get_stringshared(const E_Bluez_Element *element, const char *name, int *type);
         [ :e_bluez_element_property_type_get_stringshared, [ :e_bluez_element, :string, :pointer ], :bool ],
         # EAPI Eina_Bool e_bluez_element_property_type_get(const E_Bluez_Element *element, const char *name, int *type);
