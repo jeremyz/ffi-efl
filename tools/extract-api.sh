@@ -67,6 +67,7 @@ for header in \
     "${INCLUDE}/eeze-1/Eeze.h" \
     "${INCLUDE}/eeze-1/Eeze_Disk.h" \
     "${INCLUDE}/eeze-1/Eeze_Net.h" \
+    "${INCLUDE}/emotion-1/Emotion.h" \
     "${INCLUDE}/ethumb-1/Ethumb.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Client.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Plugin.h" \

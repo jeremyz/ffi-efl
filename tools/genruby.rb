@@ -14,8 +14,8 @@ def set_type t, sym
         printf "\033[0;35m%40s\033[0m => \033[0;36m%s\033[0m\n",t,v
         return v
     else
-        printf "\033[0;31mERROR type #{t} => #{sym} alredy exists!\033[0m\n"
-        exit 1
+        printf "\033[0;31mERROR type #{t} => #{sym} already exists!\033[0m\n"
+        # exit 1
     end
 end
 #
@@ -318,6 +318,7 @@ libs << efl_h('econnman0_7x','E_Connman.h','EConnman','e_connman','econnman.rb',
 libs << efl_h('eeze','Eeze.h','Eeze',nil,nil,["#{NATIVE}/eina_list"])
 libs << efl_h('eeze','Eeze_Disk.h','EezeDisk')
 libs << efl_h('eeze','Eeze_Net.h','EezeNet',nil,nil,["#{NATIVE}/eina_list"])
+libs << efl_h('emotion','Emotion.h','Emotion')#,nil,nil,["#{NATIVE}/eina_list"])
 libs << efl_h('ethumb','Ethumb.h','Ethumb')
 libs << efl_h('ethumb_client','Ethumb_Client.h','EthumbClient',nil,nil,["#{NATIVE}/ethumb"])
 libs << efl_h('ethumb','Ethumb_Plugin.h','EthumbPlugin',nil,nil,["#{NATIVE}/evas","#{NATIVE}/ecore_evas","#{NATIVE}/ethumb"])
