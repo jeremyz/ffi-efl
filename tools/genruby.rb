@@ -315,6 +315,7 @@ libs << efl_h('ebluez','E_Bluez.h','Ebluez','e_bluez','ebluez.rb',["#{NATIVE}/ed
 libs << efl_h('eofono','E_Ofono.h','Eofono','e_ofono','eofono.rb',["#{NATIVE}/edbus"])
 libs << efl_h('eukit','E_Ukit.h','Eukit','e_ukit','eukit.rb',["#{NATIVE}/edbus"])
 libs << efl_h('ehal','E_Hal.h','Ehal','e_hal','ehal.rb',["#{NATIVE}/edbus"])
+libs << efl_h('econnman0_7x','E_Connman.h','EConnman','e_connman','econnman.rb',["#{NATIVE}/edbus"])
 libs << efl_h('ethumb','Ethumb.h','Ethumb')
 libs << efl_h('ethumb_client','Ethumb_Client.h','EthumbClient',nil,nil,["#{NATIVE}/ethumb"])
 libs << efl_h('ethumb','Ethumb_Plugin.h','EthumbPlugin',nil,nil,["#{NATIVE}/evas","#{NATIVE}/ecore_evas","#{NATIVE}/ethumb"])

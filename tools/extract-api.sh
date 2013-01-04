@@ -63,6 +63,7 @@ for header in \
     "${INCLUDE}/e_dbus-1/E_Hal.h" \
     "${INCLUDE}/e_dbus-1/E_Ofono.h" \
     "${INCLUDE}/e_dbus-1/E_Ukit.h" \
+    "${INCLUDE}/e_dbus-1/connman0_7x/E_Connman.h" \
     "${INCLUDE}/ethumb-1/Ethumb.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Client.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Plugin.h" \
