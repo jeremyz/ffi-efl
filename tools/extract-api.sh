@@ -64,6 +64,9 @@ for header in \
     "${INCLUDE}/e_dbus-1/E_Ofono.h" \
     "${INCLUDE}/e_dbus-1/E_Ukit.h" \
     "${INCLUDE}/e_dbus-1/connman0_7x/E_Connman.h" \
+    "${INCLUDE}/eeze-1/Eeze.h" \
+    "${INCLUDE}/eeze-1/Eeze_Disk.h" \
+    "${INCLUDE}/eeze-1/Eeze_Net.h" \
     "${INCLUDE}/ethumb-1/Ethumb.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Client.h" \
     "${INCLUDE}/ethumb-1/Ethumb_Plugin.h" \

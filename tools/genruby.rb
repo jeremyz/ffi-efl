@@ -242,6 +242,7 @@ TYPES = {
     'unsigned int' => ':uint',
     'unsigned char' => ':uchar',
     'unsigned short' => ':ushort',
+    'unsigned long' => ':ulong',
     'unsigned long int' => ':ulong',
     'unsigned long long' => ':ulong_long',
     'uint32_t' => ':uint',
@@ -314,6 +315,9 @@ libs << efl_h('eofono','E_Ofono.h','Eofono','e_ofono','eofono.rb',["#{NATIVE}/ed
 libs << efl_h('eukit','E_Ukit.h','Eukit','e_ukit','eukit.rb',["#{NATIVE}/edbus"])
 libs << efl_h('ehal','E_Hal.h','Ehal','e_hal','ehal.rb',["#{NATIVE}/edbus"])
 libs << efl_h('econnman0_7x','E_Connman.h','EConnman','e_connman','econnman.rb',["#{NATIVE}/edbus"])
+libs << efl_h('eeze','Eeze.h','Eeze',nil,nil,["#{NATIVE}/eina_list"])
+libs << efl_h('eeze','Eeze_Disk.h','EezeDisk')
+libs << efl_h('eeze','Eeze_Net.h','EezeNet',nil,nil,["#{NATIVE}/eina_list"])
 libs << efl_h('ethumb','Ethumb.h','Ethumb')
 libs << efl_h('ethumb_client','Ethumb_Client.h','EthumbClient',nil,nil,["#{NATIVE}/ethumb"])
 libs << efl_h('ethumb','Ethumb_Plugin.h','EthumbPlugin',nil,nil,["#{NATIVE}/evas","#{NATIVE}/ecore_evas","#{NATIVE}/ethumb"])
