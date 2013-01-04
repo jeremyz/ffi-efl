@@ -42,11 +42,9 @@ def get_type_from_arg arg, l
     if arg =~ /\.\.\./
         return ':varargs'
     end
-    k = arg.gsub(/const/,'').gsub(/\s{2,}/,' ').strip
-    if k=~/(.*?)(\w+)$/
-        return get_type $1.strip
-    end
-    # try with unchanged argument string
+    k = arg.gsub(/const/,'').sub(/^\s+/,'').gsub(/\s{2,}/,' ').strip
+    k=~/(.*?)(\w+)$/ # remove var name if any
+    k = $1.strip if not $1.nil? and $1.length > 0
     t = get_type k
     if t.nil?
         printf "\033[0;31mwrong arg >#{k}< #{arg} (#{l})\033[0m\n"
