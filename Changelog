@@ -1,4 +1,5 @@
-2013-01-xx Jérémy Zurcher <jeremy@asynk.ch>
+2013-01-04 Jérémy Zurcher <jeremy@asynk.ch>
+	* release 0.1.0
 	* add e_dbus native binding
 	* add enotify native binding
 	* add ebluez native binding
