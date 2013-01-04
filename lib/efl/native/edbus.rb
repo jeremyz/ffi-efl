@@ -56,6 +56,8 @@ module Efl
         # VARIABLES
         # EAPI extern E_DBus_Version *e_dbus_version;
         attach_variable :e_dbus_version, :e_dbus_version
+        # EAPI extern int E_DBUS_DOMAIN_GLOBAL;
+        attach_variable :E_DBUS_DOMAIN_GLOBAL, :int
         # EAPI extern int E_DBUS_EVENT_SIGNAL;
         attach_variable :E_DBUS_EVENT_SIGNAL, :int
         #
