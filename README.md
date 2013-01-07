@@ -67,7 +67,7 @@ For more examples you may look at:
 ## REQUIREMENTS:
 
 * You need a sane enlightenment foundation libraries installation,
-  for this you might like to use [build_efl_stable.sh](https://github.com/jeremyz/bin/blob/master/build_efl_stable.sh).
+  for this you might like to use [efl-release-build.sh](https://github.com/jeremyz/bin/blob/master/efl-release-build.sh).
 
 ## DOWNLOAD/INSTALL:
 
