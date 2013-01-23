@@ -1,6 +1,7 @@
 # ffi-efl
     by Jérémy Zurcher
     http://asynk.ch
+[![Gem Version](https://badge.fury.io/rb/ffi-efl.png)](http://badge.fury.io/rb/ffi-efl)
 
 ## DESCRIPTION:
 
