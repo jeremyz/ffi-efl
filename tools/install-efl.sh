@@ -2,7 +2,7 @@
 
 WDIR=/tmp/efl
 PREFIX="/opt/efl-stable"
-VERSION=1.7.1
+VERSION=1.7.5
 BASE="http://download.enlightenment.org/releases/"
 
 export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
