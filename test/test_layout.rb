@@ -17,6 +17,7 @@ class MyWin < Elm::ElmWin
     @current = 0
     super(nil, "Layout") do
       title_set "Layout"
+      smart_callback_add("delete,request", ->(*_) { Elm.exit }, nil)
       resize 320, 320
       show
     end

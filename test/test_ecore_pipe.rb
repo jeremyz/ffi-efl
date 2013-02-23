@@ -14,6 +14,7 @@ class MyWin < Elm::ElmWin
   def initialize
     super(nil, "Pipe test") do
       title_set "Hello, World!"
+      smart_callback_add("delete,request", ->(*_) { Elm.exit }, nil)
       resize 200, 100
       show
     end
