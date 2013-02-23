@@ -8,7 +8,7 @@ module Efl
     #
     module Elm
         #
-        class ElmCheck < ElmObject
+        class ElmPanes < ElmObject
             #
             include Helper
             constructor :elm_panes_add
