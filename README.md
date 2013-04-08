@@ -9,7 +9,7 @@ A ruby ffi binding to [efl](http://www.enlightenment.org/p.php?p=docs&l=en) libr
 
 ## FEATURES/PROBLEMS:
 
-* support ruby 1.9.x NOT 1.8.x
+* support ruby 2.0.0, 1.9.x NOT 1.8.x
 * support efl 1.7.x, NOT dev branch 1.8.x
 * binding is almost complete but lacks high level ruby code and tests
 
@@ -63,7 +63,7 @@ A ruby ffi binding to [efl](http://www.enlightenment.org/p.php?p=docs&l=en) libr
 
 For more examples you may look at:
 
-* the [test/](https://github.com/jeremyz/ffi-efl/tree/master/test) and [spec/](https://github.com/jeremyz/ffi-efl/tree/master/spec) subdirs
+* [test/](https://github.com/jeremyz/ffi-efl/tree/master/test) and [spec/](https://github.com/jeremyz/ffi-efl/tree/master/spec) subdirs
 
 ## REQUIREMENTS:
 
@@ -90,6 +90,7 @@ Online repositories:
 
 * https://github.com/jeremyz/ffi-efl
 * http://cgit.asynk.ch/ffi-efl/
+* http://git.enlightenment.org/bindings/ruby/ffi-efl.git/
 
 Gem:
 
@@ -100,6 +101,7 @@ Gem:
 Special thanks to:
 
 * Lionel Orry
+* Marius Hanne
 * The enlightenment team
 
 ## LICENSE:
