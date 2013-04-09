@@ -18,7 +18,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'eeze'
+        ffi_lib 'eeze.so.1'
         #
         # ENUMS
         # typedef enum {...} Eeze_Disk_Type;

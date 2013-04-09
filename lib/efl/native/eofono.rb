@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'eofono'
+        ffi_lib 'eofono.so.1'
         #
         # TYPEDEFS
         # typedef struct _E_Ofono_Element E_Ofono_Element;

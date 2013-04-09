@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'eukit'
+        ffi_lib 'eukit.so.1'
         #
         # ENUMS
         # typedef enum {...} E_Ukit_Property_Type;

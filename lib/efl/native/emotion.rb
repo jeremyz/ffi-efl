@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'emotion'
+        ffi_lib 'emotion.so.1'
         #
         # ENUMS
         # typedef enum _Emotion_Module {...} Emotion_Module;

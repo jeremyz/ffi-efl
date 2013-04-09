@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'ecore_input'
+        ffi_lib 'ecore_input.so.1'
         #
         # ENUMS
         # typedef enum _Ecore_Event_Modifier {...} Ecore_Event_Modifier;

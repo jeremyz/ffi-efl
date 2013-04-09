@@ -18,7 +18,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'eina'
+        ffi_lib 'eina.so.1'
         #
         # ENUMS
         # typedef enum _Eina_Log_Level {...} Eina_Log_Level;

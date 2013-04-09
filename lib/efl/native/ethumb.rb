@@ -18,7 +18,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'ethumb'
+        ffi_lib 'ethumb.so.1'
         #
         # ENUMS
         # typedef enum _Ethumb_Thumb_FDO_Size {...} Ethumb_Thumb_FDO_Size;

@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'efreet'
+        ffi_lib 'efreet.so.1'
         #
         # FUNCTIONS
         fcts = [

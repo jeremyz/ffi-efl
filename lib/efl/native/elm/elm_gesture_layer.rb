@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'elementary'
+        ffi_lib 'elementary.so.1'
         #
         # ENUMS
         # enum _Elm_Gesture_Type {...} Elm_Gesture_Type;

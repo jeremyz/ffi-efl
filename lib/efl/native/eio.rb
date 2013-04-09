@@ -20,7 +20,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'eio'
+        ffi_lib 'eio.so.1'
         #
         # ENUMS
         # enum _Eio_File_Op {...} Eio_File_Op;

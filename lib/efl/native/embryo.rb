@@ -18,7 +18,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'embryo'
+        ffi_lib 'embryo.so.1'
         #
         # ENUMS
         # typedef enum _Embryo_Error {...} Embryo_Error;

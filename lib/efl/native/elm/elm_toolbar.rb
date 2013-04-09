@@ -20,7 +20,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'elementary'
+        ffi_lib 'elementary.so.1'
         #
         # ENUMS
         # typedef enum {...} Elm_Toolbar_Shrink_Mode;

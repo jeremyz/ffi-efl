@@ -20,7 +20,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'ecore_evas'
+        ffi_lib 'ecore_evas.so.1'
         #
         # ENUMS
         # typedef enum _Ecore_Evas_Engine_Type {...} Ecore_Evas_Engine_Type;

@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'econnman0_7x'
+        ffi_lib 'econnman0_7x.so.1'
         #
         # TYPEDEFS
         # typedef struct _E_Connman_Element E_Connman_Element;

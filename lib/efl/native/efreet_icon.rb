@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'efreet'
+        ffi_lib 'efreet.so.1'
         #
         # ENUMS
         # typedef enum Efreet_Icon_Theme_Context {...} Efreet_Icon_Theme_Context;

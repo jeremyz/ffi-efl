@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'ebluez'
+        ffi_lib 'ebluez.so.1'
         #
         # TYPEDEFS
         # typedef struct _E_Bluez_Element E_Bluez_Element;

@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'edbus'
+        ffi_lib 'edbus.so.1'
         #
         # TYPEDEFS
         # typedef struct _E_DBus_Version E_DBus_Version;

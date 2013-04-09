@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'efreet'
+        ffi_lib 'efreet.so.1'
         #
         # ENUMS
         # typedef enum Efreet_Menu_Entry_Type {...} Efreet_Menu_Entry_Type;

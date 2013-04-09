@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'ehal'
+        ffi_lib 'ehal.so.1'
         #
         # ENUMS
         # typedef enum {...} E_Hal_Property_Type;

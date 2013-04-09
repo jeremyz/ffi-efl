@@ -18,7 +18,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'ecore'
+        ffi_lib 'ecore.so.1'
         #
         # ENUMS
         # enum _Ecore_Exe_Flags {...} Ecore_Exe_Flags;

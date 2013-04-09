@@ -20,7 +20,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'eet'
+        ffi_lib 'eet.so.1'
         #
         # ENUMS
         # typedef enum _Eet_Error {...} Eet_Error;

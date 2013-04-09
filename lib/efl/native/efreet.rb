@@ -18,7 +18,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'efreet'
+        ffi_lib 'efreet.so.1'
         #
         # TYPEDEFS
         # typedef struct _Efreet_Version Efreet_Version;

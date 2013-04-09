@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'enotify'
+        ffi_lib 'enotify.so.1'
         #
         # TYPEDEFS
         # typedef struct E_Notification_Daemon E_Notification_Daemon;

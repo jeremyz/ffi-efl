@@ -20,7 +20,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'enotify'
+        ffi_lib 'enotify.so.1'
         #
         # ENUMS
         # typedef enum E_Notification_Urgency {...} E_Notification_Urgency;

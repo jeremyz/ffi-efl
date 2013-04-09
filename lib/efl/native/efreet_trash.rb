@@ -20,7 +20,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'efreet_trash'
+        ffi_lib 'efreet_trash.so.1'
         #
         # FUNCTIONS
         fcts = [

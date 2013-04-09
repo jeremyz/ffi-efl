@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'elementary'
+        ffi_lib 'elementary.so.1'
         #
         # ENUMS
         # typedef enum _Elm_Datetime_Field_Type {...} Elm_Datetime_Field_Type;

@@ -18,7 +18,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'eina'
+        ffi_lib 'eina.so.1'
         #
         # ENUMS
         # typedef enum {...} Eina_Xattr_Flags;

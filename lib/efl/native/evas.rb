@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'evas'
+        ffi_lib 'evas.so.1'
         #
         # CONSTANTS
         EVAS_LAYER_MIN=-32768

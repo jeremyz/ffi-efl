@@ -21,7 +21,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'ethumb'
+        ffi_lib 'ethumb.so.1'
         #
         # TYPEDEFS
         # typedef struct _Ethumb_Plugin Ethumb_Plugin;

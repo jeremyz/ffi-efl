@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'ethumb_client'
+        ffi_lib 'ethumb_client.so.1'
         #
         # TYPEDEFS
         # typedef struct _Ethumb_Client Ethumb_Client;

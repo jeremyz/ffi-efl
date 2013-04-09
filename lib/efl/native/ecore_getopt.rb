@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'ecore'
+        ffi_lib 'ecore.so.1'
         #
         # ENUMS
         # typedef enum {...} Ecore_Getopt_Action;

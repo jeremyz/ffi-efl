@@ -19,7 +19,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'edje'
+        ffi_lib 'edje.so.1'
         #
         # ENUMS
         # typedef enum _Edje_Message_Type {...} Edje_Message_Type;

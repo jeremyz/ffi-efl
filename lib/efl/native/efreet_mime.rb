@@ -18,7 +18,7 @@ module Efl
     #
     module Native
         #
-        ffi_lib 'efreet_mime'
+        ffi_lib 'efreet_mime.so.1'
         #
         # FUNCTIONS
         fcts = [
