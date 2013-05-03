@@ -1,3 +1,9 @@
+2013-XX-YY Jérémy Zurcher <jeremy@asynk.ch>
+	* release 0.1.1
+	* move Efl::MethodResolver from efl.rb into native.rb
+	* lots of new examples, thanks to Marius Hanne
+	* add .so.1 to ffi_lib calls, no need for debian *-dev packages
+
 2013-01-04 Jérémy Zurcher <jeremy@asynk.ch>
 	* release 0.1.0
 	* add e_dbus native binding
