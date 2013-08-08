@@ -1,0 +1,7 @@
+
+UGLY !!!!
+    - elm_policy_set(
+        Efl::Native.enum_type(:elm_policy)[:elm_policy_quit],
+        Efl::Native.enum_type(:elm_policy_quit)[:elm_policy_quit_last_window_closed]
+        )
+
