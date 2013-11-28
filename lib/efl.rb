@@ -3,7 +3,7 @@
 #
 module Efl
     #
-    VERSION = '0.1.0'
+    VERSION = '0.1.1'
     #
     module ClassHelper
         def to_a; [self] end
