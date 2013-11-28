@@ -29,7 +29,7 @@ module Efl
             :ecore_evas_engine_software_ddraw, :ecore_evas_engine_direct3d, :ecore_evas_engine_opengl_glew, :ecore_evas_engine_opengl_cocoa,
             :ecore_evas_engine_software_sdl, :ecore_evas_engine_directfb, :ecore_evas_engine_software_fb, :ecore_evas_engine_software_8_x11,
             :ecore_evas_engine_software_16_x11, :ecore_evas_engine_software_16_ddraw, :ecore_evas_engine_software_16_wince, :ecore_evas_engine_opengl_sdl,
-            :ecore_evas_engine_ews, :ecore_evas_engine_psl1ght, :ecore_evas_engine_wayland_shm, :ecore_evas_engine_wayland_egl ]
+            :ecore_evas_engine_ews, :ecore_evas_engine_psl1ght, :ecore_evas_engine_wayland_shm, :ecore_evas_engine_wayland_egl, :ecore_evas_engine_drm ]
         # typedef enum _Ecore_Evas_Avoid_Damage_Type {...} Ecore_Evas_Avoid_Damage_Type;
         enum :ecore_evas_avoid_damage_type, [ :ecore_evas_avoid_damage_none, 0, :ecore_evas_avoid_damage_expose, 1, :ecore_evas_avoid_damage_built_in,
             2 ]
@@ -284,6 +284,8 @@ module Efl
         [ :ecore_evas_wayland_type_set, [ :ecore_evas, :int ], :void ],
         # EAPI Ecore_Wl_Window *ecore_evas_wayland_window_get(const Ecore_Evas *ee);
         [ :ecore_evas_wayland_window_get, [ :ecore_evas ], :ecore_wl_window ],
+        # EAPI Ecore_Evas     *ecore_evas_drm_new(const char *device, unsigned int parent, int x, int y, int w, int h);
+        [ :ecore_evas_drm_new, [ :string, :uint, :int, :int, :int, :int ], :ecore_evas ],
         # EAPI Ecore_Evas *ecore_evas_buffer_new(int w, int h);
         [ :ecore_evas_buffer_new, [ :int, :int ], :ecore_evas ],
         # EAPI Ecore_Evas *ecore_evas_buffer_allocfunc_new(int w, int h, void *(*alloc_func) (void *data, int size), void (*free_func) (void *data, void *pix), const void *data);
