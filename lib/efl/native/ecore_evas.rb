@@ -88,10 +88,12 @@ module Efl
         attach_variable :ECORE_EVAS_EWS_EVENT_FULLSCREEN_CHANGE, :int
         # EAPI extern int ECORE_EVAS_EWS_EVENT_CONFIG_CHANGE;
         attach_variable :ECORE_EVAS_EWS_EVENT_CONFIG_CHANGE, :int
+        # defined in efl/src/modules/ecore_evas/engines/extn/ecore_evas_extn.c
         # EAPI extern int ECORE_EVAS_EXTN_CLIENT_ADD;
-        attach_variable :ECORE_EVAS_EXTN_CLIENT_ADD, :int
+        #attach_variable :ECORE_EVAS_EXTN_CLIENT_ADD, :int
         # EAPI extern int ECORE_EVAS_EXTN_CLIENT_DEL;
-        attach_variable :ECORE_EVAS_EXTN_CLIENT_DEL, :int
+        #attach_variable :ECORE_EVAS_EXTN_CLIENT_DEL, :int
+        #
         #
         # FUNCTIONS
         fcts = [
