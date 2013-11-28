@@ -40,12 +40,8 @@ module Efl
         # TYPEDEFS
         # typedef unsigned int Ecore_X_Window;
         typedef :uint, :ecore_x_window
-        # typedef struct _Ecore_DirectFB_Window Ecore_DirectFB_Window;
-        typedef :pointer, :ecore_directfb_window
         # typedef struct _Ecore_Win32_Window Ecore_Win32_Window;
         typedef :pointer, :ecore_win32_window
-        # typedef struct _Ecore_WinCE_Window Ecore_WinCE_Window;
-        typedef :pointer, :ecore_wince_window
         # typedef struct _Ecore_Cocoa_Window Ecore_Cocoa_Window;
         typedef :pointer, :ecore_cocoa_window
         # typedef struct _Ecore_Evas Ecore_Evas;
@@ -232,44 +228,8 @@ module Efl
         # EAPI void ecore_evas_gl_x11_pre_post_swap_callback_set(const Ecore_Evas *ee, void *data, void (*pre_cb) (void *data, Evas *e), void (*post_cb) (void *data, Evas *e));
         [ :ecore_evas_gl_x11_pre_post_swap_callback_set, [ :ecore_evas, :pointer, (callback [:pointer, :evas], :void),
             (callback [:pointer, :evas], :void) ], :void ],
-        # EAPI Ecore_Evas *ecore_evas_xrender_x11_new(const char *disp_name, Ecore_X_Window parent, int x, int y, int w, int h);
-        [ :ecore_evas_xrender_x11_new, [ :string, :uint, :int, :int, :int, :int ], :ecore_evas ],
-        # EAPI Ecore_X_Window ecore_evas_xrender_x11_window_get(const Ecore_Evas *ee);
-        [ :ecore_evas_xrender_x11_window_get, [ :ecore_evas ], :uint ],
-        # EAPI void ecore_evas_xrender_x11_direct_resize_set(Ecore_Evas *ee, Eina_Bool on);
-        [ :ecore_evas_xrender_x11_direct_resize_set, [ :ecore_evas, :bool ], :void ],
-        # EAPI Eina_Bool ecore_evas_xrender_x11_direct_resize_get(const Ecore_Evas *ee);
-        [ :ecore_evas_xrender_x11_direct_resize_get, [ :ecore_evas ], :bool ],
-        # EAPI void ecore_evas_xrender_x11_extra_event_window_add(Ecore_Evas *ee, Ecore_X_Window win);
-        [ :ecore_evas_xrender_x11_extra_event_window_add, [ :ecore_evas, :uint ], :void ],
-        # EAPI Ecore_Evas *ecore_evas_software_x11_8_new(const char *disp_name, Ecore_X_Window parent, int x, int y, int w, int h);
-        [ :ecore_evas_software_x11_8_new, [ :string, :uint, :int, :int, :int, :int ], :ecore_evas ],
-        # EAPI Ecore_X_Window ecore_evas_software_x11_8_window_get(const Ecore_Evas *ee);
-        [ :ecore_evas_software_x11_8_window_get, [ :ecore_evas ], :uint ],
-        # EAPI Ecore_X_Window ecore_evas_software_x11_8_subwindow_get(const Ecore_Evas *ee);
-        [ :ecore_evas_software_x11_8_subwindow_get, [ :ecore_evas ], :uint ],
-        # EAPI void ecore_evas_software_x11_8_direct_resize_set(Ecore_Evas *ee, Eina_Bool on);
-        [ :ecore_evas_software_x11_8_direct_resize_set, [ :ecore_evas, :bool ], :void ],
-        # EAPI Eina_Bool ecore_evas_software_x11_8_direct_resize_get(const Ecore_Evas *ee);
-        [ :ecore_evas_software_x11_8_direct_resize_get, [ :ecore_evas ], :bool ],
-        # EAPI void ecore_evas_software_x11_8_extra_event_window_add(Ecore_Evas *ee, Ecore_X_Window win);
-        [ :ecore_evas_software_x11_8_extra_event_window_add, [ :ecore_evas, :uint ], :void ],
-        # EAPI Ecore_Evas *ecore_evas_software_x11_16_new(const char *disp_name, Ecore_X_Window parent, int x, int y, int w, int h);
-        [ :ecore_evas_software_x11_16_new, [ :string, :uint, :int, :int, :int, :int ], :ecore_evas ],
-        # EAPI Ecore_X_Window ecore_evas_software_x11_16_window_get(const Ecore_Evas *ee);
-        [ :ecore_evas_software_x11_16_window_get, [ :ecore_evas ], :uint ],
-        # EAPI void ecore_evas_software_x11_16_direct_resize_set(Ecore_Evas *ee, Eina_Bool on);
-        [ :ecore_evas_software_x11_16_direct_resize_set, [ :ecore_evas, :bool ], :void ],
-        # EAPI Eina_Bool ecore_evas_software_x11_16_direct_resize_get(const Ecore_Evas *ee);
-        [ :ecore_evas_software_x11_16_direct_resize_get, [ :ecore_evas ], :bool ],
-        # EAPI void ecore_evas_software_x11_16_extra_event_window_add(Ecore_Evas *ee, Ecore_X_Window win);
-        [ :ecore_evas_software_x11_16_extra_event_window_add, [ :ecore_evas, :uint ], :void ],
         # EAPI Ecore_Evas *ecore_evas_fb_new(const char *disp_name, int rotation, int w, int h);
         [ :ecore_evas_fb_new, [ :string, :int, :int, :int ], :ecore_evas ],
-        # EAPI Ecore_Evas *ecore_evas_directfb_new(const char *disp_name, int windowed, int x, int y, int w, int h);
-        [ :ecore_evas_directfb_new, [ :string, :int, :int, :int, :int, :int ], :ecore_evas ],
-        # EAPI Ecore_DirectFB_Window *ecore_evas_directfb_window_get(const Ecore_Evas *ee);
-        [ :ecore_evas_directfb_window_get, [ :ecore_evas ], :ecore_directfb_window ],
         # EAPI Ecore_Evas *ecore_evas_wayland_shm_new(const char *disp_name, unsigned int parent, int x, int y, int w, int h, Eina_Bool frame);
         [ :ecore_evas_wayland_shm_new, [ :string, :uint, :int, :int, :int, :int, :bool ], :ecore_evas ],
         # EAPI Ecore_Evas *ecore_evas_wayland_egl_new(const char *disp_name, unsigned int parent, int x, int y, int w, int h, Eina_Bool frame);
@@ -309,12 +269,6 @@ module Efl
         [ :ecore_evas_software_gdi_new, [ :ecore_win32_window, :int, :int, :int, :int ], :ecore_evas ],
         # EAPI Ecore_Evas *ecore_evas_software_ddraw_new(Ecore_Win32_Window *parent, int x, int y, int width, int height);
         [ :ecore_evas_software_ddraw_new, [ :ecore_win32_window, :int, :int, :int, :int ], :ecore_evas ],
-        # EAPI Ecore_Evas *ecore_evas_software_16_ddraw_new(Ecore_Win32_Window *parent, int x, int y, int width, int height);
-        [ :ecore_evas_software_16_ddraw_new, [ :ecore_win32_window, :int, :int, :int, :int ], :ecore_evas ],
-        # EAPI Ecore_Evas *ecore_evas_direct3d_new(Ecore_Win32_Window *parent, int x, int y, int width, int height);
-        [ :ecore_evas_direct3d_new, [ :ecore_win32_window, :int, :int, :int, :int ], :ecore_evas ],
-        # EAPI Ecore_Evas *ecore_evas_gl_glew_new(Ecore_Win32_Window *parent, int x, int y, int width, int height);
-        [ :ecore_evas_gl_glew_new, [ :ecore_win32_window, :int, :int, :int, :int ], :ecore_evas ],
         # EAPI Ecore_Win32_Window *ecore_evas_win32_window_get(const Ecore_Evas *ee);
         [ :ecore_evas_win32_window_get, [ :ecore_evas ], :ecore_win32_window ],
         # EAPI Ecore_Evas *ecore_evas_sdl_new(const char* name, int w, int h, int fullscreen, int hwsurface, int noframe, int alpha);
@@ -323,18 +277,6 @@ module Efl
         [ :ecore_evas_sdl16_new, [ :pointer, :int, :int, :int, :int, :int, :int ], :ecore_evas ],
         # EAPI Ecore_Evas *ecore_evas_gl_sdl_new(const char* name, int w, int h, int fullscreen, int noframe);
         [ :ecore_evas_gl_sdl_new, [ :pointer, :int, :int, :int, :int ], :ecore_evas ],
-        # EAPI Ecore_Evas *ecore_evas_software_wince_new(Ecore_WinCE_Window *parent, int x, int y, int width, int height);
-        [ :ecore_evas_software_wince_new, [ :ecore_wince_window, :int, :int, :int, :int ], :ecore_evas ],
-        # EAPI Ecore_Evas *ecore_evas_software_wince_fb_new(Ecore_WinCE_Window *parent, int x, int y, int width, int height);
-        [ :ecore_evas_software_wince_fb_new, [ :ecore_wince_window, :int, :int, :int, :int ], :ecore_evas ],
-        # EAPI Ecore_Evas *ecore_evas_software_wince_gapi_new(Ecore_WinCE_Window *parent, int x, int y, int width, int height);
-        [ :ecore_evas_software_wince_gapi_new, [ :ecore_wince_window, :int, :int, :int, :int ], :ecore_evas ],
-        # EAPI Ecore_Evas *ecore_evas_software_wince_ddraw_new(Ecore_WinCE_Window *parent, int x, int y, int width, int height);
-        [ :ecore_evas_software_wince_ddraw_new, [ :ecore_wince_window, :int, :int, :int, :int ], :ecore_evas ],
-        # EAPI Ecore_Evas *ecore_evas_software_wince_gdi_new(Ecore_WinCE_Window *parent, int x, int y, int width, int height);
-        [ :ecore_evas_software_wince_gdi_new, [ :ecore_wince_window, :int, :int, :int, :int ], :ecore_evas ],
-        # EAPI Ecore_WinCE_Window *ecore_evas_software_wince_window_get(const Ecore_Evas *ee);
-        [ :ecore_evas_software_wince_window_get, [ :ecore_evas ], :ecore_wince_window ],
         # EAPI Ecore_Evas *ecore_evas_cocoa_new(Ecore_Cocoa_Window *parent, int x, int y, int w, int h);
         [ :ecore_evas_cocoa_new, [ :ecore_cocoa_window, :int, :int, :int, :int ], :ecore_evas ],
         # EAPI Ecore_Evas *ecore_evas_psl1ght_new(const char* name, int w, int h);
