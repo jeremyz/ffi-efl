@@ -10,8 +10,9 @@ A ruby ffi binding to [efl](http://www.enlightenment.org/p.php?p=docs&l=en) libr
 ## FEATURES/PROBLEMS:
 
 * support ruby 2.0.0, 1.9.x NOT 1.8.x
-* support efl 1.7.x, NOT dev branch 1.8.x
+* support EFL 1.8.x
 * binding is almost complete but lacks high level ruby code and tests
+* eldbus is not present yet
 
 ## SYNOPSIS:
 
@@ -67,8 +68,7 @@ For more examples you may look at:
 
 ## REQUIREMENTS:
 
-* You need a sane enlightenment foundation libraries installation,
-  for this you might like to use [efl-release-build.sh](https://github.com/jeremyz/bin/blob/master/efl-release-build.sh).
+* You need a sane EFL installation, goto [download](http://enlightenment.org/p.php?p=download&l=en) for more info.
 
 ## DOWNLOAD/INSTALL:
 
@@ -88,9 +88,9 @@ You can find this project in a few places:
 
 Online repositories:
 
+* http://git.enlightenment.org/bindings/ruby/ffi-efl.git/
 * https://github.com/jeremyz/ffi-efl
 * http://cgit.asynk.ch/ffi-efl/
-* http://git.enlightenment.org/bindings/ruby/ffi-efl.git/
 
 Gem:
 
@@ -102,7 +102,7 @@ Special thanks to:
 
 * Lionel Orry
 * Marius Hanne
-* The enlightenment team
+* The EFL team
 
 ## LICENSE:
 
