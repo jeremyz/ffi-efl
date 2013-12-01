@@ -12,6 +12,7 @@ class MyWin < Elm::ElmWin
   def initialize
     super(nil, "Greetings") do
       title_set "Hello, World!"
+      autodel_set true
       resize 240, 60
       show
     end
@@ -33,6 +34,7 @@ end
 Elm.init
 #
 MyWin.new
+Elm.elm_policy_set(0, 1)
 #
 Elm.run
 Elm.shutdown
