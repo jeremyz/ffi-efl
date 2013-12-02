@@ -167,10 +167,14 @@ for header in \
     #
     DIR=$(dirname $header)
     FILE=$(basename $header)
+    BASE=${header%.h}
     #
     for what in functions enums types callbacks variables; do
         F=$FILE-$what
         sed -r -n -f "$P/sed-$what" $header > $NEXT/$F
+        for more_header in "${BASE}_common.h" "${BASE}_legacy.h"; do
+            [ -e $more_header ] && sed -r -n -f "$P/sed-$what" $more_header >> $NEXT/$F
+        done
         if [ -f $PREV/$F ]; then
             diff -u0 $PREV/$F $NEXT/$F > $P/$F-diff
             N=$(cat $P/$F-diff | wc -l)
