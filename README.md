@@ -5,7 +5,7 @@
 
 ## DESCRIPTION:
 
-A ruby ffi binding to [efl](http://www.enlightenment.org/p.php?p=docs&l=en) libraries (Enlightenment Foundation Libraries).
+A ruby ffi binding to [EFL](http://www.enlightenment.org/p.php?p=docs&l=en) libraries (Enlightenment Foundation Libraries).
 
 ## FEATURES/PROBLEMS:
 
@@ -13,6 +13,7 @@ A ruby ffi binding to [efl](http://www.enlightenment.org/p.php?p=docs&l=en) libr
 * support EFL 1.8.x
 * binding is almost complete but lacks high level ruby code and tests
 * eldbus is not present yet
+* only works with legacy API (--with-api=legacy or --with-api=both)
 
 ## SYNOPSIS:
 
@@ -68,7 +69,7 @@ For more examples you may look at:
 
 ## REQUIREMENTS:
 
-* You need a sane EFL installation, goto [download](http://enlightenment.org/p.php?p=download&l=en) for more info.
+* You need a sane EFL installation built with legacy API, goto [download](http://enlightenment.org/p.php?p=download&l=en) for more info.
 
 ## DOWNLOAD/INSTALL:
 
